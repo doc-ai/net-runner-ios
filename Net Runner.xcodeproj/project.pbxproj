@@ -999,7 +999,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "doc.ai.Net-Runner";
+				PRODUCT_BUNDLE_IDENTIFIER = "ai.doc.Net-Runner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1019,7 +1019,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "doc.ai.Net-Runner";
+				PRODUCT_BUNDLE_IDENTIFIER = "ai.doc.Net-Runner";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1038,7 +1038,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "doc.ai.Net-RunnerTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "ai.doc.Net-RunnerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Net Runner.app/Net Runner";
@@ -1058,7 +1058,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "doc.ai.Net-RunnerTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "ai.doc.Net-RunnerTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Net Runner.app/Net Runner";
@@ -1077,7 +1077,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "doc.ai.Net-RunnerUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "ai.doc.Net-RunnerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Net Runner";
@@ -1096,7 +1096,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "doc.ai.Net-RunnerUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "ai.doc.Net-RunnerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "Net Runner";
