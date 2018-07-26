@@ -1,0 +1,47 @@
+{
+	"name": "Sample Test Bundle 1",
+	"id": "sample-test-bundle-1",
+	"version": "1",
+	"models": [
+		"mobilenet-v2-100-224-unquantized",
+		"mobilenet-v1-100-128-quantized"
+	],
+	"options": {
+		"iterations": 1,
+		"metric": "EvaluationMetricAccuracyTop5"
+	},
+	"images": [
+		{
+			"type": "file",
+			"path": "images/01.jpg"
+		},
+		{
+			"type": "file",
+			"path": "images/02.jpg"
+		},
+		{
+			"type": "file",
+			"path": "images/03.jpg"
+		}
+	],
+	"labels": [
+		{
+			"path": "images/01.jpg",
+			"inference_results": {
+				"rocking chair": ""
+			}
+		},
+		{
+			"path": "images/02.jpg",
+			"inference_results": {
+				"lakeside": ""
+			}
+		},
+		{
+			"path": "images/03.jpg",
+			"inference_results": {
+				"chiffonier": ""
+			}
+		}
+	]
+}

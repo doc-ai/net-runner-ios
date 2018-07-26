@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q0m-9r-bdF">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="lOy-I4-7sE">
+            <objects>
+                <navigationController id="Q0m-9r-bdF" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jNd-CK-vva">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ahH-jD-OKW" kind="relationship" relationship="rootViewController" id="gij-7O-Ete"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zyv-h2-e0M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-354" y="114"/>
+        </scene>
+        <!--Headless Test Mode-->
+        <scene sceneID="ZdW-6A-EkM">
+            <objects>
+                <viewController title="Headless Test Mode" id="ahH-jD-OKW" customClass="HeadlessViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zhy-dB-Xez">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yr0-pc-MgK">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1fy-Mh-D9H" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="398"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You are running the app in headless mode" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LmA-lY-gUw">
+                                                <rect key="frame" x="40" y="40" width="295" height="41"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If this was not your intention, change the schema at the top left of Xcode and run the app again" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KaP-yC-mDR">
+                                                <rect key="frame" x="40" y="111" width="295" height="54"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HY0-im-1cl">
+                                                <rect key="frame" x="167.5" y="195" width="40" height="1"/>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="Ppn-lX-evl"/>
+                                                    <constraint firstAttribute="height" constant="1" id="WpV-c2-MB4"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Headless evaluation is running" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeH-fM-3Lo">
+                                                <rect key="frame" x="40" y="226" width="295" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="0.064874106443135029" green="0.24091919100567685" blue="0.40165600744722219" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="EZ5-yD-FXu">
+                                                <rect key="frame" x="177.5" y="254" width="20" height="20"/>
+                                                <color key="color" red="0.064874106439999996" green="0.240919191" blue="0.40165600740000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistics" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFr-5F-Oyb">
+                                                <rect key="frame" x="20" y="342" width="335" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary Statistics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKB-uJ-gBH">
+                                                <rect key="frame" x="119" y="304" width="137" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="QeH-fM-3Lo" firstAttribute="leading" secondItem="1fy-Mh-D9H" secondAttribute="leading" constant="40" id="48Z-va-klO"/>
+                                            <constraint firstItem="KaP-yC-mDR" firstAttribute="leading" secondItem="1fy-Mh-D9H" secondAttribute="leading" constant="40" id="5YC-Vf-OmJ"/>
+                                            <constraint firstItem="QeH-fM-3Lo" firstAttribute="top" secondItem="HY0-im-1cl" secondAttribute="bottom" constant="30" id="7AC-SN-KEV"/>
+                                            <constraint firstItem="DKB-uJ-gBH" firstAttribute="top" secondItem="EZ5-yD-FXu" secondAttribute="bottom" constant="30" id="G7Y-Mq-ojp"/>
+                                            <constraint firstItem="HY0-im-1cl" firstAttribute="top" secondItem="KaP-yC-mDR" secondAttribute="bottom" constant="30" id="I1x-15-aqD"/>
+                                            <constraint firstItem="EZ5-yD-FXu" firstAttribute="top" secondItem="QeH-fM-3Lo" secondAttribute="bottom" constant="10" id="JLJ-uj-D7r"/>
+                                            <constraint firstAttribute="trailing" secondItem="KaP-yC-mDR" secondAttribute="trailing" constant="40" id="M70-Y8-6xv"/>
+                                            <constraint firstItem="LmA-lY-gUw" firstAttribute="leading" secondItem="1fy-Mh-D9H" secondAttribute="leading" constant="40" id="Qii-9Y-AiS"/>
+                                            <constraint firstItem="mFr-5F-Oyb" firstAttribute="leading" secondItem="1fy-Mh-D9H" secondAttribute="leading" constant="20" id="Ugb-q8-LGD"/>
+                                            <constraint firstAttribute="trailing" secondItem="mFr-5F-Oyb" secondAttribute="trailing" constant="20" id="a5b-Td-A8t"/>
+                                            <constraint firstItem="HY0-im-1cl" firstAttribute="centerX" secondItem="1fy-Mh-D9H" secondAttribute="centerX" id="bXr-5K-nfo"/>
+                                            <constraint firstItem="KaP-yC-mDR" firstAttribute="top" secondItem="LmA-lY-gUw" secondAttribute="bottom" constant="30" id="eR4-Cl-vdc"/>
+                                            <constraint firstItem="DKB-uJ-gBH" firstAttribute="centerX" secondItem="1fy-Mh-D9H" secondAttribute="centerX" id="gFr-tH-fbQ"/>
+                                            <constraint firstItem="mFr-5F-Oyb" firstAttribute="top" secondItem="DKB-uJ-gBH" secondAttribute="bottom" constant="20" id="gKf-D7-295"/>
+                                            <constraint firstAttribute="trailing" secondItem="LmA-lY-gUw" secondAttribute="trailing" constant="40" id="h0P-4y-1GT"/>
+                                            <constraint firstAttribute="bottom" secondItem="mFr-5F-Oyb" secondAttribute="bottom" constant="40" id="nrC-Gi-q32"/>
+                                            <constraint firstAttribute="trailing" secondItem="QeH-fM-3Lo" secondAttribute="trailing" constant="40" id="oQf-0a-W0x"/>
+                                            <constraint firstItem="EZ5-yD-FXu" firstAttribute="centerX" secondItem="1fy-Mh-D9H" secondAttribute="centerX" id="t2h-dq-v30"/>
+                                            <constraint firstItem="LmA-lY-gUw" firstAttribute="top" secondItem="1fy-Mh-D9H" secondAttribute="top" constant="40" id="tc1-7T-9Ke"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="1fy-Mh-D9H" firstAttribute="height" secondItem="Yr0-pc-MgK" secondAttribute="height" priority="250" id="DdW-NL-cga"/>
+                                    <constraint firstAttribute="bottom" secondItem="1fy-Mh-D9H" secondAttribute="bottom" id="UVP-B1-cln"/>
+                                    <constraint firstAttribute="trailing" secondItem="1fy-Mh-D9H" secondAttribute="trailing" id="WvL-Z6-0sX"/>
+                                    <constraint firstItem="1fy-Mh-D9H" firstAttribute="top" secondItem="Yr0-pc-MgK" secondAttribute="top" id="XtX-b6-qpZ"/>
+                                    <constraint firstItem="1fy-Mh-D9H" firstAttribute="width" secondItem="Yr0-pc-MgK" secondAttribute="width" id="aHG-lt-hFb"/>
+                                    <constraint firstItem="1fy-Mh-D9H" firstAttribute="leading" secondItem="Yr0-pc-MgK" secondAttribute="leading" id="vcI-Gy-rxI"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.95863172743055558" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Yr0-pc-MgK" firstAttribute="trailing" secondItem="T9m-qZ-vrD" secondAttribute="trailing" id="TBx-zv-cUV"/>
+                            <constraint firstItem="T9m-qZ-vrD" firstAttribute="bottom" secondItem="Yr0-pc-MgK" secondAttribute="bottom" id="TuA-UJ-zkD"/>
+                            <constraint firstItem="Yr0-pc-MgK" firstAttribute="top" secondItem="T9m-qZ-vrD" secondAttribute="top" id="qwK-it-rEP"/>
+                            <constraint firstItem="Yr0-pc-MgK" firstAttribute="leading" secondItem="T9m-qZ-vrD" secondAttribute="leading" id="t01-SS-Jjd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="T9m-qZ-vrD"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Headless Test Mode" id="qWu-ly-mX8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="fcw-Gi-i25">
+                            <connections>
+                                <action selector="shareResults:" destination="ahH-jD-OKW" id="iXB-bb-beo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="EZ5-yD-FXu" id="K2h-yu-9YA"/>
+                        <outlet property="resultsLabel" destination="mFr-5F-Oyb" id="onc-qp-2hB"/>
+                        <outlet property="statusLabel" destination="QeH-fM-3Lo" id="BP2-Pg-jTz"/>
+                        <outlet property="summaryLabel" destination="DKB-uJ-gBH" id="Wmi-h9-SP6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l5T-zS-dfo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="412" y="113.79310344827587"/>
+        </scene>
+    </scenes>
+</document>

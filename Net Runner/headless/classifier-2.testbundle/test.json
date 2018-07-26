@@ -1,0 +1,46 @@
+{
+	"name": "Sample Test Bundle 2",
+	"id": "sample-test-bundle-2",
+	"version": "1",
+	"models": [
+		"inception-v4",
+	],
+	"options": {
+		"iterations": 1,
+		"metric": "EvaluationMetricAccuracyTop5"
+	},
+	"images": [
+		{
+			"type": "file",
+			"path": "images/01.jpg"
+		},
+		{
+			"type": "file",
+			"path": "images/02.jpg"
+		},
+		{
+			"type": "file",
+			"path": "images/03.jpg"
+		}
+	],
+	"labels": [
+		{
+			"path": "images/01.jpg",
+			"inference_results": {
+				"rocking chair": ""
+			}
+		},
+		{
+			"path": "images/02.jpg",
+			"inference_results": {
+				"lakeside": ""
+			}
+		},
+		{
+			"path": "images/03.jpg",
+			"inference_results": {
+				"chiffonier": ""
+			}
+		}
+	]
+}
