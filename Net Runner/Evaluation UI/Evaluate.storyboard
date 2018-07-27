@@ -238,10 +238,10 @@
             </objects>
             <point key="canvasLocation" x="1329" y="896"/>
         </scene>
-        <!--Photo Album Photo View Controller-->
+        <!--Photo-->
         <scene sceneID="L4I-Wu-hHr">
             <objects>
-                <viewController id="FO5-So-Ghk" customClass="PhotoAlbumPhotoViewController" sceneMemberID="viewController">
+                <viewController title="Photo" id="FO5-So-Ghk" customClass="PhotoAlbumPhotoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hve-KV-0g2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
