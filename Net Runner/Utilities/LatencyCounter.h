@@ -12,16 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LatencyCounter : NSObject
 
-@property double lastImageProcessingLatency;
-@property double lastInferenceLatency;
+@property (readonly) double lastImageProcessingLatency;
+@property (readonly) double lastInferenceLatency;
 
-@property double imageProcessingLatency;
-@property double inferenceLatency;
-@property int count;
+@property (readonly) double imageProcessingLatency;
+@property (readonly) double inferenceLatency;
+@property (readonly) int count;
 
 @property (readonly) double averageImageProcessingLatency;
 @property (readonly) double averageInferenceLatency;
 @property (readonly) double averageTotalLatency;
+
+- (void)increaseImageProcessingLatency:(double)value;
+- (void)increaseInferenceLatency:(double)value;
+- (void)incrementCount;
 
 @end
 

@@ -45,12 +45,13 @@ typedef enum : NSUInteger {
    
     ResultInfoView *infoView;
     
-    LatencyCounter *_latencyCounter;
     ModelBundle *_modelBundle;
     id<VisionModel> _model;
 }
 
 @property(strong, nonatomic) CATextLayer* predictionTextLayer;
+
+@property LatencyCounter *latencyCounter;
 
 - (IBAction)selectInputSource:(id)sender;
 

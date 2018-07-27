@@ -10,6 +10,20 @@
 
 @implementation LatencyCounter
 
+- (void)increaseImageProcessingLatency:(double)value {
+    _lastImageProcessingLatency = value;
+    _imageProcessingLatency += value;
+}
+
+- (void)increaseInferenceLatency:(double)value {
+    _lastInferenceLatency = value;
+    _inferenceLatency += value;
+}
+
+- (void)incrementCount {
+    _count += 1;
+}
+
 - (double) averageImageProcessingLatency {
     return _imageProcessingLatency / _count;
 }

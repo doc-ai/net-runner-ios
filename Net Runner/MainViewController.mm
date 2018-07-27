@@ -97,7 +97,7 @@
     imageInputPreviewView.pixelFormat = _model.pixelFormat;
 
     _oldPredictionValues = [[NSMutableDictionary alloc] init];
-    _latencyCounter = [[LatencyCounter alloc] init];
+    self.latencyCounter = [[LatencyCounter alloc] init];
     
     // Preferences
     
@@ -181,7 +181,7 @@
         imageInputPreviewView.pixelFormat = _model.pixelFormat;
         
         _oldPredictionValues = [NSMutableDictionary dictionary];
-        _latencyCounter = [[LatencyCounter alloc] init];
+        self.latencyCounter = [[LatencyCounter alloc] init];
     }
     
     // Other Settings
@@ -453,17 +453,14 @@
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
             NSDictionary *inference = result[kEvaluatorResultsKeyInferenceResults];
-            const float inferenceLatency = [result[kEvaluatorResultsKeyInferenceLatency] floatValue];
-            const float preprocessingLatency = [result[kEvaluatorResultsKeyPreprocessingLatency] floatValue];
+            const double inferenceLatency = [result[kEvaluatorResultsKeyInferenceLatency] doubleValue];
+            const double preprocessingLatency = [result[kEvaluatorResultsKeyPreprocessingLatency] doubleValue];
             
             // Show results and latency
             
-            self->_latencyCounter.lastImageProcessingLatency = preprocessingLatency;
-            self->_latencyCounter.lastInferenceLatency = inferenceLatency;
-            
-            self->_latencyCounter.imageProcessingLatency += preprocessingLatency;
-            self->_latencyCounter.inferenceLatency += inferenceLatency;
-            self->_latencyCounter.count += 1;
+            [self.latencyCounter increaseImageProcessingLatency:preprocessingLatency];
+            [self.latencyCounter increaseInferenceLatency:inferenceLatency];
+            [self.latencyCounter incrementCount];
             
             [self setPredictionValues:inference withDecay:YES];
             self->infoView.stats = [self modelStats:NO];
@@ -490,17 +487,14 @@
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
             NSDictionary *inference = result[kEvaluatorResultsKeyInferenceResults];
-            const float inferenceLatency = [result[kEvaluatorResultsKeyInferenceLatency] floatValue];
-            const float preprocessingLatency = [result[kEvaluatorResultsKeyPreprocessingLatency] floatValue];
+            const double inferenceLatency = [result[kEvaluatorResultsKeyInferenceLatency] doubleValue];
+            const double preprocessingLatency = [result[kEvaluatorResultsKeyPreprocessingLatency] doubleValue];
             
             // Show results and latency
             
-            self->_latencyCounter.lastImageProcessingLatency = preprocessingLatency;
-            self->_latencyCounter.lastInferenceLatency = inferenceLatency;
-            
-            self->_latencyCounter.imageProcessingLatency += preprocessingLatency;
-            self->_latencyCounter.inferenceLatency += inferenceLatency;
-            self->_latencyCounter.count += 1;
+            [self.latencyCounter increaseImageProcessingLatency:preprocessingLatency];
+            [self.latencyCounter increaseInferenceLatency:inferenceLatency];
+            [self.latencyCounter incrementCount];
             
             self->_oldPredictionValues = [NSMutableDictionary dictionary];
             [self setPredictionValues:inference withDecay:YES];
