@@ -135,7 +135,7 @@ typedef enum : NSUInteger {
     
     // Prepare capture
     
-    devicePosition = AVCaptureDevicePositionFront;
+    devicePosition = AVCaptureDevicePositionBack;
     [self setupAVCapture:devicePosition];
     [self setCaptureMode:CaptureModeLiveVideo];
 }
