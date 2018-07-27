@@ -21,15 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol Model;
 @protocol VisionModel;
 
-@interface MainViewController : UIViewController <UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SettingsTableViewControllerDelegate> {
-    
-    AVCaptureVideoPreviewLayer* previewLayer;
-    AVCaptureVideoDataOutput* videoDataOutput;
-    AVCaptureSession* session;
-    dispatch_queue_t videoDataOutputQueue;
-    
-    NSMutableDictionary* _oldPredictionValues;
-}
+@interface MainViewController : UIViewController <UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SettingsTableViewControllerDelegate>
 
 @property IBOutlet UIImageView *photoImageView;
 @property IBOutlet UIView* previewView;

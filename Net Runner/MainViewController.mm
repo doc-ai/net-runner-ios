@@ -56,7 +56,15 @@ typedef enum : NSUInteger {
 
 @end
 
-@implementation MainViewController
+@implementation MainViewController {
+    AVCaptureSession *session;
+    AVCaptureDevicePosition devicePosition;
+    AVCaptureVideoPreviewLayer *previewLayer;
+    AVCaptureVideoDataOutput *videoDataOutput;
+    dispatch_queue_t videoDataOutputQueue;
+    
+    NSMutableDictionary* _oldPredictionValues;
+}
 
 - (void)dealloc {
   [self teardownAVCapture];
@@ -71,6 +79,10 @@ typedef enum : NSUInteger {
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(freezeVideo:)];
     [self.previewView addGestureRecognizer:tapRecognizer];
+    
+    UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDeviceOrientation:)];
+    swipeRecognizer.direction = ( UISwipeGestureRecognizerDirectionRight | UISwipeGestureRecognizerDirectionLeft );
+    [self.previewView addGestureRecognizer:swipeRecognizer];
     
     self.infoView = [[ResultInfoView alloc] init];
     [self.view addSubview:self.infoView];
@@ -122,8 +134,9 @@ typedef enum : NSUInteger {
     self.imageInputPreviewView.showsAlphaChannel = [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBufferAlpha];
     
     // Prepare capture
-
-    [self setupAVCapture];
+    
+    devicePosition = AVCaptureDevicePositionFront;
+    [self setupAVCapture:devicePosition];
     [self setCaptureMode:CaptureModeLiveVideo];
 }
 
@@ -278,7 +291,8 @@ typedef enum : NSUInteger {
 
 // MARK: - AV Capture
 
-- (void)setupAVCapture {
+- (void)setupAVCapture:(AVCaptureDevicePosition)position {
+    
     NSError* error = nil;
     
     // Session
@@ -293,8 +307,8 @@ typedef enum : NSUInteger {
     
     // Device and input
 
-    AVCaptureDevice* device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    AVCaptureDeviceInput* deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+    AVCaptureDevice *device = [self captureDeviceWithPosition:position];
+    AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
 
     if (error != nil) {
         NSLog(@"Failed to initialize AVCaptureDeviceInput. Note: This app doesn't work with simulator");
@@ -345,6 +359,33 @@ typedef enum : NSUInteger {
     [session startRunning];
 }
 
+- (void)teardownAVCapture {
+    [session stopRunning];
+    [previewLayer removeFromSuperlayer];
+    [videoDataOutput setSampleBufferDelegate:nil queue:NULL];
+    
+    session = nil;
+    videoDataOutput = nil;
+    previewLayer = nil;
+    
+    videoDataOutputQueue = NULL;
+}
+
+
+- (BOOL)hasDeviceInPosition:(AVCaptureDevicePosition)position {
+    return [self captureDeviceWithPosition:position] != nil;
+}
+
+- (nullable AVCaptureDevice*)captureDeviceWithPosition:(AVCaptureDevicePosition)position {
+    NSArray<AVCaptureDevice*> *devices =
+        [[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]
+        filter:^BOOL(AVCaptureDevice * _Nonnull device, NSUInteger idx, BOOL * _Nonnull stop) {
+            return device.position == position;
+        }];
+    
+    return devices.count > 0 ? devices[0] : nil;
+}
+
 - (void)presentError:(NSError*)error {
     NSString* title = [NSString stringWithFormat:@"Failed with error %d", (int)[error code]];
     
@@ -357,10 +398,6 @@ typedef enum : NSUInteger {
     [alertController addAction:dismiss];
     
     [self presentViewController:alertController animated:YES completion:nil];
-}
-
-- (void)teardownAVCapture {
-  [previewLayer removeFromSuperlayer];
 }
 
 - (AVCaptureVideoOrientation)avOrientationForDeviceOrientation:(UIDeviceOrientation)deviceOrientation {
@@ -379,6 +416,22 @@ typedef enum : NSUInteger {
         [self showPause];
     } else {
         [session startRunning];
+    }
+}
+
+- (IBAction)swipeDeviceOrientation:(id)sender {
+    if ( devicePosition == AVCaptureDevicePositionFront && [self hasDeviceInPosition:AVCaptureDevicePositionBack] ) {
+        devicePosition = AVCaptureDevicePositionBack;
+        [self teardownAVCapture];
+        [self setupAVCapture:devicePosition];
+    } else if ( devicePosition == AVCaptureDevicePositionBack && [self hasDeviceInPosition:AVCaptureDevicePositionFront] ) {
+        devicePosition = AVCaptureDevicePositionFront;
+        [self teardownAVCapture];
+        [self setupAVCapture:devicePosition];
+    } else {
+        #ifdef DEBUG
+        NSLog(@"Cannot change device position from current position, device unavailable");
+        #endif
     }
 }
 
