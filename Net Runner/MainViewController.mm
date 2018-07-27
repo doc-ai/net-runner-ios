@@ -589,68 +589,76 @@
 }
 
 - (void)setPredictionValues:(NSDictionary*)newValues withDecay:(BOOL)withDecay {
-    const float decayValue = 0.75f;
-    const float updateValue = 0.25f;
-    const float minimumThreshold = 0.01f;
-
-    NSArray* candidateLabels = [NSMutableArray array];
-
-    if (withDecay) {
-
-        NSMutableDictionary* decayedPredictionValues = [[NSMutableDictionary alloc] init];
-        for (NSString* label in _oldPredictionValues) {
-            NSNumber* oldPredictionValueObject = [_oldPredictionValues objectForKey:label];
-            const float oldPredictionValue = [oldPredictionValueObject floatValue];
-            const float decayedPredictionValue = (oldPredictionValue * decayValue);
-            if (decayedPredictionValue > minimumThreshold) {
-                NSNumber* decayedPredictionValueObject = [NSNumber numberWithFloat:decayedPredictionValue];
-                [decayedPredictionValues setObject:decayedPredictionValueObject forKey:label];
-            }
-        }
-      
-        _oldPredictionValues = decayedPredictionValues;
-
-        for (NSString* label in newValues) {
-            NSNumber* newPredictionValueObject = [newValues objectForKey:label];
-            NSNumber* oldPredictionValueObject = [_oldPredictionValues objectForKey:label];
-            if (!oldPredictionValueObject) {
-                oldPredictionValueObject = [NSNumber numberWithFloat:0.0f];
-            }
-            const float newPredictionValue = [newPredictionValueObject floatValue];
-            const float oldPredictionValue = [oldPredictionValueObject floatValue];
-            const float updatedPredictionValue = (oldPredictionValue + (newPredictionValue * updateValue));
-            NSNumber* updatedPredictionValueObject = [NSNumber numberWithFloat:updatedPredictionValue];
-            [_oldPredictionValues setObject:updatedPredictionValueObject forKey:label];
-        }
-        
-        // NSArray* candidateLabels = [NSMutableArray array];
-        for (NSString* label in _oldPredictionValues) {
-            NSNumber* oldPredictionValueObject = [_oldPredictionValues objectForKey:label];
-            const float oldPredictionValue = [oldPredictionValueObject floatValue];
-            if (oldPredictionValue > 0.05f) {
-                NSDictionary* entry = @{@"label" : label, @"value" : oldPredictionValueObject};
-                candidateLabels = [candidateLabels arrayByAddingObject:entry];
-            }
-        }
-        
-    } else {
-        
-        // NSArray* candidateLabels = [NSMutableArray array];
-        for (NSString* label in newValues) {
-            NSNumber* oldPredictionValueObject = [newValues objectForKey:label];
-            const float oldPredictionValue = [oldPredictionValueObject floatValue];
-            if (oldPredictionValue > 0.05f) {
-                NSDictionary* entry = @{@"label" : label, @"value" : oldPredictionValueObject};
-                candidateLabels = [candidateLabels arrayByAddingObject:entry];
-            }
-        }
+//    const float decayValue = 0.75f;
+//    const float updateValue = 0.25f;
+//    const float minimumThreshold = 0.01f;
+//
+//    NSMutableArray *candidateLabels = [NSMutableArray array];
+//
+//    if (withDecay) {
+//
+//        NSMutableDictionary* decayedPredictionValues = [[NSMutableDictionary alloc] init];
+//
+//        for (NSString* label in _oldPredictionValues) {
+//            NSNumber* oldPredictionValueObject = [_oldPredictionValues objectForKey:label];
+//            const float oldPredictionValue = [oldPredictionValueObject floatValue];
+//            const float decayedPredictionValue = (oldPredictionValue * decayValue);
+//            if (decayedPredictionValue > minimumThreshold) {
+//                NSNumber* decayedPredictionValueObject = [NSNumber numberWithFloat:decayedPredictionValue];
+//                [decayedPredictionValues setObject:decayedPredictionValueObject forKey:label];
+//            }
+//        }
+//
+//        _oldPredictionValues = decayedPredictionValues;
+//
+//        for (NSString* label in newValues) {
+//            NSNumber* newPredictionValueObject = [newValues objectForKey:label];
+//            NSNumber* oldPredictionValueObject = [_oldPredictionValues objectForKey:label];
+//            if (!oldPredictionValueObject) {
+//                oldPredictionValueObject = [NSNumber numberWithFloat:0.0f];
+//            }
+//            const float newPredictionValue = [newPredictionValueObject floatValue];
+//            const float oldPredictionValue = [oldPredictionValueObject floatValue];
+//            const float updatedPredictionValue = (oldPredictionValue + (newPredictionValue * updateValue));
+//            NSNumber* updatedPredictionValueObject = [NSNumber numberWithFloat:updatedPredictionValue];
+//            [_oldPredictionValues setObject:updatedPredictionValueObject forKey:label];
+//        }
+//
+//        for (NSString* label in _oldPredictionValues) {
+//            NSNumber* oldPredictionValueObject = [_oldPredictionValues objectForKey:label];
+//            const float oldPredictionValue = [oldPredictionValueObject floatValue];
+//            if (oldPredictionValue > 0.05f) {
+//                NSDictionary* entry = @{@"label" : label, @"value" : oldPredictionValueObject};
+//                candidateLabels = [candidateLabels arrayByAddingObject:entry];
+//            }
+//        }
+//
+//    } else {
+//
+//        for (NSString* label in newValues) {
+//            NSNumber* oldPredictionValueObject = [newValues objectForKey:label];
+//            const float oldPredictionValue = [oldPredictionValueObject floatValue];
+//            if (oldPredictionValue > 0.05f) {
+//                NSDictionary* entry = @{@"label" : label, @"value" : oldPredictionValueObject};
+//                candidateLabels = [candidateLabels arrayByAddingObject:entry];
+//            }
+//        }
+//    }
+    
+    NSMutableArray *candidateLabels = [NSMutableArray array];
+    
+    for ( NSString *label in newValues ) {
+        [candidateLabels addObject:@{
+            @"label" : label,
+            @"value" : [newValues objectForKey:label]
+        }];
     }
     
-  
     NSSortDescriptor* sort = [NSSortDescriptor sortDescriptorWithKey:@"value" ascending:NO];
     NSArray* sortedLabels = [candidateLabels sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
 
-    NSMutableString *classificationsString = [@"Classifications:\n" mutableCopy];
+    // NSMutableString *classificationsString = [@"Classifications:\n" mutableCopy];
+    NSMutableString *classificationsString = [NSMutableString string];
     NSInteger count = 0;
 
     for (NSDictionary* entry in sortedLabels) {
@@ -660,7 +668,7 @@
         count++;
     }
     
-    for (NSInteger i = count; i < 5; i++ ) {
+    for (NSInteger i = count; i < 5-1; i++ ) {
         [classificationsString appendString:@"\n"];
     }
 
