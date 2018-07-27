@@ -512,7 +512,7 @@
     __block CVPixelBufferRef transformedPixelBuffer = NULL;
     
     measuring_latency(&imageProcessingLatency, ^{
-        CVPixelBufferRef pixelBuffer = [image pixelBuffer]; // Returns ARGB
+        CVPixelBufferRef pixelBuffer = image.pixelBuffer; // Returns ARGB
         transformedPixelBuffer = [pipeline transform:pixelBuffer orientation:kCGImagePropertyOrientationUp];
     });
     

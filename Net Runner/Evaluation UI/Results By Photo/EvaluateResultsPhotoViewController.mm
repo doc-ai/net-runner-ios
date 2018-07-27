@@ -96,7 +96,7 @@
         return;
     }
     
-    AlbumPhotoEvaluator *evaluator = [[AlbumPhotoEvaluator alloc] initWithModel:model photo:asset album:self.album cachingManager:self.imageManager];
+    AlbumPhotoEvaluator *evaluator = [[AlbumPhotoEvaluator alloc] initWithModel:model photo:asset album:self.album imageManager:self.imageManager];
     
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         

@@ -74,6 +74,7 @@
 		E3F6C6B1210A5B8D00D200D8 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */; };
 		E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6B2210A661200D200D8 /* Headless.storyboard */; };
 		E3F6C6B7210A661300D200D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6B4210A661300D200D8 /* Main.storyboard */; };
+		E3FA5B4A210A9C58009BA905 /* CVPixelBufferEvaluator.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3FA5B49210A9C58009BA905 /* CVPixelBufferEvaluator.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +227,8 @@
 		E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E3F6C6B3210A661200D200D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Headless.storyboard; sourceTree = "<group>"; };
 		E3F6C6B5210A661300D200D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E3FA5B48210A9C58009BA905 /* CVPixelBufferEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVPixelBufferEvaluator.h; sourceTree = "<group>"; };
+		E3FA5B49210A9C58009BA905 /* CVPixelBufferEvaluator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVPixelBufferEvaluator.mm; sourceTree = "<group>"; };
 		E5E3C0E09754E88DA571C288 /* Pods-Net RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -516,6 +519,8 @@
 				E3B57E85210A52FB008D19C0 /* URLImageEvaluator.mm */,
 				E3B57E88210A52FC008D19C0 /* ImageEvaluator.h */,
 				E3B57E86210A52FC008D19C0 /* ImageEvaluator.mm */,
+				E3FA5B48210A9C58009BA905 /* CVPixelBufferEvaluator.h */,
+				E3FA5B49210A9C58009BA905 /* CVPixelBufferEvaluator.mm */,
 			);
 			path = Evaluation;
 			sourceTree = "<group>";
@@ -784,6 +789,7 @@
 				E3A5214B210A51F7004B912B /* VisionModelHelpers.mm in Sources */,
 				E3C4374F210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.m in Sources */,
 				E3F6C696210A56EC00D200D8 /* HeadlessTestBundleRunner.mm in Sources */,
+				E3FA5B4A210A9C58009BA905 /* CVPixelBufferEvaluator.mm in Sources */,
 				E3B57E8B210A52FC008D19C0 /* URLImageEvaluator.mm in Sources */,
 				E3458A94210A56410040648C /* EvaluateConfirmTableViewController.m in Sources */,
 				E3F6C695210A56EC00D200D8 /* HeadlessViewController.m in Sources */,

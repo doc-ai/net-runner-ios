@@ -19,6 +19,7 @@
 #import "EvaluationResultsActivityItemProvider.h"
 #import "EvaluateResultsByModelCollectionViewController.h"
 #import "PHFetchResult+Extensions.h"
+#import "EvaluatorConstants.h"
 
 static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
 
@@ -200,7 +201,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
                             initWithModel:(id<VisionModel>)model
                             photo:photo
                             album:album
-                            cachingManager:self.imageManager];
+                            imageManager:self.imageManager];
                         
                         [evaluators addObject:evaluator];
                         numberOfPhotos++;
@@ -316,7 +317,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
     double totalLatency =
         [[[goodResults
         map:^id _Nonnull(NSDictionary * _Nonnull obj) {
-            return obj[@"evaluation"][kImageEvaluatorInferenceLatencyKey];
+            return obj[@"evaluation"][kEvaluatorResultsKeyInferenceLatency];
         }]
         reduce:@((double)0.0) combine:^id _Nonnull(NSNumber * _Nonnull accumulator, NSNumber * _Nonnull item) {
             return @(accumulator.doubleValue + item.doubleValue);

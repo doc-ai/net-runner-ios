@@ -21,7 +21,7 @@
 
 @implementation VisionPipeline
 
-- (instancetype) initWithVisionModel:(id<VisionModel>)model {
+- (instancetype)initWithVisionModel:(id<VisionModel>)model {
     if (self = [super init]) {
         _model = model;
     }
@@ -29,7 +29,7 @@
     return self;
 }
 
-- (nullable CVPixelBufferRef) transform:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
+- (nullable CVPixelBufferRef)transform:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
     CVPixelBufferRef resizedPixelBuffer = NULL;
     CVPixelBufferRef rotatedPixelBuffer = NULL;
     CVPixelBufferRef formattedPixelBuffer = NULL;

@@ -43,7 +43,7 @@
     return options;
 }
 
-- (instancetype)initWithModel:(id<VisionModel>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album cachingManager:(PHCachingImageManager*)imageManager {
+- (instancetype)initWithModel:(id<VisionModel>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager {
     if (self = [super init]) {
         _model = model;
         _photo = photo;

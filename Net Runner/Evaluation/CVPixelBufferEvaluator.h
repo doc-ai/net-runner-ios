@@ -1,26 +1,25 @@
 //
-//  ImageEvaluator.h
-//  tflite_camera_example
+//  CVPixelBufferEvaluator.h
+//  Net Runner
 //
-//  Created by Philip Dow on 7/18/18.
+//  Created by Philip Dow on 7/26/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 #import "Evaluator.h"
-#import "VisionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ImageEvaluator : NSObject <Evaluator>
+@interface CVPixelBufferEvaluator : NSObject <Evaluator>
 
-@property (readonly) UIImage *image;
 @property (readonly) id<VisionModel> model;
 @property (readonly) NSDictionary *results;
+@property (nonatomic, readonly) CVPixelBufferRef pixelBuffer;
 
-- (instancetype)initWithImage:(UIImage*)image model:(id<VisionModel>)model;
+- (instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer model:(id<VisionModel>)model;
 
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler;
 

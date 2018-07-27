@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  * using properties specified by the model.
  */
 
-- (nullable CVPixelBufferRef) transform:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation;
+- (nullable CVPixelBufferRef)transform:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation;
 
 @end
 

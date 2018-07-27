@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) PHAssetCollection *album;
 @property (readonly) PHCachingImageManager *imageManager;
 
-- (instancetype)initWithModel:(id<VisionModel>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album cachingManager:(PHCachingImageManager*)imageManager;
+- (instancetype)initWithModel:(id<VisionModel>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager;
 
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler;
 

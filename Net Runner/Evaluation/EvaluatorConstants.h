@@ -19,8 +19,19 @@ NSString * const kEvaluatorResultsKeyEvaluation = @"evaluation";
 
 NSString * const kEvaluatorResultsKeyAlbum = @"album";
 
-NSString * const kEvaluatorReulstsKeyTypeAlbumPhoto = @"album_photo";
+// Supported source types
+
+NSString * const kEvaluatorResultsKeyTypeAlbumPhoto = @"album_photo";
 NSString * const kEvaluatorResultsKeyTypeFile = @"file";
 NSString * const kEvaluatorResultsKeyTypeURL = @"url";
+
+// Final evaluation results
+
+NSString * const kEvaluatorResultsKeyPreprocessingLatency = @"preprocessor_latency";
+NSString * const kEvaluatorResultsKeyInferenceLatency = @"inference_latency";
+NSString * const kEvaluatorResultsKeyInferenceResults = @"inference_results";
+
+NSString * const kEvaluatorResultsKeyPreprocessingError = @"preprocessor_error";
+NSString * const kEvaluatorResultsKeyInferenceError = @"inference_error";
 
 NS_ASSUME_NONNULL_END
