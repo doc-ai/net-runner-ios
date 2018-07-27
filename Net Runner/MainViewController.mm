@@ -39,6 +39,23 @@
 
 // MARK: -
 
+typedef enum : NSUInteger {
+    CaptureModeLiveVideo,
+    CaptureModePhoto,
+} CaptureMode;
+
+@interface MainViewController ()
+
+@property ResultInfoView *infoView;
+@property NSDate *lastScreenUpdate;
+@property (nonatomic) CaptureMode captureMode;
+@property LatencyCounter *latencyCounter;
+
+@property ModelBundle *modelBundle;
+@property id<VisionModel> model;
+
+@end
+
 @implementation MainViewController
 
 - (void)dealloc {
@@ -48,23 +65,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    lastScreenUpdate = [NSDate date];
+    self.lastScreenUpdate = [NSDate date];
 
     // UI
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(freezeVideo:)];
-    [previewView addGestureRecognizer:tapRecognizer];
+    [self.previewView addGestureRecognizer:tapRecognizer];
     
-    infoView = [[ResultInfoView alloc] init];
-    [self.view addSubview:infoView];
+    self.infoView = [[ResultInfoView alloc] init];
+    [self.view addSubview:self.infoView];
     
-    infoView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.infoView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [NSLayoutConstraint activateConstraints:@[
-        [infoView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:-16],
-        [infoView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-26],
-        [infoView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:16],
-        [infoView.heightAnchor constraintGreaterThanOrEqualToConstant:40]
+        [self.infoView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:-16],
+        [self.infoView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-26],
+        [self.infoView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:16],
+        [self.infoView.heightAnchor constraintGreaterThanOrEqualToConstant:40]
     ]];
 
     // Load default model
@@ -72,37 +89,37 @@
     NSString *modelId = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
     NSError *modelError;
     
-    _modelBundle = [ModelManager.sharedManager bundleWithId:modelId];
-    _model = (id<VisionModel>)[_modelBundle newModel];
+    self.modelBundle = [ModelManager.sharedManager bundleWithId:modelId];
+    self.model = (id<VisionModel>)[self.modelBundle newModel];
     
-    if ( _model == nil ) {
+    if ( self.model == nil ) {
         NSLog(@"Unable to find and instantiate model with id %@", modelId);
-        _modelBundle = nil;
-        _model = nil;
+        self.modelBundle = nil;
+        self.model = nil;
     }
     
-    if ( ![_model conformsToProtocol:@protocol(VisionModel)] ) {
+    if ( ![self.model conformsToProtocol:@protocol(VisionModel)] ) {
         NSLog(@"Model does not conform to protocol VisionModel, id: %@", modelId);
-        _modelBundle = nil;
-        _model = nil;
+        self.modelBundle = nil;
+        self.model = nil;
     }
     
-    if ( ![_model load:&modelError] ) {
+    if ( ![self.model load:&modelError] ) {
         NSLog(@"Model does could not be loaded, id: %@, error: %@", modelId, modelError);
-        _modelBundle = nil;
-        _model = nil;
+        self.modelBundle = nil;
+        self.model = nil;
     }
     
-    self.title = _model.name;
-    imageInputPreviewView.pixelFormat = _model.pixelFormat;
+    self.title = self.model.name;
+    self.imageInputPreviewView.pixelFormat = self.model.pixelFormat;
 
     _oldPredictionValues = [[NSMutableDictionary alloc] init];
     self.latencyCounter = [[LatencyCounter alloc] init];
     
     // Preferences
     
-    imageInputPreviewView.hidden = ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers];
-    imageInputPreviewView.showsAlphaChannel = [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBufferAlpha];
+    self.imageInputPreviewView.hidden = ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers];
+    self.imageInputPreviewView.showsAlphaChannel = [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBufferAlpha];
     
     // Prepare capture
 
@@ -117,14 +134,14 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    CALayer* rootLayer = [previewView layer];
+    CALayer* rootLayer = self.previewView.layer;
     [previewLayer setFrame:[rootLayer bounds]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    if (captureMode == CaptureModeLiveVideo && [session isRunning]) {
+    if (self.captureMode == CaptureModeLiveVideo && [session isRunning]) {
         [session stopRunning];
     }
 }
@@ -132,7 +149,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (captureMode == CaptureModeLiveVideo && ![session isRunning]) {
+    if (self.captureMode == CaptureModeLiveVideo && ![session isRunning]) {
         [session startRunning];
     }
 }
@@ -144,7 +161,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"SettingsSegue"] ) {
         SettingsTableViewController *destination = (SettingsTableViewController*)segue.destinationViewController;
-        destination.selectedBundle = _modelBundle;
+        destination.selectedBundle = self.modelBundle;
         destination.delegate = self;
     }
 }
@@ -155,30 +172,30 @@
     
     // Model
     
-    if ( viewController.selectedBundle != _modelBundle ) {
+    if ( viewController.selectedBundle != self.modelBundle ) {
         
         ModelBundle *newBundle = viewController.selectedBundle;
         id<Model> newModel = [newBundle newModel];
         
         if ( newModel == nil ) {
-            NSLog(@"Unable to instantiate model from bundle %@", _modelBundle.identifier);
-            _modelBundle = nil;
-            _model = nil;
+            NSLog(@"Unable to instantiate model from bundle %@", self.modelBundle.identifier);
+            self.modelBundle = nil;
+            self.model = nil;
             return;
         }
         
         if ( ![newModel conformsToProtocol:@protocol(VisionModel)] ) {
             NSLog(@"Model does not conform to vision model protocol");
-            _modelBundle = nil;
-            _model = nil;
+            self.modelBundle = nil;
+            self.model = nil;
             return;
         }
         
-        _modelBundle = newBundle;
-        _model = (id<VisionModel>)newModel;
+        self.modelBundle = newBundle;
+        self.model = (id<VisionModel>)newModel;
         
-        self.title = _model.name;
-        imageInputPreviewView.pixelFormat = _model.pixelFormat;
+        self.title = self.model.name;
+        self.imageInputPreviewView.pixelFormat = self.model.pixelFormat;
         
         _oldPredictionValues = [NSMutableDictionary dictionary];
         self.latencyCounter = [[LatencyCounter alloc] init];
@@ -186,8 +203,8 @@
     
     // Other Settings
     
-    imageInputPreviewView.hidden = ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers];
-    imageInputPreviewView.showsAlphaChannel = [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBufferAlpha];
+    self.imageInputPreviewView.hidden = ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers];
+    self.imageInputPreviewView.showsAlphaChannel = [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBufferAlpha];
 }
 
 // MARK: - Capture Mode
@@ -239,22 +256,22 @@
 
 - (void)didCancelInputSourcePicker {
     [self setInfoHidden:NO];
-    if (captureMode == CaptureModeLiveVideo && ![session isRunning]) {
+    if (self.captureMode == CaptureModeLiveVideo && ![session isRunning]) {
         [session startRunning];
     }
 }
 
 - (void)setCaptureMode:(CaptureMode)mode {
-    captureMode = mode;
+    _captureMode = mode;
     
     switch (mode) {
     case CaptureModeLiveVideo:
-        photoImageView.hidden = YES;
-        previewView.hidden = NO;
+        self.photoImageView.hidden = YES;
+        self.previewView.hidden = NO;
         break;
     case CaptureModePhoto:
-        photoImageView.hidden = NO;
-        previewView.hidden = YES;
+        self.photoImageView.hidden = NO;
+        self.previewView.hidden = YES;
         break;
     }
 }
@@ -318,7 +335,7 @@
     [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
     // AVLayerVideoGravityResizeAspectFill
     
-    CALayer* rootLayer = [previewView layer];
+    CALayer* rootLayer = self.previewView.layer;
     [rootLayer setMasksToBounds:YES];
     [previewLayer setFrame:[rootLayer bounds]];
     [rootLayer addSublayer:previewLayer];
@@ -425,29 +442,27 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     [self setInfoHidden:NO];
-    if (captureMode == CaptureModeLiveVideo && ![session isRunning]) {
+    if (self.captureMode == CaptureModeLiveVideo && ![session isRunning]) {
         [session startRunning];
     }
 }
 
 - (void)setInfoHidden:(BOOL)hidden {
     [UIView animateWithDuration:0.1 animations:^{
-        self->infoView.alpha = hidden ? 0 : 1;
+        self.infoView.alpha = hidden ? 0 : 1;
     }];
 }
 
 // MARK: - Run Model
 
 /*
- * Incoming pixelBuffer is guaranteed to be in the BGRA format: kCMPixelFormat_32BGRA, as specified
- * when setting up the AVCaptureDevice
+ * Incoming pixelBuffer is guaranteed to be in the BGRA format: kCMPixelFormat_32BGRA / kCVPixelFormatType_32BGRA,
+ * as specified when setting up the AVCaptureDevice.
  */
-
- // TODO: Use the ImageEvaluator or a PixelBuffer Evaluator to run the vision pipeline and model
 
 - (void)runModelOnFrame:(CVPixelBufferRef)pixelBuffer {
     
-    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight model:_model];
+    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight model:self.model];
     
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -463,12 +478,12 @@
             [self.latencyCounter incrementCount];
             
             [self setPredictionValues:inference withDecay:YES];
-            self->infoView.stats = [self modelStats:NO];
+            self.infoView.stats = [self modelStats:NO];
             
             // Visualize last pixel buffer used by model
     
             if ( [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers] ) {
-                self->imageInputPreviewView.pixelBuffer = [self->_model inputPixelBuffer];
+                self.imageInputPreviewView.pixelBuffer = self.model.inputPixelBuffer;
             }
 
             #ifdef DEBUG
@@ -478,10 +493,14 @@
     }];
 }
 
+/*
+ * Our utility image.pixelBuffer method returns the pixel format in ARGB: kCVPixelFormatType_32ARGB
+ */
+
 - (void)runModelOnImage:(UIImage*)image {
     
     CVPixelBufferRef pixelBuffer = image.pixelBuffer; // Returns ARGB
-    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp model:_model];
+    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp model:self.model];
     
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -498,16 +517,16 @@
             
             self->_oldPredictionValues = [NSMutableDictionary dictionary];
             [self setPredictionValues:inference withDecay:YES];
-            self->infoView.stats = [self modelStats:NO];
+            self.infoView.stats = [self modelStats:NO];
             
             // Preview
     
-            self->photoImageView.image = image;
+            self.photoImageView.image = image;
             
             // Visualize last pixel buffer used by model
     
             if ( [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers] ) {
-                self->imageInputPreviewView.pixelBuffer = [self->_model inputPixelBuffer];
+                self.imageInputPreviewView.pixelBuffer = self.model.inputPixelBuffer;
             }
 
             #ifdef DEBUG
@@ -519,9 +538,9 @@
 
 - (BOOL)throttle:(NSTimeInterval)delta {
     NSDate *now = [NSDate date];
-    NSTimeInterval diff = [now timeIntervalSinceDate:lastScreenUpdate];
+    NSTimeInterval diff = [now timeIntervalSinceDate:self.lastScreenUpdate];
     BOOL throttle = diff < delta;
-    if (!throttle) { lastScreenUpdate = now; }
+    if (!throttle) { self.lastScreenUpdate = now; }
     return throttle;
 }
 
@@ -629,7 +648,7 @@
         [classificationsString appendString:@"\n"];
     }
 
-    infoView.classifications = classificationsString;
+    self.infoView.classifications = classificationsString;
 }
 
 @end
