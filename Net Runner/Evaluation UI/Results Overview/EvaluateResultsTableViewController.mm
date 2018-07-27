@@ -160,6 +160,8 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
     fetchOptions.sortDescriptors = sortDescriptors;
     fetchOptions.predicate = fetchPredicate;
+    fetchOptions.includeAllBurstAssets = NO;
+    fetchOptions.includeHiddenAssets = NO;
     
     PHFetchResult *fetchResult = [PHAsset fetchAssetsInAssetCollection:collection options:fetchOptions];
     return fetchResult.allAssets;

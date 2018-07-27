@@ -296,10 +296,10 @@
 		E374029E210A55220025AA59 /* Select Model */ = {
 			isa = PBXGroup;
 			children = (
-				E3458A86210A55A80040648C /* EvaluateModelTableViewCell.h */,
-				E3458A85210A55A80040648C /* EvaluateModelTableViewCell.m */,
 				E3458A84210A55A80040648C /* EvaluateSelectModelsTableViewController.h */,
 				E3458A87210A55A80040648C /* EvaluateSelectModelsTableViewController.m */,
+				E3458A86210A55A80040648C /* EvaluateModelTableViewCell.h */,
+				E3458A85210A55A80040648C /* EvaluateModelTableViewCell.m */,
 			);
 			path = "Select Model";
 			sourceTree = "<group>";
@@ -307,12 +307,12 @@
 		E37402A0210A55390025AA59 /* Photo Library Browser */ = {
 			isa = PBXGroup;
 			children = (
+				E3F6C67B210A567300D200D8 /* PhotoAssetsCollectionViewController.h */,
+				E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */,
 				E3F6C67A210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.h */,
 				E3F6C67D210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m */,
 				E3F6C67E210A567300D200D8 /* PhotoAlbumPhotoViewController.h */,
 				E3F6C67F210A567300D200D8 /* PhotoAlbumPhotoViewController.m */,
-				E3F6C67B210A567300D200D8 /* PhotoAssetsCollectionViewController.h */,
-				E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */,
 			);
 			path = "Photo Library Browser";
 			sourceTree = "<group>";
@@ -342,10 +342,10 @@
 		E37402A3210A55580025AA59 /* Results Overview */ = {
 			isa = PBXGroup;
 			children = (
-				E3458A96210A56460040648C /* EvaluateResultsModelTableViewCell.h */,
-				E3458A97210A56460040648C /* EvaluateResultsModelTableViewCell.m */,
 				E3458A99210A56460040648C /* EvaluateResultsTableViewController.h */,
 				E3458A98210A56460040648C /* EvaluateResultsTableViewController.mm */,
+				E3458A96210A56460040648C /* EvaluateResultsModelTableViewCell.h */,
+				E3458A97210A56460040648C /* EvaluateResultsModelTableViewCell.m */,
 			);
 			path = "Results Overview";
 			sourceTree = "<group>";
@@ -364,10 +364,10 @@
 		E37402A5210A55640025AA59 /* Select Album */ = {
 			isa = PBXGroup;
 			children = (
-				E3458A8C210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.h */,
-				E3458A8A210A563B0040648C /* EvaluatePhotoAlbumTableViewCell.m */,
 				E3458A8D210A563C0040648C /* EvaluateSelectAlbumsTableViewController.h */,
 				E3458A8B210A563C0040648C /* EvaluateSelectAlbumsTableViewController.m */,
+				E3458A8C210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.h */,
+				E3458A8A210A563B0040648C /* EvaluatePhotoAlbumTableViewCell.m */,
 			);
 			path = "Select Album";
 			sourceTree = "<group>";

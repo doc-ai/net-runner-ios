@@ -41,6 +41,8 @@
     
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
     fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    fetchOptions.includeAllBurstAssets = NO;
+    fetchOptions.includeHiddenAssets = NO;
     
     PHFetchResult *fetchResult = [PHAsset fetchKeyAssetsInAssetCollection:album options:fetchOptions];
     PHAsset *asset = [fetchResult firstObject];

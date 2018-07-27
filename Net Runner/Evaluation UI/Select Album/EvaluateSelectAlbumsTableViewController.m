@@ -32,18 +32,19 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // self.albums = [PHCollection fetchTopLevelUserCollectionsWithOptions:nil];
-    // What about smart albums?
+    // Fetch albums, if we want to include smart albums later: PHAssetCollectionTypeSmartAlbum
     
     NSSortDescriptor *albumTitleSort = [NSSortDescriptor sortDescriptorWithKey:@"localizedTitle" ascending:YES selector:@selector(caseInsensitiveCompare:)];
     
-    PHFetchOptions *options = [[PHFetchOptions alloc] init];
-    options.sortDescriptors = @[albumTitleSort];
+    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+    fetchOptions.sortDescriptors = @[albumTitleSort];
+    fetchOptions.includeAllBurstAssets = NO;
+    fetchOptions.includeHiddenAssets = NO;
     
     self.albums = [PHAssetCollection
         fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum
-        subtype:PHAssetCollectionSubtypeAny
-        options:options];
+        subtype:PHAssetCollectionSubtypeAlbumRegular
+        options:fetchOptions];
         
     self.selectedAlbums = [[NSSet<PHAssetCollection *> alloc] init];
     self.imageManager = [[PHCachingImageManager alloc] init];
@@ -65,8 +66,11 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
     
         PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
         fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+        fetchOptions.includeAllBurstAssets = NO;
+        fetchOptions.includeHiddenAssets = NO;
+        
         PHFetchResult<PHAsset*> *fetchResult = [PHAsset fetchAssetsInAssetCollection:album options:fetchOptions];
-    
+        
         destination.imageManager = self.imageManager;
         destination.title = album.localizedTitle;
         destination.assets = fetchResult.allAssets;
