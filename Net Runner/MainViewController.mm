@@ -32,6 +32,8 @@
 #import "ImageInputPreviewView.h"
 #import "UserDefaults.h"
 #import "ModelBundle.h"
+#import "CVPixelBufferEvaluator.h"
+#import "EvaluatorConstants.h"
 
 #define LOG(x) std::cerr
 
@@ -242,7 +244,7 @@
     }
 }
 
-- (void) setCaptureMode:(CaptureMode)mode {
+- (void)setCaptureMode:(CaptureMode)mode {
     captureMode = mode;
     
     switch (mode) {
@@ -444,120 +446,81 @@
  // TODO: Use the ImageEvaluator or a PixelBuffer Evaluator to run the vision pipeline and model
 
 - (void)runModelOnFrame:(CVPixelBufferRef)pixelBuffer {
-    double imageProcessingLatency;
-    double inferenceLatency;
     
-    // Transform the pixel buffer to the required format
+    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight model:_model];
     
-    VisionPipeline *pipeline = [[VisionPipeline alloc] initWithVisionModel:_model];
-    __block CVPixelBufferRef transformedPixelBuffer = NULL;
-    
-    measuring_latency(&imageProcessingLatency, ^{
-        transformedPixelBuffer = [pipeline transform:pixelBuffer orientation:kCGImagePropertyOrientationRight];
-    });
-    
-    NSLog(@"Video image preprocessing latency: %.1lfms", imageProcessingLatency);
-    
-    if (transformedPixelBuffer == NULL) {
-        NSLog(@"Unable to transform pixel buffer for model processing");
-        return;
-    }
-    
-    // Make prediction
-    
-    __block NSDictionary *newValues;
-    
-    measuring_latency(&inferenceLatency, ^{
-        newValues = [self->_model runModelOn:transformedPixelBuffer];
-    });
-    
-    // Track latency
-    
-    _latencyCounter.lastImageProcessingLatency = imageProcessingLatency;
-    _latencyCounter.lastInferenceLatency = inferenceLatency;
-    
-    _latencyCounter.imageProcessingLatency += imageProcessingLatency;
-    _latencyCounter.inferenceLatency += inferenceLatency;
-    _latencyCounter.count += 1;
-    
-    // Update UI
-    
-    dispatch_async(dispatch_get_main_queue(), ^(void) {
-        if (![self throttle:0.0]) {
-            [self setPredictionValues:newValues withDecay:YES];
+    [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            NSDictionary *inference = result[kEvaluatorResultsKeyInferenceResults];
+            const float inferenceLatency = [result[kEvaluatorResultsKeyInferenceLatency] floatValue];
+            const float preprocessingLatency = [result[kEvaluatorResultsKeyPreprocessingLatency] floatValue];
+            
+            // Show results and latency
+            
+            self->_latencyCounter.lastImageProcessingLatency = preprocessingLatency;
+            self->_latencyCounter.lastInferenceLatency = inferenceLatency;
+            
+            self->_latencyCounter.imageProcessingLatency += preprocessingLatency;
+            self->_latencyCounter.inferenceLatency += inferenceLatency;
+            self->_latencyCounter.count += 1;
+            
+            [self setPredictionValues:inference withDecay:YES];
             self->infoView.stats = [self modelStats:NO];
-        }
-    });
+            
+            // Visualize last pixel buffer used by model
     
-    // Visualize last pixel buffer used by model
-    
-    if ( [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers] ) {
-        imageInputPreviewView.pixelBuffer = [_model inputPixelBuffer];
-    }
+            if ( [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers] ) {
+                self->imageInputPreviewView.pixelBuffer = [self->_model inputPixelBuffer];
+            }
 
-#ifdef DEBUG
-    
-    NSLog(@"%@",[self modelStats:YES]);
-    
-#endif
+            #ifdef DEBUG
+            NSLog(@"%@",[self modelStats:YES]);
+            #endif
+        });
+    }];
 }
 
 - (void)runModelOnImage:(UIImage*)image {
-    double imageProcessingLatency;
-    double inferenceLatency;
     
-    // Transform the image to the required format
+    CVPixelBufferRef pixelBuffer = image.pixelBuffer; // Returns ARGB
+    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp model:_model];
     
-    VisionPipeline *pipeline = [[VisionPipeline alloc] initWithVisionModel:_model];
-    __block CVPixelBufferRef transformedPixelBuffer = NULL;
+    [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            
+            NSDictionary *inference = result[kEvaluatorResultsKeyInferenceResults];
+            const float inferenceLatency = [result[kEvaluatorResultsKeyInferenceLatency] floatValue];
+            const float preprocessingLatency = [result[kEvaluatorResultsKeyPreprocessingLatency] floatValue];
+            
+            // Show results and latency
+            
+            self->_latencyCounter.lastImageProcessingLatency = preprocessingLatency;
+            self->_latencyCounter.lastInferenceLatency = inferenceLatency;
+            
+            self->_latencyCounter.imageProcessingLatency += preprocessingLatency;
+            self->_latencyCounter.inferenceLatency += inferenceLatency;
+            self->_latencyCounter.count += 1;
+            
+            self->_oldPredictionValues = [NSMutableDictionary dictionary];
+            [self setPredictionValues:inference withDecay:YES];
+            self->infoView.stats = [self modelStats:NO];
+            
+            // Preview
     
-    measuring_latency(&imageProcessingLatency, ^{
-        CVPixelBufferRef pixelBuffer = image.pixelBuffer; // Returns ARGB
-        transformedPixelBuffer = [pipeline transform:pixelBuffer orientation:kCGImagePropertyOrientationUp];
-    });
+            self->photoImageView.image = image;
+            
+            // Visualize last pixel buffer used by model
     
-    NSLog(@"Photo image preprocessing latency: %.1lfms", imageProcessingLatency);
-    
-    if (transformedPixelBuffer == NULL) {
-        NSLog(@"Unable to transform pixel buffer for model processing");
-        return;
-    }
-    
-    // Preview
-    
-    photoImageView.image = image;
-    photoImageView.hidden = NO;
-    previewView.hidden = YES;
-    
-    // Make prediction
-    
-    __block NSDictionary *newValues;
-    
-    measuring_latency(&inferenceLatency, ^{
-        newValues = [self->_model runModelOn:transformedPixelBuffer];
-    });
-    
-    // Track latency
-    
-    _latencyCounter.lastImageProcessingLatency = imageProcessingLatency;
-    _latencyCounter.lastInferenceLatency = inferenceLatency;
-    
-    _latencyCounter.imageProcessingLatency += imageProcessingLatency;
-    _latencyCounter.inferenceLatency += inferenceLatency;
-    _latencyCounter.count += 1;
-    
-    // Update UI
-    
-    _oldPredictionValues = [NSMutableDictionary dictionary];
-    [self setPredictionValues:newValues withDecay:NO];
-    
-    infoView.stats = [self modelStats:NO];
-    
-    // Visualize last pixel buffer used by model
-    
-    if ( [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers] ) {
-        imageInputPreviewView.pixelBuffer = [_model inputPixelBuffer];
-    }
+            if ( [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers] ) {
+                self->imageInputPreviewView.pixelBuffer = [self->_model inputPixelBuffer];
+            }
+
+            #ifdef DEBUG
+            NSLog(@"%@",[self modelStats:YES]);
+            #endif
+        });
+    }];
 }
 
 - (BOOL)throttle:(NSTimeInterval)delta {

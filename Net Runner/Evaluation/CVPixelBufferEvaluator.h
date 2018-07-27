@@ -18,8 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) id<VisionModel> model;
 @property (readonly) NSDictionary *results;
 @property (nonatomic, readonly) CVPixelBufferRef pixelBuffer;
+@property (readonly) CGImagePropertyOrientation orientation;
 
-- (instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer model:(id<VisionModel>)model;
+- (instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation model:(id<VisionModel>)model;
 
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler;
 

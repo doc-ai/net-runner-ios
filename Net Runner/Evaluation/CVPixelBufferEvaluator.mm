@@ -18,6 +18,7 @@
 @property (readwrite) NSDictionary *results;
 @property (readwrite) id<VisionModel> model;
 @property (nonatomic, readwrite) CVPixelBufferRef pixelBuffer;
+@property (readwrite) CGImagePropertyOrientation orientation;
 
 @end
 
@@ -31,9 +32,10 @@
     CVPixelBufferRetain(_pixelBuffer);
 }
 
-- (instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer model:(id<VisionModel>)model {
+- (instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation model:(id<VisionModel>)model {
     if (self = [super init]) {
         _model = model;
+        _orientation = orientation;
         _pixelBuffer = pixelBuffer;
         CVPixelBufferRetain(_pixelBuffer);
     }
@@ -71,7 +73,7 @@
     __block CVPixelBufferRef transformedPixelBuffer = NULL;
     
     measuring_latency(&imageProcessingLatency, ^{
-        transformedPixelBuffer = [pipeline transform:self.pixelBuffer orientation:kCGImagePropertyOrientationUp];
+        transformedPixelBuffer = [pipeline transform:self.pixelBuffer orientation:self.orientation];
     });
     
     if (transformedPixelBuffer == NULL) {

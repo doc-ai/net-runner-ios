@@ -44,7 +44,9 @@
     
     CVPixelBufferRef pixelBuffer = self.image.pixelBuffer; // Returns ARGB
     
-    CVPixelBufferEvaluator *pixelBufferEvaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer model:self.model];
+    // TODO: pull orientation from the UIImage
+    
+    CVPixelBufferEvaluator *pixelBufferEvaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp model:self.model];
     
     [pixelBufferEvaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         self.results = result;
