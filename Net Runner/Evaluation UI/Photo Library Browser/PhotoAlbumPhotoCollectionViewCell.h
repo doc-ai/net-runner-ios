@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)sharedInit;
 
-/*
+/**
  * Set the desired imageSize before setting the asset
  */
 

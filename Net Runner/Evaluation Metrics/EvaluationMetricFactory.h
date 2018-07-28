@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EvaluationMetricFactory : NSObject
 
-/*
+/**
  * Returns the shared instance of the EvaluationMetricFactory. The factory dyanamically instantiates
  * metric classes based on their class names. You should not need to use this class directly.
  */

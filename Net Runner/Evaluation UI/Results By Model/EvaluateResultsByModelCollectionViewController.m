@@ -75,7 +75,7 @@ static NSString * const kHeaderReuseIdentifier = @"HeaderView";
     }
 }
 
-/*
+/**
  * Group the results by album so that we can present them that way in the collection view.
  * Each grouping will have multiple entries for a single photo, specifically the number of iterations,
  * so group the entries by photo and map that array of array of photos to an array of photos.

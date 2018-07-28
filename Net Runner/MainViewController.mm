@@ -520,8 +520,8 @@ typedef enum : NSUInteger {
 
 // MARK: - Run Model
 
-/*
- * Incoming pixelBuffer is guaranteed to be in the BGRA format: kCMPixelFormat_32BGRA / kCVPixelFormatType_32BGRA,
+/**
+ * Incoming pixelBuffer is guaranteed to be in the BGRA format: `kCMPixelFormat_32BGRA` ( `kCVPixelFormatType_32BGRA` ),
  * as specified when setting up the AVCaptureDevice.
  */
 
@@ -558,8 +558,8 @@ typedef enum : NSUInteger {
     }];
 }
 
-/*
- * Our utility image.pixelBuffer method returns the pixel format in ARGB: kCVPixelFormatType_32ARGB
+/**
+ * Our utility image.pixelBuffer method returns the pixel format in ARGB: `kCVPixelFormatType_32ARGB`
  */
 
 - (void)runModelOnImage:(UIImage*)image {

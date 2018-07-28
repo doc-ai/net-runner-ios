@@ -33,13 +33,13 @@ typedef float32_t (^PixelNormalizer)(const uint8_t &value, const uint8_t &channe
 
 float32_t ScaledPixel(const uint8_t &value, uint8_t channel);
 
-/*
+/**
  * Returns a copy of the pixel buffer
  */
 
 CVPixelBufferRef CVPixelBufferCopy(CVPixelBufferRef srcBuffer);
 
-/*
+/**
  * Rotates the pixel buffer 90° clockwise. The pixel buffer must be square
  *
  * rotation value:
@@ -53,48 +53,48 @@ CVPixelBufferRef CVPixelBufferCopy(CVPixelBufferRef srcBuffer);
 
 CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVPixelBufferCounterclockwiseRotation rotation);
 
-/*
+/**
  * Converts a pixel buffer in ARGB format to one in BGRA format
  *
- * Caller must release the returned pixel buffer with CVPixelBufferRelease
+ * Caller must release the returned pixel buffer with `CVPixelBufferRelease`
  */
 
 CVPixelBufferRef CVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixelBuffer);
 
-/*
+/**
  * Converts a pixel buffer in BGRA format to one in ARGB format
  *
- * Caller must release the returned pixel buffer with CVPixelBufferRelease
+ * Caller must release the returned pixel buffer with `CVPixelBufferRelease`
  */
 
 CVPixelBufferRef CVPixelBufferCreateARGBFromBGRA(CVPixelBufferRef pixelBuffer);
 
-/*
+/**
  * Copies the pixel buffer's three color channels into separate grayscale pixel buffers
  * The srcBuffer must be in the ARGB or BGRA pixel format, and the output channels will
  * depend on that format. The alpha channel is ignored.
  *
- * Caller must release the three new pixel buffers with CVPixelBufferRelease
+ * Caller must release the three new pixel buffers with `CVPixelBufferRelease`
  */
 
 CVReturn CVPixelBufferCopySeparateChannels(CVPixelBufferRef pixelBuffer, CVPixelBufferRef* channel0Buffer, CVPixelBufferRef* channel1Buffer, CVPixelBufferRef* channel2Buffer, CVPixelBufferRef* channel3Buffer);
 
-/*
+/**
  * Returns a new copy of buffer scaled and center cropped to size.
  *
  * Size must have equal width and height, and the target size must be smaller
  * than the source size.
  *
- * Caller must release the returned pixel buffer with CVPixelBufferRelease
+ * Caller must release the returned pixel buffer with `CVPixelBufferRelease`
  */
 
 CVPixelBufferRef CVPixelBufferResizeToSquare(CVPixelBufferRef srcBuffer, CGSize size);
 
-/*
+/**
  * The pixelBuffer must already be in the shape and format expected by the input tensor,
  * with the shape parameter describing its dimensions
  *
- * tensor_t will be float32_t or uint8_t for a quantized model
+ * `tensor_t` will be `float32_t` or `uint8_t` for a quantized model
  */
 
 template <typename tensor_t>

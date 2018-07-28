@@ -16,7 +16,7 @@
 #include <fstream>
 #include <queue>
 
-/*
+/**
  * Loads the output labels used by the model
  */
 
@@ -24,7 +24,7 @@ void LoadLabels(NSString* labels_path, std::vector<std::string>* label_strings);
 
 // MARK: - Template Methods
 
-/*
+/**
  * Returns the top N confidence values over threshold in the provided vector,
  * sorted by confidence in descending order.
  *
@@ -69,7 +69,7 @@ void GetTopN(const weight_t* prediction, const int prediction_size, const int nu
     std::reverse(top_results->begin(), top_results->end());
 }
 
-/*
+/**
  * Capture the model output, returning the top N confidence values over threshold in the provided vector,
  * sorted by confidence in descending order.
  *

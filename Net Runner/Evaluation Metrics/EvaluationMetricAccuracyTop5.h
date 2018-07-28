@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*
+/**
  * The Top5 Accuracy metric returns 1 if the expected classification y is contained in
  * the top five hypothesized classifications yhat, and 0 otherwise.
  */

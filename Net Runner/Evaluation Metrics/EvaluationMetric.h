@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol EvaluationMetric <NSObject>
 
-/*
+/**
  * Produce a set of evaluation metrics given the known output y and the predicted output yhat.
  * The metrics may consist of and be organized by whatever scheme is appropriate.
  * It is up to you how you would like to use these metrics
@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSDictionary*)evaluate:(NSDictionary*)y yhat:(NSDictionary*)yhat;
 
-/*
+/**
  * Given a set of individual evaluation metrics, return the aggregate metrics.
  *
  * For example, for an RMSE error, this function could sum the individual squared error terms

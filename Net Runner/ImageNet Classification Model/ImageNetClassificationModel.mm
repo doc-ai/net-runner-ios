@@ -192,12 +192,12 @@
     return predictions;
 }
 
-/*
+/**
  * Prepare inputs by scaling and cropping pixel buffer and copying it to the input tensor.
  * Base class implementation is effectively a virtual function so that subclasses can handle differences between weight sizes
  *
- * Was super nice to use auto* tensor = interpreter->typed_tensor<weight_t>(input) where weight_t was float32_t or uint8_t
- * but not sure how we can simplify without the switch. problem is we can't use c++ templates with obj-c methods and
+ * Was super nice to use `auto* tensor = interpreter->typed_tensor<weight_t>(input)` where `weight_t` was `float32_t` or `uint8_t`
+ * but not sure how we can simplify without the switch. Problem is we can't use c++ templates with obj-c methods and
  * model weights may only be known at runtime.
  *
  * @param pixelBuffer core video pixel buffer that will be preprocessed and passed to the model
@@ -207,8 +207,8 @@
     NSAssert(NO, @"Do not call this method directly, use one of ImageNetClassificationModel's subclasses");
 }
 
-/*
- * Run inference. You must call _prepareInputs first
+/**
+ * Run inference. You must call `_prepareInputs` first
  */
 
 - (void)_runInference {
@@ -217,7 +217,7 @@
     }
 }
 
-/*
+/**
  * Capture output and interpret. Base class implementation is effectively a virtual function
  * so that subclasses can handle differences between weight sizes
  *

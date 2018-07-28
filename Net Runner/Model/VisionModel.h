@@ -29,16 +29,16 @@ typedef struct PixelNormalization {
 
 @property (readonly) ImageVolume imageVolume;
 
-/*
+/**
  * The single interface to the model. May be called on a separate thread.
  *
  * @param pixelBuffer core video pixel buffer that will be preprocessed and passed to the model
- * @returns top N dictionary of labels to confidence scores
+ * @return top N dictionary of labels to confidence scores
  */
 
 - (NSDictionary*)runModelOn:(CVPixelBufferRef)pixelBuffer;
 
-/*
+/**
  * The scaled, cropped, rotatated, and pixel formatted pixel buffer that the model actually sees,
  * prior to any other image preprocessing, e.g. normalization
  */

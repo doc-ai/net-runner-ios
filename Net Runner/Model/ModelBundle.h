@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString * const kTFModelBundleExtension;
 extern NSString * const kTFModelInfoFile;
 
-/*
+/**
  * Encapsulates information about a Model without actaully loading the model,
  * used by the UI to show model details, used to instantiate model instances as a model factory,
  * one-to-one correspondence with a .tfbundle folder in the models directory.
@@ -40,7 +40,7 @@ extern NSString * const kTFModelInfoFile;
 
 - (nullable instancetype)initWithPath:(NSString*)path;
 
-/*
+/**
  * Creates and returns a new instance of the Model represented by this bundle.
  * Returns nil if the model cannot be instantiated.
  */

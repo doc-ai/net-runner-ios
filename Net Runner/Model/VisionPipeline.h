@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype) initWithVisionModel:(id<VisionModel>)model;
 
-/*
+/**
  * Scales and crops, rotates, and converts the provided pixel buffer to ARGB or BGRA,
  * using properties specified by the model.
  */

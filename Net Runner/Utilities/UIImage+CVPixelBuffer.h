@@ -17,12 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype) initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer;
 - (nullable instancetype) initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer scale:(CGFloat)scale orientation:(UIImageOrientation)orientation;
 
-/*
- * Creates a pixel buffer of the receiver via Core Graphics
+/**
+ * Creates a pixel buffer from the receiver via Core Graphics
  *
- * @returns CVPixelBufferRef The returned pixel buffer is autoreleased and by default has the following format:
- *      Pixel Format: kCVPixelFormatType_32ARGB
- *      Alpha: kCGImageAlphaNoneSkipFirst
+ * @return A `CVPixelBufferRef` that is autoreleased and by default has the following format:
+ *      Pixel Format: `kCVPixelFormatType_32ARGB`
+ *      Alpha: `kCGImageAlphaNoneSkipFirst`
  *      Color Space: Device RGB
  */
 
