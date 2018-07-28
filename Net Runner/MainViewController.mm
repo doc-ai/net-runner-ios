@@ -99,34 +99,13 @@ typedef enum : NSUInteger {
     // Load default model
     
     NSString *modelId = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
-    NSError *modelError;
+    ModelBundle *bundle = [ModelManager.sharedManager bundleWithId:modelId];
     
-    self.modelBundle = [ModelManager.sharedManager bundleWithId:modelId];
-    self.model = (id<VisionModel>)[self.modelBundle newModel];
-    
-    if ( self.model == nil ) {
-        NSLog(@"Unable to find and instantiate model with id %@", modelId);
-        self.modelBundle = nil;
-        self.model = nil;
+    if ( bundle == nil ) {
+        NSLog(@"Unable to locate model bundle from last selected bundle with id: %@", modelId);
+    } else {
+        [self loadModelFromBundle:bundle];
     }
-    
-    if ( ![self.model conformsToProtocol:@protocol(VisionModel)] ) {
-        NSLog(@"Model does not conform to protocol VisionModel, id: %@", modelId);
-        self.modelBundle = nil;
-        self.model = nil;
-    }
-    
-    if ( ![self.model load:&modelError] ) {
-        NSLog(@"Model does could not be loaded, id: %@, error: %@", modelId, modelError);
-        self.modelBundle = nil;
-        self.model = nil;
-    }
-    
-    self.title = self.model.name;
-    self.imageInputPreviewView.pixelFormat = self.model.pixelFormat;
-
-    _oldPredictionValues = [[NSMutableDictionary alloc] init];
-    self.latencyCounter = [[LatencyCounter alloc] init];
     
     // Preferences
     
@@ -179,43 +158,48 @@ typedef enum : NSUInteger {
     }
 }
 
+- (void)loadModelFromBundle:(nonnull ModelBundle*)bundle {
+    if ( self.modelBundle == bundle ) {
+        return;
+    }
+    
+    NSError *modelError;
+    
+    self.modelBundle = bundle;
+    self.model = (id<VisionModel>)[self.modelBundle newModel];
+    
+    if ( self.model == nil ) {
+        NSLog(@"Unable to find and instantiate model with id %@", bundle.identifier);
+        self.modelBundle = nil;
+        self.model = nil;
+    }
+    
+    if ( ![self.model conformsToProtocol:@protocol(VisionModel)] ) {
+        NSLog(@"Model does not conform to protocol VisionModel, id: %@", bundle.identifier);
+        self.modelBundle = nil;
+        self.model = nil;
+    }
+    
+    if ( ![self.model load:&modelError] ) {
+        NSLog(@"Model does could not be loaded, id: %@, error: %@", bundle.identifier, modelError);
+        self.modelBundle = nil;
+        self.model = nil;
+    }
+    
+    self.title = self.model.name;
+    self.imageInputPreviewView.pixelFormat = self.model.pixelFormat;
+
+    _oldPredictionValues = [[NSMutableDictionary alloc] init];
+    self.latencyCounter = [[LatencyCounter alloc] init];
+}
+
 // MARK: - Settings Delegate
 
 - (void)settingsTableViewControllerWillDisappear:(SettingsTableViewController*)viewController {
-    
     // Model
-    
-    if ( viewController.selectedBundle != self.modelBundle ) {
-        
-        ModelBundle *newBundle = viewController.selectedBundle;
-        id<Model> newModel = [newBundle newModel];
-        
-        if ( newModel == nil ) {
-            NSLog(@"Unable to instantiate model from bundle %@", self.modelBundle.identifier);
-            self.modelBundle = nil;
-            self.model = nil;
-            return;
-        }
-        
-        if ( ![newModel conformsToProtocol:@protocol(VisionModel)] ) {
-            NSLog(@"Model does not conform to vision model protocol");
-            self.modelBundle = nil;
-            self.model = nil;
-            return;
-        }
-        
-        self.modelBundle = newBundle;
-        self.model = (id<VisionModel>)newModel;
-        
-        self.title = self.model.name;
-        self.imageInputPreviewView.pixelFormat = self.model.pixelFormat;
-        
-        _oldPredictionValues = [NSMutableDictionary dictionary];
-        self.latencyCounter = [[LatencyCounter alloc] init];
-    }
+    [self loadModelFromBundle:viewController.selectedBundle];
     
     // Other Settings
-    
     self.imageInputPreviewView.hidden = ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers];
     self.imageInputPreviewView.showsAlphaChannel = [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBufferAlpha];
 }
