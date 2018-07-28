@@ -25,8 +25,8 @@
     "input": {
         "type":         String,             // "image"
         "shape":        [Int, Int, Int],    // [width, height, channgels] eg [224,224,3]
-        "format":       String,             // "RGB | BGR"
-        "normalize":    String,             // "[0,1] | [-1,1]"
+        "format":       String,             // "RGB" | "BGR"
+        "normalize":    String,             // "[0,1]" | "[-1,1]"
         "scale":        Float,
         "bias": {
             "r":    Float,
@@ -34,6 +34,9 @@
             "b":    Float,
         }
     },
+    "options": {
+        "device_position":  String          // "front" | "back"
+    }
 }
 */
 

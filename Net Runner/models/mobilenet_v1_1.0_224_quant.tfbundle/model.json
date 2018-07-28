@@ -15,5 +15,8 @@
 		"type": "image",
 		"shape": [224,224,3],
 		"format": "RGB"
+	},
+	"options": {
+		"device_position": "back"
 	}
 }

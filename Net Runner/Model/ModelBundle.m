@@ -8,6 +8,9 @@
 
 #import "ModelBundle.h"
 
+#import "Model.h"
+#import "ModelOptions.h"
+
 NSString * const kTFModelBundleExtension = @"tfbundle";
 NSString * const kTFModelInfoFile = @"model.json";
 
@@ -23,6 +26,7 @@ NSString * const kTFModelInfoFile = @"model.json";
 @property (readwrite) NSString *license;
 @property (readwrite) BOOL quantized;
 
+@property (readwrite) ModelOptions *options;
 @property (readwrite) NSString *modelClassName;
 
 @end
@@ -71,6 +75,7 @@ NSString * const kTFModelInfoFile = @"model.json";
         _author = json[@"author"];
         _license = json[@"license"];
         
+        _options = [[ModelOptions alloc] initWithDictionary:json[@"options"]];
         _quantized = [json[@"model"][@"quantized"] boolValue];
         _modelClassName = json[@"model"][@"class"];
     }

@@ -21,5 +21,8 @@
 			"g": -1,
 			"b": -1
 		}
+	},
+	"options": {
+		"device_position": "back"
 	}
 }

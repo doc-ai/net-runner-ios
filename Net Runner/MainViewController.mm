@@ -34,6 +34,7 @@
 #import "ModelBundle.h"
 #import "CVPixelBufferEvaluator.h"
 #import "EvaluatorConstants.h"
+#import "ModelOptions.h"
 
 #define LOG(x) std::cerr
 
@@ -114,9 +115,10 @@ typedef enum : NSUInteger {
     
     // Prepare capture
     
-    devicePosition = AVCaptureDevicePositionBack;
-    [self setupAVCapture:devicePosition];
-    [self setCaptureMode:CaptureModeLiveVideo];
+    if ( self.model != nil ) {
+        [self setupAVCapture:self.model.options.devicePosition];
+        [self setCaptureMode:CaptureModeLiveVideo];
+    }
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
@@ -158,6 +160,8 @@ typedef enum : NSUInteger {
     }
 }
 
+// TODO: Visually indicate that the model could not be loaded
+
 - (void)loadModelFromBundle:(nonnull ModelBundle*)bundle {
     if ( self.modelBundle == bundle ) {
         return;
@@ -172,18 +176,21 @@ typedef enum : NSUInteger {
         NSLog(@"Unable to find and instantiate model with id %@", bundle.identifier);
         self.modelBundle = nil;
         self.model = nil;
+        return;
     }
     
     if ( ![self.model conformsToProtocol:@protocol(VisionModel)] ) {
         NSLog(@"Model does not conform to protocol VisionModel, id: %@", bundle.identifier);
         self.modelBundle = nil;
         self.model = nil;
+        return;
     }
     
     if ( ![self.model load:&modelError] ) {
         NSLog(@"Model does could not be loaded, id: %@, error: %@", bundle.identifier, modelError);
         self.modelBundle = nil;
         self.model = nil;
+        return;
     }
     
     self.title = self.model.name;
@@ -197,9 +204,18 @@ typedef enum : NSUInteger {
 
 - (void)settingsTableViewControllerWillDisappear:(SettingsTableViewController*)viewController {
     // Model
+    
     [self loadModelFromBundle:viewController.selectedBundle];
     
+    // Restart capture with the newly selected model
+    
+    if ( self.model != nil ) {
+        [self setupAVCapture:self.model.options.devicePosition];
+        [self setCaptureMode:CaptureModeLiveVideo];
+    }
+    
     // Other Settings
+    
     self.imageInputPreviewView.hidden = ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers];
     self.imageInputPreviewView.showsAlphaChannel = [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBufferAlpha];
 }
@@ -276,7 +292,6 @@ typedef enum : NSUInteger {
 // MARK: - AV Capture
 
 - (void)setupAVCapture:(AVCaptureDevicePosition)position {
-    
     NSError* error = nil;
     
     // Session
@@ -290,6 +305,7 @@ typedef enum : NSUInteger {
     }
     
     // Device and input
+    // TODO: better error handling if the devices' camera is damaged or otherwise unavailable, for example
 
     AVCaptureDevice *device = [self captureDeviceWithPosition:position];
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
@@ -341,6 +357,10 @@ typedef enum : NSUInteger {
     // Kickoff
     
     [session startRunning];
+    
+    // Save options
+    
+    devicePosition = position;
 }
 
 - (void)teardownAVCapture {
@@ -360,11 +380,21 @@ typedef enum : NSUInteger {
     return [self captureDeviceWithPosition:position] != nil;
 }
 
+/**
+ * Returns the `AVCaptureDevice` with position and media type `AVMediaTypeVideo`,
+ * or if a device at position cannot be found, returns the device with
+ * `AVCaptureDevicePositionBack`.
+ */
+
 - (nullable AVCaptureDevice*)captureDeviceWithPosition:(AVCaptureDevicePosition)position {
+    AVCaptureDevicePosition targetPosition = position == AVCaptureDevicePositionUnspecified
+        ? AVCaptureDevicePositionBack
+        : position;
+    
     NSArray<AVCaptureDevice*> *devices =
         [[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]
         filter:^BOOL(AVCaptureDevice * _Nonnull device, NSUInteger idx, BOOL * _Nonnull stop) {
-            return device.position == position;
+            return device.position == targetPosition;
         }];
     
     return devices.count > 0 ? devices[0] : nil;
@@ -405,13 +435,11 @@ typedef enum : NSUInteger {
 
 - (IBAction)swipeDeviceOrientation:(id)sender {
     if ( devicePosition == AVCaptureDevicePositionFront && [self hasDeviceInPosition:AVCaptureDevicePositionBack] ) {
-        devicePosition = AVCaptureDevicePositionBack;
         [self teardownAVCapture];
-        [self setupAVCapture:devicePosition];
+        [self setupAVCapture:AVCaptureDevicePositionBack];
     } else if ( devicePosition == AVCaptureDevicePositionBack && [self hasDeviceInPosition:AVCaptureDevicePositionFront] ) {
-        devicePosition = AVCaptureDevicePositionFront;
         [self teardownAVCapture];
-        [self setupAVCapture:devicePosition];
+        [self setupAVCapture:AVCaptureDevicePositionFront];
     } else {
         #ifdef DEBUG
         NSLog(@"Cannot change device position from current position, device unavailable");

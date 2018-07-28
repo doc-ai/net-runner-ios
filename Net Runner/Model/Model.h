@@ -16,12 +16,14 @@ typedef enum : NSUInteger {
 } ModelWeightSize;
 
 @class ModelBundle;
+@class ModelOptions;
 
 // MARK: -
 
 @protocol Model <NSObject>
 
 @property (readonly) ModelBundle *bundle;
+@property (readonly) ModelOptions *options;
 
 @property (readonly) NSString* identifier;
 @property (readonly) NSString* name;

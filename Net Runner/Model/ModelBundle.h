@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "Model.h"
-
 NS_ASSUME_NONNULL_BEGIN
+
+@class ModelOptions;
+@protocol Model;
 
 extern NSString * const kTFModelBundleExtension;
 extern NSString * const kTFModelInfoFile;
@@ -34,6 +35,7 @@ extern NSString * const kTFModelInfoFile;
 @property (readonly) NSString *license;
 @property (readonly) BOOL quantized;
 
+@property (readonly) ModelOptions *options;
 @property (readonly) NSString *modelFilepath;
 
 - (nullable instancetype)initWithPath:(NSString*)path;

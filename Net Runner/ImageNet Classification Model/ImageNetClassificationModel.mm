@@ -45,11 +45,9 @@
 }
 
 - (void)dealloc {
-
-#ifdef DEBUG
+    #ifdef DEBUG
     NSLog(@"Deallocating model");
-#endif
-
+    #endif
 }
 
 - (nullable instancetype)initWithBundle:(ModelBundle*)bundle {
@@ -67,6 +65,7 @@
     // Model Initialization
     
     _bundle = bundle;
+    _options = bundle.options;
     
     _identifier = bundle.identifier;
     _name = bundle.name;

@@ -21,6 +21,7 @@
 		E3740298210A53E00025AA59 /* EvaluationMetricFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E3740297210A53E00025AA59 /* EvaluationMetricFactory.m */; };
 		E374029C210A551A0025AA59 /* Evaluate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3740299210A551A0025AA59 /* Evaluate.storyboard */; };
 		E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */; };
+		E3851385210CE4F000F600C5 /* ModelOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = E3851384210CE4F000F600C5 /* ModelOptions.m */; };
 		E3A520E2210A49A0004B912B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A520E1210A49A0004B912B /* AppDelegate.m */; };
 		E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3A520E9210A49A1004B912B /* Assets.xcassets */; };
 		E3A520F0210A49A1004B912B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A520EF210A49A1004B912B /* main.m */; };
@@ -123,6 +124,8 @@
 		E3740299210A551A0025AA59 /* Evaluate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Evaluate.storyboard; sourceTree = "<group>"; };
 		E374029A210A551A0025AA59 /* EvaluationResultsActivityItemProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationResultsActivityItemProvider.h; sourceTree = "<group>"; };
 		E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationResultsActivityItemProvider.m; sourceTree = "<group>"; };
+		E3851383210CE4F000F600C5 /* ModelOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOptions.h; sourceTree = "<group>"; };
+		E3851384210CE4F000F600C5 /* ModelOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOptions.m; sourceTree = "<group>"; };
 		E3A520DD210A49A0004B912B /* Net Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Net Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A520E0210A49A0004B912B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E3A520E1210A49A0004B912B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -486,6 +489,8 @@
 				E3A5213C210A51F6004B912B /* ModelManager.m */,
 				E3A52144210A51F7004B912B /* ModelHelpers.h */,
 				E3A52140210A51F7004B912B /* ModelHelpers.mm */,
+				E3851383210CE4F000F600C5 /* ModelOptions.h */,
+				E3851384210CE4F000F600C5 /* ModelOptions.m */,
 				E3A5213D210A51F6004B912B /* VisionModelHelpers.h */,
 				E3A52142210A51F7004B912B /* VisionModelHelpers.mm */,
 				E3A52141210A51F7004B912B /* VisionPipeline.h */,
@@ -812,6 +817,7 @@
 				E3A520F0210A49A1004B912B /* main.m in Sources */,
 				E3A52139210A51D9004B912B /* ImageNetClassificationHelpers.mm in Sources */,
 				E3A520E2210A49A0004B912B /* AppDelegate.m in Sources */,
+				E3851385210CE4F000F600C5 /* ModelOptions.m in Sources */,
 				E3C4374E210A565A005E7E16 /* EvaluateResultsHeaderCollectionReusableView.m in Sources */,
 				E3B57E8A210A52FC008D19C0 /* AlbumPhotoEvaluator.mm in Sources */,
 				E3F6C682210A567300D200D8 /* PhotoAlbumPhotoViewController.m in Sources */,
