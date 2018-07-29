@@ -22,6 +22,7 @@
 		E374029C210A551A0025AA59 /* Evaluate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3740299210A551A0025AA59 /* Evaluate.storyboard */; };
 		E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */; };
 		E3851385210CE4F000F600C5 /* ModelOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = E3851384210CE4F000F600C5 /* ModelOptions.m */; };
+		E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */; };
 		E3A520E2210A49A0004B912B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A520E1210A49A0004B912B /* AppDelegate.m */; };
 		E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3A520E9210A49A1004B912B /* Assets.xcassets */; };
 		E3A520F0210A49A1004B912B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A520EF210A49A1004B912B /* main.m */; };
@@ -126,6 +127,9 @@
 		E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationResultsActivityItemProvider.m; sourceTree = "<group>"; };
 		E3851383210CE4F000F600C5 /* ModelOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOptions.h; sourceTree = "<group>"; };
 		E3851384210CE4F000F600C5 /* ModelOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOptions.m; sourceTree = "<group>"; };
+		E3851386210D0A3100F600C5 /* ModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutput.h; sourceTree = "<group>"; };
+		E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageNetClassificationModelOutput.h; sourceTree = "<group>"; };
+		E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageNetClassificationModelOutput.mm; sourceTree = "<group>"; };
 		E3A520DD210A49A0004B912B /* Net Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Net Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A520E0210A49A0004B912B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E3A520E1210A49A0004B912B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -471,6 +475,8 @@
 			children = (
 				E3A52137210A51D9004B912B /* ImageNetClassificationModel.h */,
 				E3A52138210A51D9004B912B /* ImageNetClassificationModel.mm */,
+				E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */,
+				E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */,
 				E3A52135210A51D8004B912B /* ImageNetClassificationHelpers.h */,
 				E3A52136210A51D9004B912B /* ImageNetClassificationHelpers.mm */,
 			);
@@ -482,6 +488,7 @@
 			children = (
 				E3A52143210A51F7004B912B /* Model.h */,
 				E3A52145210A51F7004B912B /* VisionModel.h */,
+				E3851386210D0A3100F600C5 /* ModelOutput.h */,
 				E3A52146210A51F7004B912B /* ModelJSONSchema.h */,
 				E3A5213E210A51F6004B912B /* ModelBundle.h */,
 				E3A52147210A51F7004B912B /* ModelBundle.m */,
@@ -561,14 +568,14 @@
 		E3F6C685210A56B500D200D8 /* Headless Mode */ = {
 			isa = PBXGroup;
 			children = (
-				E3F6C692210A56EC00D200D8 /* HeadlessTestBundle.h */,
-				E3F6C68C210A56EB00D200D8 /* HeadlessTestBundle.mm */,
-				E3F6C68F210A56EB00D200D8 /* HeadlessTestBundleManager.h */,
-				E3F6C690210A56EB00D200D8 /* HeadlessTestBundleManager.mm */,
-				E3F6C693210A56EC00D200D8 /* HeadlessTestBundleRunner.h */,
-				E3F6C68E210A56EB00D200D8 /* HeadlessTestBundleRunner.mm */,
 				E3F6C691210A56EC00D200D8 /* HeadlessViewController.h */,
 				E3F6C68D210A56EB00D200D8 /* HeadlessViewController.m */,
+				E3F6C68F210A56EB00D200D8 /* HeadlessTestBundleManager.h */,
+				E3F6C690210A56EB00D200D8 /* HeadlessTestBundleManager.mm */,
+				E3F6C692210A56EC00D200D8 /* HeadlessTestBundle.h */,
+				E3F6C68C210A56EB00D200D8 /* HeadlessTestBundle.mm */,
+				E3F6C693210A56EC00D200D8 /* HeadlessTestBundleRunner.h */,
+				E3F6C68E210A56EB00D200D8 /* HeadlessTestBundleRunner.mm */,
 			);
 			path = "Headless Mode";
 			sourceTree = "<group>";
@@ -808,6 +815,7 @@
 				E3458A9B210A56460040648C /* EvaluateResultsTableViewController.mm in Sources */,
 				E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.m in Sources */,
 				E3B57E7D210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.m in Sources */,
+				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
 				E3A5214D210A51F7004B912B /* VisionPipeline.mm in Sources */,
 				E3A52149210A51F7004B912B /* ModelManager.m in Sources */,

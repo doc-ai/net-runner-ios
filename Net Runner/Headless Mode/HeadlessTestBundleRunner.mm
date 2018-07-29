@@ -18,6 +18,7 @@
 #import "EvaluationMetric.h"
 #import "NSArray+Extensions.h"
 #import "ModelBundle.h"
+#import "ModelOutput.h"
 
 @interface HeadlessTestBundleRunner ()
 
@@ -179,8 +180,8 @@
             for ( NSDictionary *result in modelResults ) {
                 
                 NSString *identifier = result[@"photo"];
-                NSDictionary *yhat = result[@"evaluation"][@"inference_results"];
-                NSDictionary *y = self.testBundle.labels[identifier];
+                id yhat = ((id<ModelOutput>)result[@"evaluation"][@"inference_results"]).value;
+                id y = self.testBundle.labels[identifier];
                 
                 NSDictionary *metricResult = [metric evaluate:y yhat:yhat];
                 [metricResults addObject:metricResult];

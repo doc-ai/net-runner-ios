@@ -72,12 +72,12 @@
         // Left Aligned
         [_classificationLabel.topAnchor constraintEqualToAnchor:_effectView.topAnchor constant:16],
         [_classificationLabel.leftAnchor constraintEqualToAnchor:_effectView.leftAnchor constant:16],
-        [_classificationLabel.bottomAnchor constraintEqualToAnchor:_effectView.bottomAnchor constant:-16],
+        [_classificationLabel.bottomAnchor constraintLessThanOrEqualToAnchor:_effectView.bottomAnchor constant:-16],
         
         // Right Aligned
         [_statsLabel.topAnchor constraintEqualToAnchor:_effectView.topAnchor constant:16],
         [_statsLabel.rightAnchor constraintEqualToAnchor:_effectView.rightAnchor constant:-16],
-        [_statsLabel.bottomAnchor constraintEqualToAnchor:_effectView.bottomAnchor constant:-16]
+        [_statsLabel.bottomAnchor constraintLessThanOrEqualToAnchor:_effectView.bottomAnchor constant:-16],
     ]];
 }
 

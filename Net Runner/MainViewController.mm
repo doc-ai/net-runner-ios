@@ -35,6 +35,7 @@
 #import "CVPixelBufferEvaluator.h"
 #import "EvaluatorConstants.h"
 #import "ModelOptions.h"
+#import "ModelOutput.h"
 
 #define LOG(x) std::cerr
 
@@ -54,6 +55,7 @@ typedef enum : NSUInteger {
 
 @property ModelBundle *modelBundle;
 @property id<VisionModel> model;
+@property id<ModelOutput> previousOutput;
 
 @end
 
@@ -64,7 +66,7 @@ typedef enum : NSUInteger {
     AVCaptureVideoDataOutput *videoDataOutput;
     dispatch_queue_t videoDataOutputQueue;
     
-    NSMutableDictionary* _oldPredictionValues;
+
 }
 
 - (void)dealloc {
@@ -196,7 +198,7 @@ typedef enum : NSUInteger {
     self.title = self.model.name;
     self.imageInputPreviewView.pixelFormat = self.model.pixelFormat;
 
-    _oldPredictionValues = [[NSMutableDictionary alloc] init];
+    self.previousOutput = nil;
     self.latencyCounter = [[LatencyCounter alloc] init];
 }
 
@@ -532,7 +534,7 @@ typedef enum : NSUInteger {
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
-            NSDictionary *inference = result[kEvaluatorResultsKeyInferenceResults];
+            id<ModelOutput> inference = result[kEvaluatorResultsKeyInferenceResults];
             const double inferenceLatency = [result[kEvaluatorResultsKeyInferenceLatency] doubleValue];
             const double preprocessingLatency = [result[kEvaluatorResultsKeyPreprocessingLatency] doubleValue];
             
@@ -542,7 +544,7 @@ typedef enum : NSUInteger {
             [self.latencyCounter increaseInferenceLatency:inferenceLatency];
             [self.latencyCounter incrementCount];
             
-            [self setPredictionValues:inference withDecay:YES];
+            [self showModelOutput:inference withDecay:YES];
             self.infoView.stats = [self modelStats:NO];
             
             // Visualize last pixel buffer used by model
@@ -570,7 +572,7 @@ typedef enum : NSUInteger {
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
-            NSDictionary *inference = result[kEvaluatorResultsKeyInferenceResults];
+            id <ModelOutput> inference = result[kEvaluatorResultsKeyInferenceResults];
             const double inferenceLatency = [result[kEvaluatorResultsKeyInferenceLatency] doubleValue];
             const double preprocessingLatency = [result[kEvaluatorResultsKeyPreprocessingLatency] doubleValue];
             
@@ -580,8 +582,8 @@ typedef enum : NSUInteger {
             [self.latencyCounter increaseInferenceLatency:inferenceLatency];
             [self.latencyCounter incrementCount];
             
-            self->_oldPredictionValues = [NSMutableDictionary dictionary];
-            [self setPredictionValues:inference withDecay:YES];
+            self.previousOutput = nil;
+            [self showModelOutput:inference withDecay:NO];
             self.infoView.stats = [self modelStats:NO];
             
             // Preview
@@ -629,91 +631,14 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)setPredictionValues:(NSDictionary*)newValues withDecay:(BOOL)withDecay {
-//    const float decayValue = 0.75f;
-//    const float updateValue = 0.25f;
-//    const float minimumThreshold = 0.01f;
-//
-//    NSMutableArray *candidateLabels = [NSMutableArray array];
-//
-//    if (withDecay) {
-//
-//        NSMutableDictionary* decayedPredictionValues = [[NSMutableDictionary alloc] init];
-//
-//        for (NSString* label in _oldPredictionValues) {
-//            NSNumber* oldPredictionValueObject = [_oldPredictionValues objectForKey:label];
-//            const float oldPredictionValue = [oldPredictionValueObject floatValue];
-//            const float decayedPredictionValue = (oldPredictionValue * decayValue);
-//            if (decayedPredictionValue > minimumThreshold) {
-//                NSNumber* decayedPredictionValueObject = [NSNumber numberWithFloat:decayedPredictionValue];
-//                [decayedPredictionValues setObject:decayedPredictionValueObject forKey:label];
-//            }
-//        }
-//
-//        _oldPredictionValues = decayedPredictionValues;
-//
-//        for (NSString* label in newValues) {
-//            NSNumber* newPredictionValueObject = [newValues objectForKey:label];
-//            NSNumber* oldPredictionValueObject = [_oldPredictionValues objectForKey:label];
-//            if (!oldPredictionValueObject) {
-//                oldPredictionValueObject = [NSNumber numberWithFloat:0.0f];
-//            }
-//            const float newPredictionValue = [newPredictionValueObject floatValue];
-//            const float oldPredictionValue = [oldPredictionValueObject floatValue];
-//            const float updatedPredictionValue = (oldPredictionValue + (newPredictionValue * updateValue));
-//            NSNumber* updatedPredictionValueObject = [NSNumber numberWithFloat:updatedPredictionValue];
-//            [_oldPredictionValues setObject:updatedPredictionValueObject forKey:label];
-//        }
-//
-//        for (NSString* label in _oldPredictionValues) {
-//            NSNumber* oldPredictionValueObject = [_oldPredictionValues objectForKey:label];
-//            const float oldPredictionValue = [oldPredictionValueObject floatValue];
-//            if (oldPredictionValue > 0.05f) {
-//                NSDictionary* entry = @{@"label" : label, @"value" : oldPredictionValueObject};
-//                candidateLabels = [candidateLabels arrayByAddingObject:entry];
-//            }
-//        }
-//
-//    } else {
-//
-//        for (NSString* label in newValues) {
-//            NSNumber* oldPredictionValueObject = [newValues objectForKey:label];
-//            const float oldPredictionValue = [oldPredictionValueObject floatValue];
-//            if (oldPredictionValue > 0.05f) {
-//                NSDictionary* entry = @{@"label" : label, @"value" : oldPredictionValueObject};
-//                candidateLabels = [candidateLabels arrayByAddingObject:entry];
-//            }
-//        }
-//    }
-    
-    NSMutableArray *candidateLabels = [NSMutableArray array];
-    
-    for ( NSString *label in newValues ) {
-        [candidateLabels addObject:@{
-            @"label" : label,
-            @"value" : [newValues objectForKey:label]
-        }];
+- (void)showModelOutput:(id<ModelOutput>)modelOutput withDecay:(BOOL)withDecay {
+    if ( withDecay ) {
+        self.infoView.classifications = [modelOutput decayedOutput:self.previousOutput].localizedDescription;
+    } else {
+        self.infoView.classifications = modelOutput.localizedDescription;
     }
     
-    NSSortDescriptor* sort = [NSSortDescriptor sortDescriptorWithKey:@"value" ascending:NO];
-    NSArray* sortedLabels = [candidateLabels sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
-
-    // NSMutableString *classificationsString = [@"Classifications:\n" mutableCopy];
-    NSMutableString *classificationsString = [NSMutableString string];
-    NSInteger count = 0;
-
-    for (NSDictionary* entry in sortedLabels) {
-        NSString* label = [entry objectForKey:@"label"];
-        const int percentage = (int)roundf([[entry objectForKey:@"value"] floatValue] * 100.0f);
-        [classificationsString appendFormat:@"  (%.2f) %@\n", percentage / 100.0f, label];
-        count++;
-    }
-    
-    for (NSInteger i = count; i < 5-1; i++ ) {
-        [classificationsString appendString:@"\n"];
-    }
-
-    self.infoView.classifications = classificationsString;
+    self.previousOutput = modelOutput;
 }
 
 @end

@@ -15,6 +15,7 @@
 #import "VisionModel.h"
 #import "NSArray+Extensions.h"
 #import "ResultInfoView.h"
+#import "ModelOutput.h"
 
 @interface EvaluateResultsPhotoViewController ()
 
@@ -100,10 +101,10 @@
     
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         
-        NSDictionary *providedInference = self.results[@"evaluation"][@"inference_results"];
-        NSDictionary *myInference = result[@"evaluation"][@"inference_results"];
+        id<ModelOutput> providedInference = self.results[@"evaluation"][@"inference_results"];
+        id<ModelOutput> myInference = result[@"evaluation"][@"inference_results"];
         
-        if ( ![providedInference isEqualToDictionary:myInference] ) {
+        if ( ![providedInference isEqual:myInference] ) {
             NSLog(@"Expected provivided inference and new inference to match but they did not, provided inference: %@, new inference: %@", providedInference, myInference);
         }
         
@@ -121,22 +122,14 @@
     }];
 }
 
-- (void)displayResults:(NSDictionary*)inference {
-    if ( inference.count == 0 ) {
+- (void)displayResults:(id<ModelOutput>)output {
+    NSString *description = output.localizedDescription;
+    
+    if ( description.length == 0 ) {
         self.resultInfoView.classifications = @"None";
         self.title = @"No Inference";
         return;
     }
-    
-    NSArray *keys = [inference keysSortedByValueUsingSelector:@selector(compare:)].reversed;
-    NSMutableString *description = [NSMutableString string];
-    
-    for ( NSString *key in keys ) {
-        NSNumber *value = inference[key];
-        [description appendFormat:@"(%.2f) %@\n", value.floatValue, key];
-    }
-    
-    [description deleteCharactersInRange:NSMakeRange(description.length-1, 1)];
     
     self.resultInfoView.classifications = description;
 }

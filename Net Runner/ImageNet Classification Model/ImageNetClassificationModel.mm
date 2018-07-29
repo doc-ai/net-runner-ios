@@ -8,11 +8,12 @@
 
 #import "ImageNetClassificationModel.h"
 
-#import "Utilities.h"
 #import "ImageNetClassificationHelpers.h"
-#import "VisionModelHelpers.h"
-#import "ModelHelpers.h"
+#import "ImageNetClassificationModelOutput.h"
 #import "ModelBundle.h"
+#import "ModelHelpers.h"
+#import "Utilities.h"
+#import "VisionModelHelpers.h"
 
 #include "tensorflow/contrib/lite/kernels/register.h"
 #include "tensorflow/contrib/lite/model.h"
@@ -172,10 +173,10 @@
     _loaded = NO;
 }
 
-- (NSDictionary*)runModelOn:(CVPixelBufferRef)pixelBuffer {
+- (ImageNetClassificationModelOutput*)runModelOn:(CVPixelBufferRef)pixelBuffer {
     if ( !_loaded ) { [self load:nil]; }
     
-    NSDictionary *predictions;
+    ImageNetClassificationModelOutput *output;
 
     // Prepare input: copy pixel buffer to input tensor
     
@@ -187,9 +188,9 @@
     
     // Capture output and interpret
     
-    predictions = [self _captureOutputs];
+    output = [self _captureOutputs];
     
-    return predictions;
+    return output;
 }
 
 /**
@@ -224,7 +225,7 @@
  * @return top five predictions
  */
 
-- (NSDictionary*)_captureOutputs {
+- (ImageNetClassificationModelOutput*)_captureOutputs {
     NSAssert(NO, @"Do not call this method directly, use one of ImageNetClassificationModel's subclasses");
     return nil;
 }
@@ -253,10 +254,10 @@
     [self setInputPixelBuffer:pixelBuffer];
 }
 
-- (NSDictionary*)_captureOutputs {
+- (ImageNetClassificationModelOutput*)_captureOutputs {
     float32_t* output = interpreter->typed_output_tensor<float32_t>(0);
     NSDictionary *predictions = CaptureOutput(output, labels);
-    return predictions;
+    return [[ImageNetClassificationModelOutput alloc] initWithDictionary:predictions];
 }
 
 @end
@@ -273,10 +274,10 @@
     [self setInputPixelBuffer:pixelBuffer];
 }
 
-- (NSDictionary*)_captureOutputs {
+- (ImageNetClassificationModelOutput*)_captureOutputs {
     uint8_t* output = interpreter->typed_output_tensor<uint8_t>(0);
     NSDictionary *predictions = CaptureOutput(output, labels);
-    return predictions;
+    return [[ImageNetClassificationModelOutput alloc] initWithDictionary:predictions];
 }
 
 @end

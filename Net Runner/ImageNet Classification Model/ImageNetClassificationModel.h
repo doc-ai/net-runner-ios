@@ -15,6 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ImageNetClassificationModelOutput;
 @class ModelBundle;
 
 @interface ImageNetClassificationModel : NSObject <VisionModel>
@@ -49,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Vision Model Protocol Methods
 
-- (NSDictionary*)runModelOn:(CVPixelBufferRef)pixelBuffer;
+- (ImageNetClassificationModelOutput*)runModelOn:(CVPixelBufferRef)pixelBuffer;
 - (CVPixelBufferRef)inputPixelBuffer;
 
 @end

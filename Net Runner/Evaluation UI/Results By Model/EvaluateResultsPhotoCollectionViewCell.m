@@ -8,6 +8,7 @@
 
 #import "EvaluateResultsPhotoCollectionViewCell.h"
 #import "NSArray+Extensions.h"
+#import "ModelOutput.h"
 
 @interface EvaluateResultsPhotoCollectionViewCell()
 
@@ -60,22 +61,13 @@
 - (void)setEvaluation:(NSDictionary *)evaluation {
     _evaluation = evaluation;
     
-    NSDictionary *inference = _evaluation[@"evaluation"][@"inference_results"];
+    id<ModelOutput> output = _evaluation[@"evaluation"][@"inference_results"];
+    NSString *description = output.localizedDescription;
     
-    if ( inference.count == 0 ) {
+    if ( description.length == 0 ) {
         _resultsLabel.text = @"None";
         return;
     }
-    
-    NSArray *keys = [inference keysSortedByValueUsingSelector:@selector(compare:)].reversed;
-    NSMutableString *description = [NSMutableString string];
-    
-    for ( NSString *key in keys ) {
-        NSNumber *value = inference[key];
-        [description appendFormat:@"(%.2f) %@\n", value.floatValue, key];
-    }
-    
-    [description deleteCharactersInRange:NSMakeRange(description.length-1, 1)];
     
     _resultsLabel.text = description;
 }
