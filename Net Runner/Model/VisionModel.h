@@ -20,6 +20,7 @@ typedef struct PixelNormalization {
 } PixelNormalization;
 
 @protocol Model;
+@protocol ModelOutput;
 
 @protocol VisionModel <Model, NSObject>
 
@@ -36,7 +37,7 @@ typedef struct PixelNormalization {
  * @return top N dictionary of labels to confidence scores
  */
 
-- (NSDictionary*)runModelOn:(CVPixelBufferRef)pixelBuffer;
+- (id<ModelOutput>)runModelOn:(CVPixelBufferRef)pixelBuffer;
 
 /**
  * The scaled, cropped, rotatated, and pixel formatted pixel buffer that the model actually sees,

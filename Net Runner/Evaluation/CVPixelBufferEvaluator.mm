@@ -12,6 +12,7 @@
 #import "VisionPipeline.h"
 #import "Utilities.h"
 #import "ObjcDefer.h"
+#import "ModelOutput.h"
 
 @interface CVPixelBufferEvaluator ()
 
@@ -87,13 +88,13 @@
     
     // Make prediction
     
-    __block NSDictionary *newValues;
+    __block id<ModelOutput> modelOutput;
     
     measuring_latency(&inferenceLatency, ^{
-        newValues = [self.model runModelOn:transformedPixelBuffer];
+        modelOutput = [self.model runModelOn:transformedPixelBuffer];
     });
     
-    if (newValues == nil) {
+    if (modelOutput == nil) {
         NSLog(@"Running the model produced null results");
         self.results = @{
             kEvaluatorResultsKeyInferenceError: @"Model returned nil results"
@@ -105,7 +106,7 @@
     self.results = @{
         kEvaluatorResultsKeyPreprocessingLatency: @(imageProcessingLatency),
         kEvaluatorResultsKeyInferenceLatency: @(inferenceLatency),
-        kEvaluatorResultsKeyInferenceResults: newValues
+        kEvaluatorResultsKeyInferenceResults: modelOutput
     };
     
     safe_block(completionHandler, self.results);

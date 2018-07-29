@@ -164,9 +164,18 @@ typedef enum : NSUInteger {
 
 // TODO: Visually indicate that the model could not be loaded
 
-- (void)loadModelFromBundle:(nonnull ModelBundle*)bundle {
+/**
+ * Loads a new instance of a model from a model bundle.
+ * This method has no effect if the model bundle is already the loaded model bundle.
+ *
+ * @param bundle the `ModelBundle` to load
+ *
+ * @return BOOL `YES` if a new model was loaded, `NO` if not
+ */
+
+- (BOOL)loadModelFromBundle:(nonnull ModelBundle*)bundle {
     if ( self.modelBundle == bundle ) {
-        return;
+        return NO;
     }
     
     NSError *modelError;
@@ -178,21 +187,21 @@ typedef enum : NSUInteger {
         NSLog(@"Unable to find and instantiate model with id %@", bundle.identifier);
         self.modelBundle = nil;
         self.model = nil;
-        return;
+        return NO;
     }
     
     if ( ![self.model conformsToProtocol:@protocol(VisionModel)] ) {
         NSLog(@"Model does not conform to protocol VisionModel, id: %@", bundle.identifier);
         self.modelBundle = nil;
         self.model = nil;
-        return;
+        return NO;
     }
     
     if ( ![self.model load:&modelError] ) {
         NSLog(@"Model does could not be loaded, id: %@, error: %@", bundle.identifier, modelError);
         self.modelBundle = nil;
         self.model = nil;
-        return;
+        return NO;
     }
     
     self.title = self.model.name;
@@ -200,6 +209,8 @@ typedef enum : NSUInteger {
 
     self.previousOutput = nil;
     self.latencyCounter = [[LatencyCounter alloc] init];
+    
+    return YES;
 }
 
 // MARK: - Settings Delegate
@@ -207,11 +218,11 @@ typedef enum : NSUInteger {
 - (void)settingsTableViewControllerWillDisappear:(SettingsTableViewController*)viewController {
     // Model
     
-    [self loadModelFromBundle:viewController.selectedBundle];
+    BOOL loadedNewModel = [self loadModelFromBundle:viewController.selectedBundle];
     
     // Restart capture with the newly selected model
     
-    if ( self.model != nil ) {
+    if ( self.model != nil && loadedNewModel ) {
         [self setupAVCapture:self.model.options.devicePosition];
         [self setCaptureMode:CaptureModeLiveVideo];
     }
