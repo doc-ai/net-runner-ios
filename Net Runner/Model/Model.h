@@ -35,10 +35,10 @@ typedef enum : NSUInteger {
 @property (readonly) BOOL loaded;
 
 /**
- * The ModelBundle calls the initWithBundle: factory initialization method,
+ * The `ModelBundle` calls the `initWithBundle:` factory initialization method,
  * which conforming classes may override to support custom initialization.
  *
- * @param ModelBundle containing information about the model and its path
+ * @param bundle `ModelBundle` containing information about the model and its path
  */
 
 - (nullable instancetype)initWithBundle:(ModelBundle*)bundle;
@@ -59,7 +59,7 @@ typedef enum : NSUInteger {
  * A model should unload its resources automatically when it is deallocated, but the unload function
  * may do this as well in order to provide finer grained control to consumers.
  *
- * Conforming classes should override this method to perform custom unloading and set `loaded = NO`.
+ * Conforming classes should override this method to perform custom unloading and set `loaded=NO`.
  */
 
 - (void)unload;

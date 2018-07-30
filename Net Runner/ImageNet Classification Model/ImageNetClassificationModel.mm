@@ -22,8 +22,6 @@
 
 #include <vector>
 
-#define LOG(x) std::cerr
-
 // MARK: -
 
 @interface ImageNetClassificationModelFloat32: ImageNetClassificationModel
@@ -123,14 +121,20 @@
     model = tflite::FlatBufferModel::BuildFromFile([graphPath UTF8String]);
     
     if (!model) {
-        LOG(FATAL) << "Failed to mmap model " << graphPath;
+        NSLog(@"Failed to mmap model at path %@", graphPath);
         *error = kTFModelLoadModelError;
         return NO;
     }
 
-    LOG(INFO) << "Loaded model " << graphPath;
+    #ifdef DEBUG
+    NSLog(@"Loaded model");
+    #endif
+    
     model->error_reporter();
-    LOG(INFO) << "resolved reporter";
+    
+    #ifdef DEBUG
+    NSLog(@"Resolved reporter");
+    #endif
 
     tflite::ops::builtin::BuiltinOpResolver resolver;
 
@@ -143,12 +147,12 @@
     tflite::InterpreterBuilder(*model, resolver)(&interpreter);
    
     if (!interpreter) {
-        LOG(FATAL) << "Failed to construct interpreter";
+        NSLog(@"Failed to construct interpreter for model %@", self.identifier);
         *error = kTFModelConstructInterpreterError;
         return NO;
     }
     if (interpreter->AllocateTensors() != kTfLiteOk) {
-        LOG(FATAL) << "Failed to allocate tensors!";
+        NSLog(@"Failed to allocate tensors for model %@", self.identifier);
         *error = kTFModelAllocateTensorsError;
         return NO;
     }
@@ -174,7 +178,9 @@
 }
 
 - (ImageNetClassificationModelOutput*)runModelOn:(CVPixelBufferRef)pixelBuffer {
-    if ( !_loaded ) { [self load:nil]; }
+    if ( !_loaded ) {
+        [self load:nil];
+    }
     
     ImageNetClassificationModelOutput *output;
 
@@ -188,7 +194,7 @@
     
     // Capture output and interpret
     
-    output = [self _captureOutputs];
+    return [self _captureOutputs];
     
     return output;
 }
@@ -214,7 +220,7 @@
 
 - (void)_runInference {
     if (interpreter->Invoke() != kTfLiteOk) {
-        LOG(FATAL) << "Failed to invoke!";
+        NSLog(@"Failed to invoke for model %@", self.identifier);
     }
 }
 

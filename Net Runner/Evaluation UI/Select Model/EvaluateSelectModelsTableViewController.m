@@ -11,7 +11,7 @@
 #import "EvaluateModelTableViewCell.h"
 #import "EvaluateSelectAlbumsTableViewController.h"
 #import "ModelDetailsTableViewController.h"
-#import "ModelManager.h"
+#import "ModelBundleManager.h"
 #import "ModelBundle.h"
 
 static NSString * const kModelCellIdentifier = @"ModelCell";
@@ -36,7 +36,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"ModelDetailsSegue"] ) {
         ModelDetailsTableViewController *destination = (ModelDetailsTableViewController*)segue.destinationViewController;
-        destination.bundle = ModelManager.sharedManager.modelBundles[self.tableView.indexPathForSelectedRow.row];
+        destination.bundle = ModelBundleManager.sharedManager.modelBundles[self.tableView.indexPathForSelectedRow.row];
     }
     else if ( [segue.identifier isEqualToString:@"SelectAlbumsSegue"] ) {
         EvaluateSelectAlbumsTableViewController *destination = (EvaluateSelectAlbumsTableViewController*)segue.destinationViewController;
@@ -63,8 +63,8 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // return [[[ModelManager sharedManager] models] count];
-    return ModelManager.sharedManager.modelBundles.count;
+    // return [[[ModelBundleManager sharedManager] models] count];
+    return ModelBundleManager.sharedManager.modelBundles.count;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -82,7 +82,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EvaluateModelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kModelCellIdentifier forIndexPath:indexPath];
-    ModelBundle *bundle = ModelManager.sharedManager.modelBundles[indexPath.row];
+    ModelBundle *bundle = ModelBundleManager.sharedManager.modelBundles[indexPath.row];
     
     cell.titleLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
 

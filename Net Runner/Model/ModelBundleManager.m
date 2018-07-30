@@ -1,26 +1,25 @@
 //
-//  ModelManager.m
+//  ModelBundleManager.m
 //  tflite_camera_example
 //
 //  Created by Philip Dow on 7/10/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "ModelManager.h"
+#import "ModelBundleManager.h"
 
-// #import "ModelFactory.h"
 #import "ModelBundle.h"
 #import "NSArray+Extensions.h"
 #import "Model.h"
 
-@interface ModelManager()
+@interface ModelBundleManager()
 
 @property (readwrite) NSArray<id<Model>>* models;
 @property (readwrite) NSArray<ModelBundle*> *modelBundles;
 
 @end
 
-@implementation ModelManager
+@implementation ModelBundleManager
 
 + (instancetype)sharedManager {
     static dispatch_once_t once;

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "ModelManager.h"
+#import "ModelBundleManager.h"
 #import "NSArray+Extensions.h"
 
 @interface AppDelegate ()
@@ -26,7 +26,7 @@
     NSString *modelsPath = [[NSBundle mainBundle] pathForResource:@"models" ofType:nil];
     NSError *error;
     
-    if ( ![ModelManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error] ) {
+    if ( ![ModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error] ) {
         NSLog(@"Unable to load model bundles at path %@", modelsPath);
     }
     

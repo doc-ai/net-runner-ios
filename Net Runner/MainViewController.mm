@@ -16,7 +16,7 @@
 
 #include <iostream>
 
-#import "ModelManager.h"
+#import "ModelBundleManager.h"
 #import "ImageNetClassificationModel.h"
 #import "ResultInfoView.h"
 #import "VisionModel.h"
@@ -36,8 +36,6 @@
 #import "EvaluatorConstants.h"
 #import "ModelOptions.h"
 #import "ModelOutput.h"
-
-#define LOG(x) std::cerr
 
 // MARK: -
 
@@ -65,8 +63,6 @@ typedef enum : NSUInteger {
     AVCaptureVideoPreviewLayer *previewLayer;
     AVCaptureVideoDataOutput *videoDataOutput;
     dispatch_queue_t videoDataOutputQueue;
-    
-
 }
 
 - (void)dealloc {
@@ -102,7 +98,7 @@ typedef enum : NSUInteger {
     // Load default model
     
     NSString *modelId = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
-    ModelBundle *bundle = [ModelManager.sharedManager bundleWithId:modelId];
+    ModelBundle *bundle = [ModelBundleManager.sharedManager bundleWithId:modelId];
     
     if ( bundle == nil ) {
         NSLog(@"Unable to locate model bundle from last selected bundle with id: %@", modelId);
@@ -145,7 +141,7 @@ typedef enum : NSUInteger {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (self.captureMode == CaptureModeLiveVideo && ![session isRunning]) {
+    if (self.captureMode == CaptureModeLiveVideo && ![session isRunning] && self.model != nil) {
         [session startRunning];
     }
 }
@@ -161,8 +157,6 @@ typedef enum : NSUInteger {
         destination.delegate = self;
     }
 }
-
-// TODO: Visually indicate that the model could not be loaded
 
 /**
  * Loads a new instance of a model from a model bundle.
@@ -185,6 +179,7 @@ typedef enum : NSUInteger {
     
     if ( self.model == nil ) {
         NSLog(@"Unable to find and instantiate model with id %@", bundle.identifier);
+        [self showLoadModelAlert:@"Could not instantiate the model. Ensure the class corresponding to this model is available."];
         self.modelBundle = nil;
         self.model = nil;
         return NO;
@@ -192,6 +187,7 @@ typedef enum : NSUInteger {
     
     if ( ![self.model conformsToProtocol:@protocol(VisionModel)] ) {
         NSLog(@"Model does not conform to protocol VisionModel, id: %@", bundle.identifier);
+        [self showLoadModelAlert:@"Model class does not correspond to the VisionModel protocol."];
         self.modelBundle = nil;
         self.model = nil;
         return NO;
@@ -199,6 +195,7 @@ typedef enum : NSUInteger {
     
     if ( ![self.model load:&modelError] ) {
         NSLog(@"Model does could not be loaded, id: %@, error: %@", bundle.identifier, modelError);
+        [self showLoadModelAlert:@"Could to read the underlying model file (e.g. tflite file). Ensure it exists and is valid."];
         self.modelBundle = nil;
         self.model = nil;
         return NO;
@@ -211,6 +208,20 @@ typedef enum : NSUInteger {
     self.latencyCounter = [[LatencyCounter alloc] init];
     
     return YES;
+}
+
+- (void)showLoadModelAlert:(NSString*)description {
+    UIAlertController *alert = [UIAlertController
+        alertControllerWithTitle:NSLocalizedString(@"Unable to load model", @"Failed to load model alert title")
+        message:NSLocalizedString(description, @"Failed to load model alert message")
+        preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction
+        actionWithTitle:NSLocalizedString(@"Dismiss", @"Alert dismiss action")
+        style:UIAlertActionStyleDefault
+        handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 // MARK: - Settings Delegate

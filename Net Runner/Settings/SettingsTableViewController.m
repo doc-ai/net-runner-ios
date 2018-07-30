@@ -10,7 +10,7 @@
 
 #import "EvaluateSelectModelsTableViewController.h"
 #import "ModelsTableViewController.h"
-#import "ModelManager.h"
+#import "ModelBundleManager.h"
 #import "ModelBundle.h"
 #import "Model.h"
 #import "UserDefaults.h"

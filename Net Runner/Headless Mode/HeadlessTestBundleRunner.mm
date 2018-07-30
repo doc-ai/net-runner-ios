@@ -12,7 +12,7 @@
 #import "FileImageEvaluator.h"
 #import "URLImageEvaluator.h"
 #import "Evaluator.h"
-#import "ModelManager.h"
+#import "ModelBundleManager.h"
 #import "VisionModel.h"
 #import "Model.h"
 #import "EvaluationMetric.h"
@@ -47,7 +47,7 @@
     
     // Convert model ids to bundles
     
-    NSArray<ModelBundle*> *modelBundles = [ModelManager.sharedManager bundlesWithIds:self.testBundle.modelIds];
+    NSArray<ModelBundle*> *modelBundles = [ModelBundleManager.sharedManager bundlesWithIds:self.testBundle.modelIds];
     
     if ( modelBundles.count != self.testBundle.modelIds.count ) {
         NSLog(@"Test Bundle %@: Didn't load all models", self.testBundle.identifier);

@@ -43,7 +43,7 @@
 		E3A52133210A51A8004B912B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A52132210A51A8004B912B /* CoreMedia.framework */; };
 		E3A52139210A51D9004B912B /* ImageNetClassificationHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3A52136210A51D9004B912B /* ImageNetClassificationHelpers.mm */; };
 		E3A5213A210A51D9004B912B /* ImageNetClassificationModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3A52138210A51D9004B912B /* ImageNetClassificationModel.mm */; };
-		E3A52149210A51F7004B912B /* ModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A5213C210A51F6004B912B /* ModelManager.m */; };
+		E3A52149210A51F7004B912B /* ModelBundleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A5213C210A51F6004B912B /* ModelBundleManager.m */; };
 		E3A5214A210A51F7004B912B /* ModelHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3A52140210A51F7004B912B /* ModelHelpers.mm */; };
 		E3A5214B210A51F7004B912B /* VisionModelHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3A52142210A51F7004B912B /* VisionModelHelpers.mm */; };
 		E3A5214C210A51F7004B912B /* ModelBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A52147210A51F7004B912B /* ModelBundle.m */; };
@@ -166,10 +166,10 @@
 		E3A52136210A51D9004B912B /* ImageNetClassificationHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageNetClassificationHelpers.mm; sourceTree = "<group>"; };
 		E3A52137210A51D9004B912B /* ImageNetClassificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageNetClassificationModel.h; sourceTree = "<group>"; };
 		E3A52138210A51D9004B912B /* ImageNetClassificationModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageNetClassificationModel.mm; sourceTree = "<group>"; };
-		E3A5213C210A51F6004B912B /* ModelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelManager.m; sourceTree = "<group>"; };
+		E3A5213C210A51F6004B912B /* ModelBundleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelBundleManager.m; sourceTree = "<group>"; };
 		E3A5213D210A51F6004B912B /* VisionModelHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionModelHelpers.h; sourceTree = "<group>"; };
 		E3A5213E210A51F6004B912B /* ModelBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelBundle.h; sourceTree = "<group>"; };
-		E3A5213F210A51F6004B912B /* ModelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelManager.h; sourceTree = "<group>"; };
+		E3A5213F210A51F6004B912B /* ModelBundleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelBundleManager.h; sourceTree = "<group>"; };
 		E3A52140210A51F7004B912B /* ModelHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelHelpers.mm; sourceTree = "<group>"; };
 		E3A52141210A51F7004B912B /* VisionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionPipeline.h; sourceTree = "<group>"; };
 		E3A52142210A51F7004B912B /* VisionModelHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VisionModelHelpers.mm; sourceTree = "<group>"; };
@@ -492,8 +492,8 @@
 				E3A52146210A51F7004B912B /* ModelJSONSchema.h */,
 				E3A5213E210A51F6004B912B /* ModelBundle.h */,
 				E3A52147210A51F7004B912B /* ModelBundle.m */,
-				E3A5213F210A51F6004B912B /* ModelManager.h */,
-				E3A5213C210A51F6004B912B /* ModelManager.m */,
+				E3A5213F210A51F6004B912B /* ModelBundleManager.h */,
+				E3A5213C210A51F6004B912B /* ModelBundleManager.m */,
 				E3A52144210A51F7004B912B /* ModelHelpers.h */,
 				E3A52140210A51F7004B912B /* ModelHelpers.mm */,
 				E3851383210CE4F000F600C5 /* ModelOptions.h */,
@@ -818,7 +818,7 @@
 				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
 				E3A5214D210A51F7004B912B /* VisionPipeline.mm in Sources */,
-				E3A52149210A51F7004B912B /* ModelManager.m in Sources */,
+				E3A52149210A51F7004B912B /* ModelBundleManager.m in Sources */,
 				E3A52122210A511C004B912B /* Utilities.mm in Sources */,
 				E3F6C68A210A56DD00D200D8 /* UserDefaults.m in Sources */,
 				E3A5214A210A51F7004B912B /* ModelHelpers.mm in Sources */,

@@ -26,22 +26,25 @@ typedef struct PixelNormalization {
 
 @property (readonly) PixelNormalization normalization;
 @property (readonly) PixelNormalizer normalizer;
-@property (readonly) OSType pixelFormat;
-
 @property (readonly) ImageVolume imageVolume;
+@property (readonly) OSType pixelFormat;
 
 /**
  * The single interface to the model. May be called on a separate thread.
  *
- * @param pixelBuffer core video pixel buffer that will be preprocessed and passed to the model
- * @return top N dictionary of labels to confidence scores
+ * @param pixelBuffer core video pixel buffer that will be normalized and passed to the model.
+ * The pixelBuffer must already be in the size and format expected by the model, which can
+ * be accomplished using the `VisionPipeline`.
+ *
+ * @return `ModelOutput` wrapper to the underlying data
  */
 
 - (id<ModelOutput>)runModelOn:(CVPixelBufferRef)pixelBuffer;
 
 /**
  * The scaled, cropped, rotatated, and pixel formatted pixel buffer that the model actually sees,
- * prior to any other image preprocessing, e.g. normalization
+ * prior to any other image preprocessing, e.g. normalization. You may use this representation of
+ * the input to visually inspect and debug what the model sees.
  */
 
 - (CVPixelBufferRef)inputPixelBuffer;
