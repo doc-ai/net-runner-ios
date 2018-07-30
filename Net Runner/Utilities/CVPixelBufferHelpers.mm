@@ -252,8 +252,6 @@ CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVPixelBuffer
     const int bufferWidth = (int)CVPixelBufferGetWidth(pixelBuffer);
     const int bufferHeight = (int)CVPixelBufferGetHeight(pixelBuffer);
     
-    assert( bufferWidth == bufferHeight );
-    
     // Prepare source image buffer from input pixel buffer
     
     unsigned char* sourceBaseAddr = (unsigned char*)(CVPixelBufferGetBaseAddress(pixelBuffer));
@@ -307,11 +305,11 @@ CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVPixelBuffer
     
     CVReturn status = CVPixelBufferCreateWithBytes(
         NULL,
-        bufferWidth,
-        bufferHeight,
+        destBufferWidth,
+        destBufferHeight,
         pixelFormat,
         destData,
-        sourceRowBytes,
+        destRowBytes,
         CVPixelBufferCreateWithBytesReleaseCallback,
         NULL,
         NULL,

@@ -40,7 +40,7 @@ float_t ScaledPixel(const uint8_t &value, uint8_t channel);
 CVPixelBufferRef CVPixelBufferCopy(CVPixelBufferRef srcBuffer);
 
 /**
- * Rotates the pixel buffer 90° clockwise. The pixel buffer must be square
+ * Rotates the pixel buffer
  *
  * rotation value:
  *  0 -- rotate 0 degrees (simply copy the data from src to dest)
