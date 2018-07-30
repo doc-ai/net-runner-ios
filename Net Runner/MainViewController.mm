@@ -313,7 +313,43 @@ typedef enum : NSUInteger {
 // MARK: - AV Capture
 
 - (void)setupAVCapture:(AVCaptureDevicePosition)position {
-    NSError* error = nil;
+    
+#if TARGET_OS_SIMULATOR
+    
+    UIImage *image = [UIImage imageNamed:@"simulator-video-input"];
+    CVPixelBufferRef pixelBuffer = CVPixelBufferRotate(image.pixelBuffer, Rotate90Degrees);
+    CMSampleBufferRef sampleBuffer = NULL;
+    CMSampleTimingInfo timimgInfo = kCMTimingInfoInvalid;
+    CMVideoFormatDescriptionRef videoInfo = NULL;
+    
+    CMVideoFormatDescriptionCreateForImageBuffer(NULL, pixelBuffer, &videoInfo);
+    
+    CMSampleBufferCreateForImageBuffer(
+        kCFAllocatorDefault,
+        pixelBuffer,
+        true,
+        NULL,
+        NULL,
+        videoInfo,
+        &timimgInfo,
+        &sampleBuffer
+    );
+    
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wnonnull"
+    
+    [self captureOutput:nil didOutputSampleBuffer:sampleBuffer fromConnection:nil];
+    
+    #pragma clang diagnostic pop
+    
+    self.previewView.backgroundColor = UIColor.blackColor;
+    self.previewView.layer.contentsGravity = kCAGravityResizeAspect;
+    self.previewView.layer.contents = (id)image.CGImage;
+
+    CFRelease(sampleBuffer);
+    CVPixelBufferRelease(pixelBuffer);
+    
+#else
     
     // Session
     
@@ -328,11 +364,12 @@ typedef enum : NSUInteger {
     // Device and input
     // TODO: better error handling if the devices' camera is damaged or otherwise unavailable, for example
 
+    NSError* error = nil;
     AVCaptureDevice *device = [self captureDeviceWithPosition:position];
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
 
     if (error != nil) {
-        NSLog(@"Failed to initialize AVCaptureDeviceInput. Note: This app doesn't work with simulator");
+        NSLog(@"Failed to initialize AVCaptureDeviceInput. Note: AVCaptureDevice doesn't work in the simulator.");
         [self presentError:error];
         [self teardownAVCapture];
         assert(NO);
@@ -382,6 +419,8 @@ typedef enum : NSUInteger {
     // Save options
     
     devicePosition = position;
+    
+#endif
 }
 
 - (void)teardownAVCapture {

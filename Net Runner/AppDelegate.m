@@ -21,6 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    assert( sizeof(float_t) == 4 );
+    
     // Load models
     
     NSString *modelsPath = [[NSBundle mainBundle] pathForResource:@"models" ofType:nil];
