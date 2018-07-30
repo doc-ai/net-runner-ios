@@ -27,11 +27,11 @@ typedef enum : NSUInteger  {
     Rotate270Degrees = 3
 } CVPixelBufferCounterclockwiseRotation;
 
-typedef float32_t (^PixelNormalizer)(const uint8_t &value, const uint8_t &channel);
+typedef float_t (^PixelNormalizer)(const uint8_t &value, const uint8_t &channel);
 
 // MARK: -
 
-float32_t ScaledPixel(const uint8_t &value, uint8_t channel);
+float_t ScaledPixel(const uint8_t &value, uint8_t channel);
 
 /**
  * Returns a copy of the pixel buffer
@@ -94,7 +94,7 @@ CVPixelBufferRef CVPixelBufferResizeToSquare(CVPixelBufferRef srcBuffer, CGSize 
  * The pixelBuffer must already be in the shape and format expected by the input tensor,
  * with the shape parameter describing its dimensions
  *
- * `tensor_t` will be `float32_t` or `uint8_t` for a quantized model
+ * `tensor_t` will be `float_t` (32 bits) or `uint8_t` for a quantized model
  */
 
 template <typename tensor_t>

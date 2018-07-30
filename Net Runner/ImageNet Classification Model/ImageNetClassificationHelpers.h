@@ -28,7 +28,7 @@ void LoadLabels(NSString* labels_path, std::vector<std::string>* label_strings);
  * Returns the top N confidence values over threshold in the provided vector,
  * sorted by confidence in descending order.
  *
- * weight_t will be of type float32_t or uint8_t for quantized models
+ * weight_t will be of type float_t (32 bits) or uint8_t for quantized models
  */
 
 template <typename weight_t>
@@ -75,7 +75,7 @@ void GetTopN(const weight_t* prediction, const int prediction_size, const int nu
  *
  * N is defined as 5 and threshold as 0.1
  *
- * weight_t will be of type float32_t or uint8_t for quantized models
+ * weight_t will be of type float_t (32 bits) or uint8_t for quantized models
  */
 
 template <typename weight_t>

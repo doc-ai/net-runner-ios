@@ -254,14 +254,14 @@
 
 - (void)_prepareInputs:(CVPixelBufferRef)pixelBuffer  {
     int input = interpreter->inputs()[0];
-    float32_t* tensor = interpreter->typed_tensor<float32_t>(input);
+    float_t* tensor = interpreter->typed_tensor<float_t>(input);
 
     CVPixelBufferCopyToTensor(pixelBuffer, tensor, self.imageVolume, self.normalizer);
     [self setInputPixelBuffer:pixelBuffer];
 }
 
 - (ImageNetClassificationModelOutput*)_captureOutputs {
-    float32_t* output = interpreter->typed_output_tensor<float32_t>(0);
+    float_t* output = interpreter->typed_output_tensor<float_t>(0);
     NSDictionary *predictions = CaptureOutput(output, labels);
     return [[ImageNetClassificationModelOutput alloc] initWithDictionary:predictions];
 }

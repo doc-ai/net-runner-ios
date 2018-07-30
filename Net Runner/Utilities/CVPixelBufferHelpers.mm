@@ -31,7 +31,7 @@ void CVPixelBufferCreateWithBytesReleaseCallback(void *releaseRefCon, const void
     if (baseAddress != NULL) { free((void *)baseAddress); }
 }
 
-float32_t ScaledPixel(const uint8_t &value, uint8_t channel) {
+float_t ScaledPixel(const uint8_t &value, uint8_t channel) {
     return value;
 }
 

@@ -33,8 +33,8 @@ PixelNormalizer PixelNormalizerSingleBias(PixelNormalization normalization) {
     float scale = normalization.scale;
     float bias = normalization.redBias;
     
-    return ^float32_t (const uint8_t &value, const uint8_t &channel) {
-        return ((float32_t)value * scale) + bias;
+    return ^float_t (const uint8_t &value, const uint8_t &channel) {
+        return ((float_t)value * scale) + bias;
     };
 }
 
@@ -44,14 +44,14 @@ PixelNormalizer PixelNormalizerPerChannelBias(PixelNormalization normalization) 
     float greenBias = normalization.greenBias;
     float blueBias = normalization.blueBias;
     
-    return ^float32_t (const uint8_t &value, const uint8_t &channel) {
+    return ^float_t (const uint8_t &value, const uint8_t &channel) {
         switch (channel) {
         case 0:
-            return ((float32_t)value * scale) + redBias;
+            return ((float_t)value * scale) + redBias;
         case 1:
-            return ((float32_t)value * scale) + greenBias;
+            return ((float_t)value * scale) + greenBias;
         case 2:
-            return ((float32_t)value * scale) + blueBias;
+            return ((float_t)value * scale) + blueBias;
         default:
             NSLog(@"Unexpected channel in scaling block: %hhu", channel);
             assert(false);
@@ -64,8 +64,8 @@ PixelNormalizer PixelNormalizerPerChannelBias(PixelNormalization normalization) 
 PixelNormalizer PixelNormalizerZeroToOne() {
     float scale = 1.0/255.0;
     
-    return ^float32_t (const uint8_t &value, const uint8_t &channel) {
-        return ((float32_t)value * scale);
+    return ^float_t (const uint8_t &value, const uint8_t &channel) {
+        return ((float_t)value * scale);
     };
 }
 
@@ -73,8 +73,8 @@ PixelNormalizer PixelNormalizerNegativeOneToOne() {
     float scale = 2.0/255.0;
     float bias = -1;
     
-    return ^float32_t (const uint8_t &value, const uint8_t &channel) {
-        return ((float32_t)value * scale) + bias;
+    return ^float_t (const uint8_t &value, const uint8_t &channel) {
+        return ((float_t)value * scale) + bias;
     };
 }
 
@@ -151,16 +151,16 @@ PixelNormalization PixelNormalizationForInput(NSDictionary *input) {
         return kNoNormalization;
     }
     else {
-        float32_t scale = scaleNumber != nil
+        float_t scale = scaleNumber != nil
             ? [scaleNumber floatValue]
             : 1.0;
-        float32_t redBias = biases != nil
+        float_t redBias = biases != nil
             ? [biases[@"r"] floatValue]
             : 0.0;
-        float32_t greenBias = biases != nil
+        float_t greenBias = biases != nil
             ? [biases[@"g"] floatValue]
             : 0.0;
-        float32_t blueBias = biases != nil
+        float_t blueBias = biases != nil
             ? [biases[@"b"] floatValue]
             : 0.0;
         
@@ -194,16 +194,16 @@ PixelNormalizer PixelNormalizerForInput(NSDictionary *input) {
         return PixelNormalizerNone();
     }
     else {
-        float32_t scale = scaleNumber != nil
+        float_t scale = scaleNumber != nil
             ? [scaleNumber floatValue]
             : 1.0;
-        float32_t redBias = biases != nil
+        float_t redBias = biases != nil
             ? [biases[@"r"] floatValue]
             : 0.0;
-        float32_t greenBias = biases != nil
+        float_t greenBias = biases != nil
             ? [biases[@"g"] floatValue]
             : 0.0;
-        float32_t blueBias = biases != nil
+        float_t blueBias = biases != nil
             ? [biases[@"b"] floatValue]
             : 0.0;
         
