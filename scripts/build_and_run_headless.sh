@@ -2,6 +2,11 @@
 
 # located in $PROJECT_DIR/scripts
 
+# requirements:
+# Xcode and command line utilities
+# node : brew install node
+# ios-deploy : npm install -g ios-deploy
+
 PROJECT_DIR="$(pwd)/.."
 WORKSPACE="$PROJECT_DIR/Net Runner.xcworkspace"
 TARGET="Net Runner"
@@ -16,6 +21,7 @@ rm -r "$DSTROOT"
 mkdir "$DSTROOT"
 
 # build
+# https://developer.apple.com/library/archive/technotes/tn2339/_index.html
 
 xcodebuild build -workspace "$WORKSPACE" -scheme "$SCHEME" SYMROOT="$SYMROOT" DSTROOT="$DSTROOT"
 
