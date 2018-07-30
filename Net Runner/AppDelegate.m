@@ -38,14 +38,17 @@
     
     UIViewController *vc;
     
-    if ( NSProcessInfo.processInfo.environment[@"headless"] ) {
+    // if ( NSProcessInfo.processInfo.environment[@"headless"] ) {
+    #ifdef HEADLESS
         NSLog(@"Running application in headless mode");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Headless" bundle:[NSBundle mainBundle]];
         vc = [storyboard instantiateInitialViewController];
-    } else {
+    // } else {
+    #else
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         vc = [storyboard instantiateInitialViewController];
-    }
+    //}
+    #endif
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = vc;
