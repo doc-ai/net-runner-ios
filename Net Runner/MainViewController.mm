@@ -14,8 +14,6 @@
 #import <ImageIO/ImageIO.h>
 #import <VideoToolbox/VideoToolbox.h>
 
-#include <iostream>
-
 #import "ModelBundleManager.h"
 #import "ImageNetClassificationModel.h"
 #import "ResultInfoView.h"
@@ -46,7 +44,6 @@ typedef enum : NSUInteger {
 
 @interface MainViewController ()
 
-@property ResultInfoView *infoView;
 @property NSDate *lastScreenUpdate;
 @property (nonatomic) CaptureMode captureMode;
 @property LatencyCounter *latencyCounter;
@@ -83,17 +80,17 @@ typedef enum : NSUInteger {
     swipeRecognizer.direction = ( UISwipeGestureRecognizerDirectionRight | UISwipeGestureRecognizerDirectionLeft );
     [self.previewView addGestureRecognizer:swipeRecognizer];
     
-    self.infoView = [[ResultInfoView alloc] init];
-    [self.view addSubview:self.infoView];
-    
-    self.infoView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [NSLayoutConstraint activateConstraints:@[
-        [self.infoView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:-16],
-        [self.infoView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:-26],
-        [self.infoView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:16],
-        [self.infoView.heightAnchor constraintGreaterThanOrEqualToConstant:40]
-    ]];
+//    self.infoView = [[ResultInfoView alloc] init];
+//    [self.view addSubview:self.infoView];
+//    
+//    self.infoView.translatesAutoresizingMaskIntoConstraints = NO;
+//    
+//    [NSLayoutConstraint activateConstraints:@[
+//        [self.infoView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:0],
+//        [self.infoView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0],
+//        [self.infoView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:0],
+//        [self.infoView.heightAnchor constraintGreaterThanOrEqualToConstant:40]
+//    ]];
 
     // Load default model
     

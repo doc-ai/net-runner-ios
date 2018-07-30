@@ -38,6 +38,7 @@
     _statsLabel = [[UILabel alloc] init];
     
     self.backgroundColor = UIColor.clearColor;
+    
     self.layer.cornerRadius = 8;
     self.clipsToBounds = YES;
     

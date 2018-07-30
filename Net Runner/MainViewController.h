@@ -15,17 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ImageInputPreviewView;
 @class ResultInfoView;
-@class LatencyCounter;
-@class ModelBundle;
-
-@protocol Model;
-@protocol VisionModel;
 
 @interface MainViewController : UIViewController <UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SettingsTableViewControllerDelegate>
 
 @property IBOutlet UIImageView *photoImageView;
 @property IBOutlet UIView* previewView;
 @property IBOutlet ImageInputPreviewView *imageInputPreviewView;
+@property IBOutlet ResultInfoView *infoView;
 
 - (IBAction)selectInputSource:(id)sender;
 

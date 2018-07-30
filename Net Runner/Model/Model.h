@@ -50,7 +50,7 @@ typedef enum : NSUInteger {
  *
  * Conforming classes should override this method to perform custom loading and set loaded=YES.
  *
- * @param error No error is currently set
+ * @param error set to one of the errors in ModelHelpers or your own error.
  */
 
 - (BOOL)load:(NSError**)error;

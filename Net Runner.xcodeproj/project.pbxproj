@@ -584,12 +584,12 @@
 			isa = PBXGroup;
 			children = (
 				E3F6C69E210A56FC00D200D8 /* Settings.storyboard */,
+				E3F6C69F210A56FC00D200D8 /* SettingsTableViewController.h */,
+				E3F6C69B210A56FB00D200D8 /* SettingsTableViewController.m */,
 				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
 				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.m */,
 				E3F6C6A1210A56FC00D200D8 /* ModelsTableViewController.h */,
 				E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.m */,
-				E3F6C69F210A56FC00D200D8 /* SettingsTableViewController.h */,
-				E3F6C69B210A56FB00D200D8 /* SettingsTableViewController.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";

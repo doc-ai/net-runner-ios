@@ -42,6 +42,13 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <gestureRecognizers/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXg-je-cq8" customClass="ResultInfoView">
+                                <rect key="frame" x="16" y="571" width="343" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" placeholder="YES" id="N2H-fp-4Ir"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WA2-4K-adB" customClass="ImageInputPreviewView">
                                 <rect key="frame" x="16" y="80" width="343" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -53,15 +60,18 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="12" firstAttribute="leading" secondItem="rdD-Y5-bPW" secondAttribute="leading" id="ALH-me-tiM"/>
+                            <constraint firstItem="rdD-Y5-bPW" firstAttribute="bottom" secondItem="SXg-je-cq8" secondAttribute="bottom" constant="16" id="Gp1-rT-81K"/>
                             <constraint firstItem="Qb9-Lv-raT" firstAttribute="bottom" secondItem="rdD-Y5-bPW" secondAttribute="bottom" id="HKc-Q5-aCN"/>
                             <constraint firstItem="rdD-Y5-bPW" firstAttribute="trailing" secondItem="Qb9-Lv-raT" secondAttribute="trailing" id="SUb-vg-Xti"/>
                             <constraint firstItem="Qb9-Lv-raT" firstAttribute="leading" secondItem="rdD-Y5-bPW" secondAttribute="leading" id="X79-4R-bvT"/>
                             <constraint firstItem="rdD-Y5-bPW" firstAttribute="trailing" secondItem="WA2-4K-adB" secondAttribute="trailing" constant="16" id="YlI-xx-4WG"/>
                             <constraint firstItem="rdD-Y5-bPW" firstAttribute="trailing" secondItem="12" secondAttribute="trailing" id="ZQr-6Q-exx"/>
+                            <constraint firstItem="SXg-je-cq8" firstAttribute="leading" secondItem="rdD-Y5-bPW" secondAttribute="leading" constant="16" id="ZtS-gy-XAv"/>
                             <constraint firstItem="WA2-4K-adB" firstAttribute="top" secondItem="rdD-Y5-bPW" secondAttribute="top" constant="16" id="hcI-7d-vSM"/>
                             <constraint firstItem="Qb9-Lv-raT" firstAttribute="top" secondItem="3" secondAttribute="top" id="ixF-hN-MAp"/>
                             <constraint firstItem="12" firstAttribute="top" secondItem="3" secondAttribute="top" id="k8o-9e-0n2"/>
                             <constraint firstAttribute="bottom" secondItem="12" secondAttribute="bottom" id="onU-Wf-pLb"/>
+                            <constraint firstItem="SXg-je-cq8" firstAttribute="trailing" secondItem="rdD-Y5-bPW" secondAttribute="trailing" constant="-16" id="pQ7-k5-b8F"/>
                             <constraint firstItem="WA2-4K-adB" firstAttribute="leading" secondItem="rdD-Y5-bPW" secondAttribute="leading" constant="16" id="tSJ-tu-wUA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rdD-Y5-bPW"/>
@@ -80,6 +90,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageInputPreviewView" destination="WA2-4K-adB" id="UsQ-MV-yzp"/>
+                        <outlet property="infoView" destination="SXg-je-cq8" id="g50-d0-57m"/>
                         <outlet property="photoImageView" destination="Qb9-Lv-raT" id="KX6-VN-e9v"/>
                         <outlet property="previewView" destination="12" id="13"/>
                     </connections>
