@@ -52,15 +52,15 @@ typedef enum : NSUInteger {
 @property id<VisionModel> model;
 @property id<ModelOutput> previousOutput;
 
+@property AVCaptureSession *session;
+@property AVCaptureDevicePosition devicePosition;
+@property AVCaptureVideoPreviewLayer *previewLayer;
+@property AVCaptureVideoDataOutput *videoDataOutput;
+@property dispatch_queue_t videoDataOutputQueue;
+
 @end
 
-@implementation MainViewController {
-    AVCaptureSession *session;
-    AVCaptureDevicePosition devicePosition;
-    AVCaptureVideoPreviewLayer *previewLayer;
-    AVCaptureVideoDataOutput *videoDataOutput;
-    dispatch_queue_t videoDataOutputQueue;
-}
+@implementation MainViewController
 
 - (void)dealloc {
   [self teardownAVCapture];
@@ -79,18 +79,6 @@ typedef enum : NSUInteger {
     UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDeviceOrientation:)];
     swipeRecognizer.direction = ( UISwipeGestureRecognizerDirectionRight | UISwipeGestureRecognizerDirectionLeft );
     [self.previewView addGestureRecognizer:swipeRecognizer];
-    
-//    self.infoView = [[ResultInfoView alloc] init];
-//    [self.view addSubview:self.infoView];
-//    
-//    self.infoView.translatesAutoresizingMaskIntoConstraints = NO;
-//    
-//    [NSLayoutConstraint activateConstraints:@[
-//        [self.infoView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor constant:0],
-//        [self.infoView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0],
-//        [self.infoView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:0],
-//        [self.infoView.heightAnchor constraintGreaterThanOrEqualToConstant:40]
-//    ]];
 
     // Load default model
     
@@ -124,22 +112,30 @@ typedef enum : NSUInteger {
     [super viewDidLayoutSubviews];
     
     CALayer* rootLayer = self.previewView.layer;
-    [previewLayer setFrame:[rootLayer bounds]];
+    [self.previewLayer setFrame:[rootLayer bounds]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    if (self.captureMode == CaptureModeLiveVideo && [session isRunning]) {
-        [session stopRunning];
+#if TARGET_OS_SIMULATOR
+    return;
+#endif
+
+    if (self.captureMode == CaptureModeLiveVideo && [self.session isRunning]) {
+        [self.session stopRunning];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (self.captureMode == CaptureModeLiveVideo && ![session isRunning] && self.model != nil) {
-        [session startRunning];
+#if TARGET_OS_SIMULATOR
+    return;
+#endif
+    
+    if (self.captureMode == CaptureModeLiveVideo && ![self.session isRunning] && self.model != nil) {
+        [self.session startRunning];
     }
 }
 
@@ -154,6 +150,8 @@ typedef enum : NSUInteger {
         destination.delegate = self;
     }
 }
+
+// MARK: - Load Model
 
 /**
  * Loads a new instance of a model from a model bundle.
@@ -246,15 +244,13 @@ typedef enum : NSUInteger {
 - (IBAction)selectInputSource:(id)sender {
     [self setInfoHidden:YES];
     
-    if ([session isRunning]) {
-        [session stopRunning];
+#if !(TARGET_OS_SIMULATOR)
+    
+    if ([self.session isRunning]) {
+        [self.session stopRunning];
     }
     
-    // Show options for the source picker only if the camera is available.
-    if ( ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] ) {
-        [self presentPhotoPicker:UIImagePickerControllerSourceTypePhotoLibrary];
-        return;
-    }
+#endif
     
     UIAlertController *photoSourcePicker = [[UIAlertController alloc] init];
     
@@ -271,7 +267,9 @@ typedef enum : NSUInteger {
         [self didCancelInputSourcePicker];
     }];
     
+#if !(TARGET_OS_SIMULATOR)
     [photoSourcePicker addAction:takePicture];
+#endif
     [photoSourcePicker addAction:choosePhoto];
     [photoSourcePicker addAction:liveVideo];
     [photoSourcePicker addAction:cancel];
@@ -283,15 +281,32 @@ typedef enum : NSUInteger {
     [self setCaptureMode:CaptureModeLiveVideo];
     [self setInfoHidden:NO];
     
-    if (![session isRunning]) {
-        [session startRunning];
+    self.previousOutput = nil;
+    
+#if TARGET_OS_SIMULATOR
+    [self setupSimulatedAVCapture];
+    return;
+#endif
+    
+    if (![self.session isRunning]) {
+        [self.session startRunning];
     }
 }
 
 - (void)didCancelInputSourcePicker {
     [self setInfoHidden:NO];
-    if (self.captureMode == CaptureModeLiveVideo && ![session isRunning]) {
-        [session startRunning];
+    
+    self.previousOutput = nil;
+    
+#if TARGET_OS_SIMULATOR
+    if (self.captureMode == CaptureModeLiveVideo) {
+        [self setupSimulatedAVCapture];
+    }
+    return;
+#endif
+    
+    if (self.captureMode == CaptureModeLiveVideo && ![self.session isRunning]) {
+        [self.session startRunning];
     }
 }
 
@@ -314,6 +329,85 @@ typedef enum : NSUInteger {
 
 - (void)setupAVCapture:(AVCaptureDevicePosition)position {
     
+#if TARGET_OS_SIMULATOR
+    
+    [self setupSimulatedAVCapture];
+    return;
+
+#endif
+    
+    // Session
+    
+    self.session = [AVCaptureSession new];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self.session setSessionPreset:AVCaptureSessionPreset640x480];
+    } else {
+        [self.session setSessionPreset:AVCaptureSessionPresetPhoto];
+    }
+    
+    // Device and input
+    // TODO: better error handling if the devices' camera is damaged or otherwise unavailable, for example
+
+    NSError* error = nil;
+    AVCaptureDevice *device = [self captureDeviceWithPosition:position];
+    AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+
+    if (error != nil) {
+        NSLog(@"Failed to initialize AVCaptureDeviceInput. Note: AVCaptureDevice doesn't work in the simulator.");
+        [self presentError:error];
+        [self teardownAVCapture];
+        assert(NO);
+    }
+
+    if ([self.session canAddInput:deviceInput]) {
+        [self.session addInput:deviceInput];
+    }
+    
+    // Output
+
+    self.videoDataOutputQueue = dispatch_queue_create("VideoDataOutputQueue", DISPATCH_QUEUE_SERIAL);
+    self.videoDataOutput = [AVCaptureVideoDataOutput new];
+
+    NSDictionary *rgbOutputSettings = @{
+        (NSString*)kCVPixelBufferPixelFormatTypeKey: @(kCMPixelFormat_32BGRA)
+    };
+    
+    [[self.videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:AVCaptureVideoOrientationPortrait];
+    [self.videoDataOutput setAlwaysDiscardsLateVideoFrames:YES];
+    [self.videoDataOutput setVideoSettings:rgbOutputSettings];
+    
+    [self.videoDataOutput setSampleBufferDelegate:self queue:self.videoDataOutputQueue];
+
+    if ([self.session canAddOutput:self.videoDataOutput]) {
+        [self.session addOutput:self.videoDataOutput];
+    }
+    
+    [[self.videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setEnabled:YES];
+
+    // Preview
+
+    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
+    [self.previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
+    [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
+    // AVLayerVideoGravityResizeAspectFill
+    
+    CALayer* rootLayer = self.previewView.layer;
+    [rootLayer setMasksToBounds:YES];
+    [self.previewLayer setFrame:[rootLayer bounds]];
+    [rootLayer addSublayer:self.previewLayer];
+    
+    // Kickoff
+    
+    [self.session startRunning];
+    
+    // Save options
+    
+    self.devicePosition = position;
+}
+
+- (void)setupSimulatedAVCapture {
+
 #if TARGET_OS_SIMULATOR
     
     UIImage *image = [UIImage imageNamed:@"simulator-video-input"];
@@ -349,90 +443,24 @@ typedef enum : NSUInteger {
     CFRelease(sampleBuffer);
     CVPixelBufferRelease(pixelBuffer);
     
-#else
-    
-    // Session
-    
-    session = [AVCaptureSession new];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [session setSessionPreset:AVCaptureSessionPreset640x480];
-    } else {
-        [session setSessionPreset:AVCaptureSessionPresetPhoto];
-    }
-    
-    // Device and input
-    // TODO: better error handling if the devices' camera is damaged or otherwise unavailable, for example
-
-    NSError* error = nil;
-    AVCaptureDevice *device = [self captureDeviceWithPosition:position];
-    AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-
-    if (error != nil) {
-        NSLog(@"Failed to initialize AVCaptureDeviceInput. Note: AVCaptureDevice doesn't work in the simulator.");
-        [self presentError:error];
-        [self teardownAVCapture];
-        assert(NO);
-    }
-
-    if ([session canAddInput:deviceInput]) {
-        [session addInput:deviceInput];
-    }
-    
-    // Output
-
-    videoDataOutputQueue = dispatch_queue_create("VideoDataOutputQueue", DISPATCH_QUEUE_SERIAL);
-    videoDataOutput = [AVCaptureVideoDataOutput new];
-
-    NSDictionary *rgbOutputSettings = @{
-        (NSString*)kCVPixelBufferPixelFormatTypeKey: @(kCMPixelFormat_32BGRA)
-    };
-    
-    [[videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:AVCaptureVideoOrientationPortrait];
-    [videoDataOutput setAlwaysDiscardsLateVideoFrames:YES];
-    [videoDataOutput setVideoSettings:rgbOutputSettings];
-    
-    [videoDataOutput setSampleBufferDelegate:self queue:videoDataOutputQueue];
-
-    if ([session canAddOutput:videoDataOutput]) {
-        [session addOutput:videoDataOutput];
-    }
-    
-    [[videoDataOutput connectionWithMediaType:AVMediaTypeVideo] setEnabled:YES];
-
-    // Preview
-
-    previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    [previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
-    [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
-    // AVLayerVideoGravityResizeAspectFill
-    
-    CALayer* rootLayer = self.previewView.layer;
-    [rootLayer setMasksToBounds:YES];
-    [previewLayer setFrame:[rootLayer bounds]];
-    [rootLayer addSublayer:previewLayer];
-    
-    // Kickoff
-    
-    [session startRunning];
-    
-    // Save options
-    
-    devicePosition = position;
-    
 #endif
 }
 
 - (void)teardownAVCapture {
-    [session stopRunning];
-    [previewLayer removeFromSuperlayer];
-    [videoDataOutput setSampleBufferDelegate:nil queue:NULL];
+
+#if TARGET_OS_SIMULATOR
+    return;
+#endif
+
+    [self.session stopRunning];
+    [self.previewLayer removeFromSuperlayer];
+    [self.videoDataOutput setSampleBufferDelegate:nil queue:NULL];
     
-    session = nil;
-    videoDataOutput = nil;
-    previewLayer = nil;
+    self.session = nil;
+    self.videoDataOutput = nil;
+    self.previewLayer = nil;
     
-    videoDataOutputQueue = NULL;
+    self.videoDataOutputQueue = NULL;
 }
 
 
@@ -447,6 +475,11 @@ typedef enum : NSUInteger {
  */
 
 - (nullable AVCaptureDevice*)captureDeviceWithPosition:(AVCaptureDevicePosition)position {
+
+#if TARGET_OS_SIMULATOR
+    return nil;
+#endif
+
     AVCaptureDevicePosition targetPosition = position == AVCaptureDevicePositionUnspecified
         ? AVCaptureDevicePositionBack
         : position;
@@ -485,19 +518,29 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)freezeVideo:(id)sender {
-    if ([session isRunning]) {
-        [session stopRunning];
+    
+#if TARGET_OS_SIMULATOR
+    return;
+#endif
+
+    if ([self.session isRunning]) {
+        [self.session stopRunning];
         [self showPause];
     } else {
-        [session startRunning];
+        [self.session startRunning];
     }
 }
 
 - (IBAction)swipeDeviceOrientation:(id)sender {
-    if ( devicePosition == AVCaptureDevicePositionFront && [self hasDeviceInPosition:AVCaptureDevicePositionBack] ) {
+    
+#if TARGET_OS_SIMULATOR
+    return;
+#endif
+
+    if ( self.devicePosition == AVCaptureDevicePositionFront && [self hasDeviceInPosition:AVCaptureDevicePositionBack] ) {
         [self teardownAVCapture];
         [self setupAVCapture:AVCaptureDevicePositionBack];
-    } else if ( devicePosition == AVCaptureDevicePositionBack && [self hasDeviceInPosition:AVCaptureDevicePositionFront] ) {
+    } else if ( self.devicePosition == AVCaptureDevicePositionBack && [self hasDeviceInPosition:AVCaptureDevicePositionFront] ) {
         [self teardownAVCapture];
         [self setupAVCapture:AVCaptureDevicePositionFront];
     } else {
@@ -559,6 +602,8 @@ typedef enum : NSUInteger {
     [self setCaptureMode:CaptureModePhoto];
     [self setInfoHidden:NO];
     
+    self.previousOutput = nil;
+    
     UIImage *image = info[UIImagePickerControllerOriginalImage];
     [self runModelOnImage:image];
 }
@@ -567,8 +612,11 @@ typedef enum : NSUInteger {
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     [self setInfoHidden:NO];
-    if (self.captureMode == CaptureModeLiveVideo && ![session isRunning]) {
-        [session startRunning];
+    
+    self.previousOutput = nil;
+    
+    if (self.captureMode == CaptureModeLiveVideo && ![self.session isRunning]) {
+        [self.session startRunning];
     }
 }
 
@@ -640,7 +688,6 @@ typedef enum : NSUInteger {
             [self.latencyCounter increaseInferenceLatency:inferenceLatency];
             [self.latencyCounter incrementCount];
             
-            self.previousOutput = nil;
             [self showModelOutput:inference withDecay:NO];
             self.infoView.stats = [self modelStats:NO];
             
