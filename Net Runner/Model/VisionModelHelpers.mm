@@ -1,6 +1,6 @@
 //
 //  VisionModelHelpers.mm
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/12/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -21,7 +21,7 @@ const ImageVolume kNoImageVolume = {
     .channels = 0
 };
 
-const OSType OSTypeNone = 'NULL';
+const OSType PixelFormatTypeNone = 'NULL';
 
 // Core Pixel Normalizers
 
@@ -29,7 +29,7 @@ PixelNormalizer PixelNormalizerNone() {
     return nil;
 }
 
-PixelNormalizer PixelNormalizerSingleBias(PixelNormalization normalization) {
+PixelNormalizer PixelNormalizerSingleBias(const PixelNormalization& normalization) {
     float scale = normalization.scale;
     float bias = normalization.redBias;
     
@@ -38,7 +38,7 @@ PixelNormalizer PixelNormalizerSingleBias(PixelNormalization normalization) {
     };
 }
 
-PixelNormalizer PixelNormalizerPerChannelBias(PixelNormalization normalization) {
+PixelNormalizer PixelNormalizerPerChannelBias(const PixelNormalization& normalization) {
     float scale = normalization.scale;
     float redBias = normalization.redBias;
     float greenBias = normalization.greenBias;
@@ -103,7 +103,7 @@ OSType PixelFormatForString(NSString* string) {
     
     if ( string == nil ) {
         NSLog(@"Expected input.format string in model.json, none found");
-        return OSTypeNone;
+        return PixelFormatTypeNone;
     }
     else if ( [string isEqualToString:@"RGB"] ) {
         return kCVPixelFormatType_32ARGB;
@@ -113,7 +113,7 @@ OSType PixelFormatForString(NSString* string) {
     }
     else {
         NSLog(@"expected input.format string to be 'RGB' or 'BGR', actual value is %@", string);
-        return OSTypeNone;
+        return PixelFormatTypeNone;
     }
 }
 
@@ -224,6 +224,6 @@ PixelNormalizer PixelNormalizerForInput(NSDictionary *input) {
 
 // Utilities
 
-BOOL ImageVolumesEqual(ImageVolume a, ImageVolume b) {
+BOOL ImageVolumesEqual(const ImageVolume& a, const ImageVolume& b) {
     return a.width == b.width && a.height == b.height && a.channels == b.channels;
 }

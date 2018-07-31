@@ -1,6 +1,6 @@
 //
 //  ModelBundle.m
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/20/18.
 //  Copyright © 2018 doc.ai. All rights reserved.

@@ -16,8 +16,10 @@ AVCaptureDevicePosition ModelOptionsAVCaptureDevicePositionFromString(NSString *
 @interface ModelOptions : NSObject
 
 /**
- * Preferred device position. If the device position is unspecified at initialization,
- * `AVCaptureDevicePositionUnspecified` will be used.
+ * Preferred device position.
+ *
+ * If the device position is unspecified at initialization, `AVCaptureDevicePositionUnspecified` will be used,
+ * which will then typically default to the back facing camera.
  */
 
 @property (readonly) AVCaptureDevicePosition devicePosition;
@@ -26,10 +28,10 @@ AVCaptureDevicePosition ModelOptionsAVCaptureDevicePositionFromString(NSString *
  * Designated initializer.
  */
 
-- (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition;
+- (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition NS_DESIGNATED_INITIALIZER;
 
 /**
- * Convenience initializer used when reading from an ModelBundle.
+ * Convenience initializer used when reading from a ModelBundle.
  */
 
 - (instancetype)initWithDictionary:(nullable NSDictionary*)dictionary;

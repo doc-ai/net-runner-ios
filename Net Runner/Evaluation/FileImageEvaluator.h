@@ -1,6 +1,6 @@
 //
 //  FileImageEvaluator.h
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/18/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -14,15 +14,61 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * Runs inference on a single file URL corresponding to a file on disk. Useful for headless evaluation.
+ */
+
 @interface FileImageEvaluator : NSObject <Evaluator>
 
+/**
+ * The `VisionModel` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ */
+
 @property (readonly) id<VisionModel> model;
+
+/**
+ * The results of running inference on the model. See EvaluatorConstants.h for a list of keys that may
+ * appear in this dictionary.
+ */
+
 @property (readonly) NSDictionary *results;
 
+/**
+ * The URL of the file being evaluated.
+ */
+
 @property (readonly) NSURL *fileURL;
+
+/**
+ * The name of the file being evaluated. You may use the string represention of the file URL.
+ * Noted in the results dictionary under the `kEvaluatorResultsKeyImage` key.
+ */
+
 @property (readonly) NSString *name;
 
-- (instancetype)initWithModel:(id<VisionModel>)model fileURL:(NSURL*)fileURL name:(NSString*)name;
+/**
+ * Designated initializer.
+ *
+ * @param model The `VisionModel` object on which inference is being run. Noded in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ * @param fileURL The file backed `NSURL` on which infererence is being run.
+ * @param name The `NSString` name of the file on which infererence is being run. Noted in the results dictionary under the kEvaluatorResultsKeyImage key.
+ */
+
+- (instancetype)initWithModel:(id<VisionModel>)model fileURL:(NSURL*)fileURL name:(NSString*)name NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Use the designated initializer.
+ */
+
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
+ * Acquires a `UIImage` from the contents of the file and delegates inference to an instance of `ImageEvaluator`.
+ * Stores the results of inference in the `results` property and passes that value to the completion handler.
+ *
+ * @param completionHandler the completion block called when evaluation is finished. May be called on
+ * a separate thread.
+ */
 
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler;
 

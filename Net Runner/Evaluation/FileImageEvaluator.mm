@@ -1,6 +1,6 @@
 //
 //  FileImageEvaluator.m
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/18/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -35,8 +35,10 @@
     return self;
 }
 
+// TODO: use key constants not strings
+
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
-    dispatch_once (&_once, ^{
+    dispatch_once(&_once, ^{
      
     NSString *path = self.fileURL.path;
     NSData *data = [[NSData alloc] initWithContentsOfFile:path];
@@ -53,7 +55,7 @@
             NSLog(@"%@", errorDescription);
             self.results = @{
                 @"type": @"file",
-                @"photo": self.name,
+                @"image": self.name,
                 @"model": self.model.identifier,
                 @"error": @(YES),
                 @"error_description": errorDescription,
@@ -63,12 +65,12 @@
             return;
         }
         
-        ImageEvaluator *imageEvaluator = [[ImageEvaluator alloc] initWithImage:image model:self.model];
+        ImageEvaluator *imageEvaluator = [[ImageEvaluator alloc] initWithModel:self.model image:image ];
         
         [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results) {
             self.results = @{
                 @"type": @"file",
-                @"photo": self.name,
+                @"image": self.name,
                 @"model": self.model.identifier,
                 @"error": @(NO),
                 @"evaluation": results

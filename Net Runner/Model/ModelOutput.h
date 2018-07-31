@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * A wrapper around a model's output. All `Model` instances should return an instance of `ModelOutput`
- * from their execute function.
+ * A wrapper around a model's output. All `Model` conforming classes should return an instance of `ModelOutput`
+ * from their run/execute function.
  */
 
 @protocol ModelOutput <NSObject>
@@ -24,19 +24,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) id value;
 
 /**
- * A property list representation of the underlying results. The representation should be json serializable.
+ * A property list representation of the underlying output. The representation should be JSON serializable.
  */
 
 @property (readonly) id propertyList;
 
 /**
- * A string that describes the contents of the receiver.
+ * A debug string that describes the contents of the receiver.
  */
 
 @property(readonly, copy) NSString *description;
 
 /**
- * A human readable representation of the results.
+ * A human readable representation of the underlying output.
  */
 
 @property (readonly) NSString *localizedDescription;
@@ -52,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
  * If you don't want to return a decayed value, simply return `self`.
  *
  * @param previousOutput the previous output of the model. The previous output may be `nil`,
- *  in which case you should return `self`.
+ * in which case you should return `self`.
  *
  * @return a decayed combination of the previous and current outputs
  */

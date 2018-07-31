@@ -60,7 +60,11 @@
 }
 
 - (BOOL)isEqual:(id)anObject {
-    return [self.output isEqual:anObject];
+    if ( ![anObject isKindOfClass:self.class] ) {
+        return NO;
+    }
+    
+    return [self.output isEqual:[anObject output]];
 }
 
 // MARK: -

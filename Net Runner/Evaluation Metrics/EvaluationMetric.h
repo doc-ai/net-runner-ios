@@ -1,6 +1,6 @@
 //
 //  EvaluationMetric.h
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/19/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -19,9 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * For example, for an RMSE error, this function could return the individual error term for this example:
  *
+ * @code
  * @{
  *   @"RMSE: (yhat-y)^2
  * }
+ * @endcode
  *
  */
 
@@ -32,9 +34,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * For example, for an RMSE error, this function could sum the individual squared error terms
  * and then divide by the number of terms, taking the square root for the final value:
+ *
+ * @code
  * @{
  *   @"RMSE: sqrt(sum(individual_rmse)/count)
  * }
+ * @endcode
  *
  */
 

@@ -33,7 +33,7 @@
     CVPixelBufferRetain(_pixelBuffer);
 }
 
-- (instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation model:(id<VisionModel>)model {
+- (instancetype)initWithModel:(id<VisionModel>)model pixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
     if (self = [super init]) {
         _model = model;
         _orientation = orientation;
@@ -45,7 +45,7 @@
 }
 
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
-    dispatch_once (&_once, ^{
+    dispatch_once(&_once, ^{
     
     defer_block {
         self.model = nil;

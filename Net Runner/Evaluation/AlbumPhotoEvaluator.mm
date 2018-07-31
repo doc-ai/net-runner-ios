@@ -1,6 +1,6 @@
 //
 //  AlbumPhotoEvaluator.m
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/18/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -54,8 +54,10 @@
     return self;
 }
 
+// TODO: use key constants not strings
+
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
-    dispatch_once (&_once, ^{
+    dispatch_once(&_once, ^{
 
     [self.imageManager
         requestImageForAsset:self.photo
@@ -76,7 +78,7 @@
                 self.results = @{
                     @"type": @"album_photo",
                     @"album": self.album.localIdentifier,
-                    @"photo": self.photo.localIdentifier,
+                    @"image": self.photo.localIdentifier,
                     @"model": self.model.identifier,
                     @"error": @(YES),
                     @"error_description": errorDescription,
@@ -86,13 +88,13 @@
                 return;
             }
             
-            ImageEvaluator *imageEvaluator = [[ImageEvaluator alloc] initWithImage:result model:self.model];
+            ImageEvaluator *imageEvaluator = [[ImageEvaluator alloc] initWithModel:self.model image:result];
             
             [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results) {
                 self.results = @{
                     @"type": @"album_photo",
                     @"album": self.album.localIdentifier,
-                    @"photo": self.photo.localIdentifier,
+                    @"image": self.photo.localIdentifier,
                     @"model": self.model.identifier,
                     @"error": @(NO),
                     @"evaluation": results

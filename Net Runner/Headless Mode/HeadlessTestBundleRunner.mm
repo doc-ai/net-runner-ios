@@ -1,6 +1,6 @@
 //
 //  HeadlessTestBundleRunner.m
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/19/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -179,7 +179,7 @@
         
             for ( NSDictionary *result in modelResults ) {
                 
-                NSString *identifier = result[@"photo"];
+                NSString *identifier = result[@"image"];
                 id yhat = ((id<ModelOutput>)result[@"evaluation"][@"inference_results"]).value;
                 id y = self.testBundle.labels[identifier];
                 

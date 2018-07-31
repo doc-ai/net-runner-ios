@@ -1,6 +1,6 @@
 //
 //  EvaluationMetricFactory.h
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/19/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol EvaluationMetric;
 
+/**
+ * Instantiates conforming evaluation metrics from class names.
+ */
+
 @interface EvaluationMetricFactory : NSObject
 
 /**
@@ -20,6 +24,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 + (instancetype)sharedInstance;
+
+/**
+ * Instantiates and returns an EvaluationMetric given its class name.
+ *
+ * @param name The class name of the metric.
+ *
+ * @return A conforming instance of EvaluationMetric corresponding to the class name.
+ */
 
 - (id<EvaluationMetric>)evaluationMetricForName:(NSString*)name;
 

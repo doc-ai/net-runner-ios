@@ -35,4 +35,8 @@ AVCaptureDevicePosition ModelOptionsAVCaptureDevicePositionFromString(NSString *
     }
 }
 
+- (instancetype)init {
+    return [self initWithDictionary:nil];
+}
+
 @end

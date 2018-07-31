@@ -1,6 +1,6 @@
 //
 //  ImageNetClassificationModel.m
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/5/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -22,12 +22,8 @@
 
 #include <vector>
 
-// MARK: -
-
 @interface ImageNetClassificationModelFloat32: ImageNetClassificationModel
 @end
-
-// MARK: -
 
 @interface ImageNetClassificationModelUInt8: ImageNetClassificationModel
 @end
@@ -91,7 +87,7 @@
     
     _pixelFormat = PixelFormatForString(input[@"format"]);
     
-    if ( _pixelFormat == OSTypeNone ) {
+    if ( _pixelFormat == PixelFormatTypeNone ) {
         NSLog(@"Expected input.format string to be RGB or BGR in model.json, found %@", input[@"format"]);
         return nil;
     }
@@ -106,6 +102,16 @@
     // return nil;
     
     return self;
+}
+
+- (CVPixelBufferRef)inputPixelBuffer {
+    return _inputPixelBuffer;
+}
+
+- (void)setInputPixelBuffer:(CVPixelBufferRef _Nonnull)pixelBuffer {
+    CVPixelBufferRelease(_inputPixelBuffer);
+    _inputPixelBuffer = pixelBuffer;
+    CVPixelBufferRetain(_inputPixelBuffer);
 }
 
 - (BOOL)load:(NSError**)error {
@@ -215,7 +221,7 @@
 }
 
 /**
- * Run inference. You must call `_prepareInputs` first
+ * Run inference. You must call `_prepareInputs:` first
  */
 
 - (void)_runInference {
@@ -225,25 +231,16 @@
 }
 
 /**
- * Capture output and interpret. Base class implementation is effectively a virtual function
- * so that subclasses can handle differences between weight sizes
+ * Capture output and interpret.
  *
- * @return top five predictions
+ * Base class implementation is effectively a virtual function so that subclasses can handle differences between weight sizes.
+ *
+ * @return Top five predictions
  */
 
 - (ImageNetClassificationModelOutput*)_captureOutputs {
     NSAssert(NO, @"Do not call this method directly, use one of ImageNetClassificationModel's subclasses");
     return nil;
-}
-
-- (CVPixelBufferRef)inputPixelBuffer {
-    return _inputPixelBuffer;
-}
-
-- (void)setInputPixelBuffer:(CVPixelBufferRef _Nonnull)pixelBuffer {
-    CVPixelBufferRelease(_inputPixelBuffer);
-    _inputPixelBuffer = pixelBuffer;
-    CVPixelBufferRetain(_inputPixelBuffer);
 }
 
 @end

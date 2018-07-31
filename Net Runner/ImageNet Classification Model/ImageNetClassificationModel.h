@@ -1,6 +1,6 @@
 //
 //  ImageNetClassificationModel.h
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/5/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -17,6 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ImageNetClassificationModelOutput;
 @class ModelBundle;
+
+/**
+ * A model suitable for use in ImageNet classification problems.
+ *
+ * This single class may be used for multiple kinds of models, including MobileNet, Inception, and ResNet models,
+ * both quantized and unquantized, as long as they are performing classification inference on an image input.
+ */
 
 @interface ImageNetClassificationModel : NSObject <VisionModel>
 

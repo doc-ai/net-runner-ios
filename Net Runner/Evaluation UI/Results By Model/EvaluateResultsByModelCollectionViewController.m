@@ -1,6 +1,6 @@
 //
 //  EvaluateResultsByModelCollectionViewController.m
-//  tflite_camera_example
+//  Net Runner
 //
 //  Created by Philip Dow on 7/24/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
@@ -95,7 +95,7 @@ static NSString * const kHeaderReuseIdentifier = @"HeaderView";
     NSMutableDictionary *byAlbumReduced = [[NSMutableDictionary alloc] init];
     
     for ( NSString *album in byAlbum ) {
-        byAlbumReduced[album] = [[[byAlbum[album] groupBy:@"photo"] allValues]
+        byAlbumReduced[album] = [[[byAlbum[album] groupBy:@"image"] allValues]
             map:^id _Nonnull(NSArray * _Nonnull obj) {
                 return obj.firstObject;
             }];
@@ -110,7 +110,7 @@ static NSString * const kHeaderReuseIdentifier = @"HeaderView";
     
     for ( PHAssetCollection *album in albums ) {
         NSArray *photoIds = [byAlbumReduced[album.localIdentifier] map:^id _Nonnull(NSDictionary *  _Nonnull obj) {
-            return obj[@"photo"];
+            return obj[@"image"];
         }];
         PHFetchResult<PHAsset*> *fetch = [PHAsset fetchAssetsWithLocalIdentifiers:photoIds options:nil];;
         
@@ -128,7 +128,7 @@ static NSString * const kHeaderReuseIdentifier = @"HeaderView";
     for ( NSString *album in byAlbumReduced ) {
         NSArray *photos = byAlbumReduced[album];
         for ( NSDictionary *photo in photos ) {
-            evaluations[photo[@"photo"]] = photo;
+            evaluations[photo[@"image"]] = photo;
         }
     }
     

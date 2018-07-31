@@ -245,11 +245,9 @@ typedef enum : NSUInteger {
     [self setInfoHidden:YES];
     
 #if !(TARGET_OS_SIMULATOR)
-    
     if ([self.session isRunning]) {
         [self.session stopRunning];
     }
-    
 #endif
     
     UIAlertController *photoSourcePicker = [[UIAlertController alloc] init];
@@ -330,10 +328,8 @@ typedef enum : NSUInteger {
 - (void)setupAVCapture:(AVCaptureDevicePosition)position {
     
 #if TARGET_OS_SIMULATOR
-    
     [self setupSimulatedAVCapture];
     return;
-
 #endif
     
     // Session
@@ -635,7 +631,7 @@ typedef enum : NSUInteger {
 
 - (void)runModelOnFrame:(CVPixelBufferRef)pixelBuffer {
     
-    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight model:self.model];
+    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithModel:self.model pixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight];
     
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -673,7 +669,7 @@ typedef enum : NSUInteger {
 - (void)runModelOnImage:(UIImage*)image {
     
     CVPixelBufferRef pixelBuffer = image.pixelBuffer; // Returns ARGB
-    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp model:self.model];
+    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithModel:self.model pixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp];
     
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         dispatch_async(dispatch_get_main_queue(), ^(void) {
