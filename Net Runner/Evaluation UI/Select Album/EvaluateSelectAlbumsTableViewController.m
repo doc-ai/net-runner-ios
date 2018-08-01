@@ -15,7 +15,7 @@
 
 static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 
-@interface EvaluateSelectAlbumsTableViewController () <EvaluatePhotoAlbumTableViewCellActionTarget>
+@interface EvaluateSelectAlbumsTableViewController () <EvaluatePhotoAlbumTableViewCellActionTarget, PHPhotoLibraryChangeObserver>
 
 @property PHFetchResult<PHAssetCollection *> *albums;
 @property (nonatomic) NSSet<PHAssetCollection *> *selectedAlbums;
@@ -29,25 +29,21 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 
 @implementation EvaluateSelectAlbumsTableViewController
 
+- (void)dealloc {
+    [PHPhotoLibrary.sharedPhotoLibrary unregisterChangeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Fetch albums, if we want to include smart albums later: PHAssetCollectionTypeSmartAlbum
-    
-    NSSortDescriptor *albumTitleSort = [NSSortDescriptor sortDescriptorWithKey:@"localizedTitle" ascending:YES selector:@selector(caseInsensitiveCompare:)];
-    
-    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
-    fetchOptions.sortDescriptors = @[albumTitleSort];
-    fetchOptions.includeAllBurstAssets = NO;
-    fetchOptions.includeHiddenAssets = NO;
-    
-    self.albums = [PHAssetCollection
-        fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum
-        subtype:PHAssetCollectionSubtypeAlbumRegular
-        options:fetchOptions];
-        
-    self.selectedAlbums = [[NSSet<PHAssetCollection *> alloc] init];
+    self.selectedAlbums = [[NSSet alloc] init];
     self.imageManager = [[PHCachingImageManager alloc] init];
+    
+    if ( PHPhotoLibrary.authorizationStatus != PHAuthorizationStatusAuthorized ) {
+        [self requestPhotoLibraryAccess];
+    } else {
+        [self fetchAlbums];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -85,6 +81,74 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 
 - (UIBarButtonItem*)nextButton {
     return self.navigationItem.rightBarButtonItem;
+}
+
+// MARK: - Fetching Albums
+
+- (void)requestPhotoLibraryAccess {
+    __weak typeof(self) weakself = self;
+    
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            switch (status) {
+            case PHAuthorizationStatusNotDetermined:
+            case PHAuthorizationStatusRestricted:
+            case PHAuthorizationStatusDenied:
+                [PHPhotoLibrary.sharedPhotoLibrary registerChangeObserver:self];
+                [weakself showPhotoLibraryUnauthorizedAlert];
+                break;
+            case PHAuthorizationStatusAuthorized:
+                [weakself fetchAlbums];
+                [weakself.tableView reloadData];
+                break;
+            }
+        });
+    }];
+}
+
+- (void)fetchAlbums {
+    // Use PHAssetCollectionTypeSmartAlbum if we want to include smart albums later
+    
+    NSSortDescriptor *albumTitleSort = [NSSortDescriptor sortDescriptorWithKey:@"localizedTitle" ascending:YES selector:@selector(caseInsensitiveCompare:)];
+    
+    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+    fetchOptions.sortDescriptors = @[albumTitleSort];
+    fetchOptions.includeAllBurstAssets = NO;
+    fetchOptions.includeHiddenAssets = NO;
+    
+    self.albums = [PHAssetCollection
+        fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum
+        subtype:PHAssetCollectionSubtypeAlbumRegular
+        options:fetchOptions];
+}
+
+- (void)showPhotoLibraryUnauthorizedAlert {
+    UIAlertController *alert = [UIAlertController
+        alertControllerWithTitle:NSLocalizedString(@"Unable to access photo library", @"Photo library access unauthorized alert tite")
+        message:NSLocalizedString(@"Please grant access to your photo library", @"Photo library access unauthorized alert message")
+        preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction
+        actionWithTitle:NSLocalizedString(@"Dismiss", @"Photo library access unauthorized dismiss action")
+        style:UIAlertActionStyleCancel
+        handler:nil]];
+    
+    [alert addAction:[UIAlertAction
+        actionWithTitle:NSLocalizedString(@"Grant Access", @"Photo library access unauthorized grant access action")
+        style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * _Nonnull action) {
+            [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)photoLibraryDidChange:(PHChange *)changeInfo {
+    // Only interested in the first change after authorization status has been approved
+    [PHPhotoLibrary.sharedPhotoLibrary unregisterChangeObserver:self];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self fetchAlbums];
+    });
 }
 
 #pragma mark - Table view data source
