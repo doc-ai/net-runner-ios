@@ -27,12 +27,12 @@
 
 #include "CVPixelBufferHelpers.h"
 
+/**
+ * Release callback to free the bytes used by a pixel buffer
+ */
+
 void CVPixelBufferCreateWithBytesReleaseCallback(void *releaseRefCon, const void *baseAddress) {
     if (baseAddress != NULL) { free((void *)baseAddress); }
-}
-
-float_t ScaledPixel(const uint8_t &value, uint8_t channel) {
-    return value;
 }
 
 CVPixelBufferRef CVPixelBufferCopy(CVPixelBufferRef pixelBuffer) {
@@ -77,6 +77,88 @@ CVPixelBufferRef CVPixelBufferCopy(CVPixelBufferRef pixelBuffer) {
     
     return pixelBufferCopy;
 }
+
+CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVPixelBufferCounterclockwiseRotation rotation) {
+    CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
+    
+    const OSType pixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer);
+    const size_t sourceRowBytes = (int)CVPixelBufferGetBytesPerRow(pixelBuffer);
+    const int bufferWidth = (int)CVPixelBufferGetWidth(pixelBuffer);
+    const int bufferHeight = (int)CVPixelBufferGetHeight(pixelBuffer);
+    
+    // Prepare source image buffer from input pixel buffer
+    
+    unsigned char* sourceBaseAddr = (unsigned char*)(CVPixelBufferGetBaseAddress(pixelBuffer));
+    
+    vImage_Buffer srcImageBuffer = {
+        .width = (vImagePixelCount)bufferWidth,
+        .height = (vImagePixelCount)bufferHeight,
+        .rowBytes = sourceRowBytes,
+        .data = sourceBaseAddr,
+    };
+    
+    // Prepare destination image buffer with new block of memory
+    
+    unsigned char *destData = (unsigned char*)malloc(bufferHeight*sourceRowBytes);
+    const size_t destRowBytes = bufferHeight * ( sourceRowBytes / bufferWidth );
+    const int destBufferWidth = bufferHeight;
+    const int destBufferHeight = bufferWidth;
+    const uint8_t bgColor[4] = {0, 0, 0, 0};
+    
+    vImage_Buffer destImageBuffer = {
+        .width = (vImagePixelCount)destBufferWidth,
+        .height = (vImagePixelCount)destBufferHeight,
+        .rowBytes = destRowBytes,
+        .data = destData,
+    };
+    
+    // Apply rotation
+    
+    vImage_Error err = vImageRotate90_ARGB8888(
+        &srcImageBuffer,
+        &destImageBuffer,
+        rotation,
+        bgColor,
+        kvImageNoFlags
+    );
+    
+    // Unlock source pixel buffer, we are done with it
+    
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, kNilOptions);
+    
+    // Error handling
+    
+    if (err != kvImageNoError) {
+        NSLog(@"vImage_Error: %ld", err);
+        return NULL;
+    }
+    
+    // Create new pixel buffer from image buffer
+    
+    CVPixelBufferRef destPixelBuffer;
+    
+    CVReturn status = CVPixelBufferCreateWithBytes(
+        NULL,
+        destBufferWidth,
+        destBufferHeight,
+        pixelFormat,
+        destData,
+        destRowBytes,
+        CVPixelBufferCreateWithBytesReleaseCallback,
+        NULL,
+        NULL,
+        &destPixelBuffer
+    );
+    
+    if (status != kCVReturnSuccess) {
+        NSLog(@"Error creating destination pixel buffer");
+        free(destData);
+        return NULL;
+    }
+    
+    return destPixelBuffer;
+}
+
 
 CVPixelBufferRef CVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixelBuffer) {
     // Feels like there should be an accelerate function that does this
@@ -244,88 +326,13 @@ CVPixelBufferRef CVPixelBufferCreateARGBFromBGRA(CVPixelBufferRef pixelBuffer) {
     return destPixelBuffer;
 }
 
-CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVPixelBufferCounterclockwiseRotation rotation) {
-    CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
+CVReturn CVPixelBufferCopySeparateChannels(
+    CVPixelBufferRef pixelBuffer,
+    CVPixelBufferRef _Nullable * _Nonnull channel0Buffer,
+    CVPixelBufferRef _Nullable * _Nonnull channel1Buffer,
+    CVPixelBufferRef _Nullable * _Nonnull channel2Buffer,
+    CVPixelBufferRef _Nullable * _Nonnull channel3Buffer) {
     
-    const OSType pixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer);
-    const size_t sourceRowBytes = (int)CVPixelBufferGetBytesPerRow(pixelBuffer);
-    const int bufferWidth = (int)CVPixelBufferGetWidth(pixelBuffer);
-    const int bufferHeight = (int)CVPixelBufferGetHeight(pixelBuffer);
-    
-    // Prepare source image buffer from input pixel buffer
-    
-    unsigned char* sourceBaseAddr = (unsigned char*)(CVPixelBufferGetBaseAddress(pixelBuffer));
-    
-    vImage_Buffer srcImageBuffer = {
-        .width = (vImagePixelCount)bufferWidth,
-        .height = (vImagePixelCount)bufferHeight,
-        .rowBytes = sourceRowBytes,
-        .data = sourceBaseAddr,
-    };
-    
-    // Prepare destination image buffer with new block of memory
-    
-    unsigned char *destData = (unsigned char*)malloc(bufferHeight*sourceRowBytes);
-    const size_t destRowBytes = bufferHeight * ( sourceRowBytes / bufferWidth );
-    const int destBufferWidth = bufferHeight;
-    const int destBufferHeight = bufferWidth;
-    const uint8_t bgColor[4] = {0, 0, 0, 0};
-    
-    vImage_Buffer destImageBuffer = {
-        .width = (vImagePixelCount)destBufferWidth,
-        .height = (vImagePixelCount)destBufferHeight,
-        .rowBytes = destRowBytes,
-        .data = destData,
-    };
-    
-    // Apply rotation
-    
-    vImage_Error err = vImageRotate90_ARGB8888(
-        &srcImageBuffer,
-        &destImageBuffer,
-        rotation,
-        bgColor,
-        kvImageNoFlags
-    );
-    
-    // Unlock source pixel buffer, we are done with it
-    
-    CVPixelBufferUnlockBaseAddress(pixelBuffer, kNilOptions);
-    
-    // Error handling
-    
-    if (err != kvImageNoError) {
-        NSLog(@"vImage_Error: %ld", err);
-        return NULL;
-    }
-    
-    // Create new pixel buffer from image buffer
-    
-    CVPixelBufferRef destPixelBuffer;
-    
-    CVReturn status = CVPixelBufferCreateWithBytes(
-        NULL,
-        destBufferWidth,
-        destBufferHeight,
-        pixelFormat,
-        destData,
-        destRowBytes,
-        CVPixelBufferCreateWithBytesReleaseCallback,
-        NULL,
-        NULL,
-        &destPixelBuffer
-    );
-    
-    if (status != kCVReturnSuccess) {
-        NSLog(@"Error creating destination pixel buffer");
-        free(destData);
-        return NULL;
-    }
-    
-    return destPixelBuffer;
-}
-
-CVReturn CVPixelBufferCopySeparateChannels(CVPixelBufferRef pixelBuffer, CVPixelBufferRef* channel0Buffer, CVPixelBufferRef* channel1Buffer, CVPixelBufferRef* channel2Buffer, CVPixelBufferRef* channel3Buffer) {
     // TODO: Use Accelerate functions to extract channels to planar format: vImageConvert_ARGB8888toPlanar8
     // Then create Pixel Buffers from CVPixelBufferCreateWithPlanarBytes
     
@@ -475,8 +482,6 @@ CVReturn CVPixelBufferCopySeparateChannels(CVPixelBufferRef pixelBuffer, CVPixel
 }
 
 CVPixelBufferRef CVPixelBufferResizeToSquare(CVPixelBufferRef srcPixelBuffer, CGSize size) {
-    assert(size.width == size.height);
-    
     CVPixelBufferLockBaseAddress(srcPixelBuffer, kNilOptions);
     
     OSType sourcePixelFormat = CVPixelBufferGetPixelFormatType(srcPixelBuffer);
@@ -486,6 +491,7 @@ CVPixelBufferRef CVPixelBufferResizeToSquare(CVPixelBufferRef srcPixelBuffer, CG
     const int width = (int)CVPixelBufferGetWidth(srcPixelBuffer);
     const int height = (int)CVPixelBufferGetHeight(srcPixelBuffer);
     
+    assert(size.width == size.height);
     assert(width >= size.width);
     assert(height >= size.height);
     
@@ -549,7 +555,7 @@ CVPixelBufferRef CVPixelBufferResizeToSquare(CVPixelBufferRef srcPixelBuffer, CG
     if (error != kvImageNoError) {
         NSLog(@"Error scaling pixel buffer");
         free(destData);
-        return nil;
+        return NULL;
     }
     
     // Create a new pixel buffer from the scaled image buffer
@@ -572,7 +578,7 @@ CVPixelBufferRef CVPixelBufferResizeToSquare(CVPixelBufferRef srcPixelBuffer, CG
     if (status != kCVReturnSuccess) {
         NSLog(@"Error creating destination pixel buffer");
         free(destData);
-        return nil;
+        return NULL;
     }
     
     return destPixelBuffer;

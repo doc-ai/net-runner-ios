@@ -8,24 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CVPixelBufferHelpers.h"
+#import "VisionModelHelpers.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- * Describes how pixel values in the range of `[0,255]` will be normalized for
- * non-quantized, float32 models.
- *
- * Pixels will be typically normalized to values in the range `[0,1]` or `[-1,+1]`,
- * although separate biases may be applied to each of the RGB channels.
- */
-
-typedef struct PixelNormalization {
-    float scale;
-    float redBias;
-    float greenBias;
-    float blueBias;
-} PixelNormalization;
 
 @protocol Model;
 @protocol ModelOutput;
@@ -52,13 +37,13 @@ typedef struct PixelNormalization {
  * The shape of the image input.
  *
  * Computer vision models often take inputs with `[128,128,3]`, `[224,224,3]` or `[229,229,3]`
- *  width, height, and channels respectively.
+ * width, height, and channels respectively.
  */
 
 @property (readonly) ImageVolume imageVolume;
 
 /**
- * The pixel format require by the model, typically `RGB` or `BGR`, corresponding to
+ * The pixel format required by the model, typically `RGB` or `BGR`, corresponding to
  * `kCVPixelFormatType_32BGRA` or `kCVPixelFormatType_32ARGB` with the alpha channel
  * ignored.
  */

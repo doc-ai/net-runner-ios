@@ -23,9 +23,9 @@ const ImageVolume kNoImageVolume = {
 
 const OSType PixelFormatTypeNone = 'NULL';
 
-// Core Pixel Normalizers
+// MARK: - Core Pixel Normalizers
 
-PixelNormalizer PixelNormalizerNone() {
+PixelNormalizer _Nullable PixelNormalizerNone() {
     return nil;
 }
 
@@ -59,7 +59,7 @@ PixelNormalizer PixelNormalizerPerChannelBias(const PixelNormalization& normaliz
     };
 }
 
-// Helpers for Constructing Standard Pixel Normalizers
+// MARK: - Helpers for Constructing Standard Pixel Normalizers
 
 PixelNormalizer PixelNormalizerZeroToOne() {
     float scale = 1.0/255.0;
@@ -78,7 +78,7 @@ PixelNormalizer PixelNormalizerNegativeOneToOne() {
     };
 }
 
-// Initialization Helpers
+// MARK: - Initialization Helpers
 
 ImageVolume ImageVolumeForShape(NSArray<NSNumber*> *shape) {
     
@@ -173,7 +173,7 @@ PixelNormalization PixelNormalizationForInput(NSDictionary *input) {
     }
 }
 
-PixelNormalizer PixelNormalizerForInput(NSDictionary *input) {
+PixelNormalizer _Nullable PixelNormalizerForInput(NSDictionary *input) {
     NSString *normalizerString = input[@"normalize"];
     NSNumber *scaleNumber = input[@"scale"];
     NSDictionary *biases = input[@"bias"];
@@ -222,8 +222,9 @@ PixelNormalizer PixelNormalizerForInput(NSDictionary *input) {
     }
 }
 
-// Utilities
+// MARK: - Utilities
 
 BOOL ImageVolumesEqual(const ImageVolume& a, const ImageVolume& b) {
     return a.width == b.width && a.height == b.height && a.channels == b.channels;
 }
+
