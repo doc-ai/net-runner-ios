@@ -79,6 +79,10 @@ typedef enum : NSUInteger {
     UISwipeGestureRecognizer *swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDeviceOrientation:)];
     swipeRecognizer.direction = ( UISwipeGestureRecognizerDirectionRight | UISwipeGestureRecognizerDirectionLeft );
     [self.previewView addGestureRecognizer:swipeRecognizer];
+    
+    self.view.backgroundColor = UIColor.blackColor;
+    self.previewView.backgroundColor = UIColor.blackColor;
+    self.photoImageView.backgroundColor = UIColor.blackColor;
 
     // Load default model
     
@@ -99,8 +103,12 @@ typedef enum : NSUInteger {
     // Prepare capture
     
     if ( self.model != nil ) {
-        [self setupAVCapture:self.model.options.devicePosition];
-        [self setCaptureMode:CaptureModeLiveVideo];
+        if ( [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] != AVAuthorizationStatusAuthorized ) {
+            [self requestCameraAccess];
+        } else {
+            [self setupAVCapture:self.model.options.devicePosition];
+            [self setCaptureMode:CaptureModeLiveVideo];
+        }
     }
 }
 
@@ -323,9 +331,51 @@ typedef enum : NSUInteger {
     }
 }
 
+// MARK: - Camera Access
+
+- (void)requestCameraAccess {
+    __weak typeof(self) weakself = self;
+    
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            if ( !granted ){
+                [weakself showCameraUnauthorizedAlert];
+            } else {
+                [weakself setupAVCapture:self.model.options.devicePosition];
+                [weakself setCaptureMode:CaptureModeLiveVideo];
+            }
+        });
+    }];
+}
+
+- (void)showCameraUnauthorizedAlert {
+    UIAlertController *alert = [UIAlertController
+        alertControllerWithTitle:NSLocalizedString(@"Unable to access camera", @"Camera access unauthorized alert tite")
+        message:NSLocalizedString(@"Please grant access to your device's camera", @"Camera access unauthorized alert message")
+        preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction
+        actionWithTitle:NSLocalizedString(@"Dismiss", @"Camera access unauthorized dismiss action")
+        style:UIAlertActionStyleCancel
+        handler:nil]];
+    
+    [alert addAction:[UIAlertAction
+        actionWithTitle:NSLocalizedString(@"Grant Access", @"Camera access unauthorized grant access action")
+        style:UIAlertActionStyleDefault
+        handler:^(UIAlertAction * _Nonnull action) {
+            [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 // MARK: - AV Capture
 
 - (void)setupAVCapture:(AVCaptureDevicePosition)position {
+    
+    if ( [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] != AVAuthorizationStatusAuthorized ) {
+        return;
+    }
     
 #if TARGET_OS_SIMULATOR
     [self setupSimulatedAVCapture];
@@ -343,17 +393,16 @@ typedef enum : NSUInteger {
     }
     
     // Device and input
-    // TODO: better error handling if the devices' camera is damaged or otherwise unavailable, for example
-
+    
     NSError* error = nil;
     AVCaptureDevice *device = [self captureDeviceWithPosition:position];
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
 
     if (error != nil) {
-        NSLog(@"Failed to initialize AVCaptureDeviceInput. Note: AVCaptureDevice doesn't work in the simulator.");
-        [self presentError:error];
+        NSLog(@"Failed to initialize AVCaptureDeviceInput, error %@", error);
+        [self showAVCaptureDeviceErrorAlert];
         [self teardownAVCapture];
-        assert(NO);
+        return;
     }
 
     if ([self.session canAddInput:deviceInput]) {
@@ -442,6 +491,20 @@ typedef enum : NSUInteger {
 #endif
 }
 
+- (void)showAVCaptureDeviceErrorAlert {
+    UIAlertController *alert = [UIAlertController
+        alertControllerWithTitle:NSLocalizedString(@"Unable to access your camera", @"Camera access error alert title")
+        message:NSLocalizedString(@"There was an unknown problem accessing your device's camera", @"Camera access error alert message alert message")
+        preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction
+        actionWithTitle:NSLocalizedString(@"Dismiss", @"Camera access error alert dismiss action")
+        style:UIAlertActionStyleDefault
+        handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)teardownAVCapture {
 
 #if TARGET_OS_SIMULATOR
@@ -489,21 +552,7 @@ typedef enum : NSUInteger {
     return devices.count > 0 ? devices[0] : nil;
 }
 
-- (void)presentError:(NSError*)error {
-    NSString* title = [NSString stringWithFormat:@"Failed with error %d", (int)[error code]];
-    
-    UIAlertController* alertController = [UIAlertController
-        alertControllerWithTitle:title
-        message:[error localizedDescription]
-        preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* dismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil];
-    [alertController addAction:dismiss];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
-- (AVCaptureVideoOrientation)avOrientationForDeviceOrientation:(UIDeviceOrientation)deviceOrientation {
+- (AVCaptureVideoOrientation)AVOrientationForDeviceOrientation:(UIDeviceOrientation)deviceOrientation {
     AVCaptureVideoOrientation result = (AVCaptureVideoOrientation)(deviceOrientation);
     if (deviceOrientation == UIDeviceOrientationLandscapeLeft) {
         result = AVCaptureVideoOrientationLandscapeRight;
