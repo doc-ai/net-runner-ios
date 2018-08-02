@@ -80,14 +80,14 @@
     
     _imageVolume = ImageVolumeForShape(input[@"shape"]);
     
-    if ( ImageVolumesEqual(_imageVolume, kNoImageVolume ) ) {
+    if ( ImageVolumesEqual(_imageVolume, kImageVolumeInvalid ) ) {
         NSLog(@"Expected input.shape array field with three elements in model.json, found %@", input[@"shape"]);
         return nil;
     }
     
     _pixelFormat = PixelFormatForString(input[@"format"]);
     
-    if ( _pixelFormat == PixelFormatTypeNone ) {
+    if ( _pixelFormat == PixelFormatTypeInvalid ) {
         NSLog(@"Expected input.format string to be RGB or BGR in model.json, found %@", input[@"format"]);
         return nil;
     }
@@ -95,11 +95,10 @@
     _normalization = PixelNormalizationForInput(input);
     _normalizer = PixelNormalizerForInput(input);
     
-    // Do want to be able to report some kind of error here if the normalize string was incorrect,
-    // but no normalization is a valid option. Maybe the bundle should be clear about that
-    
-    // NSLog(@"Expected input.normalize string or input.scale and input.bias strings, found normalize: %@, scale: %@, bias: %@", input[@"normalize"], input[@"scale"], input[@"bias"]);
-    // return nil;
+    if ( PixelNormalizationsEqual(_normalization, kPixelNormalizationInvalid) ) {
+        NSLog(@"Expected input.normalizer string to be '[0,1]' or '[-1,1]', or input.scale and input.bias values, found normalization: %@, scale: %@, bias: %@", input[@"normalize"], input[@"scale"], input[@"bias"]);
+        return nil;
+    }
     
     return self;
 }
@@ -206,14 +205,17 @@
 }
 
 /**
- * Prepare inputs by scaling and cropping pixel buffer and copying it to the input tensor.
- * Base class implementation is effectively a virtual function so that subclasses can handle differences between weight sizes
+ * Copies the pixel buffer to the input tensor, applying a normalization function if the
+ * model is unquantized and one is specified.
  *
- * Was super nice to use `auto* tensor = interpreter->typed_tensor<weight_t>(input)` where `weight_t` was `float32_t` or `uint8_t`
- * but not sure how we can simplify without the switch. Problem is we can't use c++ templates with obj-c methods and
+ * The base class implementation is effectively a virtual function so that subclasses
+ * can handle differences between weight sizes.
+ *
+ * Was super nice to use `auto* tensor = interpreter->typed_tensor<weight_t>(input)` where
+ * `weight_t` was `float32_t` or `uint8_t`, but wee can't use c++ templates with obj-c methods and
  * model weights may only be known at runtime.
  *
- * @param pixelBuffer core video pixel buffer that will be preprocessed and passed to the model
+ * @param pixelBuffer pixel buffer that will be normalized and passed to the model.
  */
 
 - (void)_prepareInputs:(CVPixelBufferRef)pixelBuffer  {

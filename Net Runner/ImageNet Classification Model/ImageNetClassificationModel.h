@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * This single class may be used for multiple kinds of models, including MobileNet, Inception, and ResNet models,
  * both quantized and unquantized, as long as they are performing classification inference on an image input.
+ *
+ * The model accepts a `CVPixelBufferRef` as input and outputs a dictionary of classifications mapped to their
+ * probabilities, wrapped in an instance of `ImageNetClassificationModelOutput`.
  */
 
 @interface ImageNetClassificationModel : NSObject <VisionModel>

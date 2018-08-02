@@ -8,20 +8,41 @@
 
 #include "VisionModelHelpers.h"
 
-const PixelNormalization kNoNormalization = {
-    .scale = 1,
-    .redBias = 0,
-    .greenBias = 0,
-    .blueBias = 0
+const PixelNormalization kPixelNormalizationInvalid = {
+    .scale      = FLT_MAX,
+    .redBias    = FLT_MAX,
+    .greenBias  = FLT_MAX,
+    .blueBias   = FLT_MAX
 };
 
-const ImageVolume kNoImageVolume = {
-    .width = 0,
-    .height = 0,
-    .channels = 0
+const PixelNormalization kPixelNormalizationNone = {
+    .scale      = 1,
+    .redBias    = 0,
+    .greenBias  = 0,
+    .blueBias   = 0
 };
 
-const OSType PixelFormatTypeNone = 'NULL';
+const PixelNormalization kPixelNormalizerZeroToOne = {
+    .scale      = 1.0/255.0,
+    .redBias    = 0,
+    .greenBias  = 0,
+    .blueBias   = 0
+};
+
+const PixelNormalization kPixelNormalizerNegativeOneToOne = {
+    .scale      = 2.0/255.0,
+    .redBias    = -1,
+    .greenBias  = -1,
+    .blueBias   = -1
+};
+
+const ImageVolume kImageVolumeInvalid = {
+    .width      = 0,
+    .height     = 0,
+    .channels   = 0
+};
+
+const OSType PixelFormatTypeInvalid = 'NULL';
 
 // MARK: - Core Pixel Normalizers
 
@@ -84,12 +105,12 @@ ImageVolume ImageVolumeForShape(NSArray<NSNumber*> *shape) {
     
     if ( shape == nil ) {
         NSLog(@"Expected input.shape array field in model.json, none found");
-        return kNoImageVolume;
+        return kImageVolumeInvalid;
     }
 
     if ( shape.count != 3 ) {
         NSLog(@"Expected shape with three elements, actual count is %lu", (unsigned long)shape.count);
-        return kNoImageVolume;
+        return kImageVolumeInvalid;
     }
 
     return {
@@ -103,7 +124,7 @@ OSType PixelFormatForString(NSString* string) {
     
     if ( string == nil ) {
         NSLog(@"Expected input.format string in model.json, none found");
-        return PixelFormatTypeNone;
+        return PixelFormatTypeInvalid;
     }
     else if ( [string isEqualToString:@"RGB"] ) {
         return kCVPixelFormatType_32ARGB;
@@ -113,7 +134,7 @@ OSType PixelFormatForString(NSString* string) {
     }
     else {
         NSLog(@"expected input.format string to be 'RGB' or 'BGR', actual value is %@", string);
-        return PixelFormatTypeNone;
+        return PixelFormatTypeInvalid;
     }
 }
 
@@ -127,28 +148,17 @@ PixelNormalization PixelNormalizationForInput(NSDictionary *input) {
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
-            return {
-                .scale = 1.0/255.0,
-                .redBias = 0,
-                .greenBias = 0,
-                .blueBias = 0
-            };
+            return kPixelNormalizerZeroToOne;
         }
         else if ( [normalizerString isEqualToString:@"[-1,1]"] ) {
-            return {
-                .scale = 2.0/255.0,
-                .redBias = -1,
-                .greenBias = -1,
-                .blueBias = -1
-            };
+            return kPixelNormalizerNegativeOneToOne;
         }
         else {
-            NSLog(@"Expected input.normalizer string to be '[0,1]' or '[-1,1]', actual value is %@", normalizerString);
-            return kNoNormalization;
+            return kPixelNormalizationInvalid;
         }
     }
     else if ( scaleNumber == nil && biases == nil ) {
-        return kNoNormalization;
+        return kPixelNormalizationNone;
     }
     else {
         float_t scale = scaleNumber != nil
@@ -225,6 +235,14 @@ PixelNormalizer _Nullable PixelNormalizerForInput(NSDictionary *input) {
 // MARK: - Utilities
 
 BOOL ImageVolumesEqual(const ImageVolume& a, const ImageVolume& b) {
-    return a.width == b.width && a.height == b.height && a.channels == b.channels;
+    return a.width == b.width
+        && a.height == b.height
+        && a.channels == b.channels;
 }
 
+BOOL PixelNormalizationsEqual(const PixelNormalization& a, const PixelNormalization& b) {
+    return a.scale == b.scale
+        && a.redBias == b.redBias
+        && a.greenBias == b.greenBias
+        && a.blueBias == b.blueBias;
+}

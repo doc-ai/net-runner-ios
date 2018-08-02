@@ -60,22 +60,44 @@ typedef struct PixelNormalization {
 typedef float_t (^PixelNormalizer)(const uint8_t &value, const uint8_t &channel);
 
 /**
+ * An invalid pixel normalization, used when there is an error parsing the normalization settings.
+ */
+
+extern const PixelNormalization kPixelNormalizationInvalid;
+
+/**
  * No pixel normalization, so a scale of 1 and no bias.
  */
 
-extern const PixelNormalization kNoNormalization;
+extern const PixelNormalization kPixelNormalizationNone;
+
+/**
+ * Pixel normalization from 0 to 1.
+ *
+ * A scale of 1.0/255.0.
+ */
+
+extern const PixelNormalization kPixelNormalizerZeroToOne;
+
+/**
+ * Pixel normalization from -1 to 1.
+ *
+ * A scale of 2.0/255.0 and a bias of -1 to each channel.
+ */
+
+extern const PixelNormalization kPixelNormalizerNegativeOneToOne;
 
 /**
  * No image volume, used to represent an error reading the image volume from the model.json file.
  */
 
-extern const ImageVolume kNoImageVolume;
+extern const ImageVolume kImageVolumeInvalid;
 
 /**
  * No pixel format, used to represent an error reading the pixel format from the model.json file.
  */
 
-extern const OSType PixelFormatTypeNone;
+extern const OSType PixelFormatTypeInvalid;
 
 // MARK: - Core Pixel Normalizers
 
@@ -296,6 +318,16 @@ void CVPixelBufferCopyToTensor(CVPixelBufferRef pixelBuffer, tensor_t* _Nonnull 
  */
 
 BOOL ImageVolumesEqual(const ImageVolume& a, const ImageVolume& b);
+
+/**
+ * Checks if two PixelNormalization structs are equal
+ * @param a The first pixel normalization to compare.
+ * @param b The second pixel normalization to compare,
+ *
+ * @return BOOL 'YES' if the two structs are equal, 'NO' otherwise.
+ */
+
+BOOL PixelNormalizationsEqual(const PixelNormalization& a, const PixelNormalization& b);
 
 NS_ASSUME_NONNULL_END
 
