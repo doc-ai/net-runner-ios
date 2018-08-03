@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 
-- (NSDictionary*)evaluate:(NSDictionary*)y yhat:(NSDictionary*)yhat;
+- (NSDictionary<NSString*,NSNumber*>*)evaluate:(NSDictionary<NSString*,id>*)y yhat:(NSDictionary<NSString*,id>*)yhat;
 
 /**
  * Given a set of individual evaluation metrics, return the aggregate metrics.
@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 
-- (NSDictionary*)reduce:(NSArray<NSDictionary*>*)metrics;
+- (NSDictionary<NSString*,NSNumber*>*)reduce:(NSArray<NSDictionary<NSString*,NSNumber*>*>*)metrics;
 
 @end
 

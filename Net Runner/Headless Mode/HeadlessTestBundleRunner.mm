@@ -24,8 +24,8 @@
 @interface HeadlessTestBundleRunner ()
 
 @property (readwrite) HeadlessTestBundle *testBundle;
-@property (readwrite) NSArray<NSDictionary*> *results;
-@property (readwrite) NSArray<NSDictionary*> *summary;
+@property (readwrite) NSArray<NSDictionary<NSString*, id>*> *results;
+@property (readwrite) NSArray<NSDictionary<NSString*, id>*> *summary;
 
 @end
 
@@ -42,8 +42,6 @@
 // Future optimization might run each model on its own operation queue
 // Use a queue, not an array to manage the evaluators
 // See EvaluateResultsTableViewController
-
-// TODO: Use evaluator constants
 
 - (void)evaluate {
     
@@ -109,7 +107,7 @@
     
     NSLog(@"Test Bundle %@: Running %tu evaluators", self.testBundle.identifier, evaluators.count);
     
-    NSMutableArray<NSDictionary*> *results = [[NSMutableArray<NSDictionary*> alloc] init];
+    NSMutableArray<NSDictionary<NSString*, id>*> *results = [[NSMutableArray<NSDictionary<NSString*, id>*> alloc] init];
     
     for ( id<Evaluator> evaluator in evaluators ) {
 
@@ -128,21 +126,22 @@
     
     // Filter out results with an error for computing summary statistics
     
-    NSDictionary *resultsByError = [results groupBy:kEvaluatorResultsKeyError];
-    NSArray *resultsWithoutError = resultsByError[@(NO)];
-    NSArray *resultsWithError = resultsByError[@(YES)];
+    NSDictionary<NSNumber*, id> *resultsByError = [results groupBy:kEvaluatorResultsKeyError];
+    NSArray<NSDictionary<NSString*, id>*> *resultsWithoutError = resultsByError[@(NO)];
+    NSArray<NSDictionary<NSString*, id>*> *resultsWithError = resultsByError[@(YES)];
     
     NSLog(@"Test Bundle: %@, Evaluation errors: %tu", self.testBundle.identifier, resultsWithError.count );
     
     // Group results by model
     
-    NSDictionary *resultsByModel = [resultsWithoutError groupBy:kEvaluatorResultsKeyModel];
+    NSDictionary<NSString*, id> *resultsByModel = [resultsWithoutError groupBy:kEvaluatorResultsKeyModel];
     
     // Prepare to collect summary statistics
     
-    NSMutableDictionary *summaryStatistics = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary<NSString*, id> *summaryStatistics = [[NSMutableDictionary<NSString*, id> alloc] init];
+    
     for ( NSString *modelID in resultsByModel ) {
-        summaryStatistics[modelID] = [[NSMutableDictionary alloc] init];
+        summaryStatistics[modelID] = [[NSMutableDictionary<NSString*, id> alloc] init];
     }
     
     // Calculate average latency, by model
@@ -163,7 +162,7 @@
         
         double averageLatency = totalLatency / modelResults.count;
         
-        NSDictionary *latencySummary = @{
+        NSDictionary<NSString*,NSNumber*> *latencySummary = @{
             @"latency": @(averageLatency)
         };
         
@@ -177,7 +176,7 @@
         for ( NSString *modelID in resultsByModel ) {
             NSArray *modelResults = resultsByModel[modelID];
             
-            NSMutableArray<NSDictionary*> *metricResults = [[NSMutableArray<NSDictionary*> alloc] init];
+            NSMutableArray<NSDictionary<NSString*, id>*> *metricResults = [[NSMutableArray<NSDictionary<NSString*, id>*> alloc] init];
         
             for ( NSDictionary *result in modelResults ) {
                 
@@ -185,12 +184,11 @@
                 id yhat = ((id<ModelOutput>)result[kEvaluatorResultsKeyEvaluation][kEvaluatorResultsKeyInferenceResults]).value;
                 id y = self.testBundle.labels[identifier];
                 
-                NSDictionary *metricResult = [metric evaluate:y yhat:yhat];
+                NSDictionary<NSString*,NSNumber*> *metricResult = [metric evaluate:y yhat:yhat];
                 [metricResults addObject:metricResult];
             }
             
-            NSDictionary *metricResultsSummary = [metric reduce:metricResults];
-
+            NSDictionary<NSString*,NSNumber*> *metricResultsSummary = [metric reduce:metricResults];
             [summaryStatistics[modelID] addEntriesFromDictionary:metricResultsSummary];
         }
     }
@@ -200,12 +198,12 @@
     NSMutableArray *summary = [[NSMutableArray alloc] init];
     
     for ( NSString *model in summaryStatistics ) {
-        NSMutableDictionary *results = [summaryStatistics[model] mutableCopy];
+        NSMutableDictionary<NSString*,id> *results = [summaryStatistics[model] mutableCopy];
         results[kEvaluatorResultsKeyModel] = model;
         [summary addObject:results];
     }
     
-    self.summary = summary; // summaryStatistics;
+    self.summary = summary;
     
     NSLog(@"Test Bundle %@: Summary statistics:\n%@", self.testBundle.identifier, summaryStatistics);
 }

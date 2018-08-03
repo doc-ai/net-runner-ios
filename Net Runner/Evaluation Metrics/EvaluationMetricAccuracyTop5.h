@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `NSDictionary` with a single `@"accuracy"` key whose value is either 1 or 0.
  */
 
-- (NSDictionary*)evaluate:(NSDictionary*)y yhat:(NSDictionary*)yhat;
+- (NSDictionary<NSString*,NSNumber*>*)evaluate:(NSDictionary<NSString*,id>*)y yhat:(NSDictionary<NSString*,id>*)yhat;
 
 /**
  * The percentage of correct classifications
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `NSDictionary` with a single `@"accuracy"` key whose value is the percentage of correct classifications.
  */
 
-- (NSDictionary*)reduce:(NSArray<NSDictionary*>*)metrics;
+- (NSDictionary<NSString*,NSNumber*>*)reduce:(NSArray<NSDictionary<NSString*,NSNumber*>*>*)metrics;
 
 @end
 

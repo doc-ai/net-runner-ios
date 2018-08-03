@@ -61,7 +61,7 @@
     dispatch_async(_evaluatorQueue, ^{
         
         NSMutableArray<NSDictionary*> *results = [[NSMutableArray<NSDictionary*> alloc] init];
-        NSMutableArray<NSDictionary*> *summary = [[NSMutableArray alloc] init];
+        NSMutableArray<NSDictionary*> *summary = [[NSMutableArray<NSDictionary*> alloc] init];
         
         for ( HeadlessTestBundle *testBundle in self.testBundles ) {
             @autoreleasepool {

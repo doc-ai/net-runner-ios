@@ -11,7 +11,7 @@
 
 @implementation EvaluationMetricAccuracyTop5
 
-- (NSDictionary*)evaluate:(NSDictionary*)y yhat:(NSDictionary*)yhat {
+- (NSDictionary<NSString*,NSNumber*>*)evaluate:(NSDictionary<NSString*,id>*)y yhat:(NSDictionary<NSString*,id>*)yhat {
     NSArray *output = [[[yhat keysSortedByValueUsingSelector:@selector(compare:)] reversed] firstN:5];
     NSString *label = y.allKeys.firstObject;
     
@@ -28,7 +28,7 @@
     return 0;
 }
 
-- (NSDictionary*)reduce:(NSArray<NSDictionary*>*)metrics {
+- (NSDictionary<NSString*,NSNumber*>*)reduce:(NSArray<NSDictionary<NSString*,NSNumber*>*>*)metrics {
     NSNumber *total =
         [[metrics
         map:^id _Nonnull(NSDictionary * _Nonnull obj) {

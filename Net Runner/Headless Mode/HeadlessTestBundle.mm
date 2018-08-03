@@ -23,9 +23,9 @@
 @property (readwrite) NSString *version;
 
 @property (readwrite) NSArray<NSString*> *modelIds;
-@property (readwrite) NSArray<NSDictionary*> *images;
-@property (readwrite) NSDictionary *labels;
-@property (readwrite) NSDictionary *options;
+@property (readwrite) NSArray<NSDictionary<NSString*, id>*> *images;
+@property (readwrite) NSDictionary<NSString*,id> *labels;
+@property (readwrite) NSDictionary<NSString*,id> *options;
 
 @property (readwrite) NSUInteger iterations;
 @property (readwrite) id<EvaluationMetric> metric;
@@ -83,9 +83,9 @@
         
         // Labels
         
-        if ( NSArray<NSDictionary*> *labelsArray = json[@"labels"] ) {
-            NSMutableDictionary *labels = [[NSMutableDictionary alloc] init];
-            for ( NSDictionary* label in labelsArray ) {
+        if ( NSArray<NSDictionary<NSString*,id>*> *labelsArray = json[@"labels"] ) {
+            NSMutableDictionary<NSString*,id> *labels = [[NSMutableDictionary<NSString*,id> alloc] init];
+            for ( NSDictionary<NSString*,id> *label in labelsArray ) {
                 labels[label[@"path"]] = label[kEvaluatorResultsKeyInferenceResults];
             }
             _labels = [labels copy];

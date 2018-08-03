@@ -20,10 +20,11 @@ extern NSString * const kTFTestInfoFile;
  * All available test bundles. You must call `loadTestBundlesAtPath:error:` before accessing test bundles.
  */
 
-@property (readonly) NSArray<HeadlessTestBundle*>* testBundles;
+@property (readonly) NSArray<HeadlessTestBundle*> *testBundles;
 
 /**
- * Returns the shared instance of the HeadlessTestBundleManager.
+ * Returns the shared instance of the `HeadlessTestBundleManager`.
+ *
  * You may create your own test bundle managers if you require more than one.
  */
 
@@ -32,6 +33,11 @@ extern NSString * const kTFTestInfoFile;
 /**
  * Loads the available test bundles at the specified path, e.g. folders that end in .testbundle
  * and assigns them to the testBundles property.
+ *
+ * @param path The path from which to load the test bundles
+ * @param error Any error that occurs while loading test bundles. No error is currently set.
+ *
+ * @return BOOL `YES` if bundles were successfully loaded, `NO` otherwise.
  */
 
 - (BOOL)loadTestBundlesAtPath:(NSString*)path error:(NSError**)error;

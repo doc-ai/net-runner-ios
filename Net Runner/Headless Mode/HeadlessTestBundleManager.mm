@@ -16,7 +16,7 @@ NSString * const kTFTestInfoFile = @"test.json";
 
 @interface HeadlessTestBundleManager()
 
-@property (readwrite) NSArray<HeadlessTestBundle*>* testBundles;
+@property (readwrite) NSArray<HeadlessTestBundle*> *testBundles;
 
 @end
 
@@ -33,9 +33,7 @@ NSString * const kTFTestInfoFile = @"test.json";
 }
 
 - (BOOL)loadTestBundlesAtPath:(NSString*)path error:(NSError**)error {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    NSArray<NSString*> *paths = [fileManager contentsOfDirectoryAtPath:path error:error];
+    NSArray<NSString*> *paths = [NSFileManager.defaultManager contentsOfDirectoryAtPath:path error:error];
     
     if (paths == nil) {
         return NO;
