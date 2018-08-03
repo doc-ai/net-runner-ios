@@ -8,6 +8,7 @@
 
 #import "FileImageEvaluator.h"
 
+#import "EvaluatorConstants.h"
 #import "ImageEvaluator.h"
 #import "Utilities.h"
 #import "ObjcDefer.h"
@@ -54,12 +55,12 @@
             NSString *errorDescription = [NSString stringWithFormat:@"Error loading image at %@", path];
             NSLog(@"%@", errorDescription);
             self.results = @{
-                @"type": @"file",
-                @"image": self.name,
-                @"model": self.model.identifier,
-                @"error": @(YES),
-                @"error_description": errorDescription,
-                @"evaluation": [NSNull null]
+                kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeFile,
+                kEvaluatorResultsKeyImage               : self.name,
+                kEvaluatorResultsKeyModel               : self.model.identifier,
+                kEvaluatorResultsKeyError               : @(YES),
+                kEvaluatorResultsKeyErrorDescription    : errorDescription,
+                kEvaluatorResultsKeyEvaluation          : [NSNull null]
             };
             safe_block(completionHandler, self.results);
             return;
@@ -69,11 +70,11 @@
         
         [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results) {
             self.results = @{
-                @"type": @"file",
-                @"image": self.name,
-                @"model": self.model.identifier,
-                @"error": @(NO),
-                @"evaluation": results
+                kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeFile,
+                kEvaluatorResultsKeyImage               : self.name,
+                kEvaluatorResultsKeyModel               : self.model.identifier,
+                kEvaluatorResultsKeyError               : @(NO),
+                kEvaluatorResultsKeyEvaluation          : results
             };
             safe_block(completionHandler, self.results);
         }];

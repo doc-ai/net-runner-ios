@@ -16,6 +16,7 @@
 #import "PHFetchResult+Extensions.h"
 #import "NSArray+Extensions.h"
 #import "ModelBundle.h"
+#import "EvaluatorConstants.h"
 
 @interface EvaluateResultsByModelCollectionViewController ()
 
@@ -91,11 +92,11 @@ static NSString * const kHeaderReuseIdentifier = @"HeaderView";
     
     // Group by album and photo and map to unique photo id
     
-    NSDictionary *byAlbum = [_results groupBy:@"album"];
+    NSDictionary *byAlbum = [_results groupBy:kEvaluatorResultsKeyAlbum];
     NSMutableDictionary *byAlbumReduced = [[NSMutableDictionary alloc] init];
     
     for ( NSString *album in byAlbum ) {
-        byAlbumReduced[album] = [[[byAlbum[album] groupBy:@"image"] allValues]
+        byAlbumReduced[album] = [[[byAlbum[album] groupBy:kEvaluatorResultsKeyImage] allValues]
             map:^id _Nonnull(NSArray * _Nonnull obj) {
                 return obj.firstObject;
             }];
@@ -110,7 +111,7 @@ static NSString * const kHeaderReuseIdentifier = @"HeaderView";
     
     for ( PHAssetCollection *album in albums ) {
         NSArray *photoIds = [byAlbumReduced[album.localIdentifier] map:^id _Nonnull(NSDictionary *  _Nonnull obj) {
-            return obj[@"image"];
+            return obj[kEvaluatorResultsKeyImage];
         }];
         PHFetchResult<PHAsset*> *fetch = [PHAsset fetchAssetsWithLocalIdentifiers:photoIds options:nil];;
         
@@ -128,7 +129,7 @@ static NSString * const kHeaderReuseIdentifier = @"HeaderView";
     for ( NSString *album in byAlbumReduced ) {
         NSArray *photos = byAlbumReduced[album];
         for ( NSDictionary *photo in photos ) {
-            evaluations[photo[@"image"]] = photo;
+            evaluations[photo[kEvaluatorResultsKeyImage]] = photo;
         }
     }
     

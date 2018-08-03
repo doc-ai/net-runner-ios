@@ -19,6 +19,7 @@
 #import "NSArray+Extensions.h"
 #import "ModelBundle.h"
 #import "ModelOutput.h"
+#import "EvaluatorConstants.h"
 
 @interface HeadlessTestBundleRunner ()
 
@@ -40,8 +41,9 @@
 
 // Future optimization might run each model on its own operation queue
 // Use a queue, not an array to manage the evaluators
-
 // See EvaluateResultsTableViewController
+
+// TODO: Use evaluator constants
 
 - (void)evaluate {
     
@@ -126,7 +128,7 @@
     
     // Filter out results with an error for computing summary statistics
     
-    NSDictionary *resultsByError = [results groupBy:@"error"];
+    NSDictionary *resultsByError = [results groupBy:kEvaluatorResultsKeyError];
     NSArray *resultsWithoutError = resultsByError[@(NO)];
     NSArray *resultsWithError = resultsByError[@(YES)];
     
@@ -134,7 +136,7 @@
     
     // Group results by model
     
-    NSDictionary *resultsByModel = [resultsWithoutError groupBy:@"model"];
+    NSDictionary *resultsByModel = [resultsWithoutError groupBy:kEvaluatorResultsKeyModel];
     
     // Prepare to collect summary statistics
     
@@ -151,7 +153,7 @@
         double totalLatency =
             [[[modelResults
             map:^NSDictionary * _Nonnull(id  _Nonnull obj) {
-                return obj[@"evaluation"][@"inference_latency"];
+                return obj[kEvaluatorResultsKeyEvaluation][kEvaluatorResultsKeyInferenceLatency];
             }]
             reduce:@(0.0) combine:^id _Nonnull(NSNumber * _Nonnull accumulator, NSNumber * _Nonnull item) {
                 return @(accumulator.doubleValue + item.doubleValue);
@@ -179,8 +181,8 @@
         
             for ( NSDictionary *result in modelResults ) {
                 
-                NSString *identifier = result[@"image"];
-                id yhat = ((id<ModelOutput>)result[@"evaluation"][@"inference_results"]).value;
+                NSString *identifier = result[kEvaluatorResultsKeyImage];
+                id yhat = ((id<ModelOutput>)result[kEvaluatorResultsKeyEvaluation][kEvaluatorResultsKeyInferenceResults]).value;
                 id y = self.testBundle.labels[identifier];
                 
                 NSDictionary *metricResult = [metric evaluate:y yhat:yhat];
@@ -199,7 +201,7 @@
     
     for ( NSString *model in summaryStatistics ) {
         NSMutableDictionary *results = [summaryStatistics[model] mutableCopy];
-        results[@"model"] = model;
+        results[kEvaluatorResultsKeyModel] = model;
         [summary addObject:results];
     }
     

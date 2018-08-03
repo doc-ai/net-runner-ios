@@ -8,6 +8,7 @@
 
 #import "AlbumPhotoEvaluator.h"
 
+#import "EvaluatorConstants.h"
 #import "ImageEvaluator.h"
 #import "Model.h"
 #import "Utilities.h"
@@ -76,13 +77,13 @@
                 NSString *errorDescription = [NSString stringWithFormat:@"Unable to request image for asset %@",  self.photo.localIdentifier];
                 NSLog(@"%@", errorDescription);
                 self.results = @{
-                    @"type": @"album_photo",
-                    @"album": self.album.localIdentifier,
-                    @"image": self.photo.localIdentifier,
-                    @"model": self.model.identifier,
-                    @"error": @(YES),
-                    @"error_description": errorDescription,
-                    @"evaluation": [NSNull null]
+                    kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeAlbumPhoto,
+                    kEvaluatorResultsKeyAlbum               : self.album.localIdentifier,
+                    kEvaluatorResultsKeyImage               : self.photo.localIdentifier,
+                    kEvaluatorResultsKeyModel               : self.model.identifier,
+                    kEvaluatorResultsKeyError               : @(YES),
+                    kEvaluatorResultsKeyErrorDescription    : errorDescription,
+                    kEvaluatorResultsKeyEvaluation          : [NSNull null]
                 };
                 safe_block(completionHandler, self.results);
                 return;
@@ -92,12 +93,12 @@
             
             [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results) {
                 self.results = @{
-                    @"type": @"album_photo",
-                    @"album": self.album.localIdentifier,
-                    @"image": self.photo.localIdentifier,
-                    @"model": self.model.identifier,
-                    @"error": @(NO),
-                    @"evaluation": results
+                    kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeAlbumPhoto,
+                    kEvaluatorResultsKeyAlbum               : self.album.localIdentifier,
+                    kEvaluatorResultsKeyImage               : self.photo.localIdentifier,
+                    kEvaluatorResultsKeyModel               : self.model.identifier,
+                    kEvaluatorResultsKeyError               : @(NO),
+                    kEvaluatorResultsKeyEvaluation          : results
                 };
                 safe_block(completionHandler, self.results);
             }];

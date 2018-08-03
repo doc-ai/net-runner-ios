@@ -9,6 +9,7 @@
 #import "EvaluateResultsPhotoCollectionViewCell.h"
 #import "NSArray+Extensions.h"
 #import "ModelOutput.h"
+#import "EvaluatorConstants.h"
 
 @interface EvaluateResultsPhotoCollectionViewCell()
 
@@ -61,7 +62,7 @@
 - (void)setEvaluation:(NSDictionary *)evaluation {
     _evaluation = evaluation;
     
-    id<ModelOutput> output = _evaluation[@"evaluation"][@"inference_results"];
+    id<ModelOutput> output = _evaluation[kEvaluatorResultsKeyEvaluation][kEvaluatorResultsKeyInferenceResults];
     NSString *description = output.localizedDescription;
     
     if ( description.length == 0 ) {

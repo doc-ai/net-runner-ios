@@ -17,39 +17,39 @@ NS_ASSUME_NONNULL_BEGIN
  * See the supported evaluator result types below.
  */
 
-NSString * const kEvaluatorResultsKeySourceType = @"type";
+extern NSString * const kEvaluatorResultsKeySourceType;
 
 /**
  * A value that uniquely identifies the object being evaluated, for example
  * a photo asset identifier, filename, or url.
  */
 
-NSString * const kEvaluatorResultsKeyImage = @"image";
+extern NSString * const kEvaluatorResultsKeyImage;
 
 /**
  * The unique identifier of the model which produced these results.
  */
 
-NSString * const kEvaluatorResultsKeyModel = @"model";
+extern NSString * const kEvaluatorResultsKeyModel;
 
 /**
  * A boolean value indicating if any kind of error occurred during evaluation.
  */
 
-NSString * const kEvaluatorResultsKeyError = @"error";
+extern NSString * const kEvaluatorResultsKeyError;
 
 /**
  * A localized description of the error that occurred, if any.
  */
 
-NSString * const kEvaluatorResultsKeyErrorDescription = @"error_description";
+extern NSString * const kEvaluatorResultsKeyErrorDescription;
 
 /**
  * A dictionary containing the results of the evaluation. See the final evaluation results
  * section below for keys contained in this dictionary.
  */
 
-NSString * const kEvaluatorResultsKeyEvaluation = @"evaluation";
+extern NSString * const kEvaluatorResultsKeyEvaluation;
 
 // MARK: - Album photo evaluator keys
 
@@ -57,7 +57,7 @@ NSString * const kEvaluatorResultsKeyEvaluation = @"evaluation";
  * The locally unique identifier of the album to which this album photo belongs.
  */
 
-NSString * const kEvaluatorResultsKeyAlbum = @"album";
+extern NSString * const kEvaluatorResultsKeyAlbum;
 
 // MARK: - Supported evaluator result source types
 
@@ -65,19 +65,19 @@ NSString * const kEvaluatorResultsKeyAlbum = @"album";
  * Source type album photo.
  */
 
-NSString * const kEvaluatorResultsKeySourceTypeAlbumPhoto = @"album_photo";
+extern NSString * const kEvaluatorResultsKeySourceTypeAlbumPhoto;
 
 /**
  * Source type file.
  */
 
-NSString * const kEvaluatorResultsKeySourceTypeFile = @"file";
+extern NSString * const kEvaluatorResultsKeySourceTypeFile;
 
 /**
  * Source type URL.
  */
 
-NSString * const kEvaluatorResultsKeySourceTypeURL = @"url";
+extern NSString * const kEvaluatorResultsKeySourceTypeURL;
 
 // MARK: - Final evaluation results, produced by CVPixelBufferEvaluator
 
@@ -87,30 +87,30 @@ NSString * const kEvaluatorResultsKeySourceTypeURL = @"url";
  * representation and any normalization applied to the buffer.
  */
 
-NSString * const kEvaluatorResultsKeyPreprocessingLatency = @"preprocessor_latency";
+extern NSString * const kEvaluatorResultsKeyPreprocessingLatency;
 
 /**
  * Time it takes in milliseconds, double value, to run inference with the model and input.
  */
 
-NSString * const kEvaluatorResultsKeyInferenceLatency = @"inference_latency";
+extern NSString * const kEvaluatorResultsKeyInferenceLatency;
 
 /**
  * Results produced by the model as a `ModelOutput` object.
  */
 
-NSString * const kEvaluatorResultsKeyInferenceResults = @"inference_results";
+extern NSString * const kEvaluatorResultsKeyInferenceResults;
 
 /**
  * Any error that occurred during input preprocessing. String value.
  */
 
-NSString * const kEvaluatorResultsKeyPreprocessingError = @"preprocessor_error";
+extern NSString * const kEvaluatorResultsKeyPreprocessingError;
 
 /**
  * Any error that occurred during inference. String value.
  */
 
-NSString * const kEvaluatorResultsKeyInferenceError = @"inference_error";
+extern NSString * const kEvaluatorResultsKeyInferenceError;
 
 NS_ASSUME_NONNULL_END

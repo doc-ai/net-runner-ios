@@ -48,6 +48,7 @@
 		E3A5214B210A51F7004B912B /* VisionModelHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3A52142210A51F7004B912B /* VisionModelHelpers.mm */; };
 		E3A5214C210A51F7004B912B /* ModelBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A52147210A51F7004B912B /* ModelBundle.m */; };
 		E3A5214D210A51F7004B912B /* VisionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3A52148210A51F7004B912B /* VisionPipeline.mm */; };
+		E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3B1D8962113E37900BC9D46 /* EvaluatorConstants.mm */; };
 		E3B57E7D210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B57E7B210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.m */; };
 		E3B57E89210A52FC008D19C0 /* FileImageEvaluator.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3B57E82210A52FB008D19C0 /* FileImageEvaluator.mm */; };
 		E3B57E8A210A52FC008D19C0 /* AlbumPhotoEvaluator.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3B57E83210A52FB008D19C0 /* AlbumPhotoEvaluator.mm */; };
@@ -185,6 +186,7 @@
 		E3A52146210A51F7004B912B /* ModelBundleJSONSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelBundleJSONSchema.h; sourceTree = "<group>"; };
 		E3A52147210A51F7004B912B /* ModelBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelBundle.m; sourceTree = "<group>"; };
 		E3A52148210A51F7004B912B /* VisionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VisionPipeline.mm; sourceTree = "<group>"; };
+		E3B1D8962113E37900BC9D46 /* EvaluatorConstants.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluatorConstants.mm; sourceTree = "<group>"; };
 		E3B57E78210A52D9008D19C0 /* EvaluationMetric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationMetric.h; sourceTree = "<group>"; };
 		E3B57E79210A52D9008D19C0 /* EvaluationMetricFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationMetricFactory.h; sourceTree = "<group>"; };
 		E3B57E7A210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationMetricAccuracyTop5.h; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 			children = (
 				E3B57E87210A52FC008D19C0 /* Evaluator.h */,
 				E3B57E84210A52FB008D19C0 /* EvaluatorConstants.h */,
+				E3B1D8962113E37900BC9D46 /* EvaluatorConstants.mm */,
 				E3B57E80210A52FB008D19C0 /* AlbumPhotoEvaluator.h */,
 				E3B57E83210A52FB008D19C0 /* AlbumPhotoEvaluator.mm */,
 				E3B57E7F210A52FB008D19C0 /* FileImageEvaluator.h */,
@@ -829,6 +832,7 @@
 				E3B57E7D210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.m in Sources */,
 				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
+				E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */,
 				E3A5214D210A51F7004B912B /* VisionPipeline.mm in Sources */,
 				E3A52149210A51F7004B912B /* ModelBundleManager.m in Sources */,
 				E3A52122210A511C004B912B /* Utilities.mm in Sources */,

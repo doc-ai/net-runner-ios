@@ -227,7 +227,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
             @autoreleasepool {
                 [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
                     id<Model> model = evaluator.model;
-                    NSString *modelID = result[@"model"];
+                    NSString *modelID = result[kEvaluatorResultsKeyModel];
                     NSUInteger completedCount = [self->_progress[modelID] integerValue] + 1;
                     
                     self->_progress[modelID] = @(completedCount);
@@ -241,7 +241,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
                         NSArray *modelResults =
                             [results
                             filter:^BOOL(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                                return [obj[@"model"] isEqualToString:model.identifier];
+                                return [obj[kEvaluatorResultsKeyModel] isEqualToString:model.identifier];
                             }];
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -311,7 +311,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
     NSArray<NSDictionary*> *goodResults =
         [results
         filter:^BOOL(NSDictionary * _Nonnull result, NSUInteger idx, BOOL * _Nonnull stop) {
-            return ![result[@"error"] boolValue];
+            return ![result[kEvaluatorResultsKeyError] boolValue];
         }];
     
     NSInteger goodCount = goodResults.count;
@@ -319,7 +319,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
     double totalLatency =
         [[[goodResults
         map:^id _Nonnull(NSDictionary * _Nonnull obj) {
-            return obj[@"evaluation"][kEvaluatorResultsKeyInferenceLatency];
+            return obj[kEvaluatorResultsKeyEvaluation][kEvaluatorResultsKeyInferenceLatency];
         }]
         reduce:@((double)0.0) combine:^id _Nonnull(NSNumber * _Nonnull accumulator, NSNumber * _Nonnull item) {
             return @(accumulator.doubleValue + item.doubleValue);

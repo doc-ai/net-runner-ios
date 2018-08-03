@@ -11,6 +11,7 @@
 #import "HeadlessTestBundleManager.h"
 #import "EvaluationMetricFactory.h"
 #import "EvaluationMetric.h"
+#import "EvaluatorConstants.h"
 
 @interface HeadlessTestBundle ()
 
@@ -85,7 +86,7 @@
         if ( NSArray<NSDictionary*> *labelsArray = json[@"labels"] ) {
             NSMutableDictionary *labels = [[NSMutableDictionary alloc] init];
             for ( NSDictionary* label in labelsArray ) {
-                labels[label[@"path"]] = label[@"inference_results"];
+                labels[label[@"path"]] = label[kEvaluatorResultsKeyInferenceResults];
             }
             _labels = [labels copy];
         }

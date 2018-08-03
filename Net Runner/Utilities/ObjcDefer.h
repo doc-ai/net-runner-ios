@@ -9,7 +9,8 @@
 #ifndef ObjcDefer_h
 #define ObjcDefer_h
 
-// Similar to defer in Swift
+// Use defer_block like defer is used in Swift
+
 #define defer_block_name_with_prefix(prefix, suffix) prefix ## suffix
 #define defer_block_name(suffix) defer_block_name_with_prefix(defer_, suffix)
 #define defer_block __strong void(^defer_block_name(__LINE__))(void) __attribute__((cleanup(defer_cleanup_block), unused)) = ^

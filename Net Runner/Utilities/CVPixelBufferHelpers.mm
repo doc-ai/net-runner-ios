@@ -333,7 +333,10 @@ CVReturn CVPixelBufferCopySeparateChannels(
     CVPixelBufferRef _Nullable * _Nonnull channel2Buffer,
     CVPixelBufferRef _Nullable * _Nonnull channel3Buffer) {
     
-    // TODO: Use Accelerate functions to extract channels to planar format: vImageConvert_ARGB8888toPlanar8
+    // TODO: Use Accelerate functions to extract channels to planar format:
+    // vImageConvert_ARGB8888toPlanar8
+    // vImageConvert_XRGB8888ToPlanar8
+    // vImageConvert_BGRX8888ToPlanar8
     // Then create Pixel Buffers from CVPixelBufferCreateWithPlanarBytes
     
     const OSType pixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer);

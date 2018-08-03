@@ -16,6 +16,9 @@
 #import "NSArray+Extensions.h"
 #import "ResultInfoView.h"
 #import "ModelOutput.h"
+#import "EvaluatorConstants.h"
+
+// TODO: use evaluator constants
 
 @interface EvaluateResultsPhotoViewController ()
 
@@ -101,8 +104,8 @@
     
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
         
-        id<ModelOutput> providedInference = self.results[@"evaluation"][@"inference_results"];
-        id<ModelOutput> myInference = result[@"evaluation"][@"inference_results"];
+        id<ModelOutput> providedInference = self.results[kEvaluatorResultsKeyEvaluation][kEvaluatorResultsKeyInferenceResults];
+        id<ModelOutput> myInference = result[kEvaluatorResultsKeyEvaluation][kEvaluatorResultsKeyInferenceResults];
         
         if ( ![providedInference isEqual:myInference] ) {
             NSLog(@"Expected provivided inference and new inference to match but they did not, provided inference: %@, new inference: %@", providedInference, myInference);
