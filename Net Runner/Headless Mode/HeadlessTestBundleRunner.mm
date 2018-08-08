@@ -24,8 +24,8 @@
 @interface HeadlessTestBundleRunner ()
 
 @property (readwrite) HeadlessTestBundle *testBundle;
-@property (readwrite) NSArray<NSDictionary<NSString*, id>*> *results;
-@property (readwrite) NSArray<NSDictionary<NSString*, id>*> *summary;
+@property (readwrite) NSArray<NSDictionary<NSString*,id>*> *results;
+@property (readwrite) NSArray<NSDictionary<NSString*,id>*> *summary;
 
 @end
 
@@ -107,7 +107,7 @@
     
     NSLog(@"Test Bundle %@: Running %tu evaluators", self.testBundle.identifier, evaluators.count);
     
-    NSMutableArray<NSDictionary<NSString*, id>*> *results = [[NSMutableArray<NSDictionary<NSString*, id>*> alloc] init];
+    NSMutableArray<NSDictionary<NSString*,id>*> *results = [[NSMutableArray<NSDictionary<NSString*,id>*> alloc] init];
     
     for ( id<Evaluator> evaluator in evaluators ) {
 
@@ -126,22 +126,22 @@
     
     // Filter out results with an error for computing summary statistics
     
-    NSDictionary<NSNumber*, id> *resultsByError = [results groupBy:kEvaluatorResultsKeyError];
-    NSArray<NSDictionary<NSString*, id>*> *resultsWithoutError = resultsByError[@(NO)];
-    NSArray<NSDictionary<NSString*, id>*> *resultsWithError = resultsByError[@(YES)];
+    NSDictionary<NSNumber*,id> *resultsByError = [results groupBy:kEvaluatorResultsKeyError];
+    NSArray<NSDictionary<NSString*,id>*> *resultsWithoutError = resultsByError[@(NO)];
+    NSArray<NSDictionary<NSString*,id>*> *resultsWithError = resultsByError[@(YES)];
     
     NSLog(@"Test Bundle: %@, Evaluation errors: %tu", self.testBundle.identifier, resultsWithError.count );
     
     // Group results by model
     
-    NSDictionary<NSString*, id> *resultsByModel = [resultsWithoutError groupBy:kEvaluatorResultsKeyModel];
+    NSDictionary<NSString*,id> *resultsByModel = [resultsWithoutError groupBy:kEvaluatorResultsKeyModel];
     
     // Prepare to collect summary statistics
     
-    NSMutableDictionary<NSString*, id> *summaryStatistics = [[NSMutableDictionary<NSString*, id> alloc] init];
+    NSMutableDictionary<NSString*,id> *summaryStatistics = [[NSMutableDictionary<NSString*,id> alloc] init];
     
     for ( NSString *modelID in resultsByModel ) {
-        summaryStatistics[modelID] = [[NSMutableDictionary<NSString*, id> alloc] init];
+        summaryStatistics[modelID] = [[NSMutableDictionary<NSString*,id> alloc] init];
     }
     
     // Calculate average latency, by model
@@ -176,7 +176,7 @@
         for ( NSString *modelID in resultsByModel ) {
             NSArray *modelResults = resultsByModel[modelID];
             
-            NSMutableArray<NSDictionary<NSString*, id>*> *metricResults = [[NSMutableArray<NSDictionary<NSString*, id>*> alloc] init];
+            NSMutableArray<NSDictionary<NSString*,id>*> *metricResults = [[NSMutableArray<NSDictionary<NSString*,id>*> alloc] init];
         
             for ( NSDictionary *result in modelResults ) {
                 

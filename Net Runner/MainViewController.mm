@@ -14,8 +14,8 @@
 #import <ImageIO/ImageIO.h>
 #import <VideoToolbox/VideoToolbox.h>
 
+#import "ModelBundle.h"
 #import "ModelBundleManager.h"
-#import "ImageNetClassificationModel.h"
 #import "ResultInfoView.h"
 #import "VisionModel.h"
 #import "Model.h"
@@ -25,11 +25,8 @@
 #import "CVPixelBufferHelpers.h"
 #import "NSArray+Extensions.h"
 #import "Utilities.h"
-#import "VisionPipeline.h"
-#import "LatencyCounter.h"
 #import "ImageInputPreviewView.h"
 #import "UserDefaults.h"
-#import "ModelBundle.h"
 #import "CVPixelBufferEvaluator.h"
 #import "EvaluatorConstants.h"
 #import "ModelOptions.h"
@@ -44,7 +41,6 @@ typedef enum : NSUInteger {
 
 @interface MainViewController ()
 
-@property NSDate *lastScreenUpdate;
 @property (nonatomic) CaptureMode captureMode;
 @property LatencyCounter *latencyCounter;
 
@@ -68,9 +64,7 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.lastScreenUpdate = [NSDate date];
-
+    
     // UI
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(freezeVideo:)];
@@ -145,10 +139,6 @@ typedef enum : NSUInteger {
     if (self.captureMode == CaptureModeLiveVideo && ![self.session isRunning] && self.model != nil) {
         [self.session startRunning];
     }
-}
-
-- (void)willMoveToParentViewController:(UIViewController *)parent {
-    [super willMoveToParentViewController:parent];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -712,12 +702,13 @@ typedef enum : NSUInteger {
 }
 
 /**
+ * Run the model on an image.
  * Our utility image.pixelBuffer method returns the pixel format in ARGB: `kCVPixelFormatType_32ARGB`
  */
 
 - (void)runModelOnImage:(UIImage*)image {
     
-    CVPixelBufferRef pixelBuffer = image.pixelBuffer; // Returns ARGB
+    CVPixelBufferRef pixelBuffer = image.pixelBuffer;
     auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithModel:self.model pixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp];
     
     [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
@@ -753,14 +744,6 @@ typedef enum : NSUInteger {
     }];
 }
 
-- (BOOL)throttle:(NSTimeInterval)delta {
-    NSDate *now = [NSDate date];
-    NSTimeInterval diff = [now timeIntervalSinceDate:self.lastScreenUpdate];
-    BOOL throttle = diff < delta;
-    if (!throttle) { self.lastScreenUpdate = now; }
-    return throttle;
-}
-
 - (NSString*)modelStats:(BOOL)verbose {
     if (verbose) {
         return [NSString stringWithFormat:
@@ -773,7 +756,7 @@ typedef enum : NSUInteger {
         ];
     } else {
         return [NSString stringWithFormat:
-            @"Inference:\n %.1lfms\n\n Average (of %d):\n %.1lfms",
+            @"Latency:\n %.1lfms\n\n Average (of %d):\n %.1lfms",
                 _latencyCounter.lastInferenceLatency,
                 _latencyCounter.count,
                 _latencyCounter.averageInferenceLatency

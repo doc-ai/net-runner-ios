@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Runs inference on a single `CVPixelBufferRef`, applying any required transformations to the input.
+ * Appropriate for models with a single input node that expects a pixel buffer.
  */
 
 @interface CVPixelBufferEvaluator : NSObject <Evaluator>

@@ -14,7 +14,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Runs inference on a single URL. Currently unimplemented.
+ * Runs inference on a single URL. Appropriate for models with a single input node that expects a pixel buffer.
+ *
+ * @warning Currently unimplemented.
  */
 
 @interface URLImageEvaluator : NSObject <Evaluator>

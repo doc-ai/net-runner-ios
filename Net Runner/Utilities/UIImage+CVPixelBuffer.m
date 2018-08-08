@@ -11,7 +11,7 @@
 
 @implementation UIImage (CVPixelBuffer)
 
-- (nullable instancetype) initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer {
+- (nullable instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer {
     if (pixelBuffer == NULL) {
         return nil;
     }
@@ -27,7 +27,7 @@
     return image;
 }
 
-- (nullable instancetype) initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer scale:(CGFloat)scale orientation:(UIImageOrientation)orientation {
+- (nullable instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer scale:(CGFloat)scale orientation:(UIImageOrientation)orientation {
     if (pixelBuffer == NULL) {
         return nil;
     }
@@ -45,7 +45,7 @@
 
 // MARK: -
 
-- (nullable CVPixelBufferRef) pixelBuffer {
+- (nullable CVPixelBufferRef)pixelBuffer {
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     
     CVPixelBufferRef pixelBuffer = [self pixelBuffer:kCVPixelFormatType_32ARGB colorSpace:colorSpace alphaInfo:kCGImageAlphaNoneSkipFirst];
@@ -62,7 +62,7 @@
     // Possibly because of the use of CGColorSpaceCreateDeviceRGB
 }
 
-- (nullable CVPixelBufferRef) pixelBuffer:(OSType)format colorSpace:(CGColorSpaceRef)colorSpace alphaInfo:(CGImageAlphaInfo)alphaInfo {
+- (nullable CVPixelBufferRef)pixelBuffer:(OSType)format colorSpace:(CGColorSpaceRef)colorSpace alphaInfo:(CGImageAlphaInfo)alphaInfo {
     CVPixelBufferRef pixelBuffer;
     
     // Create pixel buffer

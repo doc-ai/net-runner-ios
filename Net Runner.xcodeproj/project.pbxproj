@@ -18,6 +18,7 @@
 		E3458A95210A56410040648C /* EvaluateIterationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A92210A56410040648C /* EvaluateIterationsTableViewCell.m */; };
 		E3458A9A210A56460040648C /* EvaluateResultsModelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A97210A56460040648C /* EvaluateResultsModelTableViewCell.m */; };
 		E3458A9B210A56460040648C /* EvaluateResultsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A98210A56460040648C /* EvaluateResultsTableViewController.mm */; };
+		E36878F52118D36400F58CAB /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E36878F42118D36400F58CAB /* NSDictionary+Extensions.m */; };
 		E3740298210A53E00025AA59 /* EvaluationMetricFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E3740297210A53E00025AA59 /* EvaluationMetricFactory.m */; };
 		E374029C210A551A0025AA59 /* Evaluate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3740299210A551A0025AA59 /* Evaluate.storyboard */; };
 		E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */; };
@@ -128,6 +129,8 @@
 		E3458A97210A56460040648C /* EvaluateResultsModelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateResultsModelTableViewCell.m; sourceTree = "<group>"; };
 		E3458A98210A56460040648C /* EvaluateResultsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluateResultsTableViewController.mm; sourceTree = "<group>"; };
 		E3458A99210A56460040648C /* EvaluateResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateResultsTableViewController.h; sourceTree = "<group>"; };
+		E36878F32118D36400F58CAB /* NSDictionary+Extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extensions.h"; sourceTree = "<group>"; };
+		E36878F42118D36400F58CAB /* NSDictionary+Extensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extensions.m"; sourceTree = "<group>"; };
 		E3740297210A53E00025AA59 /* EvaluationMetricFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationMetricFactory.m; sourceTree = "<group>"; };
 		E3740299210A551A0025AA59 /* Evaluate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Evaluate.storyboard; sourceTree = "<group>"; };
 		E374029A210A551A0025AA59 /* EvaluationResultsActivityItemProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationResultsActivityItemProvider.h; sourceTree = "<group>"; };
@@ -475,6 +478,8 @@
 				E3A52113210A511A004B912B /* UIImage+CVPixelBuffer.m */,
 				E3A5211B210A511B004B912B /* NSArray+Extensions.h */,
 				E3A5211A210A511B004B912B /* NSArray+Extensions.m */,
+				E36878F32118D36400F58CAB /* NSDictionary+Extensions.h */,
+				E36878F42118D36400F58CAB /* NSDictionary+Extensions.m */,
 				E3A5211F210A511C004B912B /* Utilities.h */,
 				E3A52115210A511B004B912B /* Utilities.mm */,
 				E3A52119210A511B004B912B /* ObjcDefer.h */,
@@ -838,6 +843,7 @@
 				E3A52122210A511C004B912B /* Utilities.mm in Sources */,
 				E3F6C68A210A56DD00D200D8 /* UserDefaults.m in Sources */,
 				E3A5214A210A51F7004B912B /* ModelHelpers.mm in Sources */,
+				E36878F52118D36400F58CAB /* NSDictionary+Extensions.m in Sources */,
 				E3A520F0210A49A1004B912B /* main.m in Sources */,
 				E3A52139210A51D9004B912B /* ImageNetClassificationHelpers.mm in Sources */,
 				E3A520E2210A49A0004B912B /* AppDelegate.m in Sources */,

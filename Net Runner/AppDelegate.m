@@ -23,7 +23,7 @@
     
     assert( sizeof(float_t) == 4 );
     
-    // Load models
+    // Load model bundles
     
     NSString *modelsPath = [[NSBundle mainBundle] pathForResource:@"models" ofType:nil];
     NSError *error;
@@ -40,16 +40,13 @@
     
     UIViewController *vc;
     
-    // if ( NSProcessInfo.processInfo.environment[@"headless"] ) {
     #ifdef HEADLESS
         NSLog(@"Running application in headless mode");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Headless" bundle:[NSBundle mainBundle]];
         vc = [storyboard instantiateInitialViewController];
-    // } else {
     #else
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         vc = [storyboard instantiateInitialViewController];
-    //}
     #endif
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

@@ -17,7 +17,7 @@
 #include <queue>
 
 /**
- * Loads the output labels used by the model
+ * Loads the output labels used by the model.
  */
 
 void LoadLabels(NSString* labels_path, std::vector<std::string>* label_strings);

@@ -14,11 +14,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (CVPixelBuffer)
 
-- (nullable instancetype) initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer;
-- (nullable instancetype) initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer scale:(CGFloat)scale orientation:(UIImageOrientation)orientation;
+/**
+ * Instantiates a `UIImage` from a `CVPixelBufferRef`
+ *
+ * @param pixelBuffer The pixel buffer to create the image from
+ *
+ * @return `UIImage`
+ */
+
+- (nullable instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer;
 
 /**
- * Creates a pixel buffer from the receiver via Core Graphics
+ * Instantiates a `UIImage` from a `CVPixelBufferRef`
+ *
+ * @param pixelBuffer The pixel buffer to create the image from
+ * @param scale A scaling factor to use
+ * @param orientation The orientation of the pixel buffer
+ *
+ * @return `UIImage`
+ */
+
+- (nullable instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer scale:(CGFloat)scale orientation:(UIImageOrientation)orientation;
+
+/**
+ * Creates a pixel buffer from the receiver via Core Graphics.
  *
  * @return A `CVPixelBufferRef` that is autoreleased and by default has the following format:
  *      Pixel Format: `kCVPixelFormatType_32ARGB`
@@ -26,8 +45,19 @@ NS_ASSUME_NONNULL_BEGIN
  *      Color Space: Device RGB
  */
 
-- (nullable CVPixelBufferRef) pixelBuffer;
-- (nullable CVPixelBufferRef) pixelBuffer:(OSType)format colorSpace:(CGColorSpaceRef)colorSpace alphaInfo:(CGImageAlphaInfo)alphaInfo;
+- (nullable CVPixelBufferRef)pixelBuffer;
+
+/**
+ * Creates a pixel buffer from the receiver via Core Graphics.
+ *
+ * @param format Pixel format of the generated pixel buffer, e.g. `kCVPixelFormatType_32ARGB` or kCVPixelFormatType_32BGRA`
+ * @param colorSpace Color space of the generated pixel buffer, e.g. `CGColorSpaceCreateDeviceRGB()`
+ * @param alphaInfo Alpha channel settings for the generated pixel buffer, e.g. `kCGImageAlphaNoneSkipFirst`
+ *
+ * @return CVPixelBufferRef The generated pixel buffer, may be `NULL`.
+ */
+
+- (nullable CVPixelBufferRef)pixelBuffer:(OSType)format colorSpace:(CGColorSpaceRef)colorSpace alphaInfo:(CGImageAlphaInfo)alphaInfo;
 
 @end
 
