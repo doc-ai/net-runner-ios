@@ -77,7 +77,7 @@ extern const PixelNormalization kPixelNormalizationNone;
  * A scale of 1.0/255.0.
  */
 
-extern const PixelNormalization kPixelNormalizerZeroToOne;
+extern const PixelNormalization kPixelNormalizationZeroToOne;
 
 /**
  * Pixel normalization from -1 to 1.
@@ -85,7 +85,7 @@ extern const PixelNormalization kPixelNormalizerZeroToOne;
  * A scale of 2.0/255.0 and a bias of -1 to each channel.
  */
 
-extern const PixelNormalization kPixelNormalizerNegativeOneToOne;
+extern const PixelNormalization kPixelNormalizationNegativeOneToOne;
 
 /**
  * No image volume, used to represent an error reading the image volume from the model.json file.
@@ -187,119 +187,62 @@ PixelNormalizer _Nullable PixelNormalizerForInput(NSDictionary *input);
 
 template <typename tensor_t>
 void CVPixelBufferCopyToTensor(CVPixelBufferRef pixelBuffer, tensor_t* _Nonnull tensor, ImageVolume shape, _Nullable PixelNormalizer normalizer) {
+    
+    CFRetain(pixelBuffer);
+    CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
+    
+    OSType sourcePixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer);
+    const int bytes_per_row = (int)CVPixelBufferGetBytesPerRow(pixelBuffer);
+    const int image_width = (int)CVPixelBufferGetWidth(pixelBuffer);
+    const int image_height = (int)CVPixelBufferGetHeight(pixelBuffer);
+    const int image_channels = 4; // by definition (ARGB, BGRA)
+    
+    assert(sourcePixelFormat == kCVPixelFormatType_32ARGB
+        || sourcePixelFormat == kCVPixelFormatType_32BGRA);
+    
+    assert(image_width == shape.width);
+    assert(image_height == shape.height);
+    assert(image_channels >= shape.channels);
+    
+    const int tensor_channels = shape.channels;
+    const int tensor_bytes_per_row = shape.width * tensor_channels;
+    
+    // channel_offset is used to skip the alpha channel when copying to the tensor
+    // it is 1 for ARGB images and 0 for BGRA images.
+    
+    const int channel_offset = sourcePixelFormat == kCVPixelFormatType_32ARGB
+        ? 1
+        : 0;
+    
+    uint8_t* in = (uint8_t*)CVPixelBufferGetBaseAddress(pixelBuffer);
+    tensor_t* out = tensor;
+    
     if ( normalizer == nil ) {
-        CVPixelBufferCopyToTensor(pixelBuffer, tensor, shape);
-        return;
-    }
-    
-    assert(pixelBuffer != NULL);
-    assert(tensor != NULL);
-    
-    CFRetain(pixelBuffer);
-    CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
-    
-    OSType sourcePixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer);
-    const int bytes_per_row = (int)CVPixelBufferGetBytesPerRow(pixelBuffer);
-    const int image_width = (int)CVPixelBufferGetWidth(pixelBuffer);
-    const int image_height = (int)CVPixelBufferGetHeight(pixelBuffer);
-    const int image_channels = 4; // by definition (ARGB, BGRA)
-    
-    assert(sourcePixelFormat == kCVPixelFormatType_32ARGB
-        || sourcePixelFormat == kCVPixelFormatType_32BGRA);
-    
-    assert(image_width == shape.width);
-    assert(image_height == shape.height);
-    assert(image_channels >= shape.channels);
-    
-    const int tensor_channels = shape.channels;
-    const int tensor_bytes_per_row = shape.width * tensor_channels;
-    
-    // channel_offset is used to skip the alpha channel when copying to the tensor
-    // it is 1 for ARGB images and 0 for BGRA images.
-    
-    const int channel_offset = sourcePixelFormat == kCVPixelFormatType_32ARGB
-        ? 1
-        : 0;
-    
-    uint8_t* in = (uint8_t*)CVPixelBufferGetBaseAddress(pixelBuffer);
-    tensor_t* out = tensor;
-    
-    for (int y = 0; y < image_height; y++) {
-        for (int x = 0; x < image_width; x++) {
-            auto* in_pixel = in + (y * bytes_per_row) + (x * image_channels);
-            auto* out_pixel = out + (y * tensor_bytes_per_row) + (x * tensor_channels);
+        
+        for (int y = 0; y < image_height; y++) {
+            for (int x = 0; x < image_width; x++) {
+                auto* in_pixel = in + (y * bytes_per_row) + (x * image_channels);
+                auto* out_pixel = out + (y * tensor_bytes_per_row) + (x * tensor_channels);
 
-            for (int c = 0; c < tensor_channels; ++c) {
-                out_pixel[c] = normalizer(in_pixel[c+channel_offset], c);
+                for (int c = 0; c < tensor_channels; ++c) {
+                    out_pixel[c] = in_pixel[c+channel_offset];
+                }
             }
         }
-    }
+        
+    } else {
     
-    CVPixelBufferUnlockBaseAddress(pixelBuffer, kNilOptions);
-    CFRelease(pixelBuffer);
-}
+        for (int y = 0; y < image_height; y++) {
+            for (int x = 0; x < image_width; x++) {
+                auto* in_pixel = in + (y * bytes_per_row) + (x * image_channels);
+                auto* out_pixel = out + (y * tensor_bytes_per_row) + (x * tensor_channels);
 
-/**
- * `CVPixelBufferCopyToTensor` copies a pixel buffer in ARGB or BGRA format to a tensor,
- * which is a pointer to an array of `float_t` or `uint8_t`.
- *
- * The pixel buffer must already be in the shape and format expected by the input tensor,
- * with the shape parameter describing its dimensions. The alpha channel will be ignored.
- *
- * If a normalizer is provided then the pixel buffer's values will be scaled using the
- * normalizer.
- *
- * `tensor_t` will be `float_t` (32 bits) for an unquantized model or `uint8_t` (8 bits)
- * for a quantized model.
- *
- * @param pixelBuffer The pixel buffer that will be copied to the tensor.
- * @param tensor The tensor that will receive the pixel buffer values.
- * @param shape The shape, i.e. width, height, and number of channels of the tensor.
- */
-
-template <typename tensor_t>
-void CVPixelBufferCopyToTensor(CVPixelBufferRef pixelBuffer, tensor_t* _Nonnull tensor, ImageVolume shape) {
-    assert(pixelBuffer != NULL);
-    assert(tensor != NULL);
-    
-    CFRetain(pixelBuffer);
-    CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
-    
-    OSType sourcePixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer);
-    const int bytes_per_row = (int)CVPixelBufferGetBytesPerRow(pixelBuffer);
-    const int image_width = (int)CVPixelBufferGetWidth(pixelBuffer);
-    const int image_height = (int)CVPixelBufferGetHeight(pixelBuffer);
-    const int image_channels = 4; // by definition (ARGB, BGRA)
-    
-    assert(sourcePixelFormat == kCVPixelFormatType_32ARGB
-        || sourcePixelFormat == kCVPixelFormatType_32BGRA);
-    
-    assert(image_width == shape.width);
-    assert(image_height == shape.height);
-    assert(image_channels >= shape.channels);
-    
-    const int tensor_channels = shape.channels;
-    const int tensor_bytes_per_row = shape.width * tensor_channels;
-    
-    // channel_offset is used to skip the alpha channel when copying to the tensor
-    // it is 1 for ARGB images and 0 for BGRA images.
-    
-    const int channel_offset = sourcePixelFormat == kCVPixelFormatType_32ARGB
-        ? 1
-        : 0;
-    
-    uint8_t* in = (uint8_t*)CVPixelBufferGetBaseAddress(pixelBuffer);
-    tensor_t* out = tensor;
-    
-    for (int y = 0; y < image_height; y++) {
-        for (int x = 0; x < image_width; x++) {
-            auto* in_pixel = in + (y * bytes_per_row) + (x * image_channels);
-            auto* out_pixel = out + (y * tensor_bytes_per_row) + (x * tensor_channels);
-
-            for (int c = 0; c < tensor_channels; ++c) {
-                out_pixel[c] = in_pixel[c+channel_offset];
+                for (int c = 0; c < tensor_channels; ++c) {
+                    out_pixel[c] = normalizer(in_pixel[c+channel_offset], c);
+                }
             }
         }
+        
     }
     
     CVPixelBufferUnlockBaseAddress(pixelBuffer, kNilOptions);

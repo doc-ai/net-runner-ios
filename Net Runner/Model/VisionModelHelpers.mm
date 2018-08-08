@@ -22,14 +22,14 @@ const PixelNormalization kPixelNormalizationNone = {
     .blueBias   = 0
 };
 
-const PixelNormalization kPixelNormalizerZeroToOne = {
+const PixelNormalization kPixelNormalizationZeroToOne = {
     .scale      = 1.0/255.0,
     .redBias    = 0,
     .greenBias  = 0,
     .blueBias   = 0
 };
 
-const PixelNormalization kPixelNormalizerNegativeOneToOne = {
+const PixelNormalization kPixelNormalizationNegativeOneToOne = {
     .scale      = 2.0/255.0,
     .redBias    = -1,
     .greenBias  = -1,
@@ -148,10 +148,10 @@ PixelNormalization PixelNormalizationForInput(NSDictionary *input) {
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
-            return kPixelNormalizerZeroToOne;
+            return kPixelNormalizationZeroToOne;
         }
         else if ( [normalizerString isEqualToString:@"[-1,1]"] ) {
-            return kPixelNormalizerNegativeOneToOne;
+            return kPixelNormalizationNegativeOneToOne;
         }
         else {
             return kPixelNormalizationInvalid;
