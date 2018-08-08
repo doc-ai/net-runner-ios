@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Runs inference on a single file URL corresponding to a file on disk. Useful for headless evaluation.
+ * Appropriate for models with a single input node that expects a pixel buffer.
  */
 
 @interface FileImageEvaluator : NSObject <Evaluator>

@@ -15,7 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Runs inference on a single album photo from the users photo library
+ * Runs inference on a single album photo from the users photo library. Appropriate for models with
+ * a single input node that expects a pixel buffer.
  */
 
 @interface AlbumPhotoEvaluator : NSObject <Evaluator>

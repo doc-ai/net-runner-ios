@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+// TODO: remove this protocol. was used to simplify decayedOutput computations but that should happen elewhere
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**

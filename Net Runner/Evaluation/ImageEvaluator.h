@@ -15,8 +15,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Runs inference on a `UIImage`. Most `VisionModel` will delegate evaluation to this object, which then
- * delegates it to the `CVPixelBufferEvaluator`.
+ * Runs inference on a `UIImage`. Appropriate for models with a single input node that expects a pixel buffer.
+ *
+ * Most `VisionModel` will delegate evaluation to this object, which then delegates it to the `CVPixelBufferEvaluator`.
  */
 
 @interface ImageEvaluator : NSObject <Evaluator>
