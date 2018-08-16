@@ -63,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return `ModelOutput` wrapper to the underlying data
  */
 
-- (id<ModelOutput>)runModelOn:(CVPixelBufferRef)pixelBuffer;
+- (NSDictionary*)runModelOn:(CVPixelBufferRef)pixelBuffer;
 
 /**
  * The scaled, cropped, rotatated, and pixel formatted pixel buffer that the model actually sees,

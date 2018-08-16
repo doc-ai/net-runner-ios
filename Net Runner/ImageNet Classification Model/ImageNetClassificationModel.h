@@ -15,7 +15,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ImageNetClassificationModelOutput;
 @class ModelBundle;
 
 /**
@@ -41,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSString* author;
 @property (readonly) NSString* license;
 @property (readonly) BOOL quantized;
+@property (readonly) NSString *type;
 @property (readonly) ModelWeightSize weightSize;
 @property (readonly) BOOL loaded;
 
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Vision Model Protocol Methods
 
-- (ImageNetClassificationModelOutput*)runModelOn:(CVPixelBufferRef)pixelBuffer;
+- (NSDictionary*)runModelOn:(CVPixelBufferRef)pixelBuffer;
 - (CVPixelBufferRef)inputPixelBuffer;
 
 @end

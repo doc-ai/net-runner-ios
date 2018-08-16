@@ -83,6 +83,12 @@ typedef enum : NSUInteger {
 @property (readonly) BOOL quantized;
 
 /**
+ * A string indicating the kind of model this is, e.g. "image.classification.imagenet"
+ */
+
+@property (readonly) NSString *type;
+
+/**
  * The model's weight size
  */
 

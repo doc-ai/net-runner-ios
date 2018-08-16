@@ -10,6 +10,8 @@
 		9DAD253D003B1A4D85B5CA69 /* libPods-Net RunnerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA948EB044918D6AB51971E /* libPods-Net RunnerTests.a */; };
 		C32559CDF1500003B0C67572 /* libPods-Net RunnerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD98B37926F97CB6AC0040D /* libPods-Net RunnerUITests.a */; };
 		CC488EDFB5B8ADBBC17E37F0 /* libPods-Net Runner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1794288569A9345E245BCB0D /* libPods-Net Runner.a */; };
+		E33229D7212607680031435F /* ModelOutputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229D6212607680031435F /* ModelOutputManager.m */; };
+		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
 		E3458A88210A55A80040648C /* EvaluateModelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A85210A55A80040648C /* EvaluateModelTableViewCell.m */; };
 		E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A87210A55A80040648C /* EvaluateSelectModelsTableViewController.m */; };
 		E3458A8E210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A8A210A563B0040648C /* EvaluatePhotoAlbumTableViewCell.m */; };
@@ -113,6 +115,10 @@
 		A4B6162EA37543DDF8D09297 /* Pods-Net RunnerUITests.release headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerUITests.release headless.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.release headless.xcconfig"; sourceTree = "<group>"; };
 		AAD98B37926F97CB6AC0040D /* libPods-Net RunnerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Net RunnerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29295E0BC8B7CF9671D6C86 /* Pods-Net RunnerUITests.debug headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerUITests.debug headless.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.debug headless.xcconfig"; sourceTree = "<group>"; };
+		E33229D5212607680031435F /* ModelOutputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutputManager.h; sourceTree = "<group>"; };
+		E33229D6212607680031435F /* ModelOutputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOutputManager.m; sourceTree = "<group>"; };
+		E33229DA21260C880031435F /* DefaultModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultModelOutput.h; sourceTree = "<group>"; };
+		E33229DB21260C880031435F /* DefaultModelOutput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DefaultModelOutput.mm; sourceTree = "<group>"; };
 		E3458A84210A55A80040648C /* EvaluateSelectModelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateSelectModelsTableViewController.h; sourceTree = "<group>"; };
 		E3458A85210A55A80040648C /* EvaluateModelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateModelTableViewCell.m; sourceTree = "<group>"; };
 		E3458A86210A55A80040648C /* EvaluateModelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateModelTableViewCell.h; sourceTree = "<group>"; };
@@ -317,6 +323,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E33229D92126098F0031435F /* Model Output */ = {
+			isa = PBXGroup;
+			children = (
+				E3851386210D0A3100F600C5 /* ModelOutput.h */,
+				E33229D5212607680031435F /* ModelOutputManager.h */,
+				E33229D6212607680031435F /* ModelOutputManager.m */,
+				E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */,
+				E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */,
+				E33229DA21260C880031435F /* DefaultModelOutput.h */,
+				E33229DB21260C880031435F /* DefaultModelOutput.mm */,
+			);
+			path = "Model Output";
+			sourceTree = "<group>";
+		};
 		E374029E210A55220025AA59 /* Select Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,6 +454,7 @@
 				E3A520E1210A49A0004B912B /* AppDelegate.m */,
 				E3F6C6AF210A5B8D00D200D8 /* MainViewController.h */,
 				E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */,
+				E33229D92126098F0031435F /* Model Output */,
 				E3A52126210A5147004B912B /* headless */,
 				E3A52127210A5147004B912B /* models */,
 				E3F6C686210A56C500D200D8 /* Settings */,
@@ -494,8 +515,6 @@
 			children = (
 				E3A52137210A51D9004B912B /* ImageNetClassificationModel.h */,
 				E3A52138210A51D9004B912B /* ImageNetClassificationModel.mm */,
-				E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */,
-				E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */,
 				E3A52135210A51D8004B912B /* ImageNetClassificationHelpers.h */,
 				E3A52136210A51D9004B912B /* ImageNetClassificationHelpers.mm */,
 			);
@@ -507,7 +526,6 @@
 			children = (
 				E3A52143210A51F7004B912B /* Model.h */,
 				E3A52145210A51F7004B912B /* VisionModel.h */,
-				E3851386210D0A3100F600C5 /* ModelOutput.h */,
 				E3A52146210A51F7004B912B /* ModelBundleJSONSchema.h */,
 				E3A5213E210A51F6004B912B /* ModelBundle.h */,
 				E3A52147210A51F7004B912B /* ModelBundle.m */,
@@ -859,7 +877,9 @@
 				E3458A8F210A563C0040648C /* EvaluateSelectAlbumsTableViewController.m in Sources */,
 				E3F6C6B1210A5B8D00D200D8 /* MainViewController.mm in Sources */,
 				E3F6C680210A567300D200D8 /* PhotoAssetsCollectionViewController.m in Sources */,
+				E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */,
 				E3F6C681210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m in Sources */,
+				E33229D7212607680031435F /* ModelOutputManager.m in Sources */,
 				E3458A8E210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.m in Sources */,
 				E3A52120210A511C004B912B /* UIImage+CVPixelBuffer.m in Sources */,
 				E3B57E89210A52FC008D19C0 /* FileImageEvaluator.mm in Sources */,

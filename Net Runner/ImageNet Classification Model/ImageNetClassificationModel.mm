@@ -68,6 +68,7 @@
     _author = bundle.author;
     _license = bundle.license;
     _quantized = bundle.quantized;
+    _type = bundle.type;
     
     // Vision Model Initialization
     
@@ -182,13 +183,11 @@
     _loaded = NO;
 }
 
-- (ImageNetClassificationModelOutput*)runModelOn:(CVPixelBufferRef)pixelBuffer {
+- (NSDictionary*)runModelOn:(CVPixelBufferRef)pixelBuffer {
     if ( !_loaded ) {
         [self load:nil];
     }
     
-    ImageNetClassificationModelOutput *output;
-
     // Prepare input: copy pixel buffer to input tensor
     
     [self _prepareInputs:pixelBuffer];
@@ -200,8 +199,6 @@
     // Capture output and interpret
     
     return [self _captureOutputs];
-    
-    return output;
 }
 
 /**
@@ -240,7 +237,7 @@
  * @return Top five predictions
  */
 
-- (ImageNetClassificationModelOutput*)_captureOutputs {
+- (NSDictionary*)_captureOutputs {
     NSAssert(NO, @"Do not call this method directly, use one of ImageNetClassificationModel's subclasses");
     return nil;
 }
@@ -259,10 +256,9 @@
     [self setInputPixelBuffer:pixelBuffer];
 }
 
-- (ImageNetClassificationModelOutput*)_captureOutputs {
+- (NSDictionary*)_captureOutputs {
     float_t* output = interpreter->typed_output_tensor<float_t>(0);
-    NSDictionary *predictions = CaptureOutput(output, labels);
-    return [[ImageNetClassificationModelOutput alloc] initWithDictionary:predictions];
+    return CaptureOutput(output, labels);
 }
 
 @end
@@ -279,10 +275,9 @@
     [self setInputPixelBuffer:pixelBuffer];
 }
 
-- (ImageNetClassificationModelOutput*)_captureOutputs {
+- (NSDictionary*)_captureOutputs {
     uint8_t* output = interpreter->typed_output_tensor<uint8_t>(0);
-    NSDictionary *predictions = CaptureOutput(output, labels);
-    return [[ImageNetClassificationModelOutput alloc] initWithDictionary:predictions];
+    return CaptureOutput(output, labels);
 }
 
 @end

@@ -9,7 +9,8 @@
 		"file": "mobilenet_v1_1.0_224.tflite",
 		"class": "ImageNetClassificationModel",
 		"quantized": false,
-		"labels": "labels.txt"
+		"labels": "labels.txt",
+		"type": "image.classification.imagenet"
 	},
 	"input": {
 		"type": "image",

@@ -62,6 +62,7 @@ NSString * const kTFModelInfoFile = @"model.json";
         assert(json[@"model"][@"quantized"] != nil);
         assert(json[@"model"][@"class"] != nil);
         assert(json[@"model"][@"file"] != nil);
+        // assert(json[@"model"][@"type"] != nil);
         
         // Initialize
         
@@ -78,6 +79,7 @@ NSString * const kTFModelInfoFile = @"model.json";
         _options = [[ModelOptions alloc] initWithDictionary:json[@"options"]];
         _quantized = [json[@"model"][@"quantized"] boolValue];
         _modelClassName = json[@"model"][@"class"];
+        _type = json[@"model"][@"type"];
     }
     
     return self;

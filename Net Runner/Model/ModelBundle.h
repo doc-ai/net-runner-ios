@@ -89,6 +89,12 @@ extern NSString * const kTFModelInfoFile;
 @property (readonly) BOOL quantized;
 
 /**
+ * A string indicating the kind of model this is, e.g. "image.classification.imagenet"
+ */
+
+@property (readonly) NSString *type;
+
+/**
  * Options associated with the model represented by this bundle.
  */
 

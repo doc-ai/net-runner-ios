@@ -13,6 +13,10 @@
 #import "Utilities.h"
 #import "ObjcDefer.h"
 #import "ModelOutput.h"
+#import "ModelOutputManager.h"
+
+// TODO: need some way to unify this: don't want to require a model output but do want to let the user specify one
+#import "ImageNetClassificationModelOutput.h"
 
 @interface CVPixelBufferEvaluator ()
 
@@ -88,11 +92,22 @@
     
     // Make prediction
     
-    __block id<ModelOutput> modelOutput;
+    __block NSDictionary *results;
     
     measuring_latency(&inferenceLatency, ^{
-        modelOutput = [self.model runModelOn:transformedPixelBuffer];
+        results = [self.model runModelOn:transformedPixelBuffer];
     });
+    
+    // Wrap output
+    // TODO: This requires some thought
+    
+    id<ModelOutput> modelOutput = [[[[ModelOutputManager sharedManager] classForType:self.model.type] alloc] initWithDictionary:results];
+    
+//    if ( [self.model.type isEqualToString:@"image.classification.imagenet"] ) {
+//        modelOutput = [[ImageNetClassificationModelOutput alloc] initWithDictionary:results];
+//    } else {
+//        assert(NO);
+//    }
     
     if (modelOutput == nil) {
         NSLog(@"Running the model produced null results");

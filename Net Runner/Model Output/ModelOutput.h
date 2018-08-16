@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-// TODO: remove this protocol. was used to simplify decayedOutput computations but that should happen elewhere
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * A wrapper around a model's output. All `Model` conforming classes should return an instance of `ModelOutput`
- * from their run/execute function.
+ * A wrapper around a model's output.
+ *
+ * This is a utility protocol that is application specific so that we can handle multiple kinds of
+ * descriptions for multiple kinds of models.
  */
 
 @protocol ModelOutput <NSObject>
