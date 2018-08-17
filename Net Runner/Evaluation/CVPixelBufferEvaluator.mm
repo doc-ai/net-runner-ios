@@ -14,9 +14,9 @@
 #import "ObjcDefer.h"
 #import "ModelOutput.h"
 #import "ModelOutputManager.h"
-
-// TODO: need some way to unify this: don't want to require a model output but do want to let the user specify one
-#import "ImageNetClassificationModelOutput.h"
+#import "TIOPixelBufferDescription.h"
+#import "TIOPixelBuffer.h"
+#import "NSDictionary+TIOData.h"
 
 @interface CVPixelBufferEvaluator ()
 
@@ -31,12 +31,6 @@
     dispatch_once_t _once;
 }
 
-- (void)setPixelBuffer:(CVPixelBufferRef)pixelBuffer {
-    CVPixelBufferRelease(_pixelBuffer);
-    _pixelBuffer = pixelBuffer;
-    CVPixelBufferRetain(_pixelBuffer);
-}
-
 - (instancetype)initWithModel:(id<VisionModel>)model pixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
     if (self = [super init]) {
         _model = model;
@@ -46,6 +40,17 @@
     }
     
     return self;
+}
+
+- (void)dealloc {
+    CVPixelBufferRelease(_pixelBuffer);
+    _pixelBuffer = NULL;
+}
+
+- (void)setPixelBuffer:(CVPixelBufferRef _Nullable)pixelBuffer {
+    CVPixelBufferRelease(_pixelBuffer);
+    _pixelBuffer = pixelBuffer;
+    CVPixelBufferRetain(_pixelBuffer);
 }
 
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
@@ -68,13 +73,14 @@
         self.results = @{
             kEvaluatorResultsKeyPreprocessingError: @"Unable to load model"
         };
-        safe_block(completionHandler, self.results);
+        safe_block(completionHandler, self.results, NULL);
         return;
     }
     
     // Transform the image to the required format
     
-    VisionPipeline *pipeline = [[VisionPipeline alloc] initWithVisionModel:self.model];
+    TIOPixelBufferDescription *description = [self.model dataDescriptionForInputAtIndex:0];
+    VisionPipeline *pipeline = [[VisionPipeline alloc] initWithTIOPixelBufferDescription:description];
     __block CVPixelBufferRef transformedPixelBuffer = NULL;
     
     measuring_latency(&imageProcessingLatency, ^{
@@ -86,45 +92,37 @@
         self.results = @{
             kEvaluatorResultsKeyPreprocessingError: @"VisionPipeline returned NULL CVPixelBuffer"
         };
-        safe_block(completionHandler, self.results);
+        safe_block(completionHandler, self.results, NULL);
         return;
     }
     
     // Make prediction
     
     __block NSDictionary *results;
+    TIOPixelBuffer *pixelBufferWrapper = [[TIOPixelBuffer alloc] initWithPixelBuffer:transformedPixelBuffer orientation:kCGImagePropertyOrientationUp];
     
     measuring_latency(&inferenceLatency, ^{
-        results = [self.model runModelOn:transformedPixelBuffer];
+        results = (NSDictionary*)[self.model runModelOn:pixelBufferWrapper];
     });
     
-    // Wrap output
-    // TODO: This requires some thought
-    
     id<ModelOutput> modelOutput = [[[[ModelOutputManager sharedManager] classForType:self.model.type] alloc] initWithDictionary:results];
-    
-//    if ( [self.model.type isEqualToString:@"image.classification.imagenet"] ) {
-//        modelOutput = [[ImageNetClassificationModelOutput alloc] initWithDictionary:results];
-//    } else {
-//        assert(NO);
-//    }
     
     if (modelOutput == nil) {
         NSLog(@"Running the model produced null results");
         self.results = @{
             kEvaluatorResultsKeyInferenceError: @"Model returned nil results"
         };
-        safe_block(completionHandler, self.results);
+        safe_block(completionHandler, self.results, NULL);
         return;
     }
     
-    self.results = @{
+    NSDictionary *evaluatorResults = @{
         kEvaluatorResultsKeyPreprocessingLatency: @(imageProcessingLatency),
         kEvaluatorResultsKeyInferenceLatency: @(inferenceLatency),
         kEvaluatorResultsKeyInferenceResults: modelOutput
     };
     
-    safe_block(completionHandler, self.results);
+    safe_block(completionHandler, evaluatorResults, transformedPixelBuffer);
     
     }); // dispatch_once
 }

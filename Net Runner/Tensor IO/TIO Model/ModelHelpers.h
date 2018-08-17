@@ -6,10 +6,42 @@
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#ifndef ModelHelpers_h
-#define ModelHelpers_h
 
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+// MARK: - Quantization
+
+typedef struct DataQuantization {
+    float scale;
+    float bias;
+} DataQuantization;
+
+typedef uint8_t (^DataQuantizer)(const float_t &value);
+
+_Nullable DataQuantizer TIODataQuantizerNone();
+
+// MARK: - Dequantization
+
+typedef struct DataDequantization {
+    float scale;
+    float bias;
+} DataDequantization;
+
+typedef float_t (^DataDequantizer)(const uint8_t &value);
+
+_Nullable DataDequantizer TIODataDequantizerNone();
+
+/**
+ * Dequantizes values from a range of `[0,255]` to `[0,1]`.
+ *
+ * This is equivalent to applying a scaling factor of `1.0/255.0` and no bias.
+ */
+
+DataDequantizer DataDequantizerZeroToOne();
+
+// MARK: - Errors
 
 /**
  * Set the `Model` laod error to `kTFModelLoadModelError` when the underlying
@@ -32,4 +64,4 @@ extern NSError * const kTFModelConstructInterpreterError;
 
 extern NSError * const kTFModelAllocateTensorsError;
 
-#endif /* ModelHelpers_h */
+NS_ASSUME_NONNULL_END

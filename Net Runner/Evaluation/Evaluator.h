@@ -9,6 +9,9 @@
 #ifndef Evaluator_h
 #define Evaluator_h
 
+#import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+
 #import "Model.h"
 #import "VisionModel.h"
 
@@ -32,9 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
  * Completion block for the evaluate method.
  *
  * @param result Results. See EvaluatorConstants.h for a list of keys that may appear in this dictionary.
+ * @param inputPixelBuffer The pixel buffer which the model actually sees before removing the alpha channel and
+ * applying any normalization.
  */
 
-typedef void (^EvaluatorCompletionBlock)(NSDictionary *result);
+typedef void (^EvaluatorCompletionBlock)(NSDictionary *result, CVPixelBufferRef _Nullable inputPixelBuffer);
 
 /**
  * The `Model` object on which inference is run. Currently, only objects conforming to the `VisionModel`
@@ -45,13 +50,6 @@ typedef void (^EvaluatorCompletionBlock)(NSDictionary *result);
  */
 
 @property (readonly) id<VisionModel> model;
-
-/**
- * The results of running inference on the model. See EvaluatorConstants.h for a list of keys that may
- * appear in this dictionary.
- */
-
-@property (readonly) NSDictionary *results;
 
 /**
  * The function repsonsible for perfoming inference with the model. The function should store the results

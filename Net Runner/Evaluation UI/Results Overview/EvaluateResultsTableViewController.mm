@@ -188,10 +188,10 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
                 continue;
             }
             
-            if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
-                NSLog(@"Model does not conform to VisionModel protocol: %@", modelBundle.identifier);
-                continue;
-            }
+//            if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
+//                NSLog(@"Model does not conform to VisionModel protocol: %@", modelBundle.identifier);
+//                continue;
+//            }
             
             numberOfModels++;
             
@@ -225,7 +225,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
             }
             
             @autoreleasepool {
-                [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
+                [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
                     id<Model> model = evaluator.model;
                     NSString *modelID = result[kEvaluatorResultsKeyModel];
                     NSUInteger completedCount = [self->_progress[modelID] integerValue] + 1;

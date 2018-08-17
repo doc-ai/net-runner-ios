@@ -36,8 +36,6 @@
     return self;
 }
 
-// TODO: use key constants not strings
-
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
     dispatch_once(&_once, ^{
      
@@ -54,7 +52,7 @@
         if (image == nil) {
             NSString *errorDescription = [NSString stringWithFormat:@"Error loading image at %@", path];
             NSLog(@"%@", errorDescription);
-            self.results = @{
+            NSDictionary *evaluatorResults = @{
                 kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeFile,
                 kEvaluatorResultsKeyImage               : self.name,
                 kEvaluatorResultsKeyModel               : self.model.identifier,
@@ -62,21 +60,21 @@
                 kEvaluatorResultsKeyErrorDescription    : errorDescription,
                 kEvaluatorResultsKeyEvaluation          : [NSNull null]
             };
-            safe_block(completionHandler, self.results);
+            safe_block(completionHandler, evaluatorResults, NULL);
             return;
         }
         
         ImageEvaluator *imageEvaluator = [[ImageEvaluator alloc] initWithModel:self.model image:image ];
         
-        [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results) {
-            self.results = @{
+        [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results, CVPixelBufferRef _Nullable inputPixelBuffer) {
+            NSDictionary *evaluatorResults = @{
                 kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeFile,
                 kEvaluatorResultsKeyImage               : self.name,
                 kEvaluatorResultsKeyModel               : self.model.identifier,
                 kEvaluatorResultsKeyError               : @(NO),
                 kEvaluatorResultsKeyEvaluation          : results
             };
-            safe_block(completionHandler, self.results);
+            safe_block(completionHandler, evaluatorResults, inputPixelBuffer);
         }];
     }
     

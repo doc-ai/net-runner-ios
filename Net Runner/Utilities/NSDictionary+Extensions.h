@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDictionary (Extensions)
 
 - (NSDictionary*)topN:(NSUInteger)count;
+- (NSDictionary*)topN:(NSUInteger)count threshold:(float)threshold;
 
 @end
 

@@ -59,6 +59,14 @@
     return [[self reverseObjectEnumerator] allObjects];
 }
 
+- (NSInteger)product {
+    return [[self
+        reduce:@(1) combine:^id _Nonnull(NSNumber * _Nonnull accumulator, NSNumber * _Nonnull item) {
+            return @(accumulator.integerValue * item.integerValue);
+        }]
+        integerValue];
+}
+
 @end
 
 // MARK: -

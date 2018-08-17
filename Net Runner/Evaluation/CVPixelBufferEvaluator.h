@@ -27,20 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) id<VisionModel> model;
 
 /**
- * The results of running inference on the model. See EvaluatorConstants.h for a list of keys that may
- * appear in this dictionary.
- *
- * Unlike other evaluator results dictionary, this dictionary only contains the results of running inference,
- * including latency, and any errors, but no information that uniquely identifies the input.
- */
-
-@property (readonly) NSDictionary *results;
-
-/**
  * The pixel buffer on which inference is being run.
  */ 
 
-@property (nonatomic, readonly) CVPixelBufferRef pixelBuffer;
+@property (nullable, nonatomic, readonly) CVPixelBufferRef pixelBuffer;
 
 /**
  * The orientation of the incoming pixel buffer. A transformation will be applied to ensure the final

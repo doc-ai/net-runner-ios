@@ -8,6 +8,9 @@
 
 #import "ImageNetClassificationModelOutput.h"
 #import "NSArray+Extensions.h"
+#import "NSDictionary+Extensions.h"
+
+static NSString * const kClassificationOutputKey = @"classification";
 
 @interface ImageNetClassificationModelOutput ()
 
@@ -19,7 +22,9 @@
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary {
     if (self = [super init]) {
-        _output = dictionary;
+        _output = @{
+            kClassificationOutputKey: [dictionary[kClassificationOutputKey] topN:5 threshold:0.1]
+        };
     }
     return self;
 }
@@ -39,16 +44,17 @@
 }
 
 - (NSString*)localizedDescription {
+    NSDictionary *classifications = self.output[kClassificationOutputKey];
     
-    if ( self.output.count == 0 ) {
+    if ( classifications.count == 0 ) {
         return @"";
     }
     
-    NSArray *keys = [self.output keysSortedByValueUsingSelector:@selector(compare:)].reversed;
+    NSArray *keys = [classifications keysSortedByValueUsingSelector:@selector(compare:)].reversed;
     NSMutableString *description = [NSMutableString string];
     
     for ( NSString *key in keys ) {
-        NSNumber *value = self.output[key];
+        NSNumber *value = classifications[key];
         [description appendFormat:@"(%.2f) %@\n", value.floatValue, key];
     }
     
@@ -81,8 +87,8 @@
     const float thresholdValue = 0.01f;
     
     NSMutableDictionary<NSString*,NSNumber*> *decayedInference = [NSMutableDictionary dictionary];
-    NSDictionary<NSString*,NSNumber*> *previousInference = previousOutput.value;
-    NSDictionary<NSString*,NSNumber*> *newInference = self.value;
+    NSDictionary<NSString*,NSNumber*> *previousInference = previousOutput.value[kClassificationOutputKey];
+    NSDictionary<NSString*,NSNumber*> *newInference = self.value[kClassificationOutputKey];
     
     for ( NSString *key in previousInference ) {
         decayedInference[key] = previousInference[key];
@@ -100,7 +106,9 @@
         }
     }
     
-    return [[ImageNetClassificationModelOutput alloc] initWithDictionary:decayedInference];
+    return [[ImageNetClassificationModelOutput alloc] initWithDictionary:@{
+        kClassificationOutputKey: decayedInference
+    }];
 }
 
 @end

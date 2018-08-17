@@ -29,13 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) id<VisionModel> model;
 
 /**
- * The results of running inference on the model. See EvaluatorConstants.h for a list of keys that may
- * appear in this dictionary.
- */
-
-@property (readonly) NSDictionary *results;
-
-/**
  * The image on which inference is being run.
  */
 

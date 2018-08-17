@@ -13,6 +13,8 @@
 
 NSString * const kTFModelBundleExtension = @"tfbundle";
 NSString * const kTFModelInfoFile = @"model.json";
+NSString * const kTFLiteModelClassName = @"TIOTFLiteModel";
+NSString * const kAssetsDirectory = @"assets";
 
 @interface ModelBundle ()
 
@@ -60,7 +62,6 @@ NSString * const kTFModelInfoFile = @"model.json";
         
         assert(json[@"model"] != nil);
         assert(json[@"model"][@"quantized"] != nil);
-        assert(json[@"model"][@"class"] != nil);
         assert(json[@"model"][@"file"] != nil);
         // assert(json[@"model"][@"type"] != nil);
         
@@ -78,8 +79,11 @@ NSString * const kTFModelInfoFile = @"model.json";
         
         _options = [[ModelOptions alloc] initWithDictionary:json[@"options"]];
         _quantized = [json[@"model"][@"quantized"] boolValue];
-        _modelClassName = json[@"model"][@"class"];
         _type = json[@"model"][@"type"];
+        
+        _modelClassName = json[@"model"][@"class"] != nil
+            ? json[@"model"][@"class"]
+            : kTFLiteModelClassName;
     }
     
     return self;
@@ -106,6 +110,10 @@ NSString * const kTFModelInfoFile = @"model.json";
 
 - (NSString*)modelFilepath {
     return [_path stringByAppendingPathComponent:_info[@"model"][@"file"]];
+}
+
+- (NSString*)pathToAsset:(NSString*)filename {
+    return [[_path stringByAppendingPathComponent:kAssetsDirectory] stringByAppendingPathComponent:filename];
 }
 
 @end

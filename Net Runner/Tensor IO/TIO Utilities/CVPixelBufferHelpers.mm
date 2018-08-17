@@ -25,7 +25,7 @@
 //  Converting 4 channels to 4: (ARGB <-> BGRA):
 //  None
 
-#include "CVPixelBufferHelpers.h"
+#import "CVPixelBufferHelpers.h"
 
 /**
  * Release callback to free the bytes used by a pixel buffer

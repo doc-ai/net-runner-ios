@@ -34,6 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray *)reversed;
 
+// Returns the numeric product of the array's entries. The entries must be of type NSNumber
+
+- (NSInteger)product;
+
 @end
 
 // MARK: - Arrays of Dictionaries

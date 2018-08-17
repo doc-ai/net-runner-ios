@@ -46,9 +46,8 @@
     
     CVPixelBufferEvaluator *pixelBufferEvaluator = [[CVPixelBufferEvaluator alloc] initWithModel:self.model pixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp];
     
-    [pixelBufferEvaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
-        self.results = result;
-        safe_block(completionHandler, self.results);
+    [pixelBufferEvaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
+        safe_block(completionHandler, result, inputPixelBuffer);
     }];
     
     }); // dispatch_once

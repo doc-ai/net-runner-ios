@@ -55,8 +55,6 @@
     return self;
 }
 
-// TODO: use key constants not strings
-
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
     dispatch_once(&_once, ^{
 
@@ -76,7 +74,7 @@
             if ( result == nil ) {
                 NSString *errorDescription = [NSString stringWithFormat:@"Unable to request image for asset %@",  self.photo.localIdentifier];
                 NSLog(@"%@", errorDescription);
-                self.results = @{
+                NSDictionary *evaluatorResults = @{
                     kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeAlbumPhoto,
                     kEvaluatorResultsKeyAlbum               : self.album.localIdentifier,
                     kEvaluatorResultsKeyImage               : self.photo.localIdentifier,
@@ -85,14 +83,14 @@
                     kEvaluatorResultsKeyErrorDescription    : errorDescription,
                     kEvaluatorResultsKeyEvaluation          : [NSNull null]
                 };
-                safe_block(completionHandler, self.results);
+                safe_block(completionHandler, evaluatorResults, NULL);
                 return;
             }
             
             ImageEvaluator *imageEvaluator = [[ImageEvaluator alloc] initWithModel:self.model image:result];
             
-            [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results) {
-                self.results = @{
+            [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results, CVPixelBufferRef _Nullable inputPixelBuffer) {
+                NSDictionary *evaluatorResults = @{
                     kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeAlbumPhoto,
                     kEvaluatorResultsKeyAlbum               : self.album.localIdentifier,
                     kEvaluatorResultsKeyImage               : self.photo.localIdentifier,
@@ -100,7 +98,7 @@
                     kEvaluatorResultsKeyError               : @(NO),
                     kEvaluatorResultsKeyEvaluation          : results
                 };
-                safe_block(completionHandler, self.results);
+                safe_block(completionHandler, evaluatorResults, inputPixelBuffer);
             }];
         }
     }];

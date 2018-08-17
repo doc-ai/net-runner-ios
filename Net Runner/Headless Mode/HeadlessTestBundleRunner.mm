@@ -70,10 +70,10 @@
             continue;
         }
         
-        if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
-            NSLog(@"Test Bundle %@: Model does not conform to VisionModel protocol: %@", self.testBundle.identifier, modelBundle.identifier);
-            continue;
-        }
+//        if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
+//            NSLog(@"Test Bundle %@: Model does not conform to VisionModel protocol: %@", self.testBundle.identifier, modelBundle.identifier);
+//            continue;
+//        }
     
         numberOfModels++;
         
@@ -112,7 +112,7 @@
     for ( id<Evaluator> evaluator in evaluators ) {
 
          @autoreleasepool {
-            [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
+            [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
                 NSMutableDictionary *resultCopy = [result mutableCopy];
                 resultCopy[@"test_bundle"] = self.testBundle.identifier;
                 [results addObject:[resultCopy copy]];

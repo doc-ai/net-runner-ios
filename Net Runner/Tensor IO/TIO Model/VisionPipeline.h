@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TIOPixelBufferDescription;
+
 @protocol VisionModel;
 
 /**
@@ -28,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly) id<VisionModel> model;
 
+// MARK: - New
+
+@property (readonly) TIOPixelBufferDescription *pixelBufferDescription;
+
 /**
  * Designated initializer.
  *
@@ -35,7 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
  * a pixel buffer to a format that can be accepted by the model.
  */
 
-- (instancetype)initWithVisionModel:(id<VisionModel>)model NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithVisionModel:(id<VisionModel>)model;
+
+// MARK: - NEW
+
+- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferDescription*)pixelBufferDescription;
 
 /**
  * Use the designated initializer.

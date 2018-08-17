@@ -16,6 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The `ModelBundleManager` manages model bundles in a provided directory. Use the returned
  * `ModelBundle` classes to instantiante `Model` objects.
+ *
+ * Usage:
+ * @code
+ * [ModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error];
+ * ModelBundle *bundle = [ModelBundleManager.sharedManager bundleWithId:@"model-id"];
+ * id<Model> model = [bundle newModel];
+ * @endcode
  */
 
 @interface ModelBundleManager : NSObject

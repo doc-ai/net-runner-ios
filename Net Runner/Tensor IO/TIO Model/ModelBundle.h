@@ -131,6 +131,16 @@ extern NSString * const kTFModelInfoFile;
 
 - (nullable id<Model>)newModel;
 
+/**
+ * Returns the path to an asset in the bundle
+ *
+ * @param filename Asset's filename, including extension
+ *
+ * @return NSString The full path to the file
+ */
+
+- (NSString*)pathToAsset:(NSString*)filename;
+
 @end
 
 NS_ASSUME_NONNULL_END

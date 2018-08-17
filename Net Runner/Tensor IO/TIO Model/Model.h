@@ -21,6 +21,8 @@ typedef enum : NSUInteger {
     ModelWeightSizeUInt8,
 } ModelWeightSize;
 
+@protocol TIOData;
+@protocol TIODataDescription;
 @class ModelBundle;
 @class ModelOptions;
 
@@ -131,6 +133,16 @@ typedef enum : NSUInteger {
  */
 
 - (void)unload;
+
+// MARK: - New
+
+- (id<TIOData>)runModelOn:(id<TIOData>)input;
+
+- (id<TIODataDescription>)dataDescriptionForInputAtIndex:(NSUInteger)index;
+- (id<TIODataDescription>)dataDescriptionForInputWithName:(NSString*)name;
+
+- (id<TIODataDescription>)dataDescriptionForOutputAtIndex:(NSUInteger)index;
+- (id<TIODataDescription>)dataDescriptionForOutputWithName:(NSString*)name;
 
 @end
 

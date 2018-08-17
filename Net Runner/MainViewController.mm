@@ -31,6 +31,7 @@
 #import "EvaluatorConstants.h"
 #import "ModelOptions.h"
 #import "ModelOutput.h"
+#import "TIOPixelBufferDescription.h"
 
 // MARK: -
 
@@ -178,13 +179,13 @@ typedef enum : NSUInteger {
         return NO;
     }
     
-    if ( ![self.model conformsToProtocol:@protocol(VisionModel)] ) {
-        NSLog(@"Model does not conform to protocol VisionModel, id: %@", bundle.identifier);
-        [self showLoadModelAlert:@"Model class does not correspond to the VisionModel protocol."];
-        self.modelBundle = nil;
-        self.model = nil;
-        return NO;
-    }
+//    if ( ![self.model conformsToProtocol:@protocol(VisionModel)] ) {
+//        NSLog(@"Model does not conform to protocol VisionModel, id: %@", bundle.identifier);
+//        [self showLoadModelAlert:@"Model class does not correspond to the VisionModel protocol."];
+//        self.modelBundle = nil;
+//        self.model = nil;
+//        return NO;
+//    }
     
     if ( ![self.model load:&modelError] ) {
         NSLog(@"Model does could not be loaded, id: %@, error: %@", bundle.identifier, modelError);
@@ -194,8 +195,10 @@ typedef enum : NSUInteger {
         return NO;
     }
     
+    TIOPixelBufferDescription *description = [self.model dataDescriptionForInputAtIndex:0];
+    
     self.title = self.model.name;
-    self.imageInputPreviewView.pixelFormat = self.model.pixelFormat;
+    self.imageInputPreviewView.pixelFormat = description.pixelFormat;
 
     self.previousOutput = nil;
     self.latencyCounter = [[LatencyCounter alloc] init];
@@ -672,7 +675,9 @@ typedef enum : NSUInteger {
     
     auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithModel:self.model pixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationRight];
     
-    [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
+    [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
+        CVPixelBufferRetain(inputPixelBuffer); // No ARC bridging boo
+        
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
             id<ModelOutput> inference = result[kEvaluatorResultsKeyInferenceResults];
@@ -691,8 +696,12 @@ typedef enum : NSUInteger {
             // Visualize last pixel buffer used by model
     
             if ( [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers] ) {
-                self.imageInputPreviewView.pixelBuffer = self.model.inputPixelBuffer;
+                self.imageInputPreviewView.pixelBuffer = inputPixelBuffer;
             }
+
+            // Cleanup
+    
+            CVPixelBufferRelease(inputPixelBuffer);
 
             #ifdef DEBUG
             NSLog(@"%@",[self modelStats:YES]);
@@ -708,10 +717,11 @@ typedef enum : NSUInteger {
 
 - (void)runModelOnImage:(UIImage*)image {
     
-    CVPixelBufferRef pixelBuffer = image.pixelBuffer;
-    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithModel:self.model pixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp];
+    auto const evaluator = [[CVPixelBufferEvaluator alloc] initWithModel:self.model pixelBuffer:image.pixelBuffer orientation:kCGImagePropertyOrientationUp];
     
-    [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
+    [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
+        CVPixelBufferRetain(inputPixelBuffer); // No ARC bridging boo
+        
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             
             id <ModelOutput> inference = result[kEvaluatorResultsKeyInferenceResults];
@@ -734,8 +744,12 @@ typedef enum : NSUInteger {
             // Visualize last pixel buffer used by model
     
             if ( [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers] ) {
-                self.imageInputPreviewView.pixelBuffer = self.model.inputPixelBuffer;
+                self.imageInputPreviewView.pixelBuffer = inputPixelBuffer;
             }
+
+            // Cleanup
+
+            CVPixelBufferRelease(inputPixelBuffer);
 
             #ifdef DEBUG
             NSLog(@"%@",[self modelStats:YES]);

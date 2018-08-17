@@ -45,3 +45,21 @@
 */
 
 #endif /* ModelBundleJSONSchema_h */
+
+/*
+"normalize": {
+    "standard":     String      // "[0,1]" | "[-1,1]"
+    "scale":        Float
+    "red_bias":     Float
+    "green_bias":   Float
+    "blue_bias":    Float
+}
+*/
+
+/*
+"dequantize": {
+    "standard":     String      // "[0,1]"
+    "scale":        Float
+    "bias":         Float
+}
+*/

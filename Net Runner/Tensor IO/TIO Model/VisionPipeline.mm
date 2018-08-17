@@ -12,6 +12,7 @@
 #import "VisionModel.h"
 #import "CVPixelBufferHelpers.h"
 #import "ObjcDefer.h"
+#import "TIOPixelBufferDescription.h"
 
 @interface VisionPipeline()
 
@@ -29,6 +30,13 @@
     return self;
 }
 
+- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferDescription*)pixelBufferDescription {
+    if (self = [super init]) {
+        _pixelBufferDescription = pixelBufferDescription;
+    }
+    return self;
+}
+
 - (nullable CVPixelBufferRef)transform:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
     CVPixelBufferRef resizedPixelBuffer = NULL;
     CVPixelBufferRef rotatedPixelBuffer = NULL;
@@ -39,8 +47,8 @@
     
     const size_t srcWidth = CVPixelBufferGetWidth(pixelBuffer);
     const size_t srcHeight = CVPixelBufferGetHeight(pixelBuffer);
-    const size_t dstWidth = self.model.imageVolume.width;
-    const size_t dstHeight = self.model.imageVolume.height;
+    const size_t dstWidth = self.pixelBufferDescription.shape.width;
+    const size_t dstHeight = self.pixelBufferDescription.shape.height;
     
     if (srcWidth != dstWidth || srcHeight != dstHeight) {
         resizedPixelBuffer = CVPixelBufferResizeToSquare(pixelBuffer, CGSizeMake(dstWidth, dstHeight));
@@ -99,7 +107,7 @@ defer_block {
     // :: rotatedPixelBuffer ->formattedPixelBuffer
     
     const OSType srcFormat = CVPixelBufferGetPixelFormatType(rotatedPixelBuffer);
-    const OSType dstFormat = self.model.pixelFormat;
+    const OSType dstFormat = self.pixelBufferDescription.pixelFormat;
     
     assert(srcFormat == kCVPixelFormatType_32BGRA || srcFormat == kCVPixelFormatType_32ARGB);
     
