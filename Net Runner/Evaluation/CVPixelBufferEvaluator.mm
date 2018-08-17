@@ -21,7 +21,7 @@
 @interface CVPixelBufferEvaluator ()
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<VisionModel> model;
+@property (readwrite) id<Model> model;
 @property (nonatomic, readwrite) CVPixelBufferRef pixelBuffer;
 @property (readwrite) CGImagePropertyOrientation orientation;
 
@@ -31,7 +31,7 @@
     dispatch_once_t _once;
 }
 
-- (instancetype)initWithModel:(id<VisionModel>)model pixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
+- (instancetype)initWithModel:(id<Model>)model pixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
     if (self = [super init]) {
         _model = model;
         _orientation = orientation;

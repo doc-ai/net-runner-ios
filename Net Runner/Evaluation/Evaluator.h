@@ -13,7 +13,6 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "Model.h"
-#import "VisionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,14 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^EvaluatorCompletionBlock)(NSDictionary *result, CVPixelBufferRef _Nullable inputPixelBuffer);
 
 /**
- * The `Model` object on which inference is run. Currently, only objects conforming to the `VisionModel`
- * protocol are supported.
+ * The `Model` object on which inference is run.
  *
  * Conforming objects should store the model in their initialization method and then set it to `nil` when
  * evaluation is complete.
  */
 
-@property (readonly) id<VisionModel> model;
+@property (readonly) id<Model> model;
 
 /**
  * The function repsonsible for perfoming inference with the model. The function should store the results

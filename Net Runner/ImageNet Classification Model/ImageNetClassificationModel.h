@@ -10,7 +10,6 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "Model.h"
-#import "VisionModel.h"
 #import "CVPixelBufferHelpers.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  * probabilities, wrapped in an instance of `ImageNetClassificationModelOutput`.
  */
 
-@interface ImageNetClassificationModel : NSObject <VisionModel>
+@interface ImageNetClassificationModel : NSObject <Model>
 
 // Model Protocol Properties
 

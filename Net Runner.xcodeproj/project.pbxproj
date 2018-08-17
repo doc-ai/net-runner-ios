@@ -159,7 +159,6 @@
 		E3322A06212613D40031435F /* VisionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionPipeline.h; sourceTree = "<group>"; };
 		E3322A07212613D40031435F /* ModelBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelBundle.m; sourceTree = "<group>"; };
 		E3322A08212613D40031435F /* ModelOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelOptions.h; sourceTree = "<group>"; };
-		E3322A09212613D40031435F /* VisionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionModel.h; sourceTree = "<group>"; };
 		E3322A0A212613D40031435F /* ModelHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelHelpers.mm; sourceTree = "<group>"; };
 		E3322A0B212613D40031435F /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		E3322A0C212613D40031435F /* ModelBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelBundle.h; sourceTree = "<group>"; };
@@ -428,7 +427,6 @@
 			isa = PBXGroup;
 			children = (
 				E3322A0B212613D40031435F /* Model.h */,
-				E3322A09212613D40031435F /* VisionModel.h */,
 				E3322A02212613D40031435F /* ModelBundleJSONSchema.h */,
 				E3322A0C212613D40031435F /* ModelBundle.h */,
 				E3322A07212613D40031435F /* ModelBundle.m */,

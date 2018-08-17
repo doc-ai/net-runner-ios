@@ -12,7 +12,6 @@
 #import "ModelBundle.h"
 #import "AlbumPhotoEvaluator.h"
 #import "UserDefaults.h"
-#import "VisionModel.h"
 #import "NSArray+Extensions.h"
 #import "ResultInfoView.h"
 #import "ModelOutput.h"
@@ -93,12 +92,7 @@
 }
 
 - (void)runModelOnAsset:(PHAsset*)asset {
-    id<VisionModel> model = (id<VisionModel>)self.modelBundle.newModel;
-    
-//    if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
-//        NSLog(@"Model does not conform to vision protocol: %@", model.identifier);
-//        return;
-//    }
+    id<Model> model = self.modelBundle.newModel;
     
     AlbumPhotoEvaluator *evaluator = [[AlbumPhotoEvaluator alloc] initWithModel:model photo:asset album:self.album imageManager:self.imageManager];
     

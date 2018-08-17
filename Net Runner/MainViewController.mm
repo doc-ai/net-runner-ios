@@ -17,7 +17,6 @@
 #import "ModelBundle.h"
 #import "ModelBundleManager.h"
 #import "ResultInfoView.h"
-#import "VisionModel.h"
 #import "Model.h"
 #import "LatencyCounter.h"
 #import "SettingsTableViewController.h"
@@ -46,7 +45,7 @@ typedef enum : NSUInteger {
 @property LatencyCounter *latencyCounter;
 
 @property ModelBundle *modelBundle;
-@property id<VisionModel> model;
+@property id<Model> model;
 @property id<ModelOutput> previousOutput;
 
 @property AVCaptureSession *session;
@@ -169,7 +168,7 @@ typedef enum : NSUInteger {
     NSError *modelError;
     
     self.modelBundle = bundle;
-    self.model = (id<VisionModel>)[self.modelBundle newModel];
+    self.model = [self.modelBundle newModel];
     
     if ( self.model == nil ) {
         NSLog(@"Unable to find and instantiate model with id %@", bundle.identifier);
@@ -178,14 +177,6 @@ typedef enum : NSUInteger {
         self.model = nil;
         return NO;
     }
-    
-//    if ( ![self.model conformsToProtocol:@protocol(VisionModel)] ) {
-//        NSLog(@"Model does not conform to protocol VisionModel, id: %@", bundle.identifier);
-//        [self showLoadModelAlert:@"Model class does not correspond to the VisionModel protocol."];
-//        self.modelBundle = nil;
-//        self.model = nil;
-//        return NO;
-//    }
     
     if ( ![self.model load:&modelError] ) {
         NSLog(@"Model does could not be loaded, id: %@, error: %@", bundle.identifier, modelError);

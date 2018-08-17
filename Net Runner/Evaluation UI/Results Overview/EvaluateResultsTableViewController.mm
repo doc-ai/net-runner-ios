@@ -11,7 +11,6 @@
 #import "AlbumPhotoEvaluator.h"
 #import "Evaluator.h"
 #import "ImageEvaluator.h"
-#import "VisionModel.h"
 #import "ModelBundle.h"
 #import "Model.h"
 #import "NSArray+Extensions.h"
@@ -188,11 +187,6 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
                 continue;
             }
             
-//            if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
-//                NSLog(@"Model does not conform to VisionModel protocol: %@", modelBundle.identifier);
-//                continue;
-//            }
-            
             numberOfModels++;
             
             for ( PHAssetCollection *album in self.albums ) {
@@ -200,7 +194,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
                 for ( PHAsset *photo in assets ) {
                     for ( NSUInteger iter = 0; iter < self.iterations.integerValue; iter++ ) {
                         AlbumPhotoEvaluator *evaluator = [[AlbumPhotoEvaluator alloc]
-                            initWithModel:(id<VisionModel>)model
+                            initWithModel:model
                             photo:photo
                             album:album
                             imageManager:self.imageManager];

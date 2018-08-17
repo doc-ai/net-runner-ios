@@ -16,7 +16,7 @@
 @interface ImageEvaluator ()
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<VisionModel> model;
+@property (readwrite) id<Model> model;
 @property (readwrite) UIImage *image;
 
 @end
@@ -25,7 +25,7 @@
     dispatch_once_t _once;
 }
 
-- (instancetype)initWithModel:(id<VisionModel>)model image:(UIImage*)image {
+- (instancetype)initWithModel:(id<Model>)model image:(UIImage*)image {
     if (self = [super init]) {
         _image = image;
         _model = model;

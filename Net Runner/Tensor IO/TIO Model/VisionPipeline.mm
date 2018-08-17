@@ -9,26 +9,11 @@
 #import "VisionPipeline.h"
 
 #import "Model.h"
-#import "VisionModel.h"
 #import "CVPixelBufferHelpers.h"
 #import "ObjcDefer.h"
 #import "TIOPixelBufferDescription.h"
 
-@interface VisionPipeline()
-
-@property (readwrite) id<VisionModel> model;
-
-@end
-
 @implementation VisionPipeline
-
-- (instancetype)initWithVisionModel:(id<VisionModel>)model {
-    if (self = [super init]) {
-        _model = model;
-    }
-    
-    return self;
-}
 
 - (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferDescription*)pixelBufferDescription {
     if (self = [super init]) {

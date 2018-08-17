@@ -13,7 +13,7 @@
 @interface URLImageEvaluator ()
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<VisionModel> model;
+@property (readwrite) id<Model> model;
 @property (readwrite) NSURL *URL;
 @property (readwrite) NSString *name;
 
@@ -23,7 +23,7 @@
     dispatch_once_t _once;
 }
 
-- (instancetype)initWithModel:(id<VisionModel>)model URL:(NSURL*)URL name:(NSString*)name {
+- (instancetype)initWithModel:(id<Model>)model URL:(NSURL*)URL name:(NSString*)name {
     if (self = [super init]) {
         _model = model;
         _URL = URL;

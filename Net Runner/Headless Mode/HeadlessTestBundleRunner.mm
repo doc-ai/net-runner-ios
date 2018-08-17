@@ -13,7 +13,6 @@
 #import "URLImageEvaluator.h"
 #import "Evaluator.h"
 #import "ModelBundleManager.h"
-#import "VisionModel.h"
 #import "Model.h"
 #import "EvaluationMetric.h"
 #import "NSArray+Extensions.h"
@@ -70,11 +69,6 @@
             continue;
         }
         
-//        if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
-//            NSLog(@"Test Bundle %@: Model does not conform to VisionModel protocol: %@", self.testBundle.identifier, modelBundle.identifier);
-//            continue;
-//        }
-    
         numberOfModels++;
         
         for ( NSDictionary *image in self.testBundle.images ) {
@@ -89,10 +83,10 @@
             
                 if ( [imageType isEqualToString:@"file"] ) {
                     NSURL *imageURL = [NSURL fileURLWithPath:[self.testBundle filePathForImageInfo:image]];
-                    evaluator = [[FileImageEvaluator alloc] initWithModel:(id<VisionModel>)model fileURL:imageURL name:name];
+                    evaluator = [[FileImageEvaluator alloc] initWithModel:model fileURL:imageURL name:name];
                 } else if ( [imageType isEqualToString:@"url"] ) {
                     NSURL *imageURL = [NSURL URLWithString:image[@"url"]];
-                    evaluator = [[URLImageEvaluator alloc] initWithModel:(id<VisionModel>)model URL:imageURL name:name];
+                    evaluator = [[URLImageEvaluator alloc] initWithModel:model URL:imageURL name:name];
                 }
                 
                 [evaluators addObject:evaluator];

@@ -10,23 +10,22 @@
 #import <UIKit/UIKit.h>
 
 #import "Evaluator.h"
-#import "VisionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Runs inference on a `UIImage`. Appropriate for models with a single input node that expects a pixel buffer.
  *
- * Most `VisionModel` will delegate evaluation to this object, which then delegates it to the `CVPixelBufferEvaluator`.
+ * Most `Model` will delegate evaluation to this object, which then delegates it to the `CVPixelBufferEvaluator`.
  */
 
 @interface ImageEvaluator : NSObject <Evaluator>
 
 /**
- * The `VisionModel` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ * The `Model` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
  */
 
-@property (readonly) id<VisionModel> model;
+@property (readonly) id<Model> model;
 
 /**
  * The image on which inference is being run.
@@ -37,11 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Designated initializer.
  *
- * @param model The `VisionModel` object on which inference is being run. Noded in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ * @param model The `Model` object on which inference is being run. Noded in the results dictionary under the `kEvaluatorResultsKeyModel` key.
  * @param image The `UIImage` on which inference is being run.
  */
 
-- (instancetype)initWithModel:(id<VisionModel>)model image:(UIImage*)image NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithModel:(id<Model>)model image:(UIImage*)image NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.

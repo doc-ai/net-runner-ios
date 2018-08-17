@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 
 #import "Evaluator.h"
-#import "VisionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FileImageEvaluator : NSObject <Evaluator>
 
 /**
- * The `VisionModel` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ * The `Model` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
  */
 
-@property (readonly) id<VisionModel> model;
+@property (readonly) id<Model> model;
 
 /**
  * The URL of the file being evaluated.
@@ -43,12 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Designated initializer.
  *
- * @param model The `VisionModel` object on which inference is being run. Noded in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ * @param model The `Model` object on which inference is being run. Noded in the results dictionary under the `kEvaluatorResultsKeyModel` key.
  * @param fileURL The file backed `NSURL` on which infererence is being run.
  * @param name The `NSString` name of the file on which infererence is being run. Noted in the results dictionary under the kEvaluatorResultsKeyImage key.
  */
 
-- (instancetype)initWithModel:(id<VisionModel>)model fileURL:(NSURL*)fileURL name:(NSString*)name NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithModel:(id<Model>)model fileURL:(NSURL*)fileURL name:(NSString*)name NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.

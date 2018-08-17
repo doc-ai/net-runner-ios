@@ -19,7 +19,7 @@
 + (PHImageRequestOptions*) imageRequestOptions;
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<VisionModel> model;
+@property (readwrite) id<Model> model;
 
 @end
 
@@ -44,7 +44,7 @@
     return options;
 }
 
-- (instancetype)initWithModel:(id<VisionModel>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager {
+- (instancetype)initWithModel:(id<Model>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager {
     if (self = [super init]) {
         _model = model;
         _photo = photo;

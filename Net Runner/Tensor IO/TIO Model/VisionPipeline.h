@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class TIOPixelBufferDescription;
 
-@protocol VisionModel;
-
 /**
  * The `VisionPipeline` is responsible for scaling and croping, rotating, and converting the provided pixel buffer
  * to and ARGB or BGRA pixel format, using properties specified by the model.
@@ -22,28 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VisionPipeline : NSObject
 
-/**
- * The `VisionModel` object which will ultimately receive the pixel buffer provided in the transform method.
- *
- * Properties such as shape and pixel format are taken from the model and used to apply the required transformations.
- */
-
-@property (readonly) id<VisionModel> model;
-
-// MARK: - New
-
 @property (readonly) TIOPixelBufferDescription *pixelBufferDescription;
 
 /**
  * Designated initializer.
  *
- * @param model The `VisionModel` whose properties will be used to apply the transformations needed to convert
- * a pixel buffer to a format that can be accepted by the model.
+ * @param pixelBufferDescription A description of the input layer that specifies the transformations
+ * needed to convert a pixel buffer to a format that can be accepted by the model.
  */
-
-- (instancetype)initWithVisionModel:(id<VisionModel>)model;
-
-// MARK: - NEW
 
 - (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferDescription*)pixelBufferDescription;
 
@@ -54,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Transform a pixel buffer into the format required by the `VisionModel`.
+ * Transform a pixel buffer into the format required by the `TIOPixelBufferDescription`.
  *
  * A single VisionPipeline may be used to transform multiple pixel buffers for the same model.
  *
