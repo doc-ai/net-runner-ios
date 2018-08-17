@@ -134,15 +134,15 @@ typedef enum : NSUInteger {
 
 - (void)unload;
 
-// MARK: - New
+// TODO: add documentation
 
 - (id<TIOData>)runModelOn:(id<TIOData>)input;
 
-- (id<TIODataDescription>)dataDescriptionForInputAtIndex:(NSUInteger)index;
-- (id<TIODataDescription>)dataDescriptionForInputWithName:(NSString*)name;
+- (id<TIODataDescription>)descriptionOfInputAtIndex:(NSUInteger)index;
+- (id<TIODataDescription>)descriptionOfInputWithName:(NSString*)name;
 
-- (id<TIODataDescription>)dataDescriptionForOutputAtIndex:(NSUInteger)index;
-- (id<TIODataDescription>)dataDescriptionForOutputWithName:(NSString*)name;
+- (id<TIODataDescription>)descriptionOfOutputAtIndex:(NSUInteger)index;
+- (id<TIODataDescription>)descriptionOfOutputWithName:(NSString*)name;
 
 @end
 

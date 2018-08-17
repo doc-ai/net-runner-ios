@@ -79,7 +79,7 @@
     
     // Transform the image to the required format
     
-    TIOPixelBufferDescription *description = [self.model dataDescriptionForInputAtIndex:0];
+    TIOPixelBufferDescription *description = [self.model descriptionOfInputAtIndex:0];
     VisionPipeline *pipeline = [[VisionPipeline alloc] initWithTIOPixelBufferDescription:description];
     __block CVPixelBufferRef transformedPixelBuffer = NULL;
     

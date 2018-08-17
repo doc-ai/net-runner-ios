@@ -186,7 +186,7 @@ typedef enum : NSUInteger {
         return NO;
     }
     
-    TIOPixelBufferDescription *description = [self.model dataDescriptionForInputAtIndex:0];
+    TIOPixelBufferDescription *description = [self.model descriptionOfInputAtIndex:0];
     
     self.title = self.model.name;
     self.imageInputPreviewView.pixelFormat = description.pixelFormat;

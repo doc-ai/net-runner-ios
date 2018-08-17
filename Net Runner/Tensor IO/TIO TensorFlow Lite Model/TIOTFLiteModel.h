@@ -43,15 +43,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)load:(NSError**)error;
 - (void)unload;
 
-// MARK: - New
-
 - (id<TIOData>)runModelOn:(id<TIOData>)input;
 
-- (id<TIODataDescription>)dataDescriptionForInputAtIndex:(NSUInteger)index;
-- (id<TIODataDescription>)dataDescriptionForInputWithName:(NSString*)name;
+- (id<TIODataDescription>)descriptionOfInputAtIndex:(NSUInteger)index;
+- (id<TIODataDescription>)descriptionOfInputWithName:(NSString*)name;
 
-- (id<TIODataDescription>)dataDescriptionForOutputAtIndex:(NSUInteger)index;
-- (id<TIODataDescription>)dataDescriptionForOutputWithName:(NSString*)name;
+- (id<TIODataDescription>)descriptionOfOutputAtIndex:(NSUInteger)index;
+- (id<TIODataDescription>)descriptionOfOutputWithName:(NSString*)name;
 
 @end
 

@@ -263,23 +263,21 @@ static NSString * const kTensorTypeImage = @"image";
 
 // MARK: - Input and Output Features
 
-- (id<TIODataDescription>)dataDescriptionForInputAtIndex:(NSUInteger)index {
+- (id<TIODataDescription>)descriptionOfInputAtIndex:(NSUInteger)index {
     return _indexedInputInterfaces[index].dataDescription;
 }
 
-- (id<TIODataDescription>)dataDescriptionForInputWithName:(NSString*)name {
+- (id<TIODataDescription>)descriptionOfInputWithName:(NSString*)name {
     return _namedInputInterfaces[name].dataDescription;
 }
 
-- (id<TIODataDescription>)dataDescriptionForOutputAtIndex:(NSUInteger)index {
+- (id<TIODataDescription>)descriptionOfOutputAtIndex:(NSUInteger)index {
     return _indexedOutputInterfaces[index].dataDescription;
 }
 
-- (id<TIODataDescription>)dataDescriptionForOutputWithName:(NSString*)name {
+- (id<TIODataDescription>)descriptionOfOutputWithName:(NSString*)name {
     return _namedOutputInterfaces[name].dataDescription;
 }
-
-// MARK: - New: Running the Model
 
 - (id<TIOData>)runModelOn:(id<TIOData>)input {
     [self _prepareInput:input];
