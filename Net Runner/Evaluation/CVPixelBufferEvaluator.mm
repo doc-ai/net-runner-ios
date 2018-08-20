@@ -101,7 +101,7 @@
     TIOPixelBuffer *pixelBufferWrapper = [[TIOPixelBuffer alloc] initWithPixelBuffer:transformedPixelBuffer orientation:kCGImagePropertyOrientationUp];
     
     measuring_latency(&inferenceLatency, ^{
-        results = (NSDictionary*)[self.model runModelOn:pixelBufferWrapper];
+        results = (NSDictionary*)[self.model runOn:pixelBufferWrapper];
     });
     
     id<ModelOutput> modelOutput = [[[[ModelOutputManager sharedManager] classForType:self.model.type] alloc] initWithDictionary:results];

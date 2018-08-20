@@ -103,6 +103,12 @@ static NSString * const kTensorTypeImage = @"image";
     return self;
 }
 
+- (nullable instancetype)init {
+    self = [self initWithBundle:[[ModelBundle alloc] initWithPath:@""]];
+    NSAssert(NO, @"Use the designated initializer initWithBundle:");
+    return nil;
+}
+
 /**
  * Enumerates through the json described inputs and constructs a `TIODataInterface` for each one.
  */
@@ -279,7 +285,7 @@ static NSString * const kTensorTypeImage = @"image";
     return _namedOutputInterfaces[name].dataDescription;
 }
 
-- (id<TIOData>)runModelOn:(id<TIOData>)input {
+- (id<TIOData>)runOn:(id<TIOData>)input {
     [self _prepareInput:input];
     [self _runInference];
     return [self _captureOutput];

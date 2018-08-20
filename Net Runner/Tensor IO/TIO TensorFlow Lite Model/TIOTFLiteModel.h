@@ -36,12 +36,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Model Protocol Methods
 
-- (nullable instancetype)initWithBundle:(ModelBundle*)bundle;
+- (nullable instancetype)initWithBundle:(ModelBundle*)bundle NS_DESIGNATED_INITIALIZER;
+
+- (nullable instancetype)init NS_UNAVAILABLE;
 
 - (BOOL)load:(NSError**)error;
 - (void)unload;
 
-- (id<TIOData>)runModelOn:(id<TIOData>)input;
+- (id<TIOData>)runOn:(id<TIOData>)input;
 
 - (id<TIODataDescription>)descriptionOfInputAtIndex:(NSUInteger)index;
 - (id<TIODataDescription>)descriptionOfInputWithName:(NSString*)name;

@@ -15,15 +15,30 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * An `NSNumber` can provide a single value to a tensor or accepts a single value from a tensor.
- *
- * The length of the data determines if the number will be instantiated with a floating point value
- * single byte integer.
- *
  */
 
 @interface NSNumber (TIOData) <TIOData>
 
+/**
+ * Initializes an `NSNumber` with bytes from a tensor.
+ *
+ * @param bytes The output buffer to read from.
+ * @param length The length of the buffer.
+ * @param description A description of the data this buffer produces.
+ *
+ * @return instancetype An instance of `NSNumber`.
+ */
+
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIODataDescription>)description;
+
+/**
+ * Request to fill a tensor with bytes.
+ *
+ * @param buffer The input buffer to copy bytes to.
+ * @param length The length of the input buffer.
+ * @param description A description of the data this buffer expects.
+ */
+
 - (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIODataDescription>)description;
 
 @end
