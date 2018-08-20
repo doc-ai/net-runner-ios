@@ -1,11 +1,10 @@
 //
-//  TIOTFLiteModelHelpers.hpp
-//  Net Runner Parser
+//  ModelJSONParsing.h
+//  Net Runner
 //
-//  Created by Philip Dow on 8/7/18.
+//  Created by Philip Dow on 8/20/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
-//  TODO: Move parsing to ModelHelpers or even to a separate class
 
 #import <Foundation/Foundation.h>
 
@@ -16,13 +15,12 @@
 #import "TIOData.h"
 #import "TIODataInterface.h"
 #import "Quantization.h"
-
-NS_ASSUME_NONNULL_BEGIN
+#import "VisionModelHelpers.h"
 
 @class ModelBundle;
 @class TIODataInterface;
 
-// MARK: - Parsing
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Parses the JSON description of a vector input or output.
@@ -66,6 +64,42 @@ _Nullable DataQuantizer TIODataQuantizerForDict(NSDictionary *dict);
  */
 
 _Nullable DataDequantizer TIODataDequantizerForDict(NSDictionary *dict);
+
+/**
+ * Converts an array of shape values to an `ImageVolume`.
+ */
+
+ImageVolume ImageVolumeForShape(NSArray<NSNumber*> *shape);
+
+/**
+ * Converts a pixel format string such as `"RGB"` or `"BGR"` to a Core Video pixel format type.
+ */
+
+OSType PixelFormatForString(NSString* formatString);
+
+/**
+ * Returns the PixelNormalization given an input dictionary.
+ */
+
+PixelNormalization PixelNormalizationForDictionary(NSDictionary *input);
+
+/**
+ * Returns the PixelNormalizer given an input dictionary.
+ */
+
+PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *input);
+
+/**
+ * Returns the denormalizing PixelNormalization given an input dictionary
+ */
+
+PixelDenormalization PixelDenormalizationForDictionary(NSDictionary *input);
+
+/**
+ * Returns the denormalizer for a given input dictionary
+ */
+
+PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *input);
 
 // MARK: - Assets
 

@@ -56,44 +56,6 @@ BOOL ImageVolumesEqual(const ImageVolume& a, const ImageVolume& b);
 
 extern const OSType PixelFormatTypeInvalid;
 
-// MARK: - Initialization Helpers
-
-/**
- * Converts an array of shape values to an `ImageVolume`.
- */
-
-ImageVolume ImageVolumeForShape(NSArray<NSNumber*> *shape);
-
-/**
- * Converts a pixel format string such as `"RGB"` or `"BGR"` to a Core Video pixel format type.
- */
-
-OSType PixelFormatForString(NSString* formatString);
-
-/**
- * Returns the PixelNormalization given an input dictionary.
- */
-
-PixelNormalization PixelNormalizationForDictionary(NSDictionary *input);
-
-/**
- * Returns the PixelNormalizer given an input dictionary.
- */
-
-PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *input);
-
-/**
- * Returns the denormalizing PixelNormalization given an input dictionary
- */
-
-PixelDenormalization PixelDenormalizationForDictionary(NSDictionary *input);
-
-/**
- * Returns the denormalizer for a given input dictionary
- */
-
-PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *input);
-
 // MARK: - CVPixelBuffer Tensor Utilities
 
 /**
