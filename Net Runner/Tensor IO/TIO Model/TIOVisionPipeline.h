@@ -1,5 +1,5 @@
 //
-//  VisionPipeline.h
+//  TIOVisionPipeline.h
 //  Net Runner
 //
 //  Created by Philip Dow on 7/11/18.
@@ -14,11 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @class TIOPixelBufferDescription;
 
 /**
- * The `VisionPipeline` is responsible for scaling and croping, rotating, and converting the provided pixel buffer
+ * The `TIOVisionPipeline` is responsible for scaling and croping, rotating, and converting the provided pixel buffer
  * to an ARGB or BGRA pixel format, using properties specified by the model.
  */
 
-@interface VisionPipeline : NSObject
+@interface TIOVisionPipeline : NSObject
 
 /**
  * A description of the pixel input expected by the model
@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Transform a pixel buffer into the format required by the `TIOPixelBufferDescription`.
  *
- * A single VisionPipeline may be used to transform multiple pixel buffers for the same model.
+ * A single TIOVisionPipeline may be used to transform multiple pixel buffers for the same model.
  *
  * @param pixelBuffer The `CVPixelBufferRef` that will be transformed.
  * @param orientation The orientation of the pixel buffer.

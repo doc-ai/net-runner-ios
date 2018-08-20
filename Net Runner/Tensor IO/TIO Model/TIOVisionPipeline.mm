@@ -1,19 +1,19 @@
 //
-//  VisionPipeline.m
+//  TIOVisionPipeline.m
 //  Net Runner
 //
 //  Created by Philip Dow on 7/11/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "VisionPipeline.h"
+#import "TIOVisionPipeline.h"
 
 #import "Model.h"
 #import "CVPixelBufferHelpers.h"
 #import "ObjcDefer.h"
 #import "TIOPixelBufferDescription.h"
 
-@implementation VisionPipeline
+@implementation TIOVisionPipeline
 
 - (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferDescription*)pixelBufferDescription {
     if (self = [super init]) {

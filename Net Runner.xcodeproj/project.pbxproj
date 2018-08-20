@@ -24,7 +24,7 @@
 		E3322A1E212613D40031435F /* CVPixelBufferHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229F7212613D40031435F /* CVPixelBufferHelpers.mm */; };
 		E3322A1F212613D40031435F /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229F9212613D40031435F /* NSArray+Extensions.m */; };
 		E3322A21212613D40031435F /* TIOTFLiteModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229FE212613D40031435F /* TIOTFLiteModel.mm */; };
-		E3322A22212613D40031435F /* VisionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A01212613D40031435F /* VisionPipeline.mm */; };
+		E3322A22212613D40031435F /* TIOVisionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A01212613D40031435F /* TIOVisionPipeline.mm */; };
 		E3322A23212613D40031435F /* VisionModelHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A03212613D40031435F /* VisionModelHelpers.mm */; };
 		E3322A24212613D40031435F /* TIOModelOptions.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A04212613D40031435F /* TIOModelOptions.mm */; };
 		E3322A25212613D40031435F /* ModelBundleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3322A05212613D40031435F /* ModelBundleManager.m */; };
@@ -157,12 +157,12 @@
 		E33229FB212613D40031435F /* TIOTFLiteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOTFLiteModel.h; sourceTree = "<group>"; };
 		E33229FE212613D40031435F /* TIOTFLiteModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOTFLiteModel.mm; sourceTree = "<group>"; };
 		E3322A00212613D40031435F /* ModelHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelHelpers.h; sourceTree = "<group>"; };
-		E3322A01212613D40031435F /* VisionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VisionPipeline.mm; sourceTree = "<group>"; };
+		E3322A01212613D40031435F /* TIOVisionPipeline.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOVisionPipeline.mm; sourceTree = "<group>"; };
 		E3322A02212613D40031435F /* ModelBundleJSONSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelBundleJSONSchema.h; sourceTree = "<group>"; };
 		E3322A03212613D40031435F /* VisionModelHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VisionModelHelpers.mm; sourceTree = "<group>"; };
 		E3322A04212613D40031435F /* TIOModelOptions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOModelOptions.mm; sourceTree = "<group>"; };
 		E3322A05212613D40031435F /* ModelBundleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelBundleManager.m; sourceTree = "<group>"; };
-		E3322A06212613D40031435F /* VisionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionPipeline.h; sourceTree = "<group>"; };
+		E3322A06212613D40031435F /* TIOVisionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOVisionPipeline.h; sourceTree = "<group>"; };
 		E3322A07212613D40031435F /* ModelBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelBundle.m; sourceTree = "<group>"; };
 		E3322A08212613D40031435F /* TIOModelOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModelOptions.h; sourceTree = "<group>"; };
 		E3322A0A212613D40031435F /* ModelHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelHelpers.mm; sourceTree = "<group>"; };
@@ -444,8 +444,8 @@
 				E3322A03212613D40031435F /* VisionModelHelpers.mm */,
 				E31C7875212A6D4E00139C90 /* PixelBufferNormalization.h */,
 				E31C7876212A6D4E00139C90 /* PixelBufferNormalization.mm */,
-				E3322A06212613D40031435F /* VisionPipeline.h */,
-				E3322A01212613D40031435F /* VisionPipeline.mm */,
+				E3322A06212613D40031435F /* TIOVisionPipeline.h */,
+				E3322A01212613D40031435F /* TIOVisionPipeline.mm */,
 			);
 			path = "TIO Model";
 			sourceTree = "<group>";
@@ -941,7 +941,7 @@
 				E3458A9B210A56460040648C /* EvaluateResultsTableViewController.mm in Sources */,
 				E3322A18212613D40031435F /* NSDictionary+TIOData.mm in Sources */,
 				E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.m in Sources */,
-				E3322A22212613D40031435F /* VisionPipeline.mm in Sources */,
+				E3322A22212613D40031435F /* TIOVisionPipeline.mm in Sources */,
 				E3B57E7D210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.m in Sources */,
 				E3322A1A212613D40031435F /* NSData+TIOData.mm in Sources */,
 				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,

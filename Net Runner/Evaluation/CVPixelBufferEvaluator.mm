@@ -9,7 +9,7 @@
 #import "CVPixelBufferEvaluator.h"
 
 #import "EvaluatorConstants.h"
-#import "VisionPipeline.h"
+#import "TIOVisionPipeline.h"
 #import "Utilities.h"
 #import "ObjcDefer.h"
 #import "ModelOutput.h"
@@ -79,7 +79,7 @@
     // Transform the image to the required format
     
     TIOPixelBufferDescription *description = [self.model descriptionOfInputAtIndex:0];
-    VisionPipeline *pipeline = [[VisionPipeline alloc] initWithTIOPixelBufferDescription:description];
+    TIOVisionPipeline *pipeline = [[TIOVisionPipeline alloc] initWithTIOPixelBufferDescription:description];
     __block CVPixelBufferRef transformedPixelBuffer = NULL;
     
     measuring_latency(&imageProcessingLatency, ^{
@@ -89,7 +89,7 @@
     if (transformedPixelBuffer == NULL) {
         NSLog(@"Unable to transform pixel buffer for model processing");
         NSDictionary *results = @{
-            kEvaluatorResultsKeyPreprocessingError: @"VisionPipeline returned NULL CVPixelBuffer"
+            kEvaluatorResultsKeyPreprocessingError: @"TIOVisionPipeline returned NULL CVPixelBuffer"
         };
         safe_block(completionHandler, results, NULL);
         return;

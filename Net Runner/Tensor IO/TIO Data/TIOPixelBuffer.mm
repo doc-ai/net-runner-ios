@@ -9,7 +9,7 @@
 #import "TIOPixelBuffer.h"
 
 #import "TIOPixelBufferDescription.h"
-#import "VisionPipeline.h"
+#import "TIOVisionPipeline.h"
 
 @implementation TIOPixelBuffer
 
@@ -77,7 +77,7 @@
         && _orientation == kCGImagePropertyOrientationUp ) {
         _transformedPixelBuffer = _pixelBuffer;
     } else {
-        VisionPipeline *pipeline = [[VisionPipeline alloc] initWithTIOPixelBufferDescription:pixelBufferDescription];
+        TIOVisionPipeline *pipeline = [[TIOVisionPipeline alloc] initWithTIOPixelBufferDescription:pixelBufferDescription];
         _transformedPixelBuffer = [pipeline transform:self.pixelBuffer orientation:self.orientation];
     }
     
