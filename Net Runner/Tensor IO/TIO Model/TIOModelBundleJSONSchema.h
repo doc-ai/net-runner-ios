@@ -1,13 +1,13 @@
 //
-//  ModelBundleJSONSchema.h
+//  TIOModelBundleJSONSchema.h
 //  Net Runner
 //
 //  Created by Philip Dow on 7/16/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#ifndef ModelBundleJSONSchema_h
-#define ModelBundleJSONSchema_h
+#ifndef TIOModelBundleJSONSchema_h
+#define TIOModelBundleJSONSchema_h
 
 // TODO: update this schema definition
 
@@ -90,22 +90,4 @@
  * the presence of the "bias" and "scale" fields in those dictionaries.
 */
 
-#endif /* ModelBundleJSONSchema_h */
-
-/*
-"normalize": {
-    "standard":     String      // "[0,1]" | "[-1,1]"
-    "scale":        Float
-    "red_bias":     Float
-    "green_bias":   Float
-    "blue_bias":    Float
-}
-*/
-
-/*
-"dequantize": {
-    "standard":     String      // "[0,1]"
-    "scale":        Float
-    "bias":         Float
-}
-*/
+#endif /* TIOModelBundleJSONSchema_h */

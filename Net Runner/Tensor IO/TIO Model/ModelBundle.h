@@ -27,7 +27,7 @@ extern NSString * const kTFModelInfoFile;
  * about the model. Some information is required, such as the identifier and name field,
  * while other information may be added as needed by your use case.
  *
- * See ModelBundleJSONSchema.h for a list of required fields and their types.
+ * See TIOModelBundleJSONSchema.h for a list of required fields and their types.
  */
 
 @interface ModelBundle : NSObject

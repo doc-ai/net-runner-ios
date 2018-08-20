@@ -150,7 +150,7 @@ NS_ASSUME_NONNULL_BEGIN
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
  * This information is encapsulated in a `TIODataDescription`, which is used to prepare
- * inputs provided to the `runOn:` method prior to performing inference. See ModelBundleJSONSchema.h
+ * inputs provided to the `runOn:` method prior to performing inference. See TIOModelBundleJSONSchema.h
  * for more information about this json file.
  */
 
@@ -164,7 +164,7 @@ NS_ASSUME_NONNULL_BEGIN
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
  * This information is encapsulated in a `TIODataDescription`, which is used to prepare
- * inputs provided to the `runOn:` method prior to performing inference. See ModelBundleJSONSchema.h
+ * inputs provided to the `runOn:` method prior to performing inference. See TIOModelBundleJSONSchema.h
  * for more information about this json file.
  */
 - (id<TIODataDescription>)descriptionOfInputWithName:(NSString*)name;
@@ -177,7 +177,7 @@ NS_ASSUME_NONNULL_BEGIN
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
  * This information is encapsulated in a `TIODataDescription`, which is used to prepare the results
- * of performing inference and returned from the `runOn:` method. See ModelBundleJSONSchema.h
+ * of performing inference and returned from the `runOn:` method. See TIOModelBundleJSONSchema.h
  * for more information about this json file.
  */
 
@@ -191,7 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
  * This information is encapsulated in a `TIODataDescription`, which is used to prepare the results
- * of performing inference and returned from the `runOn:` method. See ModelBundleJSONSchema.h
+ * of performing inference and returned from the `runOn:` method. See TIOModelBundleJSONSchema.h
  * for more information about this json file.
  */
 
