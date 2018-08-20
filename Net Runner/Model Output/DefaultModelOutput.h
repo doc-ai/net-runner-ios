@@ -13,15 +13,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * The default model output accepts a dictionary output with string keys and numeric values.
- * It produces a well formatted description of those values and applies no decay.
+ * The default model output accepts a dictionary of any kinds of keys, values, and hierarchy
+ * It produces a simple description of the dictionary and applies no decay.
  */
 
 @interface DefaultModelOutput : NSObject <ModelOutput>
 
 /**
- * The output of the model, e.g. the result of performing inference with the model
- * and a mapping of classifications to their probabilities.
+ * The output of the model, e.g. the result of performing inference with the model.
  */
 
 @property (readonly) NSDictionary<NSString*,NSNumber*> *output;
@@ -31,21 +30,19 @@ NS_ASSUME_NONNULL_BEGIN
 // Model Output Conformance
 
 /**
- * An instance of `NSDictionary` mapping classifications to probabilities.
- * The same value as `output`.
+ * An instance of `NSDictionary`, the same as output
  */
 
 @property (readonly) id value;
 
 /**
- * An instance of `NSDictionary` mapping classifications to probabilities.
- * The same value as `output`.
+ * A property list representation of the underlying model output
  */
 
 @property (readonly) id propertyList;
 
 /**
- * The top-5 results with probabilities in human readable format
+ * Simply calls `output.description` or returns an empty string is the output is empty
  */
 
 @property (readonly) NSString *localizedDescription;
@@ -61,14 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isEqual:(id)anObject;
 
 /**
- * Applies an exponential decay to the model output using the previous results
- * and returns the combination.
- *
- * Returns `self` if the `previousOutput` is nil.
- *
- * @param previousOutput The previous output produced by the model
- *
- * @return An exponentially weighted decay of the current and previous outputs, or `self` if `previousOutput` is `nil`.
+ * Return self, ignoring the previous output
  */
 
 - (id<ModelOutput>)decayedOutput:(nullable id<ModelOutput>)previousOutput;

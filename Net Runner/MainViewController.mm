@@ -14,10 +14,13 @@
 #import <ImageIO/ImageIO.h>
 #import <VideoToolbox/VideoToolbox.h>
 
+#import "TIOModel.h"
 #import "TIOModelBundle.h"
 #import "TIOModelBundleManager.h"
+#import "TIOModelOptions.h"
+#import "TIOPixelBufferDescription.h"
+
 #import "ResultInfoView.h"
-#import "TIOModel.h"
 #import "LatencyCounter.h"
 #import "SettingsTableViewController.h"
 #import "UIImage+CVPixelBuffer.h"
@@ -28,9 +31,7 @@
 #import "UserDefaults.h"
 #import "CVPixelBufferEvaluator.h"
 #import "EvaluatorConstants.h"
-#import "TIOModelOptions.h"
 #import "ModelOutput.h"
-#import "TIOPixelBufferDescription.h"
 
 // MARK: -
 
