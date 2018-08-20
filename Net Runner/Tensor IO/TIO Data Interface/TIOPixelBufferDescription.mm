@@ -10,7 +10,7 @@
 
 @implementation TIOPixelBufferDescription
 
-- (instancetype)initWithPixelFormat:(OSType)pixelFormat shape:(ImageVolume)shape normalization:(PixelNormalization)normalization normalizer:(PixelNormalizer)normalizer denormalization:(PixelDenormalization)denormalization denormalizer:(PixelDenormalizer)denormalizer quantized:(BOOL)quantized {
+- (instancetype)initWithPixelFormat:(OSType)pixelFormat shape:(TIOImageVolume)shape normalization:(TIOPixelNormalization)normalization normalizer:(TIOPixelNormalizer)normalizer denormalization:(TIOPixelDenormalization)denormalization denormalizer:(TIOPixelDenormalizer)denormalizer quantized:(BOOL)quantized {
     if (self=[super init]) {
         _pixelFormat = pixelFormat;
         _shape = shape;

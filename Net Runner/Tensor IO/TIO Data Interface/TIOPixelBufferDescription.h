@@ -11,7 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "TIODataDescription.h"
-#import "VisionModelHelpers.h"
+#import "TIOVisionModelHelpers.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,16 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, getter=isQuantized) BOOL quantized;
 @property (readonly) OSType pixelFormat;
-@property (readonly) ImageVolume shape;
-@property (readonly) PixelNormalization normalization;
-@property (nullable, readonly) PixelNormalizer normalizer;
-@property (readonly) PixelDenormalization denormalization;
-@property (nullable, readonly) PixelDenormalizer denormalizer;
+@property (readonly) TIOImageVolume shape;
+@property (readonly) TIOPixelNormalization normalization;
+@property (nullable, readonly) TIOPixelNormalizer normalizer;
+@property (readonly) TIOPixelDenormalization denormalization;
+@property (nullable, readonly) TIOPixelDenormalizer denormalizer;
 
-// TODO: Do something about duplicate PixelNormalization and PixelNormalizer types. Do I really need both?
+// TODO: Do something about duplicate TIOPixelNormalization and TIOPixelNormalizer types. Do I really need both?
 // And now I've got a quantizer and dequantizer, which do something similar
 
-- (instancetype)initWithPixelFormat:(OSType)pixelFormat shape:(ImageVolume)shape normalization:(PixelNormalization)normalization normalizer:(PixelNormalizer)normalizer denormalization:(PixelDenormalization)denormalization denormalizer:(PixelDenormalizer)denormalizer quantized:(BOOL)quantized NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithPixelFormat:(OSType)pixelFormat shape:(TIOImageVolume)shape normalization:(TIOPixelNormalization)normalization normalizer:(TIOPixelNormalizer)normalizer denormalization:(TIOPixelDenormalization)denormalization denormalizer:(TIOPixelDenormalizer)denormalizer quantized:(BOOL)quantized NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.

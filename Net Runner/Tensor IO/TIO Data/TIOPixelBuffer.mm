@@ -34,7 +34,7 @@
     CVReturn result;
     
     if ( description.isQuantized ) {
-        result = CVPixelBufferCreateFromTensor(
+        result = TIOCreateCVPixelBufferFromTensor(
             &pixelBuffer,
             (uint8_t *)bytes,
             pixelBufferDescription.shape,
@@ -42,7 +42,7 @@
             pixelBufferDescription.denormalizer
         );
     } else {
-        result = CVPixelBufferCreateFromTensor(
+        result = TIOCreateCVPixelBufferFromTensor(
             &pixelBuffer,
             (float_t *)bytes,
             pixelBufferDescription.shape,
@@ -84,14 +84,14 @@
     CVPixelBufferRetain(_transformedPixelBuffer);
     
     if ( description.isQuantized ) {
-        CVPixelBufferCopyToTensor(
+        TIOCopyCVPixelBufferToTensor(
             _transformedPixelBuffer,
             (uint8_t *)buffer,
             pixelBufferDescription.shape,
             pixelBufferDescription.normalizer
         );
     } else {
-        CVPixelBufferCopyToTensor(
+        TIOCopyCVPixelBufferToTensor(
             _transformedPixelBuffer,
             (float_t *)buffer,
             pixelBufferDescription.shape,

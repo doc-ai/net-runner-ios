@@ -16,7 +16,7 @@
 #import "TIOData.h"
 #import "TIODataInterface.h"
 #import "TIOQuantization.h"
-#import "VisionModelHelpers.h"
+#import "TIOVisionModelHelpers.h"
 
 @class TIOModelBundle;
 @class TIODataInterface;
@@ -67,10 +67,10 @@ _Nullable TIODataQuantizer TIODataQuantizerForDict(NSDictionary *dict);
 _Nullable TIODataDequantizer TIODataDequantizerForDict(NSDictionary *dict);
 
 /**
- * Converts an array of shape values to an `ImageVolume`.
+ * Converts an array of shape values to an `TIOImageVolume`.
  */
 
-ImageVolume ImageVolumeForShape(NSArray<NSNumber*> *shape);
+TIOImageVolume TIOImageVolumeForShape(NSArray<NSNumber*> *shape);
 
 /**
  * Converts a pixel format string such as `"RGB"` or `"BGR"` to a Core Video pixel format type.
@@ -79,28 +79,28 @@ ImageVolume ImageVolumeForShape(NSArray<NSNumber*> *shape);
 OSType PixelFormatForString(NSString* formatString);
 
 /**
- * Returns the PixelNormalization given an input dictionary.
+ * Returns the TIOPixelNormalization given an input dictionary.
  */
 
-PixelNormalization PixelNormalizationForDictionary(NSDictionary *input);
+TIOPixelNormalization TIOPixelNormalizationForDictionary(NSDictionary *input);
 
 /**
- * Returns the PixelNormalizer given an input dictionary.
+ * Returns the TIOPixelNormalizer given an input dictionary.
  */
 
-PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *input);
+TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary *input);
 
 /**
- * Returns the denormalizing PixelNormalization given an input dictionary
+ * Returns the denormalizing TIOPixelNormalization given an input dictionary
  */
 
-PixelDenormalization PixelDenormalizationForDictionary(NSDictionary *input);
+TIOPixelDenormalization TIOPixelDenormalizationForDictionary(NSDictionary *input);
 
 /**
  * Returns the denormalizer for a given input dictionary
  */
 
-PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *input);
+TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *input);
 
 // MARK: - Pixel Format
 
