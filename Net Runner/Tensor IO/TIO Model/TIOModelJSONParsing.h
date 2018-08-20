@@ -15,7 +15,7 @@
 
 #import "TIOData.h"
 #import "TIODataInterface.h"
-#import "Quantization.h"
+#import "TIOQuantization.h"
 #import "VisionModelHelpers.h"
 
 @class TIOModelBundle;
@@ -58,13 +58,13 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDict
  * Parses the `quantization` key of an input description and returns an associated data quantizer
  */
 
-_Nullable DataQuantizer TIODataQuantizerForDict(NSDictionary *dict);
+_Nullable TIODataQuantizer TIODataQuantizerForDict(NSDictionary *dict);
 
 /**
  * Parses the `dequantization` key of an output description and returns an associated data quantizer
  */
 
-_Nullable DataDequantizer TIODataDequantizerForDict(NSDictionary *dict);
+_Nullable TIODataDequantizer TIODataDequantizerForDict(NSDictionary *dict);
 
 /**
  * Converts an array of shape values to an `ImageVolume`.

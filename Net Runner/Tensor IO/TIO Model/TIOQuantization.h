@@ -1,5 +1,5 @@
 //
-//  Quantization.h
+//  TIOQuantization.h
 //  Net Runner
 //
 //  Created by Philip Dow on 8/19/18.
@@ -24,13 +24,13 @@ NS_ASSUME_NONNULL_BEGIN
  * @endcode
  */
 
-typedef struct DataQuantization {
+typedef struct TIODataQuantization {
     float scale;
     float bias;
-} DataQuantization;
+} TIODataQuantization;
 
 /**
- * A `DataQuantizer` is a function that quantizes unquantized values, converting them from
+ * A `TIODataQuantizer` is a function that quantizes unquantized values, converting them from
  * floating point representations to uint8_t representations.
  *
  * @param value The float_t value that will be quantized
@@ -38,13 +38,13 @@ typedef struct DataQuantization {
  * @return uint8_t A quantized representation of the value
  */
 
-typedef uint8_t (^DataQuantizer)(const float_t &value);
+typedef uint8_t (^TIODataQuantizer)(const float_t &value);
 
 /**
  * No quantization, i.e., `nil`.
  */
 
-_Nullable DataQuantizer TIODataQuantizerNone();
+_Nullable TIODataQuantizer TIODataQuantizerNone();
 
 // MARK: - Dequantization
 
@@ -60,13 +60,13 @@ _Nullable DataQuantizer TIODataQuantizerNone();
  * @endcode
  */
 
-typedef struct DataDequantization {
+typedef struct TIODataDequantization {
     float scale;
     float bias;
-} DataDequantization;
+} TIODataDequantization;
 
 /**
- * A `DataDequantizer` is a function that dequantizes quantized values, converting them from
+ * A `TIODataDequantizer` is a function that dequantizes quantized values, converting them from
  * uint8_t representations to floating point representations.
  *
  * @param value The uint8_t value that will be dequantized
@@ -74,13 +74,13 @@ typedef struct DataDequantization {
  * @return float_t A floating point representation of the value
  */
 
-typedef float_t (^DataDequantizer)(const uint8_t &value);
+typedef float_t (^TIODataDequantizer)(const uint8_t &value);
 
 /**
  * No dequantization, i.e., `nil`.
  */
 
-_Nullable DataDequantizer TIODataDequantizerNone();
+_Nullable TIODataDequantizer TIODataDequantizerNone();
 
 /**
  * Dequantizes values from a range of `[0,255]` to `[0,1]`.
@@ -88,6 +88,6 @@ _Nullable DataDequantizer TIODataDequantizerNone();
  * This is equivalent to applying a scaling factor of `1.0/255.0` and no bias.
  */
 
-DataDequantizer DataDequantizerZeroToOne();
+TIODataDequantizer TIODataDequantizerZeroToOne();
 
 NS_ASSUME_NONNULL_END

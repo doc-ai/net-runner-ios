@@ -1,26 +1,26 @@
 //
-//  Quantization.m
+//  TIOQuantization.m
 //  Net Runner
 //
 //  Created by Philip Dow on 8/19/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "Quantization.h"
+#import "TIOQuantization.h"
 
 // MARK: - Quantization
 
-_Nullable DataQuantizer TIODataQuantizerNone() {
+_Nullable TIODataQuantizer TIODataQuantizerNone() {
     return nil;
 }
 
 // MARK: - Dequantization
 
-_Nullable DataDequantizer TIODataDequantizerNone() {
+_Nullable TIODataDequantizer TIODataDequantizerNone() {
     return nil;
 }
 
-DataDequantizer DataDequantizerZeroToOne() {
+TIODataDequantizer TIODataDequantizerZeroToOne() {
     const float scale = 1.0/255.0;
     
     return ^float_t (const uint8_t &value) {

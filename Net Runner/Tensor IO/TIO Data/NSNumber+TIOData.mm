@@ -15,7 +15,7 @@
 - (nullable instancetype)initWithBytes:(const void *)buffer length:(NSUInteger)length description:(id<TIODataDescription>)description {
     assert([description isKindOfClass:TIOVectorDescription.class]);
     
-    DataDequantizer dequantizer = ((TIOVectorDescription*)description).dequantizer;
+    TIODataDequantizer dequantizer = ((TIOVectorDescription*)description).dequantizer;
     
     if ( description.isQuantized ) {
         if ( dequantizer != nil ) {
@@ -31,7 +31,7 @@
 - (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIODataDescription>)description {
     assert([description isKindOfClass:TIOVectorDescription.class]);
     
-    DataQuantizer quantizer = ((TIOVectorDescription*)description).quantizer;
+    TIODataQuantizer quantizer = ((TIOVectorDescription*)description).quantizer;
     
     if ( description.isQuantized ) {
         if ( quantizer != nil ) {

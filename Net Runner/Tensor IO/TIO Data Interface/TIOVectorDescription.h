@@ -11,7 +11,7 @@
 
 #import "TIODataDescription.h"
 #import "TIOVector.h"
-#import "Quantization.h"
+#import "TIOQuantization.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -79,13 +79,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 
-@property (nullable, readonly) DataQuantizer quantizer;
+@property (nullable, readonly) TIODataQuantizer quantizer;
 
 /**
  * A function that converts a vector from quantized values to unquantized values
  */
 
-@property (nullable, readonly) DataDequantizer dequantizer;
+@property (nullable, readonly) TIODataDequantizer dequantizer;
 
 /**
  * Designated initializer.
@@ -96,7 +96,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param dequantizer A function that transforms quantized output to unquantized values
  */
 
-- (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable DataQuantizer)quantizer dequantizer:(nullable DataDequantizer)dequantizer;
+- (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(nullable TIODataDequantizer)dequantizer;
 
 /**
  * Use the designated initializer.
