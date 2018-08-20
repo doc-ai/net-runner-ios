@@ -1,5 +1,5 @@
 //
-//  ModelBundleManager.h
+//  TIOModelBundleManager.h
 //  Net Runner
 //
 //  Created by Philip Dow on 7/10/18.
@@ -14,18 +14,18 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * The `ModelBundleManager` manages model bundles in a provided directory. Use the returned
+ * The `TIOModelBundleManager` manages model bundles in a provided directory. Use the returned
  * `ModelBundle` classes to instantiante `Model` objects.
  *
  * Usage:
  * @code
- * [ModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error];
- * ModelBundle *bundle = [ModelBundleManager.sharedManager bundleWithId:@"model-id"];
+ * [TIOModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error];
+ * ModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:@"model-id"];
  * id<Model> model = [bundle newModel];
  * @endcode
  */
 
-@interface ModelBundleManager : NSObject
+@interface TIOModelBundleManager : NSObject
 
 /**
  * All available model bundles.
@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSArray<ModelBundle*> *modelBundles;
 
 /**
- * Returns the shared instance of the `ModelBundleManager`.
+ * Returns the shared instance of the `TIOModelBundleManager`.
  * You may create your own model managers if you require more than one.
  */
 

@@ -15,7 +15,7 @@
 #import <VideoToolbox/VideoToolbox.h>
 
 #import "ModelBundle.h"
-#import "ModelBundleManager.h"
+#import "TIOModelBundleManager.h"
 #import "ResultInfoView.h"
 #import "Model.h"
 #import "LatencyCounter.h"
@@ -81,7 +81,7 @@ typedef enum : NSUInteger {
     // Load default model
     
     NSString *modelId = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
-    ModelBundle *bundle = [ModelBundleManager.sharedManager bundleWithId:modelId];
+    ModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:modelId];
     
     if ( bundle == nil ) {
         NSLog(@"Unable to locate model bundle from last selected bundle with id: %@", modelId);

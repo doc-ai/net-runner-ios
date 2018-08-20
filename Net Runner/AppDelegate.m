@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "ModelBundleManager.h"
+#import "TIOModelBundleManager.h"
 #import "NSArray+Extensions.h"
 
 @interface AppDelegate ()
@@ -28,7 +28,7 @@
     NSString *modelsPath = [[NSBundle mainBundle] pathForResource:@"models" ofType:nil];
     NSError *error;
     
-    if ( ![ModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error] ) {
+    if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error] ) {
         NSLog(@"Unable to load model bundles at path %@", modelsPath);
     }
     

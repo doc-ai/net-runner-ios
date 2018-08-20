@@ -12,7 +12,7 @@
 #import "FileImageEvaluator.h"
 #import "URLImageEvaluator.h"
 #import "Evaluator.h"
-#import "ModelBundleManager.h"
+#import "TIOModelBundleManager.h"
 #import "Model.h"
 #import "EvaluationMetric.h"
 #import "NSArray+Extensions.h"
@@ -46,7 +46,7 @@
     
     // Convert model ids to bundles
     
-    NSArray<ModelBundle*> *modelBundles = [ModelBundleManager.sharedManager bundlesWithIds:self.testBundle.modelIds];
+    NSArray<ModelBundle*> *modelBundles = [TIOModelBundleManager.sharedManager bundlesWithIds:self.testBundle.modelIds];
     
     if ( modelBundles.count != self.testBundle.modelIds.count ) {
         NSLog(@"Test Bundle %@: Didn't load all models", self.testBundle.identifier);

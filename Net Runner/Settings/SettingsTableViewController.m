@@ -10,7 +10,7 @@
 
 #import "EvaluateSelectModelsTableViewController.h"
 #import "ModelsTableViewController.h"
-#import "ModelBundleManager.h"
+#import "TIOModelBundleManager.h"
 #import "ModelBundle.h"
 #import "Model.h"
 #import "UserDefaults.h"

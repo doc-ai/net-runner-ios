@@ -11,7 +11,7 @@
 #import "EvaluateModelTableViewCell.h"
 #import "EvaluateSelectAlbumsTableViewController.h"
 #import "ModelDetailsTableViewController.h"
-#import "ModelBundleManager.h"
+#import "TIOModelBundleManager.h"
 #import "ModelBundle.h"
 
 static NSString * const kModelCellIdentifier = @"ModelCell";
@@ -36,7 +36,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"ModelDetailsSegue"] ) {
         ModelDetailsTableViewController *destination = (ModelDetailsTableViewController*)segue.destinationViewController;
-        destination.bundle = ModelBundleManager.sharedManager.modelBundles[self.tableView.indexPathForSelectedRow.row];
+        destination.bundle = TIOModelBundleManager.sharedManager.modelBundles[self.tableView.indexPathForSelectedRow.row];
     }
     else if ( [segue.identifier isEqualToString:@"SelectAlbumsSegue"] ) {
         EvaluateSelectAlbumsTableViewController *destination = (EvaluateSelectAlbumsTableViewController*)segue.destinationViewController;
@@ -63,8 +63,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // return [[[ModelBundleManager sharedManager] models] count];
-    return ModelBundleManager.sharedManager.modelBundles.count;
+    return TIOModelBundleManager.sharedManager.modelBundles.count;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -82,7 +81,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EvaluateModelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kModelCellIdentifier forIndexPath:indexPath];
-    ModelBundle *bundle = ModelBundleManager.sharedManager.modelBundles[indexPath.row];
+    ModelBundle *bundle = TIOModelBundleManager.sharedManager.modelBundles[indexPath.row];
     
     cell.titleLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
 

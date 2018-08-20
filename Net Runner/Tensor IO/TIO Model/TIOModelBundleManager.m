@@ -1,25 +1,25 @@
 //
-//  ModelBundleManager.m
+//  TIOModelBundleManager.m
 //  Net Runner
 //
 //  Created by Philip Dow on 7/10/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "ModelBundleManager.h"
+#import "TIOModelBundleManager.h"
 
 #import "ModelBundle.h"
 #import "NSArray+Extensions.h"
 #import "Model.h"
 
-@interface ModelBundleManager()
+@interface TIOModelBundleManager()
 
 @property (readwrite) NSArray<id<Model>>* models;
 @property (readwrite) NSArray<ModelBundle*> *modelBundles;
 
 @end
 
-@implementation ModelBundleManager
+@implementation TIOModelBundleManager
 
 + (instancetype)sharedManager {
     static dispatch_once_t once;
