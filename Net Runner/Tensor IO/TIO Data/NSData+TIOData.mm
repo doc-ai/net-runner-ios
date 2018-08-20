@@ -9,7 +9,6 @@
 #import "NSData+TIOData.h"
 
 #import "TIOVectorDescription.h"
-#import "ModelHelpers.h"
 
 @implementation NSData (TIOData)
 

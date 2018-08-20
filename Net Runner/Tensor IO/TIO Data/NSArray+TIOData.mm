@@ -9,7 +9,6 @@
 #import "NSArray+TIOData.h"
 
 #import "TIOVectorDescription.h"
-#import "ModelHelpers.h"
 
 @implementation NSArray (TIOData)
 

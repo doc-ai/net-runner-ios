@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Conforming classes should override this method to perform custom loading and set loaded=YES.
  *
- * @param error Set to one of the errors in ModelHelpers.h or your own error.
+ * @param error Set to one of the errors in TIOTFLiteErrors.h for TFLiteModels, or one of your own error.
  *
  * @return BOOL `YES` if the model is successfully loaded, `NO` otherwise.
  */

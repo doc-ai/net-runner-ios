@@ -9,7 +9,7 @@
 #import "TIOTFLiteModel.h"
 
 #import "TIOModelBundle.h"
-#import "ModelHelpers.h"
+#import "TIOTFLiteErrors.h"
 #import "Utilities.h"
 
 #include "tensorflow/contrib/lite/kernels/register.h"
@@ -230,7 +230,7 @@ static NSString * const kTensorTypeImage = @"image";
     
     if (!model) {
         NSLog(@"Failed to mmap model at path %@", graphPath);
-        *error = kTFModelLoadModelError;
+        *error = kTFLiteModelLoadModelError;
         return NO;
     }
 
@@ -252,12 +252,12 @@ static NSString * const kTensorTypeImage = @"image";
    
     if (!interpreter) {
         NSLog(@"Failed to construct interpreter for model %@", self.identifier);
-        *error = kTFModelConstructInterpreterError;
+        *error = kTFLiteModelConstructInterpreterError;
         return NO;
     }
     if (interpreter->AllocateTensors() != kTfLiteOk) {
         NSLog(@"Failed to allocate tensors for model %@", self.identifier);
-        *error = kTFModelAllocateTensorsError;
+        *error = kTFLiteModelAllocateTensorsError;
         return NO;
     }
     
