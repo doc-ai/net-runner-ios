@@ -92,7 +92,7 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDict
 
     OSType pixelFormat = PixelFormatForString(dict[@"format"]);
 
-    if ( pixelFormat == PixelFormatTypeInvalid ) {
+    if ( pixelFormat == TIOPixelFormatTypeInvalid ) {
         NSLog(@"Expected dict.format string to be RGB or BGR in model.json, found %@", dict[@"format"]);
         return nil;
     }
@@ -189,7 +189,7 @@ OSType PixelFormatForString(NSString* string) {
     
     if ( string == nil ) {
         NSLog(@"Expected input.format string in model.json, none found");
-        return PixelFormatTypeInvalid;
+        return TIOPixelFormatTypeInvalid;
     }
     else if ( [string isEqualToString:@"RGB"] ) {
         return kCVPixelFormatType_32ARGB;
@@ -199,7 +199,7 @@ OSType PixelFormatForString(NSString* string) {
     }
     else {
         NSLog(@"expected input.format string to be 'RGB' or 'BGR', actual value is %@", string);
-        return PixelFormatTypeInvalid;
+        return TIOPixelFormatTypeInvalid;
     }
 }
 
@@ -393,7 +393,7 @@ TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *d
 
 // MARK: - Pixel Format
 
-const OSType PixelFormatTypeInvalid = 'NULL';
+const OSType TIOPixelFormatTypeInvalid = 'NULL';
 
 // MARK: - Assets
 
