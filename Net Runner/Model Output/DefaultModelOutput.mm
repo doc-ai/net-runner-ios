@@ -43,18 +43,7 @@
         return @"";
     }
     
-    NSMutableString *description = [NSMutableString string];
-    
-    for ( NSString *key in self.output ) {
-        NSNumber *value = self.output[key];
-        [description appendFormat:@"(%.2f) %@\n", value.floatValue, key];
-    }
-    
-    if ( description.length > 0 ) {
-        [description deleteCharactersInRange:NSMakeRange(description.length-1, 1)];
-    }
-    
-    return description;
+    return self.output.description;
 }
 
 - (BOOL)isEqual:(id)anObject {

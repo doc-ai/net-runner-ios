@@ -9,6 +9,7 @@
 #import "ModelOutputManager.h"
 
 #import "ImageNetClassificationModelOutput.h"
+#import "DefaultModelOutput.h"
 
 @interface ModelOutputManager ()
 
@@ -43,15 +44,12 @@
     return [classes copy];
 }
 
-// TODO: provide a default output class
-
 - (Class)classForType:(NSString*)type {
     Class class = self.classes[type];
     if ( class != nil ) {
         return class;
     } else {
-        assert(NO);
-        return nil;
+        return DefaultModelOutput.class;
     }
 }
 
