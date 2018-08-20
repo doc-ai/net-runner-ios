@@ -28,7 +28,7 @@
 #import "UserDefaults.h"
 #import "CVPixelBufferEvaluator.h"
 #import "EvaluatorConstants.h"
-#import "ModelOptions.h"
+#import "TIOModelOptions.h"
 #import "ModelOutput.h"
 #import "TIOPixelBufferDescription.h"
 

@@ -1,5 +1,5 @@
 //
-//  ModelOptions.h
+//  TIOModelOptions.h
 //  Net Runner
 //
 //  Created by Philip Dow on 7/28/18.
@@ -11,9 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-AVCaptureDevicePosition ModelOptionsAVCaptureDevicePositionFromString(NSString * _Nullable descriptor);
+AVCaptureDevicePosition TIOModelOptionsAVCaptureDevicePositionFromString(NSString * _Nullable descriptor);
 
-@interface ModelOptions : NSObject
+@interface TIOModelOptions : NSObject
 
 /**
  * Preferred device position.

@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Model Protocol Properties
 
 @property (readonly) ModelBundle *bundle;
-@property (readonly) ModelOptions *options;
+@property (readonly) TIOModelOptions *options;
 @property (readonly) NSString* identifier;
 @property (readonly) NSString* name;
 @property (readonly) NSString* details;

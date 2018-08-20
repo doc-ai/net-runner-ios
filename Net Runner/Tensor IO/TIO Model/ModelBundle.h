@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ModelOptions;
+@class TIOModelOptions;
 @protocol Model;
 
 extern NSString * const kTFModelBundleExtension;
@@ -98,7 +98,7 @@ extern NSString * const kTFModelInfoFile;
  * Options associated with the model represented by this bundle.
  */
 
-@property (readonly) ModelOptions *options;
+@property (readonly) TIOModelOptions *options;
 
 /**
  * The file path to the actual underlying model contained in this bundle.

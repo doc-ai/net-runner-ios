@@ -9,7 +9,7 @@
 #import "ModelBundle.h"
 
 #import "Model.h"
-#import "ModelOptions.h"
+#import "TIOModelOptions.h"
 
 NSString * const kTFModelBundleExtension = @"tfbundle";
 NSString * const kTFModelInfoFile = @"model.json";
@@ -28,7 +28,7 @@ NSString * const kAssetsDirectory = @"assets";
 @property (readwrite) NSString *license;
 @property (readwrite) BOOL quantized;
 
-@property (readwrite) ModelOptions *options;
+@property (readwrite) TIOModelOptions *options;
 @property (readwrite) NSString *modelClassName;
 
 @end
@@ -77,7 +77,7 @@ NSString * const kAssetsDirectory = @"assets";
         _author = json[@"author"];
         _license = json[@"license"];
         
-        _options = [[ModelOptions alloc] initWithDictionary:json[@"options"]];
+        _options = [[TIOModelOptions alloc] initWithDictionary:json[@"options"]];
         _quantized = [json[@"model"][@"quantized"] boolValue];
         _type = json[@"model"][@"type"];
         

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TIOData;
 @protocol TIODataDescription;
 @class ModelBundle;
-@class ModelOptions;
+@class TIOModelOptions;
 
 // MARK: -
 
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Options associated with this model.
  */
 
-@property (readonly) ModelOptions *options;
+@property (readonly) TIOModelOptions *options;
 
 /**
  * A string uniquely identifying this model, taken from the model bundle.

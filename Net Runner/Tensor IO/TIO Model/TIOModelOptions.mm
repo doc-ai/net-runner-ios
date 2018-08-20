@@ -1,14 +1,14 @@
 //
-//  ModelOptions.m
+//  TIOModelOptions.m
 //  Net Runner
 //
 //  Created by Philip Dow on 7/28/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "ModelOptions.h"
+#import "TIOModelOptions.h"
 
-AVCaptureDevicePosition ModelOptionsAVCaptureDevicePositionFromString(NSString * _Nullable descriptor) {
+AVCaptureDevicePosition TIOModelOptionsAVCaptureDevicePositionFromString(NSString * _Nullable descriptor) {
     if ( [descriptor isEqualToString:@"front"] ) {
         return AVCaptureDevicePositionFront;
     } else if ( [descriptor isEqualToString:@"back"] ) {
@@ -18,7 +18,7 @@ AVCaptureDevicePosition ModelOptionsAVCaptureDevicePositionFromString(NSString *
     }
 }
 
-@implementation ModelOptions
+@implementation TIOModelOptions
 
 - (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition {
     if (self = [super init]) {
@@ -31,7 +31,7 @@ AVCaptureDevicePosition ModelOptionsAVCaptureDevicePositionFromString(NSString *
     if ( dictionary == nil ) {
         return [self initWithDevicePosition:AVCaptureDevicePositionUnspecified];
     } else {
-        return [self initWithDevicePosition:ModelOptionsAVCaptureDevicePositionFromString(dictionary[@"device_position"])];
+        return [self initWithDevicePosition:TIOModelOptionsAVCaptureDevicePositionFromString(dictionary[@"device_position"])];
     }
 }
 
