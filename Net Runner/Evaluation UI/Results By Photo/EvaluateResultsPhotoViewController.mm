@@ -90,7 +90,7 @@
 }
 
 - (void)runModelOnAsset:(PHAsset*)asset {
-    id<Model> model = self.modelBundle.newModel;
+    id<TIOModel> model = self.modelBundle.newModel;
     
     AlbumPhotoEvaluator *evaluator = [[AlbumPhotoEvaluator alloc] initWithModel:model photo:asset album:self.album imageManager:self.imageManager];
     

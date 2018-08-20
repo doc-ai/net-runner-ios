@@ -11,13 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class TIOModelOptions;
-@protocol Model;
+@protocol TIOModel;
 
 extern NSString * const kTFModelBundleExtension;
 extern NSString * const kTFModelInfoFile;
 
 /**
- * Encapsulates information about a `Model` without actaully loading the model.
+ * Encapsulates information about a `TIOModel` without actaully loading the model.
  *
  * A `TIOModelBundle` is used by the UI to show model details and is used to instantiate model
  * instances as a model factory. There is currently a one-to-one correspondence between a
@@ -125,11 +125,11 @@ extern NSString * const kTFModelInfoFile;
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Creates and returns a new instance of the `Model` represented by this bundle.
+ * Creates and returns a new instance of the `TIOModel` represented by this bundle.
  * Returns `nil` if the model cannot be instantiated.
  */
 
-- (nullable id<Model>)newModel;
+- (nullable id<TIOModel>)newModel;
 
 /**
  * Returns the path to an asset in the bundle

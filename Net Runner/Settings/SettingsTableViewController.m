@@ -12,7 +12,7 @@
 #import "ModelsTableViewController.h"
 #import "TIOModelBundleManager.h"
 #import "TIOModelBundle.h"
-#import "Model.h"
+#import "TIOModel.h"
 #import "UserDefaults.h"
 
 @interface SettingsTableViewController () <EvaluateSelectModelsTableViewControllerDelegate>

@@ -16,7 +16,7 @@
 @interface FileImageEvaluator ()
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<Model> model;
+@property (readwrite) id<TIOModel> model;
 @property (readwrite) NSURL *fileURL;
 @property (readwrite) NSString *name;
 
@@ -26,7 +26,7 @@
     dispatch_once_t _once;
 }
 
-- (instancetype)initWithModel:(id<Model>)model fileURL:(NSURL*)fileURL name:(NSString*)name {
+- (instancetype)initWithModel:(id<TIOModel>)model fileURL:(NSURL*)fileURL name:(NSString*)name {
     if (self = [super init]) {
         _model = model;
         _fileURL = fileURL;

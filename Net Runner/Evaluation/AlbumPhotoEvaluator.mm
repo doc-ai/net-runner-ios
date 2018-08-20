@@ -10,7 +10,7 @@
 
 #import "EvaluatorConstants.h"
 #import "ImageEvaluator.h"
-#import "Model.h"
+#import "TIOModel.h"
 #import "Utilities.h"
 #import "ObjcDefer.h"
 
@@ -19,7 +19,7 @@
 + (PHImageRequestOptions*) imageRequestOptions;
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<Model> model;
+@property (readwrite) id<TIOModel> model;
 
 @end
 
@@ -44,7 +44,7 @@
     return options;
 }
 
-- (instancetype)initWithModel:(id<Model>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager {
+- (instancetype)initWithModel:(id<TIOModel>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager {
     if (self = [super init]) {
         _model = model;
         _photo = photo;

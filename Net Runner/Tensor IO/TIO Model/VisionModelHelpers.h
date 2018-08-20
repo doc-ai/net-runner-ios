@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import "Model.h"
+#import "TIOModel.h"
 #import "PixelBufferNormalization.h"
 
 NS_ASSUME_NONNULL_BEGIN

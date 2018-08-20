@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class SettingsTableViewController;
 @class TIOModelBundle;
-@protocol Model;
+@protocol TIOModel;
 
 @protocol SettingsTableViewControllerDelegate
 

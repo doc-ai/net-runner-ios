@@ -8,7 +8,7 @@
 
 #import "TIOVisionPipeline.h"
 
-#import "Model.h"
+#import "TIOModel.h"
 #import "CVPixelBufferHelpers.h"
 #import "ObjcDefer.h"
 #import "TIOPixelBufferDescription.h"

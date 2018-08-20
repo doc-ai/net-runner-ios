@@ -13,7 +13,7 @@
 @interface URLImageEvaluator ()
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<Model> model;
+@property (readwrite) id<TIOModel> model;
 @property (readwrite) NSURL *URL;
 @property (readwrite) NSString *name;
 
@@ -23,7 +23,7 @@
     dispatch_once_t _once;
 }
 
-- (instancetype)initWithModel:(id<Model>)model URL:(NSURL*)URL name:(NSString*)name {
+- (instancetype)initWithModel:(id<TIOModel>)model URL:(NSURL*)URL name:(NSString*)name {
     if (self = [super init]) {
         _model = model;
         _URL = URL;

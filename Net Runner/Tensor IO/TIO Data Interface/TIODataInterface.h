@@ -90,7 +90,7 @@ typedef void (^TIOVectorMatcher)(TIOVectorDescription *vectorDescription);
 /**
  * Use this function to switch on the underlying description.
  *
- * When preparing inputs and capturing outputs, a `Model` uses the underlying description of a layer
+ * When preparing inputs and capturing outputs, a `TIOModel` uses the underlying description of a layer
  * in order to determine how to move bytes around.
  */
 

@@ -12,7 +12,7 @@
 #import "Evaluator.h"
 #import "ImageEvaluator.h"
 #import "TIOModelBundle.h"
-#import "Model.h"
+#import "TIOModel.h"
 #import "NSArray+Extensions.h"
 #import "EvaluateResultsModelTableViewCell.h"
 #import "EvaluationResultsActivityItemProvider.h"
@@ -180,7 +180,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
     
         for ( TIOModelBundle *modelBundle in self.bundles ) {
         
-            id<Model> model = [modelBundle newModel];
+            id<TIOModel> model = [modelBundle newModel];
             
             if ( model == nil ) {
                 NSLog(@"Unable to instantiate model from model bundle: %@", modelBundle.identifier);
@@ -220,7 +220,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
             
             @autoreleasepool {
                 [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
-                    id<Model> model = evaluator.model;
+                    id<TIOModel> model = evaluator.model;
                     NSString *modelID = result[kEvaluatorResultsKeyModel];
                     NSUInteger completedCount = [self->_progress[modelID] integerValue] + 1;
                     

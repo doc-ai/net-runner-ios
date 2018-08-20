@@ -21,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CVPixelBufferEvaluator : NSObject <Evaluator>
 
 /**
- * The `Model` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ * The `TIOModel` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
  */
 
-@property (readonly) id<Model> model;
+@property (readonly) id<TIOModel> model;
 
 /**
  * The pixel buffer on which inference is being run.
@@ -42,12 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Designated initializer.
  *
- * @param model The `Model` object on which inference is being run.
+ * @param model The `TIOModel` object on which inference is being run.
  * @param pixelBuffer The `CVPixelBufferRef` on which inference is being run.
  * @param orientation The `CGImagePropertyOrientation` of the incoming pixel buffer before transformations are applied to ensure it is upright.
  */
 
-- (instancetype)initWithModel:(id<Model>)model pixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithModel:(id<TIOModel>)model pixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.

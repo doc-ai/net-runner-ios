@@ -10,7 +10,7 @@
 
 #import "TIODataInterface.h"
 #import "TIOData.h"
-#import "Model.h"
+#import "TIOModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  * input and output layers of the underlying model.
  */
 
-@interface TIOTFLiteModel : NSObject <Model>
+@interface TIOTFLiteModel : NSObject <TIOModel>
 
 // Model Protocol Properties
 

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Currently, only TensorFlow Lite (TFLite) models are supported.
  */
 
-@protocol Model <NSObject>
+@protocol TIOModel <NSObject>
 
 /**
  * The `TIOModelBundle` object from which this model was instantiated.

@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import "Model.h"
+#import "TIOModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Evaluators should dispatch their operation to run once and then set the model and any input to `nil`.
  * Running an evaluator a second time should have no effect.
  *
- * There is no default inititialization method for an evaluator, but each evaluator takes a `Model`
+ * There is no default inititialization method for an evaluator, but each evaluator takes a `TIOModel`
  * and produces results, which contain the inference, latency, and other information.
  */
 
@@ -41,13 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^EvaluatorCompletionBlock)(NSDictionary *result, CVPixelBufferRef _Nullable inputPixelBuffer);
 
 /**
- * The `Model` object on which inference is run.
+ * The `TIOModel` object on which inference is run.
  *
  * Conforming objects should store the model in their initialization method and then set it to `nil` when
  * evaluation is complete.
  */
 
-@property (readonly) id<Model> model;
+@property (readonly) id<TIOModel> model;
 
 /**
  * The function repsonsible for perfoming inference with the model. The function should store the results

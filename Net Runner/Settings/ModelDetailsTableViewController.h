@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class TIOModelBundle;
-@protocol Model;
+@protocol TIOModel;
 
 NS_ASSUME_NONNULL_BEGIN
 

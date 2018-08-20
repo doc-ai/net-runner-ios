@@ -10,11 +10,11 @@
 
 #import "TIOModelBundle.h"
 #import "NSArray+Extensions.h"
-#import "Model.h"
+#import "TIOModel.h"
 
 @interface TIOModelBundleManager()
 
-@property (readwrite) NSArray<id<Model>>* models;
+@property (readwrite) NSArray<id<TIOModel>>* models;
 @property (readwrite) NSArray<TIOModelBundle*> *modelBundles;
 
 @end
@@ -48,7 +48,7 @@
         return [path stringByAppendingPathComponent:(NSString*)obj];
     }];
     
-    NSArray<id<Model>> *bundles = [bundlePaths map:^id _Nonnull(id  _Nonnull obj) {
+    NSArray<id<TIOModel>> *bundles = [bundlePaths map:^id _Nonnull(id  _Nonnull obj) {
         return [[TIOModelBundle alloc] initWithPath:obj];
     }];
     

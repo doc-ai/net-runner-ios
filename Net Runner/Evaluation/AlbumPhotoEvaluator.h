@@ -21,10 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AlbumPhotoEvaluator : NSObject <Evaluator>
 
 /**
- * The `Model` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ * The `TIOModel` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
  */
 
-@property (readonly) id<Model> model;
+@property (readonly) id<TIOModel> model;
 
 /**
  * The photo on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyImage` key.
@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Designated initializer.
  *
- * @param model The `Model` object on which inference is being run. Noded in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ * @param model The `TIOModel` object on which inference is being run. Noded in the results dictionary under the `kEvaluatorResultsKeyModel` key.
  * @param photo The `PHAsset` on which infererence is being run. Noted in the results dictionary under the kEvaluatorResultsKeyImage key.
  * @param album The `PHAssetCollection` to which the photo belongs. Noted in the results dictionary under the `kEvaluatorResultsKeyAlbum` key.
  * @param imageManager The 'PHCachingImageManager' used to manage the acquisition of assets.
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  * It is recommended that you share a single instance of `PHCachingImageManager` between the photo album evaluators you use to perform a set of inferences.
  */
 
-- (instancetype)initWithModel:(id<Model>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithModel:(id<TIOModel>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.

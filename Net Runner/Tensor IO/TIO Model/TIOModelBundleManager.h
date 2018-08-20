@@ -8,20 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol Model;
+@protocol TIOModel;
 @class TIOModelBundle;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The `TIOModelBundleManager` manages model bundles in a provided directory. Use the returned
- * `TIOModelBundle` classes to instantiante `Model` objects.
+ * `TIOModelBundle` classes to instantiante `TIOModel` objects.
  *
  * Usage:
  * @code
  * [TIOModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error];
  * TIOModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:@"model-id"];
- * id<Model> model = [bundle newModel];
+ * id<TIOModel> model = [bundle newModel];
  * @endcode
  */
 

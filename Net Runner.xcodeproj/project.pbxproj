@@ -166,7 +166,7 @@
 		E3322A07212613D40031435F /* TIOModelBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIOModelBundle.m; sourceTree = "<group>"; };
 		E3322A08212613D40031435F /* TIOModelOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModelOptions.h; sourceTree = "<group>"; };
 		E3322A0A212613D40031435F /* ModelHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelHelpers.mm; sourceTree = "<group>"; };
-		E3322A0B212613D40031435F /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		E3322A0B212613D40031435F /* TIOModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModel.h; sourceTree = "<group>"; };
 		E3322A0C212613D40031435F /* TIOModelBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModelBundle.h; sourceTree = "<group>"; };
 		E3322A0D212613D40031435F /* TIOModelBundleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModelBundleManager.h; sourceTree = "<group>"; };
 		E3322A0E212613D40031435F /* VisionModelHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionModelHelpers.h; sourceTree = "<group>"; };
@@ -426,7 +426,7 @@
 		E33229FF212613D40031435F /* TIO Model */ = {
 			isa = PBXGroup;
 			children = (
-				E3322A0B212613D40031435F /* Model.h */,
+				E3322A0B212613D40031435F /* TIOModel.h */,
 				E3322A02212613D40031435F /* TIOModelBundleJSONSchema.h */,
 				E31C7878212B2D5600139C90 /* TIOModelJSONParsing.h */,
 				E31C7879212B2D5600139C90 /* TIOModelJSONParsing.mm */,

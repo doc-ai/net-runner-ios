@@ -20,7 +20,7 @@
 
 @interface CVPixelBufferEvaluator ()
 
-@property (readwrite) id<Model> model;
+@property (readwrite) id<TIOModel> model;
 @property (nonatomic, readwrite) CVPixelBufferRef pixelBuffer;
 @property (readwrite) CGImagePropertyOrientation orientation;
 
@@ -30,7 +30,7 @@
     dispatch_once_t _once;
 }
 
-- (instancetype)initWithModel:(id<Model>)model pixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
+- (instancetype)initWithModel:(id<TIOModel>)model pixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
     if (self = [super init]) {
         _model = model;
         _orientation = orientation;

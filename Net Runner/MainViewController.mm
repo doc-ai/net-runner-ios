@@ -17,7 +17,7 @@
 #import "TIOModelBundle.h"
 #import "TIOModelBundleManager.h"
 #import "ResultInfoView.h"
-#import "Model.h"
+#import "TIOModel.h"
 #import "LatencyCounter.h"
 #import "SettingsTableViewController.h"
 #import "UIImage+CVPixelBuffer.h"
@@ -45,7 +45,7 @@ typedef enum : NSUInteger {
 @property LatencyCounter *latencyCounter;
 
 @property TIOModelBundle *modelBundle;
-@property id<Model> model;
+@property id<TIOModel> model;
 @property id<ModelOutput> previousOutput;
 
 @property AVCaptureSession *session;

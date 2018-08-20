@@ -13,7 +13,7 @@
 #import "URLImageEvaluator.h"
 #import "Evaluator.h"
 #import "TIOModelBundleManager.h"
-#import "Model.h"
+#import "TIOModel.h"
 #import "EvaluationMetric.h"
 #import "NSArray+Extensions.h"
 #import "TIOModelBundle.h"
@@ -62,7 +62,7 @@
     
     for ( TIOModelBundle *modelBundle in modelBundles ) {
         
-        id<Model> model = [modelBundle newModel];
+        id<TIOModel> model = [modelBundle newModel];
         
         if ( model == nil ) {
             NSLog(@"Test Bundle %@: Unable to instantiate model from model bundle: %@", self.testBundle.identifier, modelBundle.identifier);

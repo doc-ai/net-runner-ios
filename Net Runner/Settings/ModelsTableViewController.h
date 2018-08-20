@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ModelsTableViewController;
 @class TIOModelBundle;
-@protocol Model;
+@protocol TIOModel;
 
 @protocol ModelsTableViewControllerDelegate
 

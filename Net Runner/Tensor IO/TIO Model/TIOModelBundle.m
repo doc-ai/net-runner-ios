@@ -8,7 +8,7 @@
 
 #import "TIOModelBundle.h"
 
-#import "Model.h"
+#import "TIOModel.h"
 #import "TIOModelOptions.h"
 
 NSString * const kTFModelBundleExtension = @"tfbundle";
@@ -89,7 +89,7 @@ NSString * const kAssetsDirectory = @"assets";
     return self;
 }
 
-- (nullable id<Model>)newModel {
+- (nullable id<TIOModel>)newModel {
     
     Class ModelClass = NSClassFromString(self.modelClassName);
     
@@ -98,7 +98,7 @@ NSString * const kAssetsDirectory = @"assets";
         return nil;
     }
     
-    id<Model> model = [[ModelClass alloc] initWithBundle:self];
+    id<TIOModel> model = [[ModelClass alloc] initWithBundle:self];
     
     if ( model == nil ) {
         NSLog(@"Unable to instantiate model for class %@", ModelClass);

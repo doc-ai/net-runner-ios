@@ -9,7 +9,7 @@
 #import "ModelDetailsTableViewController.h"
 
 #import "TIOModelBundle.h"
-#import "Model.h"
+#import "TIOModel.h"
 
 @interface ModelDetailsTableViewController ()
 
