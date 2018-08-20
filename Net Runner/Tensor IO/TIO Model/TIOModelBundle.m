@@ -1,6 +1,6 @@
 //
 //  TIOModelBundle.m
-//  Net Runner
+//  TensorIO
 //
 //  Created by Philip Dow on 7/20/18.
 //  Copyright © 2018 doc.ai. All rights reserved.

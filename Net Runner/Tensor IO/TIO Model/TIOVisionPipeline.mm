@@ -1,6 +1,6 @@
 //
 //  TIOVisionPipeline.m
-//  Net Runner
+//  TensorIO
 //
 //  Created by Philip Dow on 7/11/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
