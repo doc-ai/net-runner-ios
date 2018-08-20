@@ -10,7 +10,7 @@
 
 #import "EvaluatorConstants.h"
 #import "ImageEvaluator.h"
-#import "Model.h"
+#import "TIOModel.h"
 #import "Utilities.h"
 #import "ObjcDefer.h"
 
@@ -19,7 +19,7 @@
 + (PHImageRequestOptions*) imageRequestOptions;
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<VisionModel> model;
+@property (readwrite) id<TIOModel> model;
 
 @end
 
@@ -44,7 +44,7 @@
     return options;
 }
 
-- (instancetype)initWithModel:(id<VisionModel>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager {
+- (instancetype)initWithModel:(id<TIOModel>)model photo:(PHAsset*)photo album:(PHAssetCollection*)album imageManager:(PHCachingImageManager*)imageManager {
     if (self = [super init]) {
         _model = model;
         _photo = photo;
@@ -54,8 +54,6 @@
     
     return self;
 }
-
-// TODO: use key constants not strings
 
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
     dispatch_once(&_once, ^{
@@ -76,7 +74,7 @@
             if ( result == nil ) {
                 NSString *errorDescription = [NSString stringWithFormat:@"Unable to request image for asset %@",  self.photo.localIdentifier];
                 NSLog(@"%@", errorDescription);
-                self.results = @{
+                NSDictionary *evaluatorResults = @{
                     kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeAlbumPhoto,
                     kEvaluatorResultsKeyAlbum               : self.album.localIdentifier,
                     kEvaluatorResultsKeyImage               : self.photo.localIdentifier,
@@ -85,14 +83,14 @@
                     kEvaluatorResultsKeyErrorDescription    : errorDescription,
                     kEvaluatorResultsKeyEvaluation          : [NSNull null]
                 };
-                safe_block(completionHandler, self.results);
+                safe_block(completionHandler, evaluatorResults, NULL);
                 return;
             }
             
             ImageEvaluator *imageEvaluator = [[ImageEvaluator alloc] initWithModel:self.model image:result];
             
-            [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results) {
-                self.results = @{
+            [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results, CVPixelBufferRef _Nullable inputPixelBuffer) {
+                NSDictionary *evaluatorResults = @{
                     kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeAlbumPhoto,
                     kEvaluatorResultsKeyAlbum               : self.album.localIdentifier,
                     kEvaluatorResultsKeyImage               : self.photo.localIdentifier,
@@ -100,7 +98,7 @@
                     kEvaluatorResultsKeyError               : @(NO),
                     kEvaluatorResultsKeyEvaluation          : results
                 };
-                safe_block(completionHandler, self.results);
+                safe_block(completionHandler, evaluatorResults, inputPixelBuffer);
             }];
         }
     }];

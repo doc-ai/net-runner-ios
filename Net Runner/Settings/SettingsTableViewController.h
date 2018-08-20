@@ -13,8 +13,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class SettingsTableViewController;
-@class ModelBundle;
-@protocol Model;
+@class TIOModelBundle;
+@protocol TIOModel;
 
 @protocol SettingsTableViewControllerDelegate
 
@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) IBOutlet UILabel *evaluateModelsLabel;
 
 @property (weak) id<SettingsTableViewControllerDelegate> delegate;
-@property (nonatomic) ModelBundle *selectedBundle;
+@property (nonatomic) TIOModelBundle *selectedBundle;
 
 - (IBAction)toggleShowInputBuffers;
 - (IBAction)toggleShowInputBuffersAlpha:(id)sender;

@@ -11,13 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ModelBundle;
+@class TIOModelBundle;
 
 @interface EvaluateResultsByModelCollectionViewController : UICollectionViewController
 
 @property PHCachingImageManager *imageManager;
 @property (nonatomic) NSArray<NSDictionary*> *results;
-@property ModelBundle *modelBundle;
+@property TIOModelBundle *modelBundle;
 
 @end
 

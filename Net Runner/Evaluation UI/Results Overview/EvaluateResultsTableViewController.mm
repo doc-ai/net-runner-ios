@@ -11,9 +11,8 @@
 #import "AlbumPhotoEvaluator.h"
 #import "Evaluator.h"
 #import "ImageEvaluator.h"
-#import "VisionModel.h"
-#import "ModelBundle.h"
-#import "Model.h"
+#import "TIOModelBundle.h"
+#import "TIOModel.h"
 #import "NSArray+Extensions.h"
 #import "EvaluateResultsModelTableViewCell.h"
 #import "EvaluationResultsActivityItemProvider.h"
@@ -31,7 +30,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
 @property IBOutlet UILabel *iterationsLabel;
 
 @property PHCachingImageManager *imageManager;
-@property NSArray<ModelBundle*> *bundles;
+@property NSArray<TIOModelBundle*> *bundles;
 @property NSArray<PHAssetCollection*> *albums;
 @property NSNumber *iterations;
 
@@ -61,7 +60,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
     _results = [[NSMutableDictionary alloc] init];
     _state = [[NSMutableDictionary alloc] init];
     
-    for ( ModelBundle *bundle in self.bundles ) {
+    for ( TIOModelBundle *bundle in self.bundles ) {
         // Do not initialize _results values to anything
         _state[bundle.identifier] = @(EvaluateResultsStateShowProgress);
         _progress[bundle.identifier] = @(0);
@@ -125,7 +124,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"ShowResultsForModel"] ) {
         EvaluateResultsByModelCollectionViewController *destination = (EvaluateResultsByModelCollectionViewController*)segue.destinationViewController;
-        ModelBundle *modelBundle = self.bundles[[self.tableView.indexPathForSelectedRow row]];
+        TIOModelBundle *modelBundle = self.bundles[[self.tableView.indexPathForSelectedRow row]];
         destination.results = _results[modelBundle.identifier];
         destination.imageManager = self.imageManager;
         destination.modelBundle = modelBundle;
@@ -179,17 +178,12 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
         NSUInteger numberOfPhotos = 0;
         NSUInteger numberOfModels = 0;
     
-        for ( ModelBundle *modelBundle in self.bundles ) {
+        for ( TIOModelBundle *modelBundle in self.bundles ) {
         
-            id<Model> model = [modelBundle newModel];
+            id<TIOModel> model = [modelBundle newModel];
             
             if ( model == nil ) {
                 NSLog(@"Unable to instantiate model from model bundle: %@", modelBundle.identifier);
-                continue;
-            }
-            
-            if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
-                NSLog(@"Model does not conform to VisionModel protocol: %@", modelBundle.identifier);
                 continue;
             }
             
@@ -200,7 +194,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
                 for ( PHAsset *photo in assets ) {
                     for ( NSUInteger iter = 0; iter < self.iterations.integerValue; iter++ ) {
                         AlbumPhotoEvaluator *evaluator = [[AlbumPhotoEvaluator alloc]
-                            initWithModel:(id<VisionModel>)model
+                            initWithModel:model
                             photo:photo
                             album:album
                             imageManager:self.imageManager];
@@ -225,8 +219,8 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
             }
             
             @autoreleasepool {
-                [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
-                    id<Model> model = evaluator.model;
+                [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
+                    id<TIOModel> model = evaluator.model;
                     NSString *modelID = result[kEvaluatorResultsKeyModel];
                     NSUInteger completedCount = [self->_progress[modelID] integerValue] + 1;
                     
@@ -261,7 +255,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
     }); // dispatch
 }
 
-- (void)updateProgressForBundle:(ModelBundle*)bundle completed:(NSUInteger)completed totalCount:(NSUInteger)totalCount {
+- (void)updateProgressForBundle:(TIOModelBundle*)bundle completed:(NSUInteger)completed totalCount:(NSUInteger)totalCount {
     NSUInteger index = [self.bundles indexOfObject:bundle];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     
@@ -274,7 +268,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
     [cell.progressView setProgress:(float)completed/(float)totalCount animated:YES];
 }
 
-- (void)completedEvaluation:(NSArray<NSDictionary*>*)results forBundle:(ModelBundle*)bundle {
+- (void)completedEvaluation:(NSArray<NSDictionary*>*)results forBundle:(TIOModelBundle*)bundle {
     _state[bundle.identifier] = @(EvaluateResultsStateShowResults);
     _results[bundle.identifier] = results;
     
@@ -301,7 +295,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
     }
 }
 
-- (double)averageLatencyForModel:(ModelBundle*)bundle {
+- (double)averageLatencyForModel:(TIOModelBundle*)bundle {
     NSArray *results = _results[bundle.identifier];
     
     if ( results == nil || results.count == 0) {
@@ -350,7 +344,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EvaluateResultsModelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kModelResultsCellIdentifier forIndexPath:indexPath];
-    ModelBundle *bundle = self.bundles[indexPath.row];
+    TIOModelBundle *bundle = self.bundles[indexPath.row];
  
     cell.titleLabel.text = bundle.name;
     cell.progressView.progress = [_progress[bundle.identifier] integerValue];

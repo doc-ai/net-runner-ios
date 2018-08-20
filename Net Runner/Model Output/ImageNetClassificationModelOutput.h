@@ -12,6 +12,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * A wrapper for imagenet classification outputs. Model outputs are considered application specific
+ * at this point. The `ImageNetClassificationModelOutput` takes the top 5 results over a probability
+ * threshold of 0.1 from the "classification" value in the output.
+ */
+
 @interface ImageNetClassificationModelOutput : NSObject <ModelOutput>
 
 /**

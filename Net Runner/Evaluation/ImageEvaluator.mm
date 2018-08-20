@@ -16,7 +16,7 @@
 @interface ImageEvaluator ()
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<VisionModel> model;
+@property (readwrite) id<TIOModel> model;
 @property (readwrite) UIImage *image;
 
 @end
@@ -25,7 +25,7 @@
     dispatch_once_t _once;
 }
 
-- (instancetype)initWithModel:(id<VisionModel>)model image:(UIImage*)image {
+- (instancetype)initWithModel:(id<TIOModel>)model image:(UIImage*)image {
     if (self = [super init]) {
         _image = image;
         _model = model;
@@ -46,9 +46,8 @@
     
     CVPixelBufferEvaluator *pixelBufferEvaluator = [[CVPixelBufferEvaluator alloc] initWithModel:self.model pixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp];
     
-    [pixelBufferEvaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
-        self.results = result;
-        safe_block(completionHandler, self.results);
+    [pixelBufferEvaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
+        safe_block(completionHandler, result, inputPixelBuffer);
     }];
     
     }); // dispatch_once

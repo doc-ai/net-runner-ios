@@ -7,16 +7,28 @@
 	"license": "Apache License. Version 2.0 http://www.apache.org/licenses/LICENSE-2.0",
 	"model": {
 		"file": "mobilenet_v1_1.0_224_quant.tflite",
-		"class": "ImageNetClassificationModel",
 		"quantized": true,
-		"labels": "labels.txt",
 		"type": "image.classification.imagenet"
 	},
-	"input": {
-		"type": "image",
-		"shape": [224,224,3],
-		"format": "RGB"
-	},
+	"inputs": [
+		{
+			"name": "image",
+			"type": "image",
+			"shape": [224,224,3],
+			"format": "RGB"
+		},
+	],
+	"outputs": [
+		{
+			"name": "classification",
+			"type": "array",
+			"shape": [1,1000],
+			"labels": "labels.txt",
+			"dequantize": {
+				"standard": "[0,1]"
+			}
+		},
+	],
 	"options": {
 		"device_position": "back"
 	}

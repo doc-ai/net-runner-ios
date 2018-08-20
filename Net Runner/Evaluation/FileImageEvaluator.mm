@@ -16,7 +16,7 @@
 @interface FileImageEvaluator ()
 
 @property (readwrite) NSDictionary *results;
-@property (readwrite) id<VisionModel> model;
+@property (readwrite) id<TIOModel> model;
 @property (readwrite) NSURL *fileURL;
 @property (readwrite) NSString *name;
 
@@ -26,7 +26,7 @@
     dispatch_once_t _once;
 }
 
-- (instancetype)initWithModel:(id<VisionModel>)model fileURL:(NSURL*)fileURL name:(NSString*)name {
+- (instancetype)initWithModel:(id<TIOModel>)model fileURL:(NSURL*)fileURL name:(NSString*)name {
     if (self = [super init]) {
         _model = model;
         _fileURL = fileURL;
@@ -35,8 +35,6 @@
     
     return self;
 }
-
-// TODO: use key constants not strings
 
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
     dispatch_once(&_once, ^{
@@ -54,7 +52,7 @@
         if (image == nil) {
             NSString *errorDescription = [NSString stringWithFormat:@"Error loading image at %@", path];
             NSLog(@"%@", errorDescription);
-            self.results = @{
+            NSDictionary *evaluatorResults = @{
                 kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeFile,
                 kEvaluatorResultsKeyImage               : self.name,
                 kEvaluatorResultsKeyModel               : self.model.identifier,
@@ -62,21 +60,21 @@
                 kEvaluatorResultsKeyErrorDescription    : errorDescription,
                 kEvaluatorResultsKeyEvaluation          : [NSNull null]
             };
-            safe_block(completionHandler, self.results);
+            safe_block(completionHandler, evaluatorResults, NULL);
             return;
         }
         
         ImageEvaluator *imageEvaluator = [[ImageEvaluator alloc] initWithModel:self.model image:image ];
         
-        [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results) {
-            self.results = @{
+        [imageEvaluator evaluateWithCompletionHandler:^(NSDictionary *results, CVPixelBufferRef _Nullable inputPixelBuffer) {
+            NSDictionary *evaluatorResults = @{
                 kEvaluatorResultsKeySourceType          : kEvaluatorResultsKeySourceTypeFile,
                 kEvaluatorResultsKeyImage               : self.name,
                 kEvaluatorResultsKeyModel               : self.model.identifier,
                 kEvaluatorResultsKeyError               : @(NO),
                 kEvaluatorResultsKeyEvaluation          : results
             };
-            safe_block(completionHandler, self.results);
+            safe_block(completionHandler, evaluatorResults, inputPixelBuffer);
         }];
     }
     
