@@ -10,6 +10,7 @@
 		9DAD253D003B1A4D85B5CA69 /* libPods-Net RunnerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DA948EB044918D6AB51971E /* libPods-Net RunnerTests.a */; };
 		C32559CDF1500003B0C67572 /* libPods-Net RunnerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD98B37926F97CB6AC0040D /* libPods-Net RunnerUITests.a */; };
 		CC488EDFB5B8ADBBC17E37F0 /* libPods-Net Runner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1794288569A9345E245BCB0D /* libPods-Net Runner.a */; };
+		E31C7874212A5ABC00139C90 /* Quantization.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7873212A5ABC00139C90 /* Quantization.mm */; };
 		E33229D7212607680031435F /* ModelOutputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229D6212607680031435F /* ModelOutputManager.m */; };
 		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
 		E3322A18212613D40031435F /* NSDictionary+TIOData.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229E7212613D40031435F /* NSDictionary+TIOData.mm */; };
@@ -123,6 +124,8 @@
 		A4B6162EA37543DDF8D09297 /* Pods-Net RunnerUITests.release headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerUITests.release headless.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.release headless.xcconfig"; sourceTree = "<group>"; };
 		AAD98B37926F97CB6AC0040D /* libPods-Net RunnerUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Net RunnerUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29295E0BC8B7CF9671D6C86 /* Pods-Net RunnerUITests.debug headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerUITests.debug headless.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.debug headless.xcconfig"; sourceTree = "<group>"; };
+		E31C7872212A5ABC00139C90 /* Quantization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quantization.h; sourceTree = "<group>"; };
+		E31C7873212A5ABC00139C90 /* Quantization.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Quantization.mm; sourceTree = "<group>"; };
 		E33229D5212607680031435F /* ModelOutputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutputManager.h; sourceTree = "<group>"; };
 		E33229D6212607680031435F /* ModelOutputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOutputManager.m; sourceTree = "<group>"; };
 		E33229DA21260C880031435F /* DefaultModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultModelOutput.h; sourceTree = "<group>"; };
@@ -430,6 +433,8 @@
 				E3322A05212613D40031435F /* ModelBundleManager.m */,
 				E3322A00212613D40031435F /* ModelHelpers.h */,
 				E3322A0A212613D40031435F /* ModelHelpers.mm */,
+				E31C7872212A5ABC00139C90 /* Quantization.h */,
+				E31C7873212A5ABC00139C90 /* Quantization.mm */,
 				E3322A08212613D40031435F /* ModelOptions.h */,
 				E3322A04212613D40031435F /* ModelOptions.mm */,
 				E3322A0E212613D40031435F /* VisionModelHelpers.h */,
@@ -952,6 +957,7 @@
 				E3F6C697210A56EC00D200D8 /* HeadlessTestBundleManager.mm in Sources */,
 				E3322A21212613D40031435F /* TIOTFLiteModel.mm in Sources */,
 				E3322A1D212613D40031435F /* UIImage+CVPixelBuffer.mm in Sources */,
+				E31C7874212A5ABC00139C90 /* Quantization.mm in Sources */,
 				E3F6C694210A56EC00D200D8 /* HeadlessTestBundle.mm in Sources */,
 				E3B57E8C210A52FC008D19C0 /* ImageEvaluator.mm in Sources */,
 				E3458A8F210A563C0040648C /* EvaluateSelectAlbumsTableViewController.m in Sources */,

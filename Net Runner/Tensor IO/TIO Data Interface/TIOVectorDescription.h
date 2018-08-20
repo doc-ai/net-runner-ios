@@ -9,9 +9,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ModelHelpers.h"
 #import "TIODataDescription.h"
 #import "TIOVector.h"
+#import "Quantization.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

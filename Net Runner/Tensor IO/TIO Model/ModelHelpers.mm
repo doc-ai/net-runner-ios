@@ -8,26 +8,6 @@
 
 #import "ModelHelpers.h"
 
-// MARK: - Quantization
-
-_Nullable DataQuantizer TIODataQuantizerNone() {
-    return nil;
-}
-
-// MARK: - Dequantization
-
-_Nullable DataDequantizer TIODataDequantizerNone() {
-    return nil;
-}
-
-DataDequantizer DataDequantizerZeroToOne() {
-    const float scale = 1.0/255.0;
-    
-    return ^float_t (const uint8_t &value) {
-        return ((float_t)value * scale);
-    };
-}
-
 // MARK: - Errors
 
 NSError * const kTFModelLoadModelError = [NSError errorWithDomain:@"netrunner.ios" code:101 userInfo:@{

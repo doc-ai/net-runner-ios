@@ -15,7 +15,7 @@
 
 #import "TIOData.h"
 #import "TIODataInterface.h"
-#import "ModelHelpers.h"
+#import "Quantization.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
