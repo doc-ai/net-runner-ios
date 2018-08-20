@@ -16,7 +16,7 @@
 #import "Model.h"
 #import "EvaluationMetric.h"
 #import "NSArray+Extensions.h"
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 #import "ModelOutput.h"
 #import "EvaluatorConstants.h"
 
@@ -46,7 +46,7 @@
     
     // Convert model ids to bundles
     
-    NSArray<ModelBundle*> *modelBundles = [TIOModelBundleManager.sharedManager bundlesWithIds:self.testBundle.modelIds];
+    NSArray<TIOModelBundle*> *modelBundles = [TIOModelBundleManager.sharedManager bundlesWithIds:self.testBundle.modelIds];
     
     if ( modelBundles.count != self.testBundle.modelIds.count ) {
         NSLog(@"Test Bundle %@: Didn't load all models", self.testBundle.identifier);
@@ -60,7 +60,7 @@
     NSUInteger numberOfPhotos = 0;
     NSUInteger numberOfModels = 0;
     
-    for ( ModelBundle *modelBundle in modelBundles ) {
+    for ( TIOModelBundle *modelBundle in modelBundles ) {
         
         id<Model> model = [modelBundle newModel];
         

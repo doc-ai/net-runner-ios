@@ -9,18 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @protocol Model;
-@class ModelBundle;
+@class TIOModelBundle;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The `TIOModelBundleManager` manages model bundles in a provided directory. Use the returned
- * `ModelBundle` classes to instantiante `Model` objects.
+ * `TIOModelBundle` classes to instantiante `Model` objects.
  *
  * Usage:
  * @code
  * [TIOModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error];
- * ModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:@"model-id"];
+ * TIOModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:@"model-id"];
  * id<Model> model = [bundle newModel];
  * @endcode
  */
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
  * You must call `loadModelBundlesAtPath:error:` before accessing this property.
  */
 
-@property (readonly) NSArray<ModelBundle*> *modelBundles;
+@property (readonly) NSArray<TIOModelBundle*> *modelBundles;
 
 /**
  * Returns the shared instance of the `TIOModelBundleManager`.
@@ -62,10 +62,10 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param modelIds Array of model ids in `NSString` format
  *
- * @return Array of `ModelBundle` matching the model ids
+ * @return Array of `TIOModelBundle` matching the model ids
  */
 
-- (NSArray<ModelBundle*>*)bundlesWithIds:(NSArray<NSString*>*)modelIds;
+- (NSArray<TIOModelBundle*>*)bundlesWithIds:(NSArray<NSString*>*)modelIds;
 
 /**
  * Returns the single model that matches the provided id.
@@ -74,10 +74,10 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param modelId The single model id whose bundle you would like.
  *
- * @return The `ModelBundle` matching the model id.
+ * @return The `TIOModelBundle` matching the model id.
  */
 
-- (nullable ModelBundle*)bundleWithId:(NSString*)modelId;
+- (nullable TIOModelBundle*)bundleWithId:(NSString*)modelId;
 
 @end
 

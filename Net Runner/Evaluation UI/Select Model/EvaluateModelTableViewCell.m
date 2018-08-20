@@ -8,7 +8,7 @@
 
 #import "EvaluateModelTableViewCell.h"
 
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 
 @implementation EvaluateModelTableViewCell
 
@@ -25,7 +25,7 @@
     [self.actionTarget didSwitchBundle:self.bundle toSelected:sender.on];
 }
 
-- (void)setBundle:(ModelBundle *)bundle {
+- (void)setBundle:(TIOModelBundle *)bundle {
     if ( _bundle != bundle ) {
         [self displayBundle:bundle];
     }
@@ -33,7 +33,7 @@
     _bundle = bundle;
 }
 
-- (void)displayBundle:(ModelBundle*)bundle {
+- (void)displayBundle:(TIOModelBundle*)bundle {
     self.titleLabel.text = bundle.name;
 }
 

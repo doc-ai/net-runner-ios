@@ -1,12 +1,12 @@
 //
-//  ModelBundle.m
+//  TIOModelBundle.m
 //  Net Runner
 //
 //  Created by Philip Dow on 7/20/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 
 #import "Model.h"
 #import "TIOModelOptions.h"
@@ -16,7 +16,7 @@ NSString * const kTFModelInfoFile = @"model.json";
 NSString * const kTFLiteModelClassName = @"TIOTFLiteModel";
 NSString * const kAssetsDirectory = @"assets";
 
-@interface ModelBundle ()
+@interface TIOModelBundle ()
 
 @property (readwrite) NSDictionary *info;
 @property (readwrite) NSString *path;
@@ -33,7 +33,7 @@ NSString * const kAssetsDirectory = @"assets";
 
 @end
 
-@implementation ModelBundle
+@implementation TIOModelBundle
 
 - (nullable instancetype)initWithPath:(NSString*)path {
     if (self = [super init]) {

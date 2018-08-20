@@ -1,5 +1,5 @@
 //
-//  ModelBundle.h
+//  TIOModelBundle.h
 //  Net Runner
 //
 //  Created by Philip Dow on 7/20/18.
@@ -19,9 +19,9 @@ extern NSString * const kTFModelInfoFile;
 /**
  * Encapsulates information about a `Model` without actaully loading the model.
  *
- * A `ModelBundle` is used by the UI to show model details and is used to instantiate model
+ * A `TIOModelBundle` is used by the UI to show model details and is used to instantiate model
  * instances as a model factory. There is currently a one-to-one correspondence between a
- * `ModelBundle` and a .tfbundle folder in the models directory.
+ * `TIOModelBundle` and a .tfbundle folder in the models directory.
  *
  * A model bundle folder must contain at least a model.json file, which contains information
  * about the model. Some information is required, such as the identifier and name field,
@@ -30,7 +30,7 @@ extern NSString * const kTFModelInfoFile;
  * See TIOModelBundleJSONSchema.h for a list of required fields and their types.
  */
 
-@interface ModelBundle : NSObject
+@interface TIOModelBundle : NSObject
 
 /**
  * The deserialized information contained in the model.json file.
@@ -113,7 +113,7 @@ extern NSString * const kTFModelInfoFile;
  *
  * @param path Fully qualified path to the model bundle folder.
  *
- * @return An instance of a `ModelBundle` or `nil` if no bundle could be loaded at that path.
+ * @return An instance of a `TIOModelBundle` or `nil` if no bundle could be loaded at that path.
  */
 
 - (nullable instancetype)initWithPath:(NSString*)path NS_DESIGNATED_INITIALIZER;

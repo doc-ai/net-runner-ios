@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class ModelBundle;
+@class TIOModelBundle;
 @protocol Model;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ModelDetailsTableViewController : UITableViewController
 
-@property ModelBundle *bundle;
+@property TIOModelBundle *bundle;
 
 @property (weak) IBOutlet UILabel *nameLabel;
 @property (weak) IBOutlet UILabel *authorLabel;

@@ -9,12 +9,12 @@
 #import "ModelJSONParsing.h"
 
 #import "NSArray+Extensions.h"
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 #import "TIODataInterface.h"
 #import "TIOPixelBufferDescription.h"
 #import "TIOVectorDescription.h"
 
-TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, ModelBundle *bundle) {
+TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle) {
     NSArray<NSNumber*> *shape = dict[@"shape"];
     NSString *name = dict[@"name"];
     BOOL isOutput = !isInput;

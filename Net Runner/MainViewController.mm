@@ -14,7 +14,7 @@
 #import <ImageIO/ImageIO.h>
 #import <VideoToolbox/VideoToolbox.h>
 
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 #import "TIOModelBundleManager.h"
 #import "ResultInfoView.h"
 #import "Model.h"
@@ -44,7 +44,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) CaptureMode captureMode;
 @property LatencyCounter *latencyCounter;
 
-@property ModelBundle *modelBundle;
+@property TIOModelBundle *modelBundle;
 @property id<Model> model;
 @property id<ModelOutput> previousOutput;
 
@@ -81,7 +81,7 @@ typedef enum : NSUInteger {
     // Load default model
     
     NSString *modelId = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
-    ModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:modelId];
+    TIOModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:modelId];
     
     if ( bundle == nil ) {
         NSLog(@"Unable to locate model bundle from last selected bundle with id: %@", modelId);
@@ -155,12 +155,12 @@ typedef enum : NSUInteger {
  * Loads a new instance of a model from a model bundle.
  * This method has no effect if the model bundle is already the loaded model bundle.
  *
- * @param bundle the `ModelBundle` to load
+ * @param bundle the `TIOModelBundle` to load
  *
  * @return BOOL `YES` if a new model was loaded, `NO` if not
  */
 
-- (BOOL)loadModelFromBundle:(nonnull ModelBundle*)bundle {
+- (BOOL)loadModelFromBundle:(nonnull TIOModelBundle*)bundle {
     if ( self.modelBundle == bundle ) {
         return NO;
     }

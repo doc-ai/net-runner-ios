@@ -8,14 +8,14 @@
 
 #import "TIOModelBundleManager.h"
 
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 #import "NSArray+Extensions.h"
 #import "Model.h"
 
 @interface TIOModelBundleManager()
 
 @property (readwrite) NSArray<id<Model>>* models;
-@property (readwrite) NSArray<ModelBundle*> *modelBundles;
+@property (readwrite) NSArray<TIOModelBundle*> *modelBundles;
 
 @end
 
@@ -49,27 +49,27 @@
     }];
     
     NSArray<id<Model>> *bundles = [bundlePaths map:^id _Nonnull(id  _Nonnull obj) {
-        return [[ModelBundle alloc] initWithPath:obj];
+        return [[TIOModelBundle alloc] initWithPath:obj];
     }];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
-    NSArray<ModelBundle*> *sortedBundles = [bundles sortedArrayUsingDescriptors:@[sortDescriptor]];
+    NSArray<TIOModelBundle*> *sortedBundles = [bundles sortedArrayUsingDescriptors:@[sortDescriptor]];
     
     self.modelBundles = sortedBundles;
     
     return YES;
 }
 
-- (nullable ModelBundle*)bundleWithId:(NSString*)modelId {
-    NSArray *matching = [self.modelBundles filter:^BOOL(ModelBundle * _Nonnull bundle, NSUInteger idx, BOOL * _Nonnull stop) {
+- (nullable TIOModelBundle*)bundleWithId:(NSString*)modelId {
+    NSArray *matching = [self.modelBundles filter:^BOOL(TIOModelBundle * _Nonnull bundle, NSUInteger idx, BOOL * _Nonnull stop) {
         return [bundle.identifier isEqualToString:modelId];
     }];
     
     return matching.count == 0 ? nil : matching.firstObject;
 }
 
-- (NSArray<ModelBundle*>*)bundlesWithIds:(NSArray<NSString*>*)modelIds {
-    return [self.modelBundles filter:^BOOL(ModelBundle * _Nonnull bundle, NSUInteger idx, BOOL * _Nonnull stop) {
+- (NSArray<TIOModelBundle*>*)bundlesWithIds:(NSArray<NSString*>*)modelIds {
+    return [self.modelBundles filter:^BOOL(TIOModelBundle * _Nonnull bundle, NSUInteger idx, BOOL * _Nonnull stop) {
         return [modelIds containsObject:bundle.identifier];
     }];
 }

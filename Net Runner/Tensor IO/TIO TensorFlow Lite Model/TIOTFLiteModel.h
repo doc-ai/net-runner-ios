@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Model Protocol Properties
 
-@property (readonly) ModelBundle *bundle;
+@property (readonly) TIOModelBundle *bundle;
 @property (readonly) TIOModelOptions *options;
 @property (readonly) NSString* identifier;
 @property (readonly) NSString* name;
@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Model Protocol Methods
 
-- (nullable instancetype)initWithBundle:(ModelBundle*)bundle NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithBundle:(TIOModelBundle*)bundle NS_DESIGNATED_INITIALIZER;
 
 - (nullable instancetype)init NS_UNAVAILABLE;
 

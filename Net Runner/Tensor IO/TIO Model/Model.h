@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol TIOData;
 @protocol TIODataDescription;
-@class ModelBundle;
+@class TIOModelBundle;
 @class TIOModelOptions;
 
 // MARK: -
@@ -25,10 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol Model <NSObject>
 
 /**
- * The `ModelBundle` object from which this model was instantiated.
+ * The `TIOModelBundle` object from which this model was instantiated.
  */
 
-@property (readonly) ModelBundle *bundle;
+@property (readonly) TIOModelBundle *bundle;
 
 /**
  * Options associated with this model.
@@ -92,17 +92,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The designated initializer for conforming classes.
  *
- * You should not need to call this method directly. Instead, acquire an instance of a `ModelBundle`
- * associated with this model by way of the model's identifier. Then the `ModelBundle` class
+ * You should not need to call this method directly. Instead, acquire an instance of a `TIOModelBundle`
+ * associated with this model by way of the model's identifier. Then the `TIOModelBundle` class
  * calls this `initWithBundle:` factory initialization method, which conforming classes may override
  * to support custom initialization.
  *
- * @param bundle `ModelBundle` containing information about the model and its path
+ * @param bundle `TIOModelBundle` containing information about the model and its path
  *
  * @return instancetype An instance of the conforming class, may be `nil`.
  */
 
-- (nullable instancetype)initWithBundle:(ModelBundle*)bundle;
+- (nullable instancetype)initWithBundle:(TIOModelBundle*)bundle;
 
 /**
  * Loads a model into memory.

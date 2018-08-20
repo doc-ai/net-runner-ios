@@ -18,7 +18,7 @@
 #import "Quantization.h"
 #import "VisionModelHelpers.h"
 
-@class ModelBundle;
+@class TIOModelBundle;
 @class TIODataInterface;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return TIODataInterface An interface that describes this pixel buffer input or output
  */
 
-TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, ModelBundle *bundle);
+TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle);
 
 /**
  * Parses the JSON description of a pixel buffer input or output.

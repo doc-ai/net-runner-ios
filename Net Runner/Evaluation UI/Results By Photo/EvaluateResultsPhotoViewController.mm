@@ -9,7 +9,7 @@
 #import "EvaluateResultsPhotoViewController.h"
 
 #import "ImageInputPreviewView.h"
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 #import "AlbumPhotoEvaluator.h"
 #import "UserDefaults.h"
 #import "NSArray+Extensions.h"

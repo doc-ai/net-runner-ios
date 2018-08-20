@@ -12,13 +12,13 @@
 #import "EvaluateSelectAlbumsTableViewController.h"
 #import "ModelDetailsTableViewController.h"
 #import "TIOModelBundleManager.h"
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 
 static NSString * const kModelCellIdentifier = @"ModelCell";
 
 @interface EvaluateSelectModelsTableViewController () <EvaluateModelTableViewCellActionTarget>
 
-@property (nonatomic) NSSet<ModelBundle*> *selectedBundles;
+@property (nonatomic) NSSet<TIOModelBundle*> *selectedBundles;
 @property (readonly) UIBarButtonItem *nextButton;
 
 @end
@@ -30,7 +30,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.selectedBundles = [[NSSet<ModelBundle*> alloc] init];
+    self.selectedBundles = [[NSSet<TIOModelBundle*> alloc] init];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -46,7 +46,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
     }
 }
 
-- (void)setSelectedBundles:(NSSet<ModelBundle *> *)selectedBundles {
+- (void)setSelectedBundles:(NSSet<TIOModelBundle *> *)selectedBundles {
     _selectedBundles = selectedBundles;
     
     self.nextButton.enabled = _selectedBundles.count > 0;
@@ -81,7 +81,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EvaluateModelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kModelCellIdentifier forIndexPath:indexPath];
-    ModelBundle *bundle = TIOModelBundleManager.sharedManager.modelBundles[indexPath.row];
+    TIOModelBundle *bundle = TIOModelBundleManager.sharedManager.modelBundles[indexPath.row];
     
     cell.titleLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
 
@@ -97,7 +97,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 
 // MARK: -
 
-- (void)didSwitchBundle:(ModelBundle*)bundle toSelected:(BOOL)selected {
+- (void)didSwitchBundle:(TIOModelBundle*)bundle toSelected:(BOOL)selected {
     if ( [self.selectedBundles containsObject:bundle] ) {
         [[self mutableSetValueForKey:@"selectedBundles"] removeObject:bundle];
     } else {

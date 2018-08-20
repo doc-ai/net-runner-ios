@@ -13,14 +13,14 @@
 #import "EvaluateIterationsTableViewCell.h"
 #import "EvaluateResultsTableViewController.h"
 #import "UserDefaults.h"
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 
 static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 static NSString * const kModelCellIdentifier = @"ModelCell";
 
 @interface EvaluateConfirmTableViewController () <EvaluateIterationsTableViewCellActionTarget>
 
-@property NSArray<ModelBundle*> *bundles;
+@property NSArray<TIOModelBundle*> *bundles;
 @property NSArray<PHAssetCollection*> *albums;
 @property NSNumber *iterations;
 
@@ -83,7 +83,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
         
         EvaluateModelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kModelCellIdentifier forIndexPath:indexPath];
         
-        ModelBundle *bundle = self.bundles[indexPath.row];
+        TIOModelBundle *bundle = self.bundles[indexPath.row];
     
         cell.titleLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
 

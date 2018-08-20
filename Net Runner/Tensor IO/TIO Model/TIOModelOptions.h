@@ -31,7 +31,7 @@ AVCaptureDevicePosition TIOModelOptionsAVCaptureDevicePositionFromString(NSStrin
 - (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition NS_DESIGNATED_INITIALIZER;
 
 /**
- * Convenience initializer used when reading from a ModelBundle.
+ * Convenience initializer used when reading from a TIOModelBundle.
  */
 
 - (instancetype)initWithDictionary:(nullable NSDictionary*)dictionary;

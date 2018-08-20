@@ -10,7 +10,7 @@
 
 #import "ModelDetailsTableViewController.h"
 #import "TIOModelBundleManager.h"
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 #import "Model.h"
 
 @interface ModelsTableViewController ()
@@ -51,7 +51,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ModelCell" forIndexPath:indexPath];
-    ModelBundle *bundle = [TIOModelBundleManager.sharedManager.modelBundles objectAtIndex:indexPath.row];
+    TIOModelBundle *bundle = [TIOModelBundleManager.sharedManager.modelBundles objectAtIndex:indexPath.row];
     
     cell.textLabel.text = bundle.name;
     cell.accessoryType = UITableViewCellAccessoryDetailButton;

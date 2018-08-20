@@ -28,7 +28,7 @@
 		E3322A23212613D40031435F /* VisionModelHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A03212613D40031435F /* VisionModelHelpers.mm */; };
 		E3322A24212613D40031435F /* TIOModelOptions.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A04212613D40031435F /* TIOModelOptions.mm */; };
 		E3322A25212613D40031435F /* TIOModelBundleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3322A05212613D40031435F /* TIOModelBundleManager.m */; };
-		E3322A26212613D40031435F /* ModelBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = E3322A07212613D40031435F /* ModelBundle.m */; };
+		E3322A26212613D40031435F /* TIOModelBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = E3322A07212613D40031435F /* TIOModelBundle.m */; };
 		E3322A27212613D40031435F /* ModelHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A0A212613D40031435F /* ModelHelpers.mm */; };
 		E3322A28212613D40031435F /* TIODataInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A11212613D40031435F /* TIODataInterface.mm */; };
 		E3322A29212613D40031435F /* TIOVectorDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A14212613D40031435F /* TIOVectorDescription.mm */; };
@@ -163,11 +163,11 @@
 		E3322A04212613D40031435F /* TIOModelOptions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOModelOptions.mm; sourceTree = "<group>"; };
 		E3322A05212613D40031435F /* TIOModelBundleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIOModelBundleManager.m; sourceTree = "<group>"; };
 		E3322A06212613D40031435F /* TIOVisionPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOVisionPipeline.h; sourceTree = "<group>"; };
-		E3322A07212613D40031435F /* ModelBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelBundle.m; sourceTree = "<group>"; };
+		E3322A07212613D40031435F /* TIOModelBundle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TIOModelBundle.m; sourceTree = "<group>"; };
 		E3322A08212613D40031435F /* TIOModelOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModelOptions.h; sourceTree = "<group>"; };
 		E3322A0A212613D40031435F /* ModelHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelHelpers.mm; sourceTree = "<group>"; };
 		E3322A0B212613D40031435F /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
-		E3322A0C212613D40031435F /* ModelBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelBundle.h; sourceTree = "<group>"; };
+		E3322A0C212613D40031435F /* TIOModelBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModelBundle.h; sourceTree = "<group>"; };
 		E3322A0D212613D40031435F /* TIOModelBundleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModelBundleManager.h; sourceTree = "<group>"; };
 		E3322A0E212613D40031435F /* VisionModelHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisionModelHelpers.h; sourceTree = "<group>"; };
 		E3322A11212613D40031435F /* TIODataInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIODataInterface.mm; sourceTree = "<group>"; };
@@ -430,8 +430,8 @@
 				E3322A02212613D40031435F /* TIOModelBundleJSONSchema.h */,
 				E31C7878212B2D5600139C90 /* ModelJSONParsing.h */,
 				E31C7879212B2D5600139C90 /* ModelJSONParsing.mm */,
-				E3322A0C212613D40031435F /* ModelBundle.h */,
-				E3322A07212613D40031435F /* ModelBundle.m */,
+				E3322A0C212613D40031435F /* TIOModelBundle.h */,
+				E3322A07212613D40031435F /* TIOModelBundle.m */,
 				E3322A0D212613D40031435F /* TIOModelBundleManager.h */,
 				E3322A05212613D40031435F /* TIOModelBundleManager.m */,
 				E3322A00212613D40031435F /* ModelHelpers.h */,
@@ -951,7 +951,7 @@
 				E3322A29212613D40031435F /* TIOVectorDescription.mm in Sources */,
 				E3F6C68A210A56DD00D200D8 /* UserDefaults.m in Sources */,
 				E36878F52118D36400F58CAB /* NSDictionary+Extensions.m in Sources */,
-				E3322A26212613D40031435F /* ModelBundle.m in Sources */,
+				E3322A26212613D40031435F /* TIOModelBundle.m in Sources */,
 				E3322A24212613D40031435F /* TIOModelOptions.mm in Sources */,
 				E3A520F0210A49A1004B912B /* main.m in Sources */,
 				E3A520E2210A49A0004B912B /* AppDelegate.m in Sources */,

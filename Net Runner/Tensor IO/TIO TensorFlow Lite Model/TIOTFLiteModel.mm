@@ -8,7 +8,7 @@
 
 #import "TIOTFLiteModel.h"
 
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 #import "ModelHelpers.h"
 #import "Utilities.h"
 
@@ -61,7 +61,7 @@ static NSString * const kTensorTypeImage = @"image";
     #endif
 }
 
-- (nullable instancetype)initWithBundle:(ModelBundle*)bundle {
+- (nullable instancetype)initWithBundle:(TIOModelBundle*)bundle {
     if (self = [super init]) {
         _bundle = bundle;
         _options = bundle.options;
@@ -104,7 +104,7 @@ static NSString * const kTensorTypeImage = @"image";
 }
 
 - (nullable instancetype)init {
-    self = [self initWithBundle:[[ModelBundle alloc] initWithPath:@""]];
+    self = [self initWithBundle:[[TIOModelBundle alloc] initWithPath:@""]];
     NSAssert(NO, @"Use the designated initializer initWithBundle:");
     return nil;
 }
