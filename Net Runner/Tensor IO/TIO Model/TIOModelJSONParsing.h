@@ -108,7 +108,7 @@ TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *i
  * No pixel format, used to represent an error reading the pixel format from the model.json file.
  */
 
-extern const OSType PixelFormatTypeInvalid;
+extern const OSType TIOPixelFormatTypeInvalid;
 
 // MARK: - Assets
 
