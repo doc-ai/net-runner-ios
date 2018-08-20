@@ -17,22 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The description of a vector input or output later.
- */
-
-@interface TIOVectorDescription : NSObject <TIODataDescription>
-
-@property (readonly, getter=isQuantized) BOOL quantized;
-
-/**
- * The length of the vector in terms of its number of elements.
  *
  * Inputs and outputs are always unrolled vectors, and from the tensor's perspective they are just
  * an array of bytes. The total length of a vector will be the total volume of the layer.
  * For example, if an input layer is a tensor of shape `(24,24,2)` the length of the vector will be
  * `24x24x2 = 1152`.
  *
- * TensorFlow Lite models expect tensor inputs to be unrolled from the first to the last dimension.
- * For example, a 2x4 matrix with the following values:
+ * TensorFlow Lite models expect row major ordering of bytes, such that higher order dimensions are
+ * traversed first. For example, a 2x4 matrix with the following values:
  *
  * @code
  * [[1 2 3 4]
@@ -45,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
  * [1 2 3 4 5 6 7 8]
  * @endcode
  *
+ * i.e, start with the row and traverse the columns before moving to the next row.
+ *
  * Because output layers are also exposed as an array of bytes, a `TIOTFLiteModel` will always return
  * a vector in one dimension. If is up to you to reshape it if required.
  *
@@ -52,6 +46,15 @@ NS_ASSUME_NONNULL_BEGIN
  * A `TIOVectorDescription`'s length is different that the byte length of a `TIOData`.
  * For example a quantized `TIOVector` (uint_t) of length 4 will occupy 4 bytes of memory but an
  * unquantized `Vector` (float_t) of length 4 will occupy 16 bytes of memory.
+ */
+
+@interface TIOVectorDescription : NSObject <TIODataDescription>
+
+@property (readonly, getter=isQuantized) BOOL quantized;
+
+/**
+ * The length of the vector in terms of its number of elements.
+ *
  */
 
 @property (readonly) NSUInteger length;
