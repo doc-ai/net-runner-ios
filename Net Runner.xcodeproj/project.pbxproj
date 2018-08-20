@@ -12,7 +12,7 @@
 		CC488EDFB5B8ADBBC17E37F0 /* libPods-Net Runner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1794288569A9345E245BCB0D /* libPods-Net Runner.a */; };
 		E31C7874212A5ABC00139C90 /* Quantization.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7873212A5ABC00139C90 /* Quantization.mm */; };
 		E31C7877212A6D4E00139C90 /* PixelBufferNormalization.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7876212A6D4E00139C90 /* PixelBufferNormalization.mm */; };
-		E31C787A212B2D5600139C90 /* ModelJSONParsing.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7879212B2D5600139C90 /* ModelJSONParsing.mm */; };
+		E31C787A212B2D5600139C90 /* TIOModelJSONParsing.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7879212B2D5600139C90 /* TIOModelJSONParsing.mm */; };
 		E33229D7212607680031435F /* ModelOutputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229D6212607680031435F /* ModelOutputManager.m */; };
 		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
 		E3322A18212613D40031435F /* NSDictionary+TIOData.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229E7212613D40031435F /* NSDictionary+TIOData.mm */; };
@@ -129,8 +129,8 @@
 		E31C7873212A5ABC00139C90 /* Quantization.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Quantization.mm; sourceTree = "<group>"; };
 		E31C7875212A6D4E00139C90 /* PixelBufferNormalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PixelBufferNormalization.h; sourceTree = "<group>"; };
 		E31C7876212A6D4E00139C90 /* PixelBufferNormalization.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PixelBufferNormalization.mm; sourceTree = "<group>"; };
-		E31C7878212B2D5600139C90 /* ModelJSONParsing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelJSONParsing.h; sourceTree = "<group>"; };
-		E31C7879212B2D5600139C90 /* ModelJSONParsing.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelJSONParsing.mm; sourceTree = "<group>"; };
+		E31C7878212B2D5600139C90 /* TIOModelJSONParsing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TIOModelJSONParsing.h; sourceTree = "<group>"; };
+		E31C7879212B2D5600139C90 /* TIOModelJSONParsing.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOModelJSONParsing.mm; sourceTree = "<group>"; };
 		E33229D5212607680031435F /* ModelOutputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutputManager.h; sourceTree = "<group>"; };
 		E33229D6212607680031435F /* ModelOutputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOutputManager.m; sourceTree = "<group>"; };
 		E33229DA21260C880031435F /* DefaultModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultModelOutput.h; sourceTree = "<group>"; };
@@ -428,8 +428,8 @@
 			children = (
 				E3322A0B212613D40031435F /* Model.h */,
 				E3322A02212613D40031435F /* TIOModelBundleJSONSchema.h */,
-				E31C7878212B2D5600139C90 /* ModelJSONParsing.h */,
-				E31C7879212B2D5600139C90 /* ModelJSONParsing.mm */,
+				E31C7878212B2D5600139C90 /* TIOModelJSONParsing.h */,
+				E31C7879212B2D5600139C90 /* TIOModelJSONParsing.mm */,
 				E3322A0C212613D40031435F /* TIOModelBundle.h */,
 				E3322A07212613D40031435F /* TIOModelBundle.m */,
 				E3322A0D212613D40031435F /* TIOModelBundleManager.h */,
@@ -975,7 +975,7 @@
 				E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */,
 				E3F6C681210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m in Sources */,
 				E3322A1F212613D40031435F /* NSArray+Extensions.m in Sources */,
-				E31C787A212B2D5600139C90 /* ModelJSONParsing.mm in Sources */,
+				E31C787A212B2D5600139C90 /* TIOModelJSONParsing.mm in Sources */,
 				E33229D7212607680031435F /* ModelOutputManager.m in Sources */,
 				E3458A8E210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.m in Sources */,
 				E3B57E89210A52FC008D19C0 /* FileImageEvaluator.mm in Sources */,

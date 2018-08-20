@@ -1,12 +1,12 @@
 //
-//  ModelJSONParsing.m
+//  TIOModelJSONParsing.m
 //  Net Runner
 //
 //  Created by Philip Dow on 8/20/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "ModelJSONParsing.h"
+#import "TIOModelJSONParsing.h"
 
 #import "NSArray+Extensions.h"
 #import "TIOModelBundle.h"

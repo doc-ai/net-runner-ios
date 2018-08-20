@@ -28,7 +28,7 @@
 #import "NSData+TIOData.h"
 #import "NSDictionary+TIOData.h"
 #import "NSArray+Extensions.h"
-#import "ModelJSONParsing.h"
+#import "TIOModelJSONParsing.h"
 
 static NSString * const kTensorTypeVector = @"array";
 static NSString * const kTensorTypeImage = @"image";
