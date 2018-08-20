@@ -20,7 +20,6 @@
 
 @interface CVPixelBufferEvaluator ()
 
-@property (readwrite) NSDictionary *results;
 @property (readwrite) id<Model> model;
 @property (nonatomic, readwrite) CVPixelBufferRef pixelBuffer;
 @property (readwrite) CGImagePropertyOrientation orientation;
@@ -70,10 +69,10 @@
     
     if ( ![self.model load:&modelError] ) {
         NSLog(@"Unable to load model, error: %@", modelError);
-        self.results = @{
+        NSDictionary *results = @{
             kEvaluatorResultsKeyPreprocessingError: @"Unable to load model"
         };
-        safe_block(completionHandler, self.results, NULL);
+        safe_block(completionHandler, results, NULL);
         return;
     }
     
@@ -89,10 +88,10 @@
     
     if (transformedPixelBuffer == NULL) {
         NSLog(@"Unable to transform pixel buffer for model processing");
-        self.results = @{
+        NSDictionary *results = @{
             kEvaluatorResultsKeyPreprocessingError: @"VisionPipeline returned NULL CVPixelBuffer"
         };
-        safe_block(completionHandler, self.results, NULL);
+        safe_block(completionHandler, results, NULL);
         return;
     }
     
@@ -109,10 +108,10 @@
     
     if (modelOutput == nil) {
         NSLog(@"Running the model produced null results");
-        self.results = @{
+        NSDictionary *results = @{
             kEvaluatorResultsKeyInferenceError: @"Model returned nil results"
         };
-        safe_block(completionHandler, self.results, NULL);
+        safe_block(completionHandler, results, NULL);
         return;
     }
     

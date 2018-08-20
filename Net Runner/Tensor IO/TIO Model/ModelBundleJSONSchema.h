@@ -9,6 +9,8 @@
 #ifndef ModelBundleJSONSchema_h
 #define ModelBundleJSONSchema_h
 
+// TODO: update this schema definition
+
 /*
 {
     "name":         String,
@@ -16,12 +18,26 @@
     "details":      String,
     "author":       String,
     "license":      String,
+ 
     "model": {
         "quantized":    Bool,
         "file":         String,
         "class":        String,
         "labels":       String,             // Or any other info
     },
+ 
+    "inputs": [
+ 
+    ],
+ 
+    "outputs": [
+ 
+    ],
+    
+    "options": {
+        "device_position":  String          // "front" | "back"
+    }
+ 
     "input": {
         "type":         String,             // "image"
         "shape":        [Int, Int, Int],    // [width, height, channgels] eg [224,224,3]
@@ -34,9 +50,6 @@
             "b":    Float,
         }
     },
-    "options": {
-        "device_position":  String          // "front" | "back"
-    }
 }
 */
 

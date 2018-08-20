@@ -17,6 +17,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// TODO: move pixel normalization to its own files
+
 // MARK: - Types
 
 /**
@@ -100,7 +102,7 @@ extern const PixelNormalization kPixelNormalizationNone;
 /**
  * Pixel normalization from 0 to 1.
  *
- * A scale of 1.0/255.0.
+ * A scale of 1.0/255.0 and no bias
  */
 
 extern const PixelNormalization kPixelNormalizationZeroToOne;
@@ -113,11 +115,32 @@ extern const PixelNormalization kPixelNormalizationZeroToOne;
 
 extern const PixelNormalization kPixelNormalizationNegativeOneToOne;
 
-
+/**
+ * An invalid pixel denormalization, used when there is an error parsing the denormalization settings.
+ */
 
 extern const PixelDenormalization kPixelDenormalizationInvalid;
+
+/**
+ * No pixel denormalization, so a scale of 1 and no bias.
+ */
+
 extern const PixelDenormalization kPixelDenormalizationNone;
+
+/**
+ * Pixel denormalization from a range of values 0 to 1.
+ *
+ * A scale of 255.0 and no bias
+ */
+
 extern const PixelDenormalization kPixelDenormalizationZeroToOne;
+
+/**
+ * Pixel denormalization from a range of values  -1 to 1.
+ *
+ * A scale of 255.0/2.0 and a bias of +1 to each channel.
+ */
+
 extern const PixelDenormalization kPixelDenormalizationNegativeOneToOne;
 
 /**
@@ -335,8 +358,8 @@ void CVPixelBufferCopyToTensor(CVPixelBufferRef pixelBuffer, tensor_t* _Nonnull 
 // TODO: ensure 16 byte pixel buffer alignment
 
 /**
- * Copies tensor bytes directly into pixel buffer, applying a denormalization function and adjusting
- * for the pixel format.
+ * Copies tensor bytes directly into  a pixel buffer from a tensor, applying a denormalization
+ * function and adjusting for the pixel format.
  *
  * The resulting pixel buffer will (eventually) be 16 byte aligned. The caller must release the
  * pixelBuffer with `CVPixelBufferRelease`.

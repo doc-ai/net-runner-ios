@@ -5,7 +5,7 @@
 //  Created by Philip Dow on 8/7/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
-//  TODO: Move to ModelHelpers
+//  TODO: Move parsing to ModelHelpers or even to a separate class
 
 #import <Foundation/Foundation.h>
 

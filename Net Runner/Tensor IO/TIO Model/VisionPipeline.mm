@@ -49,9 +49,9 @@
         return NULL;
     }
     
-defer_block {
-    CVPixelBufferRelease(resizedPixelBuffer);
-};
+    defer_block {
+        CVPixelBufferRelease(resizedPixelBuffer);
+    };
     
     // Rotate pixel buffer
     // :: resizedPixelBuffer -> rotatedPixelBuffer
@@ -84,9 +84,9 @@ defer_block {
         return NULL;
     }
     
-defer_block {
-    CVPixelBufferRelease(rotatedPixelBuffer);
-};
+    defer_block {
+        CVPixelBufferRelease(rotatedPixelBuffer);
+    };
     
     // Convert pixel buffer to ARGB
     // :: rotatedPixelBuffer ->formattedPixelBuffer
@@ -112,9 +112,9 @@ defer_block {
         return NULL;
     }
     
-defer_block {
-    CFAutorelease(formattedPixelBuffer);
-};
+    defer_block {
+        CFAutorelease(formattedPixelBuffer);
+    };
     
     // Return the formatted pixel buffer
     

@@ -20,10 +20,10 @@ extern NSString * const kTFModelInfoFile;
  * Encapsulates information about a `Model` without actaully loading the model.
  *
  * A `ModelBundle` is used by the UI to show model details and is used to instantiate model
- * instances as a model factory. There is currently a one-to-one correspondence with a .tfbundle
- * folder in the models directory.
+ * instances as a model factory. There is currently a one-to-one correspondence between a
+ * `ModelBundle` and a .tfbundle folder in the models directory.
  *
- * A model bundle folder must contain at least a model.json file which contains information
+ * A model bundle folder must contain at least a model.json file, which contains information
  * about the model. Some information is required, such as the identifier and name field,
  * while other information may be added as needed by your use case.
  *

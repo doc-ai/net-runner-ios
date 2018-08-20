@@ -87,7 +87,6 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Designated initializer.
  *
- * @param name The name of this layer.
  * @param length The total number of elements in this layer.
  * @param labels The indexed labels associated with the outputs of this layer. May be `nil`.
  * @param quantizer A function that transforms unquantized values to quantized input

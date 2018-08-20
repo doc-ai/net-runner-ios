@@ -15,10 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The `VisionPipeline` is responsible for scaling and croping, rotating, and converting the provided pixel buffer
- * to and ARGB or BGRA pixel format, using properties specified by the model.
+ * to an ARGB or BGRA pixel format, using properties specified by the model.
  */
 
 @interface VisionPipeline : NSObject
+
+/**
+ * A description of the pixel input expected by the model
+ */
 
 @property (readonly) TIOPixelBufferDescription *pixelBufferDescription;
 
