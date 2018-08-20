@@ -391,6 +391,10 @@ PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *dict) {
     }
 }
 
+// MARK: - Pixel Format
+
+const OSType PixelFormatTypeInvalid = 'NULL';
+
 // MARK: - Assets
 
 void LoadLabels(NSString* labels_path, std::vector<std::string>* label_strings) {

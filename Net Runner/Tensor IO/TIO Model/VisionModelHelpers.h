@@ -12,8 +12,6 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-#include <stdio.h>
-
 #import "Model.h"
 #import "PixelBufferNormalization.h"
 
@@ -47,14 +45,6 @@ extern const ImageVolume kImageVolumeInvalid;
  */
 
 BOOL ImageVolumesEqual(const ImageVolume& a, const ImageVolume& b);
-
-// MARK: - Pixel Format
-
-/**
- * No pixel format, used to represent an error reading the pixel format from the model.json file.
- */
-
-extern const OSType PixelFormatTypeInvalid;
 
 // MARK: - CVPixelBuffer Tensor Utilities
 

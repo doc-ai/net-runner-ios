@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#include <stdio.h>
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -100,6 +101,14 @@ PixelDenormalization PixelDenormalizationForDictionary(NSDictionary *input);
  */
 
 PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *input);
+
+// MARK: - Pixel Format
+
+/**
+ * No pixel format, used to represent an error reading the pixel format from the model.json file.
+ */
+
+extern const OSType PixelFormatTypeInvalid;
 
 // MARK: - Assets
 

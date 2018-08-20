@@ -21,7 +21,3 @@ BOOL ImageVolumesEqual(const ImageVolume& a, const ImageVolume& b) {
         && a.height == b.height
         && a.channels == b.channels;
 }
-
-// MARK: - Pixel Format
-
-const OSType PixelFormatTypeInvalid = 'NULL';
