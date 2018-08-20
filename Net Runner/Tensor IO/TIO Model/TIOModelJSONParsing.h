@@ -8,11 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#include <stdio.h>
-#include <vector>
-#include <iostream>
-#include <fstream>
-
 #import "TIOData.h"
 #import "TIODataInterface.h"
 #import "TIOQuantization.h"
@@ -109,13 +104,5 @@ TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *i
  */
 
 extern const OSType TIOPixelFormatTypeInvalid;
-
-// MARK: - Assets
-
-/**
- * Reads the labels associated with a TIOVector feature.
- */
-
-void LoadLabels(NSString* labels_path, std::vector<std::string>* label_strings);
 
 NS_ASSUME_NONNULL_END

@@ -25,18 +25,15 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionar
 
     // Labels
 
-    NSMutableArray<NSString*> *labels = nil;
+    NSArray<NSString*> *labels = nil;
 
     if ( NSString *labelsFilename = dict[@"labels"] ) {
-        labels = NSMutableArray.array;
-        std::vector<std::string> labelVector;
+        NSError *error = nil;
+        labels = [[NSString stringWithContentsOfFile:[bundle pathToAsset:labelsFilename] encoding:NSUTF8StringEncoding error:&error] componentsSeparatedByString:@"\n"];
         
-        NSString *labelsPath = [bundle pathToAsset:labelsFilename];
-        LoadLabels(labelsPath, &labelVector);
-        
-        for ( NSUInteger i = 0; i < labelVector.size(); i++ ) {
-            NSString *label = [NSString stringWithUTF8String:labelVector[i].c_str()];
-            [labels addObject:label];
+        if ( error ) {
+            NSLog(@"There was a problem reading %@, no labels were loaded", [bundle pathToAsset:labelsFilename]);
+            labels = nil;
         }
     }
     
@@ -394,17 +391,3 @@ TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *d
 // MARK: - Pixel Format
 
 const OSType TIOPixelFormatTypeInvalid = 'NULL';
-
-// MARK: - Assets
-
-void LoadLabels(NSString* labels_path, std::vector<std::string>* label_strings) {
-    std::ifstream t;
-    t.open([labels_path UTF8String]);
-    std::string line;
-    while (t) {
-        std::getline(t, line);
-        label_strings->push_back(line);
-    }
-    t.close();
-}
-
