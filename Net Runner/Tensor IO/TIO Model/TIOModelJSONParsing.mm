@@ -43,7 +43,7 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionar
     // Quantization
     // TODO: support quantization for inputs
     
-    DataQuantizer quantizer;
+    TIODataQuantizer quantizer;
     
     if ( isInput ) {
         quantizer = TIODataQuantizerNone();
@@ -53,7 +53,7 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionar
     
     // Dequantization
     
-    DataDequantizer dequantizer;
+    TIODataDequantizer dequantizer;
     
     if ( isOutput ) {
         dequantizer = TIODataDequantizerForDict(dict);
@@ -148,19 +148,19 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDict
     return interface;
 }
 
-_Nullable DataQuantizer TIODataQuantizerForDict(NSDictionary *dict) {
+_Nullable TIODataQuantizer TIODataQuantizerForDict(NSDictionary *dict) {
     // TODO: support data quantization
     return nil;
 }
 
-_Nullable DataDequantizer TIODataDequantizerForDict(NSDictionary *dict) {
+_Nullable TIODataDequantizer TIODataDequantizerForDict(NSDictionary *dict) {
     NSString *standard = dict[@"dequantize"][@"standard"];
     // TODO: support scale and bias
     // NSNumber *scale = dict[@"dequantize"][@"scale"];
     // NSNumber *bias = dict[@"dequantize"][@"bias"];
     
     if ( [standard isEqualToString:@"[0,1]"] ) {
-        return DataDequantizerZeroToOne();
+        return TIODataDequantizerZeroToOne();
     }
     
     return nil;

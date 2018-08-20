@@ -10,7 +10,7 @@
 
 @implementation TIOVectorDescription
 
-- (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable DataQuantizer)quantizer dequantizer:(DataDequantizer)dequantizer {
+- (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(TIODataDequantizer)dequantizer {
     if (self=[super init]) {
         _length = length;
         _labels = labels.copy;
