@@ -1,37 +1,37 @@
 //
-//  PixelBufferNormalization.m
+//  TIOPixelNormalization.m
 //  Net Runner
 //
 //  Created by Philip Dow on 8/19/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "PixelBufferNormalization.h"
+#import "TIOPixelNormalization.h"
 
 // Standard Pixel Normalizers
 
-const PixelNormalization kPixelNormalizationInvalid = {
+const TIOPixelNormalization kTIOPixelNormalizationInvalid = {
     .scale      = FLT_MAX,
     .redBias    = FLT_MAX,
     .greenBias  = FLT_MAX,
     .blueBias   = FLT_MAX
 };
 
-const PixelNormalization kPixelNormalizationNone = {
+const TIOPixelNormalization kTIOPixelNormalizationNone = {
     .scale      = 1,
     .redBias    = 0,
     .greenBias  = 0,
     .blueBias   = 0
 };
 
-const PixelNormalization kPixelNormalizationZeroToOne = {
+const TIOPixelNormalization kTIOPixelNormalizationZeroToOne = {
     .scale      = 1.0/255.0,
     .redBias    = 0,
     .greenBias  = 0,
     .blueBias   = 0
 };
 
-const PixelNormalization kPixelNormalizationNegativeOneToOne = {
+const TIOPixelNormalization kTIOPixelNormalizationNegativeOneToOne = {
     .scale      = 2.0/255.0,
     .redBias    = -1,
     .greenBias  = -1,
@@ -40,28 +40,28 @@ const PixelNormalization kPixelNormalizationNegativeOneToOne = {
 
 // Standard Pixel Denormalizers
 
-const PixelDenormalization kPixelDenormalizationInvalid = {
+const TIOPixelDenormalization kTIOPixelDenormalizationInvalid = {
     .scale      = FLT_MAX,
     .redBias    = FLT_MAX,
     .greenBias  = FLT_MAX,
     .blueBias   = FLT_MAX
 };
 
-const PixelDenormalization kPixelDenormalizationNone = {
+const TIOPixelDenormalization kTIOPixelDenormalizationNone = {
     .scale      = 1,
     .redBias    = 0,
     .greenBias  = 0,
     .blueBias   = 0
 };
 
-const PixelDenormalization kPixelDenormalizationZeroToOne = {
+const TIOPixelDenormalization kTIOPixelDenormalizationZeroToOne = {
     .scale      = 255.0,
     .redBias    = 0,
     .greenBias  = 0,
     .blueBias   = 0
 };
 
-const PixelDenormalization kPixelDenormalizationNegativeOneToOne = {
+const TIOPixelDenormalization kTIOPixelDenormalizationNegativeOneToOne = {
     .scale      = 255.0/2.0,
     .redBias    = 1,
     .greenBias  = 1,
@@ -70,11 +70,11 @@ const PixelDenormalization kPixelDenormalizationNegativeOneToOne = {
 
 // MARK: - Core Pixel Normalizers
 
-PixelNormalizer _Nullable PixelNormalizerNone() {
+TIOPixelNormalizer _Nullable TIOPixelNormalizerNone() {
     return nil;
 }
 
-PixelNormalizer PixelNormalizerSingleBias(const PixelNormalization& normalization) {
+TIOPixelNormalizer TIOPixelNormalizerSingleBias(const TIOPixelNormalization& normalization) {
     const float scale = normalization.scale;
     const float bias = normalization.redBias;
     
@@ -83,7 +83,7 @@ PixelNormalizer PixelNormalizerSingleBias(const PixelNormalization& normalizatio
     };
 }
 
-PixelNormalizer PixelNormalizerPerChannelBias(const PixelNormalization& normalization) {
+TIOPixelNormalizer TIOPixelNormalizerPerChannelBias(const TIOPixelNormalization& normalization) {
     const float scale = normalization.scale;
     const float redBias = normalization.redBias;
     const float greenBias = normalization.greenBias;
@@ -106,7 +106,7 @@ PixelNormalizer PixelNormalizerPerChannelBias(const PixelNormalization& normaliz
 
 // MARK: - Helpers for Constructing Standard Pixel Normalizers
 
-PixelNormalizer PixelNormalizerZeroToOne() {
+TIOPixelNormalizer TIOPixelNormalizerZeroToOne() {
     const float scale = 1.0/255.0;
     
     return ^float_t (const uint8_t &value, const uint8_t &channel) {
@@ -114,7 +114,7 @@ PixelNormalizer PixelNormalizerZeroToOne() {
     };
 }
 
-PixelNormalizer PixelNormalizerNegativeOneToOne() {
+TIOPixelNormalizer TIOPixelNormalizerNegativeOneToOne() {
     const float scale = 2.0/255.0;
     const float bias = -1;
     
@@ -125,11 +125,11 @@ PixelNormalizer PixelNormalizerNegativeOneToOne() {
 
 // MARK: - Core Pixel Denormalizers
 
-PixelDenormalizer _Nullable PixelDenormalizerNone() {
+TIOPixelDenormalizer _Nullable TIOPixelDenormalizerNone() {
     return nil;
 }
 
-PixelDenormalizer PixelDenormalizerSingleBias(const PixelNormalization& normalization) {
+TIOPixelDenormalizer TIOPixelDenormalizerSingleBias(const TIOPixelNormalization& normalization) {
     const float scale = normalization.scale;
     const float bias = normalization.redBias;
     
@@ -138,7 +138,7 @@ PixelDenormalizer PixelDenormalizerSingleBias(const PixelNormalization& normaliz
     };
 }
 
-PixelDenormalizer PixelDenormalizerPerChannelBias(const PixelNormalization& normalization) {
+TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(const TIOPixelNormalization& normalization) {
     const float scale = normalization.scale;
     const float redBias = normalization.redBias;
     const float greenBias = normalization.greenBias;
@@ -161,7 +161,7 @@ PixelDenormalizer PixelDenormalizerPerChannelBias(const PixelNormalization& norm
 
 // MARK: - Helpers for Constructing Standard Pixel Denormalizers
 
-PixelDenormalizer PixelDenormalizerZeroToOne() {
+TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne() {
     const float scale = 255.0;
     
     return ^uint8_t (const float_t &value, const uint8_t &channel) {
@@ -169,7 +169,7 @@ PixelDenormalizer PixelDenormalizerZeroToOne() {
     };
 }
 
-PixelDenormalizer PixelDenormalizerNegativeOneToOne() {
+TIOPixelDenormalizer TIOPixelDenormalizerNegativeOneToOne() {
     const float scale = 255.0/2.0;
     const float bias = 1;
     
@@ -180,14 +180,14 @@ PixelDenormalizer PixelDenormalizerNegativeOneToOne() {
 
 // MARK: - Utilities
 
-BOOL PixelNormalizationsEqual(const PixelNormalization& a, const PixelNormalization& b) {
+BOOL TIOPixelNormalizationsEqual(const TIOPixelNormalization& a, const TIOPixelNormalization& b) {
     return a.scale == b.scale
         && a.redBias == b.redBias
         && a.greenBias == b.greenBias
         && a.blueBias == b.blueBias;
 }
 
-BOOL PixelDenormalizationsEqual(const PixelDenormalization& a, const PixelDenormalization& b) {
+BOOL TIOPixelDenormalizationsEqual(const TIOPixelDenormalization& a, const TIOPixelDenormalization& b) {
     return a.scale == b.scale
         && a.redBias == b.redBias
         && a.greenBias == b.greenBias

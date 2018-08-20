@@ -1,19 +1,19 @@
 //
-//  VisionModelHelpers.h
+//  TIOVisionModelHelpers.h
 //  Net Runner
 //
 //  Created by Philip Dow on 7/12/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#ifndef VisionModelHelpers_h
-#define VisionModelHelpers_h
+#ifndef TIOVisionModelHelpers_h
+#define TIOVisionModelHelpers_h
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
 #import "TIOModel.h"
-#import "PixelBufferNormalization.h"
+#import "TIOPixelNormalization.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,17 +23,17 @@ NS_ASSUME_NONNULL_BEGIN
  * Describes the input volume of a tensor that takes an image
  */
 
-typedef struct ImageVolume {
+typedef struct TIOImageVolume {
     int width;
     int height;
     int channels;
-} ImageVolume;
+} TIOImageVolume;
 
 /**
  * No image volume, used to represent an error reading the image volume from the model.json file.
  */
 
-extern const ImageVolume kImageVolumeInvalid;
+extern const TIOImageVolume kTIOImageVolumeInvalid;
 
 /**
  * Checks if two image volumes are equal.
@@ -44,13 +44,13 @@ extern const ImageVolume kImageVolumeInvalid;
  * @return BOOL `YES` if two image volumes are equal, `NO` otherwise.
  */
 
-BOOL ImageVolumesEqual(const ImageVolume& a, const ImageVolume& b);
+BOOL TIOImageVolumesEqual(const TIOImageVolume& a, const TIOImageVolume& b);
 
 // MARK: - CVPixelBuffer Tensor Utilities
 
 /**
- * `CVPixelBufferCopyToTensor` copies a pixel buffer in ARGB or BGRA format to a tensor,
- * which is a pointer to an array of float_t or uint8_t.
+ * Copies a pixel buffer in ARGB or BGRA format to a tensor, which is a pointer to an array of
+ * float_t or uint8_t.
  *
  * The pixel buffer must already be in the shape and format expected by the input tensor,
  * with the shape parameter describing its dimensions. The alpha channel will be ignored.
@@ -69,7 +69,7 @@ BOOL ImageVolumesEqual(const ImageVolume& a, const ImageVolume& b);
  */
 
 template <typename tensor_t>
-void CVPixelBufferCopyToTensor(CVPixelBufferRef pixelBuffer, tensor_t* _Nonnull tensor, ImageVolume shape, _Nullable PixelNormalizer normalizer) {
+void TIOCopyCVPixelBufferToTensor(CVPixelBufferRef pixelBuffer, tensor_t* _Nonnull tensor, TIOImageVolume shape, _Nullable TIOPixelNormalizer normalizer) {
     
     CFRetain(pixelBuffer);
     CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
@@ -152,7 +152,7 @@ void CVPixelBufferCopyToTensor(CVPixelBufferRef pixelBuffer, tensor_t* _Nonnull 
  */
 
 template <typename tensor_t>
-CVReturn CVPixelBufferCreateFromTensor(_Nonnull CVPixelBufferRef * _Nonnull pixelBuffer, tensor_t * _Nonnull tensor, ImageVolume shape, OSType pixelFormat, _Nullable PixelDenormalizer denormalizer) {
+CVReturn TIOCreateCVPixelBufferFromTensor(_Nonnull CVPixelBufferRef * _Nonnull pixelBuffer, tensor_t * _Nonnull tensor, TIOImageVolume shape, OSType pixelFormat, _Nullable TIOPixelDenormalizer denormalizer) {
     
     assert( pixelFormat == kCVPixelFormatType_32ARGB || pixelFormat == kCVPixelFormatType_32BGRA );
     assert( shape.width % 16 == 0);
@@ -240,4 +240,4 @@ CVReturn CVPixelBufferCreateFromTensor(_Nonnull CVPixelBufferRef * _Nonnull pixe
 
 NS_ASSUME_NONNULL_END
 
-#endif /* VisionModelHelpers_h */
+#endif /* TIOVisionModelHelpers_h */

@@ -1,5 +1,5 @@
 //
-//  PixelBufferNormalization.h
+//  TIOPixelNormalization.h
 //  Net Runner
 //
 //  Created by Philip Dow on 8/19/18.
@@ -16,14 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Pixels will typically normalized to values in the range `[0,1]` or `[-1,+1]`,
  * although separate biases may be applied to each of the RGB channels.
+ *
+ * Pixel normalization is like quantization but in the opposite direction.
  */
 
-typedef struct PixelNormalization {
+typedef struct TIOPixelNormalization {
     float scale;
     float redBias;
     float greenBias;
     float blueBias;
-} PixelNormalization;
+} TIOPixelNormalization;
 
 /**
  * Describes a denormalization, or how pixel values in some arbitrary range will be
@@ -31,15 +33,18 @@ typedef struct PixelNormalization {
  *
  * Pixels will typically be denormalized from values in the range `[0,1]` or `[-1,+1]`,
  * although separate denormaliation biases may be required for each of the RGB channels.
+ *
+ * Normalization and denormalization apply the same operations with scaling and bias values,
+ * but they are typically inverse of one another.
  */
 
-typedef PixelNormalization PixelDenormalization;
+typedef TIOPixelNormalization TIOPixelDenormalization;
 
 /**
- * A `PixelNormalizer` is a function that transforms a pixel value in the range `[0,255]`
+ * A `TIOPixelNormalizer` is a function that transforms a pixel value in the range `[0,255]`
  * to some other range, where the transformation may be channel dependent.
  *
- * The normalizer will typically be constructed with the help of a `PixelNormalization`
+ * The normalizer will typically be constructed with the help of a `TIOPixelNormalization`
  * struct or using one of the core or standard normalizers provided.
  *
  * @param value The single byte pixel value being transformed
@@ -48,14 +53,14 @@ typedef PixelNormalization PixelDenormalization;
  * @return float_t The transformed value
  */
 
-typedef float_t (^PixelNormalizer)(const uint8_t &value, const uint8_t &channel);
+typedef float_t (^TIOPixelNormalizer)(const uint8_t &value, const uint8_t &channel);
 
 /**
- * A `PixelDenormalizer` is a function that transforms a normalized pixel value, typically in the
+ * A `TIOPixelDenormalizer` is a function that transforms a normalized pixel value, typically in the
  * range `[0,1]` or `[-1,1]` back to a pixel value in the range `[0,255]`, where the denormalization
  * may be channel dependent.
  *
- * The denormalizer will typically be constructed with the help of a `PixelDenormalization`
+ * The denormalizer will typically be constructed with the help of a `TIOPixelDenormalization`
  * struct or using one of the core or standard denormalizers provided.
  *
  * @param value The four byte normalized pixel value being transformed
@@ -64,19 +69,19 @@ typedef float_t (^PixelNormalizer)(const uint8_t &value, const uint8_t &channel)
  * @return uint8_t The denormalized value
  */
 
-typedef uint8_t (^PixelDenormalizer)(const float_t &value, const uint8_t &channel);
+typedef uint8_t (^TIOPixelDenormalizer)(const float_t &value, const uint8_t &channel);
 
 /**
  * An invalid pixel normalization, used when there is an error parsing the normalization settings.
  */
 
-extern const PixelNormalization kPixelNormalizationInvalid;
+extern const TIOPixelNormalization kTIOPixelNormalizationInvalid;
 
 /**
  * No pixel normalization, so a scale of 1 and no bias.
  */
 
-extern const PixelNormalization kPixelNormalizationNone;
+extern const TIOPixelNormalization kTIOPixelNormalizationNone;
 
 /**
  * Pixel normalization from 0 to 1.
@@ -84,7 +89,7 @@ extern const PixelNormalization kPixelNormalizationNone;
  * A scale of 1.0/255.0 and no bias
  */
 
-extern const PixelNormalization kPixelNormalizationZeroToOne;
+extern const TIOPixelNormalization kTIOPixelNormalizationZeroToOne;
 
 /**
  * Pixel normalization from -1 to 1.
@@ -92,19 +97,19 @@ extern const PixelNormalization kPixelNormalizationZeroToOne;
  * A scale of 2.0/255.0 and a bias of -1 to each channel.
  */
 
-extern const PixelNormalization kPixelNormalizationNegativeOneToOne;
+extern const TIOPixelNormalization kTIOPixelNormalizationNegativeOneToOne;
 
 /**
  * An invalid pixel denormalization, used when there is an error parsing the denormalization settings.
  */
 
-extern const PixelDenormalization kPixelDenormalizationInvalid;
+extern const TIOPixelDenormalization kTIOPixelDenormalizationInvalid;
 
 /**
  * No pixel denormalization, so a scale of 1 and no bias.
  */
 
-extern const PixelDenormalization kPixelDenormalizationNone;
+extern const TIOPixelDenormalization kTIOPixelDenormalizationNone;
 
 /**
  * Pixel denormalization from a range of values 0 to 1.
@@ -112,7 +117,7 @@ extern const PixelDenormalization kPixelDenormalizationNone;
  * A scale of 255.0 and no bias
  */
 
-extern const PixelDenormalization kPixelDenormalizationZeroToOne;
+extern const TIOPixelDenormalization kTIOPixelDenormalizationZeroToOne;
 
 /**
  * Pixel denormalization from a range of values  -1 to 1.
@@ -120,7 +125,7 @@ extern const PixelDenormalization kPixelDenormalizationZeroToOne;
  * A scale of 255.0/2.0 and a bias of +1 to each channel.
  */
 
-extern const PixelDenormalization kPixelDenormalizationNegativeOneToOne;
+extern const TIOPixelDenormalization kTIOPixelDenormalizationNegativeOneToOne;
 
 // MARK: - Core Pixel Normalizers
 
@@ -128,19 +133,19 @@ extern const PixelDenormalization kPixelDenormalizationNegativeOneToOne;
  * A normalizing function that applies no normalization to the pixel values, `nil`.
  */
 
-PixelNormalizer _Nullable PixelNormalizerNone();
+TIOPixelNormalizer _Nullable TIOPixelNormalizerNone();
 
 /**
  * A normalizing function that applies a scaling factor and equal bias to each pixel channel.
  */
 
-PixelNormalizer PixelNormalizerSingleBias(const PixelNormalization& normalization);
+TIOPixelNormalizer TIOPixelNormalizerSingleBias(const TIOPixelNormalization& normalization);
 
 /**
  * A normalizing function that applies a scaling factor and different biases to each pixel channel.
  */
 
-PixelNormalizer PixelNormalizerPerChannelBias(const PixelNormalization& normalization);
+TIOPixelNormalizer TIOPixelNormalizerPerChannelBias(const TIOPixelNormalization& normalization);
 
 // MARK: - Helpers for Constructing Standard Pixel Normalizers
 
@@ -150,7 +155,7 @@ PixelNormalizer PixelNormalizerPerChannelBias(const PixelNormalization& normaliz
  * This is equivalent to applying a scaling factor of `1.0/255.0` and no channel bias.
  */
 
-PixelNormalizer PixelNormalizerZeroToOne();
+TIOPixelNormalizer TIOPixelNormalizerZeroToOne();
 
 /**
  * Normalizes pixel values from a range of `[0,255]` to `[-1,1]`.
@@ -158,7 +163,7 @@ PixelNormalizer PixelNormalizerZeroToOne();
  * This is equivalent to applying a scaling factor of `2.0/255.0` and a bias of `-1` to each channel.
  */
 
-PixelNormalizer PixelNormalizerNegativeOneToOne();
+TIOPixelNormalizer TIOPixelNormalizerNegativeOneToOne();
 
 // MARK: - Core Pixel Denormalizers
 
@@ -166,19 +171,19 @@ PixelNormalizer PixelNormalizerNegativeOneToOne();
  * A denormalizing function that applies no denormalization to the pixel values, `nil`.
  */
 
-PixelDenormalizer _Nullable PixelDenormalizerNone();
+TIOPixelDenormalizer _Nullable TIOPixelDenormalizerNone();
 
 /**
  * A denormalizing function that applies a scaling factor and equal bias to each pixel channel.
  */
 
-PixelDenormalizer PixelDenormalizerSingleBias(const PixelNormalization& normalization);
+TIOPixelDenormalizer TIOPixelDenormalizerSingleBias(const TIOPixelNormalization& normalization);
 
 /**
  * A denormalizing function that applies a scaling factor and different biases to each pixel channel.
  */
 
-PixelDenormalizer PixelDenormalizerPerChannelBias(const PixelNormalization& normalization);
+TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(const TIOPixelNormalization& normalization);
 
 // MARK: - Helpers for Constructing Standard Pixel Denormalizers
 
@@ -188,7 +193,7 @@ PixelDenormalizer PixelDenormalizerPerChannelBias(const PixelNormalization& norm
  * This is equivalent to applying no channel bias a scaling factor of `255.0`.
  */
 
-PixelDenormalizer PixelDenormalizerZeroToOne();
+TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne();
 
 /**
  * Normalizes pixel values from a range of `[-1,1]` to `[0,255]`.
@@ -196,28 +201,28 @@ PixelDenormalizer PixelDenormalizerZeroToOne();
  * This is equivalent to applying a bias of `1` to each channel and a scaling factor of `255.0/2.0`.
  */
 
-PixelDenormalizer PixelDenormalizerNegativeOneToOne();
+TIOPixelDenormalizer TIOPixelDenormalizerNegativeOneToOne();
 
 // MARK: - Utilities
 
 /**
- * Checks if two PixelNormalization structs are equal
+ * Checks if two TIOPixelNormalization structs are equal
  * @param a The first pixel normalization to compare.
  * @param b The second pixel normalization to compare,
  *
  * @return BOOL 'YES' if the two structs are equal, 'NO' otherwise.
  */
 
-BOOL PixelNormalizationsEqual(const PixelNormalization& a, const PixelNormalization& b);
+BOOL TIOPixelNormalizationsEqual(const TIOPixelNormalization& a, const TIOPixelNormalization& b);
 
 /**
- * Checks if two PixelDenormalization structs are equal
+ * Checks if two TIOPixelDenormalization structs are equal
  * @param a The first pixel denormalization to compare.
  * @param b The second pixel denormalization to compare,
  *
  * @return BOOL 'YES' if the two structs are equal, 'NO' otherwise.
  */
 
-BOOL PixelDenormalizationsEqual(const PixelDenormalization& a, const PixelDenormalization& b);
+BOOL TIOPixelDenormalizationsEqual(const TIOPixelDenormalization& a, const TIOPixelDenormalization& b);
 
 NS_ASSUME_NONNULL_END

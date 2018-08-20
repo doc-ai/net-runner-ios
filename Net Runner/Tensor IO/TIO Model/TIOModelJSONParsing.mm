@@ -81,9 +81,9 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDict
     
     // Image Volume
     
-    ImageVolume imageVolume = ImageVolumeForShape(shape);
+    TIOImageVolume imageVolume = TIOImageVolumeForShape(shape);
     
-    if ( ImageVolumesEqual(imageVolume, kImageVolumeInvalid ) ) {
+    if ( TIOImageVolumesEqual(imageVolume, kTIOImageVolumeInvalid ) ) {
         NSLog(@"Expected dict.shape array field with three elements in model.json, found %@", dict[@"shape"]);
         return nil;
     }
@@ -99,38 +99,38 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDict
     
     // Normalization
     
-    PixelNormalization normalization;
-    PixelNormalizer normalizer;
+    TIOPixelNormalization normalization;
+    TIOPixelNormalizer normalizer;
     
     if ( isInput ) {
-        normalization = PixelNormalizationForDictionary(dict);
-        normalizer = PixelNormalizerForDictionary(dict);
+        normalization = TIOPixelNormalizationForDictionary(dict);
+        normalizer = TIOPixelNormalizerForDictionary(dict);
 
-        if ( PixelNormalizationsEqual(normalization, kPixelNormalizationInvalid) ) {
+        if ( TIOPixelNormalizationsEqual(normalization, kTIOPixelNormalizationInvalid) ) {
             NSLog(@"Expected dict.normalizer string to be '[0,1]' or '[-1,1]', or scale and bias values, found normalization: %@, scale: %@, bias: %@", dict[@"normalize"], dict[@"scale"], dict[@"bias"]);
             return nil;
         }
     } else {
-        normalization = kPixelNormalizationNone;
-        normalizer = PixelNormalizerNone();
+        normalization = kTIOPixelNormalizationNone;
+        normalizer = TIOPixelNormalizerNone();
     }
     
     // Denormalization
     
-    PixelDenormalization denormalization;
-    PixelDenormalizer denormalizer;
+    TIOPixelDenormalization denormalization;
+    TIOPixelDenormalizer denormalizer;
 
     if ( isOutput ) {
-        denormalization = PixelDenormalizationForDictionary(dict);
-        denormalizer = PixelDenormalizerForDictionary(dict);
+        denormalization = TIOPixelDenormalizationForDictionary(dict);
+        denormalizer = TIOPixelDenormalizerForDictionary(dict);
         
-        if ( PixelDenormalizationsEqual(denormalization, kPixelDenormalizationInvalid) ) {
+        if ( TIOPixelDenormalizationsEqual(denormalization, kTIOPixelDenormalizationInvalid) ) {
             NSLog(@"Expected dict.denormalizer string to be '[0,1]' or '[-1,1]', or scale and bias values, found denormalization: %@, scale: %@, bias: %@", dict[@"normalize"], dict[@"scale"], dict[@"bias"]);
             return nil;
         }
     } else {
-        denormalization = kPixelDenormalizationNone;
-        denormalizer = PixelDenormalizerNone();
+        denormalization = kTIOPixelDenormalizationNone;
+        denormalizer = TIOPixelDenormalizerNone();
     }
 
     // Description
@@ -166,16 +166,16 @@ _Nullable TIODataDequantizer TIODataDequantizerForDict(NSDictionary *dict) {
     return nil;
 }
 
-ImageVolume ImageVolumeForShape(NSArray<NSNumber*> *shape) {
+TIOImageVolume TIOImageVolumeForShape(NSArray<NSNumber*> *shape) {
     
     if ( shape == nil ) {
         NSLog(@"Expected input.shape array field in model.json, none found");
-        return kImageVolumeInvalid;
+        return kTIOImageVolumeInvalid;
     }
 
     if ( shape.count != 3 ) {
         NSLog(@"Expected shape with three elements, actual count is %lu", (unsigned long)shape.count);
-        return kImageVolumeInvalid;
+        return kTIOImageVolumeInvalid;
     }
 
     return {
@@ -206,24 +206,24 @@ OSType PixelFormatForString(NSString* string) {
 // The presence of a normalizer overrides scale and bias preferences
 // Would like to return a tuple here
 
-PixelNormalization PixelNormalizationForDictionary(NSDictionary *dict) {
+TIOPixelNormalization TIOPixelNormalizationForDictionary(NSDictionary *dict) {
     NSString *normalizerString = dict[@"normalize"][@"standard"];
     NSNumber *scaleNumber = dict[@"normalize"][@"scale"];
     NSDictionary *biases = dict[@"normalize"][@"bias"];
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
-            return kPixelNormalizationZeroToOne;
+            return kTIOPixelNormalizationZeroToOne;
         }
         else if ( [normalizerString isEqualToString:@"[-1,1]"] ) {
-            return kPixelNormalizationNegativeOneToOne;
+            return kTIOPixelNormalizationNegativeOneToOne;
         }
         else {
-            return kPixelNormalizationInvalid;
+            return kTIOPixelNormalizationInvalid;
         }
     }
     else if ( scaleNumber == nil && biases == nil ) {
-        return kPixelNormalizationNone;
+        return kTIOPixelNormalizationNone;
     }
     else {
         float_t scale = scaleNumber != nil
@@ -248,17 +248,17 @@ PixelNormalization PixelNormalizationForDictionary(NSDictionary *dict) {
     }
 }
 
-PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *dict) {
+TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary *dict) {
     NSString *normalizerString = dict[@"normalize"][@"standard"];
     NSNumber *scaleNumber = dict[@"normalize"][@"scale"];
     NSDictionary *biases = dict[@"normalize"][@"bias"];
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
-            return PixelNormalizerZeroToOne();
+            return TIOPixelNormalizerZeroToOne();
         }
         else if ( [normalizerString isEqualToString:@"[-1,1]"] ) {
-            return PixelNormalizerNegativeOneToOne();
+            return TIOPixelNormalizerNegativeOneToOne();
         }
         else {
             NSLog(@"Expected input.normalizer string to be '[0,1]' or '[-1,1]', actual value is %@", normalizerString);
@@ -266,7 +266,7 @@ PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *dict) {
         }
     }
     else if ( scaleNumber == nil && biases == nil ) {
-        return PixelNormalizerNone();
+        return TIOPixelNormalizerNone();
     }
     else {
         float_t scale = scaleNumber != nil
@@ -282,7 +282,7 @@ PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *dict) {
             ? [biases[@"b"] floatValue]
             : 0.0;
         
-        PixelNormalization normalization = {
+        TIOPixelNormalization normalization = {
             .scale = scale,
             .redBias = redBias,
             .greenBias = greenBias,
@@ -290,9 +290,9 @@ PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *dict) {
         };
         
         if ( (redBias == greenBias) && (redBias == blueBias) ) {
-            return PixelNormalizerSingleBias(normalization);
+            return TIOPixelNormalizerSingleBias(normalization);
         } else {
-            return PixelNormalizerPerChannelBias(normalization);
+            return TIOPixelNormalizerPerChannelBias(normalization);
         }
     }
 }
@@ -300,24 +300,24 @@ PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *dict) {
 // The presence of a denormalizer overrides scale and bias preferences
 // Would like to return a tuple here
 
-PixelDenormalization PixelDenormalizationForDictionary(NSDictionary *dict) {
+TIOPixelDenormalization TIOPixelDenormalizationForDictionary(NSDictionary *dict) {
     NSString *normalizerString = dict[@"denormalize"][@"standard"];
     NSNumber *scaleNumber = dict[@"denormalize"][@"scale"];
     NSDictionary *biases = dict[@"denormalize"][@"bias"];
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
-            return kPixelDenormalizationZeroToOne;
+            return kTIOPixelDenormalizationZeroToOne;
         }
         else if ( [normalizerString isEqualToString:@"[-1,1]"] ) {
-            return kPixelDenormalizationNegativeOneToOne;
+            return kTIOPixelDenormalizationNegativeOneToOne;
         }
         else {
-            return kPixelDenormalizationInvalid;
+            return kTIOPixelDenormalizationInvalid;
         }
     }
     else if ( scaleNumber == nil && biases == nil ) {
-        return kPixelDenormalizationNone;
+        return kTIOPixelDenormalizationNone;
     }
     else {
         float_t scale = scaleNumber != nil
@@ -342,17 +342,17 @@ PixelDenormalization PixelDenormalizationForDictionary(NSDictionary *dict) {
     }
 }
 
-PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *dict) {
+TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *dict) {
     NSString *normalizerString = dict[@"denormalize"][@"standard"];
     NSNumber *scaleNumber = dict[@"denormalize"][@"scale"];
     NSDictionary *biases = dict[@"denormalize"][@"bias"];
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
-            return PixelDenormalizerZeroToOne();
+            return TIOPixelDenormalizerZeroToOne();
         }
         else if ( [normalizerString isEqualToString:@"[-1,1]"] ) {
-            return PixelDenormalizerNegativeOneToOne();
+            return TIOPixelDenormalizerNegativeOneToOne();
         }
         else {
             NSLog(@"Expected input.denormalizer string to be '[0,1]' or '[-1,1]', actual value is %@", normalizerString);
@@ -360,7 +360,7 @@ PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *dict) {
         }
     }
     else if ( scaleNumber == nil && biases == nil ) {
-        return PixelDenormalizerNone();
+        return TIOPixelDenormalizerNone();
     }
     else {
         float_t scale = scaleNumber != nil
@@ -376,7 +376,7 @@ PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *dict) {
             ? [biases[@"b"] floatValue]
             : 0.0;
         
-        PixelNormalization normalization = {
+        TIOPixelNormalization normalization = {
             .scale = scale,
             .redBias = redBias,
             .greenBias = greenBias,
@@ -384,9 +384,9 @@ PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *dict) {
         };
         
         if ( (redBias == greenBias) && (redBias == blueBias) ) {
-            return PixelDenormalizerSingleBias(normalization);
+            return TIOPixelDenormalizerSingleBias(normalization);
         } else {
-            return PixelDenormalizerPerChannelBias(normalization);
+            return TIOPixelDenormalizerPerChannelBias(normalization);
         }
     }
 }
