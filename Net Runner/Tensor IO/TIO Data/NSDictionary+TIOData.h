@@ -1,6 +1,6 @@
 //
 //  NSDictionary+TIOData.h
-//  Net Runner Parser
+//  TensorIO
 //
 //  Created by Philip Dow on 8/6/18.
 //  Copyright © 2018 doc.ai. All rights reserved.

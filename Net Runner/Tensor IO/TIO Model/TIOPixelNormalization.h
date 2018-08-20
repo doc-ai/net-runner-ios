@@ -1,6 +1,6 @@
 //
 //  TIOPixelNormalization.h
-//  Net Runner
+//  TensorIO
 //
 //  Created by Philip Dow on 8/19/18.
 //  Copyright © 2018 doc.ai. All rights reserved.

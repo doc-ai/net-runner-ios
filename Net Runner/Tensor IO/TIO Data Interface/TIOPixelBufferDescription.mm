@@ -1,6 +1,6 @@
 //
 //  TIOPixelBufferDescription.m
-//  Net Runner Parser
+//  TensorIO
 //
 //  Created by Philip Dow on 8/5/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
