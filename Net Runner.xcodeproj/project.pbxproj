@@ -11,6 +11,7 @@
 		C32559CDF1500003B0C67572 /* libPods-Net RunnerUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD98B37926F97CB6AC0040D /* libPods-Net RunnerUITests.a */; };
 		CC488EDFB5B8ADBBC17E37F0 /* libPods-Net Runner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1794288569A9345E245BCB0D /* libPods-Net Runner.a */; };
 		E31C7874212A5ABC00139C90 /* Quantization.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7873212A5ABC00139C90 /* Quantization.mm */; };
+		E31C7877212A6D4E00139C90 /* PixelBufferNormalization.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7876212A6D4E00139C90 /* PixelBufferNormalization.mm */; };
 		E33229D7212607680031435F /* ModelOutputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229D6212607680031435F /* ModelOutputManager.m */; };
 		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
 		E3322A18212613D40031435F /* NSDictionary+TIOData.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229E7212613D40031435F /* NSDictionary+TIOData.mm */; };
@@ -126,6 +127,8 @@
 		E29295E0BC8B7CF9671D6C86 /* Pods-Net RunnerUITests.debug headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerUITests.debug headless.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.debug headless.xcconfig"; sourceTree = "<group>"; };
 		E31C7872212A5ABC00139C90 /* Quantization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Quantization.h; sourceTree = "<group>"; };
 		E31C7873212A5ABC00139C90 /* Quantization.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Quantization.mm; sourceTree = "<group>"; };
+		E31C7875212A6D4E00139C90 /* PixelBufferNormalization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PixelBufferNormalization.h; sourceTree = "<group>"; };
+		E31C7876212A6D4E00139C90 /* PixelBufferNormalization.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PixelBufferNormalization.mm; sourceTree = "<group>"; };
 		E33229D5212607680031435F /* ModelOutputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutputManager.h; sourceTree = "<group>"; };
 		E33229D6212607680031435F /* ModelOutputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOutputManager.m; sourceTree = "<group>"; };
 		E33229DA21260C880031435F /* DefaultModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultModelOutput.h; sourceTree = "<group>"; };
@@ -439,6 +442,8 @@
 				E3322A04212613D40031435F /* ModelOptions.mm */,
 				E3322A0E212613D40031435F /* VisionModelHelpers.h */,
 				E3322A03212613D40031435F /* VisionModelHelpers.mm */,
+				E31C7875212A6D4E00139C90 /* PixelBufferNormalization.h */,
+				E31C7876212A6D4E00139C90 /* PixelBufferNormalization.mm */,
 				E3322A06212613D40031435F /* VisionPipeline.h */,
 				E3322A01212613D40031435F /* VisionPipeline.mm */,
 			);
@@ -920,6 +925,7 @@
 				E3322A28212613D40031435F /* TIODataInterface.mm in Sources */,
 				E3C4374F210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.m in Sources */,
 				E3F6C696210A56EC00D200D8 /* HeadlessTestBundleRunner.mm in Sources */,
+				E31C7877212A6D4E00139C90 /* PixelBufferNormalization.mm in Sources */,
 				E3322A25212613D40031435F /* ModelBundleManager.m in Sources */,
 				E3322A19212613D40031435F /* NSNumber+TIOData.mm in Sources */,
 				E3FA5B4A210A9C58009BA905 /* CVPixelBufferEvaluator.mm in Sources */,
