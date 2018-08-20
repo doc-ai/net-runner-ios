@@ -69,9 +69,9 @@ OSType PixelFormatForString(NSString* string) {
 // Would like to return a tuple here
 
 PixelNormalization PixelNormalizationForDictionary(NSDictionary *dict) {
-    NSString *normalizerString = dict[@"normalize"];
-    NSNumber *scaleNumber = dict[@"scale"];
-    NSDictionary *biases = dict[@"bias"];
+    NSString *normalizerString = dict[@"normalize"][@"standard"];
+    NSNumber *scaleNumber = dict[@"normalize"][@"scale"];
+    NSDictionary *biases = dict[@"normalize"][@"bias"];
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
@@ -111,9 +111,9 @@ PixelNormalization PixelNormalizationForDictionary(NSDictionary *dict) {
 }
 
 PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *dict) {
-    NSString *normalizerString = dict[@"normalize"];
-    NSNumber *scaleNumber = dict[@"scale"];
-    NSDictionary *biases = dict[@"bias"];
+    NSString *normalizerString = dict[@"normalize"][@"standard"];
+    NSNumber *scaleNumber = dict[@"normalize"][@"scale"];
+    NSDictionary *biases = dict[@"normalize"][@"bias"];
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
@@ -159,13 +159,13 @@ PixelNormalizer _Nullable PixelNormalizerForDictionary(NSDictionary *dict) {
     }
 }
 
-// The presence of a deormalizer overrides scale and bias preferences
+// The presence of a denormalizer overrides scale and bias preferences
 // Would like to return a tuple here
 
 PixelDenormalization PixelDenormalizationForDictionary(NSDictionary *dict) {
-    NSString *normalizerString = dict[@"denormalize"];
-    NSNumber *scaleNumber = dict[@"scale"];
-    NSDictionary *biases = dict[@"bias"];
+    NSString *normalizerString = dict[@"denormalize"][@"standard"];
+    NSNumber *scaleNumber = dict[@"denormalize"][@"scale"];
+    NSDictionary *biases = dict[@"denormalize"][@"bias"];
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
@@ -205,9 +205,9 @@ PixelDenormalization PixelDenormalizationForDictionary(NSDictionary *dict) {
 }
 
 PixelDenormalizer _Nullable PixelDenormalizerForDictionary(NSDictionary *dict) {
-    NSString *normalizerString = dict[@"denormalize"];
-    NSNumber *scaleNumber = dict[@"scale"];
-    NSDictionary *biases = dict[@"bias"];
+    NSString *normalizerString = dict[@"denormalize"][@"standard"];
+    NSNumber *scaleNumber = dict[@"denormalize"][@"scale"];
+    NSDictionary *biases = dict[@"denormalize"][@"bias"];
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {

@@ -156,11 +156,10 @@ _Nullable DataQuantizer TIODataQuantizerForDict(NSDictionary *dict) {
 }
 
 _Nullable DataDequantizer TIODataDequantizerForDict(NSDictionary *dict) {
-    NSDictionary *dequantizeDict = dict[@"dequantize"];
-    NSString *standard = dequantizeDict[@"standard"];
+    NSString *standard = dict[@"dequantize"][@"standard"];
     // TODO: support scale and bias
-    // NSNumber *scale = dequantizeDict[@"scale"];
-    // NSNumber *bias = dequantizeDict[@"bias"];
+    // NSNumber *scale = dict[@"dequantize"][@"scale"];
+    // NSNumber *bias = dict[@"dequantize"][@"bias"];
     
     if ( [standard isEqualToString:@"[0,1]"] ) {
         return DataDequantizerZeroToOne();
