@@ -50,6 +50,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TIOVectorDescription : NSObject <TIODataDescription>
 
+/**
+ * `YES` if the layer is quantized, `NO` otherwise
+ */
+
 @property (readonly, getter=isQuantized) BOOL quantized;
 
 /**
@@ -88,12 +92,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly) TIODataDequantizer dequantizer;
 
 /**
- * Designated initializer.
+ * Designated initializer. Creates a vector description from the properties parsed in a model.json
+ * file.
  *
  * @param length The total number of elements in this layer.
  * @param labels The indexed labels associated with the outputs of this layer. May be `nil`.
  * @param quantizer A function that transforms unquantized values to quantized input
  * @param dequantizer A function that transforms quantized output to unquantized values
+ *
+ * @return instancetype A read-only instance of `TIOVectorDescription`
  */
 
 - (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(nullable TIODataDequantizer)dequantizer;
