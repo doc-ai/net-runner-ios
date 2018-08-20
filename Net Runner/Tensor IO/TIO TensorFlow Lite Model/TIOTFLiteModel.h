@@ -25,7 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly) ModelBundle *bundle;
 @property (readonly) ModelOptions *options;
-
 @property (readonly) NSString* identifier;
 @property (readonly) NSString* name;
 @property (readonly) NSString* details;
@@ -33,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSString* license;
 @property (readonly) BOOL quantized;
 @property (readonly) NSString *type;
-@property (readonly) ModelWeightSize weightSize; // Unused
 @property (readonly) BOOL loaded;
 
 // Model Protocol Methods

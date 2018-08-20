@@ -10,19 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// TODO: remove model weight size
-
-/**
- * The bit size of weights used by the model, either float32 ot uint8.
- * Quantized models use single byte weights while unquantized models
- * use four byte weights.
- */
-
-typedef enum : NSUInteger {
-    ModelWeightSizeFloat32,
-    ModelWeightSizeUInt8,
-} ModelWeightSize DEPRECATED_ATTRIBUTE;
-
 @protocol TIOData;
 @protocol TIODataDescription;
 @class ModelBundle;
@@ -80,8 +67,10 @@ typedef enum : NSUInteger {
 @property (readonly) NSString* license;
 
 /**
- * A boolean value indicated if the model is quantized or not. Quantized models have a weight size of `ModelWeightSizeUInt8`,
- * while unquantized models have a weight size of `ModelWeightSizeFloat32`.
+ * A boolean value indicated if the model is quantized or not.
+ *
+ * Quantized models have 8 bit `uint8_t` interfaces while unquantized modesl have 32 bit, `float_t`
+ * interfaces.
  */
 
 @property (readonly) BOOL quantized;
@@ -91,12 +80,6 @@ typedef enum : NSUInteger {
  */
 
 @property (readonly) NSString *type;
-
-/**
- * The model's weight size
- */
-
-@property (readonly) ModelWeightSize weightSize DEPRECATED_ATTRIBUTE;
 
 /**
  * A boolen value indicated whether the model has been loaded or not. Conforming classes may want
