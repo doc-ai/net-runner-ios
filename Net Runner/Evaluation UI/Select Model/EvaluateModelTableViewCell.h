@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class ModelBundle;
+@class TIOModelBundle;
 
 @protocol EvaluateModelTableViewCellActionTarget <NSObject>
 
-- (void)didSwitchBundle:(ModelBundle*)bundle toSelected:(BOOL)selected;
+- (void)didSwitchBundle:(TIOModelBundle*)bundle toSelected:(BOOL)selected;
 
 @end
 
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) IBOutlet UISwitch *selectedSwitch;
 
 @property (weak) id<EvaluateModelTableViewCellActionTarget>actionTarget;
-@property (nonatomic) ModelBundle *bundle;
+@property (nonatomic) TIOModelBundle *bundle;
 
 - (IBAction)selectedSwitchAction:(UISwitch*)sender;
 

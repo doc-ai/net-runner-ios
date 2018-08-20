@@ -10,9 +10,9 @@
 
 #import "EvaluateSelectModelsTableViewController.h"
 #import "ModelsTableViewController.h"
-#import "ModelBundleManager.h"
-#import "ModelBundle.h"
-#import "Model.h"
+#import "TIOModelBundleManager.h"
+#import "TIOModelBundle.h"
+#import "TIOModel.h"
 #import "UserDefaults.h"
 
 @interface SettingsTableViewController () <EvaluateSelectModelsTableViewControllerDelegate>
@@ -51,7 +51,7 @@
     }
 }
 
-- (void)setSelectedBundle:(ModelBundle *)selectedBundle {
+- (void)setSelectedBundle:(TIOModelBundle *)selectedBundle {
     _selectedBundle = selectedBundle;
     
     if (self.isViewLoaded) {
@@ -67,7 +67,7 @@
 
 // MARK: - Models Table View Controller Delegate
 
-- (void) modelTableViewController:(ModelsTableViewController*)viewController didSelectBundle:(ModelBundle*)bundle {
+- (void) modelTableViewController:(ModelsTableViewController*)viewController didSelectBundle:(TIOModelBundle*)bundle {
     [NSUserDefaults.standardUserDefaults setObject:bundle.identifier forKey:kPrefsSelectedModelID];
     self.selectedBundle = bundle;
 }

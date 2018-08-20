@@ -9,9 +9,9 @@
 #import "ModelsTableViewController.h"
 
 #import "ModelDetailsTableViewController.h"
-#import "ModelBundleManager.h"
-#import "ModelBundle.h"
-#import "Model.h"
+#import "TIOModelBundleManager.h"
+#import "TIOModelBundle.h"
+#import "TIOModel.h"
 
 @interface ModelsTableViewController ()
 
@@ -26,7 +26,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"ModelDetailsSegue"] ) {
         ModelDetailsTableViewController *destination = (ModelDetailsTableViewController*)segue.destinationViewController;
-        destination.bundle = ModelBundleManager.sharedManager.modelBundles[((NSIndexPath*)sender).row];
+        destination.bundle = TIOModelBundleManager.sharedManager.modelBundles[((NSIndexPath*)sender).row];
     }
 }
 
@@ -37,7 +37,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ModelBundleManager.sharedManager.modelBundles.count;
+    return TIOModelBundleManager.sharedManager.modelBundles.count;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -51,7 +51,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ModelCell" forIndexPath:indexPath];
-    ModelBundle *bundle = [ModelBundleManager.sharedManager.modelBundles objectAtIndex:indexPath.row];
+    TIOModelBundle *bundle = [TIOModelBundleManager.sharedManager.modelBundles objectAtIndex:indexPath.row];
     
     cell.textLabel.text = bundle.name;
     cell.accessoryType = UITableViewCellAccessoryDetailButton;
@@ -68,7 +68,7 @@
     [self deselectModelRowsExceptRowAtIndexPath:indexPath];
     
     [tableView cellForRowAtIndexPath:indexPath].textLabel.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
-    self.selectedBundle = [ModelBundleManager.sharedManager.modelBundles objectAtIndex:indexPath.row];
+    self.selectedBundle = [TIOModelBundleManager.sharedManager.modelBundles objectAtIndex:indexPath.row];
     
     [self.delegate modelTableViewController:self didSelectBundle:self.selectedBundle];
 }

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ImageInputPreviewView;
 @class ResultInfoView;
-@class ModelBundle;
+@class TIOModelBundle;
 
 @interface EvaluateResultsPhotoViewController : UIViewController
 
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) IBOutlet ResultInfoView *resultInfoView;
 @property (weak) IBOutlet UIImageView *imageView;
 
-@property ModelBundle *modelBundle;
+@property TIOModelBundle *modelBundle;
 @property NSDictionary *results;
 
 @property (nonatomic) PHCachingImageManager *imageManager;

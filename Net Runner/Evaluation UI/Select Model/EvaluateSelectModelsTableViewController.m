@@ -11,14 +11,14 @@
 #import "EvaluateModelTableViewCell.h"
 #import "EvaluateSelectAlbumsTableViewController.h"
 #import "ModelDetailsTableViewController.h"
-#import "ModelBundleManager.h"
-#import "ModelBundle.h"
+#import "TIOModelBundleManager.h"
+#import "TIOModelBundle.h"
 
 static NSString * const kModelCellIdentifier = @"ModelCell";
 
 @interface EvaluateSelectModelsTableViewController () <EvaluateModelTableViewCellActionTarget>
 
-@property (nonatomic) NSSet<ModelBundle*> *selectedBundles;
+@property (nonatomic) NSSet<TIOModelBundle*> *selectedBundles;
 @property (readonly) UIBarButtonItem *nextButton;
 
 @end
@@ -30,13 +30,13 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.selectedBundles = [[NSSet<ModelBundle*> alloc] init];
+    self.selectedBundles = [[NSSet<TIOModelBundle*> alloc] init];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"ModelDetailsSegue"] ) {
         ModelDetailsTableViewController *destination = (ModelDetailsTableViewController*)segue.destinationViewController;
-        destination.bundle = ModelBundleManager.sharedManager.modelBundles[self.tableView.indexPathForSelectedRow.row];
+        destination.bundle = TIOModelBundleManager.sharedManager.modelBundles[self.tableView.indexPathForSelectedRow.row];
     }
     else if ( [segue.identifier isEqualToString:@"SelectAlbumsSegue"] ) {
         EvaluateSelectAlbumsTableViewController *destination = (EvaluateSelectAlbumsTableViewController*)segue.destinationViewController;
@@ -46,7 +46,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
     }
 }
 
-- (void)setSelectedBundles:(NSSet<ModelBundle *> *)selectedBundles {
+- (void)setSelectedBundles:(NSSet<TIOModelBundle *> *)selectedBundles {
     _selectedBundles = selectedBundles;
     
     self.nextButton.enabled = _selectedBundles.count > 0;
@@ -63,8 +63,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // return [[[ModelBundleManager sharedManager] models] count];
-    return ModelBundleManager.sharedManager.modelBundles.count;
+    return TIOModelBundleManager.sharedManager.modelBundles.count;
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -82,7 +81,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EvaluateModelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kModelCellIdentifier forIndexPath:indexPath];
-    ModelBundle *bundle = ModelBundleManager.sharedManager.modelBundles[indexPath.row];
+    TIOModelBundle *bundle = TIOModelBundleManager.sharedManager.modelBundles[indexPath.row];
     
     cell.titleLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
 
@@ -98,7 +97,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 
 // MARK: -
 
-- (void)didSwitchBundle:(ModelBundle*)bundle toSelected:(BOOL)selected {
+- (void)didSwitchBundle:(TIOModelBundle*)bundle toSelected:(BOOL)selected {
     if ( [self.selectedBundles containsObject:bundle] ) {
         [[self mutableSetValueForKey:@"selectedBundles"] removeObject:bundle];
     } else {

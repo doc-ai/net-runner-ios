@@ -9,8 +9,10 @@
 #ifndef Evaluator_h
 #define Evaluator_h
 
-#import "Model.h"
-#import "VisionModel.h"
+#import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+
+#import "TIOModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Evaluators should dispatch their operation to run once and then set the model and any input to `nil`.
  * Running an evaluator a second time should have no effect.
  *
- * There is no default inititialization method for an evaluator, but each evaluator takes a `Model`
+ * There is no default inititialization method for an evaluator, but each evaluator takes a `TIOModel`
  * and produces results, which contain the inference, latency, and other information.
  */
 
@@ -32,26 +34,20 @@ NS_ASSUME_NONNULL_BEGIN
  * Completion block for the evaluate method.
  *
  * @param result Results. See EvaluatorConstants.h for a list of keys that may appear in this dictionary.
+ * @param inputPixelBuffer The pixel buffer which the model actually sees before removing the alpha channel and
+ * applying any normalization.
  */
 
-typedef void (^EvaluatorCompletionBlock)(NSDictionary *result);
+typedef void (^EvaluatorCompletionBlock)(NSDictionary *result, CVPixelBufferRef _Nullable inputPixelBuffer);
 
 /**
- * The `Model` object on which inference is run. Currently, only objects conforming to the `VisionModel`
- * protocol are supported.
+ * The `TIOModel` object on which inference is run.
  *
  * Conforming objects should store the model in their initialization method and then set it to `nil` when
  * evaluation is complete.
  */
 
-@property (readonly) id<VisionModel> model;
-
-/**
- * The results of running inference on the model. See EvaluatorConstants.h for a list of keys that may
- * appear in this dictionary.
- */
-
-@property (readonly) NSDictionary *results;
+@property (readonly) id<TIOModel> model;
 
 /**
  * The function repsonsible for perfoming inference with the model. The function should store the results

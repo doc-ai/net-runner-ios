@@ -12,12 +12,11 @@
 #import "FileImageEvaluator.h"
 #import "URLImageEvaluator.h"
 #import "Evaluator.h"
-#import "ModelBundleManager.h"
-#import "VisionModel.h"
-#import "Model.h"
+#import "TIOModelBundleManager.h"
+#import "TIOModel.h"
 #import "EvaluationMetric.h"
 #import "NSArray+Extensions.h"
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 #import "ModelOutput.h"
 #import "EvaluatorConstants.h"
 
@@ -47,7 +46,7 @@
     
     // Convert model ids to bundles
     
-    NSArray<ModelBundle*> *modelBundles = [ModelBundleManager.sharedManager bundlesWithIds:self.testBundle.modelIds];
+    NSArray<TIOModelBundle*> *modelBundles = [TIOModelBundleManager.sharedManager bundlesWithIds:self.testBundle.modelIds];
     
     if ( modelBundles.count != self.testBundle.modelIds.count ) {
         NSLog(@"Test Bundle %@: Didn't load all models", self.testBundle.identifier);
@@ -61,20 +60,15 @@
     NSUInteger numberOfPhotos = 0;
     NSUInteger numberOfModels = 0;
     
-    for ( ModelBundle *modelBundle in modelBundles ) {
+    for ( TIOModelBundle *modelBundle in modelBundles ) {
         
-        id<Model> model = [modelBundle newModel];
+        id<TIOModel> model = [modelBundle newModel];
         
         if ( model == nil ) {
             NSLog(@"Test Bundle %@: Unable to instantiate model from model bundle: %@", self.testBundle.identifier, modelBundle.identifier);
             continue;
         }
         
-        if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
-            NSLog(@"Test Bundle %@: Model does not conform to VisionModel protocol: %@", self.testBundle.identifier, modelBundle.identifier);
-            continue;
-        }
-    
         numberOfModels++;
         
         for ( NSDictionary *image in self.testBundle.images ) {
@@ -89,10 +83,10 @@
             
                 if ( [imageType isEqualToString:@"file"] ) {
                     NSURL *imageURL = [NSURL fileURLWithPath:[self.testBundle filePathForImageInfo:image]];
-                    evaluator = [[FileImageEvaluator alloc] initWithModel:(id<VisionModel>)model fileURL:imageURL name:name];
+                    evaluator = [[FileImageEvaluator alloc] initWithModel:model fileURL:imageURL name:name];
                 } else if ( [imageType isEqualToString:@"url"] ) {
                     NSURL *imageURL = [NSURL URLWithString:image[@"url"]];
-                    evaluator = [[URLImageEvaluator alloc] initWithModel:(id<VisionModel>)model URL:imageURL name:name];
+                    evaluator = [[URLImageEvaluator alloc] initWithModel:model URL:imageURL name:name];
                 }
                 
                 [evaluators addObject:evaluator];
@@ -112,7 +106,7 @@
     for ( id<Evaluator> evaluator in evaluators ) {
 
          @autoreleasepool {
-            [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
+            [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
                 NSMutableDictionary *resultCopy = [result mutableCopy];
                 resultCopy[@"test_bundle"] = self.testBundle.identifier;
                 [results addObject:[resultCopy copy]];

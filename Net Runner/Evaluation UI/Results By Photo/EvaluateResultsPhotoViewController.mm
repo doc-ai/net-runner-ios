@@ -9,16 +9,13 @@
 #import "EvaluateResultsPhotoViewController.h"
 
 #import "ImageInputPreviewView.h"
-#import "ModelBundle.h"
+#import "TIOModelBundle.h"
 #import "AlbumPhotoEvaluator.h"
 #import "UserDefaults.h"
-#import "VisionModel.h"
 #import "NSArray+Extensions.h"
 #import "ResultInfoView.h"
 #import "ModelOutput.h"
 #import "EvaluatorConstants.h"
-
-// TODO: use evaluator constants
 
 @interface EvaluateResultsPhotoViewController ()
 
@@ -93,16 +90,11 @@
 }
 
 - (void)runModelOnAsset:(PHAsset*)asset {
-    id<VisionModel> model = (id<VisionModel>)self.modelBundle.newModel;
-    
-    if ( ![model conformsToProtocol:@protocol(VisionModel)] ) {
-        NSLog(@"Model does not conform to vision protocol: %@", model.identifier);
-        return;
-    }
+    id<TIOModel> model = self.modelBundle.newModel;
     
     AlbumPhotoEvaluator *evaluator = [[AlbumPhotoEvaluator alloc] initWithModel:model photo:asset album:self.album imageManager:self.imageManager];
     
-    [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result) {
+    [evaluator evaluateWithCompletionHandler:^(NSDictionary * _Nonnull result, CVPixelBufferRef _Nullable inputPixelBuffer) {
         
         id<ModelOutput> providedInference = self.results[kEvaluatorResultsKeyEvaluation][kEvaluatorResultsKeyInferenceResults];
         id<ModelOutput> myInference = result[kEvaluatorResultsKeyEvaluation][kEvaluatorResultsKeyInferenceResults];
@@ -112,16 +104,14 @@
         }
         
         // Visualize last pixel buffer used by model
-    
+        
         if ( [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers] ) {
-            self.imageInputPreviewView.pixelBuffer = model.inputPixelBuffer;
+            self.imageInputPreviewView.pixelBuffer = inputPixelBuffer;
         }
         
         // Show the inference results
         
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            [self displayResults:myInference];
-        });
+        [self displayResults:myInference];
     }];
 }
 
