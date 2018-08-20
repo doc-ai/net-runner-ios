@@ -12,10 +12,6 @@
 #import "ModelHelpers.h"
 #import "Utilities.h"
 
-#include <vector>
-#include <iostream>
-#include <fstream>
-
 #include "tensorflow/contrib/lite/kernels/register.h"
 #include "tensorflow/contrib/lite/model.h"
 #include "tensorflow/contrib/lite/string_util.h"
@@ -42,11 +38,11 @@ static NSString * const kTensorTypeImage = @"image";
     std::unique_ptr<tflite::FlatBufferModel> model;
     std::unique_ptr<tflite::Interpreter> interpreter;
     
-    // Index to Feature Description
+    // Index to Interface Description
     NSArray<TIODataInterface*> *_indexedInputInterfaces;
     NSArray<TIODataInterface*> *_indexedOutputInterfaces;
     
-    // Name to Feature Description
+    // Name to Interface Description
     NSDictionary<NSString*,TIODataInterface*> *_namedInputInterfaces;
     NSDictionary<NSString*,TIODataInterface*> *_namedOutputInterfaces;
     
@@ -109,8 +105,14 @@ static NSString * const kTensorTypeImage = @"image";
     return nil;
 }
 
+// MARK: - JSON Parsing
+
 /**
  * Enumerates through the json described inputs and constructs a `TIODataInterface` for each one.
+ *
+ * @param inputs An array of dictionaries describing the model's input layers
+ *
+ * @return BOOL `YES` if the json descriptions were successfully parsed, `NO` otherwise
  */
 
 - (BOOL)_parseInputs:(NSArray<NSDictionary<NSString*,id>*>*)inputs {
@@ -157,6 +159,10 @@ static NSString * const kTensorTypeImage = @"image";
 
 /**
  * Enumerates through the json described outputs and constructs a `TIODataInterface` for each one.
+ *
+ * @param outputs An array of dictionaries describing the model's output layers
+ *
+ * @return BOOL `YES` if the json descriptions were successfully parsed, `NO` otherwise
  */
 
 - (BOOL)_parseOutputs:(NSArray<NSDictionary<NSString*,id>*>*)outputs {
@@ -201,7 +207,15 @@ static NSString * const kTensorTypeImage = @"image";
     return !error;
 }
 
-// MARK: -
+// MARK: - Model Memory Management
+
+/**
+ * Loads a model into memory and sets loaded=YES
+ *
+ * @param error An error describing any failure to load the model
+ *
+ * @return BOOL `YES` if the model is successfully loaded, `NO` otherwise.
+ */
 
 - (BOOL)load:(NSError**)error {
     if ( _loaded ) {
@@ -252,6 +266,10 @@ static NSString * const kTensorTypeImage = @"image";
     return YES;
 }
 
+/**
+ * Unloads the model and sets loaded=NO
+ */
+
 - (void)unload {
     interpreter.reset();
     model.reset();
@@ -285,15 +303,32 @@ static NSString * const kTensorTypeImage = @"image";
     return _namedOutputInterfaces[name].dataDescription;
 }
 
+// MARK: - Perform Inference
+
+/**
+ * Prepares the model's input tensors and performs inference, returning the results.
+ *
+ * @param input Any class conforming to `TIOData` whose bytes will be copied to the input tensors
+ *
+ * @return TIOData The results of performing inference
+ */
+
 - (id<TIOData>)runOn:(id<TIOData>)input {
     [self _prepareInput:input];
     [self _runInference];
     return [self _captureOutput];
 }
 
+/**
+ * Iterates through the provided `TIOData` inputs, matching them to the model's input layers, and
+ * copies their bytes to those input layers.
+ *
+ * @param data Any class conforming to the `TIOData` protocol
+ */
+
 - (void)_prepareInput:(id<TIOData>)data  {
     
-    // When preparing inputs we take into account the type of the model features provided
+    // When preparing inputs we take into account the type of input provided
     // and the number of inputs that are available
     
     if ( [data isKindOfClass:NSDictionary.class] ) {
@@ -317,7 +352,7 @@ static NSString * const kTensorTypeImage = @"image";
     }
     else if ( _indexedInputInterfaces.count == 1 ) {
     
-        // If there is a single input available, simply take the modelFeature as it is, whatever it is
+        // If there is a single input available, simply take the input as it is
         
         void *tensor = [self inputTensorAtIndex:0];
         TIODataInterface *interface = _indexedInputInterfaces[0];
@@ -345,6 +380,14 @@ static NSString * const kTensorTypeImage = @"image";
         }
     }
 }
+
+/**
+ * Requests the input to copy its bytes to the tensor
+ *
+ * @param input The data whose bytes will be copied to the tensor
+ * @param tensor A pointer to the tensor which will receive those bytes
+ * @param interface A description of the data which the tensor expects
+ */
 
 - (void)_prepareInput:(id<TIOData>)input tensor:(void *)tensor interface:(TIODataInterface*)interface {
 
@@ -377,11 +420,23 @@ static NSString * const kTensorTypeImage = @"image";
         }];
 }
 
+/**
+ * Runs inference on the model. Inputs must be copied to the input tensors prior to calling this method
+ */
+
 - (void)_runInference {
     if (interpreter->Invoke() != kTfLiteOk) {
         NSLog(@"Failed to invoke for model %@", self.identifier);
     }
 }
+
+/**
+ * Captures outputs from the model.
+ *
+ * @return TIOData A class that is appropriate to the model output. Currently all outputs are
+ * wrapped in an instance of `NSDictionary` whose keys are taken from the json description of the
+ * model outputs.
+ */
 
 - (id<TIOData>)_captureOutput {
    
@@ -397,6 +452,13 @@ static NSString * const kTensorTypeImage = @"image";
 
     return [outputs copy];
 }
+
+/**
+ * Copies bytes from the tensor to an appropricate class that conforms to `TIOData`
+ *
+ * @param tensor The output tensor whose bytes will be captured
+ * @param interface A description of the data which this tensor contains
+ */
 
 - (id<TIOData>)_captureOutput:(void *)tensor interface:(TIODataInterface*)interface {
     __block id<TIOData> data;
@@ -426,6 +488,10 @@ static NSString * const kTensorTypeImage = @"image";
 
 // MARK: - Utilities
 
+/**
+ * Returns a pointer to an input tensor at a given index
+ */
+
 - (void *)inputTensorAtIndex:(NSUInteger)index {
     int tensor_input = interpreter->inputs()[index];
     if ( self.quantized ) {
@@ -434,6 +500,10 @@ static NSString * const kTensorTypeImage = @"image";
         return interpreter->typed_tensor<float_t>(tensor_input);
     }
 }
+
+/**
+ * Returns a pointer to an output tensor at a given index
+ */
 
 - (void *)outputTensorAtIndex:(NSUInteger)index {
     if ( self.quantized ) {

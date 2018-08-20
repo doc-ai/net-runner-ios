@@ -9,8 +9,6 @@
 #ifndef TIOModelBundleJSONSchema_h
 #define TIOModelBundleJSONSchema_h
 
-// TODO: update this schema definition
-
 /**
 {
     "name":         String,

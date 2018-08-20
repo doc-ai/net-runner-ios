@@ -17,8 +17,6 @@
 #import "ModelOutput.h"
 #import "EvaluatorConstants.h"
 
-// TODO: use evaluator constants
-
 @interface EvaluateResultsPhotoViewController ()
 
 @property (nonatomic, readwrite) UIImage *image;
