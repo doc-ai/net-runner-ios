@@ -8,7 +8,7 @@
 
 #import "TIOPixelBuffer.h"
 
-#import "TIOPixelBufferDescription.h"
+#import "TIOPixelBufferLayerDescription.h"
 #import "TIOVisionPipeline.h"
 
 @implementation TIOPixelBuffer
@@ -29,7 +29,7 @@
 
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
     
-    TIOPixelBufferDescription *pixelBufferDescription = (TIOPixelBufferDescription*)description;
+    TIOPixelBufferLayerDescription *pixelBufferDescription = (TIOPixelBufferLayerDescription*)description;
     CVPixelBufferRef pixelBuffer = NULL;
     CVReturn result;
     
@@ -60,9 +60,9 @@
 }
 
 - (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
-    assert([description isKindOfClass:TIOPixelBufferDescription.class]);
+    assert([description isKindOfClass:TIOPixelBufferLayerDescription.class]);
     
-    TIOPixelBufferDescription *pixelBufferDescription = (TIOPixelBufferDescription*)description;
+    TIOPixelBufferLayerDescription *pixelBufferDescription = (TIOPixelBufferLayerDescription*)description;
     
     // If the pixel buffer is already the right size, format, and orientation simpy copy it to the tensor.
     // Otherwise, run it through the vision pipeline

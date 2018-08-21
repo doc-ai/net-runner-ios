@@ -14,10 +14,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TIOPixelBufferDescription;
+@class TIOPixelBufferLayerDescription;
 @class TIOVectorLayerDescription;
 
-typedef void (^TIOPixelBufferMatcher)(TIOPixelBufferDescription *pixelBufferDescription);
+typedef void (^TIOPixelBufferMatcher)(TIOPixelBufferLayerDescription *pixelBufferDescription);
 typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
 
 /**
@@ -43,7 +43,7 @@ typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
  * @return `TIODataInterface` The encapsulated description
  */
 
-- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferDescription*)pixelBufferDescription;
+- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription;
 
 /**
  * Initializes a `TIODataInterface` with a vector description, e.g. the description of a  vector,

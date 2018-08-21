@@ -11,7 +11,7 @@
 #import "NSArray+Extensions.h"
 #import "TIOModelBundle.h"
 #import "TIODataInterface.h"
-#import "TIOPixelBufferDescription.h"
+#import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
 
 TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle) {
@@ -133,7 +133,7 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDict
     // Description
 
     TIODataInterface *interface = [[TIODataInterface alloc] initWithName:name isInput:isInput pixelBufferDescription:
-        [[TIOPixelBufferDescription alloc]
+        [[TIOPixelBufferLayerDescription alloc]
             initWithPixelFormat:pixelFormat
             shape:imageVolume
             normalization:normalization

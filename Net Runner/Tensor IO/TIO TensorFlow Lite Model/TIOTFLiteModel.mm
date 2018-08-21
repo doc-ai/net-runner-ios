@@ -20,7 +20,7 @@
 #import "TIOData.h"
 #import "TIODataInterface.h"
 #import "TIOLayerDescription.h"
-#import "TIOPixelBufferDescription.h"
+#import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
 #import "TIOPixelBuffer.h"
 #import "NSArray+TIOData.h"
@@ -394,7 +394,7 @@ static NSString * const kTensorTypeImage = @"image";
     size_t byteSize = self.quantized ? sizeof(uint8_t) : sizeof(float_t);
 
     [interface
-        matchCasePixelBuffer:^(TIOPixelBufferDescription *pixelBufferDescription) {
+        matchCasePixelBuffer:^(TIOPixelBufferLayerDescription *pixelBufferDescription) {
             
             assert( [input isKindOfClass:TIOPixelBuffer.class] );
             
@@ -464,7 +464,7 @@ static NSString * const kTensorTypeImage = @"image";
     __block id<TIOData> data;
     
     [interface
-        matchCasePixelBuffer:^(TIOPixelBufferDescription * _Nonnull pixelBufferDescription) {
+        matchCasePixelBuffer:^(TIOPixelBufferLayerDescription * _Nonnull pixelBufferDescription) {
             
             data = [[TIOPixelBuffer alloc] initWithBytes:tensor length:0 description:pixelBufferDescription];
         

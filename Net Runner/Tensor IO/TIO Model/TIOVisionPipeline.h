@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class TIOPixelBufferDescription;
+@class TIOPixelBufferLayerDescription;
 
 /**
  * The `TIOVisionPipeline` is responsible for scaling and croping, rotating, and converting the provided pixel buffer
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  * A description of the pixel input expected by the model
  */
 
-@property (readonly) TIOPixelBufferDescription *pixelBufferDescription;
+@property (readonly) TIOPixelBufferLayerDescription *pixelBufferDescription;
 
 /**
  * Designated initializer.
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
  * needed to convert a pixel buffer to a format that can be accepted by the model.
  */
 
-- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferDescription*)pixelBufferDescription;
+- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription;
 
 /**
  * Use the designated initializer.
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Transform a pixel buffer into the format required by the `TIOPixelBufferDescription`.
+ * Transform a pixel buffer into the format required by the `TIOPixelBufferLayerDescription`.
  *
  * A single TIOVisionPipeline may be used to transform multiple pixel buffers for the same model.
  *

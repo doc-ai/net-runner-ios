@@ -1,11 +1,10 @@
 //
-//  TIOPixelBufferDescription.h
+//  TIOPixelBufferLayerDescription.h
 //  TensorIO
 //
 //  Created by Philip Dow on 8/5/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
-//  TODO: Perhaps TIOPixelBufferDescription is TIOPixelBufferLayerDescription
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
@@ -22,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The description of a pixel buffer input or output layer.
  */
 
-@interface TIOPixelBufferDescription : NSObject <TIOLayerDescription>
+@interface TIOPixelBufferLayerDescription : NSObject <TIOLayerDescription>
 
 /**
  * `YES` is the layer is quantized, `NO` otherwise
@@ -81,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param denormalizer A function which denormalizes pixel values for an output layer, may be `nil`
  * @param quantized `YES` if this layer expectes quantized values, `NO` otherwise
  *
- * @return instancetype A read-only instance of `TIOPixelBufferDescription`
+ * @return instancetype A read-only instance of `TIOPixelBufferLayerDescription`
  */
 
 - (instancetype)initWithPixelFormat:(OSType)pixelFormat

@@ -14,7 +14,7 @@
 #import "ObjcDefer.h"
 #import "ModelOutput.h"
 #import "ModelOutputManager.h"
-#import "TIOPixelBufferDescription.h"
+#import "TIOPixelBufferLayerDescription.h"
 #import "TIOPixelBuffer.h"
 #import "NSDictionary+TIOData.h"
 
@@ -78,7 +78,7 @@
     
     // Transform the image to the required format
     
-    TIOPixelBufferDescription *description = [self.model descriptionOfInputAtIndex:0];
+    TIOPixelBufferLayerDescription *description = [self.model descriptionOfInputAtIndex:0];
     TIOVisionPipeline *pipeline = [[TIOVisionPipeline alloc] initWithTIOPixelBufferDescription:description];
     __block CVPixelBufferRef transformedPixelBuffer = NULL;
     

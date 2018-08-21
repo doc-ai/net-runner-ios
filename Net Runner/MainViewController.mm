@@ -18,7 +18,7 @@
 #import "TIOModelBundle.h"
 #import "TIOModelBundleManager.h"
 #import "TIOModelOptions.h"
-#import "TIOPixelBufferDescription.h"
+#import "TIOPixelBufferLayerDescription.h"
 
 #import "ResultInfoView.h"
 #import "LatencyCounter.h"
@@ -187,7 +187,7 @@ typedef enum : NSUInteger {
         return NO;
     }
     
-    TIOPixelBufferDescription *description = [self.model descriptionOfInputAtIndex:0];
+    TIOPixelBufferLayerDescription *description = [self.model descriptionOfInputAtIndex:0];
     
     self.title = self.model.name;
     self.imageInputPreviewView.pixelFormat = description.pixelFormat;
