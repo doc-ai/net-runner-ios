@@ -31,7 +31,7 @@
 		E3322A26212613D40031435F /* TIOModelBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = E3322A07212613D40031435F /* TIOModelBundle.m */; };
 		E3322A27212613D40031435F /* TIOTFLiteErrors.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A0A212613D40031435F /* TIOTFLiteErrors.mm */; };
 		E3322A28212613D40031435F /* TIODataInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A11212613D40031435F /* TIODataInterface.mm */; };
-		E3322A29212613D40031435F /* TIOVectorDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A14212613D40031435F /* TIOVectorDescription.mm */; };
+		E3322A29212613D40031435F /* TIOVectorLayerDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A14212613D40031435F /* TIOVectorLayerDescription.mm */; };
 		E3322A2A212613D40031435F /* TIOPixelBufferDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A16212613D40031435F /* TIOPixelBufferDescription.mm */; };
 		E3458A88210A55A80040648C /* EvaluateModelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A85210A55A80040648C /* EvaluateModelTableViewCell.m */; };
 		E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A87210A55A80040648C /* EvaluateSelectModelsTableViewController.m */; };
@@ -172,11 +172,11 @@
 		E3322A0E212613D40031435F /* TIOVisionModelHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOVisionModelHelpers.h; sourceTree = "<group>"; };
 		E3322A11212613D40031435F /* TIODataInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIODataInterface.mm; sourceTree = "<group>"; };
 		E3322A12212613D40031435F /* TIODataInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIODataInterface.h; sourceTree = "<group>"; };
-		E3322A13212613D40031435F /* TIOVectorDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOVectorDescription.h; sourceTree = "<group>"; };
-		E3322A14212613D40031435F /* TIOVectorDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOVectorDescription.mm; sourceTree = "<group>"; };
+		E3322A13212613D40031435F /* TIOVectorLayerDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOVectorLayerDescription.h; sourceTree = "<group>"; };
+		E3322A14212613D40031435F /* TIOVectorLayerDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOVectorLayerDescription.mm; sourceTree = "<group>"; };
 		E3322A15212613D40031435F /* TIOPixelBufferDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOPixelBufferDescription.h; sourceTree = "<group>"; };
 		E3322A16212613D40031435F /* TIOPixelBufferDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOPixelBufferDescription.mm; sourceTree = "<group>"; };
-		E3322A17212613D40031435F /* TIODataDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIODataDescription.h; sourceTree = "<group>"; };
+		E3322A17212613D40031435F /* TIOLayerDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOLayerDescription.h; sourceTree = "<group>"; };
 		E3458A84210A55A80040648C /* EvaluateSelectModelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateSelectModelsTableViewController.h; sourceTree = "<group>"; };
 		E3458A85210A55A80040648C /* EvaluateModelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateModelTableViewCell.m; sourceTree = "<group>"; };
 		E3458A86210A55A80040648C /* EvaluateModelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateModelTableViewCell.h; sourceTree = "<group>"; };
@@ -455,9 +455,9 @@
 			children = (
 				E3322A12212613D40031435F /* TIODataInterface.h */,
 				E3322A11212613D40031435F /* TIODataInterface.mm */,
-				E3322A17212613D40031435F /* TIODataDescription.h */,
-				E3322A13212613D40031435F /* TIOVectorDescription.h */,
-				E3322A14212613D40031435F /* TIOVectorDescription.mm */,
+				E3322A17212613D40031435F /* TIOLayerDescription.h */,
+				E3322A13212613D40031435F /* TIOVectorLayerDescription.h */,
+				E3322A14212613D40031435F /* TIOVectorLayerDescription.mm */,
 				E3322A15212613D40031435F /* TIOPixelBufferDescription.h */,
 				E3322A16212613D40031435F /* TIOPixelBufferDescription.mm */,
 			);
@@ -948,7 +948,7 @@
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
 				E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */,
 				E3A52122210A511C004B912B /* Utilities.mm in Sources */,
-				E3322A29212613D40031435F /* TIOVectorDescription.mm in Sources */,
+				E3322A29212613D40031435F /* TIOVectorLayerDescription.mm in Sources */,
 				E3F6C68A210A56DD00D200D8 /* UserDefaults.m in Sources */,
 				E36878F52118D36400F58CAB /* NSDictionary+Extensions.m in Sources */,
 				E3322A26212613D40031435F /* TIOModelBundle.m in Sources */,

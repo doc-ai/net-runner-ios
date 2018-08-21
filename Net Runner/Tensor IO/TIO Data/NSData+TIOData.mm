@@ -8,16 +8,16 @@
 
 #import "NSData+TIOData.h"
 
-#import "TIOVectorDescription.h"
+#import "TIOVectorLayerDescription.h"
 
 @implementation NSData (TIOData)
 
 // TODO: quantize and dequantize bytes
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIODataDescription>)description {
-    assert([description isKindOfClass:TIOVectorDescription.class]);
+- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+    assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
-    TIODataDequantizer dequantizer = ((TIOVectorDescription*)description).dequantizer;
+    TIODataDequantizer dequantizer = ((TIOVectorLayerDescription*)description).dequantizer;
     
     if ( description.isQuantized && dequantizer ) {
         assert(NO);
@@ -27,10 +27,10 @@
     }
 }
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIODataDescription>)description {
-    assert([description isKindOfClass:TIOVectorDescription.class]);
+- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+    assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
-    TIODataQuantizer quantizer = ((TIOVectorDescription*)description).quantizer;
+    TIODataQuantizer quantizer = ((TIOVectorLayerDescription*)description).quantizer;
     
     if ( description.isQuantized && quantizer ) {
         assert(NO);

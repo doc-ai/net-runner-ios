@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "TIODataDescription.h"
+#import "TIOLayerDescription.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return instancetype An instance of the conforming data type.
  */
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIODataDescription>)description;
+- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
 
 /**
  * Requests that a conforming object fill the tensor with bytes.
@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param description A description of the data this buffer expects.
  */
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIODataDescription>)description;
+- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
 
 @end
 

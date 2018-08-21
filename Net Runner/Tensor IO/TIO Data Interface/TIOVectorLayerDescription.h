@@ -1,15 +1,14 @@
 //
-//  TIOVectorDescription.h
+//  TIOVectorLayerDescription.h
 //  TensorIO
 //
 //  Created by Philip Dow on 8/5/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
-//  TODO: Perhaps TIOVectorDescription is TIOVectorLayerDescription
 
 #import <Foundation/Foundation.h>
 
-#import "TIODataDescription.h"
+#import "TIOLayerDescription.h"
 #import "TIOVector.h"
 #import "TIOQuantization.h"
 
@@ -43,12 +42,12 @@ NS_ASSUME_NONNULL_BEGIN
  * a vector in one dimension. If is up to you to reshape it if required.
  *
  * @warning
- * A `TIOVectorDescription`'s length is different that the byte length of a `TIOData`.
+ * A `TIOVectorLayerDescription`'s length is different that the byte length of a `TIOData`.
  * For example a quantized `TIOVector` (uint_t) of length 4 will occupy 4 bytes of memory but an
  * unquantized `Vector` (float_t) of length 4 will occupy 16 bytes of memory.
  */
 
-@interface TIOVectorDescription : NSObject <TIODataDescription>
+@interface TIOVectorLayerDescription : NSObject <TIOLayerDescription>
 
 /**
  * `YES` if the layer is quantized, `NO` otherwise
@@ -100,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param quantizer A function that transforms unquantized values to quantized input
  * @param dequantizer A function that transforms quantized output to unquantized values
  *
- * @return instancetype A read-only instance of `TIOVectorDescription`
+ * @return instancetype A read-only instance of `TIOVectorLayerDescription`
  */
 
 - (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(nullable TIODataDequantizer)dequantizer;

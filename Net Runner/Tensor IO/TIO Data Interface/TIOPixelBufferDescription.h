@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import "TIODataDescription.h"
+#import "TIOLayerDescription.h"
 #import "TIOVisionModelHelpers.h"
 
 // TODO: Do something about duplicate TIOPixelNormalization and TIOPixelNormalizer types. Do I really need both?
@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The description of a pixel buffer input or output layer.
  */
 
-@interface TIOPixelBufferDescription : NSObject <TIODataDescription>
+@interface TIOPixelBufferDescription : NSObject <TIOLayerDescription>
 
 /**
  * `YES` is the layer is quantized, `NO` otherwise

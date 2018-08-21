@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import "TIODataDescription.h"
+#import "TIOLayerDescription.h"
 #import "TIOData.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return instancetype An instance of `TIOPixelBuffer`
  */
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIODataDescription>)description;
+- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
 
 /**
  * Request to fill a tensor with bytes.
@@ -84,7 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param description A description of the data this buffer expects.
  */
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIODataDescription>)description;
+- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
 
 @end
 

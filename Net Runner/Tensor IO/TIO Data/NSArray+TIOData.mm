@@ -8,14 +8,14 @@
 
 #import "NSArray+TIOData.h"
 
-#import "TIOVectorDescription.h"
+#import "TIOVectorLayerDescription.h"
 
 @implementation NSArray (TIOData)
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIODataDescription>)description {
-    assert([description isKindOfClass:TIOVectorDescription.class]);
+- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+    assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
-    TIODataDequantizer dequantizer = ((TIOVectorDescription*)description).dequantizer;
+    TIODataDequantizer dequantizer = ((TIOVectorLayerDescription*)description).dequantizer;
     NSMutableArray *array = NSMutableArray.array;
     
     if ( description.isQuantized ) {
@@ -37,10 +37,10 @@
     return [self initWithArray:array];
 }
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIODataDescription>)description {
-    assert([description isKindOfClass:TIOVectorDescription.class]);
+- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+    assert([description isKindOfClass:TIOVectorLayerDescription.class]);
 
-    TIODataQuantizer quantizer = ((TIOVectorDescription*)description).quantizer;
+    TIODataQuantizer quantizer = ((TIOVectorLayerDescription*)description).quantizer;
 
     if ( description.isQuantized ) {
         if ( quantizer != nil ) {
