@@ -8,8 +8,6 @@
 
 #import "TIOTFLiteErrors.h"
 
-// MARK: - Errors
-
 NSError * const kTFLiteModelLoadModelError = [NSError errorWithDomain:@"netrunner.ios" code:101 userInfo:@{
     NSLocalizedDescriptionKey: @"Unable to load model from graph file"
 }];

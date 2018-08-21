@@ -35,7 +35,7 @@ typedef struct TIOPixelNormalization {
  * although separate denormaliation biases may be required for each of the RGB channels.
  *
  * Normalization and denormalization apply the same operations with scaling and bias values,
- * but they are typically inverse of one another.
+ * but they are typically inverses of one another.
  */
 
 typedef TIOPixelNormalization TIOPixelDenormalization;
@@ -196,7 +196,7 @@ TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(const TIOPixelNormalizat
 TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne();
 
 /**
- * Normalizes pixel values from a range of `[-1,1]` to `[0,255]`.
+ * Denormalizes pixel values from a range of `[-1,1]` to `[0,255]`.
  *
  * This is equivalent to applying a bias of `1` to each channel and a scaling factor of `255.0/2.0`.
  */

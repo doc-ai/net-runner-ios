@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (CVPixelBuffer)
 
-- (nullable instancetype) initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer;
-- (nullable instancetype) initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer scale:(CGFloat)scale orientation:(UIImageOrientation)orientation;
+- (nullable instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer;
+- (nullable instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer scale:(CGFloat)scale orientation:(UIImageOrientation)orientation;
 
 /**
  * Creates a pixel buffer from the receiver via Core Graphics
@@ -26,8 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
  *      Color Space: Device RGB
  */
 
-- (nullable CVPixelBufferRef) pixelBuffer;
-- (nullable CVPixelBufferRef) pixelBuffer:(OSType)format colorSpace:(CGColorSpaceRef)colorSpace alphaInfo:(CGImageAlphaInfo)alphaInfo;
+- (nullable CVPixelBufferRef)pixelBuffer;
+- (nullable CVPixelBufferRef)pixelBuffer:(OSType)format colorSpace:(CGColorSpaceRef)colorSpace alphaInfo:(CGImageAlphaInfo)alphaInfo;
 
 @end
 

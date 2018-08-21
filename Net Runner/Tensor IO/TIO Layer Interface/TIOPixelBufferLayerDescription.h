@@ -43,28 +43,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * A description of how pixel values will be normalized from a uint8_t range of `[0,255]` to some
- * other floating point range. May be `kTIOPixelNormalizationNone`.
+ * other floating point range, may be `kTIOPixelNormalizationNone`.
  */
 
 @property (readonly) TIOPixelNormalization normalization;
 
 /**
  * A function that normalizes pixel values from a uint8_t range of `[0,255]` to some other
- * floating point range. May be nil.
+ * floating point range. may be `nil`.
  */
 
 @property (nullable, readonly) TIOPixelNormalizer normalizer;
 
 /**
  * A description of how pixel values will be denormalized from some floating point range back to
- * uint8_t values in the range `[0,255]`. May be `kTIOPixelDenormalizationNone`.
+ * uint8_t values in the range `[0,255]`, may be `kTIOPixelDenormalizationNone`.
  */
 
 @property (readonly) TIOPixelDenormalization denormalization;
 
 /**
  * A function that denormalizes pixel values from a floating point range back to uint8_t values
- * in the range `[0,255]`. May be nil.
+ * in the range `[0,255]`, may be nil.
  */
 
 @property (nullable, readonly) TIOPixelDenormalizer denormalizer;
