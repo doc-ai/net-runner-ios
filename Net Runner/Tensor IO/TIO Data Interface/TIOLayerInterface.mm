@@ -1,30 +1,30 @@
 //
-//  TIODataInterface.m
+//  TIOLayerInterface.m
 //  TensorIO
 //
 //  Created by Philip Dow on 8/3/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "TIODataInterface.h"
+#import "TIOLayerInterface.h"
 
 #import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
 
 typedef enum : NSUInteger {
-    TIODataInterfaceTypePixelBuffer,
-    TIODataInterfaceTypeVector,
-} TIODataInterfaceType;
+    TIOLayerInterfaceTypePixelBuffer,
+    TIOLayerInterfaceTypeVector,
+} TIOLayerInterfaceType;
 
-@implementation TIODataInterface {
-    TIODataInterfaceType _type;
+@implementation TIOLayerInterface {
+    TIOLayerInterfaceType _type;
 }
 
 - (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription {
     if ( self = [super init] ) {
         _name = name;
         _input = isInput;
-        _type = TIODataInterfaceTypePixelBuffer;
+        _type = TIOLayerInterfaceTypePixelBuffer;
         _dataDescription = pixelBufferDescription;
     }
     return self;
@@ -34,7 +34,7 @@ typedef enum : NSUInteger {
     if ( self = [super init] ) {
         _name = name;
         _input = isInput;
-        _type = TIODataInterfaceTypeVector;
+        _type = TIOLayerInterfaceTypeVector;
         _dataDescription = vectorDescription;
     }
     return self;
@@ -43,10 +43,10 @@ typedef enum : NSUInteger {
 - (void)matchCasePixelBuffer:(TIOPixelBufferMatcher)pixelBufferMatcher caseVector:(TIOVectorMatcher)vectorMatcher {
     
     switch ( _type ) {
-    case TIODataInterfaceTypePixelBuffer:
+    case TIOLayerInterfaceTypePixelBuffer:
         pixelBufferMatcher((TIOPixelBufferLayerDescription*)_dataDescription);
         break;
-    case TIODataInterfaceTypeVector:
+    case TIOLayerInterfaceTypeVector:
         vectorMatcher((TIOVectorLayerDescription*)_dataDescription);
         break;
     }

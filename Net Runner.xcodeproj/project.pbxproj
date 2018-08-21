@@ -30,7 +30,7 @@
 		E3322A25212613D40031435F /* TIOModelBundleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3322A05212613D40031435F /* TIOModelBundleManager.m */; };
 		E3322A26212613D40031435F /* TIOModelBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = E3322A07212613D40031435F /* TIOModelBundle.m */; };
 		E3322A27212613D40031435F /* TIOTFLiteErrors.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A0A212613D40031435F /* TIOTFLiteErrors.mm */; };
-		E3322A28212613D40031435F /* TIODataInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A11212613D40031435F /* TIODataInterface.mm */; };
+		E3322A28212613D40031435F /* TIOLayerInterface.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A11212613D40031435F /* TIOLayerInterface.mm */; };
 		E3322A29212613D40031435F /* TIOVectorLayerDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A14212613D40031435F /* TIOVectorLayerDescription.mm */; };
 		E3322A2A212613D40031435F /* TIOPixelBufferLayerDescription.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A16212613D40031435F /* TIOPixelBufferLayerDescription.mm */; };
 		E3458A88210A55A80040648C /* EvaluateModelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A85210A55A80040648C /* EvaluateModelTableViewCell.m */; };
@@ -170,8 +170,8 @@
 		E3322A0C212613D40031435F /* TIOModelBundle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModelBundle.h; sourceTree = "<group>"; };
 		E3322A0D212613D40031435F /* TIOModelBundleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOModelBundleManager.h; sourceTree = "<group>"; };
 		E3322A0E212613D40031435F /* TIOVisionModelHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOVisionModelHelpers.h; sourceTree = "<group>"; };
-		E3322A11212613D40031435F /* TIODataInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIODataInterface.mm; sourceTree = "<group>"; };
-		E3322A12212613D40031435F /* TIODataInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIODataInterface.h; sourceTree = "<group>"; };
+		E3322A11212613D40031435F /* TIOLayerInterface.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOLayerInterface.mm; sourceTree = "<group>"; };
+		E3322A12212613D40031435F /* TIOLayerInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOLayerInterface.h; sourceTree = "<group>"; };
 		E3322A13212613D40031435F /* TIOVectorLayerDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOVectorLayerDescription.h; sourceTree = "<group>"; };
 		E3322A14212613D40031435F /* TIOVectorLayerDescription.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOVectorLayerDescription.mm; sourceTree = "<group>"; };
 		E3322A15212613D40031435F /* TIOPixelBufferLayerDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOPixelBufferLayerDescription.h; sourceTree = "<group>"; };
@@ -453,8 +453,8 @@
 		E3322A10212613D40031435F /* TIO Data Interface */ = {
 			isa = PBXGroup;
 			children = (
-				E3322A12212613D40031435F /* TIODataInterface.h */,
-				E3322A11212613D40031435F /* TIODataInterface.mm */,
+				E3322A12212613D40031435F /* TIOLayerInterface.h */,
+				E3322A11212613D40031435F /* TIOLayerInterface.mm */,
 				E3322A17212613D40031435F /* TIOLayerDescription.h */,
 				E3322A13212613D40031435F /* TIOVectorLayerDescription.h */,
 				E3322A14212613D40031435F /* TIOVectorLayerDescription.mm */,
@@ -922,7 +922,7 @@
 				E3F6C6A3210A56FC00D200D8 /* ModelsTableViewController.m in Sources */,
 				E3458A9A210A56460040648C /* EvaluateResultsModelTableViewCell.m in Sources */,
 				E3322A23212613D40031435F /* TIOVisionModelHelpers.mm in Sources */,
-				E3322A28212613D40031435F /* TIODataInterface.mm in Sources */,
+				E3322A28212613D40031435F /* TIOLayerInterface.mm in Sources */,
 				E3C4374F210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.m in Sources */,
 				E3F6C696210A56EC00D200D8 /* HeadlessTestBundleRunner.mm in Sources */,
 				E31C7877212A6D4E00139C90 /* TIOPixelNormalization.mm in Sources */,
