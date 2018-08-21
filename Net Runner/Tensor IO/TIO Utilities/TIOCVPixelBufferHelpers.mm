@@ -1,5 +1,5 @@
 //
-//  CVPixelBufferHelpers.mm
+//  TIOCVPixelBufferHelpers.mm
 //  TensorIO
 //
 //  Created by Philip Dow on 7/3/18.
@@ -25,17 +25,17 @@
 //  Converting 4 channels to 4: (ARGB <-> BGRA):
 //  None
 
-#import "CVPixelBufferHelpers.h"
+#import "TIOCVPixelBufferHelpers.h"
 
 /**
  * Release callback to free the bytes used by a pixel buffer
  */
 
-void CVPixelBufferCreateWithBytesReleaseCallback(void *releaseRefCon, const void *baseAddress) {
+void TIOCVPixelBufferCreateWithBytesReleaseCallback(void *releaseRefCon, const void *baseAddress) {
     if (baseAddress != NULL) { free((void *)baseAddress); }
 }
 
-CVPixelBufferRef CVPixelBufferCopy(CVPixelBufferRef pixelBuffer) {
+CVPixelBufferRef TIOCVPixelBufferCopy(CVPixelBufferRef pixelBuffer) {
     CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
     
     int bufferWidth = (int)CVPixelBufferGetWidth(pixelBuffer);
@@ -78,7 +78,7 @@ CVPixelBufferRef CVPixelBufferCopy(CVPixelBufferRef pixelBuffer) {
     return pixelBufferCopy;
 }
 
-CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVPixelBufferCounterclockwiseRotation rotation) {
+CVPixelBufferRef TIOCVPixelBufferRotate(CVPixelBufferRef pixelBuffer, TIOCVPixelBufferCounterclockwiseRotation rotation) {
     CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
     
     const OSType pixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer);
@@ -144,7 +144,7 @@ CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVPixelBuffer
         pixelFormat,
         destData,
         destRowBytes,
-        CVPixelBufferCreateWithBytesReleaseCallback,
+        TIOCVPixelBufferCreateWithBytesReleaseCallback,
         NULL,
         NULL,
         &destPixelBuffer
@@ -160,7 +160,7 @@ CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVPixelBuffer
 }
 
 
-CVPixelBufferRef CVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixelBuffer) {
+CVPixelBufferRef TIOCVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixelBuffer) {
     // Feels like there should be an accelerate function that does this
     // Destination format is kCVPixelFormatType_32BGRA
     
@@ -243,7 +243,7 @@ CVPixelBufferRef CVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixelBuffer) {
     return destPixelBuffer;
 }
 
-CVPixelBufferRef CVPixelBufferCreateARGBFromBGRA(CVPixelBufferRef pixelBuffer) {
+CVPixelBufferRef TIOCVPixelBufferCreateARGBFromBGRA(CVPixelBufferRef pixelBuffer) {
     // Feels like there should be an accelerate function that does this
     // Destination format is kCVPixelFormatType_32ARGB
     
@@ -326,7 +326,7 @@ CVPixelBufferRef CVPixelBufferCreateARGBFromBGRA(CVPixelBufferRef pixelBuffer) {
     return destPixelBuffer;
 }
 
-CVReturn CVPixelBufferCopySeparateChannels(
+CVReturn TIOCVPixelBufferCopySeparateChannels(
     CVPixelBufferRef pixelBuffer,
     CVPixelBufferRef _Nullable * _Nonnull channel0Buffer,
     CVPixelBufferRef _Nullable * _Nonnull channel1Buffer,
@@ -484,7 +484,7 @@ CVReturn CVPixelBufferCopySeparateChannels(
     return kCVReturnSuccess;
 }
 
-CVPixelBufferRef CVPixelBufferResizeToSquare(CVPixelBufferRef srcPixelBuffer, CGSize size) {
+CVPixelBufferRef TIOCVPixelBufferResizeToSquare(CVPixelBufferRef srcPixelBuffer, CGSize size) {
     CVPixelBufferLockBaseAddress(srcPixelBuffer, kNilOptions);
     
     OSType sourcePixelFormat = CVPixelBufferGetPixelFormatType(srcPixelBuffer);
@@ -572,7 +572,7 @@ CVPixelBufferRef CVPixelBufferResizeToSquare(CVPixelBufferRef srcPixelBuffer, CG
         sourcePixelFormat,
         destData,
         destRowBytes,
-        CVPixelBufferCreateWithBytesReleaseCallback,
+        TIOCVPixelBufferCreateWithBytesReleaseCallback,
         NULL,
         NULL,
         &destPixelBuffer

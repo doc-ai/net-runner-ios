@@ -8,7 +8,7 @@
 
 #import "ImageInputPreviewView.h"
 
-#import "CVPixelBufferHelpers.h"
+#import "TIOCVPixelBufferHelpers.h"
 #import "UIImage+CVPixelBuffer.h"
 #import "TIOObjcDefer.h"
 
@@ -186,7 +186,7 @@ static float kDotViewDim = 5.0;
                      channel2Buffer = NULL,
                      channel3Buffer = NULL;
     
-    CVReturn status = CVPixelBufferCopySeparateChannels(pixelBuffer,
+    CVReturn status = TIOCVPixelBufferCopySeparateChannels(pixelBuffer,
         &channel0Buffer,
         &channel1Buffer,
         &channel2Buffer,
