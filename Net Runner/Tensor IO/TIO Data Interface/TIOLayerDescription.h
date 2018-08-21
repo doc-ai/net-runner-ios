@@ -1,5 +1,5 @@
 //
-//  TIODataInterface.h
+//  TIOLayerInterface.h
 //  TensorIO
 //
 //  Created by Philip Dow on 8/5/18.

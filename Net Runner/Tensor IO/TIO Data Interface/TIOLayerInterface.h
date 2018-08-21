@@ -1,11 +1,10 @@
 //
-//  TIODataInterface.h
+//  TIOLayerInterface.h
 //  TensorIO
 //
 //  Created by Philip Dow on 8/3/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
-//  TODO: Perhaps TIODataInteface is TIOLayerInterface
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
@@ -33,25 +32,25 @@ typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
  * and clipping an image before passing it to the model.
  */
 
-@interface TIODataInterface : NSObject
+@interface TIOLayerInterface : NSObject
 
 /**
- * Initializes a `TIODataInterface` with a pixel buffer description.
+ * Initializes a `TIOLayerInterface` with a pixel buffer description.
  *
  * @param pixelBufferDescription Description of the expected pixel buffer
  *
- * @return `TIODataInterface` The encapsulated description
+ * @return `TIOLayerInterface` The encapsulated description
  */
 
 - (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription;
 
 /**
- * Initializes a `TIODataInterface` with a vector description, e.g. the description of a  vector,
+ * Initializes a `TIOLayerInterface` with a vector description, e.g. the description of a  vector,
  * matrix, or other tensor.
  *
  * @param vectorDescription Description of the expected vector
  *
- * @return `TIODataInterface` The encapsulated description
+ * @return `TIOLayerInterface` The encapsulated description
  */
 
 - (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription*)vectorDescription;

@@ -18,7 +18,7 @@
 #include "tensorflow/contrib/lite/tools/mutable_op_resolver.h"
 
 #import "TIOData.h"
-#import "TIODataInterface.h"
+#import "TIOLayerInterface.h"
 #import "TIOLayerDescription.h"
 #import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
@@ -39,12 +39,12 @@ static NSString * const kTensorTypeImage = @"image";
     std::unique_ptr<tflite::Interpreter> interpreter;
     
     // Index to Interface Description
-    NSArray<TIODataInterface*> *_indexedInputInterfaces;
-    NSArray<TIODataInterface*> *_indexedOutputInterfaces;
+    NSArray<TIOLayerInterface*> *_indexedInputInterfaces;
+    NSArray<TIOLayerInterface*> *_indexedOutputInterfaces;
     
     // Name to Interface Description
-    NSDictionary<NSString*,TIODataInterface*> *_namedInputInterfaces;
-    NSDictionary<NSString*,TIODataInterface*> *_namedOutputInterfaces;
+    NSDictionary<NSString*,TIOLayerInterface*> *_namedInputInterfaces;
+    NSDictionary<NSString*,TIOLayerInterface*> *_namedOutputInterfaces;
     
     // Name to Index
     NSDictionary<NSString*,NSNumber*> *_namedInputToIndex;
@@ -108,7 +108,7 @@ static NSString * const kTensorTypeImage = @"image";
 // MARK: - JSON Parsing
 
 /**
- * Enumerates through the json described inputs and constructs a `TIODataInterface` for each one.
+ * Enumerates through the json described inputs and constructs a `TIOLayerInterface` for each one.
  *
  * @param inputs An array of dictionaries describing the model's input layers
  *
@@ -117,8 +117,8 @@ static NSString * const kTensorTypeImage = @"image";
 
 - (BOOL)_parseInputs:(NSArray<NSDictionary<NSString*,id>*>*)inputs {
     
-    auto *indexedInputInterfaces = [NSMutableArray<TIODataInterface*> array];
-    auto *namedInputInterfaces = [NSMutableDictionary<NSString*,TIODataInterface*> dictionary];
+    auto *indexedInputInterfaces = [NSMutableArray<TIOLayerInterface*> array];
+    auto *namedInputInterfaces = [NSMutableDictionary<NSString*,TIOLayerInterface*> dictionary];
     auto *namedInputToIndex = [NSMutableDictionary<NSString*,NSNumber*> dictionary];
     
     auto isQuantized = self.quantized;
@@ -131,7 +131,7 @@ static NSString * const kTensorTypeImage = @"image";
         NSString *type = input[@"type"];
         NSString *name = input[@"name"];
         
-        TIODataInterface *interface;
+        TIOLayerInterface *interface;
         
         if ( [type isEqualToString:kTensorTypeVector] ) {
             interface = TIOTFLiteModelParseTIOVectorDescription(input, isInput, isQuantized, self->_bundle);
@@ -158,7 +158,7 @@ static NSString * const kTensorTypeImage = @"image";
 }
 
 /**
- * Enumerates through the json described outputs and constructs a `TIODataInterface` for each one.
+ * Enumerates through the json described outputs and constructs a `TIOLayerInterface` for each one.
  *
  * @param outputs An array of dictionaries describing the model's output layers
  *
@@ -167,8 +167,8 @@ static NSString * const kTensorTypeImage = @"image";
 
 - (BOOL)_parseOutputs:(NSArray<NSDictionary<NSString*,id>*>*)outputs {
     
-    auto *indexedOutputInterfaces = [NSMutableArray<TIODataInterface*> array];
-    auto *namedOutputInterfaces = [NSMutableDictionary<NSString*,TIODataInterface*> dictionary];
+    auto *indexedOutputInterfaces = [NSMutableArray<TIOLayerInterface*> array];
+    auto *namedOutputInterfaces = [NSMutableDictionary<NSString*,TIOLayerInterface*> dictionary];
     auto *namedOutputToIndex = [NSMutableDictionary<NSString*,NSNumber*> dictionary];
     
     auto isQuantized = self.quantized;
@@ -181,7 +181,7 @@ static NSString * const kTensorTypeImage = @"image";
         NSString *type = output[@"type"];
         NSString *name = output[@"name"];
         
-        TIODataInterface *interface;
+        TIOLayerInterface *interface;
         
         if ( [type isEqualToString:kTensorTypeVector] ) {
             interface = TIOTFLiteModelParseTIOVectorDescription(output, isInput, isQuantized, self->_bundle);
@@ -344,7 +344,7 @@ static NSString * const kTensorTypeImage = @"image";
             
             int index = _namedOutputToIndex[name].intValue;
             void *tensor = [self inputTensorAtIndex:index];
-            TIODataInterface *interface = _namedInputInterfaces[name];
+            TIOLayerInterface *interface = _namedInputInterfaces[name];
             id<TIOData> input = dictionaryData[name];
             
             [self _prepareInput:input tensor:tensor interface:interface];
@@ -355,7 +355,7 @@ static NSString * const kTensorTypeImage = @"image";
         // If there is a single input available, simply take the input as it is
         
         void *tensor = [self inputTensorAtIndex:0];
-        TIODataInterface *interface = _indexedInputInterfaces[0];
+        TIOLayerInterface *interface = _indexedInputInterfaces[0];
         id<TIOData> input = data;
         
         [self _prepareInput:input tensor:tensor interface:interface];
@@ -373,7 +373,7 @@ static NSString * const kTensorTypeImage = @"image";
         
         for ( int index = 0; index < arrayData.count; index++ ) {
             void *tensor = [self inputTensorAtIndex:index];
-            TIODataInterface *interface = _indexedInputInterfaces[index];
+            TIOLayerInterface *interface = _indexedInputInterfaces[index];
             id<TIOData> input = arrayData[index];
             
             [self _prepareInput:input tensor:tensor interface:interface];
@@ -389,7 +389,7 @@ static NSString * const kTensorTypeImage = @"image";
  * @param interface A description of the data which the tensor expects
  */
 
-- (void)_prepareInput:(id<TIOData>)input tensor:(void *)tensor interface:(TIODataInterface*)interface {
+- (void)_prepareInput:(id<TIOData>)input tensor:(void *)tensor interface:(TIOLayerInterface*)interface {
 
     size_t byteSize = self.quantized ? sizeof(uint8_t) : sizeof(float_t);
 
@@ -443,7 +443,7 @@ static NSString * const kTensorTypeImage = @"image";
     NSMutableDictionary<NSString*,id<TIOData>> *outputs = [[NSMutableDictionary alloc] init];
 
     for ( int index = 0; index < _indexedOutputInterfaces.count; index++ ) {
-        TIODataInterface *interface = _indexedOutputInterfaces[index];
+        TIOLayerInterface *interface = _indexedOutputInterfaces[index];
         void *tensor = [self outputTensorAtIndex:index];
         
         id<TIOData> data = [self _captureOutput:tensor interface:interface];
@@ -460,7 +460,7 @@ static NSString * const kTensorTypeImage = @"image";
  * @param interface A description of the data which this tensor contains
  */
 
-- (id<TIOData>)_captureOutput:(void *)tensor interface:(TIODataInterface*)interface {
+- (id<TIOData>)_captureOutput:(void *)tensor interface:(TIOLayerInterface*)interface {
     __block id<TIOData> data;
     
     [interface

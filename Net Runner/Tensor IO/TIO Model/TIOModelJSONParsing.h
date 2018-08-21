@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #import "TIOData.h"
-#import "TIODataInterface.h"
+#import "TIOLayerInterface.h"
 #import "TIOQuantization.h"
 #import "TIOVisionModelHelpers.h"
 
 @class TIOModelBundle;
-@class TIODataInterface;
+@class TIOLayerInterface;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,10 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @param quantized `YES` if the layer expects or returns quantized bytes, `NO` otherwise
  * @param bundle `The ModelBundel` that is being parsed, needed to derive a path to the labels file
  *
- * @return TIODataInterface An interface that describes this pixel buffer input or output
+ * @return TIOLayerInterface An interface that describes this pixel buffer input or output
  */
 
-TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle);
+TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle);
 
 /**
  * Parses the JSON description of a pixel buffer input or output.
@@ -44,10 +44,10 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionar
  * @param isInput `YES` if this is an input layer, `NO` if it is an output layer
  * @param quantized `YES` if the layer expects or returns quantized bytes, `NO` otherwise
  *
- * @return TIODataInterface An interface that describes this pixel buffer input or output
+ * @return TIOLayerInterface An interface that describes this pixel buffer input or output
  */
 
-TIODataInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDictionary *dict, BOOL isInput, BOOL quantized);
+TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDictionary *dict, BOOL isInput, BOOL quantized);
 
 /**
  * Parses the `quantization` key of an input description and returns an associated data quantizer

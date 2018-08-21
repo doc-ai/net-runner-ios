@@ -10,11 +10,11 @@
 
 #import "NSArray+Extensions.h"
 #import "TIOModelBundle.h"
-#import "TIODataInterface.h"
+#import "TIOLayerInterface.h"
 #import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
 
-TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle) {
+TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle) {
     NSArray<NSNumber*> *shape = dict[@"shape"];
     NSString *name = dict[@"name"];
     BOOL isOutput = !isInput;
@@ -60,7 +60,7 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionar
     
     // Interface
 
-    TIODataInterface *interface = [[TIODataInterface alloc] initWithName:name isInput:isInput vectorDescription:
+    TIOLayerInterface *interface = [[TIOLayerInterface alloc] initWithName:name isInput:isInput vectorDescription:
         [[TIOVectorLayerDescription alloc]
             initWithLength:length
             labels:labels
@@ -71,7 +71,7 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionar
     return interface;
 }
 
-TIODataInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDictionary *dict, BOOL isInput, BOOL quantized) {
+TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDictionary *dict, BOOL isInput, BOOL quantized) {
     NSArray<NSNumber*> *shape = dict[@"shape"];
     NSString *name = dict[@"name"];
     BOOL isOutput = !isInput;
@@ -132,7 +132,7 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDict
 
     // Description
 
-    TIODataInterface *interface = [[TIODataInterface alloc] initWithName:name isInput:isInput pixelBufferDescription:
+    TIOLayerInterface *interface = [[TIOLayerInterface alloc] initWithName:name isInput:isInput pixelBufferDescription:
         [[TIOPixelBufferLayerDescription alloc]
             initWithPixelFormat:pixelFormat
             shape:imageVolume
