@@ -12,7 +12,7 @@
 #import "TIOModelBundle.h"
 #import "TIODataInterface.h"
 #import "TIOPixelBufferDescription.h"
-#import "TIOVectorDescription.h"
+#import "TIOVectorLayerDescription.h"
 
 TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle) {
     NSArray<NSNumber*> *shape = dict[@"shape"];
@@ -61,7 +61,7 @@ TIODataInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionar
     // Interface
 
     TIODataInterface *interface = [[TIODataInterface alloc] initWithName:name isInput:isInput vectorDescription:
-        [[TIOVectorDescription alloc]
+        [[TIOVectorLayerDescription alloc]
             initWithLength:length
             labels:labels
             quantized:quantized

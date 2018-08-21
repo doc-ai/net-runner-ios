@@ -10,25 +10,25 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-#import "TIODataDescription.h"
+#import "TIOLayerDescription.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class TIOPixelBufferDescription;
-@class TIOVectorDescription;
+@class TIOVectorLayerDescription;
 
 typedef void (^TIOPixelBufferMatcher)(TIOPixelBufferDescription *pixelBufferDescription);
-typedef void (^TIOVectorMatcher)(TIOVectorDescription *vectorDescription);
+typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
 
 /**
- * The input or output interface to a model, described by a `TIODataDescription`.
+ * The input or output interface to a model, described by a `TIOLayerDescription`.
  *
  * This is an algebraic data type inspired by Remodel: https://github.com/facebook/remodel.
  * In Swift it would be an Enumeration with Associated Values. The intent is to capture the
  * variety of inputs and outputs a model can accept in a unified interface.
  *
  * Normally you will not need to interract with this class, although you may request a
- * `TIODataDescription` from a conforming `TIOModel` for inputs or outputs that you are specifically
+ * `TIOLayerDescription` from a conforming `TIOModel` for inputs or outputs that you are specifically
  * interested in, for example, a pixel buffer input when you want greater control over scaling
  * and clipping an image before passing it to the model.
  */
@@ -54,7 +54,7 @@ typedef void (^TIOVectorMatcher)(TIOVectorDescription *vectorDescription);
  * @return `TIODataInterface` The encapsulated description
  */
 
-- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorDescription*)vectorDescription;
+- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription*)vectorDescription;
 
 /**
  * Use one of the above initializer
@@ -82,10 +82,10 @@ typedef void (^TIOVectorMatcher)(TIOVectorDescription *vectorDescription);
  * The underlying data description.
  *
  * Generally you should use the match-case function instead of accessing the underlying
- * `TIODataDescription` directly.
+ * `TIOLayerDescription` directly.
  */
 
-@property (readonly) id<TIODataDescription> dataDescription;
+@property (readonly) id<TIOLayerDescription> dataDescription;
 
 /**
  * Use this function to switch on the underlying description.

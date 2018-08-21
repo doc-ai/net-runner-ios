@@ -10,12 +10,12 @@
 
 @implementation NSDictionary (TIOData)
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIODataDescription>)description {
+- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
     NSAssert(NO, @"This method is unimplemented. A dictionary cannot be constructed directly from a tensor.");
     return [self init];
 }
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIODataDescription>)description {
+- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
     NSAssert(NO, @"This method is unimplemented. Tensor bytes cannot be captured from a dictionary.");
 }
 

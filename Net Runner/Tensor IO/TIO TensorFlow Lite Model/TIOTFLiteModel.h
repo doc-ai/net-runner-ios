@@ -45,11 +45,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id<TIOData>)runOn:(id<TIOData>)input;
 
-- (id<TIODataDescription>)descriptionOfInputAtIndex:(NSUInteger)index;
-- (id<TIODataDescription>)descriptionOfInputWithName:(NSString*)name;
+- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index;
+- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString*)name;
 
-- (id<TIODataDescription>)descriptionOfOutputAtIndex:(NSUInteger)index;
-- (id<TIODataDescription>)descriptionOfOutputWithName:(NSString*)name;
+- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index;
+- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString*)name;
 
 @end
 

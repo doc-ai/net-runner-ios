@@ -27,7 +27,7 @@
     CVPixelBufferRelease(_transformedPixelBuffer);
 }
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIODataDescription>)description {
+- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
     
     TIOPixelBufferDescription *pixelBufferDescription = (TIOPixelBufferDescription*)description;
     CVPixelBufferRef pixelBuffer = NULL;
@@ -59,7 +59,7 @@
     return [self initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp];
 }
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIODataDescription>)description {
+- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOPixelBufferDescription.class]);
     
     TIOPixelBufferDescription *pixelBufferDescription = (TIOPixelBufferDescription*)description;

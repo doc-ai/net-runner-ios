@@ -19,9 +19,9 @@
 
 #import "TIOData.h"
 #import "TIODataInterface.h"
-#import "TIODataDescription.h"
+#import "TIOLayerDescription.h"
 #import "TIOPixelBufferDescription.h"
-#import "TIOVectorDescription.h"
+#import "TIOVectorLayerDescription.h"
 #import "TIOPixelBuffer.h"
 #import "NSArray+TIOData.h"
 #import "NSNumber+TIOData.h"
@@ -287,19 +287,19 @@ static NSString * const kTensorTypeImage = @"image";
 
 // MARK: - Input and Output Features
 
-- (id<TIODataDescription>)descriptionOfInputAtIndex:(NSUInteger)index {
+- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index {
     return _indexedInputInterfaces[index].dataDescription;
 }
 
-- (id<TIODataDescription>)descriptionOfInputWithName:(NSString*)name {
+- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString*)name {
     return _namedInputInterfaces[name].dataDescription;
 }
 
-- (id<TIODataDescription>)descriptionOfOutputAtIndex:(NSUInteger)index {
+- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index {
     return _indexedOutputInterfaces[index].dataDescription;
 }
 
-- (id<TIODataDescription>)descriptionOfOutputWithName:(NSString*)name {
+- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString*)name {
     return _namedOutputInterfaces[name].dataDescription;
 }
 
@@ -406,7 +406,7 @@ static NSString * const kTensorTypeImage = @"image";
             
             [input getBytes:tensor length:byteCount description:pixelBufferDescription];
             
-        } caseVector:^(TIOVectorDescription *vectorDescription) {
+        } caseVector:^(TIOVectorLayerDescription *vectorDescription) {
             
             assert( [input isKindOfClass:NSArray.class]
                 ||  [input isKindOfClass:NSData.class]
@@ -468,7 +468,7 @@ static NSString * const kTensorTypeImage = @"image";
             
             data = [[TIOPixelBuffer alloc] initWithBytes:tensor length:0 description:pixelBufferDescription];
         
-        } caseVector:^(TIOVectorDescription * _Nonnull vectorDescription) {
+        } caseVector:^(TIOVectorLayerDescription * _Nonnull vectorDescription) {
             
             TIOVector *vector = [[TIOVector alloc] initWithBytes:tensor length:vectorDescription.length description:vectorDescription];
             

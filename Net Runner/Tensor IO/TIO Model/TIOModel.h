@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol TIOData;
-@protocol TIODataDescription;
+@protocol TIOLayerDescription;
 @class TIOModelBundle;
 @class TIOModelOptions;
 
@@ -149,12 +149,12 @@ NS_ASSUME_NONNULL_BEGIN
  * the interface to a model, an array of named inputs includes information such as the type of
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
- * This information is encapsulated in a `TIODataDescription`, which is used to prepare
+ * This information is encapsulated in a `TIOLayerDescription`, which is used to prepare
  * inputs provided to the `runOn:` method prior to performing inference. See TIOModelBundleJSONSchema.h
  * for more information about this json file.
  */
 
-- (id<TIODataDescription>)descriptionOfInputAtIndex:(NSUInteger)index;
+- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index;
 
 /**
  * Returns a description of the model's input for a given name
@@ -163,11 +163,11 @@ NS_ASSUME_NONNULL_BEGIN
  * the interface to a model, an array of named inputs includes information such as the type of
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
- * This information is encapsulated in a `TIODataDescription`, which is used to prepare
+ * This information is encapsulated in a `TIOLayerDescription`, which is used to prepare
  * inputs provided to the `runOn:` method prior to performing inference. See TIOModelBundleJSONSchema.h
  * for more information about this json file.
  */
-- (id<TIODataDescription>)descriptionOfInputWithName:(NSString*)name;
+- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString*)name;
 
 /**
  * Returns a description of the model's output at a given index
@@ -176,12 +176,12 @@ NS_ASSUME_NONNULL_BEGIN
  * the interface to a model, an array of named inputs includes information such as the type of
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
- * This information is encapsulated in a `TIODataDescription`, which is used to prepare the results
+ * This information is encapsulated in a `TIOLayerDescription`, which is used to prepare the results
  * of performing inference and returned from the `runOn:` method. See TIOModelBundleJSONSchema.h
  * for more information about this json file.
  */
 
-- (id<TIODataDescription>)descriptionOfOutputAtIndex:(NSUInteger)index;
+- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index;
 
 /**
  * Returns a description of the model's output for a given name
@@ -190,12 +190,12 @@ NS_ASSUME_NONNULL_BEGIN
  * the interface to a model, an array of named inputs includes information such as the type of
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
- * This information is encapsulated in a `TIODataDescription`, which is used to prepare the results
+ * This information is encapsulated in a `TIOLayerDescription`, which is used to prepare the results
  * of performing inference and returned from the `runOn:` method. See TIOModelBundleJSONSchema.h
  * for more information about this json file.
  */
 
-- (id<TIODataDescription>)descriptionOfOutputWithName:(NSString*)name;
+- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString*)name;
 
 @end
 

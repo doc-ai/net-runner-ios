@@ -9,7 +9,7 @@
 #import "TIODataInterface.h"
 
 #import "TIOPixelBufferDescription.h"
-#import "TIOVectorDescription.h"
+#import "TIOVectorLayerDescription.h"
 
 typedef enum : NSUInteger {
     TIODataInterfaceTypePixelBuffer,
@@ -30,7 +30,7 @@ typedef enum : NSUInteger {
     return self;
 }
 
-- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorDescription*)vectorDescription {
+- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription*)vectorDescription {
     if ( self = [super init] ) {
         _name = name;
         _input = isInput;
@@ -47,7 +47,7 @@ typedef enum : NSUInteger {
         pixelBufferMatcher((TIOPixelBufferDescription*)_dataDescription);
         break;
     case TIODataInterfaceTypeVector:
-        vectorMatcher((TIOVectorDescription*)_dataDescription);
+        vectorMatcher((TIOVectorLayerDescription*)_dataDescription);
         break;
     }
 }

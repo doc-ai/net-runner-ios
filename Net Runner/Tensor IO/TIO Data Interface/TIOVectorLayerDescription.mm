@@ -1,14 +1,14 @@
 //
-//  TIOVectorDescription.m
+//  TIOVectorLayerDescription.m
 //  TensorIO
 //
 //  Created by Philip Dow on 8/5/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "TIOVectorDescription.h"
+#import "TIOVectorLayerDescription.h"
 
-@implementation TIOVectorDescription
+@implementation TIOVectorLayerDescription
 
 - (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(TIODataDequantizer)dequantizer {
     if (self=[super init]) {
