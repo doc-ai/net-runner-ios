@@ -373,7 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				E33229E5212613D40031435F /* TIO Data */,
-				E3322A10212613D40031435F /* TIO Data Interface */,
+				E3322A10212613D40031435F /* TIO Layer Interface */,
 				E33229FF212613D40031435F /* TIO Model */,
 				E33229FA212613D40031435F /* TIO TensorFlow Lite Model */,
 				E33229F2212613D40031435F /* TIO Utilities */,
@@ -450,7 +450,7 @@
 			path = "TIO Model";
 			sourceTree = "<group>";
 		};
-		E3322A10212613D40031435F /* TIO Data Interface */ = {
+		E3322A10212613D40031435F /* TIO Layer Interface */ = {
 			isa = PBXGroup;
 			children = (
 				E3322A12212613D40031435F /* TIOLayerInterface.h */,
@@ -461,7 +461,7 @@
 				E3322A15212613D40031435F /* TIOPixelBufferLayerDescription.h */,
 				E3322A16212613D40031435F /* TIOPixelBufferLayerDescription.mm */,
 			);
-			path = "TIO Data Interface";
+			path = "TIO Layer Interface";
 			sourceTree = "<group>";
 		};
 		E374029E210A55220025AA59 /* Select Model */ = {
@@ -964,6 +964,7 @@
 				E3322A21212613D40031435F /* TIOTFLiteModel.mm in Sources */,
 				E3322A1D212613D40031435F /* UIImage+CVPixelBuffer.mm in Sources */,
 				E31C7874212A5ABC00139C90 /* TIOQuantization.mm in Sources */,
+				E31C787B212B5C0D00139C90 /* PhenomenalFaceModelOutput.mm in Sources */,
 				E3F6C694210A56EC00D200D8 /* HeadlessTestBundle.mm in Sources */,
 				E3B57E8C210A52FC008D19C0 /* ImageEvaluator.mm in Sources */,
 				E3458A8F210A563C0040648C /* EvaluateSelectAlbumsTableViewController.m in Sources */,

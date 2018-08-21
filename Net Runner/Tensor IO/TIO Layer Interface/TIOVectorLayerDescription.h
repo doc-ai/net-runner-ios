@@ -15,11 +15,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * The description of a vector input or output later.
+ * The description of a vector (array) input or output later.
  *
- * Inputs and outputs are always unrolled vectors, and from the tensor's perspective they are just
- * an array of bytes. The total length of a vector will be the total volume of the layer.
- * For example, if an input layer is a tensor of shape `(24,24,2)` the length of the vector will be
+ * Vector inputs and outputs are always unrolled vectors, and from the tensor's perspective they are
+ * just an array of bytes. The total length of a vector will be the total volume of the layer.
+ * For example, if an input layer is a tensor of shape `(24,24,2)`, the length of the vector will be
  * `24x24x2 = 1152`.
  *
  * TensorFlow Lite models expect row major ordering of bytes, such that higher order dimensions are
@@ -42,9 +42,9 @@ NS_ASSUME_NONNULL_BEGIN
  * a vector in one dimension. If is up to you to reshape it if required.
  *
  * @warning
- * A `TIOVectorLayerDescription`'s length is different that the byte length of a `TIOData`.
- * For example a quantized `TIOVector` (uint_t) of length 4 will occupy 4 bytes of memory but an
- * unquantized `Vector` (float_t) of length 4 will occupy 16 bytes of memory.
+ * A `TIOVectorLayerDescription`'s length is different than the byte length of a `TIOData` object.
+ * For example a quantized `TIOVector` (uint8_t) of length 4 will occupy 4 bytes of memory but an
+ * unquantized `TIOVector` (float_t) of length 4 will occupy 16 bytes of memory.
  */
 
 @interface TIOVectorLayerDescription : NSObject <TIOLayerDescription>
@@ -57,7 +57,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The length of the vector in terms of its number of elements.
- *
  */
 
 @property (readonly) NSUInteger length;
@@ -79,7 +78,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * A function that converts a vector from unquantized values to quantized values
- *
  */
 
 @property (nullable, readonly) TIODataQuantizer quantizer;
@@ -102,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return instancetype A read-only instance of `TIOVectorLayerDescription`
  */
 
-- (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(nullable TIODataDequantizer)dequantizer;
+- (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(nullable TIODataDequantizer)dequantizer NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.

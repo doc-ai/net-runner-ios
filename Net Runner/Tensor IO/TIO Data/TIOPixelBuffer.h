@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Wraps a `CVPixelBuffer` so that it can provide data to and receive data from a model.
+ * Wraps a `CVPixelBuffer` so that it can provide data to and receive data from a tensor.
  */
 
 @interface TIOPixelBuffer : NSObject <TIOData>
@@ -25,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * For an input layer this is the pixel buffer prior to any transformations, such as scaling,
  * cropping, and pixel format transoformation. For an output layer, this is a pixel buffer
- * whose bytes have been supplied directly by the tensor, with an alpha channel added.
+ * whose bytes have been supplied by the tensor, with any denormalization applied and an alpha
+ * channel added.
  */
 
 @property (readonly) CVPixelBufferRef pixelBuffer;

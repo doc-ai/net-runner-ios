@@ -18,8 +18,33 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: -
 
 /**
- * An Obj-C wrapper around lower level, usually C++ model implementations.
- * Currently, only TensorFlow Lite (TFLite) models are supported.
+ * An Obj-C wrapper around lower level, usually C++ model implementations. This is the primary
+ * API provided by the TensorIO framework.
+ *
+ * A `TIOModel` is built from a bundle folder that contains the underlying model, a json description
+ * of the model's input and output layers, and any additional assets required by the model, for
+ * example, output labels.
+ *
+ * A conforming `TIOModel` begins by parsing a json description of the model's input and output
+ * layers, producing a `TIOLayerInterface` for each layer. Each layer is fully described by a
+ * conforming `TIOLayerDescription`, which describes the data the layer expects or produces, for
+ * example, whether it is quantized, any transformations that should be applied to it, and the
+ * number of bytes the layer expects.
+ *
+ * To perform inference with the underlying model, call `runOn:` with a conforming `TIOData` object.
+ * `TIOData` objects simply know how to copy bytes to and receive bytes from a model's input
+ * and output layers. Internally, this method matches `TIOData` objects with their corresponding
+ * layers and ensures that bytes are copied to the right place. The `runOn:` method then returns a
+ * conforming `TIOData` object, which is the result of performing inference with the model.
+ * Objects that conform to the `TIOData` protocol include `NSNumber`, `NSArray`, `NSData`,
+ * `NSDictionary`, and `TIOPixelBuffer`, which wraps a `CVPixelBuffer` for computer vision models.
+ *
+ * For more information about a model's interface, refer to the `TIOLayerInterface` and
+ * `TIOLayerDescription` classes. For more information about the kinds of Objective-C data a
+ * `TIOModel` can work with, refer to the `TIOData` protocol and its conforming classes. For more
+ * information about the JSON file which describes a model, see TIOModelBundleJSONSchema.h
+ *
+ * Note that, currently, only TensorFlow Lite (TFLite) models are supported.
  */
 
 @protocol TIOModel <NSObject>

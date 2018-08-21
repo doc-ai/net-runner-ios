@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
  * @param buffer The input buffer to copy bytes to.
  * @param length The length of the input buffer.
  * @param description A description of the data this buffer expects.
+ *
+ * @warning This method is unimplemented. A dictionary cannot provide bytes directly to a tensor.
  */
 
 - (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description;

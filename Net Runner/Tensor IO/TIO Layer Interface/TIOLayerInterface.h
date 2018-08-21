@@ -20,13 +20,15 @@ typedef void (^TIOPixelBufferMatcher)(TIOPixelBufferLayerDescription *pixelBuffe
 typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
 
 /**
- * The input or output interface to a model, described by a `TIOLayerDescription`.
+ * Encapsulates information about the input and output layers of a model, fully described by a
+ * `TIOLayerDescription`. Used internally by a model when parsing its description. Also used to
+ * match inputs and outputs to their corresponding layers.
  *
  * This is an algebraic data type inspired by Remodel: https://github.com/facebook/remodel.
  * In Swift it would be an Enumeration with Associated Values. The intent is to capture the
- * variety of inputs and outputs a model can accept in a unified interface.
+ * variety of inputs and outputs a model can accept and produce in a unified interface.
  *
- * Normally you will not need to interract with this class, although you may request a
+ * Normally you will not need to interact with this class, although you may request a
  * `TIOLayerDescription` from a conforming `TIOModel` for inputs or outputs that you are specifically
  * interested in, for example, a pixel buffer input when you want greater control over scaling
  * and clipping an image before passing it to the model.
@@ -42,10 +44,10 @@ typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
  * @return `TIOLayerInterface` The encapsulated description
  */
 
-- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription;
+- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription NS_DESIGNATED_INITIALIZER;
 
 /**
- * Initializes a `TIOLayerInterface` with a vector description, e.g. the description of a  vector,
+ * Initializes a `TIOLayerInterface` with a vector description, e.g. the description of a vector,
  * matrix, or other tensor.
  *
  * @param vectorDescription Description of the expected vector
@@ -53,10 +55,10 @@ typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
  * @return `TIOLayerInterface` The encapsulated description
  */
 
-- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription*)vectorDescription;
+- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription*)vectorDescription NS_DESIGNATED_INITIALIZER;
 
 /**
- * Use one of the above initializer
+ * Use one of the above initializers
  */
 
 - (instancetype)init NS_UNAVAILABLE;

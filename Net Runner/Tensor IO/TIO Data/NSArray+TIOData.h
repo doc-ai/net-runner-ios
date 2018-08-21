@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSArray (TIOData) <TIOData>
 
 /**
- * Initializes an `NSData` object with bytes from a tensor.
+ * Initializes an `NSArray` object with bytes from a tensor.
  *
  * @param bytes The output buffer to read from.
  * @param length The length of the buffer.
