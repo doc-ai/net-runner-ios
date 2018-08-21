@@ -12,7 +12,7 @@
 #import "HeadlessTestBundleManager.h"
 #import "HeadlessTestBundle.h"
 #import "EvaluationResultsActivityItemProvider.h"
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 
 @interface HeadlessViewController ()
 

@@ -8,7 +8,7 @@
 
 #import "TIOModelJSONParsing.h"
 
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 #import "TIOModelBundle.h"
 #import "TIOLayerInterface.h"
 #import "TIOPixelBufferLayerDescription.h"

@@ -14,7 +14,7 @@
 #import "EvaluateResultsPhotoViewController.h"
 #import "PhotoAlbumPhotoViewController.h"
 #import "PHFetchResult+Extensions.h"
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 #import "TIOModelBundle.h"
 #import "EvaluatorConstants.h"
 

@@ -8,7 +8,7 @@
 
 #import "ImageEvaluator.h"
 
-#import "UIImage+CVPixelBuffer.h"
+#import "UIImage+TIOCVPixelBufferExtensions.h"
 #import "TIOObjcDefer.h"
 #import "CVPixelBufferEvaluator.h"
 #import "Utilities.h"

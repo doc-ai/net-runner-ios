@@ -7,7 +7,7 @@
 //
 
 #import "EvaluationMetricAccuracyTop5.h"
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 
 static NSString * const kClassificationOutputKey = @"classification";
 

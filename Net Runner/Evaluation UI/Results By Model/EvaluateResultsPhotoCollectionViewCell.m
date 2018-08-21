@@ -7,7 +7,7 @@
 //
 
 #import "EvaluateResultsPhotoCollectionViewCell.h"
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 #import "ModelOutput.h"
 #import "EvaluatorConstants.h"
 

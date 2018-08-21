@@ -1,12 +1,12 @@
 //
-//  NSArray+Extensions.m
+//  NSArray+TIOExtensions.m
 //  TensorIO
 //
 //  Created by Philip Dow on 7/10/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 
 @implementation NSArray (Blocks)
 

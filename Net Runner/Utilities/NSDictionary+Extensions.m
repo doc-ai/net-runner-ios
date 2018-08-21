@@ -8,7 +8,7 @@
 
 #import "NSDictionary+Extensions.h"
 
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 
 @implementation NSDictionary (Extensions)
 

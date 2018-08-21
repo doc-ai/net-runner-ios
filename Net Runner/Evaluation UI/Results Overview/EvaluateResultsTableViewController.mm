@@ -13,7 +13,7 @@
 #import "ImageEvaluator.h"
 #import "TIOModelBundle.h"
 #import "TIOModel.h"
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 #import "EvaluateResultsModelTableViewCell.h"
 #import "EvaluationResultsActivityItemProvider.h"
 #import "EvaluateResultsByModelCollectionViewController.h"

@@ -9,7 +9,7 @@
 #import "HeadlessTestBundleManager.h"
 
 #import "HeadlessTestBundle.h"
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 
 NSString * const kTFTestBundleExtension = @"testbundle";
 NSString * const kTFTestInfoFile = @"test.json";
