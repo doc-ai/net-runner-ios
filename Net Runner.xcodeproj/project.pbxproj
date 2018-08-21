@@ -20,9 +20,9 @@
 		E3322A1A212613D40031435F /* NSData+TIOData.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229EA212613D40031435F /* NSData+TIOData.mm */; };
 		E3322A1B212613D40031435F /* TIOPixelBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229EC212613D40031435F /* TIOPixelBuffer.mm */; };
 		E3322A1C212613D40031435F /* NSArray+TIOData.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229EF212613D40031435F /* NSArray+TIOData.mm */; };
-		E3322A1D212613D40031435F /* UIImage+CVPixelBuffer.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229F4212613D40031435F /* UIImage+CVPixelBuffer.mm */; };
+		E3322A1D212613D40031435F /* UIImage+TIOCVPixelBufferExtensions.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229F4212613D40031435F /* UIImage+TIOCVPixelBufferExtensions.mm */; };
 		E3322A1E212613D40031435F /* TIOCVPixelBufferHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229F7212613D40031435F /* TIOCVPixelBufferHelpers.mm */; };
-		E3322A1F212613D40031435F /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229F9212613D40031435F /* NSArray+Extensions.m */; };
+		E3322A1F212613D40031435F /* NSArray+TIOExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229F9212613D40031435F /* NSArray+TIOExtensions.m */; };
 		E3322A21212613D40031435F /* TIOTFLiteModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229FE212613D40031435F /* TIOTFLiteModel.mm */; };
 		E3322A22212613D40031435F /* TIOVisionPipeline.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A01212613D40031435F /* TIOVisionPipeline.mm */; };
 		E3322A23212613D40031435F /* TIOVisionModelHelpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3322A03212613D40031435F /* TIOVisionModelHelpers.mm */; };
@@ -147,13 +147,13 @@
 		E33229EF212613D40031435F /* NSArray+TIOData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSArray+TIOData.mm"; sourceTree = "<group>"; };
 		E33229F0212613D40031435F /* NSDictionary+TIOData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+TIOData.h"; sourceTree = "<group>"; };
 		E33229F1212613D40031435F /* NSData+TIOData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+TIOData.h"; sourceTree = "<group>"; };
-		E33229F3212613D40031435F /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
-		E33229F4212613D40031435F /* UIImage+CVPixelBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+CVPixelBuffer.mm"; sourceTree = "<group>"; };
-		E33229F5212613D40031435F /* UIImage+CVPixelBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CVPixelBuffer.h"; sourceTree = "<group>"; };
+		E33229F3212613D40031435F /* NSArray+TIOExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+TIOExtensions.h"; sourceTree = "<group>"; };
+		E33229F4212613D40031435F /* UIImage+TIOCVPixelBufferExtensions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+TIOCVPixelBufferExtensions.mm"; sourceTree = "<group>"; };
+		E33229F5212613D40031435F /* UIImage+TIOCVPixelBufferExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TIOCVPixelBufferExtensions.h"; sourceTree = "<group>"; };
 		E33229F6212613D40031435F /* TIOObjcDefer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOObjcDefer.h; sourceTree = "<group>"; };
 		E33229F7212613D40031435F /* TIOCVPixelBufferHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOCVPixelBufferHelpers.mm; sourceTree = "<group>"; };
 		E33229F8212613D40031435F /* TIOCVPixelBufferHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOCVPixelBufferHelpers.h; sourceTree = "<group>"; };
-		E33229F9212613D40031435F /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
+		E33229F9212613D40031435F /* NSArray+TIOExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+TIOExtensions.m"; sourceTree = "<group>"; };
 		E33229FB212613D40031435F /* TIOTFLiteModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOTFLiteModel.h; sourceTree = "<group>"; };
 		E33229FE212613D40031435F /* TIOTFLiteModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOTFLiteModel.mm; sourceTree = "<group>"; };
 		E3322A00212613D40031435F /* TIOTFLiteErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOTFLiteErrors.h; sourceTree = "<group>"; };
@@ -403,10 +403,10 @@
 		E33229F2212613D40031435F /* TIO Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				E33229F3212613D40031435F /* NSArray+Extensions.h */,
-				E33229F9212613D40031435F /* NSArray+Extensions.m */,
-				E33229F5212613D40031435F /* UIImage+CVPixelBuffer.h */,
-				E33229F4212613D40031435F /* UIImage+CVPixelBuffer.mm */,
+				E33229F3212613D40031435F /* NSArray+TIOExtensions.h */,
+				E33229F9212613D40031435F /* NSArray+TIOExtensions.m */,
+				E33229F5212613D40031435F /* UIImage+TIOCVPixelBufferExtensions.h */,
+				E33229F4212613D40031435F /* UIImage+TIOCVPixelBufferExtensions.mm */,
 				E33229F8212613D40031435F /* TIOCVPixelBufferHelpers.h */,
 				E33229F7212613D40031435F /* TIOCVPixelBufferHelpers.mm */,
 				E33229F6212613D40031435F /* TIOObjcDefer.h */,
@@ -962,7 +962,7 @@
 				E3458A95210A56410040648C /* EvaluateIterationsTableViewCell.m in Sources */,
 				E3F6C697210A56EC00D200D8 /* HeadlessTestBundleManager.mm in Sources */,
 				E3322A21212613D40031435F /* TIOTFLiteModel.mm in Sources */,
-				E3322A1D212613D40031435F /* UIImage+CVPixelBuffer.mm in Sources */,
+				E3322A1D212613D40031435F /* UIImage+TIOCVPixelBufferExtensions.mm in Sources */,
 				E31C7874212A5ABC00139C90 /* TIOQuantization.mm in Sources */,
 				E3F6C694210A56EC00D200D8 /* HeadlessTestBundle.mm in Sources */,
 				E3B57E8C210A52FC008D19C0 /* ImageEvaluator.mm in Sources */,
@@ -974,7 +974,7 @@
 				E3F6C680210A567300D200D8 /* PhotoAssetsCollectionViewController.m in Sources */,
 				E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */,
 				E3F6C681210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m in Sources */,
-				E3322A1F212613D40031435F /* NSArray+Extensions.m in Sources */,
+				E3322A1F212613D40031435F /* NSArray+TIOExtensions.m in Sources */,
 				E31C787A212B2D5600139C90 /* TIOModelJSONParsing.mm in Sources */,
 				E33229D7212607680031435F /* ModelOutputManager.m in Sources */,
 				E3458A8E210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.m in Sources */,

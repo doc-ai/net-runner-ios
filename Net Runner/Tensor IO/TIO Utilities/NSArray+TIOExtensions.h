@@ -1,5 +1,5 @@
 //
-//  NSArray+Extensions.h
+//  NSArray+TIOExtensions.h
 //  TensorIO
 //
 //  Created by Philip Dow on 7/10/18.

@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 #import "TIOModelBundleManager.h"
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 
 @interface AppDelegate ()
 

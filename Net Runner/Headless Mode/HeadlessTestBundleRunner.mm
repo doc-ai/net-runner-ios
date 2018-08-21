@@ -15,7 +15,7 @@
 #import "TIOModelBundleManager.h"
 #import "TIOModel.h"
 #import "EvaluationMetric.h"
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 #import "TIOModelBundle.h"
 #import "ModelOutput.h"
 #import "EvaluatorConstants.h"

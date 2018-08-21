@@ -9,7 +9,7 @@
 #import "TIOModelBundleManager.h"
 
 #import "TIOModelBundle.h"
-#import "NSArray+Extensions.h"
+#import "NSArray+TIOExtensions.h"
 #import "TIOModel.h"
 
 @interface TIOModelBundleManager()

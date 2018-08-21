@@ -9,7 +9,7 @@
 #import "ImageInputPreviewView.h"
 
 #import "TIOCVPixelBufferHelpers.h"
-#import "UIImage+CVPixelBuffer.h"
+#import "UIImage+TIOCVPixelBufferExtensions.h"
 #import "TIOObjcDefer.h"
 
 static float kViewDim = UIScreen.mainScreen.bounds.size.width <= 320 ? 54.0 : 64.0;

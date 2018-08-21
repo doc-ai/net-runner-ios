@@ -1,12 +1,12 @@
 //
-//  UIImage+CVPixelBuffer.m
+//  UIImage+TIOCVPixelBufferExtensions.m
 //  TensorIO
 //
 //  Created by Philip Dow on 7/6/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "UIImage+CVPixelBuffer.h"
+#import "UIImage+TIOCVPixelBufferExtensions.h"
 #import "TIOObjcDefer.h"
 
 @implementation UIImage (CVPixelBuffer)
