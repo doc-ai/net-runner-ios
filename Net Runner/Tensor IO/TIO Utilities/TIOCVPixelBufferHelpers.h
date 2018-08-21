@@ -1,13 +1,13 @@
 //
-//  CVPixelBufferHelpers.h
+//  TIOCVPixelBufferHelpers.h
 //  TensorIO
 //
 //  Created by Philip Dow on 7/3/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#ifndef CVPixelBuffer_Utilities_h
-#define CVPixelBuffer_Utilities_h
+#ifndef TIOCVPixelBufferHelpers_h
+#define TIOCVPixelBufferHelpers_h
 
 #import <AVFoundation/AVFoundation.h>
 #import <Accelerate/Accelerate.h>
@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Rotation constants used with `CVPixelBufferRotate`.
+ * Rotation constants used with `TIOCVPixelBufferRotate`.
  */
 
 typedef enum : NSUInteger  {
@@ -23,7 +23,7 @@ typedef enum : NSUInteger  {
     Rotate90Degrees = 1,
     Rotate180Degrees = 2,
     Rotate270Degrees = 3
-} CVPixelBufferCounterclockwiseRotation;
+} TIOCVPixelBufferCounterclockwiseRotation;
 
 /**
  * Returns a copy of the pixel buffer.
@@ -36,7 +36,7 @@ typedef enum : NSUInteger  {
  * destination pixel buffer could not be created.
  */
 
-_Nullable CVPixelBufferRef CVPixelBufferCopy(CVPixelBufferRef pixelBuffer);
+_Nullable CVPixelBufferRef TIOCVPixelBufferCopy(CVPixelBufferRef pixelBuffer);
 
 /**
  * Rotates the pixel buffer at 90 degree intervals in a counterclockwise direction.
@@ -50,7 +50,7 @@ _Nullable CVPixelBufferRef CVPixelBufferCopy(CVPixelBufferRef pixelBuffer);
  * destination pixel buffer could not be created or the rotation fails.
  */
 
-_Nullable CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVPixelBufferCounterclockwiseRotation rotation);
+_Nullable CVPixelBufferRef TIOCVPixelBufferRotate(CVPixelBufferRef pixelBuffer, TIOCVPixelBufferCounterclockwiseRotation rotation);
 
 /**
  * Converts a pixel buffer in ARGB format to one in BGRA format
@@ -63,7 +63,7 @@ _Nullable CVPixelBufferRef CVPixelBufferRotate(CVPixelBufferRef pixelBuffer, CVP
  * destination pixel buffer could not be created.
  */
 
-_Nullable CVPixelBufferRef CVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixelBuffer);
+_Nullable CVPixelBufferRef TIOCVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixelBuffer);
 
 /**
  * Converts a pixel buffer in BGRA format to one in ARGB format
@@ -76,7 +76,7 @@ _Nullable CVPixelBufferRef CVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixe
  * destination pixel buffer could not be created.
  */
 
-_Nullable CVPixelBufferRef CVPixelBufferCreateARGBFromBGRA(CVPixelBufferRef pixelBuffer);
+_Nullable CVPixelBufferRef TIOCVPixelBufferCreateARGBFromBGRA(CVPixelBufferRef pixelBuffer);
 
 /**
  * Copies an ARGB or BGRA formatted pixel buffer into four separate, channelwise grayscale pixel buffers.
@@ -96,7 +96,7 @@ _Nullable CVPixelBufferRef CVPixelBufferCreateARGBFromBGRA(CVPixelBufferRef pixe
  * @return CVReturn `kCVReturnSuccess` if the operation was successful, `kCVReturnError` otherwise.
  */
 
-CVReturn CVPixelBufferCopySeparateChannels(
+CVReturn TIOCVPixelBufferCopySeparateChannels(
     CVPixelBufferRef pixelBuffer,
     CVPixelBufferRef _Nullable * _Nonnull channel0Buffer,
     CVPixelBufferRef _Nullable * _Nonnull channel1Buffer,
@@ -119,7 +119,7 @@ CVReturn CVPixelBufferCopySeparateChannels(
  * destination pixel buffer could not be created.
  */
 
-_Nullable CVPixelBufferRef CVPixelBufferResizeToSquare(CVPixelBufferRef pixelBuffer, CGSize size);
+_Nullable CVPixelBufferRef TIOCVPixelBufferResizeToSquare(CVPixelBufferRef pixelBuffer, CGSize size);
 
 NS_ASSUME_NONNULL_END
 

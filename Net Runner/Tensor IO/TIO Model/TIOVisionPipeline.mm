@@ -9,7 +9,7 @@
 #import "TIOVisionPipeline.h"
 
 #import "TIOModel.h"
-#import "CVPixelBufferHelpers.h"
+#import "TIOCVPixelBufferHelpers.h"
 #import "TIOObjcDefer.h"
 #import "TIOPixelBufferLayerDescription.h"
 
@@ -36,7 +36,7 @@
     const size_t dstHeight = self.pixelBufferDescription.shape.height;
     
     if (srcWidth != dstWidth || srcHeight != dstHeight) {
-        resizedPixelBuffer = CVPixelBufferResizeToSquare(pixelBuffer, CGSizeMake(dstWidth, dstHeight));
+        resizedPixelBuffer = TIOCVPixelBufferResizeToSquare(pixelBuffer, CGSizeMake(dstWidth, dstHeight));
     } else {
         resizedPixelBuffer = pixelBuffer;
         CVPixelBufferRetain(resizedPixelBuffer);
@@ -62,13 +62,13 @@
         CVPixelBufferRetain(rotatedPixelBuffer);
         break;
     case kCGImagePropertyOrientationRight:
-        rotatedPixelBuffer = CVPixelBufferRotate(resizedPixelBuffer, Rotate270Degrees);
+        rotatedPixelBuffer = TIOCVPixelBufferRotate(resizedPixelBuffer, Rotate270Degrees);
         break;
     case kCGImagePropertyOrientationDown:
-        rotatedPixelBuffer = CVPixelBufferRotate(resizedPixelBuffer, Rotate180Degrees);
+        rotatedPixelBuffer = TIOCVPixelBufferRotate(resizedPixelBuffer, Rotate180Degrees);
         break;
     case kCGImagePropertyOrientationLeft:
-        rotatedPixelBuffer = CVPixelBufferRotate(resizedPixelBuffer, Rotate90Degrees);
+        rotatedPixelBuffer = TIOCVPixelBufferRotate(resizedPixelBuffer, Rotate90Degrees);
         break;
     default:
         NSLog(@"Unknown orientation, assuming kCGImagePropertyOrientationUp, reported: %d", orientation);
@@ -97,9 +97,9 @@
     assert(srcFormat == kCVPixelFormatType_32BGRA || srcFormat == kCVPixelFormatType_32ARGB);
     
     if (srcFormat == kCVPixelFormatType_32BGRA && dstFormat == kCVPixelFormatType_32ARGB ) {
-        formattedPixelBuffer = CVPixelBufferCreateARGBFromBGRA(rotatedPixelBuffer);
+        formattedPixelBuffer = TIOCVPixelBufferCreateARGBFromBGRA(rotatedPixelBuffer);
     } else if (srcFormat == kCVPixelFormatType_32ARGB && dstFormat == kCVPixelFormatType_32BGRA) {
-        formattedPixelBuffer = CVPixelBufferCreateBGRAFromARGB(rotatedPixelBuffer);
+        formattedPixelBuffer = TIOCVPixelBufferCreateBGRAFromARGB(rotatedPixelBuffer);
     } else {
         formattedPixelBuffer = rotatedPixelBuffer;
         CVPixelBufferRetain(formattedPixelBuffer);

@@ -24,7 +24,7 @@
 #import "LatencyCounter.h"
 #import "SettingsTableViewController.h"
 #import "UIImage+CVPixelBuffer.h"
-#import "CVPixelBufferHelpers.h"
+#import "TIOCVPixelBufferHelpers.h"
 #import "NSArray+Extensions.h"
 #import "Utilities.h"
 #import "ImageInputPreviewView.h"
@@ -441,7 +441,7 @@ typedef enum : NSUInteger {
 #if TARGET_OS_SIMULATOR
     
     UIImage *image = [UIImage imageNamed:@"simulator-video-input"];
-    CVPixelBufferRef pixelBuffer = CVPixelBufferRotate(image.pixelBuffer, Rotate90Degrees);
+    CVPixelBufferRef pixelBuffer = TIOCVPixelBufferRotate(image.pixelBuffer, Rotate90Degrees);
     CMSampleBufferRef sampleBuffer = NULL;
     CMSampleTimingInfo timimgInfo = kCMTimingInfoInvalid;
     CMVideoFormatDescriptionRef videoInfo = NULL;
