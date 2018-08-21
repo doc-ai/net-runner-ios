@@ -9,7 +9,7 @@
 #import "ImageEvaluator.h"
 
 #import "UIImage+CVPixelBuffer.h"
-#import "ObjcDefer.h"
+#import "TIOObjcDefer.h"
 #import "CVPixelBufferEvaluator.h"
 #import "Utilities.h"
 
@@ -37,7 +37,7 @@
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
     dispatch_once(&_once, ^{
     
-    defer_block {
+    tio_defer_block {
         self.model = nil;
         self.image = nil;
     };

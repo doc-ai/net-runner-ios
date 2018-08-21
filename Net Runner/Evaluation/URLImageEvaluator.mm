@@ -8,7 +8,7 @@
 
 #import "URLImageEvaluator.h"
 
-#import "ObjcDefer.h"
+#import "TIOObjcDefer.h"
 
 @interface URLImageEvaluator ()
 
@@ -40,7 +40,7 @@
     
     @autoreleasepool {
         
-        defer_block {
+        tio_defer_block {
             self.model = nil;
         };
         

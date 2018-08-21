@@ -12,7 +12,7 @@
 #import "ImageEvaluator.h"
 #import "TIOModel.h"
 #import "Utilities.h"
-#import "ObjcDefer.h"
+#import "TIOObjcDefer.h"
 
 @interface AlbumPhotoEvaluator()
 
@@ -67,7 +67,7 @@
         
         @autoreleasepool {
         
-            defer_block {
+            tio_defer_block {
                 self.model = nil;
             };
         
