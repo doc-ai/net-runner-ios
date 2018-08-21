@@ -10,7 +10,7 @@
 
 #import "CVPixelBufferHelpers.h"
 #import "UIImage+CVPixelBuffer.h"
-#import "ObjcDefer.h"
+#import "TIOObjcDefer.h"
 
 static float kViewDim = UIScreen.mainScreen.bounds.size.width <= 320 ? 54.0 : 64.0;
 static float kDotViewOffset = 0.0;
@@ -198,12 +198,12 @@ static float kDotViewDim = 5.0;
         return;
     }
     
-defer_block {
-    CVPixelBufferRelease(channel0Buffer);
-    CVPixelBufferRelease(channel1Buffer);
-    CVPixelBufferRelease(channel2Buffer);
-    CVPixelBufferRelease(channel3Buffer);
-};
+    tio_defer_block {
+        CVPixelBufferRelease(channel0Buffer);
+        CVPixelBufferRelease(channel1Buffer);
+        CVPixelBufferRelease(channel2Buffer);
+        CVPixelBufferRelease(channel3Buffer);
+    };
 
     UIImage *channel0Image = [[UIImage alloc] initWithPixelBuffer:channel0Buffer];
     UIImage *channel1Image = [[UIImage alloc] initWithPixelBuffer:channel1Buffer];

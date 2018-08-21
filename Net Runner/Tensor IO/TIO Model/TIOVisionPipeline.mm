@@ -10,7 +10,7 @@
 
 #import "TIOModel.h"
 #import "CVPixelBufferHelpers.h"
-#import "ObjcDefer.h"
+#import "TIOObjcDefer.h"
 #import "TIOPixelBufferLayerDescription.h"
 
 @implementation TIOVisionPipeline
@@ -49,7 +49,7 @@
         return NULL;
     }
     
-    defer_block {
+    tio_defer_block {
         CVPixelBufferRelease(resizedPixelBuffer);
     };
     
@@ -84,7 +84,7 @@
         return NULL;
     }
     
-    defer_block {
+    tio_defer_block {
         CVPixelBufferRelease(rotatedPixelBuffer);
     };
     
@@ -112,7 +112,7 @@
         return NULL;
     }
     
-    defer_block {
+    tio_defer_block {
         CFAutorelease(formattedPixelBuffer);
     };
     

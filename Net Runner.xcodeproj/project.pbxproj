@@ -150,7 +150,7 @@
 		E33229F3212613D40031435F /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
 		E33229F4212613D40031435F /* UIImage+CVPixelBuffer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIImage+CVPixelBuffer.mm"; sourceTree = "<group>"; };
 		E33229F5212613D40031435F /* UIImage+CVPixelBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CVPixelBuffer.h"; sourceTree = "<group>"; };
-		E33229F6212613D40031435F /* ObjcDefer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcDefer.h; sourceTree = "<group>"; };
+		E33229F6212613D40031435F /* TIOObjcDefer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TIOObjcDefer.h; sourceTree = "<group>"; };
 		E33229F7212613D40031435F /* CVPixelBufferHelpers.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVPixelBufferHelpers.mm; sourceTree = "<group>"; };
 		E33229F8212613D40031435F /* CVPixelBufferHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVPixelBufferHelpers.h; sourceTree = "<group>"; };
 		E33229F9212613D40031435F /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
@@ -409,7 +409,7 @@
 				E33229F4212613D40031435F /* UIImage+CVPixelBuffer.mm */,
 				E33229F8212613D40031435F /* CVPixelBufferHelpers.h */,
 				E33229F7212613D40031435F /* CVPixelBufferHelpers.mm */,
-				E33229F6212613D40031435F /* ObjcDefer.h */,
+				E33229F6212613D40031435F /* TIOObjcDefer.h */,
 			);
 			path = "TIO Utilities";
 			sourceTree = "<group>";
@@ -964,7 +964,6 @@
 				E3322A21212613D40031435F /* TIOTFLiteModel.mm in Sources */,
 				E3322A1D212613D40031435F /* UIImage+CVPixelBuffer.mm in Sources */,
 				E31C7874212A5ABC00139C90 /* TIOQuantization.mm in Sources */,
-				E31C787B212B5C0D00139C90 /* PhenomenalFaceModelOutput.mm in Sources */,
 				E3F6C694210A56EC00D200D8 /* HeadlessTestBundle.mm in Sources */,
 				E3B57E8C210A52FC008D19C0 /* ImageEvaluator.mm in Sources */,
 				E3458A8F210A563C0040648C /* EvaluateSelectAlbumsTableViewController.m in Sources */,

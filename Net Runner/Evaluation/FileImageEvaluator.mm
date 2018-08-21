@@ -11,7 +11,7 @@
 #import "EvaluatorConstants.h"
 #import "ImageEvaluator.h"
 #import "Utilities.h"
-#import "ObjcDefer.h"
+#import "TIOObjcDefer.h"
 
 @interface FileImageEvaluator ()
 
@@ -45,7 +45,7 @@
     
     @autoreleasepool {
     
-        defer_block {
+        tio_defer_block {
             self.model = nil;
         };
     

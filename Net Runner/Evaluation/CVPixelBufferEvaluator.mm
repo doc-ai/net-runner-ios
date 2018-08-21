@@ -11,7 +11,7 @@
 #import "EvaluatorConstants.h"
 #import "TIOVisionPipeline.h"
 #import "Utilities.h"
-#import "ObjcDefer.h"
+#import "TIOObjcDefer.h"
 #import "ModelOutput.h"
 #import "ModelOutputManager.h"
 #import "TIOPixelBufferLayerDescription.h"
@@ -55,7 +55,7 @@
 - (void)evaluateWithCompletionHandler:(nullable EvaluatorCompletionBlock)completionHandler {
     dispatch_once(&_once, ^{
     
-    defer_block {
+    tio_defer_block {
         self.model = nil;
         self.pixelBuffer = NULL;
     };
