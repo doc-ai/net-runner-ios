@@ -1,14 +1,14 @@
 //
-//  TIOPixelBufferDescription.m
+//  TIOPixelBufferLayerDescription.m
 //  TensorIO
 //
 //  Created by Philip Dow on 8/5/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "TIOPixelBufferDescription.h"
+#import "TIOPixelBufferLayerDescription.h"
 
-@implementation TIOPixelBufferDescription
+@implementation TIOPixelBufferLayerDescription
 
 - (instancetype)initWithPixelFormat:(OSType)pixelFormat
     shape:(TIOImageVolume)shape

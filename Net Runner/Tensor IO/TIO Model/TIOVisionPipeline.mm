@@ -11,11 +11,11 @@
 #import "TIOModel.h"
 #import "CVPixelBufferHelpers.h"
 #import "ObjcDefer.h"
-#import "TIOPixelBufferDescription.h"
+#import "TIOPixelBufferLayerDescription.h"
 
 @implementation TIOVisionPipeline
 
-- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferDescription*)pixelBufferDescription {
+- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription {
     if (self = [super init]) {
         _pixelBufferDescription = pixelBufferDescription;
     }
