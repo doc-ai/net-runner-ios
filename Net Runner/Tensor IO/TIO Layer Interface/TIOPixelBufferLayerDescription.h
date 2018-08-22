@@ -24,9 +24,6 @@
 #import "TIOLayerDescription.h"
 #import "TIOVisionModelHelpers.h"
 
-// TODO: Do something about duplicate TIOPixelNormalization and TIOPixelNormalizer types. Do I really need both?
-// And now I've got a quantizer and dequantizer, which do something similar
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -72,9 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  * model.json file.
  *
  * @param pixelFormat The expected format of the pixels
- * @param normalization A description of how the pixels will be normalized for an input layer
  * @param normalizer A function which normalizes the pixel values for an input layer, may be `nil`.
- * @param denormalization A description of how the pixels will be denormalized for an output layer
  * @param denormalizer A function which denormalizes pixel values for an output layer, may be `nil`
  * @param quantized `YES` if this layer expectes quantized values, `NO` otherwise
  *
