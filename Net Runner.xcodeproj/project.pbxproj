@@ -13,6 +13,7 @@
 		E31C7874212A5ABC00139C90 /* TIOQuantization.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7873212A5ABC00139C90 /* TIOQuantization.mm */; };
 		E31C7877212A6D4E00139C90 /* TIOPixelNormalization.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7876212A6D4E00139C90 /* TIOPixelNormalization.mm */; };
 		E31C787A212B2D5600139C90 /* TIOModelJSONParsing.mm in Sources */ = {isa = PBXBuildFile; fileRef = E31C7879212B2D5600139C90 /* TIOModelJSONParsing.mm */; };
+		E31C799D212E0E8300139C90 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E31C799C212E0E8300139C90 /* LICENSE */; };
 		E33229D7212607680031435F /* ModelOutputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229D6212607680031435F /* ModelOutputManager.m */; };
 		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
 		E3322A18212613D40031435F /* NSDictionary+TIOData.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229E7212613D40031435F /* NSDictionary+TIOData.mm */; };
@@ -131,6 +132,7 @@
 		E31C7876212A6D4E00139C90 /* TIOPixelNormalization.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOPixelNormalization.mm; sourceTree = "<group>"; };
 		E31C7878212B2D5600139C90 /* TIOModelJSONParsing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TIOModelJSONParsing.h; sourceTree = "<group>"; };
 		E31C7879212B2D5600139C90 /* TIOModelJSONParsing.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = TIOModelJSONParsing.mm; sourceTree = "<group>"; };
+		E31C799C212E0E8300139C90 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E33229D5212607680031435F /* ModelOutputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutputManager.h; sourceTree = "<group>"; };
 		E33229D6212607680031435F /* ModelOutputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOutputManager.m; sourceTree = "<group>"; };
 		E33229DA21260C880031435F /* DefaultModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultModelOutput.h; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 		E3A520D4210A49A0004B912B = {
 			isa = PBXGroup;
 			children = (
+				E31C799C212E0E8300139C90 /* LICENSE */,
 				E3A520DF210A49A0004B912B /* Net Runner */,
 				E3A520F8210A49A1004B912B /* Net RunnerTests */,
 				E3A52103210A49A1004B912B /* Net RunnerUITests */,
@@ -828,6 +831,7 @@
 				E3A52128210A5147004B912B /* headless in Resources */,
 				E3F6C6A4210A56FC00D200D8 /* Settings.storyboard in Resources */,
 				E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */,
+				E31C799D212E0E8300139C90 /* LICENSE in Resources */,
 				E3F6C6AB210A578100D200D8 /* Launch Screen.storyboard in Resources */,
 				E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */,
 				E3F6C6B7210A661300D200D8 /* Main.storyboard in Resources */,
