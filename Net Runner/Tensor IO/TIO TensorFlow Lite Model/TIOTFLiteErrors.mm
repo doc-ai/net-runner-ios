@@ -8,14 +8,14 @@
 
 #import "TIOTFLiteErrors.h"
 
-NSError * const kTFLiteModelLoadModelError = [NSError errorWithDomain:@"netrunner.ios" code:101 userInfo:@{
+NSError * const kTIOTFLiteModelLoadModelError = [NSError errorWithDomain:@"doc.ai.netrunner" code:101 userInfo:@{
     NSLocalizedDescriptionKey: @"Unable to load model from graph file"
 }];
 
-NSError * const kTFLiteModelConstructInterpreterError = [NSError errorWithDomain:@"netrunner.ios" code:101 userInfo:@{
+NSError * const kTIOTFLiteModelConstructInterpreterError = [NSError errorWithDomain:@"doc.ai.netrunner" code:102 userInfo:@{
     NSLocalizedDescriptionKey: @"Unable to construct interpreter"
 }];
 
-NSError * const kTFLiteModelAllocateTensorsError = [NSError errorWithDomain:@"netrunner.ios" code:101 userInfo:@{
+NSError * const kTIOTFLiteModelAllocateTensorsError = [NSError errorWithDomain:@"doc.ai.netrunner" code:103 userInfo:@{
     NSLocalizedDescriptionKey: @"Unable to allocate tensors"
 }];
