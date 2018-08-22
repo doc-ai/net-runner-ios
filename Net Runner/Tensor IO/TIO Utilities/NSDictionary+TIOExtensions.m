@@ -1,12 +1,12 @@
 //
-//  NSDictionary+Extensions.m
+//  NSDictionary+TIOExtensions.m
 //  Net Runner
 //
 //  Created by Philip Dow on 8/6/18.
 //  Copyright © 2018 doc.ai. All rights reserved.
 //
 
-#import "NSDictionary+Extensions.h"
+#import "NSDictionary+TIOExtensions.h"
 
 #import "NSArray+TIOExtensions.h"
 

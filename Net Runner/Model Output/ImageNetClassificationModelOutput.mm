@@ -8,7 +8,7 @@
 
 #import "ImageNetClassificationModelOutput.h"
 #import "NSArray+TIOExtensions.h"
-#import "NSDictionary+Extensions.h"
+#import "NSDictionary+TIOExtensions.h"
 
 static NSString * const kClassificationOutputKey = @"classification";
 
