@@ -227,7 +227,7 @@ static NSString * const kTensorTypeImage = @"image";
     
     if (!model) {
         NSLog(@"Failed to mmap model at path %@", graphPath);
-        *error = kTFLiteModelLoadModelError;
+        *error = kTIOTFLiteModelLoadModelError;
         return NO;
     }
 
@@ -249,12 +249,12 @@ static NSString * const kTensorTypeImage = @"image";
    
     if (!interpreter) {
         NSLog(@"Failed to construct interpreter for model %@", self.identifier);
-        *error = kTFLiteModelConstructInterpreterError;
+        *error = kTIOTFLiteModelConstructInterpreterError;
         return NO;
     }
     if (interpreter->AllocateTensors() != kTfLiteOk) {
         NSLog(@"Failed to allocate tensors for model %@", self.identifier);
-        *error = kTFLiteModelAllocateTensorsError;
+        *error = kTIOTFLiteModelAllocateTensorsError;
         return NO;
     }
     
