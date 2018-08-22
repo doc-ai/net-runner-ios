@@ -8,15 +8,12 @@
 
 #import "TIOTFLiteModel.h"
 
-#import "TIOModelBundle.h"
-#import "TIOTFLiteErrors.h"
-#import "Utilities.h"
-
 #include "tensorflow/contrib/lite/kernels/register.h"
 #include "tensorflow/contrib/lite/model.h"
 #include "tensorflow/contrib/lite/string_util.h"
-#include "tensorflow/contrib/lite/tools/mutable_op_resolver.h"
 
+#import "TIOModelBundle.h"
+#import "TIOTFLiteErrors.h"
 #import "TIOData.h"
 #import "TIOLayerInterface.h"
 #import "TIOLayerDescription.h"
@@ -314,6 +311,7 @@ static NSString * const kTensorTypeImage = @"image";
  */
 
 - (id<TIOData>)runOn:(id<TIOData>)input {
+    [self load:nil];
     [self _prepareInput:input];
     [self _runInference];
     return [self _captureOutput];
