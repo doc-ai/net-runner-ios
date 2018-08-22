@@ -48,6 +48,10 @@ static NSString * const kTensorTypeImage = @"image";
     NSDictionary<NSString*,NSNumber*> *_namedOutputToIndex;
 }
 
++ (nullable instancetype)modelWithBundleAtPath:(NSString*)path {
+    return [[[TIOModelBundle alloc] initWithPath:path] newModel];
+}
+
 - (void)dealloc {
     #ifdef DEBUG
     NSLog(@"Deallocating model");

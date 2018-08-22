@@ -23,6 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TIOTFLiteModel : NSObject <TIOModel>
 
+/**
+ * Convenience method for initializing a model directly from bundle at some path
+ *
+ * @param path The path to the model bundle folder
+ *
+ * @return TIOTFLiteModel An instance of the model, or `nil`.
+ */
+
++ (nullable instancetype)modelWithBundleAtPath:(NSString*)path;
+
 // Model Protocol Properties
 
 @property (readonly) TIOModelBundle *bundle;
