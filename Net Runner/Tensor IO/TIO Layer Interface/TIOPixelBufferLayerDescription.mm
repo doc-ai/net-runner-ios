@@ -10,20 +10,11 @@
 
 @implementation TIOPixelBufferLayerDescription
 
-- (instancetype)initWithPixelFormat:(OSType)pixelFormat
-    shape:(TIOImageVolume)shape
-    normalization:(TIOPixelNormalization)normalization
-    normalizer:(nullable TIOPixelNormalizer)normalizer
-    denormalization:(TIOPixelDenormalization)denormalization
-    denormalizer:(nullable TIOPixelDenormalizer)denormalizer
-    quantized:(BOOL)quantized {
-    
+- (instancetype)initWithPixelFormat:(OSType)pixelFormat shape:(TIOImageVolume)shape normalizer:(nullable TIOPixelNormalizer)normalizer denormalizer:(nullable TIOPixelDenormalizer)denormalizer quantized:(BOOL)quantized {
     if (self=[super init]) {
         _pixelFormat = pixelFormat;
         _shape = shape;
-        _normalization = normalization;
         _normalizer = normalizer;
-        _denormalization = denormalization;
         _denormalizer = denormalizer;
         _quantized = quantized;
     }

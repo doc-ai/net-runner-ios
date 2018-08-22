@@ -74,28 +74,16 @@ TIOImageVolume TIOImageVolumeForShape(NSArray<NSNumber*> *shape);
 OSType PixelFormatForString(NSString* formatString);
 
 /**
- * Returns the TIOPixelNormalization given an input dictionary.
- */
-
-TIOPixelNormalization TIOPixelNormalizationForDictionary(NSDictionary *input);
-
-/**
  * Returns the TIOPixelNormalizer given an input dictionary.
  */
 
-TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary *input);
-
-/**
- * Returns the denormalizing TIOPixelNormalization given an input dictionary
- */
-
-TIOPixelDenormalization TIOPixelDenormalizationForDictionary(NSDictionary *input);
+TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary *input, NSError **error);
 
 /**
  * Returns the denormalizer for a given input dictionary
  */
 
-TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *input);
+TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *input, NSError **error);
 
 // MARK: - Pixel Format
 
