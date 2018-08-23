@@ -20,9 +20,7 @@
 
 #import "ImageInputPreviewView.h"
 
-#import "TIOCVPixelBufferHelpers.h"
-#import "UIImage+TIOCVPixelBufferExtensions.h"
-#import "TIOObjcDefer.h"
+@import TensorIO;
 
 static float kViewDim = UIScreen.mainScreen.bounds.size.width <= 320 ? 54.0 : 64.0;
 static float kDotViewOffset = 0.0;

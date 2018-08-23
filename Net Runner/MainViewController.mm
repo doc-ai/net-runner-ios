@@ -20,30 +20,24 @@
 
 #import "MainViewController.h"
 
-#import <AssertMacros.h>
-#import <AssetsLibrary/AssetsLibrary.h>
-#import <CoreImage/CoreImage.h>
-#import <ImageIO/ImageIO.h>
-#import <VideoToolbox/VideoToolbox.h>
+@import AssetsLibrary;
+@import CoreImage;
+@import ImageIO;
+@import VideoToolbox;
 
-#import "TIOModel.h"
-#import "TIOModelBundle.h"
-#import "TIOModelBundleManager.h"
-#import "TIOModelOptions.h"
-#import "TIOPixelBufferLayerDescription.h"
+#import <AssertMacros.h>
 
 #import "ResultInfoView.h"
 #import "LatencyCounter.h"
 #import "SettingsTableViewController.h"
-#import "UIImage+TIOCVPixelBufferExtensions.h"
-#import "TIOCVPixelBufferHelpers.h"
-#import "NSArray+TIOExtensions.h"
 #import "Utilities.h"
 #import "ImageInputPreviewView.h"
 #import "UserDefaults.h"
 #import "CVPixelBufferEvaluator.h"
 #import "EvaluatorConstants.h"
 #import "ModelOutput.h"
+
+@import TensorIO;
 
 // MARK: -
 

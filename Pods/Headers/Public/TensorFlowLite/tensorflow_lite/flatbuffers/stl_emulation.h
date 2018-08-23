@@ -1,1 +1,0 @@
-../../../../../TensorFlowLite/Frameworks/tensorflow_lite.framework/Headers/flatbuffers/stl_emulation.h

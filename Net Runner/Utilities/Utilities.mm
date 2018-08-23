@@ -18,8 +18,9 @@
 //  limitations under the License.
 //
 
+@import AVFoundation;
+
 #include "Utilities.h"
-#include <Foundation/Foundation.h>
 
 #include <stdio.h>
 #include <time.h>

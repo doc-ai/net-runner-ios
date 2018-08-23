@@ -1,1 +1,0 @@
-../../../../../../../../../TensorFlowLite/Frameworks/tensorflow_lite.framework/Headers/tensorflow/contrib/lite/schema/builtin_ops_header/generator.h

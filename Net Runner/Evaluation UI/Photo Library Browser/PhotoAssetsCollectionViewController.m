@@ -23,12 +23,6 @@
 #import "PhotoAlbumPhotoCollectionViewCell.h"
 #import "PhotoAlbumPhotoViewController.h"
 
-@interface PhotoAssetsCollectionViewController ()
-
-// @property PHFetchResult<PHAsset*> *fetchResult;
-
-@end
-
 @implementation PhotoAssetsCollectionViewController
 
 static NSString * const kAlbumPhotoReuseIdentifier = @"AlbumPhotoCell";

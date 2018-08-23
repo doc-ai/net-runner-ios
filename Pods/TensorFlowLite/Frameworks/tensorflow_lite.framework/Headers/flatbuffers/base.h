@@ -1,17 +1,12 @@
 #ifndef FLATBUFFERS_BASE_H_
 #define FLATBUFFERS_BASE_H_
 
-// clang-format off
 #if defined(FLATBUFFERS_MEMORY_LEAK_TRACKING) && \
     defined(_MSC_VER) && defined(_DEBUG)
   #define _CRTDBG_MAP_ALLOC
 #endif
 
 #include <assert.h>
-
-#if !defined(FLATBUFFERS_ASSERT)
-#define FLATBUFFERS_ASSERT assert
-#endif
 
 #ifndef ARDUINO
 #include <cstdint>
@@ -104,7 +99,7 @@
 #endif // !defined(FLATBUFFERS_LITTLEENDIAN)
 
 #define FLATBUFFERS_VERSION_MAJOR 1
-#define FLATBUFFERS_VERSION_MINOR 9
+#define FLATBUFFERS_VERSION_MINOR 8
 #define FLATBUFFERS_VERSION_REVISION 0
 #define FLATBUFFERS_STRING_EXPAND(X) #X
 #define FLATBUFFERS_STRING(X) FLATBUFFERS_STRING_EXPAND(X)
@@ -123,13 +118,6 @@
   #define FLATBUFFERS_CONSTEXPR constexpr
 #else
   #define FLATBUFFERS_CONSTEXPR
-#endif
-
-#if (defined(__cplusplus) && __cplusplus >= 201402L) || \
-    (defined(__cpp_constexpr) && __cpp_constexpr >= 201304)
-  #define FLATBUFFERS_CONSTEXPR_CPP14 FLATBUFFERS_CONSTEXPR
-#else
-  #define FLATBUFFERS_CONSTEXPR_CPP14
 #endif
 
 #if defined(__GXX_EXPERIMENTAL_CXX0X__) && __GNUC__ * 10 + __GNUC_MINOR__ >= 46 || \
@@ -213,7 +201,7 @@ template<typename T> T EndianSwap(T t) {
     u.i = FLATBUFFERS_BYTESWAP64(u.i);
     return u.t;
   } else {
-    FLATBUFFERS_ASSERT(0);
+    assert(0);
   }
 }
 

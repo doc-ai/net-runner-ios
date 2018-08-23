@@ -21,7 +21,8 @@
 #import "HeadlessTestBundleManager.h"
 
 #import "HeadlessTestBundle.h"
-#import "NSArray+TIOExtensions.h"
+
+@import TensorIO;
 
 NSString * const kTFTestBundleExtension = @"testbundle";
 NSString * const kTFTestInfoFile = @"test.json";

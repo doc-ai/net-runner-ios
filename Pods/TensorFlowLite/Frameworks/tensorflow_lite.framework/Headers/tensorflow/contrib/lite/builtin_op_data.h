@@ -53,6 +53,8 @@ typedef struct {
   TfLitePadding padding;
   int stride_width;
   int stride_height;
+  int dilation_width_factor;
+  int dilation_height_factor;
   TfLiteFusedActivation activation;
 } TfLiteConvParams;
 
@@ -160,6 +162,9 @@ typedef struct {
 } TfLitePadParams;
 
 typedef struct {
+} TfLitePadV2Params;
+
+typedef struct {
   // TODO(ahentz): We can't have dynamic data in this struct, at least not yet.
   // For now we will fix the maximum possible number of dimensions.
   int shape[8];
@@ -220,6 +225,20 @@ typedef struct {
   int new_axis_mask;
   int shrink_axis_mask;
 } TfLiteStridedSliceParams;
+
+typedef struct {
+  TfLiteType output_type;
+} TfLiteArgMaxParams;
+
+typedef struct {
+  TfLitePadding padding;
+  int stride_width;
+  int stride_height;
+} TfLiteTransposeConvParams;
+
+typedef struct {
+  bool validate_indices;
+} TfLiteSparseToDenseParams;
 
 #ifdef __cplusplus
 }  // extern "C"

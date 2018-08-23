@@ -19,6 +19,7 @@
 //
 
 #import "ImageNetClassificationModelOutput.h"
+
 #import "NSArray+TIOExtensions.h"
 #import "NSDictionary+TIOExtensions.h"
 

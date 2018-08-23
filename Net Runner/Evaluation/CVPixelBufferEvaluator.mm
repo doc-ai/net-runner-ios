@@ -21,14 +21,11 @@
 #import "CVPixelBufferEvaluator.h"
 
 #import "EvaluatorConstants.h"
-#import "TIOVisionPipeline.h"
 #import "Utilities.h"
-#import "TIOObjcDefer.h"
 #import "ModelOutput.h"
 #import "ModelOutputManager.h"
-#import "TIOPixelBufferLayerDescription.h"
-#import "TIOPixelBuffer.h"
-#import "NSDictionary+TIOData.h"
+
+@import TensorIO;
 
 @interface CVPixelBufferEvaluator ()
 

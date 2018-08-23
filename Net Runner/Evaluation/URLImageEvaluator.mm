@@ -20,7 +20,7 @@
 
 #import "URLImageEvaluator.h"
 
-#import "TIOObjcDefer.h"
+@import TensorIO;
 
 @interface URLImageEvaluator ()
 
