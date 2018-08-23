@@ -18,8 +18,8 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
-#import <Photos/Photos.h>
+@import Foundation;
+@import Photos;
 
 #import "Evaluator.h"
 

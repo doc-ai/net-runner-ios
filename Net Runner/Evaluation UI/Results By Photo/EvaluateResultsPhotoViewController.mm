@@ -21,13 +21,13 @@
 #import "EvaluateResultsPhotoViewController.h"
 
 #import "ImageInputPreviewView.h"
-#import "TIOModelBundle.h"
 #import "AlbumPhotoEvaluator.h"
 #import "UserDefaults.h"
-#import "NSArray+TIOExtensions.h"
 #import "ResultInfoView.h"
 #import "ModelOutput.h"
 #import "EvaluatorConstants.h"
+
+@import TensorIO;
 
 @interface EvaluateResultsPhotoViewController ()
 

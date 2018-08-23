@@ -24,13 +24,11 @@
 #import "FileImageEvaluator.h"
 #import "URLImageEvaluator.h"
 #import "Evaluator.h"
-#import "TIOModelBundleManager.h"
-#import "TIOModel.h"
 #import "EvaluationMetric.h"
-#import "NSArray+TIOExtensions.h"
-#import "TIOModelBundle.h"
 #import "ModelOutput.h"
 #import "EvaluatorConstants.h"
+
+@import TensorIO;
 
 @interface HeadlessTestBundleRunner ()
 

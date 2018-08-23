@@ -21,10 +21,10 @@
 #ifndef Evaluator_h
 #define Evaluator_h
 
-#import <Foundation/Foundation.h>
-#import <AVFoundation/AVFoundation.h>
+@import Foundation;
+@import AVFoundation;
 
-#import "TIOModel.h"
+@protocol TIOModel;
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -18,8 +18,8 @@
 //  limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
-#import <Photos/Photos.h>
+@import UIKit;
+@import Photos;
 
 NS_ASSUME_NONNULL_BEGIN
 

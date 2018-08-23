@@ -23,14 +23,13 @@
 #import "AlbumPhotoEvaluator.h"
 #import "Evaluator.h"
 #import "ImageEvaluator.h"
-#import "TIOModelBundle.h"
-#import "TIOModel.h"
-#import "NSArray+TIOExtensions.h"
 #import "EvaluateResultsModelTableViewCell.h"
 #import "EvaluationResultsActivityItemProvider.h"
 #import "EvaluateResultsByModelCollectionViewController.h"
 #import "PHFetchResult+Extensions.h"
 #import "EvaluatorConstants.h"
+
+@import TensorIO;
 
 static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
 

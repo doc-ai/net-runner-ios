@@ -22,9 +22,9 @@
 
 #import "EvaluatorConstants.h"
 #import "ImageEvaluator.h"
-#import "TIOModel.h"
 #import "Utilities.h"
-#import "TIOObjcDefer.h"
+
+@import TensorIO;
 
 @interface AlbumPhotoEvaluator()
 

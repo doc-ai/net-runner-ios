@@ -1,1 +1,0 @@
-../../../../../../../../../TensorFlowLite/Frameworks/tensorflow_lite.framework/Headers/tensorflow/contrib/lite/python/interpreter_wrapper/interpreter_wrapper.h

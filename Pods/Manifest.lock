@@ -1,16 +1,29 @@
 PODS:
-  - TensorFlowLite (0.1.7)
+  - TensorFlowLite (1.10.0)
+  - TensorIO (0.1.0):
+    - TensorFlowLite
 
 DEPENDENCIES:
-  - TensorFlowLite
+  - "TensorIO (from `git@github.com:doc-ai/TensorIO.git`, commit `de728f4d51852aeaa63c2832d78e6349a966bcb1`)"
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - TensorFlowLite
 
-SPEC CHECKSUMS:
-  TensorFlowLite: 7cd43376c604938a12110b8335a5a407afe41688
+EXTERNAL SOURCES:
+  TensorIO:
+    :commit: de728f4d51852aeaa63c2832d78e6349a966bcb1
+    :git: "git@github.com:doc-ai/TensorIO.git"
 
-PODFILE CHECKSUM: 1a94ee86cecbe51a6589e8a3657381bc407c10a4
+CHECKOUT OPTIONS:
+  TensorIO:
+    :commit: de728f4d51852aeaa63c2832d78e6349a966bcb1
+    :git: "git@github.com:doc-ai/TensorIO.git"
+
+SPEC CHECKSUMS:
+  TensorFlowLite: df8d9089c2067d9d1bf2e51d4114b408f58baba0
+  TensorIO: 1e9006e5602c8b216bc8fcb7699dcf3ba9348239
+
+PODFILE CHECKSUM: 92ad2be6a1bfe7cc9afbb5524a4a66fa675745b6
 
 COCOAPODS: 1.5.3
