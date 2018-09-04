@@ -349,7 +349,7 @@ Actual Inference (yhat)
 
 ```json
 "classification": {
-  "rocking chair": 0.68
+  "rocking chair": 0.68,
   "porch": 0.14
 }
 ```
