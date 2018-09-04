@@ -1,8 +1,10 @@
 # Net Runner
 
-Net Runner is an iOS environment for running, measuring, and evaluating computer vision machine learning models on device. It works on iOS 9.3 or higher and has been tested on devices as old as a 5th generation iPod touch.
+Net Runner is an iOS environment for running, measuring, and evaluating computer vision machine learning models on device. Net Runner currently supports TensorFlow Lite models and works on iOS 9.3 or higher. We've tested our models on devices as old as a 5th generation iPod touch. 
 
-We think it looks pretty good too. And if that latency number worries you, it's because this is a screenshot from the simulator. On an iPhone X, MobileNet V2 classification models perform inference in an impressive 40ms.
+Data scientists can run their own models in Net Runner without needing to know any iPhone specific code, while developers will find a sophisticated and flexible library underneath the hood in the form of [TensorIO](https://github.com/doc-ai/TensorIO).
+
+We happen to think it looks pretty good too. And if that latency number worries you, it's because this is a screenshot from the simulator. On an iPhone X, MobileNet V2 classification models perform inference in an impressive 40ms.
 
 <img src="readme-images/net-runner-screenshot.jpg" width="240">
 
@@ -13,6 +15,11 @@ We think it looks pretty good too. And if that latency number worries you, it's 
 * [ Installation ](#installation)
 * [ Author ](#author)
 * [ License ](#license)
+* [ Data Scientists Start Here ](#data-scientists)
+	* [ Freezing a Model ](#freeze-model)
+	* [ Converting a Model to TensorFlow Lite ](#toco-convert)
+	* [ Preparing a TF Lite Model for Net Runner ](#prep-net-runner) 
+* [ Developers Start Here ](#developers)
 * [ Basic Usage ](#basic-usage)
 	* [ Model Evaluators ](#model-evaluators) 
 	* [ TensorIO ](#tensor-io)
@@ -50,6 +57,55 @@ Philip Dow (philip@doc.ai)
 ## License
 
 Net Runner is available under the Apache 2 license. See the LICENSE file for more info.
+
+<a name="data-scientists"></a>
+## Data Scientists Start Here
+
+Net Runner is designed to be easy to use for computer vision data scientists and without the need for any TensorFlow Lite or iPhone specific code. That means no C, C++, Objective-C, or Swift. Instead, model builders describe their models using JSON with information that is already familiar to them, such as tensor shapes and data transformations.
+
+There is still something of a process to get to that point, which looks like:
+
+1. Develop your TensorFlow model
+2. Save your model
+3. Convert your saved model to a frozen model
+4. Convert the frozen model to a TensorFlow Lite model
+5. Prepare your TensorFlow Lite model for Net Runner
+
+A guide to assist data scientists with these steps is forthcoming, but the following information will help you get started. See especially the [TF Lite Developer Guide](https://www.tensorflow.org/mobile/tflite/devguide) at tensorflow.org for information on freezing a model and converting it to the TensorFlow Lite format.
+
+<a name="freeze-model"></a>
+### Freezing a Model
+
+Convert a saved model to a frozen model with the `freeze_graph` command line utility, which is included with python installations of TensorFlow. 
+
+A frozen graph is one in which trainable variables have into transformed and "frozen" into constants that are then packaged into a single protobuf file along with the graph. It is a model format that is optimized for and suited to inference only.
+
+<a name="toco-convert"></a>
+### Converting a Model to TensorFlow Lite (TF Lite)
+
+Once you have frozen your model convert, it to the TensorFlow Lite format using the `toco` command line utility, also included with python installations of TensorFlow. 
+
+TensorFlow Lite is a TensorFlow environment for mobile and embedded use cases and is how models are run on iPhone and Android devices. TensorFlow Lite models do not support all operations, but most convolution operations are available, and if you are beginning with a MobileNet or Inception ResNet model you should be fine.
+
+<a name="prep-net-runner"></a>
+### Preparing a TF Lite Model for Net Runner
+
+At this stage you could use your model with the TensorFlow Lite library directly, but that would involve programming in Objective-C++ for an iPhone and Java and C++ on Android. Instead, Net Runner uses [TensorIO](https://github.com/doc-ai/TensorIO), a framework also developed by doc.ai for the rapid deployment of TensorFlow Lite models to iOS devices.
+
+With TensorIO you describe your model's input and output layers using JSON, and Net Runner will automatically prepare camera and image data for inference and capture your model's output in the correct format.
+
+Refer to the included *.tfbundle* folders in the *models* directory found in this repo for examples, and see especially the [section on TensorIO](#tensor-io) below for details on preparing your TF Lite models for Net Runner.
+
+<a name="developers"></a>
+## Developers Start Here
+
+Net Runner is designed for turnkey use without the need to write any additional code. If you would, however, like to perform custom model evaluation, format your model's output in a more human readable way, or extend the underlying [TensorIO framework](https://github.com/doc-ai/TensorIO), some coding may be necessary.
+
+By default, Net Runner displays a model's output using a propertly list representation. To format that output, refer to the section on [custom output](#custom-output).
+
+Net Runner supports the headless evaluation of models. You may define an evaluation metric and then create test bundles with test examples and expected outputs to evaluate a model's accuracy. For more information on setting up custom evaluation metrics and running your own tests, see the section on Net Runner's [headless mode](#headless-mode).
+
+If you would like to contribute to TensorIO, the underlying framework that allows users to describe their models with JSON rather than write custom Objective-C++ code, head on over to the [TensorIO repository](https://github.com/doc-ai/TensorIO).
 
 <a name="basic-usage"></a>
 ## Basic Usage
@@ -151,7 +207,9 @@ For example, the included MobileNet V2 model has the following directory structu
     - labels.txt
 ```
 
-For more information on how to describe your model in the *model.json* folder, refer to the [TensorIO documentation](https://github.com/doc-ai/TensorIO#model-json).
+If your model expects a single input layer of image data, Net Runner will know how to interface with it without your needing to write any code. If you have a single output layer, you can probably get by with copying the *model.json* file from one of the included models and making small changes to it. Net Runner will then display your model's output at the bottom of the screen.
+
+For more information on how to describe your model in the *model.json* file, and for additional details on packaging your models in a *.tfbundle* folder, refer to the [TensorIO documentation](https://github.com/doc-ai/TensorIO#model-json).
 
 <a name="custom-output"></a>
 ### Custom Output
