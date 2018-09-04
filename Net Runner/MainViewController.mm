@@ -63,6 +63,8 @@ typedef enum : NSUInteger {
 
 @end
 
+// MARK: -
+
 @implementation MainViewController
 
 - (void)dealloc {
