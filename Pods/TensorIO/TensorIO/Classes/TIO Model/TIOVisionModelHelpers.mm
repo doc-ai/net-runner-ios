@@ -23,13 +23,13 @@
 // MARK: - Image Volume
 
 const TIOImageVolume kTIOImageVolumeInvalid = {
-    .width      = 0,
     .height     = 0,
+    .width      = 0,
     .channels   = 0
 };
 
 BOOL TIOImageVolumesEqual(const TIOImageVolume& a, const TIOImageVolume& b) {
-    return a.width == b.width
-        && a.height == b.height
+    return a.height == b.height
+        && a.width == b.width
         && a.channels == b.channels;
 }

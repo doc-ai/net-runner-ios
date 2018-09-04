@@ -30,15 +30,13 @@
     TIODataDequantizer dequantizer = ((TIOVectorLayerDescription*)description).dequantizer;
     NSMutableArray *array = NSMutableArray.array;
     
-    if ( description.isQuantized ) {
-        if ( dequantizer != nil ) {
-            for ( NSUInteger i = 0; i < length; i++ ) {
-                [array addObject:@(dequantizer(((uint8_t *)bytes)[i]))];
-            }
-        } else {
-            for ( NSUInteger i = 0; i < length; i++ ) {
-                [array addObject:@(((uint8_t *)bytes)[i])];
-            }
+    if ( description.isQuantized && dequantizer != nil ) {
+        for ( NSUInteger i = 0; i < length; i++ ) {
+            [array addObject:@(dequantizer(((uint8_t *)bytes)[i]))];
+        }
+    } else if ( description.isQuantized && dequantizer == nil ) {
+        for ( NSUInteger i = 0; i < length; i++ ) {
+            [array addObject:@(((uint8_t *)bytes)[i])];
         }
     } else {
         for ( NSUInteger i = 0; i < length; i++ ) {
@@ -54,15 +52,13 @@
 
     TIODataQuantizer quantizer = ((TIOVectorLayerDescription*)description).quantizer;
 
-    if ( description.isQuantized ) {
-        if ( quantizer != nil ) {
-            for ( NSInteger i = 0; i < self.count; i++ ) {
-                ((uint8_t *)buffer)[i] = quantizer(((NSNumber*)self[i]).floatValue);
-            }
-        } else {
-            for ( NSInteger i = 0; i < self.count; i++ ) {
-                ((uint8_t *)buffer)[i] = ((NSNumber*)self[i]).charValue;
-            }
+    if ( description.isQuantized && quantizer != nil ) {
+        for ( NSInteger i = 0; i < self.count; i++ ) {
+            ((uint8_t *)buffer)[i] = quantizer(((NSNumber*)self[i]).floatValue);
+        }
+    } else  if ( description.isQuantized && quantizer == nil ) {
+        for ( NSInteger i = 0; i < self.count; i++ ) {
+            ((uint8_t *)buffer)[i] = ((NSNumber*)self[i]).unsignedCharValue;
         }
     } else {
         for ( NSInteger i = 0; i < self.count; i++ ) {

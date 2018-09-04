@@ -65,37 +65,37 @@ TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDic
  * Parses the `quantization` key of an input description and returns an associated data quantizer
  */
 
-_Nullable TIODataQuantizer TIODataQuantizerForDict(NSDictionary *dict);
+_Nullable TIODataQuantizer TIODataQuantizerForDict(NSDictionary * _Nullable dict, NSError **error);
 
 /**
  * Parses the `dequantization` key of an output description and returns an associated data quantizer
  */
 
-_Nullable TIODataDequantizer TIODataDequantizerForDict(NSDictionary *dict);
+_Nullable TIODataDequantizer TIODataDequantizerForDict(NSDictionary * _Nullable dict, NSError **error);
 
 /**
  * Converts an array of shape values to an `TIOImageVolume`.
  */
 
-TIOImageVolume TIOImageVolumeForShape(NSArray<NSNumber*> *shape);
+TIOImageVolume TIOImageVolumeForShape(NSArray<NSNumber*> *_Nullable shape);
 
 /**
  * Converts a pixel format string such as `"RGB"` or `"BGR"` to a Core Video pixel format type.
  */
 
-OSType PixelFormatForString(NSString* formatString);
+OSType TIOPixelFormatForString(NSString * _Nullable formatString);
 
 /**
  * Returns the TIOPixelNormalizer given an input dictionary.
  */
 
-TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary *input, NSError **error);
+TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary * _Nullable input, NSError **error);
 
 /**
  * Returns the denormalizer for a given input dictionary
  */
 
-TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *input, NSError **error);
+TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary * _Nullable input, NSError **error);
 
 // MARK: - Pixel Format
 

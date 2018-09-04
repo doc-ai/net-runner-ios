@@ -1,7 +1,7 @@
 {
   "name": "TensorIO",
-  "version": "0.1.0",
-  "summary": "An Objective-C wrapper to TensorFlow Lite.",
+  "version": "0.2.1",
+  "summary": "An Objective-C wrapper for TensorFlow Lite.",
   "description": "Perform inference with TensorFlow Lite models using all the conveniences of Objective-C",
   "homepage": "https://github.com/doc.ai/TensorIO",
   "license": {
@@ -9,11 +9,11 @@
     "file": "LICENSE"
   },
   "authors": {
-    "philip@doc.ai": "philip@doc.ai"
+    "Philip Dow": "philip@doc.ai"
   },
   "source": {
     "git": "https://github.com/doc-ai/TensorIO.git",
-    "tag": "0.1.0"
+    "tag": "0.2.1"
   },
   "platforms": {
     "ios": "9.3"

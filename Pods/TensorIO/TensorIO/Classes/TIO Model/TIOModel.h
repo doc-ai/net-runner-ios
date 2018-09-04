@@ -57,6 +57,10 @@ NS_ASSUME_NONNULL_BEGIN
  * information about the JSON file which describes a model, see TIOModelBundleJSONSchema.h
  *
  * Note that, currently, only TensorFlow Lite (TFLite) models are supported.
+ *
+ * @warning
+ * Models are not thread safe. Models may be used on separate threads, so that you can perform
+ * inference off the main thread, but you should not use the same model from multiple threads.
  */
 
 @protocol TIOModel <NSObject>

@@ -22,20 +22,64 @@
 
 // MARK: - Quantization
 
+TIODataQuantizer TIODataQuantizerWithQuantization(const TIODataQuantization& quantization) {
+    const float scale = quantization.scale;
+    const float bias = quantization.bias;
+    
+    return ^uint8_t(const float_t &value) {
+        return (uint8_t)((value+bias) * scale);
+    };
+}
+
+TIODataQuantizer TIODataQuantizerZeroToOne() {
+    const float scale = 255.0;
+    
+    return ^uint8_t(const float_t &value) {
+        return (uint8_t)(value * scale);
+    };
+}
+
+TIODataQuantizer TIODataQuantizerNegativeOneToOne() {
+    const float scale = 255.0/2.0;
+    const float bias = 1;
+    
+    return ^uint8_t(const float_t &value) {
+        return (uint8_t)((value+bias) * scale);
+    };
+}
+
 _Nullable TIODataQuantizer TIODataQuantizerNone() {
     return nil;
 }
 
 // MARK: - Dequantization
 
-_Nullable TIODataDequantizer TIODataDequantizerNone() {
-    return nil;
+TIODataDequantizer TIODataDequantizerWithDequantization(const TIODataDequantization& dequantization) {
+    const float scale = dequantization.scale;
+    const float bias = dequantization.bias;
+    
+    return ^float_t(const uint8_t &value) {
+        return ((float_t)value * scale) + bias;
+    };
 }
 
 TIODataDequantizer TIODataDequantizerZeroToOne() {
     const float scale = 1.0/255.0;
     
-    return ^float_t (const uint8_t &value) {
+    return ^float_t(const uint8_t &value) {
         return ((float_t)value * scale);
     };
+}
+
+TIODataDequantizer TIODataDequantizerNegativeOneToOne() {
+    const float scale = 2.0/255.0;
+    const float bias = -1;
+    
+    return ^float_t(const uint8_t &value) {
+        return ((float_t)value * scale) + bias;
+    };
+}
+
+_Nullable TIODataDequantizer TIODataDequantizerNone() {
+    return nil;
 }

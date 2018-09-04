@@ -36,8 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 typedef struct TIOImageVolume {
-    int width;
     int height;
+    int width;
     int channels;
 } TIOImageVolume;
 

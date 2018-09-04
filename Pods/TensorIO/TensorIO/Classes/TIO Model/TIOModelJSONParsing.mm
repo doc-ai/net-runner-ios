@@ -27,11 +27,19 @@
 #import "TIOVectorLayerDescription.h"
 
 static NSError * const kTIOParserInvalidPixelNormalizationError = [NSError errorWithDomain:@"doc.ai.tensorio" code:201 userInfo:@{
-    NSLocalizedDescriptionKey: @"Unable to parse normalization field in description of input or output layer"
+    NSLocalizedDescriptionKey: @"Unable to parse normalize field in description of input or output layer"
 }];
 
 static NSError * const kTIOParserInvalidPixelDenormalizationError = [NSError errorWithDomain:@"doc.ai.tensorio" code:202 userInfo:@{
-    NSLocalizedDescriptionKey: @"Unable to parse the denormalization field in description of input or output layer"
+    NSLocalizedDescriptionKey: @"Unable to parse the denormalize field in description of input or output layer"
+}];
+
+static NSError * const kTIOParserInvalidQuantizerError = [NSError errorWithDomain:@"doc.ai.tensorio" code:203 userInfo:@{
+    NSLocalizedDescriptionKey: @"Unable to parse the quantize field in description of input or output layer"
+}];
+
+static NSError * const kTIOParserInvalidDequantizerError = [NSError errorWithDomain:@"doc.ai.tensorio" code:204 userInfo:@{
+    NSLocalizedDescriptionKey: @"Unable to parse the dequantize field in description of input or output layer"
 }];
 
 // MARK: -
@@ -60,12 +68,16 @@ TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictiona
     }
     
     // Quantization
-    // TODO: support quantization for inputs
     
     TIODataQuantizer quantizer;
     
     if ( isInput ) {
-        quantizer = TIODataQuantizerNone();
+        NSError *error;
+        quantizer = TIODataQuantizerForDict(dict[@"quantize"], &error);
+        if ( error != nil ) {
+            NSLog(@"Expected quantize.standard string to be '[0,1]' or '[-1,1]', or to find scale and bias values, found: %@", dict);
+            return nil;
+        }
     } else {
         quantizer = TIODataQuantizerNone();
     }
@@ -75,7 +87,12 @@ TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictiona
     TIODataDequantizer dequantizer;
     
     if ( isOutput ) {
-        dequantizer = TIODataDequantizerForDict(dict);
+        NSError *error;
+        dequantizer = TIODataDequantizerForDict(dict[@"dequantize"], &error);
+        if ( error != nil ) {
+            NSLog(@"Expected dequantize.standard string to be '[0,1]' or '[-1,1]', or to find scale and bias values, found: %@", dict);
+            return nil;
+        }
     } else {
         dequantizer = TIODataDequantizerNone();
     }
@@ -109,7 +126,7 @@ TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDic
     
     // Pixel Format
 
-    OSType pixelFormat = PixelFormatForString(dict[@"format"]);
+    OSType pixelFormat = TIOPixelFormatForString(dict[@"format"]);
 
     if ( pixelFormat == TIOPixelFormatTypeInvalid ) {
         NSLog(@"Expected dict.format string to be RGB or BGR in model.json, found %@", dict[@"format"]);
@@ -122,9 +139,9 @@ TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDic
     
     if ( isInput ) {
         NSError *error;
-        normalizer = TIOPixelNormalizerForDictionary(dict, &error);
+        normalizer = TIOPixelNormalizerForDictionary(dict[@"normalize"], &error);
         if ( error != nil ) {
-            NSLog(@"Expected dict.normalizer string to be '[0,1]' or '[-1,1]', or scale and bias values, found normalization: %@, scale: %@, bias: %@", dict[@"normalize"], dict[@"scale"], dict[@"bias"]);
+            NSLog(@"Expected normalize.standard string to be '[0,1]' or '[-1,1]', or to find scale and bias values, found: %@", dict[@"normalize"]);
             return nil;
         }
     } else {
@@ -137,9 +154,9 @@ TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDic
 
     if ( isOutput ) {
         NSError *error;
-        denormalizer = TIOPixelDenormalizerForDictionary(dict, &error);
+        denormalizer = TIOPixelDenormalizerForDictionary(dict[@"denormalize"], &error);
         if ( error != nil ) {
-            NSLog(@"Expected dict.denormalizer string to be '[0,1]' or '[-1,1]', or scale and bias values, found denormalization: %@, scale: %@, bias: %@", dict[@"normalize"], dict[@"scale"], dict[@"bias"]);
+            NSLog(@"Expected denormalize string to be '[0,1]' or '[-1,1]', or to find scale and bias values, found: %@", dict[@"normalize"]);
             return nil;
         }
     } else {
@@ -159,25 +176,69 @@ TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDic
     return interface;
 }
 
-_Nullable TIODataQuantizer TIODataQuantizerForDict(NSDictionary *dict) {
-    // TODO: support data quantization
-    return nil;
+_Nullable TIODataQuantizer TIODataQuantizerForDict(NSDictionary * _Nullable dict, NSError **error) {
+    if ( dict == nil ) {
+        return nil;
+    }
+    
+    NSString *standard = dict[@"standard"];
+    NSNumber *scale = dict[@"scale"];
+    NSNumber *bias = dict[@"bias"];
+    
+    if ( [standard isEqualToString:@"[0,1]"] ) {
+        return TIODataQuantizerZeroToOne();
+    }
+    else if ( [standard isEqualToString:@"[-1,1]"] ) {
+        return TIODataQuantizerNegativeOneToOne();
+    }
+    else if ( standard != nil ) {
+        *error = kTIOParserInvalidQuantizerError;
+        return nil;
+    }
+    else if ( scale != nil && bias != nil ) {
+        return TIODataQuantizerWithQuantization({
+            .scale = scale.floatValue,
+            .bias = bias.floatValue
+        });
+    }
+    else {
+        *error = kTIOParserInvalidQuantizerError;
+        return nil;
+    }
 }
 
-_Nullable TIODataDequantizer TIODataDequantizerForDict(NSDictionary *dict) {
-    NSString *standard = dict[@"dequantize"][@"standard"];
-    // TODO: support scale and bias
-    // NSNumber *scale = dict[@"dequantize"][@"scale"];
-    // NSNumber *bias = dict[@"dequantize"][@"bias"];
+_Nullable TIODataDequantizer TIODataDequantizerForDict(NSDictionary * _Nullable dict, NSError **error) {
+    if ( dict == nil ) {
+        return nil;
+    }
+    
+    NSString *standard = dict[@"standard"];
+    NSNumber *scale = dict[@"scale"];
+    NSNumber *bias = dict[@"bias"];
     
     if ( [standard isEqualToString:@"[0,1]"] ) {
         return TIODataDequantizerZeroToOne();
     }
-    
-    return nil;
+    else if ( [standard isEqualToString:@"[-1,1]"] ) {
+        return TIODataDequantizerNegativeOneToOne();
+    }
+    else if ( standard != nil ) {
+        *error = kTIOParserInvalidQuantizerError;
+        return nil;
+    }
+    else if ( scale != nil && bias != nil ) {
+        return TIODataDequantizerWithDequantization({
+            .scale = scale.floatValue,
+            .bias = bias.floatValue
+        });
+    }
+    else {
+        *error = kTIOParserInvalidQuantizerError;
+        return nil;
+    }
 }
 
-TIOImageVolume TIOImageVolumeForShape(NSArray<NSNumber*> *shape) {
+TIOImageVolume TIOImageVolumeForShape(NSArray<NSNumber*> * _Nullable shape) {
     
     if ( shape == nil ) {
         NSLog(@"Expected input.shape array field in model.json, none found");
@@ -190,13 +251,13 @@ TIOImageVolume TIOImageVolumeForShape(NSArray<NSNumber*> *shape) {
     }
 
     return {
-        .width = (int)shape[0].integerValue,
-        .height = (int)shape[1].integerValue,
+        .height = (int)shape[0].integerValue,
+        .width = (int)shape[1].integerValue,
         .channels = (int)shape[2].integerValue
     };
 }
 
-OSType PixelFormatForString(NSString* string) {
+OSType TIOPixelFormatForString(NSString * _Nullable string) {
     
     if ( string == nil ) {
         NSLog(@"Expected input.format string in model.json, none found");
@@ -214,10 +275,14 @@ OSType PixelFormatForString(NSString* string) {
     }
 }
 
-TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary *dict, NSError **error) {
-    NSString *normalizerString = dict[@"normalize"][@"standard"];
-    NSNumber *scaleNumber = dict[@"normalize"][@"scale"];
-    NSDictionary *biases = dict[@"normalize"][@"bias"];
+TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary * _Nullable dict, NSError **error) {
+    NSString *normalizerString = dict[@"standard"];
+    NSNumber *scaleNumber = dict[@"scale"];
+    NSDictionary *biases = dict[@"bias"];
+    
+    if ( dict == nil ) {
+        return TIOPixelNormalizerNone();
+    }
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {
@@ -264,10 +329,14 @@ TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary *dict,
     }
 }
 
-TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary *dict, NSError **error) {
-    NSString *normalizerString = dict[@"denormalize"][@"standard"];
-    NSNumber *scaleNumber = dict[@"denormalize"][@"scale"];
-    NSDictionary *biases = dict[@"denormalize"][@"bias"];
+TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary * _Nullable dict, NSError **error) {
+    NSString *normalizerString = dict[@"standard"];
+    NSNumber *scaleNumber = dict[@"scale"];
+    NSDictionary *biases = dict[@"bias"];
+    
+    if ( dict == nil ) {
+        return TIOPixelDenormalizerNone();
+    }
     
     if ( normalizerString != nil ) {
         if ( [normalizerString isEqualToString:@"[0,1]"] ) {

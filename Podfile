@@ -8,8 +8,7 @@ target 'Net Runner' do
 
   # Pods for Net Runner
 
-  # pod 'TensorFlowLite'
-  pod 'TensorIO', :git => 'git@github.com:doc-ai/TensorIO.git', :commit => 'de728f4d51852aeaa63c2832d78e6349a966bcb1'
+  pod 'TensorIO', :git => 'git@github.com:doc-ai/TensorIO.git'
 
   target 'Net RunnerTests' do
     inherit! :search_paths
