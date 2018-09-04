@@ -29,12 +29,10 @@
     
     TIODataDequantizer dequantizer = ((TIOVectorLayerDescription*)description).dequantizer;
     
-    if ( description.isQuantized ) {
-        if ( dequantizer != nil ) {
-            return [self initWithFloat:dequantizer(((uint8_t *)buffer)[0])];
-        } else {
-            return [self initWithChar:((uint8_t *)buffer)[0]];
-        }
+    if ( description.isQuantized && dequantizer != nil ) {
+        return [self initWithFloat:dequantizer(((uint8_t *)buffer)[0])];
+    } else if ( description.isQuantized && dequantizer == nil ) {
+        return [self initWithUnsignedChar:((uint8_t *)buffer)[0]];
     } else {
         return [self initWithFloat:((float_t *)buffer)[0]];
     }
@@ -45,12 +43,10 @@
     
     TIODataQuantizer quantizer = ((TIOVectorLayerDescription*)description).quantizer;
     
-    if ( description.isQuantized ) {
-        if ( quantizer != nil ) {
-            ((uint8_t *)buffer)[0] = quantizer(self.floatValue);
-        } else {
-            ((uint8_t *)buffer)[0] = self.charValue;
-        }
+    if ( description.isQuantized && quantizer != nil ) {
+        ((uint8_t *)buffer)[0] = quantizer(self.floatValue);
+    } else if ( description.isQuantized && quantizer == nil ) {
+        ((uint8_t *)buffer)[0] = self.unsignedCharValue;
     } else {
         ((float_t *)buffer)[0] = self.floatValue;
     }

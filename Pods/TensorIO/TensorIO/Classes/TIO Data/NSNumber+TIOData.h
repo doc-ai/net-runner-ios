@@ -34,6 +34,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Initializes an `NSNumber` with bytes from a tensor.
  *
+ * Bytes are copied according to the following rules, with information about quantization taken
+ * from the description:
+ *
+ * - If the layer is unquantized, the tensor's bytes are copied directly into a numeric object
+ *   (the bytes are implicitly interpreted as `float_t` values)
+ *
+ * - If the layer is quantized and no dequantizer block is provided, the tensor's bytes are copied
+ *   directly into a numeric object (the bytes are implicitly interpreted as `uint8_t` values)
+ *
+ * - If the layer is quantized and a dequantizer block is provided, the tensor's bytes are
+ *   interpreted as `uint8_t` values, passed to the dequantizer block, and the resulting `float_t`
+ *   bytes are copied into a numeric object
+ *
  * @param bytes The output buffer to read from.
  * @param length The length of the buffer.
  * @param description A description of the data this buffer produces.
@@ -45,6 +58,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Request to fill a tensor with bytes.
+ *
+ * Bytes are copied according to the following rules, with information about quantization taken
+ * from the description:
+ *
+ * - If the layer is unquantized, the number's `float_t` value is copied directly to the buffer
+ *
+ * - If the layer is quantized and no quantizer block is provided, the number's `uint8_t` value is
+ *   copied directly to the buffer
+ *
+ * - If the layer is quantized and a quantizer block is provided, the number's `float_t` vlaue
+ *   is passed to the quantizer block and the `uint8_t` value it returns is copied to the buffer
  *
  * @param buffer The input buffer to copy bytes to.
  * @param length The length of the input buffer.

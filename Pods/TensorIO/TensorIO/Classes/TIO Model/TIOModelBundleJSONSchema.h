@@ -39,7 +39,7 @@
         {
             "name":         String,
             "type":         String,             // "image" | "array"
-            "shape":        [Int, ...],         // [width, height, channels] for an image input
+            "shape":        [Int, ...],         // [height, width, channels] for an image input
             "quantize":     {                   // quantization for array inputs
                 "standard":     String,         // "[0,1]" | "[-1,1]"
                 "scale":        Float,

@@ -53,6 +53,32 @@ typedef struct TIODataQuantization {
 typedef uint8_t (^TIODataQuantizer)(const float_t &value);
 
 /**
+ * A quantizing function that applies the provide scale and bias according to the following forumla
+ *
+ * @code
+ * quantized_value = (value + bias) * scale
+ * @endcode
+ *
+ * @param quantization The scale and bias values
+ *
+ * @return TIODataQuantizer The quantizing function
+ */
+
+TIODataQuantizer TIODataQuantizerWithQuantization(const TIODataQuantization& quantization);
+
+/**
+ * A standard quantization function that converts values from a range of `[0,1]` to `[0,255]`
+ */
+
+TIODataQuantizer TIODataQuantizerZeroToOne();
+
+/**
+ * A standard quantization function that converts values from a range of `[-1,1]` to `[0,255]`
+ */
+
+TIODataQuantizer TIODataQuantizerNegativeOneToOne();
+
+/**
  * No quantization, i.e., `nil`.
  */
 
@@ -68,7 +94,7 @@ _Nullable TIODataQuantizer TIODataQuantizerNone();
  *
  * Data is dequantized according to the following equation:
  * @code
- * dequantized_value = value * scale + bias
+ * dequantized_value = (value + bias) * scale
  * @endcode
  */
 
@@ -89,17 +115,39 @@ typedef struct TIODataDequantization {
 typedef float_t (^TIODataDequantizer)(const uint8_t &value);
 
 /**
- * No dequantization, i.e., `nil`.
+ * A dequantizing function that applies the provide scale and bias according to the following forumla
+ *
+ * @code
+ * dequantized_value = (value * scale) + bias
+ * @endcode
+ *
+ * @param dequantization The scale and bias values
+ *
+ * @return TIODataQuantizer The quantizing function
  */
 
-_Nullable TIODataDequantizer TIODataDequantizerNone();
+TIODataDequantizer TIODataDequantizerWithDequantization(const TIODataDequantization& dequantization);
 
 /**
- * Dequantizes values from a range of `[0,255]` to `[0,1]`.
+ * A standard dequantizing function that converts values from a range of `[0,255]` to `[0,1]`.
  *
  * This is equivalent to applying a scaling factor of `1.0/255.0` and no bias.
  */
 
 TIODataDequantizer TIODataDequantizerZeroToOne();
+
+/**
+ * A standard dequantizing function that converts values from a range of `[0,255]` to `[-1,1]`.
+ *
+ * This is equivalent to applying a scaling factor of `2.0/255.0` and a bias of `-1`.
+ */
+
+TIODataDequantizer TIODataDequantizerNegativeOneToOne();
+
+/**
+ * No dequantization, i.e., `nil`.
+ */
+
+_Nullable TIODataDequantizer TIODataDequantizerNone();
 
 NS_ASSUME_NONNULL_END
