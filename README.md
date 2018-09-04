@@ -83,16 +83,16 @@ A frozen graph is one in which trainable variables have into transformed and "fr
 <a name="toco-convert"></a>
 ### Converting a Model to TensorFlow Lite (TF Lite)
 
-Once you have frozen your model convert, it to the TensorFlow Lite format using the `toco` command line utility, also included with python installations of TensorFlow. 
+Once you have frozen your model convert it to the TensorFlow Lite format using the `toco` command line utility, also included with python installations of TensorFlow. 
 
-TensorFlow Lite is a TensorFlow environment for mobile and embedded use cases and is how models are run on iPhone and Android devices. TensorFlow Lite models do not support all operations, but most convolution operations are available, and if you are beginning with a MobileNet or Inception ResNet model you should be fine.
+TensorFlow Lite is a TensorFlow environment for mobile and embedded use cases and is how models are run on iPhone and Android devices. TensorFlow Lite models do not support all tensor operations, but most convolution operations are available, and if you are beginning with a MobileNet or Inception ResNet model you should be fine.
 
 <a name="prep-net-runner"></a>
 ### Preparing a TF Lite Model for Net Runner
 
 At this stage you could use your model with the TensorFlow Lite library directly, but that would involve programming in Objective-C++ for an iPhone and Java and C++ on Android. Instead, Net Runner uses [TensorIO](https://github.com/doc-ai/TensorIO), a framework also developed by doc.ai for the rapid deployment of TensorFlow Lite models to iOS devices.
 
-With TensorIO you describe your model's input and output layers using JSON, and Net Runner will automatically prepare camera and image data for inference and capture your model's output in the correct format.
+With TensorIO you describe your model's input and output layers using JSON. Net Runner can then automatically prepare camera and image data for inference and capture your model's output in the correct format.
 
 Refer to the included *.tfbundle* folders in the *models* directory found in this repo for examples, and see especially the [section on TensorIO](#tensor-io) below for details on preparing your TF Lite models for Net Runner.
 
