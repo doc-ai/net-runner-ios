@@ -1,5 +1,7 @@
 # Net Runner
 
+[![Build Status](https://travis-ci.org/doc-ai/net-runner-ios.svg?branch=master)](https://travis-ci.org/doc-ai/net-runner-ios)
+
 Net Runner is an iOS environment for running, measuring, and evaluating computer vision machine learning models on device. Net Runner currently supports TensorFlow Lite models and works on iOS 9.3 or higher. We've tested our models on devices as old as a 5th generation iPod touch. 
 
 Data scientists can run their own models in Net Runner without needing to know any iPhone specific code, while developers will find a sophisticated and flexible library underneath the hood in the form of [TensorIO](https://github.com/doc-ai/TensorIO).
