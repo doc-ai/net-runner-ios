@@ -110,7 +110,7 @@ If you would like to contribute to TensorIO, the underlying framework that allow
 <a name="basic-usage"></a>
 ## Basic Usage
 
-Net Runner ships with four MobileNet models for image classification. The application launches with a MobileNet V2 model selected and the back facing camera feeding image data into it. The model can classify 1000 objects, and Net Runner shows the top five classifications with a probability over 0.1.
+Net Runner ships with four MobileNet models for image classification. The application launches with a MobileNet V2 model and the back facing camera feeding image data into it. The model can classify 1000 objects, and Net Runner shows the top five classifications with a probability over 0.1.
 
 Net Runner measures the model's latency and continuously outputs an average value. On an iPhone X the average latency of the MobileNet V2 model should be ~40ms.
 
@@ -207,7 +207,7 @@ For example, the included MobileNet V2 model has the following directory structu
     - labels.txt
 ```
 
-If your model expects a single input layer of image data, Net Runner will know how to interface with it without your needing to write any code. If you have a single output layer, you can probably get by with copying the *model.json* file from one of the included models and making small changes to it. Net Runner will then display your model's output at the bottom of the screen.
+If your model expects a single input layer of image data, Net Runner will know how to use it without any additional code. If you have a single output layer, you can probably get by with copying the *model.json* file from one of the included models and making small changes to it. Net Runner will then display your model's output at the bottom of the screen.
 
 For more information on how to describe your model in the *model.json* file, and for additional details on packaging your models in a *.tfbundle* folder, refer to the [TensorIO documentation](https://github.com/doc-ai/TensorIO#model-json).
 
@@ -216,7 +216,7 @@ For more information on how to describe your model in the *model.json* file, and
 
 By default Net Runner outputs a property list representation of your model's output in the info section at the bottom of the screen. If you would prefer to format this output, create a class that conforms to the `ModelOutput` protocol and implement, specifically, the `localizedDescription` method.
 
-You can then register your class with the `ModelOutputManager`. The manager uses the *model.type* field in the model's JSON description, so that you can register a single output class for multiple kinds of models.
+You can then register your class with the `ModelOutputManager`. The manager uses the *model.type* field in the model's JSON description, so that you can register a single output class for multiple models.
 
 ```objc
 + (NSDictionary<NSString*,Class>*)classes {
@@ -232,21 +232,21 @@ You can then register your class with the `ModelOutputManager`. The manager uses
 <a name="bulk-inference"></a>
 ## Bulk Inference
 
-Net Runner supports the bulk inference of models on photo albums located on the device. Select *Settings* and tap *Evalute Models* under *Testing*. Follow the on screen instructions to select the models and albums you would like to perform inference with. You may then view the results in bulk and individually, which is pretty nice.
+Net Runner can perform bulk inference on the device's photo albums. Select *Settings* and tap *Evalute Models* under *Testing*. Follow the on screen instructions to select the models and albums you would like to perform inference with. You may then view the results in bulk and individually, which is nice way to develop a sense for how well your models are performing.
 
 <img src="readme-images/bulk-inference.jpg" width="240">
 
 <a name="headless-mode"></a>
 ## Headless Mode
 
-Headless mode enables the automatic evaluation of models on images that are included with the application. To use headless mode, switch the Build Scheme to *Net Runner Headless* at the top left of the Xcode window and add your custom test bundles to the *headless* directory included in the repository. 
+For a more rigorous assessment of your model's performance, headless mode supports the automatic evaluation of models on images that are included with the application. To use headless mode, switch the Build Scheme to *Net Runner Headless* at the top left of the Xcode window and add your custom test bundles to the *headless* directory included in the repository. 
 
 <a name="evaluation-metric"></a>
 ### Evaluation Metric
 
 You may also need to implement a custom evaluation metric that conforms to the `EvaluationMetric` protocol. See the *Evaluation Metrics* group in Xcode for more information. Specifically, an `EvaluationMetric` knows how to evaluate the results of a single inference and then aggregate and reduce those results to a single value, typically an average. When you create an evaluation metric you will implement two methods, `evaluate:yhat:` and `reduce:` that do just that.
 
-See below for a description of how the included `EvaluationMetricAccuracyTop5` assess a model's accuracy.
+See below for a description of how the included `EvaluationMetricAccuracyTop5` assess an image classification model's accuracy.
 
 <a name="headless-directory"></a>
 ### The Headless Directory
@@ -254,7 +254,7 @@ See below for a description of how the included `EvaluationMetricAccuracyTop5` a
 Net Runner looks for *.testbundle* folders in the *headless* directory when performing headless evaluation. To add your own headless evaluation, create a *.testbundle* folder in this directory. There is no need to add this folder to Xcode, as the folder reference will automatically pick it up. The folder should have the following directory structure:
 
 ```
-- my-evaluation.testbundle
+- myevaluation.testbundle
   - test.json
   - images
     - 01.jpg
@@ -265,7 +265,7 @@ Net Runner looks for *.testbundle* folders in the *headless* directory when perf
 <a name="test-json"></a>
 ### The JSON Test File
 
-Inside your *.testbundle* you must have a *test.json* file as well as an images directory that contains the jpg files you will be performing inference on. The *test.json* file has the following basic structure. All fields are required.
+Inside your *.testbundle* you must have a *test.json* file as well as an images directory that contains the image files you will be performing inference on. The *test.json* file has the following basic structure. All fields are required.
 
 ```json
 {
@@ -294,7 +294,7 @@ The *name*, *id*, and *version* field are specific to your use case and may be a
 
 *models*
 
-The *models* field is an array of string values corresponding to the *id* values of the models you would like to perform inference on. Recall that the *model.json* description of a model in a *.tfbundle* folder contains an *id* entry. The entries here correspond to those values. You may perform headless evaluation on many models simultaneously, which is useful for comparing the performance of related models.
+The *models* field is an array of string values corresponding to the *id* values of the models you would like to perform inference with. Recall that the *model.json* description of a model in a *.tfbundle* folder contains an *id* entry. The entries here correspond to those values. You may perform headless evaluation on many models simultaneously, which is useful for comparing the performance of related models.
 
 *options*
 
@@ -302,7 +302,7 @@ The options field supports two entries, *iterations* and *metric*.
 
 *iterations* describes how many times a model should perform inference on each entry, with the latency results averaged over those iterations. 
 
-*metric* is a string value equal to the Objective-C class name of the evaluation metric you would like to use. `EvaluationMetricAccuracyTop5` is already implemented for you. See the *EvaluationMetric* group in Xcode and the *EvaluationMetric* protocol for examples and more information. It will be up to you to design evaluation metrics that work with the outputs your models produce.
+*metric* is a string value equal to the Objective-C class name of the evaluation metric you would like to use. `EvaluationMetricAccuracyTop5` is already implemented. See the *EvaluationMetric* group in Xcode and the `EvaluationMetric` protocol for examples and more information. It will be up to you to design evaluation metrics that work with the outputs your models produce.
 
 *images*
 
@@ -358,7 +358,7 @@ In the included headless examples, we know that the output of the classification
 }
 ```
 
-We also know that the model outputs these values under the *classification* entry in a dictionary. (We know that because the *model.json* file names the first output *classification* in its *outputs* field, and TensorIO packs a model's outputs into a dictionary representation keyed to these names. See [TensorIO](https://github.com/doc-ai/TensorIO#outputs-field) for more information about model outputs.)
+We also know that the model outputs these values under the *classification* entry in a dictionary. (We know that because the first entry in the *outputs* field in the model's *model.json* file has the name *classification*, and TensorIO packs a model's outputs into a dictionary representation keyed to these names. See [TensorIO](https://github.com/doc-ai/TensorIO#outputs-field) for more information about model outputs.)
 
 Consequently, the entire *labels* entry for the included examples has the following value:
 
@@ -395,7 +395,7 @@ When Net Runner performs headless evaluation, it takes the output produced by th
 
 For example, the included `EvaluationMetricAccuracyTop5` might take the following expected inference and actual inference:
 
-Expected Inference (yhat)
+Expected Inference (y)
 
 ```json
 "classification": {
