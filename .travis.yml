@@ -1,0 +1,16 @@
+# references:
+# * https://www.objc.io/issues/6-build-tools/travis-ci/
+# * https://github.com/supermarin/xcpretty#usage
+
+os: osx
+osx_image: xcode10
+language: objective-c
+
+cache: cocoapods
+
+before_install:
+- gem install cocoapods # Since Travis is not always on latest version
+- pod install
+
+script:
+- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace 'Net Runner.xcworkspace' -scheme 'Net Runner' -sdk iphonesimulator12.0 ONLY_ACTIVE_ARCH=NO | xcpretty
