@@ -34,10 +34,24 @@
     
     assert( sizeof(float_t) == 4 );
     
-    // Load model bundles
-    
-    NSString *modelsPath = [[NSBundle mainBundle] pathForResource:@"models" ofType:nil];
+    // Move model bundles into Documents/ directory and then load them
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *initialModelsPath = [[NSBundle mainBundle] pathForResource:@"models" ofType:nil];
+    NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory inDomains: NSUserDomainMask][0];
+    NSString *documentDirectoryPath = [documentDirectoryURL path];
+    NSString *modelsPath = [documentDirectoryPath stringByAppendingPathComponent:@"models"];
+    BOOL checkDirectory = true;
     NSError *error;
+    
+    if ([fileManager fileExistsAtPath:modelsPath isDirectory:&checkDirectory]) {
+        NSLog(@"Models directory already exists: %@", modelsPath);
+    } else {
+        NSLog(@"Copying initial models directory from: %@ to: %@", initialModelsPath, modelsPath);
+        BOOL copySuccess = [fileManager copyItemAtPath:initialModelsPath toPath:modelsPath error:&error];
+        if (!copySuccess) {
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }
     
     if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error] ) {
         NSLog(@"Unable to load model bundles at path %@", modelsPath);
