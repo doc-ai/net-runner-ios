@@ -61,6 +61,7 @@
     NSError *error;
     
     if (![fileManager fileExistsAtPath:modelsPath]) {
+        NSLog(@"Loading packaged models into modelsPath: %@", modelsPath);
         BOOL copySuccess = [fileManager copyItemAtPath:[self initialModelsPath] toPath:modelsPath error:&error];
         if (!copySuccess) {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
