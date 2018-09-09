@@ -17,12 +17,7 @@
 			"shape": [224,224,3],
 			"format": "RGB",
 			"normalize": {
-				"scale": 0.0078,
-				"bias": {
-					"r": -1,
-					"g": -1,
-					"b": -1
-				}
+				"standard": "[-1,1]"
 			}
 		},
 	],
