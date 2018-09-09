@@ -28,29 +28,45 @@
 
 @implementation AppDelegate
 
+/*!
+ @abstract Returns path to the directory of models presented to Net Runner at build time
+ @discussion The models at this path are copied over to the modelsPath and loaded from there
+ when the application is run. Apart from the first time that Net Runner is launched, the
+ models in this directory are not used.
+ */
+- (NSString*) initialModelsPath {
+    return [[NSBundle mainBundle] pathForResource:@"models" ofType:nil];
+}
+
+/*!
+ @abstract Returns path to the directory from which Net Runner loads models at run time
+ @discussion Net Runner only loads models from this directory when it is launched.
+ */
+- (NSString*) modelsPath {
+    NSURL *documentDirectoryURL = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains: NSUserDomainMask][0];
+    NSString *documentDirectoryPath = [documentDirectoryURL path];
+    NSString *modelsPath = [documentDirectoryPath stringByAppendingPathComponent:@"models"];
+    return modelsPath;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
     assert( sizeof(float_t) == 4 );
     
-    // Move model bundles into Documents/ directory and then load them
+    // Move model bundles into Documents/models/ directory and then load them
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *initialModelsPath = [[NSBundle mainBundle] pathForResource:@"models" ofType:nil];
-    NSURL *documentDirectoryURL = [fileManager URLsForDirectory:NSDocumentDirectory inDomains: NSUserDomainMask][0];
-    NSString *documentDirectoryPath = [documentDirectoryURL path];
-    NSString *modelsPath = [documentDirectoryPath stringByAppendingPathComponent:@"models"];
-    BOOL checkDirectory = true;
+    NSString *modelsPath = [self modelsPath];
     NSError *error;
     
-    if ([fileManager fileExistsAtPath:modelsPath isDirectory:&checkDirectory]) {
-        NSLog(@"Models directory already exists: %@", modelsPath);
-    } else {
-        NSLog(@"Copying initial models directory from: %@ to: %@", initialModelsPath, modelsPath);
-        BOOL copySuccess = [fileManager copyItemAtPath:initialModelsPath toPath:modelsPath error:&error];
+    if (![fileManager fileExistsAtPath:modelsPath]) {
+        BOOL copySuccess = [fileManager copyItemAtPath:[self initialModelsPath] toPath:modelsPath error:&error];
         if (!copySuccess) {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
+    } else {
+        NSLog(@"File/directory already exists at modelsPath: %@", modelsPath);
     }
     
     if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error] ) {
