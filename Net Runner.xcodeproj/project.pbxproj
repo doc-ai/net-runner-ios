@@ -981,7 +981,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ai.doc.netrunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1001,7 +1001,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ai.doc.netrunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1163,7 +1163,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ai.doc.netrunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Debug Headless";
 		};
@@ -1280,7 +1280,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ai.doc.netrunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Release Headless";
 		};
