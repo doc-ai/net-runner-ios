@@ -11,6 +11,7 @@
 		61B7A53C2780E40C45354934 /* Pods_Net_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3AA305EE73B4923B6F1C4EB /* Pods_Net_RunnerTests.framework */; };
 		74A591FB1BE0B2B72FE3DB4F /* Pods_Net_RunnerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC62BB37B1C41A365AC7E83 /* Pods_Net_RunnerUITests.framework */; };
 		E31C799D212E0E8300139C90 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E31C799C212E0E8300139C90 /* LICENSE */; };
+		E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.m */; };
 		E33229D7212607680031435F /* ModelOutputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229D6212607680031435F /* ModelOutputManager.m */; };
 		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
 		E3458A88210A55A80040648C /* EvaluateModelTableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */; };
@@ -105,6 +106,8 @@
 		C9CD66883F2E8B93B1287CD2 /* Pods_Net_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Net_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29295E0BC8B7CF9671D6C86 /* Pods-Net RunnerUITests.debug headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerUITests.debug headless.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.debug headless.xcconfig"; sourceTree = "<group>"; };
 		E31C799C212E0E8300139C90 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E32FB5DA2149BA0A00367B11 /* AddModelTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddModelTableViewController.h; sourceTree = "<group>"; };
+		E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddModelTableViewController.m; sourceTree = "<group>"; };
 		E33229D5212607680031435F /* ModelOutputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutputManager.h; sourceTree = "<group>"; };
 		E33229D6212607680031435F /* ModelOutputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOutputManager.m; sourceTree = "<group>"; };
 		E33229DA21260C880031435F /* DefaultModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultModelOutput.h; sourceTree = "<group>"; };
@@ -543,10 +546,12 @@
 				E3F6C69E210A56FC00D200D8 /* Settings.storyboard */,
 				E3F6C69F210A56FC00D200D8 /* SettingsTableViewController.h */,
 				E3F6C69B210A56FB00D200D8 /* SettingsTableViewController.mm */,
-				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
-				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */,
 				E3F6C6A1210A56FC00D200D8 /* ModelsTableViewController.h */,
 				E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */,
+				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
+				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */,
+				E32FB5DA2149BA0A00367B11 /* AddModelTableViewController.h */,
+				E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -769,6 +774,7 @@
 				E3458A9B210A56460040648C /* EvaluateResultsTableViewController.mm in Sources */,
 				E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.mm in Sources */,
 				E3B57E7D210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.mm in Sources */,
+				E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.m in Sources */,
 				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
 				E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */,
