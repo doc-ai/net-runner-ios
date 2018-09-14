@@ -20,6 +20,8 @@
 
 #import "AppDelegate.h"
 
+#import "UserDefaults.h"
+
 @import TensorIO;
 
 @interface AppDelegate ()
@@ -60,6 +62,18 @@
     NSString *modelsPath = [self modelsPath];
     NSError *error;
     
+    // For Build 7, in case user installed previous models with build 6, clean the models directory
+    
+    if ( [fileManager fileExistsAtPath:modelsPath] && ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsBuild7CleanedModelsDir] ) {
+        NSError *removeError;
+        if ( ![fileManager removeItemAtPath:modelsPath error:&removeError] ) {
+            NSLog(@"Error deleting file at path %@, error %@", modelsPath, removeError);
+        }
+        [NSUserDefaults.standardUserDefaults setBool:YES forKey:kPrefsBuild7CleanedModelsDir];
+    }
+    
+    // Copy models from app bundle to documents irectory
+    
     if (![fileManager fileExistsAtPath:modelsPath]) {
         NSLog(@"Loading packaged models into modelsPath: %@", modelsPath);
         BOOL copySuccess = [fileManager copyItemAtPath:[self initialModelsPath] toPath:modelsPath error:&error];
@@ -77,6 +91,15 @@
     // Register Defaults
     
     [NSUserDefaults.standardUserDefaults registerDefaults:[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]]];
+    
+    // Ensure that the select model is available, and if it is not, default to an included mobilenet model
+    
+    NSString *modelId = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
+    TIOModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:modelId];
+    
+    if ( bundle == nil ) {
+        [NSUserDefaults.standardUserDefaults setObject:kPresDefaultModelID forKey:kPrefsSelectedModelID];
+    }
     
     // Kick off application
     
