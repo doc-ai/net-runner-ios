@@ -243,7 +243,9 @@ typedef enum : NSUInteger {
 // MARK: - Capture Mode
 
 - (IBAction)selectInputSource:(id)sender {
-    [self setInfoHidden:YES];
+    if ( UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad ) {
+        [self setInfoHidden:YES];
+    }
     
 #if !(TARGET_OS_SIMULATOR)
     if ([self.session isRunning]) {
@@ -265,6 +267,9 @@ typedef enum : NSUInteger {
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [self didCancelInputSourcePicker];
     }];
+    
+    photoSourcePicker.popoverPresentationController.barButtonItem = (UIBarButtonItem*)sender;
+    photoSourcePicker.popoverPresentationController.sourceView = self.view;
     
 #if !(TARGET_OS_SIMULATOR)
     [photoSourcePicker addAction:takePicture];
@@ -634,7 +639,7 @@ typedef enum : NSUInteger {
     [self presentViewController:picker animated:YES completion:nil];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString*,id> *)info {
     [picker dismissViewControllerAnimated:YES completion:nil];
     
     [self setCaptureMode:CaptureModePhoto];
