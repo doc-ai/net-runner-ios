@@ -8,6 +8,8 @@ Data scientists can run their own models in Net Runner without needing to know a
 
 We happen to think it looks pretty good too. And if that latency number worries you, it's because this is a screenshot from the simulator. On an iPhone X, MobileNet V2 classification models perform inference in an impressive 40ms.
 
+[Download Net Runner on the iOS App Store.](https://itunes.apple.com/us/app/net-runner-by-doc-ai/id1435828634?ls=1&mt=8)
+
 <img src="readme-images/net-runner-screenshot.jpg" width="240">
 
 ## Table of Contents
