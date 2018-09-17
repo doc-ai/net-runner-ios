@@ -64,12 +64,14 @@
     
     // For Build 7, in case user installed previous models with build 6, clean the models directory
     
-    if ( [fileManager fileExistsAtPath:modelsPath] && ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsBuild7CleanedModelsDir] ) {
-        NSError *removeError;
-        if ( ![fileManager removeItemAtPath:modelsPath error:&removeError] ) {
-            NSLog(@"Error deleting file at path %@, error %@", modelsPath, removeError);
-        }
+    if ( ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsBuild7CleanedModelsDir] ) {
         [NSUserDefaults.standardUserDefaults setBool:YES forKey:kPrefsBuild7CleanedModelsDir];
+        if ( [fileManager fileExistsAtPath:modelsPath] ) {
+            NSError *removeError;
+            if ( ![fileManager removeItemAtPath:modelsPath error:&removeError] ) {
+                NSLog(@"Error deleting file at path %@, error %@", modelsPath, removeError);
+            }
+        }
     }
     
     // Copy models from app bundle to documents irectory
