@@ -64,7 +64,7 @@
 		E3F6C6A3210A56FC00D200D8 /* ModelsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */; };
 		E3F6C6A4210A56FC00D200D8 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C69E210A56FC00D200D8 /* Settings.storyboard */; };
 		E3F6C6A5210A56FC00D200D8 /* ModelDetailsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */; };
-		E3F6C6AB210A578100D200D8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6A8210A578100D200D8 /* Launch Screen.storyboard */; };
+		E3F6C6AB210A578100D200D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */; };
 		E3F6C6AE210A57F200D200D8 /* ResultInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6AD210A57F200D200D8 /* ResultInfoView.m */; };
 		E3F6C6B1210A5B8D00D200D8 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */; };
 		E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6B2210A661200D200D8 /* Headless.storyboard */; };
@@ -206,7 +206,7 @@
 		E3F6C69F210A56FC00D200D8 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
 		E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelDetailsTableViewController.mm; sourceTree = "<group>"; };
 		E3F6C6A1210A56FC00D200D8 /* ModelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelsTableViewController.h; sourceTree = "<group>"; };
-		E3F6C6A8210A578100D200D8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3F6C6AC210A57F200D200D8 /* ResultInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultInfoView.h; sourceTree = "<group>"; };
 		E3F6C6AD210A57F200D200D8 /* ResultInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultInfoView.m; sourceTree = "<group>"; };
 		E3F6C6AF210A5B8D00D200D8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -404,7 +404,7 @@
 		E3A520DF210A49A0004B912B /* Net Runner */ = {
 			isa = PBXGroup;
 			children = (
-				E3F6C6A8210A578100D200D8 /* Launch Screen.storyboard */,
+				E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */,
 				E3F6C6B2210A661200D200D8 /* Headless.storyboard */,
 				E3F6C6B4210A661300D200D8 /* Main.storyboard */,
 				E3A520E9210A49A1004B912B /* Assets.xcassets */,
@@ -662,7 +662,7 @@
 				E3F6C6A4210A56FC00D200D8 /* Settings.storyboard in Resources */,
 				E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */,
 				E31C799D212E0E8300139C90 /* LICENSE in Resources */,
-				E3F6C6AB210A578100D200D8 /* Launch Screen.storyboard in Resources */,
+				E3F6C6AB210A578100D200D8 /* LaunchScreen.storyboard in Resources */,
 				E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */,
 				E3F6C6B7210A661300D200D8 /* Main.storyboard in Resources */,
 				E3F6C68B210A56DD00D200D8 /* UserDefaults.plist in Resources */,
@@ -981,7 +981,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ai.doc.netrunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1001,7 +1001,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ai.doc.netrunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1163,7 +1163,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ai.doc.netrunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Debug Headless";
 		};
@@ -1280,7 +1280,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ai.doc.netrunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Release Headless";
 		};
