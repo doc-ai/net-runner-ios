@@ -9,6 +9,7 @@ target 'Net Runner' do
   # Pods for Net Runner
 
   pod 'TensorIO'
+  pod 'SSZipArchive'
 
   target 'Net RunnerTests' do
     inherit! :search_paths
