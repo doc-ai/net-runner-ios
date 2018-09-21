@@ -11,7 +11,7 @@
 		61B7A53C2780E40C45354934 /* Pods_Net_RunnerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3AA305EE73B4923B6F1C4EB /* Pods_Net_RunnerTests.framework */; };
 		74A591FB1BE0B2B72FE3DB4F /* Pods_Net_RunnerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC62BB37B1C41A365AC7E83 /* Pods_Net_RunnerUITests.framework */; };
 		E31C799D212E0E8300139C90 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E31C799C212E0E8300139C90 /* LICENSE */; };
-		E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.m */; };
+		E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.mm */; };
 		E33229D7212607680031435F /* ModelOutputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229D6212607680031435F /* ModelOutputManager.m */; };
 		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
 		E3458A88210A55A80040648C /* EvaluateModelTableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */; };
@@ -107,7 +107,7 @@
 		E29295E0BC8B7CF9671D6C86 /* Pods-Net RunnerUITests.debug headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerUITests.debug headless.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.debug headless.xcconfig"; sourceTree = "<group>"; };
 		E31C799C212E0E8300139C90 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		E32FB5DA2149BA0A00367B11 /* AddModelTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddModelTableViewController.h; sourceTree = "<group>"; };
-		E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddModelTableViewController.m; sourceTree = "<group>"; };
+		E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AddModelTableViewController.mm; sourceTree = "<group>"; };
 		E33229D5212607680031435F /* ModelOutputManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutputManager.h; sourceTree = "<group>"; };
 		E33229D6212607680031435F /* ModelOutputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOutputManager.m; sourceTree = "<group>"; };
 		E33229DA21260C880031435F /* DefaultModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultModelOutput.h; sourceTree = "<group>"; };
@@ -135,6 +135,7 @@
 		E3851386210D0A3100F600C5 /* ModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutput.h; sourceTree = "<group>"; };
 		E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageNetClassificationModelOutput.h; sourceTree = "<group>"; };
 		E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageNetClassificationModelOutput.mm; sourceTree = "<group>"; };
+		E392F88421556D7000116078 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		E3A520DD210A49A0004B912B /* Net Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Net Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A520E0210A49A0004B912B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E3A520E1210A49A0004B912B /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -276,6 +277,7 @@
 		C58BDA35C2002CED0C8D954F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E392F88421556D7000116078 /* libz.tbd */,
 				E3A52132210A51A8004B912B /* CoreMedia.framework */,
 				E3A52130210A51A3004B912B /* Accelerate.framework */,
 				E3A5212E210A519D004B912B /* VideoToolbox.framework */,
@@ -551,7 +553,7 @@
 				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
 				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */,
 				E32FB5DA2149BA0A00367B11 /* AddModelTableViewController.h */,
-				E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.m */,
+				E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.mm */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -567,6 +569,7 @@
 				E3A520D9210A49A0004B912B /* Sources */,
 				E3A520DA210A49A0004B912B /* Frameworks */,
 				E3A520DB210A49A0004B912B /* Resources */,
+				903C8A821C568A9C0EF948DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -710,6 +713,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		903C8A821C568A9C0EF948DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Net Runner/Pods-Net Runner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Net Runner/Pods-Net Runner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C74F13DAE66D8B96FFA9470C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -774,7 +799,7 @@
 				E3458A9B210A56460040648C /* EvaluateResultsTableViewController.mm in Sources */,
 				E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.mm in Sources */,
 				E3B57E7D210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.mm in Sources */,
-				E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.m in Sources */,
+				E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.mm in Sources */,
 				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
 				E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */,
