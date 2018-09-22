@@ -8,10 +8,14 @@
 
 #import "AddModelTableViewController.h"
 
+#import "ModelImporter.h"
+
 #import <SSZipArchive/SSZipArchive.h>
 @import TensorIO;
 
-@interface AddModelTableViewController () <NSURLSessionDownloadDelegate>
+@interface AddModelTableViewController () <ModelImporterDelegate>
+
+@property ModelImporter *importer;
 
 @end
 
@@ -23,6 +27,12 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAddModel:)];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    self.downloadLabel.hidden = YES;
+    self.downloadProgressView.hidden = YES;
+    self.validatedLabel.hidden = YES;
+    self.savedLabel.hidden = YES;
+    self.completedLabel.hidden = YES;
 }
 
 // MARK: - Table View Delegate
@@ -51,97 +61,112 @@
 
 - (IBAction)importModel:(id)sender {
     
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSURL *URL = [NSURL URLWithString:@"http://localhost:8000/my-model.tfbundle.zip"];
-    NSURLSessionDownloadTask *task = [session downloadTaskWithURL:URL];
+    if ( self.URLField.text.length == 0 ) {
+        NSLog(@"Enter a URL");
+        return;
+    }
     
-    [task resume];
+    NSURL *URL = [NSURL URLWithString:self.URLField.text]; // @"http://localhost:8000/my-model.tfbundle.zip"
+    
+    if ( URL == nil ) {
+        NSLog(@"Invalid URL");
+        return;
+    }
+    
+    if ( self.importer != nil ) {
+        [self.importer cancel];
+        self.importer = nil;
+    }
+    
+    self.importer = [[ModelImporter alloc] initWithURL:URL delegate:self destinationDirectory:[NSURL fileURLWithPath:[self modelsPath]]];
+    
+    [self.importer download];
 }
 
-- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
+// MARK: - Model Importer Delegate
+
+- (void)modelImporterDownloadDidBegin:(ModelImporter*)importer {
+    NSLog(@"Importer Did Begin Download");
     
-    NSLog(@"Location: %@", location);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.downloadProgressView.hidden = NO;
+        self.downloadProgressView.progress = 0;
+        self.downloadLabel.hidden = NO;
+    });
+}
+
+- (void)modelImporter:(ModelImporter*)importer downloadDidProgress:(float)progress {
+    NSLog(@"Importer Did Progress");
     
-    NSURL *unzipDestination = [[location URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"unzipped"];
-    NSURL *zipDestination = [[location URLByDeletingPathExtension] URLByAppendingPathExtension:@"zip"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.downloadProgressView setProgress:progress animated:YES];
+    });
+}
+
+- (void)modelImporter:(ModelImporter*)importer downloadDidFail:(NSError*)error {
+    NSLog(@"Importer Download Failed: %@", error);
     
-    NSFileManager *fm = [NSFileManager defaultManager];
+    dispatch_async(dispatch_get_main_queue(), ^{
+    
+        UIAlertController *alert = [UIAlertController
+            alertControllerWithTitle:NSLocalizedString(@"Problem Importing Model", @"Import model error alert title")
+            message:NSLocalizedString(@"...", @"Iport model error alert message")
+            preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction
+            actionWithTitle:NSLocalizedString(@"Dismiss", @"Alert dismiss action")
+            style:UIAlertActionStyleDefault
+            handler:nil]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    
+    });
+}
+
+- (void)modelImporterDownloadDidFinish:(ModelImporter*)importer {
+    NSLog(@"Importer Did Finish Download");
+    
+}
+
+- (void)modelImporterDidValidate:(ModelImporter*)importer {
+    NSLog(@"Importer Did Validate");
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.validatedLabel.hidden = NO;
+    });
+}
+
+- (void)modelImporterDidCompleteImport:(ModelImporter*)importer {
+    NSLog(@"Importer Did Complete Import");
+    self.importer = nil;
+    
+    // Reload the model bundles
+    
     NSError *error;
     
-    if ( [fm fileExistsAtPath:zipDestination.path] && ![fm removeItemAtURL:zipDestination error:&error] ) {
-        NSLog(@"FM Error: %@", error);
+    if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:[self modelsPath] error:&error] ) {
+        NSLog(@"Unable to load model bundles at path %@", [self modelsPath]);
         return;
     }
     
-    if ( [fm fileExistsAtPath:unzipDestination.path] && ![fm removeItemAtURL:unzipDestination error:&error] ) {
-        NSLog(@"FM Error: %@", error);
-        return;
-    }
+    // Refresh the model delegate
     
-    if ( ![fm moveItemAtURL:location toURL:zipDestination error:&error] ) {
-        NSLog(@"FM Error: %@", error);
-        return;
-    }
-    
-    [SSZipArchive unzipFileAtPath:zipDestination.path toDestination:unzipDestination.path progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-
-        ;
-
-    } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
-        if ( error ) {
-            NSLog(@"Unzip error: %@ %@ %@", zipDestination, unzipDestination, error);
-            return;
-        }
-        
-        NSLog(@"Unzipped to %@", unzipDestination);
-        
-        if ( ![fm fileExistsAtPath:unzipDestination.path] ) {
-            NSLog(@"Unzipped file does not exist at %@", unzipDestination);
-            return;
-        }
-        
-        NSArray *contents = [fm contentsOfDirectoryAtPath:unzipDestination.path error:&error];
-        
-        if ( contents == nil && error ) {
-            NSLog(@"No contents at %@", unzipDestination);
-            return;
-        }
-        
-        if ( contents.count != 1 ) {
-            NSLog(@"Too many files in zipped folder: %@", contents);
-            return;
-        }
-        
-        NSString *modelFilename = contents[0];
-        NSURL *modelSource = [unzipDestination URLByAppendingPathComponent:contents[0]];
-        NSURL *modelDestination = [[NSURL fileURLWithPath:[self modelsPath]] URLByAppendingPathComponent:contents[0]];
-        
-        // TODO: perform model validation
-        
-        if ( [fm fileExistsAtPath:modelDestination.path] ) {
-            NSLog(@"Model with the folder name %@ already exists in the models directory", modelFilename);
-            return;
-        }
-        
-        if ( ![fm moveItemAtURL:modelSource toURL:modelDestination error:&error] ) {
-            NSLog(@"Unable to copy model folder from %@ to %@, error %@", modelSource, modelDestination, error);
-            return;
-        }
-        
-        // Reload the model bundles
-        
-        if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:[self modelsPath] error:&error] ) {
-            NSLog(@"Unable to load model bundles at path %@", [self modelsPath]);
-        }
-        
-        // Refresh the model delegate
-    }];
-    
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.savedLabel.hidden = NO;
+        self.completedLabel.hidden = NO;
+    });
 }
 
-- (NSString*) modelsPath {
+- (void)modelImporterDidCancel:(ModelImporter*)importer {
+    NSLog(@"Importer Did Cancel");
+    self.importer = nil;
+}
+
+// MARK: -
+
+// TODO: Duplicated in AppDelegate
+
+- (NSString*)modelsPath {
     NSURL *documentDirectoryURL = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains: NSUserDomainMask][0];
     NSString *documentDirectoryPath = [documentDirectoryURL path];
     NSString *modelsPath = [documentDirectoryPath stringByAppendingPathComponent:@"models"];
