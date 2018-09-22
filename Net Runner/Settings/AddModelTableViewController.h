@@ -12,6 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AddModelTableViewController : UITableViewController <UITextFieldDelegate>
 
+@property (weak) IBOutlet UITextField *URLField;
+@property (weak) IBOutlet UIProgressView *downloadProgressView;
+@property (weak) IBOutlet UILabel *downloadLabel;
+@property (weak) IBOutlet UILabel *validatedLabel;
+@property (weak) IBOutlet UILabel *savedLabel;
+@property (weak) IBOutlet UILabel *completedLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

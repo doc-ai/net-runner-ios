@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qln-i4-rzJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Qln-i4-rzJ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -258,7 +258,7 @@ doc.ai</string>
                                                     <rect key="frame" x="16" y="63" width="343" height="31"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done" textContentType="url"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="url"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="Od1-bg-myu" id="1ED-zp-Yei"/>
                                                     </connections>
@@ -289,53 +289,44 @@ doc.ai</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading model…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQg-y6-5T0">
-                                                    <rect key="frame" x="16" y="5" width="148" height="18"/>
+                                                    <rect key="frame" x="16" y="30" width="148" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ro5-i2-Yrt">
-                                                    <rect key="frame" x="16" y="35" width="343" height="2"/>
+                                                    <rect key="frame" x="16" y="60" width="343" height="2"/>
                                                 </progressView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validating model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVA-V9-qJu">
-                                                    <rect key="frame" x="16" y="47" width="114" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validated model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVA-V9-qJu">
+                                                    <rect key="frame" x="16" y="82" width="110" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saving model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ord-Jv-45c">
-                                                    <rect key="frame" x="16" y="75" width="92.5" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ord-Jv-45c">
+                                                    <rect key="frame" x="16" y="120" width="88.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import complete!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gb3-jp-tpb">
-                                                    <rect key="frame" x="16" y="103" width="118" height="18"/>
+                                                    <rect key="frame" x="16" y="158" width="118" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7co-iq-EMJ">
-                                                    <rect key="frame" x="16" y="131" width="343" height="55"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                    <state key="normal" title="Close"/>
-                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ro5-i2-Yrt" firstAttribute="top" secondItem="zQg-y6-5T0" secondAttribute="bottom" constant="12" id="8sQ-NT-AEj"/>
                                                 <constraint firstItem="DVA-V9-qJu" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leadingMargin" id="DBm-tX-GI9"/>
-                                                <constraint firstItem="DVA-V9-qJu" firstAttribute="top" secondItem="ro5-i2-Yrt" secondAttribute="bottom" constant="10" id="DUU-Wa-sTx"/>
-                                                <constraint firstItem="7co-iq-EMJ" firstAttribute="trailing" secondItem="SEN-bF-lDw" secondAttribute="trailingMargin" id="J0P-T1-QnU"/>
-                                                <constraint firstItem="7co-iq-EMJ" firstAttribute="top" secondItem="Gb3-jp-tpb" secondAttribute="bottom" constant="10" id="L2f-0V-hSK"/>
+                                                <constraint firstItem="DVA-V9-qJu" firstAttribute="top" secondItem="ro5-i2-Yrt" secondAttribute="bottom" constant="20" id="DUU-Wa-sTx"/>
                                                 <constraint firstItem="Gb3-jp-tpb" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leadingMargin" id="OrU-Q4-ExA"/>
                                                 <constraint firstItem="zQg-y6-5T0" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leading" constant="16" id="XFz-Bu-bED"/>
-                                                <constraint firstItem="zQg-y6-5T0" firstAttribute="top" secondItem="SEN-bF-lDw" secondAttribute="top" constant="5" id="YJx-2X-8dk"/>
-                                                <constraint firstItem="ord-Jv-45c" firstAttribute="top" secondItem="DVA-V9-qJu" secondAttribute="bottom" constant="10" id="YOK-nz-6gj"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="7co-iq-EMJ" secondAttribute="bottom" constant="8" id="cBH-7J-d3l"/>
+                                                <constraint firstItem="zQg-y6-5T0" firstAttribute="top" secondItem="SEN-bF-lDw" secondAttribute="top" constant="30" id="YJx-2X-8dk"/>
+                                                <constraint firstItem="ord-Jv-45c" firstAttribute="top" secondItem="DVA-V9-qJu" secondAttribute="bottom" constant="20" id="YOK-nz-6gj"/>
                                                 <constraint firstItem="ro5-i2-Yrt" firstAttribute="trailing" secondItem="SEN-bF-lDw" secondAttribute="trailingMargin" id="fgc-bA-Ix1"/>
-                                                <constraint firstItem="7co-iq-EMJ" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leadingMargin" id="k2O-Jw-tt2"/>
                                                 <constraint firstItem="ord-Jv-45c" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leadingMargin" id="utM-mi-odH"/>
-                                                <constraint firstItem="Gb3-jp-tpb" firstAttribute="top" secondItem="ord-Jv-45c" secondAttribute="bottom" constant="10" id="uu9-gz-wyX"/>
+                                                <constraint firstItem="Gb3-jp-tpb" firstAttribute="top" secondItem="ord-Jv-45c" secondAttribute="bottom" constant="20" id="uu9-gz-wyX"/>
                                                 <constraint firstItem="ro5-i2-Yrt" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leadingMargin" id="vhc-w6-jG8"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -359,6 +350,14 @@ doc.ai</string>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Import Model" id="gbP-2a-XQy"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="URLField" destination="Enx-Os-QGQ" id="6qZ-8n-JMe"/>
+                        <outlet property="completedLabel" destination="Gb3-jp-tpb" id="UBv-Fm-Hlt"/>
+                        <outlet property="downloadLabel" destination="zQg-y6-5T0" id="0NC-Ut-CO0"/>
+                        <outlet property="downloadProgressView" destination="ro5-i2-Yrt" id="0Kb-K2-WlA"/>
+                        <outlet property="savedLabel" destination="ord-Jv-45c" id="yga-sc-Uwf"/>
+                        <outlet property="validatedLabel" destination="DVA-V9-qJu" id="tDE-az-ZcQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gR4-lc-8kq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
