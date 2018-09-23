@@ -11,16 +11,21 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ModelImporter;
+@class TIOModelBundleValidator;
 
 @protocol ModelImporterDelegate
 
 - (void)modelImporterDownloadDidBegin:(ModelImporter*)importer;
 - (void)modelImporter:(ModelImporter*)importer downloadDidProgress:(float)progress;
-- (void)modelImporter:(ModelImporter*)importer downloadDidFail:(NSError*)error;
 - (void)modelImporterDownloadDidFinish:(ModelImporter*)importer;
 - (void)modelImporterDidValidate:(ModelImporter*)importer;
 - (void)modelImporterDidCompleteImport:(ModelImporter*)importer;
+- (void)modelImporter:(ModelImporter*)importer importDidFail:(NSError*)error;
 - (void)modelImporterDidCancel:(ModelImporter*)importer;
+
+// TODO: fix custom validation. can't forward declare a block type but can't mix obj-c and obj-c++ headers. stupid
+
+- (BOOL (^_Nonnull)(NSString *path, NSDictionary *JSON, NSError **error))modelImporter:(ModelImporter*)importer validationBlockForModelBundleAtURL:(NSURL*)URL;
 
 @end
 

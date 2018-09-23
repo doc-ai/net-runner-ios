@@ -85,6 +85,32 @@
 
 // MARK: - Model Importer Delegate
 
+- (BOOL (^_Nonnull)(NSString *path, NSDictionary *JSON, NSError **error))modelImporter:(ModelImporter*)importer validationBlockForModelBundleAtURL:(NSURL*)URL {
+    
+    // TODO: Yuck
+    
+    // Net Runner requires a single input that is of type "image"
+    
+    return ^BOOL(NSString *path, NSDictionary *JSON, NSError **error) {
+        
+        NSArray *inputs = JSON[@"inputs"];
+        
+        if ( inputs.count != 1 ) {
+            // *error =
+            return NO;
+        }
+        
+        NSDictionary *input = inputs[0];
+        
+        if ( ![input[@"type"] isEqualToString:@"image"] ) {
+            // *error =
+            return NO;
+        }
+        
+        return YES;
+    };
+}
+
 - (void)modelImporterDownloadDidBegin:(ModelImporter*)importer {
     NSLog(@"Importer Did Begin Download");
     
@@ -103,14 +129,14 @@
     });
 }
 
-- (void)modelImporter:(ModelImporter*)importer downloadDidFail:(NSError*)error {
+- (void)modelImporter:(ModelImporter*)importer importDidFail:(NSError*)error {
     NSLog(@"Importer Download Failed: %@", error);
     
     dispatch_async(dispatch_get_main_queue(), ^{
     
         UIAlertController *alert = [UIAlertController
             alertControllerWithTitle:NSLocalizedString(@"Problem Importing Model", @"Import model error alert title")
-            message:NSLocalizedString(@"...", @"Iport model error alert message")
+            message:NSLocalizedString(@"...", @"Import model error alert message")
             preferredStyle:UIAlertControllerStyleAlert];
         
         [alert addAction:[UIAlertAction
