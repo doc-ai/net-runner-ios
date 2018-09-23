@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "summary": "An Objective-C wrapper for TensorFlow Lite.",
   "description": "Perform inference with TensorFlow Lite models using all the conveniences of Objective-C",
-  "homepage": "https://github.com/doc.ai/TensorIO",
+  "homepage": "https://github.com/doc-ai/TensorIO",
   "license": {
     "type": "Apache 2",
     "file": "LICENSE"

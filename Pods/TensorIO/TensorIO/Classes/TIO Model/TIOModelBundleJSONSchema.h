@@ -30,9 +30,10 @@
     "license":      String,
  
     "model": {
-        "quantized":    Bool,                   // true if model is quantized, false otherwise
-        "file":         String,                 // filename of model in bundle directory, e.g. model.tflite
-        "class":        String,                 // optional class to use with this model
+        "quantized":    Bool,                   // required: true if model is quantized, false otherwise
+        "file":         String,                 // required: filename of model in bundle directory, e.g. "model.tflite"
+        "class":        String,                 // optional: class to use with this model
+        "type":         String,                 // optional: categorization, e.g. "image.classification.net"
     },
  
     "inputs": [

@@ -29,7 +29,6 @@
 }
 
 - (void)download {
-    
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
     
@@ -48,8 +47,11 @@
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
     
+    // TODO: error handling
+    
     if ( [downloadTask.response isKindOfClass:[NSHTTPURLResponse class]] && ((NSHTTPURLResponse*)downloadTask.response).statusCode != 200 ) {
-        [self.delegate modelImporter:self downloadDidFail:nil];
+        NSLog(@"HTTP Response Error: %@", downloadTask.response);
+        [self.delegate modelImporter:self importDidFail:nil];
         return;
     }
     
@@ -78,10 +80,10 @@
         return;
     }
     
+    // Unzip
+    
     [SSZipArchive unzipFileAtPath:zipDestination.path toDestination:unzipDestination.path progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-
         ;
-
     } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
         if ( error ) {
             NSLog(@"Unzip error: %@ %@ %@", zipDestination, unzipDestination, error);
@@ -94,6 +96,8 @@
             NSLog(@"Unzipped file does not exist at %@", unzipDestination);
             return;
         }
+        
+        // Confirm contents are valid
         
         NSArray *contents = [fm contentsOfDirectoryAtPath:unzipDestination.path error:&error];
         
@@ -111,9 +115,19 @@
         NSURL *modelSource = [unzipDestination URLByAppendingPathComponent:contents[0]];
         NSURL *modelDestination = [self.destinationDirectory URLByAppendingPathComponent:contents[0]];
         
-        // TODO: perform model validation
+        // Validation
+        
+        TIOModelBundleValidationBlock validationBlock = [self.delegate modelImporter:self validationBlockForModelBundleAtURL:modelSource];
+        TIOModelBundleValidator *validator = [[TIOModelBundleValidator alloc] initWithModelBundleAtPath:modelSource.path];
+        
+        if ( ![validator validate:validationBlock error:&error] ) {
+            [self.delegate modelImporter:self importDidFail:error];
+            return;
+        }
         
         [self.delegate modelImporterDidValidate:self];
+        
+        // Copy to Destination
         
         if ( [fm fileExistsAtPath:modelDestination.path] ) {
             NSLog(@"Model with the folder name %@ already exists in the models directory", modelFilename);

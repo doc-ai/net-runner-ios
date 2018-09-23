@@ -43,12 +43,19 @@
     return sharedInstance;
 }
 
++ (NSError*)noValidModelBundlesError {
+    return [NSError errorWithDomain:@"doc.ai.netrunner" code:201 userInfo:@{
+        NSLocalizedDescriptionKey: @"No valid model bundles found at path",
+        NSLocalizedRecoverySuggestionErrorKey: @"Ensure this path exists and that it contains one or more correctly formated .tfbundle folders"
+    }];
+}
+
 - (BOOL)loadModelBundlesAtPath:(NSString*)path error:(NSError**)error {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     NSArray<NSString*> *paths = [fileManager contentsOfDirectoryAtPath:path error:error];
     
-    if (paths == nil) {
+    if ( paths == nil ) {
         return NO;
     }
     
@@ -66,6 +73,11 @@
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES selector:@selector(caseInsensitiveCompare:)];
     NSArray<TIOModelBundle*> *sortedBundles = [bundles sortedArrayUsingDescriptors:@[sortDescriptor]];
+    
+    if ( sortedBundles.count == 0 ) {
+        *error = [TIOModelBundleManager noValidModelBundlesError];
+        return NO;
+    }
     
     self.modelBundles = sortedBundles;
     
