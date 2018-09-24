@@ -11,6 +11,22 @@
 #import <SSZipArchive/SSZipArchive.h>
 @import TensorIO;
 
+// MARK: - Errors
+
+static NSString * const NetRunnerModelImporterErrorDomain = @"ai.doc.net-runner.model-importer";
+
+static const NSInteger NetRunnerModelImporterHTTPErrorCode          = 101;
+static const NSInteger NetRunnerModelImporterUnzipErrorCode         = 102;
+static const NSInteger NetRunnerModelImporterContentsErrorCode      = 103;
+static const NSInteger NetRunnerModelImporterFileSystemErrorCode    = 104;
+
+NSError * NetRunnerModelImporterHTTPError();
+NSError * NetRunnerModelImporterUnzipError();
+NSError * NetRunnerModelImporterContentsError();
+NSError * NetRunnerModelImporterFileSystemError();
+
+// MARK: -
+
 @interface ModelImporter() <NSURLSessionDownloadDelegate>
 
 @property NSURLSessionDownloadTask *downloadTask;
@@ -47,17 +63,19 @@
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
     
-    // TODO: error handling
+    // HTTP Error
     
     if ( [downloadTask.response isKindOfClass:[NSHTTPURLResponse class]] && ((NSHTTPURLResponse*)downloadTask.response).statusCode != 200 ) {
         NSLog(@"HTTP Response Error: %@", downloadTask.response);
-        [self.delegate modelImporter:self importDidFail:nil];
+        [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterHTTPError()];
         return;
     }
     
+    // Inform delegate we are finished downloading
+    
     [self.delegate modelImporterDownloadDidFinish:self];
     
-    NSLog(@"Location: %@", location);
+    // Prepare to unzip file
     
     NSURL *unzipDestination = [[location URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"unzipped"];
     NSURL *zipDestination = [[location URLByDeletingPathExtension] URLByAppendingPathExtension:@"zip"];
@@ -67,26 +85,31 @@
     
     if ( [fm fileExistsAtPath:zipDestination.path] && ![fm removeItemAtURL:zipDestination error:&error] ) {
         NSLog(@"FM Error: %@", error);
+        [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterFileSystemError()];
         return;
     }
     
     if ( [fm fileExistsAtPath:unzipDestination.path] && ![fm removeItemAtURL:unzipDestination error:&error] ) {
         NSLog(@"FM Error: %@", error);
+        [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterFileSystemError()];
         return;
     }
     
     if ( ![fm moveItemAtURL:location toURL:zipDestination error:&error] ) {
         NSLog(@"FM Error: %@", error);
+        [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterFileSystemError()];
         return;
     }
     
-    // Unzip
+    // Unzip file
     
-    [SSZipArchive unzipFileAtPath:zipDestination.path toDestination:unzipDestination.path progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
-        ;
-    } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
+    [SSZipArchive unzipFileAtPath:zipDestination.path toDestination:unzipDestination.path progressHandler:nil completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
+        
+        // Report unzip errors
+        
         if ( error ) {
             NSLog(@"Unzip error: %@ %@ %@", zipDestination, unzipDestination, error);
+            [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterUnzipError()];
             return;
         }
         
@@ -94,56 +117,67 @@
         
         if ( ![fm fileExistsAtPath:unzipDestination.path] ) {
             NSLog(@"Unzipped file does not exist at %@", unzipDestination);
+            [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterUnzipError()];
             return;
         }
         
-        // Confirm contents are valid
+        // Confirm unzipped contents are valid
         
         NSArray *contents = [fm contentsOfDirectoryAtPath:unzipDestination.path error:&error];
         
         if ( contents == nil && error ) {
             NSLog(@"No contents at %@", unzipDestination);
+            [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterContentsError()];
             return;
         }
         
         if ( contents.count != 1 ) {
             NSLog(@"Too many files in zipped folder: %@", contents);
+            [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterContentsError()];
             return;
         }
+        
+        // Prepare to copy download to desitionat directory
         
         NSString *modelFilename = contents[0];
         NSURL *modelSource = [unzipDestination URLByAppendingPathComponent:contents[0]];
         NSURL *modelDestination = [self.destinationDirectory URLByAppendingPathComponent:contents[0]];
         
-        // Validation
+        // Perform custom validation
         
         TIOModelBundleValidationBlock validationBlock = [self.delegate modelImporter:self validationBlockForModelBundleAtURL:modelSource];
         TIOModelBundleValidator *validator = [[TIOModelBundleValidator alloc] initWithModelBundleAtPath:modelSource.path];
         
         if ( ![validator validate:validationBlock error:&error] ) {
+            NSLog(@"Custom validator failed: %@", error);
             [self.delegate modelImporter:self importDidFail:error];
             return;
         }
         
         [self.delegate modelImporterDidValidate:self];
         
-        // Copy to Destination
+        // TODO: decide on policy when the target model folder already exists
+        // If model folder already exists at destination, remove it
         
         if ( [fm fileExistsAtPath:modelDestination.path] ) {
             NSLog(@"Model with the folder name %@ already exists in the models directory", modelFilename);
             
-            // Temporarily remove it for testing
-            
             if ( ![fm removeItemAtURL:modelDestination error:&error] ) {
                 NSLog(@"FM Error: %@", error);
+                [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterFileSystemError()];
                 return;
             }
         }
         
+        // Copy to Destination
+        
         if ( ![fm moveItemAtURL:modelSource toURL:modelDestination error:&error] ) {
             NSLog(@"Unable to copy model folder from %@ to %@, error %@", modelSource, modelDestination, error);
+            [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterFileSystemError()];
             return;
         }
+        
+        // Inform deletate we are done
         
         [self.delegate modelImporterDidCompleteImport:self];
     }];
@@ -156,3 +190,33 @@
 }
 
 @end
+
+// MARK: - Errors
+
+NSError * NetRunnerModelImporterHTTPError() {
+    return [[NSError alloc] initWithDomain:NetRunnerModelImporterErrorDomain code:NetRunnerModelImporterHTTPErrorCode userInfo:@{
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"There was a problem requesting the file from the server."],
+        NSLocalizedRecoverySuggestionErrorKey: @"Make sure the URL points to a file that exists and that you have permission to access that file."
+    }];
+}
+
+NSError * NetRunnerModelImporterUnzipError() {
+    return [[NSError alloc] initWithDomain:NetRunnerModelImporterErrorDomain code:NetRunnerModelImporterUnzipErrorCode userInfo:@{
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"There was a problem unzipping the downloaded file."],
+        NSLocalizedRecoverySuggestionErrorKey: @"Make sure you are importing a model directory (e.g. a .tfbundle folder) that has been zipped using a utility like gzip or the Finder's \"Compress\" option."
+    }];
+}
+
+NSError * NetRunnerModelImporterContentsError() {
+    return [[NSError alloc] initWithDomain:NetRunnerModelImporterErrorDomain code:NetRunnerModelImporterContentsErrorCode userInfo:@{
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"There was a problem unzipping the downloaded file."],
+        NSLocalizedRecoverySuggestionErrorKey: @"Make sure you are importing a model directory (e.g. a .tfbundle folder) that has been zipped using a utility like gzip or the Finder's \"Compress\" option."
+    }];
+}
+
+NSError * NetRunnerModelImporterFileSystemError() {
+    return [[NSError alloc] initWithDomain:NetRunnerModelImporterErrorDomain code:NetRunnerModelImporterFileSystemErrorCode userInfo:@{
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"There was a moving or copying the downloaded model."],
+        NSLocalizedRecoverySuggestionErrorKey: @"Make sure you have enough space on your device for the model. Some models are quite large."
+    }];
+}

@@ -13,6 +13,26 @@
 #import <SSZipArchive/SSZipArchive.h>
 @import TensorIO;
 
+// MARK: - Errors
+
+static NSString * const NetRunnerAddModelErrorDomain = @"ai.doc.net-runner.add-model";
+
+NSError * NetRunnerAddModelInvalidURLError() {
+    return [[NSError alloc] initWithDomain:NetRunnerAddModelErrorDomain code:101 userInfo:@{
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"The URL is invalid"],
+        NSLocalizedRecoverySuggestionErrorKey: @"Please enter a valid URL"
+    }];
+}
+
+NSError * NetRunnerModelInputsError() {
+    return [[NSError alloc] initWithDomain:NetRunnerAddModelErrorDomain code:102 userInfo:@{
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Net Runner cannot use this model"],
+        NSLocalizedRecoverySuggestionErrorKey: @"Net Runner models must take a single input of type image"
+    }];
+}
+
+// MARK: -
+
 @interface AddModelTableViewController () <ModelImporterDelegate>
 
 @property ModelImporter *importer;
@@ -63,6 +83,7 @@
     
     if ( self.URLField.text.length == 0 ) {
         NSLog(@"Enter a URL");
+        [self showError:NetRunnerAddModelInvalidURLError()];
         return;
     }
     
@@ -70,6 +91,7 @@
     
     if ( URL == nil ) {
         NSLog(@"Invalid URL");
+        [self showError:NetRunnerAddModelInvalidURLError()];
         return;
     }
     
@@ -79,7 +101,6 @@
     }
     
     self.importer = [[ModelImporter alloc] initWithURL:URL delegate:self destinationDirectory:[NSURL fileURLWithPath:[self modelsPath]]];
-    
     [self.importer download];
 }
 
@@ -96,14 +117,14 @@
         NSArray *inputs = JSON[@"inputs"];
         
         if ( inputs.count != 1 ) {
-            // *error =
+            *error = NetRunnerModelInputsError();
             return NO;
         }
         
         NSDictionary *input = inputs[0];
         
         if ( ![input[@"type"] isEqualToString:@"image"] ) {
-            // *error =
+            *error = NetRunnerModelInputsError();
             return NO;
         }
         
@@ -133,19 +154,10 @@
     NSLog(@"Importer Download Failed: %@", error);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-    
-        UIAlertController *alert = [UIAlertController
-            alertControllerWithTitle:NSLocalizedString(@"Problem Importing Model", @"Import model error alert title")
-            message:NSLocalizedString(@"...", @"Import model error alert message")
-            preferredStyle:UIAlertControllerStyleAlert];
+        self.downloadProgressView.hidden = YES;
+        self.downloadLabel.hidden = YES;
         
-        [alert addAction:[UIAlertAction
-            actionWithTitle:NSLocalizedString(@"Dismiss", @"Alert dismiss action")
-            style:UIAlertActionStyleDefault
-            handler:nil]];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    
+        [self showError:error];
     });
 }
 
@@ -172,15 +184,30 @@
     
     if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:[self modelsPath] error:&error] ) {
         NSLog(@"Unable to load model bundles at path %@", [self modelsPath]);
+        // TODO: show an error
         return;
     }
     
-    // Refresh the model delegate
-    
+    // Success
+
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.savedLabel.hidden = NO;
-        self.completedLabel.hidden = NO;
+        NSString *message = NSLocalizedString(@"The model was sucessfully imported and is available for selection in the model list", @"model imported success message");
+        NSString *title = NSLocalizedString(@"Model Imported", @"model imported success title");
+    
+        UIAlertController *alert = [UIAlertController
+            alertControllerWithTitle:title
+            message:message
+            preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction
+            actionWithTitle:NSLocalizedString(@"Dismiss", @"Alert dismiss action")
+            style:UIAlertActionStyleDefault
+            handler:nil]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     });
+    
+    // Refresh the model details table view
 }
 
 - (void)modelImporterDidCancel:(ModelImporter*)importer {
@@ -189,6 +216,34 @@
 }
 
 // MARK: -
+
+- (void)showError:(NSError*)error {
+    NSString *description = error.localizedDescription;
+    NSString *recovery = error.localizedRecoverySuggestion;
+
+    if ( description == nil || description.length == 0 ) {
+        description = @"";
+    }
+
+    if ( recovery == nil || recovery.length == 0 ) {
+        recovery = @"";
+    }
+
+    NSString *message = [[[description stringByAppendingString:@"\n\n"] stringByAppendingString:recovery] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *title = NSLocalizedString(@"Problem Importing Model", @"Import model error alert title");
+
+    UIAlertController *alert = [UIAlertController
+        alertControllerWithTitle:title
+        message:message
+        preferredStyle:UIAlertControllerStyleAlert];
+
+    [alert addAction:[UIAlertAction
+        actionWithTitle:NSLocalizedString(@"Dismiss", @"Alert dismiss action")
+        style:UIAlertActionStyleDefault
+        handler:nil]];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 // TODO: Duplicated in AppDelegate
 
