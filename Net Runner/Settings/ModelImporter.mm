@@ -90,42 +90,22 @@ NSError * NetRunnerModelImporterFileSystemError();
     // Prepare to unzip file
     
     NSURL *unzipDestination = [[location URLByDeletingLastPathComponent] URLByAppendingPathComponent:@"unzipped"];
-    NSURL *zipDestination = [[location URLByDeletingPathExtension] URLByAppendingPathExtension:@"zip"];
-    
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSError *error;
-    
-    if ( [fm fileExistsAtPath:zipDestination.path] && ![fm removeItemAtURL:zipDestination error:&error] ) {
-        NSLog(@"FM Error: %@", error);
-        [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterFileSystemError()];
-        return;
-    }
-    
-    if ( [fm fileExistsAtPath:unzipDestination.path] && ![fm removeItemAtURL:unzipDestination error:&error] ) {
-        NSLog(@"FM Error: %@", error);
-        [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterFileSystemError()];
-        return;
-    }
-    
-    if ( ![fm moveItemAtURL:location toURL:zipDestination error:&error] ) {
-        NSLog(@"FM Error: %@", error);
-        [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterFileSystemError()];
-        return;
-    }
     
     // Unzip file
     
-    [SSZipArchive unzipFileAtPath:zipDestination.path toDestination:unzipDestination.path progressHandler:nil completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
+    [SSZipArchive unzipFileAtPath:location.path toDestination:unzipDestination.path progressHandler:nil completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
         
         // Report unzip errors
         
         if ( error ) {
-            NSLog(@"Unzip error: %@ %@ %@", zipDestination, unzipDestination, error);
+            NSLog(@"Unzip error: %@ %@ %@", location, unzipDestination, error);
             [self.delegate modelImporter:self importDidFail:NetRunnerModelImporterUnzipError()];
             return;
         }
         
         NSLog(@"Unzipped to %@", unzipDestination);
+        
+        NSFileManager *fm = [NSFileManager defaultManager];
         
         if ( ![fm fileExistsAtPath:unzipDestination.path] ) {
             NSLog(@"Unzipped file does not exist at %@", unzipDestination);
@@ -149,7 +129,7 @@ NSError * NetRunnerModelImporterFileSystemError();
             return;
         }
         
-        // Prepare to copy download to desitionat directory
+        // Prepare to copy download to destination directory
         
         NSString *modelFilename = contents[0];
         NSURL *modelSource = [unzipDestination URLByAppendingPathComponent:contents[0]];
