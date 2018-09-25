@@ -219,7 +219,9 @@ NSError * NetRunnerModelInputsError() {
         [alert addAction:[UIAlertAction
             actionWithTitle:NSLocalizedString(@"Dismiss", @"Alert dismiss action")
             style:UIAlertActionStyleDefault
-            handler:nil]];
+            handler:^(UIAlertAction * _Nonnull action) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }]];
         
         [self presentViewController:alert animated:YES completion:nil];
     });
