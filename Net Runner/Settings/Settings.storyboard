@@ -213,23 +213,21 @@ doc.ai</string>
                         <sections>
                             <tableViewSection id="D6x-dZ-Sd3">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="130" id="7H0-Fp-LBB">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="141" id="7H0-Fp-LBB">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7H0-Fp-LBB" id="haN-e7-YJK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5GB-zI-scD">
-                                                    <rect key="frame" x="16" y="31" width="343" height="58"/>
-                                                    <string key="text">You may import models that have been prepared for TensorIO and Net Runner. For more information visit our GitHub repository:
-</string>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="You may import models that have been prepared for TensorIO and Net Runner. For more information visit our GitHub repository:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5GB-zI-scD">
+                                                    <rect key="frame" x="16" y="31" width="343" height="54"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOT-e2-MDO">
-                                                    <rect key="frame" x="16" y="89" width="343" height="30"/>
+                                                    <rect key="frame" x="16" y="95" width="343" height="35"/>
                                                     <state key="normal" title="https://github.com/doc-ai/net-runner-ios"/>
                                                     <connections>
                                                         <action selector="visitNetRunnerRepository:" destination="Od1-bg-myu" eventType="touchUpInside" id="XLk-Mr-1oR"/>
@@ -239,7 +237,7 @@ doc.ai</string>
                                             <constraints>
                                                 <constraint firstItem="mOT-e2-MDO" firstAttribute="bottom" secondItem="haN-e7-YJK" secondAttribute="bottomMargin" id="7vf-Vq-Hvv"/>
                                                 <constraint firstItem="mOT-e2-MDO" firstAttribute="trailing" secondItem="haN-e7-YJK" secondAttribute="trailingMargin" id="C84-kr-rgh"/>
-                                                <constraint firstItem="mOT-e2-MDO" firstAttribute="top" secondItem="5GB-zI-scD" secondAttribute="bottom" id="QoP-yq-HNx"/>
+                                                <constraint firstItem="mOT-e2-MDO" firstAttribute="top" secondItem="5GB-zI-scD" secondAttribute="bottom" constant="10" id="QoP-yq-HNx"/>
                                                 <constraint firstItem="5GB-zI-scD" firstAttribute="top" secondItem="haN-e7-YJK" secondAttribute="topMargin" constant="20" id="Rv6-Q0-jKG"/>
                                                 <constraint firstItem="5GB-zI-scD" firstAttribute="leading" secondItem="haN-e7-YJK" secondAttribute="leadingMargin" id="oW1-vS-Xi1"/>
                                                 <constraint firstItem="mOT-e2-MDO" firstAttribute="leading" secondItem="haN-e7-YJK" secondAttribute="leadingMargin" id="oql-DL-YlJ"/>
@@ -248,7 +246,7 @@ doc.ai</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="105" id="y92-5F-wZG">
-                                        <rect key="frame" x="0.0" y="130" width="375" height="105"/>
+                                        <rect key="frame" x="0.0" y="141" width="375" height="105"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y92-5F-wZG" id="s5x-Sa-Hl7">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
@@ -281,11 +279,11 @@ doc.ai</string>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="205" id="Flq-Du-8kh">
-                                        <rect key="frame" x="0.0" y="235" width="375" height="205"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="113" id="Flq-Du-8kh">
+                                        <rect key="frame" x="0.0" y="246" width="375" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Flq-Du-8kh" id="SEN-bF-lDw">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading model…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQg-y6-5T0">
@@ -297,37 +295,13 @@ doc.ai</string>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ro5-i2-Yrt">
                                                     <rect key="frame" x="16" y="60" width="343" height="2"/>
                                                 </progressView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Validated model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVA-V9-qJu">
-                                                    <rect key="frame" x="16" y="82" width="110" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ord-Jv-45c">
-                                                    <rect key="frame" x="16" y="120" width="88.5" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import complete!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gb3-jp-tpb">
-                                                    <rect key="frame" x="16" y="158" width="118" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Gb3-jp-tpb" secondAttribute="bottom" constant="18" id="2nH-3g-6Z7"/>
                                                 <constraint firstItem="ro5-i2-Yrt" firstAttribute="top" secondItem="zQg-y6-5T0" secondAttribute="bottom" constant="12" id="8sQ-NT-AEj"/>
-                                                <constraint firstItem="DVA-V9-qJu" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leadingMargin" id="DBm-tX-GI9"/>
-                                                <constraint firstItem="DVA-V9-qJu" firstAttribute="top" secondItem="ro5-i2-Yrt" secondAttribute="bottom" constant="20" id="DUU-Wa-sTx"/>
-                                                <constraint firstItem="Gb3-jp-tpb" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leadingMargin" id="OrU-Q4-ExA"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ro5-i2-Yrt" secondAttribute="bottom" constant="40" id="Hal-EM-UIv"/>
                                                 <constraint firstItem="zQg-y6-5T0" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leading" constant="16" id="XFz-Bu-bED"/>
                                                 <constraint firstItem="zQg-y6-5T0" firstAttribute="top" secondItem="SEN-bF-lDw" secondAttribute="top" constant="30" id="YJx-2X-8dk"/>
-                                                <constraint firstItem="ord-Jv-45c" firstAttribute="top" secondItem="DVA-V9-qJu" secondAttribute="bottom" constant="20" id="YOK-nz-6gj"/>
                                                 <constraint firstItem="ro5-i2-Yrt" firstAttribute="trailing" secondItem="SEN-bF-lDw" secondAttribute="trailingMargin" id="fgc-bA-Ix1"/>
-                                                <constraint firstItem="ord-Jv-45c" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leadingMargin" id="utM-mi-odH"/>
-                                                <constraint firstItem="Gb3-jp-tpb" firstAttribute="top" secondItem="ord-Jv-45c" secondAttribute="bottom" constant="20" id="uu9-gz-wyX"/>
                                                 <constraint firstItem="ro5-i2-Yrt" firstAttribute="leading" secondItem="SEN-bF-lDw" secondAttribute="leadingMargin" id="vhc-w6-jG8"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -353,11 +327,8 @@ doc.ai</string>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="URLField" destination="Enx-Os-QGQ" id="6qZ-8n-JMe"/>
-                        <outlet property="completedLabel" destination="Gb3-jp-tpb" id="UBv-Fm-Hlt"/>
                         <outlet property="downloadLabel" destination="zQg-y6-5T0" id="0NC-Ut-CO0"/>
                         <outlet property="downloadProgressView" destination="ro5-i2-Yrt" id="0Kb-K2-WlA"/>
-                        <outlet property="savedLabel" destination="ord-Jv-45c" id="yga-sc-Uwf"/>
-                        <outlet property="validatedLabel" destination="DVA-V9-qJu" id="tDE-az-ZcQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gR4-lc-8kq" userLabel="First Responder" sceneMemberID="firstResponder"/>

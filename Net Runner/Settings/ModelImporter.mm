@@ -56,7 +56,7 @@ NSError * NetRunnerModelImporterFileSystemError();
     return self;
 }
 
-- (void)download {
+- (void)import {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
     
