@@ -45,8 +45,15 @@ NSError * NetRunnerModelInputsError() {
     }];
 }
 
-NSError * NetRunnerReloadModelsError() {
+NSError * NetRunnerImageShapeError() {
     return [[NSError alloc] initWithDomain:NetRunnerAddModelErrorDomain code:103 userInfo:@{
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Net Runner cannot use this model."],
+        NSLocalizedRecoverySuggestionErrorKey: @"Net Runner image inputs must have an image shape with three elements whose last element is 3 dimensions, corresponding to 3 color channels in height-width-channels ordering."
+    }];
+}
+
+NSError * NetRunnerReloadModelsError() {
+    return [[NSError alloc] initWithDomain:NetRunnerAddModelErrorDomain code:104 userInfo:@{
         NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Net Runner was unable to reload the models."],
         NSLocalizedRecoverySuggestionErrorKey: @"Restart Net Runner and try again."
     }];
@@ -126,7 +133,8 @@ NSError * NetRunnerReloadModelsError() {
 
 - (BOOL (^_Nullable)(NSString *path, NSDictionary *JSON, NSError **error))modelImporter:(ModelImporter*)importer validationBlockForModelBundleAtURL:(NSURL*)URL {
     
-    // Net Runner requires a single input that is of type "image"
+    // Net Runner requires a single input that is of type "image",
+    // whose "shape" is 3 elements with the last element being 3 for three color channels
     
     return ^BOOL(NSString *path, NSDictionary *JSON, NSError **error) {
         
@@ -141,6 +149,11 @@ NSError * NetRunnerReloadModelsError() {
         
         if ( ![input[@"type"] isEqualToString:@"image"] ) {
             *error = NetRunnerModelInputsError();
+            return NO;
+        }
+        
+        if ( [input[@"shape"] count] != 3 || [input[@"shape"][2] integerValue] != 3 ) {
+            *error = NetRunnerImageShapeError();
             return NO;
         }
         
