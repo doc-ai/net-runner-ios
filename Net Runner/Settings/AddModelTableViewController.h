@@ -22,6 +22,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class AddModelTableViewController;
+
+@protocol AddModelTableViewControllerDelegate
+
+- (void)addModelTableViewControllerDidAddModel:(AddModelTableViewController*)viewController;
+
+@end
+
 @interface AddModelTableViewController : UITableViewController <UITextFieldDelegate>
 
 @property (weak) IBOutlet UITextField *URLField;
@@ -30,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) IBOutlet UILabel *validatedLabel;
 @property (weak) IBOutlet UILabel *savedLabel;
 @property (weak) IBOutlet UILabel *completedLabel;
+
+@property id<AddModelTableViewControllerDelegate> delegate;
 
 @end
 

@@ -199,10 +199,15 @@ NSError * NetRunnerModelInputsError() {
         // TODO: show an error
         return;
     }
-    
-    // Success
 
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        // Inform delegate import is successful
+        
+        [self.delegate addModelTableViewControllerDidAddModel:self];
+        
+        // Success alert
+        
         NSString *message = NSLocalizedString(@"The model was sucessfully imported and is available for selection in the model list", @"model imported success message");
         NSString *title = NSLocalizedString(@"Model Imported", @"model imported success title");
     
@@ -218,8 +223,6 @@ NSError * NetRunnerModelInputsError() {
         
         [self presentViewController:alert animated:YES completion:nil];
     });
-    
-    // Refresh the model details table view
 }
 
 - (void)modelImporterDidCancel:(ModelImporter*)importer {
