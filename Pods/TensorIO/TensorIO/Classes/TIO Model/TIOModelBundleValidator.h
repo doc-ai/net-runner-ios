@@ -84,6 +84,8 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
  * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
  */
 
+// TODO: documentation
+
 - (BOOL)validateBundleProperties:(NSDictionary*)JSON error:(NSError**)error;
 
 - (BOOL)validateModelProperties:(NSDictionary*)JSON error:(NSError**)error;
