@@ -25,21 +25,30 @@
 #import <SSZipArchive/SSZipArchive.h>
 @import TensorIO;
 
+static NSString * const NetRunnerGitHubRepository = @"https://github.com/doc-ai/net-runner-ios";
+
 // MARK: - Errors
 
 static NSString * const NetRunnerAddModelErrorDomain = @"ai.doc.net-runner.add-model";
 
 NSError * NetRunnerAddModelInvalidURLError() {
     return [[NSError alloc] initWithDomain:NetRunnerAddModelErrorDomain code:101 userInfo:@{
-        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"The URL is invalid"],
-        NSLocalizedRecoverySuggestionErrorKey: @"Please enter a valid URL"
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"The URL is invalid."],
+        NSLocalizedRecoverySuggestionErrorKey: @"Please enter a valid URL."
     }];
 }
 
 NSError * NetRunnerModelInputsError() {
     return [[NSError alloc] initWithDomain:NetRunnerAddModelErrorDomain code:102 userInfo:@{
-        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Net Runner cannot use this model"],
-        NSLocalizedRecoverySuggestionErrorKey: @"Net Runner models must take a single input of type image"
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Net Runner cannot use this model."],
+        NSLocalizedRecoverySuggestionErrorKey: @"Net Runner models must take a single input of type image."
+    }];
+}
+
+NSError * NetRunnerReloadModelsError() {
+    return [[NSError alloc] initWithDomain:NetRunnerAddModelErrorDomain code:103 userInfo:@{
+        NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Net Runner was unable to reload the models."],
+        NSLocalizedRecoverySuggestionErrorKey: @"Restart Net Runner and try again."
     }];
 }
 
@@ -62,9 +71,6 @@ NSError * NetRunnerModelInputsError() {
     
     self.downloadLabel.hidden = YES;
     self.downloadProgressView.hidden = YES;
-    self.validatedLabel.hidden = YES;
-    self.savedLabel.hidden = YES;
-    self.completedLabel.hidden = YES;
 }
 
 // MARK: - Table View Delegate
@@ -88,7 +94,7 @@ NSError * NetRunnerModelInputsError() {
 }
 
 - (IBAction)visitNetRunnerRepository:(id)sender {
-    [UIApplication.sharedApplication openURL:[NSURL URLWithString:@"https://github.com/doc-ai/net-runner-ios"]];
+    [UIApplication.sharedApplication openURL:[NSURL URLWithString:NetRunnerGitHubRepository]];
 }
 
 - (IBAction)importModel:(id)sender {
@@ -99,7 +105,7 @@ NSError * NetRunnerModelInputsError() {
         return;
     }
     
-    NSURL *URL = [NSURL URLWithString:self.URLField.text]; // @"http://localhost:8000/my-model.tfbundle.zip"
+    NSURL *URL = [NSURL URLWithString:self.URLField.text];
     
     if ( URL == nil ) {
         NSLog(@"Invalid URL");
@@ -113,14 +119,12 @@ NSError * NetRunnerModelInputsError() {
     }
     
     self.importer = [[ModelImporter alloc] initWithURL:URL delegate:self destinationDirectory:[NSURL fileURLWithPath:[self modelsPath]]];
-    [self.importer download];
+    [self.importer import];
 }
 
 // MARK: - Model Importer Delegate
 
-- (BOOL (^_Nonnull)(NSString *path, NSDictionary *JSON, NSError **error))modelImporter:(ModelImporter*)importer validationBlockForModelBundleAtURL:(NSURL*)URL {
-    
-    // TODO: Yuck
+- (BOOL (^_Nullable)(NSString *path, NSDictionary *JSON, NSError **error))modelImporter:(ModelImporter*)importer validationBlockForModelBundleAtURL:(NSURL*)URL {
     
     // Net Runner requires a single input that is of type "image"
     
@@ -175,20 +179,21 @@ NSError * NetRunnerModelInputsError() {
 
 - (void)modelImporterDownloadDidFinish:(ModelImporter*)importer {
     NSLog(@"Importer Did Finish Download");
-    
 }
 
 - (void)modelImporterDidValidate:(ModelImporter*)importer {
     NSLog(@"Importer Did Validate");
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        self.validatedLabel.hidden = NO;
-    });
 }
 
 - (void)modelImporterDidCompleteImport:(ModelImporter*)importer {
     NSLog(@"Importer Did Complete Import");
+    
     self.importer = nil;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.downloadProgressView.hidden = YES;
+        self.downloadLabel.hidden = YES;
+    });
     
     // Reload the model bundles
     
@@ -196,7 +201,7 @@ NSError * NetRunnerModelInputsError() {
     
     if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:[self modelsPath] error:&error] ) {
         NSLog(@"Unable to load model bundles at path %@", [self modelsPath]);
-        // TODO: show an error
+        [self showError:NetRunnerReloadModelsError()];
         return;
     }
 
@@ -229,6 +234,7 @@ NSError * NetRunnerModelInputsError() {
 
 - (void)modelImporterDidCancel:(ModelImporter*)importer {
     NSLog(@"Importer Did Cancel");
+    
     self.importer = nil;
 }
 
