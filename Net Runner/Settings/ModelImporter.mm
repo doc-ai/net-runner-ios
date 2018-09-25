@@ -75,6 +75,12 @@ NSError * NetRunnerModelImporterFileSystemError();
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
     
+    NSFileManager *fm = [NSFileManager defaultManager];
+    
+    tio_defer_block {
+        [fm removeItemAtURL:location error:nil];
+    };
+    
     // HTTP Error
     
     if ( [downloadTask.response isKindOfClass:[NSHTTPURLResponse class]] && ((NSHTTPURLResponse*)downloadTask.response).statusCode != 200 ) {
@@ -95,6 +101,10 @@ NSError * NetRunnerModelImporterFileSystemError();
     
     [SSZipArchive unzipFileAtPath:location.path toDestination:unzipDestination.path progressHandler:nil completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
         
+        tio_defer_block {
+            [fm removeItemAtURL:unzipDestination error:nil];
+        };
+        
         // Report unzip errors
         
         if ( error ) {
@@ -104,8 +114,6 @@ NSError * NetRunnerModelImporterFileSystemError();
         }
         
         NSLog(@"Unzipped to %@", unzipDestination);
-        
-        NSFileManager *fm = [NSFileManager defaultManager];
         
         if ( ![fm fileExistsAtPath:unzipDestination.path] ) {
             NSLog(@"Unzipped file does not exist at %@", unzipDestination);
