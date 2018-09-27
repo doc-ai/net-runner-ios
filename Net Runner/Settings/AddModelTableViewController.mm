@@ -21,6 +21,7 @@
 #import "AddModelTableViewController.h"
 
 #import "ModelImporter.h"
+#import "ModelManager.h"
 
 #import <SSZipArchive/SSZipArchive.h>
 @import TensorIO;
@@ -125,7 +126,13 @@ NSError * NetRunnerReloadModelsError() {
         self.importer = nil;
     }
     
-    self.importer = [[ModelImporter alloc] initWithURL:URL delegate:self destinationDirectory:[NSURL fileURLWithPath:[self modelsPath]]];
+    NSURL *destination = [NSURL fileURLWithPath:ModelManager.sharedManager.modelsPath];
+    
+    self.importer = [[ModelImporter alloc]
+        initWithURL:URL
+        delegate:self
+        destinationDirectory:destination];
+    
     [self.importer import];
 }
 
@@ -212,8 +219,8 @@ NSError * NetRunnerReloadModelsError() {
     
     NSError *error;
     
-    if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:[self modelsPath] error:&error] ) {
-        NSLog(@"Unable to load model bundles at path %@", [self modelsPath]);
+    if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:ModelManager.sharedManager.modelsPath error:&error] ) {
+        NSLog(@"Unable to load model bundles at path %@", ModelManager.sharedManager.modelsPath);
         [self showError:NetRunnerReloadModelsError()];
         return;
     }
@@ -279,15 +286,6 @@ NSError * NetRunnerReloadModelsError() {
         handler:nil]];
 
     [self presentViewController:alert animated:YES completion:nil];
-}
-
-// TODO: Duplicated in AppDelegate
-
-- (NSString*)modelsPath {
-    NSURL *documentDirectoryURL = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains: NSUserDomainMask][0];
-    NSString *documentDirectoryPath = [documentDirectoryURL path];
-    NSString *modelsPath = [documentDirectoryPath stringByAppendingPathComponent:@"models"];
-    return modelsPath;
 }
 
 @end
