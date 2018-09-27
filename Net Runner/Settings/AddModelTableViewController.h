@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) IBOutlet UIProgressView *downloadProgressView;
 @property (weak) IBOutlet UILabel *downloadLabel;
 
-@property id<AddModelTableViewControllerDelegate> delegate;
+@property (weak) id<AddModelTableViewControllerDelegate> delegate;
 
 @end
 

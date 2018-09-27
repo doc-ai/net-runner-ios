@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  * The model importer delegate. See the `ModelImporterDelegate` for the required delegate functions.
  */
 
-@property (readonly) id<ModelImporterDelegate> delegate;
+@property (weak, readonly) id<ModelImporterDelegate> delegate;
 
 /**
  * The directory that the downloaded model will be copied to.
