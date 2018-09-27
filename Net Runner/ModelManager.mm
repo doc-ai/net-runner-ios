@@ -8,6 +8,10 @@
 
 #import "ModelManager.h"
 
+#import "UserDefaults.h"
+
+@import TensorIO;
+
 @implementation ModelManager
 
 + (instancetype)sharedManager {
@@ -26,7 +30,7 @@
         @"mobilenet-v1-100-224-quantized",
         @"mobilenet-v1-100-224-unquantized",
         @"mobilenet-v1-100-128-quantized",
-        @"",
+        @"phenomenal-face-mobilenet-v2-100-224",
     ];
 }
 
@@ -46,6 +50,10 @@
 // MARK: - Activity
 
 - (BOOL)deleteModel:(TIOModelBundle*)modelBundle error:(NSError**)error {
+    
+    NSString *selectedModelID = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
+    BOOL isSelectedModel = [selectedModelID isEqualToString:modelBundle.identifier];
+    
     return YES;
 }
 
