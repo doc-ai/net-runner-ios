@@ -20,6 +20,8 @@
 
 #import "ModelDetailsTableViewController.h"
 
+#import "ModelDetailsJSONViewController.h"
+
 @import TensorIO;
 
 @interface ModelDetailsTableViewController ()
@@ -42,6 +44,13 @@
     self.licenseLabel.text = self.bundle.license;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ( [segue.identifier isEqualToString:@"ModelDetailsJSONSegue"] ) {
+        ModelDetailsJSONViewController *vc = (ModelDetailsJSONViewController*)segue.destinationViewController;
+        vc.bundle = self.bundle;
+    }
+}
+
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -58,6 +67,8 @@
         return NSLocalizedString(@"Description", @"Model description section heading");
     case 3:
         return NSLocalizedString(@"License", @"Model license section heading");
+    case 4:
+        return NSLocalizedString(@"More", @"Model more section heading");
     default:
         return @"";
     }

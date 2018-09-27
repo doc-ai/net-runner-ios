@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -480,6 +481,35 @@ doc.ai</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="Nzz-ID-8mo">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="44" id="QeW-IP-Xgr">
+                                        <rect key="frame" x="0.0" y="563" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QeW-IP-Xgr" id="2hr-df-Hsr">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model JSON" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMe-tp-bPS">
+                                                    <rect key="frame" x="16" y="11" width="317" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wMe-tp-bPS" firstAttribute="top" secondItem="2hr-df-Hsr" secondAttribute="topMargin" id="2Dh-qz-lq6"/>
+                                                <constraint firstItem="wMe-tp-bPS" firstAttribute="trailing" secondItem="2hr-df-Hsr" secondAttribute="trailingMargin" id="EfZ-3Q-Lkg"/>
+                                                <constraint firstItem="wMe-tp-bPS" firstAttribute="leading" secondItem="2hr-df-Hsr" secondAttribute="leadingMargin" id="Ij1-ke-W3I"/>
+                                                <constraint firstItem="wMe-tp-bPS" firstAttribute="bottom" secondItem="2hr-df-Hsr" secondAttribute="bottomMargin" id="uNk-pR-2RW"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="DyF-cf-Wkq" kind="show" identifier="ModelDetailsJSONSegue" id="eA7-yx-VSV"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="Pmh-s4-Pxw" id="yb9-q0-rA3"/>
@@ -496,6 +526,39 @@ doc.ai</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="haX-Lb-17V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2012" y="-241"/>
+        </scene>
+        <!--Model JSON-->
+        <scene sceneID="0pB-FB-H2s">
+            <objects>
+                <viewController title="Model JSON" id="DyF-cf-Wkq" customClass="ModelDetailsJSONViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jYe-rq-IBs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pzV-fc-E5u">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pzV-fc-E5u" firstAttribute="trailing" secondItem="Zcy-Ee-Jt3" secondAttribute="trailing" id="3JH-tO-ZT5"/>
+                            <constraint firstItem="pzV-fc-E5u" firstAttribute="bottom" secondItem="Zcy-Ee-Jt3" secondAttribute="bottom" id="C0x-Cs-mXe"/>
+                            <constraint firstItem="pzV-fc-E5u" firstAttribute="leading" secondItem="Zcy-Ee-Jt3" secondAttribute="leading" id="ZCl-aS-WAP"/>
+                            <constraint firstItem="pzV-fc-E5u" firstAttribute="top" secondItem="jYe-rq-IBs" secondAttribute="top" id="oXZ-Wy-xKn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zcy-Ee-Jt3"/>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="pzV-fc-E5u" id="az9-09-cf7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ii8-r4-SXs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2800.8000000000002" y="-242.42878560719643"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="B6m-4w-dK1">

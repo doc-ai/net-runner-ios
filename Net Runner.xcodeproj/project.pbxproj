@@ -27,6 +27,7 @@
 		E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */; };
 		E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */; };
 		E392F8882155914700116078 /* ModelImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F8872155914700116078 /* ModelImporter.mm */; };
+		E392F88B215D5AB400116078 /* ModelDetailsJSONViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */; };
 		E3A520E2210A49A0004B912B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3A520E1210A49A0004B912B /* AppDelegate.mm */; };
 		E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3A520E9210A49A1004B912B /* Assets.xcassets */; };
 		E3A520F0210A49A1004B912B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A520EF210A49A1004B912B /* main.m */; };
@@ -139,6 +140,8 @@
 		E392F88421556D7000116078 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		E392F8862155914700116078 /* ModelImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelImporter.h; sourceTree = "<group>"; };
 		E392F8872155914700116078 /* ModelImporter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelImporter.mm; sourceTree = "<group>"; };
+		E392F889215D5AB400116078 /* ModelDetailsJSONViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelDetailsJSONViewController.h; sourceTree = "<group>"; };
+		E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelDetailsJSONViewController.mm; sourceTree = "<group>"; };
 		E3A520DD210A49A0004B912B /* Net Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Net Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A520E0210A49A0004B912B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E3A520E1210A49A0004B912B /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -555,6 +558,8 @@
 				E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */,
 				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
 				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */,
+				E392F889215D5AB400116078 /* ModelDetailsJSONViewController.h */,
+				E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */,
 				E32FB5DA2149BA0A00367B11 /* AddModelTableViewController.h */,
 				E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.mm */,
 				E392F8862155914700116078 /* ModelImporter.h */,
@@ -823,6 +828,7 @@
 				E3F6C6B1210A5B8D00D200D8 /* MainViewController.mm in Sources */,
 				E392F8882155914700116078 /* ModelImporter.mm in Sources */,
 				E3F6C680210A567300D200D8 /* PhotoAssetsCollectionViewController.m in Sources */,
+				E392F88B215D5AB400116078 /* ModelDetailsJSONViewController.mm in Sources */,
 				E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */,
 				E3F6C681210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m in Sources */,
 				E33229D7212607680031435F /* ModelOutputManager.m in Sources */,
