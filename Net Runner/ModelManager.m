@@ -20,6 +20,16 @@
     return sharedInstance;
 }
 
+- (NSArray<NSString*>*)defaultModelIDs {
+    return @[
+        @"mobilenet-v2-100-224-unquantized",
+        @"mobilenet-v1-100-224-quantized",
+        @"mobilenet-v1-100-224-unquantized",
+        @"mobilenet-v1-100-128-quantized",
+        @"",
+    ];
+}
+
 // MARK: - Model Directories
 
 - (NSString*)initialModelsPath {
@@ -33,5 +43,10 @@
     return modelsPath;
 }
 
+// MARK: - Activity
+
+- (BOOL)deleteModel:(TIOModelBundle*)modelBundle error:(NSError**)error {
+    return YES;
+}
 
 @end

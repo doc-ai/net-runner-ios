@@ -33,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) IBOutlet UILabel *authorLabel;
 @property (weak) IBOutlet UILabel *descriptionLabel;
 @property (weak) IBOutlet UILabel *licenseLabel;
+@property (weak) IBOutlet UIView *footerView;
+
+- (IBAction)deleteModel:(id)sender;
 
 @end
 

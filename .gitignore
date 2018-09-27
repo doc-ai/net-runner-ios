@@ -9,6 +9,9 @@ Net Runner/models/*
 !Net Runner/models/mobilenet_v1_1.0_224.tfbundle/
 !Net Runner/models/mobilenet_v2_1.4_224.tfbundle/
 
+# macOS
+.DS_Store
+
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore

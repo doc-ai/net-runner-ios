@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TIOModelBundle;
+
 /**
  * Wraps the `TIOModelBundleManager` to provide application specific functionality
  * such as model location and deleting models.
@@ -22,6 +24,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 + (instancetype)sharedManager;
+
+/**
+ * Returns an array of model ids that ship with the application.
+ *
+ * These models cannot, for example, be deleted.
+ */
+
+- (NSArray<NSString*>*)defaultModelIDs;
 
 /*!
  @abstract Returns path to the directory of models presented to Net Runner at build time
@@ -38,6 +48,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 - (NSString*)modelsPath;
+
+/**
+ * Deletes the specified model, removing it from the file system
+ *
+ * @param modelBundle A bundle representing the model you'd like to delete
+ * @param error Pointer to an error that will be set if the model cannot be deleted
+ *
+ * @return BOOL `YES` if the model is succeesfully deleted, `NO` otherwise
+ */
+
+- (BOOL)deleteModel:(TIOModelBundle*)modelBundle error:(NSError**)error;
 
 @end
 

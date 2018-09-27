@@ -21,6 +21,7 @@
 #import "ModelDetailsTableViewController.h"
 
 #import "ModelDetailsJSONViewController.h"
+#import "ModelManager.h"
 
 @import TensorIO;
 
@@ -34,6 +35,10 @@
     [super viewDidLoad];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    if ( [ModelManager.sharedManager.defaultModelIDs containsObject:self.bundle.identifier] ) {
+        self.tableView.tableFooterView.hidden = YES;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,6 +81,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+// MARK: - Actions
+
+- (IBAction)deleteModel:(id)sender {
+    
+    UIAlertController *alert = [UIAlertController
+        alertControllerWithTitle:NSLocalizedString(@"Are you sure you want to delete this model?", @"Delete model alert title")
+        message:NSLocalizedString(@"Deleting this model will remove it permanently. It will no longer be available to select for live inference or for bulk evaluation.", @"Delete model alert message")
+        preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete Model", @"Delete model alert delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSError *error;
+        if ( ![ModelManager.sharedManager deleteModel:self.bundle error:&error] ) {
+            UIAlertController *errorAlert = [UIAlertController
+                alertControllerWithTitle:NSLocalizedString(@"There was a problem removing the model", @"Delete model error alert title")
+                message:NSLocalizedString(@"Try restarting Net Runner and deleting the model again or re-installing Net Runner.", @"Delete model error alert message")
+                preferredStyle:UIAlertControllerStyleAlert];
+            
+            [errorAlert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Dismiss", @"Dismiss alert title") style:UIAlertActionStyleDefault handler:nil]];
+            
+            [self presentViewController:errorAlert animated:YES completion:nil];
+        }
+        
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Delete model alert canel button") style:UIAlertActionStyleCancel handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
