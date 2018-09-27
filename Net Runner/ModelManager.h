@@ -10,6 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * Notification posted when a model is deleted
+ *
+ * The `"model"` key contains the identifier of the model that was deleted.
+ */
+
+extern NSString * const NRModelManagerDidDeleteModelNotification;
+
 @class TIOModelBundle;
 
 /**

@@ -12,6 +12,8 @@
 
 @import TensorIO;
 
+NSString * const NRModelManagerDidDeleteModelNotification = @"NRModelManagerDidDeleteModelNotification";
+
 @implementation ModelManager
 
 + (instancetype)sharedManager {
@@ -53,6 +55,33 @@
     
     NSString *selectedModelID = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
     BOOL isSelectedModel = [selectedModelID isEqualToString:modelBundle.identifier];
+    NSFileManager *fm = NSFileManager.defaultManager;
+    
+    // Remove the model and send errors back to the client
+    
+    if ( ![fm removeItemAtPath:modelBundle.path error:error] ) {
+        NSLog(@"Unable to remove model at path: %@, error: %@", modelBundle.path, *error);
+        return NO;
+    }
+    
+    // Reload models
+    
+    if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:self.modelsPath error:error] ) {
+        NSLog(@"Unable to load model bundles at path %@, error: %@", self.modelsPath, *error);
+        return NO;
+    }
+    
+    // Reset the selected model if the selected model was deleted
+    
+    if ( isSelectedModel ) {
+        [NSUserDefaults.standardUserDefaults setObject:kPresDefaultModelID forKey:kPrefsSelectedModelID];
+    }
+    
+    // Inform listeners
+    
+    [NSNotificationCenter.defaultCenter postNotificationName:NRModelManagerDidDeleteModelNotification object:self userInfo:@{
+        @"model": modelBundle
+    }];
     
     return YES;
 }

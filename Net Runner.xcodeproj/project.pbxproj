@@ -28,7 +28,7 @@
 		E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */; };
 		E392F8882155914700116078 /* ModelImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F8872155914700116078 /* ModelImporter.mm */; };
 		E392F88B215D5AB400116078 /* ModelDetailsJSONViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */; };
-		E392F88E215D6B3B00116078 /* ModelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E392F88D215D6B3B00116078 /* ModelManager.m */; };
+		E392F88E215D6B3B00116078 /* ModelManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F88D215D6B3B00116078 /* ModelManager.mm */; };
 		E3A520E2210A49A0004B912B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3A520E1210A49A0004B912B /* AppDelegate.mm */; };
 		E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3A520E9210A49A1004B912B /* Assets.xcassets */; };
 		E3A520F0210A49A1004B912B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E3A520EF210A49A1004B912B /* main.m */; };
@@ -144,7 +144,7 @@
 		E392F889215D5AB400116078 /* ModelDetailsJSONViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelDetailsJSONViewController.h; sourceTree = "<group>"; };
 		E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelDetailsJSONViewController.mm; sourceTree = "<group>"; };
 		E392F88C215D6B3B00116078 /* ModelManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelManager.h; sourceTree = "<group>"; };
-		E392F88D215D6B3B00116078 /* ModelManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelManager.m; sourceTree = "<group>"; };
+		E392F88D215D6B3B00116078 /* ModelManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelManager.mm; sourceTree = "<group>"; };
 		E3A520DD210A49A0004B912B /* Net Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Net Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3A520E0210A49A0004B912B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E3A520E1210A49A0004B912B /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 				E3F6C6AF210A5B8D00D200D8 /* MainViewController.h */,
 				E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */,
 				E392F88C215D6B3B00116078 /* ModelManager.h */,
-				E392F88D215D6B3B00116078 /* ModelManager.m */,
+				E392F88D215D6B3B00116078 /* ModelManager.mm */,
 				E33229D92126098F0031435F /* Model Output */,
 				E3A52126210A5147004B912B /* headless */,
 				E3A52127210A5147004B912B /* models */,
@@ -815,7 +815,7 @@
 				E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.mm in Sources */,
 				E3B57E7D210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.mm in Sources */,
 				E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.mm in Sources */,
-				E392F88E215D6B3B00116078 /* ModelManager.m in Sources */,
+				E392F88E215D6B3B00116078 /* ModelManager.mm in Sources */,
 				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
 				E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */,

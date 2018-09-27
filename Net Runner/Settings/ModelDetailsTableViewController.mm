@@ -95,7 +95,10 @@
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete Model", @"Delete model alert delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         NSError *error;
+        
         if ( ![ModelManager.sharedManager deleteModel:self.bundle error:&error] ) {
+            NSLog(@"There was a problem deleting the model with identifier %@, error: %@", self.bundle.identifier, error);
+            
             UIAlertController *errorAlert = [UIAlertController
                 alertControllerWithTitle:NSLocalizedString(@"There was a problem removing the model", @"Delete model error alert title")
                 message:NSLocalizedString(@"Try restarting Net Runner and deleting the model again or re-installing Net Runner.", @"Delete model error alert message")
@@ -104,8 +107,14 @@
             [errorAlert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Dismiss", @"Dismiss alert title") style:UIAlertActionStyleDefault handler:nil]];
             
             [self presentViewController:errorAlert animated:YES completion:nil];
-        }
         
+        } else {
+            [self.delegate modelDetailsTableViewControllerDidDeleteModel:self];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Delete model alert canel button") style:UIAlertActionStyleCancel handler:nil]];
