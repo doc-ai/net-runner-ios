@@ -376,6 +376,26 @@ doc.ai</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="wvh-zl-SWq">
+                            <rect key="frame" x="0.0" y="625" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGo-wt-1fg">
+                                    <rect key="frame" x="142" y="7" width="91" height="30"/>
+                                    <state key="normal" title="Delete Model">
+                                        <color key="titleColor" red="1" green="0.26194005205237636" blue="0.21104333621558746" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="deleteModel:" destination="Pmh-s4-Pxw" eventType="touchUpInside" id="ZBS-tc-9lj"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="vGo-wt-1fg" firstAttribute="centerY" secondItem="wvh-zl-SWq" secondAttribute="centerY" id="UOM-p6-8Qo"/>
+                                <constraint firstItem="vGo-wt-1fg" firstAttribute="centerX" secondItem="wvh-zl-SWq" secondAttribute="centerX" id="WKK-BE-RZV"/>
+                            </constraints>
+                        </view>
                         <sections>
                             <tableViewSection id="vCm-tW-0hx">
                                 <cells>
@@ -519,6 +539,7 @@ doc.ai</string>
                     <connections>
                         <outlet property="authorLabel" destination="ndm-MJ-PFq" id="i2u-Jx-7vI"/>
                         <outlet property="descriptionLabel" destination="Yer-VO-Unp" id="tko-3n-J6u"/>
+                        <outlet property="footerView" destination="wvh-zl-SWq" id="VjU-fI-Zyq"/>
                         <outlet property="licenseLabel" destination="U04-PG-zIJ" id="hOW-4e-nCr"/>
                         <outlet property="nameLabel" destination="jau-8j-W51" id="h8d-GX-ygm"/>
                     </connections>
