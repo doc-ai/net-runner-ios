@@ -35,7 +35,7 @@ static NSString * const NetRunnerAddModelErrorDomain = @"ai.doc.net-runner.add-m
 NSError * NetRunnerAddModelInvalidURLError() {
     return [[NSError alloc] initWithDomain:NetRunnerAddModelErrorDomain code:101 userInfo:@{
         NSLocalizedDescriptionKey: [NSString stringWithFormat:@"The URL is invalid."],
-        NSLocalizedRecoverySuggestionErrorKey: @"Please enter a valid URL."
+        NSLocalizedRecoverySuggestionErrorKey: @"Please enter a valid URL. Make sure to include the http or https scheme."
     }];
 }
 
@@ -115,7 +115,7 @@ NSError * NetRunnerReloadModelsError() {
     
     NSURL *URL = [NSURL URLWithString:self.URLField.text];
     
-    if ( URL == nil ) {
+    if ( URL == nil || URL.scheme == nil || URL.host == nil ) {
         NSLog(@"Invalid URL");
         [self showError:NetRunnerAddModelInvalidURLError()];
         return;
