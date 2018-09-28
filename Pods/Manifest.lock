@@ -1,20 +1,24 @@
 PODS:
+  - SSZipArchive (2.1.4)
   - TensorFlowLite (1.10.1)
-  - TensorIO (0.2.1):
+  - TensorIO (0.3.0):
     - TensorFlowLite
 
 DEPENDENCIES:
+  - SSZipArchive
   - TensorIO
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - SSZipArchive
     - TensorFlowLite
     - TensorIO
 
 SPEC CHECKSUMS:
+  SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
   TensorFlowLite: 6274f29bbf7e234edb3108f0f32728b5a4d53d77
-  TensorIO: 48572597172982da4ccf949364dc3266b025caa8
+  TensorIO: ddb16628b67832b343fd650bf0cc7c7dcf1d760d
 
-PODFILE CHECKSUM: 3cfb1af1548ac16b1c67a27873dab837ee04128e
+PODFILE CHECKSUM: e164552bd03b1a3b462a2fc6c4c02cd18725d160
 
 COCOAPODS: 1.5.3

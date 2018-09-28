@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString * const kTFModelBundleExtension;
 extern NSString * const kTFModelInfoFile;
+extern NSString * const kTFLiteModelClassName;
+extern NSString * const kTFModelAssetsDirectory;
 
 /**
  * Encapsulates information about a `TIOModel` without actaully loading the model.

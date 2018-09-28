@@ -20,19 +20,32 @@
 
 @import UIKit;
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class ModelDetailsTableViewController;
 @class TIOModelBundle;
 @protocol TIOModel;
 
-NS_ASSUME_NONNULL_BEGIN
+@protocol ModelDetailsTableViewControllerDelegate
+
+- (void)modelDetailsTableViewControllerDidDeleteModel:(ModelDetailsTableViewController*)viewController;
+
+@end
+
+// MARK: -
 
 @interface ModelDetailsTableViewController : UITableViewController
 
+@property (weak) id<ModelDetailsTableViewControllerDelegate> delegate;
 @property TIOModelBundle *bundle;
 
 @property (weak) IBOutlet UILabel *nameLabel;
 @property (weak) IBOutlet UILabel *authorLabel;
 @property (weak) IBOutlet UILabel *descriptionLabel;
 @property (weak) IBOutlet UILabel *licenseLabel;
+@property (weak) IBOutlet UIView *footerView;
+
+- (IBAction)deleteModel:(id)sender;
 
 @end
 
