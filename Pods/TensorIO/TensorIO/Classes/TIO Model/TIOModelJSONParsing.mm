@@ -26,19 +26,19 @@
 #import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
 
-static NSError * const kTIOParserInvalidPixelNormalizationError = [NSError errorWithDomain:@"doc.ai.tensorio" code:201 userInfo:@{
+static NSError * const kTIOParserInvalidPixelNormalizationError = [NSError errorWithDomain:@"ai.doc.tensorio" code:201 userInfo:@{
     NSLocalizedDescriptionKey: @"Unable to parse normalize field in description of input or output layer"
 }];
 
-static NSError * const kTIOParserInvalidPixelDenormalizationError = [NSError errorWithDomain:@"doc.ai.tensorio" code:202 userInfo:@{
+static NSError * const kTIOParserInvalidPixelDenormalizationError = [NSError errorWithDomain:@"ai.doc.tensorio" code:202 userInfo:@{
     NSLocalizedDescriptionKey: @"Unable to parse the denormalize field in description of input or output layer"
 }];
 
-static NSError * const kTIOParserInvalidQuantizerError = [NSError errorWithDomain:@"doc.ai.tensorio" code:203 userInfo:@{
+static NSError * const kTIOParserInvalidQuantizerError = [NSError errorWithDomain:@"ai.doc.tensorio" code:203 userInfo:@{
     NSLocalizedDescriptionKey: @"Unable to parse the quantize field in description of input or output layer"
 }];
 
-static NSError * const kTIOParserInvalidDequantizerError = [NSError errorWithDomain:@"doc.ai.tensorio" code:204 userInfo:@{
+static NSError * const kTIOParserInvalidDequantizerError = [NSError errorWithDomain:@"ai.doc.tensorio" code:204 userInfo:@{
     NSLocalizedDescriptionKey: @"Unable to parse the dequantize field in description of input or output layer"
 }];
 

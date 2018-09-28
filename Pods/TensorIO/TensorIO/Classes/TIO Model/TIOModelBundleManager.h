@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  * @param path Directory where model bundles are located, may be in the application bundle,
  * application documents directory, or elsewhere.
- * @param error No error is currently set.
+ * @param error An error if the model bundles could not be loaded.
  *
  * @return `YES` if the bundles were successfully loaded, `NO` otherwise.
  */

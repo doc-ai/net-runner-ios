@@ -21,19 +21,32 @@
 #import "ModelsTableViewController.h"
 
 #import "ModelDetailsTableViewController.h"
+#import "AddModelTableViewController.h"
+#import "UserDefaults.h"
+// #import "ModelManager.h"
 
 @import TensorIO;
+
+@interface ModelsTableViewController() <AddModelTableViewControllerDelegate, ModelDetailsTableViewControllerDelegate>
+@end
 
 @implementation ModelsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addModel:)];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"ModelDetailsSegue"] ) {
         ModelDetailsTableViewController *destination = (ModelDetailsTableViewController*)segue.destinationViewController;
         destination.bundle = TIOModelBundleManager.sharedManager.modelBundles[((NSIndexPath*)sender).row];
+        destination.delegate = self;
+    }
+    if ( [segue.identifier isEqualToString:@"AddModelSegue"] ) {
+        AddModelTableViewController *destination = (AddModelTableViewController*)((UINavigationController*)segue.destinationViewController).topViewController;
+        destination.delegate = self;
     }
 }
 
@@ -63,7 +76,7 @@
     cell.textLabel.text = bundle.name;
     cell.accessoryType = UITableViewCellAccessoryDetailButton;
     
-    cell.textLabel.font = self.selectedBundle == bundle
+    cell.textLabel.font = [self.selectedBundle.identifier isEqualToString:bundle.identifier]
         ? [UIFont boldSystemFontOfSize:[UIFont systemFontSize]]
         : [UIFont systemFontOfSize:[UIFont systemFontSize]];
 
@@ -94,6 +107,33 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"ModelDetailsSegue" sender:indexPath];
+}
+
+// MARK: - Add Model Table View Controller Delegate
+
+- (void)addModelTableViewControllerDidAddModel:(AddModelTableViewController*)viewController {
+    [self.tableView reloadData];
+}
+
+// MARK: - Model Details Table View Controller Delegate
+
+- (void)modelDetailsTableViewControllerDidDeleteModel:(ModelDetailsTableViewController*)viewController {
+    [self.tableView reloadData];
+    
+    // If the currently selected model was deleted, reset the selection to the default model
+    
+    NSString *selectedModelID = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
+    
+    if ( ![self.selectedBundle.identifier isEqualToString:selectedModelID] ) {
+        self.selectedBundle = [TIOModelBundleManager.sharedManager bundleWithId:selectedModelID];
+        [self.delegate modelTableViewController:self didSelectBundle:self.selectedBundle];
+    }
+}
+
+// MARK: - User Interaction
+
+- (IBAction)addModel:(id)sender {
+    [self performSegueWithIdentifier:@"AddModelSegue" sender:nil];
 }
 
 @end

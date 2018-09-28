@@ -26,7 +26,7 @@
 NSString * const kTFModelBundleExtension = @"tfbundle";
 NSString * const kTFModelInfoFile = @"model.json";
 NSString * const kTFLiteModelClassName = @"TIOTFLiteModel";
-NSString * const kAssetsDirectory = @"assets";
+NSString * const kTFModelAssetsDirectory = @"assets";
 
 @interface TIOModelBundle ()
 
@@ -62,20 +62,6 @@ NSString * const kAssetsDirectory = @"assets";
             NSLog(@"Error reading json file at path %@, error %@", jsonPath, jsonError);
             return nil;
         }
-        
-        // Required properties
-        
-        assert(json[@"id"] != nil);
-        assert(json[@"name"] != nil);
-        assert(json[@"version"] != nil);
-        assert(json[@"details"] != nil);
-        assert(json[@"author"] != nil);
-        assert(json[@"license"] != nil);
-        
-        assert(json[@"model"] != nil);
-        assert(json[@"model"][@"quantized"] != nil);
-        assert(json[@"model"][@"file"] != nil);
-        // assert(json[@"model"][@"type"] != nil);
         
         // Initialize
         
@@ -125,7 +111,7 @@ NSString * const kAssetsDirectory = @"assets";
 }
 
 - (NSString*)pathToAsset:(NSString*)filename {
-    return [[_path stringByAppendingPathComponent:kAssetsDirectory] stringByAppendingPathComponent:filename];
+    return [[_path stringByAppendingPathComponent:kTFModelAssetsDirectory] stringByAppendingPathComponent:filename];
 }
 
 @end

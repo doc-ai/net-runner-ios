@@ -20,6 +20,11 @@
 	<string>7</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Capture live video images for model evaluation</string>
 	<key>NSPhotoLibraryUsageDescription</key>
