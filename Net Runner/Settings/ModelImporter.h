@@ -18,8 +18,6 @@
 //  limitations under the License.
 //
 
-// TODO: add documentation
-
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN

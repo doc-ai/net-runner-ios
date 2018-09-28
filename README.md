@@ -23,6 +23,7 @@ We happen to think it looks pretty good too. And if that latency number worries 
 	* [ Freezing a Model ](#freeze-model)
 	* [ Converting a Model to TensorFlow Lite ](#toco-convert)
 	* [ Preparing a TF Lite Model for Net Runner ](#prep-net-runner) 
+	* [ Adding a Model To Net Runner ](#add-model)
 * [ Developers Start Here ](#developers)
 * [ Basic Usage ](#basic-usage)
 	* [ Model Evaluators ](#model-evaluators) 
@@ -99,6 +100,15 @@ At this stage you could use your model with the TensorFlow Lite library directly
 With TensorIO you describe your model's input and output layers using JSON. Net Runner can then automatically prepare camera and image data for inference and capture your model's output in the correct format.
 
 Refer to the included *.tfbundle* folders in the *models* directory found in this repo for examples, and see especially the [section on TensorIO](#tensor-io) below for details on preparing your TF Lite models for Net Runner.
+
+<a name="add-model"></a>
+### Adding a Model to Net Runner
+
+You can download your own models directly into Net Runner. Make sure your model has been propertly prepared and is wrapped in a *.tfbundle* with a *model.json* description and any other assets, then zip the *.tfbundle* folder using a utility like gzip or the Finder's Compress utility. 
+
+Upload the zipped bundle to web site you can access, and then from within Net Runner, go to Settings and tap the selected model. At the top right of the Models table, tap the Plus button. Enter the URL and then tap Import Model at the bottom of the screen.
+
+Net Runner will download, unzip, and validate your model, and if it can be run in the app, will import it and make it available for selection and evaluation. Note that Net Runner is designed specifically for computer vision applications, so your models should take a single input of type image.
 
 <a name="developers"></a>
 ## Developers Start Here
