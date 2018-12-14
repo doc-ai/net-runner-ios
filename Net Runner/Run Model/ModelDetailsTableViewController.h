@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak) id<ModelDetailsTableViewControllerDelegate> delegate;
 @property TIOModelBundle *bundle;
+@property BOOL editable;
 
 @property (weak) IBOutlet UILabel *nameLabel;
 @property (weak) IBOutlet UILabel *authorLabel;

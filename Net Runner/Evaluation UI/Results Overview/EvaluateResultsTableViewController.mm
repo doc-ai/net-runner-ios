@@ -298,7 +298,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
 
 - (void)completedEvaluation {
     self.navigationItem.rightBarButtonItem.enabled = YES;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEvaluation:)];
+    self.navigationItem.leftBarButtonItem = nil;
     
     for ( UITableViewCell *cell in self.tableView.visibleCells ) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

@@ -36,7 +36,9 @@
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-    if ( [ModelManager.sharedManager.defaultModelIDs containsObject:self.bundle.identifier] ) {
+    // Disallow deletion if we are not editable or the bundle is included by default
+    
+    if ( !self.editable || [ModelManager.sharedManager.defaultModelIDs containsObject:self.bundle.identifier] ) {
         self.tableView.tableFooterView.hidden = YES;
     }
 }
