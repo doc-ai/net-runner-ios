@@ -21,15 +21,13 @@
 @import UIKit;
 @import AVFoundation;
 
-#import "SettingsTableViewController.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
 @class ImageInputPreviewView;
 @class ResultInfoView;
 @class TIOModelBundle;
 
-@interface RunImageModelViewController : UIViewController <UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SettingsTableViewControllerDelegate>
+@interface RunImageModelViewController : UIViewController <UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property IBOutlet UIImageView *photoImageView;
 @property IBOutlet UIView* previewView;

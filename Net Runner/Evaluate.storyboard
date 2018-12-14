@@ -65,7 +65,6 @@
                                 <connections>
                                     <outlet property="selectedSwitch" destination="TtY-1N-y6D" id="I4G-BG-Etq"/>
                                     <outlet property="titleLabel" destination="Dve-gh-QWp" id="EZ0-Ad-Tfz"/>
-                                    <segue destination="iTj-5t-Qjo" kind="show" identifier="ModelDetailsSegue" id="LLk-tW-NYF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -86,14 +85,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IlV-rd-qXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="482" y="149"/>
-        </scene>
-        <!--ModelDetails-->
-        <scene sceneID="yym-aV-Tmw">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="ModelDetails" id="iTj-5t-Qjo" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PSG-Jm-B0Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="481" y="575"/>
         </scene>
         <!--Select Albums-->
         <scene sceneID="gb8-0v-7IA">
