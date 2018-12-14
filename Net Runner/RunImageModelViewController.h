@@ -1,5 +1,5 @@
 //
-//  MainViewController.h
+//  RunImageModelViewController.h
 //  Net Runner
 //
 //  Created by Philip Dow on 7/26/18.
@@ -27,13 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ImageInputPreviewView;
 @class ResultInfoView;
+@class TIOModelBundle;
 
-@interface MainViewController : UIViewController <UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SettingsTableViewControllerDelegate>
+@interface RunImageModelViewController : UIViewController <UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, SettingsTableViewControllerDelegate>
 
 @property IBOutlet UIImageView *photoImageView;
 @property IBOutlet UIView* previewView;
 @property IBOutlet ImageInputPreviewView *imageInputPreviewView;
 @property IBOutlet ResultInfoView *infoView;
+
+@property (nullable) TIOModelBundle *modelBundle;
 
 - (IBAction)selectInputSource:(id)sender;
 

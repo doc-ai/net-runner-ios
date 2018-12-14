@@ -56,7 +56,6 @@
     if ( [segue.identifier isEqualToString:@"ModelsSegue"] ) {
         ModelsTableViewController *destination = (ModelsTableViewController*)segue.destinationViewController;
         destination.selectedBundle = self.selectedBundle;
-        destination.delegate = self;
     }
     else if ( [segue.identifier isEqualToString:@"EvaluateSegue"] ) {
         EvaluateSelectModelsTableViewController *destination = (EvaluateSelectModelsTableViewController*)((UINavigationController*)segue.destinationViewController).topViewController;
@@ -75,13 +74,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-// MARK: - Models Table View Controller Delegate
-
-- (void) modelTableViewController:(ModelsTableViewController*)viewController didSelectBundle:(TIOModelBundle*)bundle {
-    [NSUserDefaults.standardUserDefaults setObject:bundle.identifier forKey:kPrefsSelectedModelID];
-    self.selectedBundle = bundle;
 }
 
 // MARK: -

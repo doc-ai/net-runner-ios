@@ -1,5 +1,5 @@
 //
-//  MainViewController.mm
+//  RunImageModelViewController.mm
 //  Net Runner
 //
 //  Created by Philip Dow on 7/26/18.
@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "MainViewController.h"
+#import "RunImageModelViewController.h"
 
 @import AssetsLibrary;
 @import CoreImage;
@@ -46,12 +46,11 @@ typedef enum : NSUInteger {
     CaptureModePhoto,
 } CaptureMode;
 
-@interface MainViewController ()
+@interface RunImageModelViewController ()
 
 @property (nonatomic) CaptureMode captureMode;
 @property LatencyCounter *latencyCounter;
 
-@property TIOModelBundle *modelBundle;
 @property id<TIOModel> model;
 @property id<ModelOutput> previousOutput;
 
@@ -65,7 +64,7 @@ typedef enum : NSUInteger {
 
 // MARK: -
 
-@implementation MainViewController
+@implementation RunImageModelViewController
 
 - (void)dealloc {
   [self teardownAVCapture];
@@ -87,16 +86,9 @@ typedef enum : NSUInteger {
     self.previewView.backgroundColor = UIColor.blackColor;
     self.photoImageView.backgroundColor = UIColor.blackColor;
 
-    // Load default model
-    
-    NSString *modelId = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
-    TIOModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:modelId];
-    
-    if ( bundle == nil ) {
-        NSLog(@"Unable to locate model bundle from last selected bundle with id: %@", modelId);
-    } else {
-        [self loadModelFromBundle:bundle];
-    }
+    // Load the target model
+
+    [self loadModelFromBundle:self.modelBundle];
     
     // Preferences
     
@@ -150,6 +142,8 @@ typedef enum : NSUInteger {
     }
 }
 
+// TODO: Won't need to pass selected model to settingss
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"SettingsSegue"] ) {
         SettingsTableViewController *destination = (SettingsTableViewController*)segue.destinationViewController;
@@ -170,13 +164,8 @@ typedef enum : NSUInteger {
  */
 
 - (BOOL)loadModelFromBundle:(nonnull TIOModelBundle*)bundle {
-    if ( self.modelBundle == bundle ) {
-        return NO;
-    }
-    
     NSError *modelError;
     
-    self.modelBundle = bundle;
     self.model = [self.modelBundle newModel];
     
     if ( self.model == nil ) {
