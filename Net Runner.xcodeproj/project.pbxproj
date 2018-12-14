@@ -67,9 +67,8 @@
 		E3F6C696210A56EC00D200D8 /* HeadlessTestBundleRunner.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C68E210A56EB00D200D8 /* HeadlessTestBundleRunner.mm */; };
 		E3F6C697210A56EC00D200D8 /* HeadlessTestBundleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C690210A56EB00D200D8 /* HeadlessTestBundleManager.mm */; };
 		E3F6C69A210A56F300D200D8 /* ImageInputPreviewView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C699210A56F200D200D8 /* ImageInputPreviewView.mm */; };
-		E3F6C6A2210A56FC00D200D8 /* SettingsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C69B210A56FB00D200D8 /* SettingsTableViewController.mm */; };
+		E3F6C6A2210A56FC00D200D8 /* ImageSettingsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C69B210A56FB00D200D8 /* ImageSettingsTableViewController.mm */; };
 		E3F6C6A3210A56FC00D200D8 /* ModelsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */; };
-		E3F6C6A4210A56FC00D200D8 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C69E210A56FC00D200D8 /* Settings.storyboard */; };
 		E3F6C6A5210A56FC00D200D8 /* ModelDetailsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */; };
 		E3F6C6AB210A578100D200D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */; };
 		E3F6C6AE210A57F200D200D8 /* ResultInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6AD210A57F200D200D8 /* ResultInfoView.m */; };
@@ -218,11 +217,10 @@
 		E3F6C693210A56EC00D200D8 /* HeadlessTestBundleRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadlessTestBundleRunner.h; sourceTree = "<group>"; };
 		E3F6C698210A56F200D200D8 /* ImageInputPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInputPreviewView.h; sourceTree = "<group>"; };
 		E3F6C699210A56F200D200D8 /* ImageInputPreviewView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageInputPreviewView.mm; sourceTree = "<group>"; };
-		E3F6C69B210A56FB00D200D8 /* SettingsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SettingsTableViewController.mm; sourceTree = "<group>"; };
+		E3F6C69B210A56FB00D200D8 /* ImageSettingsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageSettingsTableViewController.mm; sourceTree = "<group>"; };
 		E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelsTableViewController.mm; sourceTree = "<group>"; };
 		E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelDetailsTableViewController.h; sourceTree = "<group>"; };
-		E3F6C69E210A56FC00D200D8 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		E3F6C69F210A56FC00D200D8 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		E3F6C69F210A56FC00D200D8 /* ImageSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSettingsTableViewController.h; sourceTree = "<group>"; };
 		E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelDetailsTableViewController.mm; sourceTree = "<group>"; };
 		E3F6C6A1210A56FC00D200D8 /* ModelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelsTableViewController.h; sourceTree = "<group>"; };
 		E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -427,8 +425,6 @@
 				E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */,
 				E3F6C6B2210A661200D200D8 /* Headless.storyboard */,
 				E3E7725321C42DE3004988DC /* Main.storyboard */,
-				E3E7725C21C4351F004988DC /* Run.storyboard */,
-				E3F6C6B4210A661300D200D8 /* RunImageModel.storyboard */,
 				E3740299210A551A0025AA59 /* Evaluate.storyboard */,
 				E3E7725921C42F7B004988DC /* Collect.storyboard */,
 				E3A520E9210A49A1004B912B /* Assets.xcassets */,
@@ -439,15 +435,13 @@
 				E3A520EF210A49A1004B912B /* main.m */,
 				E3A520E0210A49A0004B912B /* AppDelegate.h */,
 				E3A520E1210A49A0004B912B /* AppDelegate.mm */,
-				E3F6C6AF210A5B8D00D200D8 /* RunImageModelViewController.h */,
-				E3F6C6B0210A5B8D00D200D8 /* RunImageModelViewController.mm */,
 				E392F88C215D6B3B00116078 /* ModelManager.h */,
 				E392F88D215D6B3B00116078 /* ModelManager.mm */,
 				E33229D92126098F0031435F /* Model Output */,
 				E3A52126210A5147004B912B /* headless */,
 				E3A52127210A5147004B912B /* models */,
 				E3E7725F21C43678004988DC /* Run Model */,
-				E3F6C686210A56C500D200D8 /* Settings */,
+				E3F6C686210A56C500D200D8 /* Run Image Model */,
 				E3F6C683210A569400D200D8 /* Additional UI */,
 				E3F6C685210A56B500D200D8 /* Headless Mode */,
 				E3B57E8D210A5301008D19C0 /* Evaluation UI */,
@@ -540,6 +534,7 @@
 		E3E7725F21C43678004988DC /* Run Model */ = {
 			isa = PBXGroup;
 			children = (
+				E3E7725C21C4351F004988DC /* Run.storyboard */,
 				E3F6C6A1210A56FC00D200D8 /* ModelsTableViewController.h */,
 				E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */,
 				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
@@ -580,14 +575,16 @@
 			path = "Headless Mode";
 			sourceTree = "<group>";
 		};
-		E3F6C686210A56C500D200D8 /* Settings */ = {
+		E3F6C686210A56C500D200D8 /* Run Image Model */ = {
 			isa = PBXGroup;
 			children = (
-				E3F6C69E210A56FC00D200D8 /* Settings.storyboard */,
-				E3F6C69F210A56FC00D200D8 /* SettingsTableViewController.h */,
-				E3F6C69B210A56FB00D200D8 /* SettingsTableViewController.mm */,
+				E3F6C6B4210A661300D200D8 /* RunImageModel.storyboard */,
+				E3F6C6AF210A5B8D00D200D8 /* RunImageModelViewController.h */,
+				E3F6C6B0210A5B8D00D200D8 /* RunImageModelViewController.mm */,
+				E3F6C69F210A56FC00D200D8 /* ImageSettingsTableViewController.h */,
+				E3F6C69B210A56FB00D200D8 /* ImageSettingsTableViewController.mm */,
 			);
-			path = Settings;
+			path = "Run Image Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -699,7 +696,6 @@
 			files = (
 				E3A52129210A5147004B912B /* models in Resources */,
 				E3A52128210A5147004B912B /* headless in Resources */,
-				E3F6C6A4210A56FC00D200D8 /* Settings.storyboard in Resources */,
 				E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */,
 				E3E7725B21C42F7B004988DC /* Collect.storyboard in Resources */,
 				E31C799D212E0E8300139C90 /* LICENSE in Resources */,
@@ -827,7 +823,7 @@
 				E3458A94210A56410040648C /* EvaluateConfirmTableViewController.mm in Sources */,
 				E3F6C695210A56EC00D200D8 /* HeadlessViewController.mm in Sources */,
 				E3F6C6A5210A56FC00D200D8 /* ModelDetailsTableViewController.mm in Sources */,
-				E3F6C6A2210A56FC00D200D8 /* SettingsTableViewController.mm in Sources */,
+				E3F6C6A2210A56FC00D200D8 /* ImageSettingsTableViewController.mm in Sources */,
 				E3F6C69A210A56F300D200D8 /* ImageInputPreviewView.mm in Sources */,
 				E3C43752210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm in Sources */,
 				E3C4374D210A565A005E7E16 /* EvaluateResultsByModelCollectionViewController.mm in Sources */,

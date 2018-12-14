@@ -29,7 +29,7 @@
 
 #import "ResultInfoView.h"
 #import "LatencyCounter.h"
-#import "SettingsTableViewController.h"
+#import "ImageSettingsTableViewController.h"
 #import "Utilities.h"
 #import "ImageInputPreviewView.h"
 #import "UserDefaults.h"
@@ -133,22 +133,15 @@ typedef enum : NSUInteger {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    self.imageInputPreviewView.hidden = ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers];
+    self.imageInputPreviewView.showsAlphaChannel = [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBufferAlpha];
+    
 #if TARGET_OS_SIMULATOR
     return;
 #endif
     
     if (self.captureMode == CaptureModeLiveVideo && ![self.session isRunning] && self.model != nil) {
         [self.session startRunning];
-    }
-}
-
-// TODO: Won't need to pass selected model to settingss
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ( [segue.identifier isEqualToString:@"SettingsSegue"] ) {
-        SettingsTableViewController *destination = (SettingsTableViewController*)segue.destinationViewController;
-        destination.selectedBundle = self.modelBundle;
-        destination.delegate = self;
     }
 }
 
@@ -207,26 +200,6 @@ typedef enum : NSUInteger {
         handler:nil]];
     
     [self presentViewController:alert animated:YES completion:nil];
-}
-
-// MARK: - Settings Delegate
-
-- (void)settingsTableViewControllerWillDisappear:(SettingsTableViewController*)viewController {
-    // Model
-    
-    BOOL loadedNewModel = [self loadModelFromBundle:viewController.selectedBundle];
-    
-    // Restart capture with the newly selected model
-    
-    if ( self.model != nil && loadedNewModel ) {
-        [self setupAVCapture:self.model.options.devicePosition];
-        [self setCaptureMode:CaptureModeLiveVideo];
-    }
-    
-    // Other Settings
-    
-    self.imageInputPreviewView.hidden = ![NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBuffers];
-    self.imageInputPreviewView.showsAlphaChannel = [NSUserDefaults.standardUserDefaults boolForKey:kPrefsShowInputBufferAlpha];
 }
 
 // MARK: - Capture Mode
