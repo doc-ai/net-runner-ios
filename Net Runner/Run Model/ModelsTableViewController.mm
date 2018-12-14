@@ -20,10 +20,9 @@
 
 #import "ModelsTableViewController.h"
 
+#import "RunImageModelViewController.h"
 #import "ModelDetailsTableViewController.h"
 #import "AddModelTableViewController.h"
-#import "UserDefaults.h"
-// #import "ModelManager.h"
 
 @import TensorIO;
 
@@ -44,9 +43,16 @@
         destination.bundle = TIOModelBundleManager.sharedManager.modelBundles[((NSIndexPath*)sender).row];
         destination.delegate = self;
     }
-    if ( [segue.identifier isEqualToString:@"AddModelSegue"] ) {
+    else if ( [segue.identifier isEqualToString:@"AddModelSegue"] ) {
         AddModelTableViewController *destination = (AddModelTableViewController*)((UINavigationController*)segue.destinationViewController).topViewController;
         destination.delegate = self;
+    }
+    else if ( [segue.identifier isEqualToString:@"RunImageModelSegue"] ) {
+        RunImageModelViewController *destination = (RunImageModelViewController*)segue.destinationViewController;
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        TIOModelBundle *modelBundle = [TIOModelBundleManager.sharedManager.modelBundles objectAtIndex:indexPath.row];
+        
+        destination.modelBundle = modelBundle;
     }
 }
 
@@ -63,7 +69,7 @@
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
     case 0:
-        return @"TensorFlow Lite Models";
+        return @"Image Models";
     default:
         return @"";
     }
@@ -83,28 +89,6 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self deselectModelRowsExceptRowAtIndexPath:indexPath];
-    
-    [tableView cellForRowAtIndexPath:indexPath].textLabel.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
-    self.selectedBundle = [TIOModelBundleManager.sharedManager.modelBundles objectAtIndex:indexPath.row];
-    
-    [self.delegate modelTableViewController:self didSelectBundle:self.selectedBundle];
-}
-
-- (void)deselectModelRowsExceptRowAtIndexPath:(NSIndexPath *)indexPath {
-    const NSInteger modelSection = 0;
-    
-    for (NSInteger row = 0; row < [self.tableView numberOfRowsInSection:modelSection]; row++) {
-        if (row == indexPath.row) {
-            continue;
-        }
-        NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:modelSection];
-        [self.tableView cellForRowAtIndexPath:path].textLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
-    }
-}
-
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"ModelDetailsSegue" sender:indexPath];
 }
@@ -119,15 +103,6 @@
 
 - (void)modelDetailsTableViewControllerDidDeleteModel:(ModelDetailsTableViewController*)viewController {
     [self.tableView reloadData];
-    
-    // If the currently selected model was deleted, reset the selection to the default model
-    
-    NSString *selectedModelID = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
-    
-    if ( ![self.selectedBundle.identifier isEqualToString:selectedModelID] ) {
-        self.selectedBundle = [TIOModelBundleManager.sharedManager bundleWithId:selectedModelID];
-        [self.delegate modelTableViewController:self didSelectBundle:self.selectedBundle];
-    }
 }
 
 // MARK: - User Interaction

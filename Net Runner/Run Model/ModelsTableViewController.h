@@ -26,17 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 @class TIOModelBundle;
 @protocol TIOModel;
 
-@protocol ModelsTableViewControllerDelegate
-
-- (void) modelTableViewController:(ModelsTableViewController*)viewController didSelectBundle:(TIOModelBundle*)bundle;
-
-@end
-
 // MARK: -
 
 @interface ModelsTableViewController : UITableViewController
 
-@property (weak) id<ModelsTableViewControllerDelegate> delegate;
 @property TIOModelBundle *selectedBundle;
 
 @end

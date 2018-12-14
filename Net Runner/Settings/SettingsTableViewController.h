@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: -
 
-@interface SettingsTableViewController : UITableViewController <ModelsTableViewControllerDelegate>
+@interface SettingsTableViewController : UITableViewController
 
 @property (weak) IBOutlet UISwitch *showInputBuffersSwitch;
 @property (weak) IBOutlet UISwitch *showInputBuffersAlphaSwitch;
