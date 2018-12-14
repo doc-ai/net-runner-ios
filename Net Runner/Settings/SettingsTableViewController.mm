@@ -26,7 +26,7 @@
 
 @import TensorIO;
 
-@interface SettingsTableViewController () <EvaluateSelectModelsTableViewControllerDelegate>
+@interface SettingsTableViewController ()
 
 @end
 
@@ -50,6 +50,8 @@
     }
 }
 
+// TODO: Remove settings segues
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"ModelsSegue"] ) {
         ModelsTableViewController *destination = (ModelsTableViewController*)segue.destinationViewController;
@@ -58,7 +60,6 @@
     }
     else if ( [segue.identifier isEqualToString:@"EvaluateSegue"] ) {
         EvaluateSelectModelsTableViewController *destination = (EvaluateSelectModelsTableViewController*)((UINavigationController*)segue.destinationViewController).topViewController;
-        destination.delegate = self;
     }
 }
 
@@ -81,12 +82,6 @@
 - (void) modelTableViewController:(ModelsTableViewController*)viewController didSelectBundle:(TIOModelBundle*)bundle {
     [NSUserDefaults.standardUserDefaults setObject:bundle.identifier forKey:kPrefsSelectedModelID];
     self.selectedBundle = bundle;
-}
-
-// MARK: - Evaluate Delegate
-
-- (void)evaluateSelectModelsTableViewControllerDidCancel:(EvaluateSelectModelsTableViewController *)tableViewController {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // MARK: -
