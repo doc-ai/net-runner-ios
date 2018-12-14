@@ -42,6 +42,7 @@
         ModelDetailsTableViewController *destination = (ModelDetailsTableViewController*)segue.destinationViewController;
         destination.bundle = TIOModelBundleManager.sharedManager.modelBundles[((NSIndexPath*)sender).row];
         destination.delegate = self;
+        destination.editable = YES;
     }
     else if ( [segue.identifier isEqualToString:@"AddModelSegue"] ) {
         AddModelTableViewController *destination = (AddModelTableViewController*)((UINavigationController*)segue.destinationViewController).topViewController;

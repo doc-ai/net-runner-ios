@@ -19,26 +19,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="PgA-wj-HMs" userLabel="Header View">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the models you would like to evaluate." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9MG-pF-cYL">
-                                    <rect key="frame" x="32" y="14" width="311" height="36"/>
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main-evaluate" translatesAutoresizingMaskIntoConstraints="NO" id="GsC-gg-GGj">
+                                    <rect key="frame" x="20" y="15" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="Pdb-Xy-giJ"/>
+                                        <constraint firstAttribute="height" constant="50" id="t1S-ez-4oQ"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select models to evaluate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLE-ps-UgD">
+                                    <rect key="frame" x="84" y="41" width="283" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="9MG-pF-cYL" firstAttribute="leading" secondItem="PgA-wj-HMs" secondAttribute="leading" constant="32" id="7Gt-ee-dCj"/>
-                                <constraint firstItem="9MG-pF-cYL" firstAttribute="centerY" secondItem="PgA-wj-HMs" secondAttribute="centerY" id="fnd-f3-63o"/>
-                                <constraint firstAttribute="trailing" secondItem="9MG-pF-cYL" secondAttribute="trailing" constant="32" id="oPU-vV-cu3"/>
+                                <constraint firstItem="GsC-gg-GGj" firstAttribute="centerY" secondItem="PgA-wj-HMs" secondAttribute="centerY" constant="5" id="4cL-SA-6Wr"/>
+                                <constraint firstAttribute="trailing" secondItem="vLE-ps-UgD" secondAttribute="trailing" constant="8" id="cgB-Ys-aUY"/>
+                                <constraint firstItem="GsC-gg-GGj" firstAttribute="leading" secondItem="PgA-wj-HMs" secondAttribute="leading" constant="20" id="dic-HJ-HYv"/>
+                                <constraint firstAttribute="bottom" secondItem="vLE-ps-UgD" secondAttribute="bottom" constant="8" id="qe9-zw-6aM"/>
+                                <constraint firstItem="vLE-ps-UgD" firstAttribute="leading" secondItem="GsC-gg-GGj" secondAttribute="trailing" constant="14" id="t1g-am-OQe"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ModelCell" id="A0E-Tg-Cqc" customClass="EvaluateModelTableViewCell">
-                                <rect key="frame" x="0.0" y="119.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="125.5" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A0E-Tg-Cqc" id="UF6-Fj-3QO">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -65,6 +74,7 @@
                                 <connections>
                                     <outlet property="selectedSwitch" destination="TtY-1N-y6D" id="I4G-BG-Etq"/>
                                     <outlet property="titleLabel" destination="Dve-gh-QWp" id="EZ0-Ad-Tfz"/>
+                                    <segue destination="3Xm-DV-xTF" kind="show" identifier="ModelDetailsSegue" id="5Zg-TI-igI"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -85,6 +95,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IlV-rd-qXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="482" y="149"/>
+        </scene>
+        <!--ModelDetails-->
+        <scene sceneID="cHc-KL-Xwt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Run" referencedIdentifier="ModelDetails" id="3Xm-DV-xTF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ep8-QT-RIZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="481" y="608"/>
         </scene>
         <!--Select Albums-->
         <scene sceneID="gb8-0v-7IA">
@@ -633,4 +651,7 @@ How about a nice game of chess? ♟️</string>
             <point key="canvasLocation" x="3038" y="1637"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="main-evaluate" width="100" height="102"/>
+    </resources>
 </document>

@@ -49,6 +49,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
     if ( [segue.identifier isEqualToString:@"ModelDetailsSegue"] ) {
         ModelDetailsTableViewController *destination = (ModelDetailsTableViewController*)segue.destinationViewController;
         destination.bundle = TIOModelBundleManager.sharedManager.modelBundles[self.tableView.indexPathForSelectedRow.row];
+        destination.editable = NO;
     }
     else if ( [segue.identifier isEqualToString:@"SelectAlbumsSegue"] ) {
         EvaluateSelectAlbumsTableViewController *destination = (EvaluateSelectAlbumsTableViewController*)segue.destinationViewController;
@@ -81,7 +82,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
     case 0:
-        return @"TensorFlow Lite Models";
+        return @"Image Models";
     default:
         return @"";
     }
@@ -96,15 +97,18 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
     TIOModelBundle *bundle = TIOModelBundleManager.sharedManager.modelBundles[indexPath.row];
     
     cell.titleLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
-
-    cell.accessoryType = [self.selectedBundles containsObject:bundle]
-        ? UITableViewCellAccessoryCheckmark
-        : UITableViewCellAccessoryNone;
-    
     cell.actionTarget = self;
     cell.bundle = bundle;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"ModelDetailsSegue" sender:indexPath];
 }
 
 // MARK: -

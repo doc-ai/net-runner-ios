@@ -425,7 +425,6 @@
 				E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */,
 				E3F6C6B2210A661200D200D8 /* Headless.storyboard */,
 				E3E7725321C42DE3004988DC /* Main.storyboard */,
-				E3740299210A551A0025AA59 /* Evaluate.storyboard */,
 				E3E7725921C42F7B004988DC /* Collect.storyboard */,
 				E3A520E9210A49A1004B912B /* Assets.xcassets */,
 				E3A520EE210A49A1004B912B /* Info.plist */,
@@ -518,6 +517,7 @@
 		E3B57E8D210A5301008D19C0 /* Evaluation UI */ = {
 			isa = PBXGroup;
 			children = (
+				E3740299210A551A0025AA59 /* Evaluate.storyboard */,
 				E374029A210A551A0025AA59 /* EvaluationResultsActivityItemProvider.h */,
 				E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */,
 				E374029E210A55220025AA59 /* Select Model */,
