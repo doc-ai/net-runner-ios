@@ -54,6 +54,8 @@
 		E3C4374E210A565A005E7E16 /* EvaluateResultsHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C4374A210A565A005E7E16 /* EvaluateResultsHeaderCollectionReusableView.m */; };
 		E3C4374F210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3C4374C210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.mm */; };
 		E3C43752210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3C43751210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm */; };
+		E3E7725521C42DE3004988DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7725321C42DE3004988DC /* Main.storyboard */; };
+		E3E7725B21C42F7B004988DC /* Collect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7725921C42F7B004988DC /* Collect.storyboard */; };
 		E3F6C680210A567300D200D8 /* PhotoAssetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */; };
 		E3F6C681210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67D210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m */; };
 		E3F6C682210A567300D200D8 /* PhotoAlbumPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67F210A567300D200D8 /* PhotoAlbumPhotoViewController.m */; };
@@ -72,7 +74,7 @@
 		E3F6C6AE210A57F200D200D8 /* ResultInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6AD210A57F200D200D8 /* ResultInfoView.m */; };
 		E3F6C6B1210A5B8D00D200D8 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */; };
 		E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6B2210A661200D200D8 /* Headless.storyboard */; };
-		E3F6C6B7210A661300D200D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6B4210A661300D200D8 /* Main.storyboard */; };
+		E3F6C6B7210A661300D200D8 /* Run.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6B4210A661300D200D8 /* Run.storyboard */; };
 		E3FA5B4A210A9C58009BA905 /* CVPixelBufferEvaluator.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3FA5B49210A9C58009BA905 /* CVPixelBufferEvaluator.mm */; };
 /* End PBXBuildFile section */
 
@@ -193,6 +195,8 @@
 		E3C4374C210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluateResultsPhotoCollectionViewCell.mm; sourceTree = "<group>"; };
 		E3C43750210A565F005E7E16 /* EvaluateResultsPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateResultsPhotoViewController.h; sourceTree = "<group>"; };
 		E3C43751210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluateResultsPhotoViewController.mm; sourceTree = "<group>"; };
+		E3E7725421C42DE3004988DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E3E7725A21C42F7B004988DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Collect.storyboard; sourceTree = "<group>"; };
 		E3F6C67A210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		E3F6C67B210A567300D200D8 /* PhotoAssetsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAssetsCollectionViewController.h; sourceTree = "<group>"; };
 		E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAssetsCollectionViewController.m; sourceTree = "<group>"; };
@@ -225,7 +229,7 @@
 		E3F6C6AF210A5B8D00D200D8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		E3F6C6B3210A661200D200D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Headless.storyboard; sourceTree = "<group>"; };
-		E3F6C6B5210A661300D200D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E3F6C6B5210A661300D200D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Run.storyboard; sourceTree = "<group>"; };
 		E3FA5B48210A9C58009BA905 /* CVPixelBufferEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVPixelBufferEvaluator.h; sourceTree = "<group>"; };
 		E3FA5B49210A9C58009BA905 /* CVPixelBufferEvaluator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVPixelBufferEvaluator.mm; sourceTree = "<group>"; };
 		E5E3C0E09754E88DA571C288 /* Pods-Net RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -420,7 +424,10 @@
 			children = (
 				E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */,
 				E3F6C6B2210A661200D200D8 /* Headless.storyboard */,
-				E3F6C6B4210A661300D200D8 /* Main.storyboard */,
+				E3E7725321C42DE3004988DC /* Main.storyboard */,
+				E3F6C6B4210A661300D200D8 /* Run.storyboard */,
+				E3740299210A551A0025AA59 /* Evaluate.storyboard */,
+				E3E7725921C42F7B004988DC /* Collect.storyboard */,
 				E3A520E9210A49A1004B912B /* Assets.xcassets */,
 				E3A520EE210A49A1004B912B /* Info.plist */,
 				E3F6C689210A56DD00D200D8 /* UserDefaults.plist */,
@@ -513,7 +520,6 @@
 		E3B57E8D210A5301008D19C0 /* Evaluation UI */ = {
 			isa = PBXGroup;
 			children = (
-				E3740299210A551A0025AA59 /* Evaluate.storyboard */,
 				E374029A210A551A0025AA59 /* EvaluationResultsActivityItemProvider.h */,
 				E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */,
 				E374029E210A55220025AA59 /* Select Model */,
@@ -684,10 +690,12 @@
 				E3A52128210A5147004B912B /* headless in Resources */,
 				E3F6C6A4210A56FC00D200D8 /* Settings.storyboard in Resources */,
 				E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */,
+				E3E7725B21C42F7B004988DC /* Collect.storyboard in Resources */,
 				E31C799D212E0E8300139C90 /* LICENSE in Resources */,
+				E3E7725521C42DE3004988DC /* Main.storyboard in Resources */,
 				E3F6C6AB210A578100D200D8 /* LaunchScreen.storyboard in Resources */,
 				E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */,
-				E3F6C6B7210A661300D200D8 /* Main.storyboard in Resources */,
+				E3F6C6B7210A661300D200D8 /* Run.storyboard in Resources */,
 				E3F6C68B210A56DD00D200D8 /* UserDefaults.plist in Resources */,
 				E374029C210A551A0025AA59 /* Evaluate.storyboard in Resources */,
 			);
@@ -875,6 +883,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		E3E7725321C42DE3004988DC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3E7725421C42DE3004988DC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E3E7725921C42F7B004988DC /* Collect.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3E7725A21C42F7B004988DC /* Base */,
+			);
+			name = Collect.storyboard;
+			sourceTree = "<group>";
+		};
 		E3F6C6B2210A661200D200D8 /* Headless.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -883,12 +907,12 @@
 			name = Headless.storyboard;
 			sourceTree = "<group>";
 		};
-		E3F6C6B4210A661300D200D8 /* Main.storyboard */ = {
+		E3F6C6B4210A661300D200D8 /* Run.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E3F6C6B5210A661300D200D8 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Run.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

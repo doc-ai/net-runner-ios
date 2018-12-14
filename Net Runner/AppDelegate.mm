@@ -83,6 +83,10 @@
         [NSUserDefaults.standardUserDefaults setObject:kPresDefaultModelID forKey:kPrefsSelectedModelID];
     }
     
+    // Global Appearance
+    
+    [[UILabel appearanceWhenContainedInInstancesOfClasses:@[UITableView.class]] setTextColor:[UIColor colorWithWhite:0.2 alpha:1.0]];
+    
     // Kick off application
     
     UIViewController *vc;

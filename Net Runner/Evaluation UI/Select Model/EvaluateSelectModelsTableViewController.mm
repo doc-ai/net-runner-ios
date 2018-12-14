@@ -117,10 +117,4 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
     }
 }
 
-// MARK: -
-
-- (IBAction)cancelEvaluation:(id)sender {
-    [self.delegate evaluateSelectModelsTableViewControllerDidCancel:self];
-}
-
 @end
