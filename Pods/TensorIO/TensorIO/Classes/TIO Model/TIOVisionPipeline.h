@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TIOVisionPipeline : NSObject
 
 /**
- * A description of the pixel input expected by the model
+ * A description of the pixel input expected by the model.
  */
 
 @property (readonly) TIOPixelBufferLayerDescription *pixelBufferDescription;

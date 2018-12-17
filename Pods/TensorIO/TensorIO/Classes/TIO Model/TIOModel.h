@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol TIOData;
 @protocol TIOLayerDescription;
+@class TIOLayerInterface;
 @class TIOModelBundle;
 @class TIOModelOptions;
 
@@ -131,6 +132,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) BOOL loaded;
 
 /**
+ * Returns descriptions of the model's inputs indexed to the order they appear in model.json.
+ */
+
+@property (readonly) NSArray<TIOLayerInterface*> *inputs;
+
+/**
+ * Returns descriptions of the model's outputs indexed to the order they appear in model.json.
+ */
+
+@property (readonly) NSArray<TIOLayerInterface*> *outputs;
+
+/**
  * The designated initializer for conforming classes.
  *
  * You should not need to call this method directly. Instead, acquire an instance of a `TIOModelBundle`
@@ -196,7 +209,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns a description of the model's input at a given index
  *
- * Model inputs and outputs are organized by index and name. In the model.json file that descrbies
+ * Model inputs and outputs are organized by index and name. In the model.json file that describes
  * the interface to a model, an array of named inputs includes information such as the type of
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
@@ -210,7 +223,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns a description of the model's input for a given name
  *
- * Model inputs and outputs are organized by index and name. In the model.json file that descrbies
+ * Model inputs and outputs are organized by index and name. In the model.json file that describes
  * the interface to a model, an array of named inputs includes information such as the type of
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
@@ -218,12 +231,13 @@ NS_ASSUME_NONNULL_BEGIN
  * inputs provided to the `runOn:` method prior to performing inference. See TIOModelBundleJSONSchema.h
  * for more information about this json file.
  */
+ 
 - (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString*)name;
 
 /**
  * Returns a description of the model's output at a given index
  *
- * Model inputs and outputs are organized by index and name. In the model.json file that descrbies
+ * Model inputs and outputs are organized by index and name. In the model.json file that describes
  * the interface to a model, an array of named inputs includes information such as the type of
  * data the input expects, its volume, and any transformations that will be applied to it.
  *
@@ -237,7 +251,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Returns a description of the model's output for a given name
  *
- * Model inputs and outputs are organized by index and name. In the model.json file that descrbies
+ * Model inputs and outputs are organized by index and name. In the model.json file that describes
  * the interface to a model, an array of named inputs includes information such as the type of
  * data the input expects, its volume, and any transformations that will be applied to it.
  *

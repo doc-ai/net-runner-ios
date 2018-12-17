@@ -59,10 +59,10 @@ typedef TIOPixelNormalization TIOPixelDenormalization;
  * The normalizer will typically be constructed with the help of a `TIOPixelNormalization`
  * struct or using one of the core or standard normalizers provided.
  *
- * @param value The single byte pixel value being transformed
- * @param channel The RGB channel of the pixel value being transformed
+ * @param value The single byte pixel value being transformed.
+ * @param channel The RGB channel of the pixel value being transformed.
  *
- * @return float_t The transformed value
+ * @return float_t The transformed value.
  */
 
 typedef float_t (^TIOPixelNormalizer)(const uint8_t &value, const uint8_t &channel);
@@ -75,10 +75,10 @@ typedef float_t (^TIOPixelNormalizer)(const uint8_t &value, const uint8_t &chann
  * The denormalizer will typically be constructed with the help of a `TIOPixelDenormalization`
  * struct or using one of the core or standard denormalizers provided.
  *
- * @param value The four byte normalized pixel value being transformed
- * @param channel The RGB channel of the pixel value being transformed
+ * @param value The four byte normalized pixel value being transformed.
+ * @param channel The RGB channel of the pixel value being transformed.
  *
- * @return uint8_t The denormalized value
+ * @return uint8_t The denormalized value.
  */
 
 typedef uint8_t (^TIOPixelDenormalizer)(const float_t &value, const uint8_t &channel);
@@ -98,7 +98,7 @@ extern const TIOPixelNormalization kTIOPixelNormalizationNone;
 /**
  * Pixel normalization from 0 to 1.
  *
- * A scale of 1.0/255.0 and no bias
+ * A scale of 1.0/255.0 and no bias.
  */
 
 extern const TIOPixelNormalization kTIOPixelNormalizationZeroToOne;
@@ -126,7 +126,7 @@ extern const TIOPixelDenormalization kTIOPixelDenormalizationNone;
 /**
  * Pixel denormalization from a range of values 0 to 1.
  *
- * A scale of 255.0 and no bias
+ * A scale of 255.0 and no bias.
  */
 
 extern const TIOPixelDenormalization kTIOPixelDenormalizationZeroToOne;
@@ -218,21 +218,23 @@ TIOPixelDenormalizer TIOPixelDenormalizerNegativeOneToOne();
 // MARK: - Utilities
 
 /**
- * Checks if two TIOPixelNormalization structs are equal
- * @param a The first pixel normalization to compare.
- * @param b The second pixel normalization to compare,
+ * Checks if two TIOPixelNormalization structs are equal.
  *
- * @return BOOL 'YES' if the two structs are equal, 'NO' otherwise.
+ * @param a The first pixel normalization to compare.
+ * @param b The second pixel normalization to compare.
+ *
+ * @return BOOL `YES` if the two structs are equal, `NO` otherwise.
  */
 
 BOOL TIOPixelNormalizationsEqual(const TIOPixelNormalization& a, const TIOPixelNormalization& b);
 
 /**
- * Checks if two TIOPixelDenormalization structs are equal
- * @param a The first pixel denormalization to compare.
- * @param b The second pixel denormalization to compare,
+ * Checks if two TIOPixelDenormalization structs are equal.
  *
- * @return BOOL 'YES' if the two structs are equal, 'NO' otherwise.
+ * @param a The first pixel denormalization to compare.
+ * @param b The second pixel denormalization to compare.
+ *
+ * @return BOOL `YES` if the two structs are equal, `NO` otherwise.
  */
 
 BOOL TIOPixelDenormalizationsEqual(const TIOPixelDenormalization& a, const TIOPixelDenormalization& b);

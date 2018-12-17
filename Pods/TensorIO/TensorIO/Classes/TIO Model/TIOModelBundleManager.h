@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  * application documents directory, or elsewhere.
  * @param error An error if the model bundles could not be loaded.
  *
- * @return `YES` if the bundles were successfully loaded, `NO` otherwise.
+ * @return BOOL `YES` if the bundles were successfully loaded, `NO` otherwise.
  */
 
 - (BOOL)loadModelBundlesAtPath:(NSString*)path error:(NSError**)error;
@@ -74,7 +74,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param modelIds Array of model ids in `NSString` format
  *
- * @return Array of `TIOModelBundle` matching the model ids
+ * @return NSArray Array of `TIOModelBundle` matching the model ids
  */
 
 - (NSArray<TIOModelBundle*>*)bundlesWithIds:(NSArray<NSString*>*)modelIds;
@@ -86,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @param modelId The single model id whose bundle you would like.
  *
- * @return The `TIOModelBundle` matching the model id.
+ * @return TIOModelBundle The model bundle matching the model id.
  */
 
 - (nullable TIOModelBundle*)bundleWithId:(NSString*)modelId;

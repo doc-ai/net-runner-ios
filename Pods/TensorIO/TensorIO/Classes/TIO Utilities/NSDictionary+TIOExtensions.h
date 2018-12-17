@@ -22,9 +22,31 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * TensorIO utility functions for `NSDictionary`.
+ *
+ * A number of models return a softmax function over a set of labeled output,
+ * for example, classification outputs. These utility functions are meant to
+ * be worked with that kind of data, where the entries in the dictionary are
+ * label-probability key-value pairs.
+ */
+
 @interface NSDictionary (Extensions)
 
+/**
+ * Returns the top N or fewer entries in the dictionary, by probability.
+ */
+
 - (NSDictionary*)topN:(NSUInteger)count;
+
+/**
+ * Returns the top N entries in the dictionary, by probability, but only
+ * those that surpass a threshold.
+ *
+ * Entries are first filtered by the threshold then sorted, and finally the
+ * top N or fewer entries are returned.
+ */
+
 - (NSDictionary*)topN:(NSUInteger)count threshold:(float)threshold;
 
 @end

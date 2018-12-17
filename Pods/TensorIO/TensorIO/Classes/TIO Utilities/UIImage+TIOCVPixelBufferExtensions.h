@@ -24,27 +24,32 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * TensorIO extensions to `UIImage`, specifically for converting images to and from
+ * instances of `CVPixelBufferRef`.
+ */
+
 @interface UIImage (CVPixelBuffer)
 
 /**
  * Instantiates an image from a pixel buffer, assuming a scaling factor of 1.0 and an orientation
- * of UIImageOrientationUp
+ * of UIImageOrientationUp.
  *
- * @param pixelBuffer The source pixel buffer
+ * @param pixelBuffer The source pixel buffer.
  *
- * @return UIImage The resulting image
+ * @return UIImage The resulting image.
  */
 
 - (nullable instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer;
 
 /**
- * Instantiates an image from a pixel buffer
+ * Instantiates an image from a pixel buffer.
  *
- * @param pixelBuffer The source pixel buffer
- * @param scale The image scale
- * @param orientation The resulting image's orientation
+ * @param pixelBuffer The source pixel buffer.
+ * @param scale The image scale.
+ * @param orientation The resulting image's orientation.
  *
- * @return UIImage The resulting image
+ * @return UIImage The resulting image.
  */
 - (nullable instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer scale:(CGFloat)scale orientation:(UIImageOrientation)orientation;
 
@@ -53,14 +58,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * The pixel buffer will have the following format:
  *
- * - Pixel Format: `kCVPixelFormatType_32ARGB`
+ * - Pixel Format: `kCVPixelFormatType_32ARGB`.
+
+ * - Alpha: `kCGImageAlphaNoneSkipFirst`.
  *
- * - Alpha: `kCGImageAlphaNoneSkipFirst`
+ * - Color Space: Device RGB.
  *
- * - Color Space: Device RGB
- *
- * @return `CVPixelBufferRef` Autoreleased
- *
+ * @return CVPixelBufferRef An autoreleased pixel buffer.
  */
 
 - (nullable CVPixelBufferRef)pixelBuffer;
@@ -68,11 +72,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Creates a pixel buffer from the receiver via Core Graphics.
  *
- * @param format The pixel format of the resulting pixel buffer
- * @param colorSpace The color space of the resulting pixel buffer
- * @param alphaInfo Alpha channel info for the resulting pixel buffer
+ * @param format The pixel format of the resulting pixel buffer.
+ * @param colorSpace The color space of the resulting pixel buffer.
+ * @param alphaInfo Alpha channel info for the resulting pixel buffer.
  *
- * @return An autoreleased `CVPixelBufferRef`
+ * @return An autoreleased `CVPixelBufferRef`.
  */
 
 - (nullable CVPixelBufferRef)pixelBuffer:(OSType)format colorSpace:(CGColorSpaceRef)colorSpace alphaInfo:(CGImageAlphaInfo)alphaInfo;

@@ -25,13 +25,32 @@ NS_ASSUME_NONNULL_BEGIN
 @class TIOModelOptions;
 @protocol TIOModel;
 
+/**
+ * The file extension used to identify a TensorIO bundle, currently '.tfbundle'.
+ */
+
 extern NSString * const kTFModelBundleExtension;
+
+/**
+ * The name of the file inside a TensorIO bundle that contains the model spec, currently 'model.json'.
+ */
+
 extern NSString * const kTFModelInfoFile;
+
+/**
+ * The default classname for use with TensorFlow Lite models, currently `TIOTFLiteModel`.
+ */
+
 extern NSString * const kTFLiteModelClassName;
+
+/**
+ * The name of the directory inside a TensorIO bundle that contains additional data, currently 'assets'.
+ */
+
 extern NSString * const kTFModelAssetsDirectory;
 
 /**
- * Encapsulates information about a `TIOModel` without actaully loading the model.
+ * Encapsulates information about a `TIOModel` without actually loading the model.
  *
  * A `TIOModelBundle` is used by the UI to show model details and is used to instantiate model
  * instances as a model factory. There is currently a one-to-one correspondence between a

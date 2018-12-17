@@ -53,7 +53,7 @@ typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
  *
  * @param pixelBufferDescription Description of the expected pixel buffer
  *
- * @return `TIOLayerInterface` The encapsulated description
+ * @return TIOLayerInterface The encapsulated description
  */
 
 - (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription NS_DESIGNATED_INITIALIZER;
@@ -64,7 +64,7 @@ typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
  *
  * @param vectorDescription Description of the expected vector
  *
- * @return `TIOLayerInterface` The encapsulated description
+ * @return TIOLayerInterface The encapsulated description
  */
 
 - (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription*)vectorDescription NS_DESIGNATED_INITIALIZER;

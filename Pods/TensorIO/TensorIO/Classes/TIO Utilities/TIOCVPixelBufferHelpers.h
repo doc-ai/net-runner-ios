@@ -65,7 +65,7 @@ _Nullable CVPixelBufferRef TIOCVPixelBufferCopy(CVPixelBufferRef pixelBuffer);
 _Nullable CVPixelBufferRef TIOCVPixelBufferRotate(CVPixelBufferRef pixelBuffer, TIOCVPixelBufferCounterclockwiseRotation rotation);
 
 /**
- * Converts a pixel buffer in ARGB format to one in BGRA format
+ * Converts a pixel buffer in ARGB format to one in BGRA format.
  *
  * Caller must release the returned pixel buffer with `CVPixelBufferRelease`.
  *
@@ -78,7 +78,7 @@ _Nullable CVPixelBufferRef TIOCVPixelBufferRotate(CVPixelBufferRef pixelBuffer, 
 _Nullable CVPixelBufferRef TIOCVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixelBuffer);
 
 /**
- * Converts a pixel buffer in BGRA format to one in ARGB format
+ * Converts a pixel buffer in BGRA format to one in ARGB format.
  *
  * Caller must release the returned pixel buffer with `CVPixelBufferRelease`.
  *
