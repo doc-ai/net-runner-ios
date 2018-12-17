@@ -300,6 +300,14 @@ static NSString * const kTensorTypeImage = @"image";
 
 // MARK: - Input and Output Features
 
+- (NSArray<TIOLayerInterface*>*)inputs {
+    return _indexedInputInterfaces;
+}
+
+- (NSArray<TIOLayerInterface*>*)outputs {
+    return _indexedOutputInterfaces;
+}
+
 - (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index {
     return _indexedInputInterfaces[index].dataDescription;
 }

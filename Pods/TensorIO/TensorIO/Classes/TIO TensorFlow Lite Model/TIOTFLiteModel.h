@@ -29,7 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
  * An Objective-C wrapper around TensorFlow lite models that provides a unified interface to the
  * input and output layers of the underlying model.
  *
- * See `TIOModel` for more information about TensorIO models.
+ * See `TIOModel` for more information about TensorIO models and for a description of the
+ * conforming properties and methods here.
  */
 
 @interface TIOTFLiteModel : NSObject <TIOModel>
@@ -48,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) BOOL quantized;
 @property (readonly) NSString *type;
 @property (readonly) BOOL loaded;
+
+@property (readonly) NSArray<TIOLayerInterface*> *inputs;
+@property (readonly) NSArray<TIOLayerInterface*> *outputs;
 
 // Model Protocol Methods
 

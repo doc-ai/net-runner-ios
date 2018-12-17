@@ -23,7 +23,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Set the `TIOModel` laod error to `kTIOTFLiteModelLoadModelError` when the underlying
+ * Set the `TIOModel` load error to `kTIOTFLiteModelLoadModelError` when the underlying
  * model (e.g. tflite model) cannot be loaded.
  */
 

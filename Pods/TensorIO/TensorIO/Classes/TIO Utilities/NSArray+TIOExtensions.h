@@ -23,29 +23,65 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: - Blocks
 
+/**
+ * A set of widely used functional extensions to `NSArray`.
+ */
+ 
 @interface NSArray<T> (Blocks)
 
-- (id)reduce:(id)initial combine:(id (^)(id accumulator,T item))combine;
+/**
+ * Traverses the array and calls the combine block, returning a single value
+ * that is accumulated by the block.
+ */
+
+- (id)reduce:(id)initial combine:(id (^)(id accumulator, T item))combine;
+
+/**
+ * Traverses the array and returns a new array composed only of those items
+ * for which the provided block returns `YES`.
+ */
+
 - (NSArray *)filter:(BOOL (^)(T obj, NSUInteger idx, BOOL *stop))block;
+
+/**
+ * Traverses the array and calls the provided block with each item, returning a new
+ * array composed of the items returned by the block.
+ */
+
 - (NSArray *)map:(id(^)(T obj))block;
+
+/**
+ * Traverses the array and returns `YES` if the provided block returns `YES` for any item.
+ */
+
 - (BOOL)contains:(BOOL(^)(T obj))block;
 
 @end
 
 // MARK: - Other utilities
 
+/**
+ * Additional array utilities used by TensorIO.
+ */
+
 @interface NSArray (Utilities)
 
-// Returns the first n elements, or if the length of the array is less than n,
-// the contents of array.
+/**
+ * Returns the first n elements, or if the length of the array is less than n,
+ * the contents of array.
+ */
 
 - (NSArray *)firstN:(NSUInteger)n;
 
-// Returns all objects in the array reversed, by way of the reverseObjectEnumerator
+/**
+ * Returns all objects in the array reversed, by way of the `reverseObjectEnumerator`.
+ */
 
 - (NSArray *)reversed;
 
-// Returns the numeric product of the array's entries. The entries must be of type NSNumber
+/**
+ * Returns the numeric product of the array's entries. The entries must be of type `NSNumber`.
+ */
 
 - (NSInteger)product;
 
@@ -53,7 +89,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 // MARK: - Arrays of Dictionaries
 
+/**
+ * Utilities for arrays of dictionaries.
+ */
+
 @interface NSArray (DictionaryUtilities)
+
+/**
+ * Groups the items in the array by some key, returning a dictionary of those key-grouping pairs.
+ */
 
 - (NSDictionary *)groupBy:(NSString*)key;
 

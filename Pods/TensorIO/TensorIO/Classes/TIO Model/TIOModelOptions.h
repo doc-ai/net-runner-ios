@@ -23,7 +23,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * Converts a string representation of a capture device position, e.g. a camera position,
+ * to an `AVCaptureDevicePosition`.
+ *
+ * @param descriptor A string representation of a device position. 'front' and 'back' are
+ * the only values currently supported.
+ *
+ * @return AVCaptureDevicePosition The qualified device position, either `AVCaptureDevicePositionFront`,
+ * `AVCaptureDevicePositionBack`, or `AVCaptureDevicePositionUnspecified`.
+ */
+
 AVCaptureDevicePosition TIOModelOptionsAVCaptureDevicePositionFromString(NSString * _Nullable descriptor);
+
+/**
+ * Encapsulates additional options that a model would like to communicate to it consumers.
+ */
 
 @interface TIOModelOptions : NSObject
 

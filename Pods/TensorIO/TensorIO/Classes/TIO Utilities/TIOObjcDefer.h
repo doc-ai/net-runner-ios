@@ -28,6 +28,13 @@
 #define tio_defer_block __strong void(^tio_defer_block_name(__LINE__))(void) __attribute__((cleanup(tio_defer_cleanup_block), unused)) = ^
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wunused-function"
+/**
+ * A magical utility function that performs like a a `defer` in Swift.
+ *
+ * Do not use this function directly. Instead use `tio_defer_block()`.
+ * Code that is wrapped a call to `tio_defer_block` will automatically be called
+ * when the enclosing scope exits.
+ */
 static void tio_defer_cleanup_block(__strong void(^*block)(void)) {
     (*block)();
 }

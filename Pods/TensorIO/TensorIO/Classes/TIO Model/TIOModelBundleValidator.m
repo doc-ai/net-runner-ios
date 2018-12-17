@@ -250,7 +250,7 @@ static NSError * TIOLabelsFileDoesNotExistError(NSString *filename);
     
     // Custom validator
     
-    if ( ![self validateCustomValidator:JSON validator:customValidator error:error] ) {
+    if ( customValidator != nil && ![self validateCustomValidator:JSON validator:customValidator error:error] ) {
         return NO;
     }
     
