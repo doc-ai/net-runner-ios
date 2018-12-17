@@ -375,7 +375,7 @@ static NSString * const kModelResultsCellIdentifier = @"ModelResultsCell";
 
 - (void)cancelEvaluation:(id)sender {
     
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Stop Evaluation" message:@"Stopping will discard any results and return you to Settings." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Stop Evaluation" message:@"Stopping will immediately cancel evaluation and discard any results." preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *stopEvaluation = [UIAlertAction actionWithTitle:@"Stop Evaluation" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         self->_cancelledEvaluation = YES;
