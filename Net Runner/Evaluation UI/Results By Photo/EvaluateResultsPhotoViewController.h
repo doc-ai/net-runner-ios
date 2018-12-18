@@ -19,8 +19,7 @@
 //
 
 @import UIKit;
-
-#import "PhotoAlbumPhotoViewController.h"
+@import Photos;
 
 NS_ASSUME_NONNULL_BEGIN
 
