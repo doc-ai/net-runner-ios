@@ -26,6 +26,7 @@
 #import "ResultInfoView.h"
 #import "ModelOutput.h"
 #import "EvaluatorConstants.h"
+#import "LabelOutputsTableViewController.h"
 
 @import TensorIO;
 
@@ -93,6 +94,16 @@
     // And we want to run the same process that produced the results we recieved
     
     [self runModelOnAsset:self.asset];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ( [segue.identifier isEqualToString:@"LabelOutputsSegue"] ) {
+        UINavigationController *controller = (UINavigationController*)segue.destinationViewController;
+        LabelOutputsTableViewController *destination = (LabelOutputsTableViewController*)controller.topViewController;
+        destination.modelBundle = self.modelBundle;
+        destination.imageManager = self.imageManager;
+        destination.asset = self.asset;
+    }
 }
 
 - (void)setImage:(UIImage *)image {
