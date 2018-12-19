@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TextLabelTableViewCell : UITableViewCell <LabelOutputTableViewCell, UITextViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @property (weak) id<LabelOutputTableViewCellDelegate> delegate;
 @property UIReturnKeyType returnKeyType;

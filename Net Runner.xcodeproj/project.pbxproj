@@ -28,6 +28,7 @@
 		E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */; };
 		E378487E21C993D800AB6C1E /* NumericLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E378487D21C993D800AB6C1E /* NumericLabelTableViewCell.m */; };
 		E378488121C993E300AB6C1E /* TextLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E378488021C993E300AB6C1E /* TextLabelTableViewCell.m */; };
+		E378488421CADF1C00AB6C1E /* Label.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E378488321CADF1C00AB6C1E /* Label.storyboard */; };
 		E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */; };
 		E392F8882155914700116078 /* ModelImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F8872155914700116078 /* ModelImporter.mm */; };
 		E392F88B215D5AB400116078 /* ModelDetailsJSONViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */; };
@@ -147,6 +148,7 @@
 		E378487F21C993E300AB6C1E /* TextLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextLabelTableViewCell.h; sourceTree = "<group>"; };
 		E378488021C993E300AB6C1E /* TextLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextLabelTableViewCell.m; sourceTree = "<group>"; };
 		E378488221C9B40100AB6C1E /* LabelOutputTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelOutputTableViewCell.h; sourceTree = "<group>"; };
+		E378488321CADF1C00AB6C1E /* Label.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Label.storyboard; sourceTree = "<group>"; };
 		E3851386210D0A3100F600C5 /* ModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutput.h; sourceTree = "<group>"; };
 		E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageNetClassificationModelOutput.h; sourceTree = "<group>"; };
 		E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageNetClassificationModelOutput.mm; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 		E354776621C8515600FB573C /* Label Outputs */ = {
 			isa = PBXGroup;
 			children = (
+				E378488321CADF1C00AB6C1E /* Label.storyboard */,
 				E354776321C8515100FB573C /* LabelOutputsTableViewController.h */,
 				E354776421C8515100FB573C /* LabelOutputsTableViewController.mm */,
 				E378488221C9B40100AB6C1E /* LabelOutputTableViewCell.h */,
@@ -729,6 +732,7 @@
 				E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */,
 				E3E7725E21C4351F004988DC /* Run.storyboard in Resources */,
 				E3F6C6B7210A661300D200D8 /* RunImageModel.storyboard in Resources */,
+				E378488421CADF1C00AB6C1E /* Label.storyboard in Resources */,
 				E3F6C68B210A56DD00D200D8 /* UserDefaults.plist in Resources */,
 				E374029C210A551A0025AA59 /* Evaluate.storyboard in Resources */,
 			);

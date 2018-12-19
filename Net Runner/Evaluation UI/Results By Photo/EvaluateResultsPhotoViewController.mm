@@ -97,7 +97,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ( [segue.identifier isEqualToString:@"LabelOutputsSegue"] ) {
+    if ( [segue.identifier isEqualToString:@"LabelSingleSegue"] ) {
         UINavigationController *controller = (UINavigationController*)segue.destinationViewController;
         LabelOutputsTableViewController *destination = (LabelOutputsTableViewController*)controller.topViewController;
         destination.modelBundle = self.modelBundle;

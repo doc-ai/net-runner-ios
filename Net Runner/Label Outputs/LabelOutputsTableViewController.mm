@@ -113,6 +113,7 @@
         if ( vectorDescription.labels == nil ) {
             // Float values
             NumericLabelTableViewCell *numericCell = (NumericLabelTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FloatOutputCell" forIndexPath:indexPath];
+            numericCell.numberOfExpectedValues = vectorDescription.length;
             cell = numericCell;
         
         } else {
