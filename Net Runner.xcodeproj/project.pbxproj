@@ -26,6 +26,8 @@
 		E3740298210A53E00025AA59 /* EvaluationMetricFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E3740297210A53E00025AA59 /* EvaluationMetricFactory.m */; };
 		E374029C210A551A0025AA59 /* Evaluate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3740299210A551A0025AA59 /* Evaluate.storyboard */; };
 		E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */; };
+		E378487E21C993D800AB6C1E /* NumericLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E378487D21C993D800AB6C1E /* NumericLabelTableViewCell.m */; };
+		E378488121C993E300AB6C1E /* TextLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E378488021C993E300AB6C1E /* TextLabelTableViewCell.m */; };
 		E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */; };
 		E392F8882155914700116078 /* ModelImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F8872155914700116078 /* ModelImporter.mm */; };
 		E392F88B215D5AB400116078 /* ModelDetailsJSONViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */; };
@@ -140,6 +142,11 @@
 		E3740299210A551A0025AA59 /* Evaluate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Evaluate.storyboard; sourceTree = "<group>"; };
 		E374029A210A551A0025AA59 /* EvaluationResultsActivityItemProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationResultsActivityItemProvider.h; sourceTree = "<group>"; };
 		E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationResultsActivityItemProvider.m; sourceTree = "<group>"; };
+		E378487C21C993D800AB6C1E /* NumericLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumericLabelTableViewCell.h; sourceTree = "<group>"; };
+		E378487D21C993D800AB6C1E /* NumericLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NumericLabelTableViewCell.m; sourceTree = "<group>"; };
+		E378487F21C993E300AB6C1E /* TextLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextLabelTableViewCell.h; sourceTree = "<group>"; };
+		E378488021C993E300AB6C1E /* TextLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextLabelTableViewCell.m; sourceTree = "<group>"; };
+		E378488221C9B40100AB6C1E /* LabelOutputTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelOutputTableViewCell.h; sourceTree = "<group>"; };
 		E3851386210D0A3100F600C5 /* ModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutput.h; sourceTree = "<group>"; };
 		E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageNetClassificationModelOutput.h; sourceTree = "<group>"; };
 		E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageNetClassificationModelOutput.mm; sourceTree = "<group>"; };
@@ -325,6 +332,11 @@
 			children = (
 				E354776321C8515100FB573C /* LabelOutputsTableViewController.h */,
 				E354776421C8515100FB573C /* LabelOutputsTableViewController.mm */,
+				E378488221C9B40100AB6C1E /* LabelOutputTableViewCell.h */,
+				E378487C21C993D800AB6C1E /* NumericLabelTableViewCell.h */,
+				E378487D21C993D800AB6C1E /* NumericLabelTableViewCell.m */,
+				E378487F21C993E300AB6C1E /* TextLabelTableViewCell.h */,
+				E378488021C993E300AB6C1E /* TextLabelTableViewCell.m */,
 			);
 			path = "Label Outputs";
 			sourceTree = "<group>";
@@ -826,6 +838,7 @@
 				E3F6C6AE210A57F200D200D8 /* ResultInfoView.m in Sources */,
 				E3A52124210A511C004B912B /* PHFetchResult+Extensions.m in Sources */,
 				E3458A88210A55A80040648C /* EvaluateModelTableViewCell.mm in Sources */,
+				E378487E21C993D800AB6C1E /* NumericLabelTableViewCell.m in Sources */,
 				E3740298210A53E00025AA59 /* EvaluationMetricFactory.m in Sources */,
 				E3F6C6A3210A56FC00D200D8 /* ModelsTableViewController.mm in Sources */,
 				E3458A9A210A56460040648C /* EvaluateResultsModelTableViewCell.m in Sources */,
@@ -862,6 +875,7 @@
 				E354776521C8515100FB573C /* LabelOutputsTableViewController.mm in Sources */,
 				E3458A8F210A563C0040648C /* EvaluateSelectAlbumsTableViewController.m in Sources */,
 				E3F6C6B1210A5B8D00D200D8 /* RunImageModelViewController.mm in Sources */,
+				E378488121C993E300AB6C1E /* TextLabelTableViewCell.m in Sources */,
 				E392F8882155914700116078 /* ModelImporter.mm in Sources */,
 				E3F6C680210A567300D200D8 /* PhotoAssetsCollectionViewController.m in Sources */,
 				E392F88B215D5AB400116078 /* ModelDetailsJSONViewController.mm in Sources */,
