@@ -118,6 +118,8 @@ static NSString * const TextLabelPlaceholder = @"Enter text label";
 - (UIView*)inputAccessoryView {
     if ( _inputAccessoryView == nil ) {
         
+        // Table view
+        
         _labelTableView = [[UITableView alloc] init];
         
         [_labelTableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"LabelCell"];
@@ -126,9 +128,16 @@ static NSString * const TextLabelPlaceholder = @"Enter text label";
         _labelTableView.dataSource = self;
         _labelTableView.delegate = self;
     
+        // Input acessory view
+    
         _inputAccessoryView = [[UIView alloc] init];
         
         _inputAccessoryView.backgroundColor = [UIColor colorWithWhite:0.75 alpha:1];
+        _inputAccessoryView.translatesAutoresizingMaskIntoConstraints = NO;
+        _inputAccessoryView.frame = CGRectMake(0, 0, CGRectGetWidth([[UIScreen mainScreen] bounds]), 44*3);
+        
+        // Embed table view
+        
         [_inputAccessoryView addSubview:_labelTableView];
         
         [NSLayoutConstraint activateConstraints:@[
@@ -137,9 +146,6 @@ static NSString * const TextLabelPlaceholder = @"Enter text label";
             [_labelTableView.leftAnchor constraintEqualToAnchor:_inputAccessoryView.leftAnchor constant:0],
             [_labelTableView.rightAnchor constraintEqualToAnchor:_inputAccessoryView.rightAnchor constant:0]
         ]];
-        
-        _inputAccessoryView.translatesAutoresizingMaskIntoConstraints = NO;
-        _inputAccessoryView.frame = CGRectMake(0, 0, CGRectGetWidth([[UIScreen mainScreen] bounds]), 44*3);
     }
     
     return _inputAccessoryView;

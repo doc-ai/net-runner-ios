@@ -31,6 +31,14 @@ static NSString * const NumericLabelPlaceholder = @"Enter numeric values";
     }
 }
 
+- (void)setNumberOfExpectedValues:(NSUInteger)numberOfExpectedValues {
+    _numberOfExpectedValues = numberOfExpectedValues;
+    
+    self.countLabel.text = numberOfExpectedValues >= 2
+        ? [NSString stringWithFormat:@"%ld numeric values", numberOfExpectedValues]
+        : [NSString stringWithFormat:@"%ld numeric value", numberOfExpectedValues];
+}
+
 - (void)setPlaceholderVisible:(BOOL)visible {
     if ( visible ) {
         self.textView.text = NumericLabelPlaceholder;
