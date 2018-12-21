@@ -1,5 +1,5 @@
 //
-//  PhotoAssetsCollectionViewController.m
+//  LabelPhotoAssetsCollectionViewController.m
 //  Net Runner
 //
 //  Created by Philip Dow on 7/24/18.
@@ -18,15 +18,21 @@
 //  limitations under the License.
 //
 
-#import "PhotoAssetsCollectionViewController.h"
+#import "LabelPhotoAssetsCollectionViewController.h"
 
 #import "PhotoAlbumPhotoCollectionViewCell.h"
 #import "PhotoAlbumPhotoViewController.h"
 #import "PHFetchResult+Extensions.h"
 
-static NSString * const AlbumPhotoReuseIdentifier = @"AlbumPhotoCell";
+// Label specific
+#import "LabelOutputsTableViewController.h"
 
-@interface PhotoAssetsCollectionViewController() <PHPhotoLibraryChangeObserver>
+@import TensorIO;
+
+static NSString * const AlbumPhotoReuseIdentifier = @"AlbumPhotoCell";
+static NSString * const LabelPhotoSegue = @"LabelPhotoSegue";
+
+@interface LabelPhotoAssetsCollectionViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate, PHPhotoLibraryChangeObserver>
 
 /**
  * Used to populate the collection view as well as track changes to the album.
@@ -34,9 +40,15 @@ static NSString * const AlbumPhotoReuseIdentifier = @"AlbumPhotoCell";
 
 @property (nonatomic) PHFetchResult<PHAsset*> *fetchResult;
 
+/**
+ * Will be set when a new photo is taken and added to the album rather than an existing photo selected.
+ */
+
+@property PHAsset *createdAsset;
+
 @end
 
-@implementation PhotoAssetsCollectionViewController
+@implementation LabelPhotoAssetsCollectionViewController
 
 + (PHFetchOptions*)fetchOptions {
     PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
@@ -80,18 +92,26 @@ static NSString * const AlbumPhotoReuseIdentifier = @"AlbumPhotoCell";
     [PHPhotoLibrary.sharedPhotoLibrary unregisterChangeObserver:self];
 }
 
+// Labeling specific
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-     if ( [segue.identifier isEqualToString:@"ShowPhoto"] ) {
-        PhotoAlbumPhotoViewController *destination = (PhotoAlbumPhotoViewController*)segue.destinationViewController;
+     if ( [segue.identifier isEqualToString:LabelPhotoSegue] ) {
+        UINavigationController *controller = (UINavigationController*)segue.destinationViewController;
+        LabelOutputsTableViewController *destination = (LabelOutputsTableViewController*)controller.topViewController;
+        
+        destination.modelBundle = self.modelBundle;
         destination.imageManager = self.imageManager;
-        destination.asset = [self.fetchResult objectAtIndex:[self.collectionView.indexPathsForSelectedItems[0] item]];
+        
+        destination.asset = self.createdAsset == nil
+            ? [self.fetchResult objectAtIndex:[self.collectionView.indexPathsForSelectedItems[0] item]]
+            : self.createdAsset;
      }
 }
 
 - (void)setAlbum:(PHAssetCollection *)album {
     _album = album;
     
-    self.fetchResult = [PHAsset fetchAssetsInAssetCollection:album options:PhotoAssetsCollectionViewController.fetchOptions];
+    self.fetchResult = [PHAsset fetchAssetsInAssetCollection:album options:LabelPhotoAssetsCollectionViewController.fetchOptions];
     self.title = album.localizedTitle;
 }
 
@@ -178,6 +198,83 @@ static NSString * const AlbumPhotoReuseIdentifier = @"AlbumPhotoCell";
     }];
     
     return paths;
+}
+
+// MARK: - Labeling specific
+
+// Select multiple photos and bulk label them
+
+- (IBAction)selectMultiple:(id)sender {
+
+}
+
+// Take a picture and immediately drop into the labeling ui
+
+- (IBAction)takePicture:(id)sender {
+
+#if (TARGET_OS_SIMULATOR)
+    // TODO: Maybe show a nice alert with an error
+    return;
+#endif
+    
+    [self presentPhotoPicker:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (void)presentPhotoPicker:(UIImagePickerControllerSourceType)sourceType {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = sourceType;
+    picker.delegate = self;
+    
+    // Se the preferred camera position according to the moel bundle if available
+    
+    if ( self.modelBundle.options.devicePosition == AVCaptureDevicePositionFront
+        && [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront] ) {
+        picker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+    } else if ( self.modelBundle.options.devicePosition == AVCaptureDevicePositionBack
+        && [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceRear] ) {
+        picker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+    }
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+// TODO: if the user cancels labeling, remove the newly created image asset from the album
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString*,id> *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    // Acquire the image
+    
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+    // Create an asset from the image
+    
+    __block PHObjectPlaceholder *placeholder;
+    
+    [PHPhotoLibrary.sharedPhotoLibrary performChanges:^{
+        PHAssetChangeRequest *imageRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+        PHAssetCollectionChangeRequest *albumRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:self.album];
+        
+        placeholder = imageRequest.placeholderForCreatedAsset;
+        [albumRequest addAssets:@[placeholder]];
+    
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        NSString *identifier = placeholder.localIdentifier;
+        PHFetchResult *fetch = [PHAsset fetchAssetsWithLocalIdentifiers:@[identifier] options:nil];
+        PHAsset *asset = fetch.firstObject;
+        
+        // Label the newly created asset
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.createdAsset = asset;
+            [self performSegueWithIdentifier:LabelPhotoSegue sender:nil];
+            self.createdAsset = nil;
+        });
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

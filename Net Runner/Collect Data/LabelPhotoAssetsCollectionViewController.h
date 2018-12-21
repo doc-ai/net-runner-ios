@@ -1,5 +1,5 @@
 //
-//  PhotoAssetsCollectionViewController.h
+//  LabelPhotoAssetsCollectionViewController.h
 //  Net Runner
 //
 //  Created by Philip Dow on 7/24/18.
@@ -18,15 +18,27 @@
 //  limitations under the License.
 //
 
+//  TODO: We are duplicating code in PhotoAssetsCollectionViewController and then relying on its cell implementation
+//  ^^^^: Refactor and share
+
 @import UIKit;
 @import Photos;
 
+@class TIOModelBundle;
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PhotoAssetsCollectionViewController : UICollectionViewController
+@interface LabelPhotoAssetsCollectionViewController : UICollectionViewController
 
 @property (nonatomic) PHCachingImageManager *imageManager;
 @property (nonatomic) PHAssetCollection *album;
+
+// Labeling specific
+
+@property TIOModelBundle *modelBundle;
+
+- (IBAction)selectMultiple:(id)sender;
+- (IBAction)takePicture:(id)sender;
 
 @end
 

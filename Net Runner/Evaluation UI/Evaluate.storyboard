@@ -645,7 +645,7 @@ How about a nice game of chess? ♟️</string>
                     <navigationItem key="navigationItem" title="Photo Results" id="xcP-WM-5rg">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="0Ee-Dy-OgR">
                             <connections>
-                                <segue destination="Cax-ao-qM4" kind="presentation" identifier="LabelSingleSegue" id="YBN-5q-ldl"/>
+                                <segue destination="Cax-ao-qM4" kind="presentation" identifier="LabelPhotoSegue" id="YBN-5q-ldl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
