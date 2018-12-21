@@ -3,7 +3,7 @@
 //  Net Runner
 //
 //  Created by Philip Dow on 9/12/18.
-//  Copyright © 2018 doc.ai. All rights reserved.
+//  Copyright © 2018 doc.ai (http://doc.ai)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
