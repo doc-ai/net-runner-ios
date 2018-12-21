@@ -23,7 +23,9 @@
 #import "EvaluateConfirmTableViewController.h"
 #import "EvaluatePhotoAlbumTableViewCell.h"
 #import "PhotoAssetsCollectionViewController.h"
-#import "PHFetchResult+Extensions.h"
+
+// TODO: mixing the evaluating and labeling ui, refactor or change this somewhere
+#import "LabelPhotoAssetsCollectionViewController.h"
 
 static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 
@@ -61,27 +63,30 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"EvaluateSegue"] ) {
         EvaluateConfirmTableViewController *destination = (EvaluateConfirmTableViewController*)segue.destinationViewController;
+        
         destination.data = @{
             @"bundles": self.data[@"bundles"],
             @"albums": self.selectedAlbums.allObjects,
             @"image-manager": self.imageManager
         };
+        
     } else if ( [segue.identifier isEqualToString:@"AlbumDetailsSegue"] ) {
         PhotoAssetsCollectionViewController *destination = (PhotoAssetsCollectionViewController*)segue.destinationViewController;
         PHAssetCollection *album = self.albums[[self.tableView.indexPathForSelectedRow row]];
         
-        // Fetch the album photos
-    
-        PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
-        fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
-        fetchOptions.includeAllBurstAssets = NO;
-        fetchOptions.includeHiddenAssets = NO;
+        destination.imageManager = self.imageManager;
+        destination.album = album;
         
-        PHFetchResult<PHAsset*> *fetchResult = [PHAsset fetchAssetsInAssetCollection:album options:fetchOptions];
+    } else if ( [segue.identifier isEqualToString:@"LabelAlbumDetailsSegue"] ) {
+        LabelPhotoAssetsCollectionViewController *destination = (LabelPhotoAssetsCollectionViewController*)segue.destinationViewController;
+        PHAssetCollection *album = self.albums[[self.tableView.indexPathForSelectedRow row]];
         
         destination.imageManager = self.imageManager;
-        destination.title = album.localizedTitle;
-        destination.assets = fetchResult.allAssets;
+        destination.album = album;
+        
+        // Labeling specific: refactor?
+        
+        destination.modelBundle = self.data[@"bundles"][0];
     }
 }
 
