@@ -1,33 +1,38 @@
 PODS:
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
   - SSZipArchive (2.1.4)
   - TensorFlowLite (1.12.0)
   - TensorIO (0.3.1):
     - TensorFlowLite
 
 DEPENDENCIES:
+  - FMDB
   - SSZipArchive
-  - TensorIO (from `https://github.com/doc-ai/TensorIO.git`, branch `expose-io`)
+  - TensorIO (from `https://github.com/doc-ai/TensorIO.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - FMDB
     - SSZipArchive
     - TensorFlowLite
 
 EXTERNAL SOURCES:
   TensorIO:
-    :branch: expose-io
     :git: https://github.com/doc-ai/TensorIO.git
 
 CHECKOUT OPTIONS:
   TensorIO:
-    :commit: 8e50b945720b93696b5f8458d78e5ee4e02daa2f
+    :commit: 73a37abab581a9bd585bda6892fd7ec42cb63109
     :git: https://github.com/doc-ai/TensorIO.git
 
 SPEC CHECKSUMS:
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
   TensorFlowLite: e81aef029750aa46b42ad16553fa4cddd81498cc
   TensorIO: b0d968ebe97d11d70d43c7ebe2319a883e780720
 
-PODFILE CHECKSUM: 076d7e0d6c6e1f5a60d17fdb6d0a61fa2ef4085e
+PODFILE CHECKSUM: 4f6e49d48cc568c08bedba3a09f1d71ab8cfafaf
 
 COCOAPODS: 1.5.3
