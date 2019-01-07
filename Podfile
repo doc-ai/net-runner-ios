@@ -8,9 +8,9 @@ target 'Net Runner' do
 
   # Pods for Net Runner
 
-  # pod 'TensorIO'
-  pod 'TensorIO', :git => 'https://github.com/doc-ai/TensorIO.git', :branch => 'expose-io'
+  pod 'TensorIO', :git => 'https://github.com/doc-ai/TensorIO.git'
   pod 'SSZipArchive'
+  pod 'FMDB'
 
   target 'Net RunnerTests' do
     inherit! :search_paths
