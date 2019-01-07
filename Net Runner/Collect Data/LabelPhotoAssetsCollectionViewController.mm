@@ -213,7 +213,7 @@ static NSString * const LabelPhotoSegue = @"LabelPhotoSegue";
 - (IBAction)takePicture:(id)sender {
 
 #if (TARGET_OS_SIMULATOR)
-    // TODO: Maybe show a nice alert with an error
+    NSLog(@"SIMULATOR: Taking pictures is not suppored");
     return;
 #endif
     
