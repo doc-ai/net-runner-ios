@@ -19,8 +19,54 @@
 //
 
 #import "NumericLabelTableViewCell.h"
+#import "ImageModelLabels.h"
 
 static NSString * const NumericLabelPlaceholder = @"Enter numeric values";
+
+NSNumberFormatter * TextToNumberFormatter() {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US"];
+    return formatter;
+}
+
+NSString * NumericVectorToText(NSArray<NSNumber*> * vector) {
+    return [vector componentsJoinedByString:@", "];
+}
+
+NSArray<NSNumber*> * _Nullable TextToNumericVector(NSString * _Nullable text, NSNumberFormatter * formatter) {
+    if (text == nil || text.length == 0) {
+        return @[];
+    }
+    
+    NSArray<NSString*> *stringVals = [text componentsSeparatedByString:@","];
+    __block BOOL hasNaNs = NO;
+    
+    NSMutableArray<NSNumber*> *numVals = [[NSMutableArray alloc] init];
+    
+    for (NSString *str in stringVals) {
+        NSString *stripped = [str stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+        NSNumber *number = [formatter numberFromString:stripped];
+        if (number == nil) {
+            number = [NSDecimalNumber notANumber];
+            hasNaNs = YES;
+        }
+        [numVals addObject:number];
+    }
+    
+    if (hasNaNs) {
+        return nil;
+    }
+    
+    return numVals.copy;
+}
+
+@interface NumericLabelTableViewCell()
+
+@property ImageModelLabels *labels;
+@property NSString *key;
+
+@end
 
 @implementation NumericLabelTableViewCell
 
@@ -33,13 +79,29 @@ static NSString * const NumericLabelPlaceholder = @"Enter numeric values";
     [self setPlaceholderVisible:YES];
 }
 
-- (void)setNumericValues:(NSArray *)numericValues {
-    _numericValues = numericValues;
+// Read the numeric vector label and display it, or display a placeholder
+
+- (void)setLabels:(ImageModelLabels*)labels key:(NSString*)key {
+    self.labels = labels;
+    self.key = key;
     
-    if ( numericValues == nil || numericValues.count == 0 ) {
+    @try {
+        NSArray<NSNumber*> *vector = [self.labels labelForKey:self.key];
+        NSString *text = NumericVectorToText(vector);
+        [self setValue:text];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"An exception occurred trying to read the %@ key from labels, exception: %@",
+            self.key, exception);
+    }
+}
+
+- (void)setValue:(NSString *)value {
+    if ( value == nil || value.length == 0 ) {
         [self setPlaceholderVisible:YES];
     } else {
         [self setPlaceholderVisible:NO];
+        self.textView.text = value;
     }
 }
 
@@ -47,7 +109,7 @@ static NSString * const NumericLabelPlaceholder = @"Enter numeric values";
     _numberOfExpectedValues = numberOfExpectedValues;
     
     self.countLabel.text = numberOfExpectedValues >= 2
-        ? [NSString stringWithFormat:@"%ld numeric values", numberOfExpectedValues]
+        ? [NSString stringWithFormat:@"%ld comma separated numeric values", numberOfExpectedValues]
         : [NSString stringWithFormat:@"%ld numeric value", numberOfExpectedValues];
 }
 
@@ -99,7 +161,27 @@ static NSString * const NumericLabelPlaceholder = @"Enter numeric values";
     }
 }
 
+// Write to the labels object when the text view ends editing
+
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    // The label must be set before the placeholder is returned
+    NSArray<NSNumber*> *vector = TextToNumericVector(textView.text, TextToNumberFormatter());
+    
+    // TODO: error handling
+    
+    if (vector == nil) {
+        // Error converting text to numbers
+    } else {
+        // All good
+        @try {
+            [self.labels setLabel:vector forKey:self.key];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"An exception occurred trying to write the %@ key to labels, exception: %@",
+                self.key, exception);
+        }
+    }
+    
     if ( [textView.text isEqualToString:@""] ) {
         [self setPlaceholderVisible:YES];
     }

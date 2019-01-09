@@ -1,9 +1,9 @@
 //
-//  LabelOutputTableViewCell.h
+//  NRFileManager.h
 //  Net Runner
 //
-//  Created by Philip Dow on 12/18/18.
-//  Copyright © 2018 doc.ai (http://doc.ai)
+//  Created by Philip Dow on 1/8/19.
+//  Copyright © 2019 doc.ai (http://doc.ai)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -22,29 +22,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol LabelOutputTableViewCell;
+@interface NRFileManager : NSObject
 
-@protocol LabelOutputTableViewCellDelegate
+/**
+ * Returns the shared file manager.
+ */
 
-- (void)labelOutputCellDidReturn:(UITableViewCell<LabelOutputTableViewCell>*)cell;
++ (instancetype)sharedManager;
 
-@end
+/**
+ * Returns the path to model labels databases directory, creating it if necessary.
+ */
 
-NS_ASSUME_NONNULL_END
-
-// MARK: -
-
-NS_ASSUME_NONNULL_BEGIN
-
-@class ImageModelLabels;
-
-@protocol LabelOutputTableViewCell <NSObject>
-
-@property (weak) id<LabelOutputTableViewCellDelegate> delegate;
-@property UIReturnKeyType returnKeyType;
-
-- (void)setLabels:(ImageModelLabels*)labels key:(NSString*)key;
-- (BOOL)becomeFirstResponder;
+- (NSString*)labelDatabasesDirectory;
 
 @end
 

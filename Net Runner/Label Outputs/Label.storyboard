@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,6 +31,33 @@
                                 <constraint firstItem="9f8-rJ-UpQ" firstAttribute="leading" secondItem="3fM-Cv-uSE" secondAttribute="leading" id="R3C-LQ-JA6"/>
                                 <constraint firstItem="9f8-rJ-UpQ" firstAttribute="top" secondItem="3fM-Cv-uSE" secondAttribute="top" id="awh-Xg-DbT"/>
                                 <constraint firstAttribute="bottom" secondItem="9f8-rJ-UpQ" secondAttribute="bottom" id="yzb-wK-MZc"/>
+                            </constraints>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="ui5-Lv-bKp">
+                            <rect key="frame" x="0.0" y="453.5" width="375" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comma separate multiple numeric values, and use a period to represent the decimal place." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAv-XA-c93">
+                                    <rect key="frame" x="16" y="12" width="343" height="31.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" white="0.30088975690000003" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Man-3h-lK6">
+                                    <rect key="frame" x="145" y="54" width="85" height="30"/>
+                                    <state key="normal" title="Clear Labels"/>
+                                    <connections>
+                                        <action selector="clearLabels:" destination="7Po-l0-ZIR" eventType="touchUpInside" id="baV-Bd-fU5"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="Man-3h-lK6" secondAttribute="bottom" constant="16" id="KUX-T8-5G0"/>
+                                <constraint firstItem="Man-3h-lK6" firstAttribute="centerX" secondItem="ui5-Lv-bKp" secondAttribute="centerX" id="RbE-Mq-hpt"/>
+                                <constraint firstItem="WAv-XA-c93" firstAttribute="leading" secondItem="ui5-Lv-bKp" secondAttribute="leading" constant="16" id="kig-MI-aTS"/>
+                                <constraint firstItem="WAv-XA-c93" firstAttribute="top" secondItem="ui5-Lv-bKp" secondAttribute="top" constant="12" id="mhB-25-nf5"/>
+                                <constraint firstAttribute="trailing" secondItem="WAv-XA-c93" secondAttribute="trailing" constant="16" id="uGI-MF-HTY"/>
                             </constraints>
                         </view>
                         <prototypes>

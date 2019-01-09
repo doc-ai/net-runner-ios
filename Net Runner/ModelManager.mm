@@ -35,6 +35,7 @@ NSString * const NRModelManagerDidDeleteModelNotification = @"NRModelManagerDidD
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
     });
+    
     return sharedInstance;
 }
 

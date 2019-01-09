@@ -24,6 +24,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ImageModelLabels;
+
 @interface TextLabelTableViewCell : UITableViewCell <LabelOutputTableViewCell, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -33,8 +35,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) id<LabelOutputTableViewCellDelegate> delegate;
 @property UIReturnKeyType returnKeyType;
 
-@property (nullable, nonatomic) NSString *textValue;
-@property (nullable, nonatomic) NSArray<NSString*> *labels;
+/**
+ * The universe of known possible text labels for this output, e.g. the list of supported
+ * image classifications.
+ *
+ * These will be shown in a table view below the cell, and as the user types they will be
+ * filtered.
+ */
+
+@property (nullable, nonatomic) NSArray<NSString*> *knownLabels;
+
+/**
+ * Set the output labels object and key (layer name) which this cell is managing.
+ *
+ * The cell and not the table view is responsible for displaying its content from this object
+ * and writing changes to its content back to this object.
+ */
+
+- (void)setLabels:(ImageModelLabels*)labels key:(NSString*)key;
 
 @end
 

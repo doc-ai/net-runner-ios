@@ -24,6 +24,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class ImageModelLabels;
+
 @interface NumericLabelTableViewCell : UITableViewCell <LabelOutputTableViewCell, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -33,8 +35,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) id<LabelOutputTableViewCellDelegate> delegate;
 @property UIReturnKeyType returnKeyType;
 
-@property (nullable, nonatomic) NSArray *numericValues;
+/**
+ * The number of numeric values this cell expects the user to input.
+ */
+
 @property (nonatomic) NSUInteger numberOfExpectedValues;
+
+/**
+ * Set the output labels object and key (layer name) which this cell is managing.
+ *
+ * The cell and not the table view is responsible for displaying its content from this object
+ * and writing changes to its content back to this object.
+ */
+
+- (void)setLabels:(ImageModelLabels*)labels key:(NSString*)key;
 
 @end
 

@@ -49,7 +49,9 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
     if ( [segue.identifier isEqualToString:@"ModelDetailsSegue"] ) {
         ModelDetailsTableViewController *destination = (ModelDetailsTableViewController*)segue.destinationViewController;
         destination.bundle = TIOModelBundleManager.sharedManager.modelBundles[self.tableView.indexPathForSelectedRow.row];
-        destination.editable = NO;
+        
+        destination.actions = ModelDetailsActionNone;
+        // destination.editable = NO;
     }
     else if ( [segue.identifier isEqualToString:@"SelectAlbumsSegue"] ) {
         EvaluateSelectAlbumsTableViewController *destination = (EvaluateSelectAlbumsTableViewController*)segue.destinationViewController;
