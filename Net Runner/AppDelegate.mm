@@ -23,6 +23,7 @@
 #import "ModelManager.h"
 #import "UserDefaults.h"
 
+@import SVProgressHUD;
 @import TensorIO;
 
 @interface AppDelegate ()
@@ -86,6 +87,9 @@
     // Global Appearance
     
     [[UILabel appearanceWhenContainedInInstancesOfClasses:@[UITableView.class]] setTextColor:[UIColor colorWithWhite:0.2 alpha:1.0]];
+    
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setMinimumDismissTimeInterval:2.0];
     
     // Kick off application
     

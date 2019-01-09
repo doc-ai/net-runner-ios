@@ -25,6 +25,7 @@
 #import "ModelManager.h"
 #import "NRFileManager.h"
 
+@import SVProgressHUD;
 @import TensorIO;
 
 @interface ModelDetailsTableViewController ()
@@ -38,6 +39,25 @@
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
+    [self updateAvailableActions];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.title = self.bundle.name;
+    self.nameLabel.text = self.bundle.name;
+    self.authorLabel.text = self.bundle.author;
+    self.descriptionLabel.text = self.bundle.details;
+    self.licenseLabel.text = self.bundle.license;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ( [segue.identifier isEqualToString:@"ModelDetailsJSONSegue"] ) {
+        ModelDetailsJSONViewController *vc = (ModelDetailsJSONViewController*)segue.destinationViewController;
+        vc.bundle = self.bundle;
+    }
+}
+
+- (void)updateAvailableActions {
     BOOL labelsDatabaseExists = [ImageModelLabelsDatabase databaseExistsForModel:self.bundle basepath:NRFileManager.sharedManager.labelDatabasesDirectory];
     
     // Disallow deletion if we are not editable or the bundle is included by default
@@ -53,25 +73,14 @@
     
     if (showShareLabels) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareLabels:)];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
     }
     
     if (hideDeleteModel && hideClearLabels) {
         self.tableView.tableFooterView.hidden = YES;
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    self.title = self.bundle.name;
-    self.nameLabel.text = self.bundle.name;
-    self.authorLabel.text = self.bundle.author;
-    self.descriptionLabel.text = self.bundle.details;
-    self.licenseLabel.text = self.bundle.license;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ( [segue.identifier isEqualToString:@"ModelDetailsJSONSegue"] ) {
-        ModelDetailsJSONViewController *vc = (ModelDetailsJSONViewController*)segue.destinationViewController;
-        vc.bundle = self.bundle;
+    } else {
+        self.tableView.tableFooterView.hidden = NO;
     }
 }
 
@@ -134,7 +143,9 @@
         
             [self.delegate modelDetailsTableViewControllerDidDeleteModel:self];
             
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [SVProgressHUD showSuccessWithStatus:@"Model deleted"];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];
             });
         }
@@ -148,13 +159,20 @@
 - (IBAction)clearLabelsDatabase:(id)sender {
     
     UIAlertController *alert = [UIAlertController
-        alertControllerWithTitle:NSLocalizedString(@"Clear Labels Database?", @"Clear labels database alert title")
-        message:NSLocalizedString(@"Clearing the labels for this model will remove any existing labels. They will no longer be visible in the labeling section, and you will no longer be able to export them.", @"Clear labels database alert message")
+        alertControllerWithTitle:NSLocalizedString(@"Clear All Labels?", @"Clear labels alert title")
+        message:NSLocalizedString(@"Clearing the labels for this model will remove any existing labels. They will no longer be visible in the labeling section, and you will no longer be able to export them.", @"Clear labels alert message")
         preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Clear Labels", @"Clear labels alert clear button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         [ImageModelLabelsDatabase removeDatabaseForModel:self.bundle basepath:NRFileManager.sharedManager.labelDatabasesDirectory];
+        
+        [SVProgressHUD showSuccessWithStatus:@"Labels cleared"];
+        
+        self.actions &= ~ModelDetailsActionClearLabels;
+        self.actions &= ~ModelDetailsActionShareLabels;
+        
+        [self updateAvailableActions];
     }]];
     
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Clear labels alert alert canel button") style:UIAlertActionStyleCancel handler:nil]];
