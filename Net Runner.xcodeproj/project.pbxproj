@@ -31,6 +31,7 @@
 		E378488421CADF1C00AB6C1E /* Label.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E378488321CADF1C00AB6C1E /* Label.storyboard */; };
 		E378488821CAE1FE00AB6C1E /* CollectSelectModelTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E378488721CAE1FE00AB6C1E /* CollectSelectModelTableViewController.mm */; };
 		E378488B21CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E378488A21CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.mm */; };
+		E384E27721E5691A005166CB /* NRFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E384E27621E5691A005166CB /* NRFileManager.m */; };
 		E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */; };
 		E392F8882155914700116078 /* ModelImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F8872155914700116078 /* ModelImporter.mm */; };
 		E392F88B215D5AB400116078 /* ModelDetailsJSONViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */; };
@@ -63,6 +64,8 @@
 		E3E7725521C42DE3004988DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7725321C42DE3004988DC /* Main.storyboard */; };
 		E3E7725B21C42F7B004988DC /* Collect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7725921C42F7B004988DC /* Collect.storyboard */; };
 		E3E7725E21C4351F004988DC /* Run.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7725C21C4351F004988DC /* Run.storyboard */; };
+		E3E9A20721E4137900C64FC6 /* ImageModelLabelsDatabase.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3E9A20621E4137900C64FC6 /* ImageModelLabelsDatabase.mm */; };
+		E3E9A20B21E4171000C64FC6 /* ImageModelLabels.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */; };
 		E3F6C680210A567300D200D8 /* PhotoAssetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */; };
 		E3F6C681210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67D210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m */; };
 		E3F6C682210A567300D200D8 /* PhotoAlbumPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67F210A567300D200D8 /* PhotoAlbumPhotoViewController.m */; };
@@ -155,6 +158,8 @@
 		E378488721CAE1FE00AB6C1E /* CollectSelectModelTableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CollectSelectModelTableViewController.mm; sourceTree = "<group>"; };
 		E378488921CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelPhotoAssetsCollectionViewController.h; sourceTree = "<group>"; };
 		E378488A21CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LabelPhotoAssetsCollectionViewController.mm; sourceTree = "<group>"; };
+		E384E27521E5691A005166CB /* NRFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NRFileManager.h; sourceTree = "<group>"; };
+		E384E27621E5691A005166CB /* NRFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NRFileManager.m; sourceTree = "<group>"; };
 		E3851386210D0A3100F600C5 /* ModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutput.h; sourceTree = "<group>"; };
 		E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageNetClassificationModelOutput.h; sourceTree = "<group>"; };
 		E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageNetClassificationModelOutput.mm; sourceTree = "<group>"; };
@@ -216,6 +221,10 @@
 		E3E7725421C42DE3004988DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E3E7725A21C42F7B004988DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Collect.storyboard; sourceTree = "<group>"; };
 		E3E7725D21C4351F004988DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Run.storyboard; sourceTree = "<group>"; };
+		E3E9A20521E4137900C64FC6 /* ImageModelLabelsDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabelsDatabase.h; sourceTree = "<group>"; };
+		E3E9A20621E4137900C64FC6 /* ImageModelLabelsDatabase.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabelsDatabase.mm; sourceTree = "<group>"; };
+		E3E9A20921E4171000C64FC6 /* ImageModelLabels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabels.h; sourceTree = "<group>"; };
+		E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabels.mm; sourceTree = "<group>"; };
 		E3F6C67A210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		E3F6C67B210A567300D200D8 /* PhotoAssetsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAssetsCollectionViewController.h; sourceTree = "<group>"; };
 		E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAssetsCollectionViewController.m; sourceTree = "<group>"; };
@@ -478,6 +487,8 @@
 				E3A520EF210A49A1004B912B /* main.m */,
 				E3A520E0210A49A0004B912B /* AppDelegate.h */,
 				E3A520E1210A49A0004B912B /* AppDelegate.mm */,
+				E384E27521E5691A005166CB /* NRFileManager.h */,
+				E384E27621E5691A005166CB /* NRFileManager.m */,
 				E392F88C215D6B3B00116078 /* ModelManager.h */,
 				E392F88D215D6B3B00116078 /* ModelManager.mm */,
 				E33229D92126098F0031435F /* Model Output */,
@@ -492,6 +503,7 @@
 				E3A5214E210A5292004B912B /* Evaluation Metrics */,
 				E378488521CAE17800AB6C1E /* Collect Data */,
 				E354776621C8515600FB573C /* Label Outputs */,
+				E3E9A20821E4138000C64FC6 /* ModelLabels */,
 				E3A52112210A5105004B912B /* Utilities */,
 			);
 			path = "Net Runner";
@@ -593,6 +605,17 @@
 				E392F8872155914700116078 /* ModelImporter.mm */,
 			);
 			path = "Run Model";
+			sourceTree = "<group>";
+		};
+		E3E9A20821E4138000C64FC6 /* ModelLabels */ = {
+			isa = PBXGroup;
+			children = (
+				E3E9A20521E4137900C64FC6 /* ImageModelLabelsDatabase.h */,
+				E3E9A20621E4137900C64FC6 /* ImageModelLabelsDatabase.mm */,
+				E3E9A20921E4171000C64FC6 /* ImageModelLabels.h */,
+				E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */,
+			);
+			path = ModelLabels;
 			sourceTree = "<group>";
 		};
 		E3F6C683210A569400D200D8 /* Additional UI */ = {
@@ -877,16 +900,19 @@
 				E3458A9B210A56460040648C /* EvaluateResultsTableViewController.mm in Sources */,
 				E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.mm in Sources */,
 				E3B57E7D210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.mm in Sources */,
+				E384E27721E5691A005166CB /* NRFileManager.m in Sources */,
 				E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.mm in Sources */,
 				E392F88E215D6B3B00116078 /* ModelManager.mm in Sources */,
 				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
 				E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */,
 				E3A52122210A511C004B912B /* Utilities.mm in Sources */,
+				E3E9A20721E4137900C64FC6 /* ImageModelLabelsDatabase.mm in Sources */,
 				E3F6C68A210A56DD00D200D8 /* UserDefaults.m in Sources */,
 				E3A520F0210A49A1004B912B /* main.m in Sources */,
 				E3A520E2210A49A0004B912B /* AppDelegate.mm in Sources */,
 				E3C4374E210A565A005E7E16 /* EvaluateResultsHeaderCollectionReusableView.m in Sources */,
+				E3E9A20B21E4171000C64FC6 /* ImageModelLabels.mm in Sources */,
 				E378488821CAE1FE00AB6C1E /* CollectSelectModelTableViewController.mm in Sources */,
 				E3B57E8A210A52FC008D19C0 /* AlbumPhotoEvaluator.mm in Sources */,
 				E3F6C682210A567300D200D8 /* PhotoAlbumPhotoViewController.m in Sources */,

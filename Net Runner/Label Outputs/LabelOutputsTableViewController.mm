@@ -24,12 +24,23 @@
 #import "NumericLabelTableViewCell.h"
 #import "TextLabelTableViewCell.h"
 
+//  Note that we are coupling generic labeling to models of a particular type (images)
+//  A future iteration will add a ModelLabels protocol that supports the basic get and set label
+//  methods and then we can reuse some of this interface across models of many types
+
+#import "NRFileManager.h"
+#import "ImageModelLabelsDatabase.h"
+#import "ImageModelLabels.h"
+
 @import TensorIO;
 
 @interface LabelOutputsTableViewController () <LabelOutputTableViewCellDelegate>
 
 @property (nonatomic, readwrite) UIImage *image;
 @property id<TIOModel> model;
+
+@property ImageModelLabelsDatabase *labelsDatabase;
+@property ImageModelLabels *labels;
 
 @end
 
@@ -82,6 +93,11 @@
     // Load Model
     
     self.model = self.modelBundle.newModel;
+    
+    // Load Database and Labels
+    
+    self.labelsDatabase = [[ImageModelLabelsDatabase alloc] initWithModel:self.model basepath:NRFileManager.sharedManager.labelDatabasesDirectory];
+    self.labels = [self.labelsDatabase labelsForImageWithID:self.asset.localIdentifier];
 }
 
 - (void)setImage:(UIImage *)image {
@@ -92,6 +108,15 @@
 
 // MARK: - User Actions
 
+- (IBAction)clearLabels:(id)sender {
+    [self.labels remove];
+    
+    self.labels = [self.labelsDatabase labelsForImageWithID:self.asset.localIdentifier];
+    [self.tableView reloadData];
+    
+    // TODO: show a little "cleared" notice
+}
+
 - (IBAction)cancel:(id)sender {
     [self.view endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -99,6 +124,7 @@
 
 - (IBAction)save:(id)sender {
     [self.view endEditing:YES];
+    [self.labels save];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -112,26 +138,28 @@
     return 1;
 }
 
-// TODO: update the "1 numeric value" label
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __block UITableViewCell<LabelOutputTableViewCell> *cell;
  
-    [self.model.outputs[indexPath.section] matchCasePixelBuffer:^(TIOPixelBufferLayerDescription * _Nonnull pixelBufferDescription) {
-        // Image layer: editing not currently supported
-        cell = [tableView dequeueReusableCellWithIdentifier:@"ImageOutputCell" forIndexPath:indexPath];
+    TIOLayerInterface *layer = self.model.outputs[indexPath.section];
+ 
+    [layer matchCasePixelBuffer:^(TIOPixelBufferLayerDescription * _Nonnull pixelBufferDescription) {
+            // Image layer: editing not currently supported
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ImageOutputCell" forIndexPath:indexPath];
     
     } caseVector:^(TIOVectorLayerDescription * _Nonnull vectorDescription) {
         if ( vectorDescription.labels == nil ) {
             // Float values
             NumericLabelTableViewCell *numericCell = (NumericLabelTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"FloatOutputCell" forIndexPath:indexPath];
             numericCell.numberOfExpectedValues = vectorDescription.length;
+            [numericCell setLabels:self.labels key:layer.name];
             cell = numericCell;
         
         } else {
             // Text labeled values
             TextLabelTableViewCell *textCell = (TextLabelTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"TextLabelOutputCell" forIndexPath:indexPath];
-            textCell.labels = vectorDescription.labels;
+            textCell.knownLabels = vectorDescription.labels;
+            [textCell setLabels:self.labels key:layer.name];
             cell = textCell;
         }
     }];

@@ -19,10 +19,14 @@
 //
 
 #import "TextLabelTableViewCell.h"
+#import "ImageModelLabels.h"
 
 static NSString * const TextLabelPlaceholder = @"Enter text label";
 
 @interface TextLabelTableViewCell() <UITableViewDataSource, UITableViewDelegate>
+
+@property ImageModelLabels *labels;
+@property NSString *key;
 
 @end
 
@@ -43,13 +47,28 @@ static NSString * const TextLabelPlaceholder = @"Enter text label";
     [self setPlaceholderVisible:YES];
 }
 
-- (void)setTextValue:(NSString *)textValue {
-    _textValue = textValue;
+// Read the text label and display it, or display a placeholder
+
+- (void)setLabels:(ImageModelLabels*)labels key:(NSString*)key {
+    self.labels = labels;
+    self.key = key;
     
-    if ( textValue == nil || textValue.length == 0 ) {
+    @try {
+        NSString *text = [self.labels labelForKey:self.key];
+        [self setValue:text];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"An exception occurred trying to read the %@ key from labels, exception: %@",
+            self.key, exception);
+    }
+}
+
+- (void)setValue:(NSString *)value {
+    if ( value == nil || value.length == 0 ) {
         [self setPlaceholderVisible:YES];
     } else {
         [self setPlaceholderVisible:NO];
+        self.textView.text = value;
     }
 }
 
@@ -63,9 +82,9 @@ static NSString * const TextLabelPlaceholder = @"Enter text label";
     }
 }
 
-- (void)setLabels:(NSArray<NSString *> *)labels {
-    _labels = labels;
-    _filteredLabels = labels;
+- (void)setKnownLabels:(NSArray<NSString *> *)knownLabels {
+    _knownLabels = knownLabels;
+    _filteredLabels = knownLabels;
 }
 
 // MARK - Label Output Table View Cell Protocol
@@ -108,7 +127,18 @@ static NSString * const TextLabelPlaceholder = @"Enter text label";
     }
 }
 
+// Write to the labels object when the text view ends editing
+
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    // The label must be set before the placeholder is returned
+    @try {
+        [self.labels setLabel:textView.text forKey:self.key];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"An exception occurred trying to write the %@ key to labels, exception: %@",
+            self.key, exception);
+    }
+    
     if ( [textView.text isEqualToString:@""] ) {
         [self setPlaceholderVisible:YES];
     }
@@ -165,10 +195,10 @@ static NSString * const TextLabelPlaceholder = @"Enter text label";
 
 - (void)updateSearchFilter:(NSString*)text {
     if ( text == nil || text.length == 0 ) {
-        _filteredLabels = self.labels;
+        _filteredLabels = self.knownLabels;
     } else {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH[cd] %@", text];
-        _filteredLabels = [self.labels filteredArrayUsingPredicate:predicate];
+        _filteredLabels = [self.knownLabels filteredArrayUsingPredicate:predicate];
     }
     
     [_labelTableView reloadData];

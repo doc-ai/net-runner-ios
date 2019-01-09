@@ -36,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property TIOModelBundle *modelBundle;
 
+- (IBAction)clearLabels:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;
 

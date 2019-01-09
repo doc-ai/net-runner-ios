@@ -21,7 +21,9 @@
 #import "ModelDetailsTableViewController.h"
 
 #import "ModelDetailsJSONViewController.h"
+#import "ImageModelLabelsDatabase.h"
 #import "ModelManager.h"
+#import "NRFileManager.h"
 
 @import TensorIO;
 
@@ -36,9 +38,24 @@
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
-    // Disallow deletion if we are not editable or the bundle is included by default
+    BOOL labelsDatabaseExists = [ImageModelLabelsDatabase databaseExistsForModel:self.bundle basepath:NRFileManager.sharedManager.labelDatabasesDirectory];
     
-    if ( !self.editable || [ModelManager.sharedManager.defaultModelIDs containsObject:self.bundle.identifier] ) {
+    // Disallow deletion if we are not editable or the bundle is included by default
+    BOOL hideDeleteModel = (self.actions & ModelDetailsActionDeleteModel) == 0
+                         || [ModelManager.sharedManager.defaultModelIDs containsObject:self.bundle.identifier];
+    BOOL hideClearLabels = (self.actions & ModelDetailsActionClearLabels) == 0
+                         || !labelsDatabaseExists;
+    BOOL showShareLabels = (self.actions & ModelDetailsActionShareLabels) != 0
+                         && labelsDatabaseExists;
+    
+    self.actionsStackView.arrangedSubviews[1].hidden = hideDeleteModel;
+    self.actionsStackView.arrangedSubviews[0].hidden = hideClearLabels;
+    
+    if (showShareLabels) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareLabels:)];
+    }
+    
+    if (hideDeleteModel && hideClearLabels) {
         self.tableView.tableFooterView.hidden = YES;
     }
 }
@@ -90,8 +107,8 @@
 - (IBAction)deleteModel:(id)sender {
     
     UIAlertController *alert = [UIAlertController
-        alertControllerWithTitle:NSLocalizedString(@"Are you sure you want to delete this model?", @"Delete model alert title")
-        message:NSLocalizedString(@"Deleting this model will remove it permanently. It will no longer be available to select for live inference or for bulk evaluation.", @"Delete model alert message")
+        alertControllerWithTitle:NSLocalizedString(@"Delete Model?", @"Delete model alert title")
+        message:NSLocalizedString(@"Deleting this model will remove it permanently. It will no longer be available for live inference or bulk evaluation, and any labels you have associated with it will be removed.", @"Delete model alert message")
         preferredStyle:UIAlertControllerStyleActionSheet];
     
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete Model", @"Delete model alert delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
@@ -111,6 +128,10 @@
             [self presentViewController:errorAlert animated:YES completion:nil];
         
         } else {
+            
+            // Also clear the labels
+            [ImageModelLabelsDatabase removeDatabaseForModel:self.bundle basepath:NRFileManager.sharedManager.labelDatabasesDirectory];
+        
             [self.delegate modelDetailsTableViewControllerDidDeleteModel:self];
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -122,6 +143,27 @@
     [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Delete model alert canel button") style:UIAlertActionStyleCancel handler:nil]];
     
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (IBAction)clearLabelsDatabase:(id)sender {
+    
+    UIAlertController *alert = [UIAlertController
+        alertControllerWithTitle:NSLocalizedString(@"Clear Labels Database?", @"Clear labels database alert title")
+        message:NSLocalizedString(@"Clearing the labels for this model will remove any existing labels. They will no longer be visible in the labeling section, and you will no longer be able to export them.", @"Clear labels database alert message")
+        preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Clear Labels", @"Clear labels alert clear button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        [ImageModelLabelsDatabase removeDatabaseForModel:self.bundle basepath:NRFileManager.sharedManager.labelDatabasesDirectory];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Clear labels alert alert canel button") style:UIAlertActionStyleCancel handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (IBAction)shareLabels:(id)sender {
+    NSLog(@"share labels");
 }
 
 @end

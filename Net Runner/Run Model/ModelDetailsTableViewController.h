@@ -22,6 +22,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_OPTIONS(NSUInteger, SupportedModelDetailsActions) {
+    ModelDetailsActionNone = 0,
+    ModelDetailsActionDeleteModel = (1 << 0),
+    ModelDetailsActionClearLabels = (1 << 1),
+    ModelDetailsActionShareLabels = (1 << 2)
+};
+
 @class ModelDetailsTableViewController;
 @class TIOModelBundle;
 @protocol TIOModel;
@@ -38,15 +45,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak) id<ModelDetailsTableViewControllerDelegate> delegate;
 @property TIOModelBundle *bundle;
-@property BOOL editable;
+
+@property SupportedModelDetailsActions actions;
+// @property BOOL editable;
 
 @property (weak) IBOutlet UILabel *nameLabel;
 @property (weak) IBOutlet UILabel *authorLabel;
 @property (weak) IBOutlet UILabel *descriptionLabel;
 @property (weak) IBOutlet UILabel *licenseLabel;
 @property (weak) IBOutlet UIView *footerView;
+@property (weak) IBOutlet UIStackView *actionsStackView;
 
 - (IBAction)deleteModel:(id)sender;
+- (IBAction)clearLabelsDatabase:(id)sender;
 
 @end
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I1T-tQ-jQA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I1T-tQ-jQA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -223,23 +223,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="paV-14-cb7">
-                            <rect key="frame" x="0.0" y="625" width="375" height="44"/>
+                            <rect key="frame" x="0.0" y="625" width="375" height="88"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CaV-zW-9Rx">
-                                    <rect key="frame" x="142" y="7" width="91" height="30"/>
-                                    <state key="normal" title="Delete Model">
-                                        <color key="titleColor" red="1" green="0.26194005209999999" blue="0.21104333619999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="deleteModel:" destination="5ky-NH-gGF" eventType="touchUpInside" id="ANT-Bh-Ivb"/>
-                                    </connections>
-                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="len-V8-2sH">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSj-1d-8ae">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <state key="normal" title="Clear Labels Database"/>
+                                            <connections>
+                                                <action selector="clearLabelsDatabase:" destination="5ky-NH-gGF" eventType="touchUpInside" id="mBN-jn-GoE"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5p-N5-AXU">
+                                            <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                            <state key="normal" title="Delete Model">
+                                                <color key="titleColor" red="1" green="0.0" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="deleteModel:" destination="5ky-NH-gGF" eventType="touchUpInside" id="gAF-sT-awU"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="CaV-zW-9Rx" firstAttribute="centerY" secondItem="paV-14-cb7" secondAttribute="centerY" id="VSk-nQ-J7h"/>
-                                <constraint firstItem="CaV-zW-9Rx" firstAttribute="centerX" secondItem="paV-14-cb7" secondAttribute="centerX" id="me3-Mu-hu7"/>
+                                <constraint firstAttribute="trailing" secondItem="len-V8-2sH" secondAttribute="trailing" id="IC1-tg-X3j"/>
+                                <constraint firstAttribute="bottom" secondItem="len-V8-2sH" secondAttribute="bottom" id="TGg-hx-E2o"/>
+                                <constraint firstItem="len-V8-2sH" firstAttribute="leading" secondItem="paV-14-cb7" secondAttribute="leading" id="ajl-hS-Uk0"/>
+                                <constraint firstItem="len-V8-2sH" firstAttribute="top" secondItem="paV-14-cb7" secondAttribute="top" id="p2g-9D-Odh"/>
                             </constraints>
                         </view>
                         <sections>
@@ -383,6 +397,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="actionsStackView" destination="len-V8-2sH" id="WBo-HW-kYT"/>
                         <outlet property="authorLabel" destination="kH2-P8-LMX" id="RV7-wa-Ap2"/>
                         <outlet property="descriptionLabel" destination="h1C-cO-kQr" id="Ue0-gW-ouF"/>
                         <outlet property="footerView" destination="paV-14-cb7" id="0JL-73-6eS"/>
