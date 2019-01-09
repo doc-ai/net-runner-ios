@@ -231,7 +231,7 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSj-1d-8ae">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                            <state key="normal" title="Clear Labels Database"/>
+                                            <state key="normal" title="Clear All Labels"/>
                                             <connections>
                                                 <action selector="clearLabelsDatabase:" destination="5ky-NH-gGF" eventType="touchUpInside" id="mBN-jn-GoE"/>
                                             </connections>

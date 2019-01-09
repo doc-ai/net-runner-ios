@@ -3,6 +3,7 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - SSZipArchive (2.1.4)
+  - SVProgressHUD (2.2.5)
   - TensorFlowLite (1.12.0)
   - TensorIO (0.3.1):
     - TensorFlowLite
@@ -10,12 +11,14 @@ PODS:
 DEPENDENCIES:
   - FMDB
   - SSZipArchive
+  - SVProgressHUD
   - TensorIO (from `https://github.com/doc-ai/TensorIO.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - FMDB
     - SSZipArchive
+    - SVProgressHUD
     - TensorFlowLite
 
 EXTERNAL SOURCES:
@@ -30,9 +33,10 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TensorFlowLite: e81aef029750aa46b42ad16553fa4cddd81498cc
   TensorIO: b0d968ebe97d11d70d43c7ebe2319a883e780720
 
-PODFILE CHECKSUM: 4f6e49d48cc568c08bedba3a09f1d71ab8cfafaf
+PODFILE CHECKSUM: 8a408e13f65bcd248d66fb9624b073840171052d
 
 COCOAPODS: 1.5.3

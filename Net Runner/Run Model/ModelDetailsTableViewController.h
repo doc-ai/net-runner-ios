@@ -47,7 +47,6 @@ typedef NS_OPTIONS(NSUInteger, SupportedModelDetailsActions) {
 @property TIOModelBundle *bundle;
 
 @property SupportedModelDetailsActions actions;
-// @property BOOL editable;
 
 @property (weak) IBOutlet UILabel *nameLabel;
 @property (weak) IBOutlet UILabel *authorLabel;

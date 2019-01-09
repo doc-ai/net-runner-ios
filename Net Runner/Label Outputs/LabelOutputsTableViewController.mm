@@ -32,6 +32,7 @@
 #import "ImageModelLabelsDatabase.h"
 #import "ImageModelLabels.h"
 
+@import SVProgressHUD;
 @import TensorIO;
 
 @interface LabelOutputsTableViewController () <LabelOutputTableViewCellDelegate>
@@ -114,7 +115,7 @@
     self.labels = [self.labelsDatabase labelsForImageWithID:self.asset.localIdentifier];
     [self.tableView reloadData];
     
-    // TODO: show a little "cleared" notice
+    [SVProgressHUD showSuccessWithStatus:@"Labels cleared"];
 }
 
 - (IBAction)cancel:(id)sender {

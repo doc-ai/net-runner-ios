@@ -46,11 +46,8 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ( [segue.identifier isEqualToString:@"ModelDetailsSegue"] ) {
         ModelDetailsTableViewController *destination = (ModelDetailsTableViewController*)segue.destinationViewController;
-        
         destination.bundle = TIOModelBundleManager.sharedManager.modelBundles[((NSIndexPath*)sender).row];
-        
         destination.actions = (ModelDetailsActionClearLabels|ModelDetailsActionShareLabels);
-        // destination.editable = NO;
     
     } else if ( [segue.identifier isEqualToString:@"SelectAlbumsSegue"] ) {
         EvaluateSelectAlbumsTableViewController *destination = (EvaluateSelectAlbumsTableViewController*)segue.destinationViewController;
