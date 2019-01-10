@@ -22,6 +22,7 @@
 
 #import "ModelDetailsJSONViewController.h"
 #import "ImageModelLabelsDatabase.h"
+#import "ImageModelLabelsExportActivityItemProvider.h"
 #import "ModelManager.h"
 #import "NRFileManager.h"
 
@@ -181,7 +182,13 @@
 }
 
 - (IBAction)shareLabels:(id)sender {
-    NSLog(@"share labels");
+    ImageModelLabelsDatabase *database = [[ImageModelLabelsDatabase alloc] initWithModel:self.bundle.newModel basepath:NRFileManager.sharedManager.labelDatabasesDirectory];
+    
+    ImageModelLabelsExportActivityItemProvider *provider = [[ImageModelLabelsExportActivityItemProvider alloc] initWithDatabase:database identifier:self.bundle.identifier];
+    
+    UIActivityViewController *vc = [[UIActivityViewController alloc] initWithActivityItems:@[provider] applicationActivities:nil];
+    
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end

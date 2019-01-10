@@ -40,6 +40,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *identifier;
 
 /**
+ * Unnested key-value pairs associated with model outputs.
+ *
+ * These values are more safely accessed using the labelForKey: method.
+ */
+
+@property (readonly) NSDictionary *labels;
+
+/**
  * Designated initializer.
  *
  * You should not need to call this method or need to instantiate a `ImageModelLabels` object yourself.

@@ -14,6 +14,8 @@
 		E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.mm */; };
 		E33229D7212607680031435F /* ModelOutputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229D6212607680031435F /* ModelOutputManager.m */; };
 		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
+		E344013421E6C09200B6E9CC /* ImageModelLabelsExporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E344013321E6C09200B6E9CC /* ImageModelLabelsExporter.mm */; };
+		E344013721E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */; };
 		E3458A88210A55A80040648C /* EvaluateModelTableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */; };
 		E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A87210A55A80040648C /* EvaluateSelectModelsTableViewController.mm */; };
 		E3458A8E210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A8A210A563B0040648C /* EvaluatePhotoAlbumTableViewCell.m */; };
@@ -126,6 +128,10 @@
 		E33229D6212607680031435F /* ModelOutputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOutputManager.m; sourceTree = "<group>"; };
 		E33229DA21260C880031435F /* DefaultModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultModelOutput.h; sourceTree = "<group>"; };
 		E33229DB21260C880031435F /* DefaultModelOutput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DefaultModelOutput.mm; sourceTree = "<group>"; };
+		E344013221E6C09200B6E9CC /* ImageModelLabelsExporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabelsExporter.h; sourceTree = "<group>"; };
+		E344013321E6C09200B6E9CC /* ImageModelLabelsExporter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabelsExporter.mm; sourceTree = "<group>"; };
+		E344013521E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabelsExportActivityItemProvider.h; sourceTree = "<group>"; };
+		E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabelsExportActivityItemProvider.mm; sourceTree = "<group>"; };
 		E3458A84210A55A80040648C /* EvaluateSelectModelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateSelectModelsTableViewController.h; sourceTree = "<group>"; };
 		E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluateModelTableViewCell.mm; sourceTree = "<group>"; };
 		E3458A86210A55A80040648C /* EvaluateModelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateModelTableViewCell.h; sourceTree = "<group>"; };
@@ -614,6 +620,10 @@
 				E3E9A20621E4137900C64FC6 /* ImageModelLabelsDatabase.mm */,
 				E3E9A20921E4171000C64FC6 /* ImageModelLabels.h */,
 				E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */,
+				E344013221E6C09200B6E9CC /* ImageModelLabelsExporter.h */,
+				E344013321E6C09200B6E9CC /* ImageModelLabelsExporter.mm */,
+				E344013521E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.h */,
+				E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */,
 			);
 			path = ModelLabels;
 			sourceTree = "<group>";
@@ -881,6 +891,7 @@
 			files = (
 				E3A52121210A511C004B912B /* LatencyCounter.m in Sources */,
 				E3F6C6AE210A57F200D200D8 /* ResultInfoView.m in Sources */,
+				E344013721E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm in Sources */,
 				E3A52124210A511C004B912B /* PHFetchResult+Extensions.m in Sources */,
 				E3458A88210A55A80040648C /* EvaluateModelTableViewCell.mm in Sources */,
 				E378487E21C993D800AB6C1E /* NumericLabelTableViewCell.m in Sources */,
@@ -908,6 +919,7 @@
 				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
 				E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */,
+				E344013421E6C09200B6E9CC /* ImageModelLabelsExporter.mm in Sources */,
 				E3A52122210A511C004B912B /* Utilities.mm in Sources */,
 				E3E9A20721E4137900C64FC6 /* ImageModelLabelsDatabase.mm in Sources */,
 				E3F6C68A210A56DD00D200D8 /* UserDefaults.m in Sources */,

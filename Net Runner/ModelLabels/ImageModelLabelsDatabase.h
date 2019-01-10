@@ -17,6 +17,10 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+//  TODO: Note the use of TIOModel and TIOModelBundle below. It should be possible to
+//  instantiate an instance of the database with just the model bundle, which means that
+//  a model's description should be fully available from the bundle without needing to
+//  load a model into memory.
 
 #import <Foundation/Foundation.h>
 
@@ -94,6 +98,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 - (nullable ImageModelLabels*)labelsForImageWithID:(NSString*)identifier;
+
+/**
+ * Returns all labels in the database.
+ */
+
+- (NSArray<ImageModelLabels*>*)allLabels;
 
 /**
  * Closes the connection to the database and frees up the underlying mysql resources.
