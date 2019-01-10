@@ -178,6 +178,44 @@ NSDictionary * _Nonnull PlaceholderLabelsForModel(id<TIOModel> _Nonnull model) {
     return labels;
 }
 
+- (NSArray<ImageModelLabels*>*)allLabels {
+    NSString *query = @"SELECT * FROM labels";
+    FMResultSet *results = [self.db executeQuery:query];
+    
+    if (results == nil) {
+        NSLog(@"Error executing labels select query, error: %@", self.db.lastErrorMessage);
+        return nil;
+    }
+    
+    NSMutableArray<ImageModelLabels*> *allLabels = [[NSMutableArray alloc] init];
+    
+    while (results.next) {
+        NSString *identifier = [results objectForColumn:@"id"];
+        NSData *data = [results objectForColumn:@"labels"];
+        
+        if (data == nil) {
+            NSLog(@"Unable to read labels from select results for object with identifier %@, error: %@",
+                identifier, self.db.lastErrorMessage);
+            continue;
+        }
+        
+        NSError *JSONError;
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&JSONError];
+        
+        if (dictionary == nil) {
+            NSLog(@"Unable to deserialize labels from select results for object with identifier %@, error: %@",
+                identifier, JSONError);
+            continue;
+        }
+        
+        ImageModelLabels *labels = [[ImageModelLabels alloc] initWithDatabase:self identifier:identifier labels:dictionary isCreated:YES];
+        
+        [allLabels addObject:labels];
+    }
+    
+    return allLabels.copy;
+}
+
 - (void)close {
     [_db close];
 }

@@ -29,7 +29,7 @@
  * Unnested key-value pairs associated with model outputs.
  */
 
-@property NSDictionary *labels;
+@property (readwrite) NSDictionary *labels;
 
 /**
  * Flag indicating if the values have actually been stored in the database yet.
