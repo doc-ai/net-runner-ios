@@ -33,8 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak) ImageModelLabelsDatabase *database;
 
 /**
- * An unique identifier for this object in the database, corresponding to the `PHObject`
- * `localIdentifier`.
+ * An unique identifier for this object in the database, corresponding to a `PHObject`'s
+ * `localIdentifier` value.
  */
 
 @property NSString *identifier;
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Designated initializer.
  *
- * You should not need to call this method or need to instantiate a `ImageModelLabels` object yourself.
+ * You should not need to call this method or need to instantiate an `ImageModelLabels` object yourself.
  * It should only ever be called by an instance of `ImageModelLabelsDatabase`.
  */
 

@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * An `Evaluator` knows how to run a model on a particular kind of input.
- * For `VisonModel` evaluators, the higher level evaluators ultimately pass execution down to the
+ * For image evaluators, the higher level evaluators ultimately pass execution down to the
  * `CVPixelBufferEvaluator`, which loads the model and runs inference, returning the results and latency.
  *
  * Evaluators should dispatch their operation to run once and then set the model and any input to `nil`.

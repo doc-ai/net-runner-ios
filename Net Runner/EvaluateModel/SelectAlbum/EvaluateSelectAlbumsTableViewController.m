@@ -26,6 +26,9 @@
 
 // TODO: mixing the evaluating and labeling ui, refactor or change this somewhere
 #import "LabelPhotoAssetsCollectionViewController.h"
+#import "TIOModelBundle.h"
+
+@import SVProgressHUD;
 
 static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 
@@ -35,7 +38,8 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 @property (nonatomic) NSSet<PHAssetCollection *> *selectedAlbums;
 @property PHCachingImageManager *imageManager;
 
-@property (readonly) UIBarButtonItem *nextButton;
+// Nullable because we are overloading this class to support album selection in labeling
+@property (nullable, readonly) UIBarButtonItem *nextButton;
 
 @end
 
@@ -85,7 +89,6 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
         destination.album = album;
         
         // Labeling specific: refactor?
-        
         destination.modelBundle = self.data[@"bundles"][0];
     }
 }
@@ -97,7 +100,10 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
 }
 
 - (UIBarButtonItem*)nextButton {
-    return self.navigationItem.rightBarButtonItem;
+    // Next button has tag of 1001, add button has tag of 0
+    return self.navigationItem.rightBarButtonItem.tag == 1001
+        ? self.navigationItem.rightBarButtonItem
+        : nil;
 }
 
 // MARK: - Fetching Albums
@@ -206,6 +212,43 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
     } else {
         [[self mutableSetValueForKey:@"selectedAlbums"] addObject:album];
     }
+}
+
+// MARK: - User Actions
+
+- (IBAction)createAlbum:(id)sender {
+    // TODO: Refactor (this belongs to data labeling only)
+    
+    NSString *title = ((TIOModelBundle*)[self.data[@"bundles"] firstObject]).name;
+    __block PHObjectPlaceholder *placeholder;
+    
+    [PHPhotoLibrary.sharedPhotoLibrary performChanges:^{
+        PHAssetCollectionChangeRequest *create = [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:title];
+        placeholder = create.placeholderForCreatedAssetCollection;
+    
+    } completionHandler:^(BOOL success, NSError * _Nullable error) {
+        if (!success) {
+            NSLog(@"There was a problem creating the photo album, error: %@", error);
+            [SVProgressHUD showErrorWithStatus:@"Unable to Create Album"];
+            return;
+        }
+        
+        // TODO: Use PHPhotoLibraryChangeObserver to observe creation of album
+        // This would also ensure newly created albums outside the app are immediately visible
+        
+        // PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+        // fetchOptions.includeAllBurstAssets = NO;
+        // fetchOptions.includeHiddenAssets = NO;
+        
+        // PHFetchResult<PHAssetCollection*> *result = [PHAssetCollection fetchAssetCollectionsWithLocalIdentifiers:@[placeholder.localIdentifier] options:fetchOptions];
+        // PHAssetCollection *collection = result.firstObject;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"Created %@ Album", title]];
+            [self fetchAlbums];
+            [self.tableView reloadData];
+        });
+    }];
 }
 
 @end

@@ -76,8 +76,11 @@
         resultHandler:^(UIImage *result, NSDictionary *info) {
     
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.albumImageView.image = result;
+            self.albumImageView.image = (result == nil)
+                ? [UIImage imageNamed:@"album-placeholder.png"]
+                : result;
         });
+    
     }];
 }
 

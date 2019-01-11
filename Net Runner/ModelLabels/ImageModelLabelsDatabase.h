@@ -43,13 +43,13 @@ NS_ASSUME_NONNULL_BEGIN
  * A handle to the underlying FMDB resource.
  *
  * Do not make database calls to this resource directly. It is exposed to allow instances of
- * ImageModelLabels to manage their own saving and deleting.
+ * `ImageModelLabels` to manage their own saving and deleting.
  */
 
 @property (readonly) FMDatabase *db;
 
 /**
- * Initializes a labels database instance with reference to a particular model.
+ * Initializes a labels database with reference to a particular model.
  *
  * If a database for this model doesn't exist yet, this method creates that database on disk.
  * When you are finished using this database, call `close` on it. That method is also called
@@ -57,11 +57,8 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * The on-disk database stores label data according to the format specifed in the outputs field
  * of your model's JSON description. Updates to a model that use the same model identifier must
- * not change their output fields. If the description of the model's output fields does not match
- * the description stored in an already existing label database, this method will return nil.
- *
- * As a matter of practice, updates to a model should not change the input and output fields,
- * only model weights or internal structure.
+ * not change their output fields. As a matter of practice, updates to a model should not change
+ * the input and output fields, only model weights or internal structure.
  */
 
 - (instancetype)initWithModel:(id<TIOModel>)model basepath:(NSString*)basepath NS_DESIGNATED_INITIALIZER;
@@ -94,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
  * the same way. When you call `save` on this object, a row will be created for it in the
  * database.
  *
- * The identifier corresponds to the `PHObject` `localIdentifier`.
+ * The identifier corresponds to a `PHObject`'s `localIdentifier` value.
  */
 
 - (nullable ImageModelLabels*)labelsForImageWithID:(NSString*)identifier;
