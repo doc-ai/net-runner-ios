@@ -336,7 +336,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E33229D92126098F0031435F /* Model Output */ = {
+		E33229D92126098F0031435F /* ModelOutput */ = {
 			isa = PBXGroup;
 			children = (
 				E3851386210D0A3100F600C5 /* ModelOutput.h */,
@@ -347,10 +347,21 @@
 				E33229DA21260C880031435F /* DefaultModelOutput.h */,
 				E33229DB21260C880031435F /* DefaultModelOutput.mm */,
 			);
-			path = "Model Output";
+			path = ModelOutput;
 			sourceTree = "<group>";
 		};
-		E354776621C8515600FB573C /* Label Outputs */ = {
+		E344013821E81D0600B6E9CC /* GlobalManagers */ = {
+			isa = PBXGroup;
+			children = (
+				E384E27521E5691A005166CB /* NRFileManager.h */,
+				E384E27621E5691A005166CB /* NRFileManager.m */,
+				E392F88C215D6B3B00116078 /* ModelManager.h */,
+				E392F88D215D6B3B00116078 /* ModelManager.mm */,
+			);
+			path = GlobalManagers;
+			sourceTree = "<group>";
+		};
+		E354776621C8515600FB573C /* LabelOutputs */ = {
 			isa = PBXGroup;
 			children = (
 				E378488321CADF1C00AB6C1E /* Label.storyboard */,
@@ -362,7 +373,7 @@
 				E378487F21C993E300AB6C1E /* TextLabelTableViewCell.h */,
 				E378488021C993E300AB6C1E /* TextLabelTableViewCell.m */,
 			);
-			path = "Label Outputs";
+			path = LabelOutputs;
 			sourceTree = "<group>";
 		};
 		E374029E210A55220025AA59 /* Select Model */ = {
@@ -444,7 +455,7 @@
 			path = "Select Album";
 			sourceTree = "<group>";
 		};
-		E378488521CAE17800AB6C1E /* Collect Data */ = {
+		E378488521CAE17800AB6C1E /* CollectData */ = {
 			isa = PBXGroup;
 			children = (
 				E3E7725921C42F7B004988DC /* Collect.storyboard */,
@@ -453,7 +464,7 @@
 				E378488921CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.h */,
 				E378488A21CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.mm */,
 			);
-			path = "Collect Data";
+			path = CollectData;
 			sourceTree = "<group>";
 		};
 		E3A520D4210A49A0004B912B = {
@@ -493,22 +504,19 @@
 				E3A520EF210A49A1004B912B /* main.m */,
 				E3A520E0210A49A0004B912B /* AppDelegate.h */,
 				E3A520E1210A49A0004B912B /* AppDelegate.mm */,
-				E384E27521E5691A005166CB /* NRFileManager.h */,
-				E384E27621E5691A005166CB /* NRFileManager.m */,
-				E392F88C215D6B3B00116078 /* ModelManager.h */,
-				E392F88D215D6B3B00116078 /* ModelManager.mm */,
-				E33229D92126098F0031435F /* Model Output */,
+				E344013821E81D0600B6E9CC /* GlobalManagers */,
+				E33229D92126098F0031435F /* ModelOutput */,
 				E3A52126210A5147004B912B /* headless */,
 				E3A52127210A5147004B912B /* models */,
-				E3E7725F21C43678004988DC /* Run Model */,
-				E3F6C686210A56C500D200D8 /* Run Image Model */,
-				E3F6C683210A569400D200D8 /* Additional UI */,
-				E3F6C685210A56B500D200D8 /* Headless Mode */,
-				E3B57E8D210A5301008D19C0 /* Evaluation UI */,
+				E3E7725F21C43678004988DC /* RunModel */,
+				E3F6C686210A56C500D200D8 /* RunImageModel */,
+				E3F6C683210A569400D200D8 /* AdditionalUI */,
+				E3F6C685210A56B500D200D8 /* HeadlessMode */,
+				E3B57E8D210A5301008D19C0 /* EvaluationUI */,
 				E3B57E7E210A52ED008D19C0 /* Evaluation */,
-				E3A5214E210A5292004B912B /* Evaluation Metrics */,
-				E378488521CAE17800AB6C1E /* Collect Data */,
-				E354776621C8515600FB573C /* Label Outputs */,
+				E3A5214E210A5292004B912B /* EvaluationMetrics */,
+				E378488521CAE17800AB6C1E /* CollectData */,
+				E354776621C8515600FB573C /* LabelOutputs */,
 				E3E9A20821E4138000C64FC6 /* ModelLabels */,
 				E3A52112210A5105004B912B /* Utilities */,
 			);
@@ -546,7 +554,7 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		E3A5214E210A5292004B912B /* Evaluation Metrics */ = {
+		E3A5214E210A5292004B912B /* EvaluationMetrics */ = {
 			isa = PBXGroup;
 			children = (
 				E3B57E78210A52D9008D19C0 /* EvaluationMetric.h */,
@@ -555,7 +563,7 @@
 				E3B57E7A210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.h */,
 				E3B57E7B210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.mm */,
 			);
-			path = "Evaluation Metrics";
+			path = EvaluationMetrics;
 			sourceTree = "<group>";
 		};
 		E3B57E7E210A52ED008D19C0 /* Evaluation */ = {
@@ -578,7 +586,7 @@
 			path = Evaluation;
 			sourceTree = "<group>";
 		};
-		E3B57E8D210A5301008D19C0 /* Evaluation UI */ = {
+		E3B57E8D210A5301008D19C0 /* EvaluationUI */ = {
 			isa = PBXGroup;
 			children = (
 				E3740299210A551A0025AA59 /* Evaluate.storyboard */,
@@ -592,10 +600,10 @@
 				E37402A1210A554B0025AA59 /* Results By Photo */,
 				E37402A0210A55390025AA59 /* Photo Library Browser */,
 			);
-			path = "Evaluation UI";
+			path = EvaluationUI;
 			sourceTree = "<group>";
 		};
-		E3E7725F21C43678004988DC /* Run Model */ = {
+		E3E7725F21C43678004988DC /* RunModel */ = {
 			isa = PBXGroup;
 			children = (
 				E3E7725C21C4351F004988DC /* Run.storyboard */,
@@ -610,7 +618,7 @@
 				E392F8862155914700116078 /* ModelImporter.h */,
 				E392F8872155914700116078 /* ModelImporter.mm */,
 			);
-			path = "Run Model";
+			path = RunModel;
 			sourceTree = "<group>";
 		};
 		E3E9A20821E4138000C64FC6 /* ModelLabels */ = {
@@ -628,7 +636,7 @@
 			path = ModelLabels;
 			sourceTree = "<group>";
 		};
-		E3F6C683210A569400D200D8 /* Additional UI */ = {
+		E3F6C683210A569400D200D8 /* AdditionalUI */ = {
 			isa = PBXGroup;
 			children = (
 				E3F6C698210A56F200D200D8 /* ImageInputPreviewView.h */,
@@ -636,10 +644,10 @@
 				E3F6C6AC210A57F200D200D8 /* ResultInfoView.h */,
 				E3F6C6AD210A57F200D200D8 /* ResultInfoView.m */,
 			);
-			path = "Additional UI";
+			path = AdditionalUI;
 			sourceTree = "<group>";
 		};
-		E3F6C685210A56B500D200D8 /* Headless Mode */ = {
+		E3F6C685210A56B500D200D8 /* HeadlessMode */ = {
 			isa = PBXGroup;
 			children = (
 				E3F6C691210A56EC00D200D8 /* HeadlessViewController.h */,
@@ -651,10 +659,10 @@
 				E3F6C693210A56EC00D200D8 /* HeadlessTestBundleRunner.h */,
 				E3F6C68E210A56EB00D200D8 /* HeadlessTestBundleRunner.mm */,
 			);
-			path = "Headless Mode";
+			path = HeadlessMode;
 			sourceTree = "<group>";
 		};
-		E3F6C686210A56C500D200D8 /* Run Image Model */ = {
+		E3F6C686210A56C500D200D8 /* RunImageModel */ = {
 			isa = PBXGroup;
 			children = (
 				E3F6C6B4210A661300D200D8 /* RunImageModel.storyboard */,
@@ -663,7 +671,7 @@
 				E3F6C69F210A56FC00D200D8 /* ImageSettingsTableViewController.h */,
 				E3F6C69B210A56FB00D200D8 /* ImageSettingsTableViewController.mm */,
 			);
-			path = "Run Image Model";
+			path = RunImageModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

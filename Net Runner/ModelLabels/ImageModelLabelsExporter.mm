@@ -75,6 +75,8 @@ NSString * PathSafeString(NSString * string) {
     return self;
 }
 
+// TODO: remove images that could not be found from the labels.json output
+
 - (BOOL)exportTo:(NSString*)path {
     NSArray<ImageModelLabels*> *labels = self.database.allLabels;
     NSMutableArray<NSDictionary*> *labelDictionaries = [[NSMutableArray alloc] init];
