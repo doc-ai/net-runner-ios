@@ -118,7 +118,7 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the albums you would like to run these models on." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbQ-uv-JRw">
                                     <rect key="frame" x="32" y="14" width="311" height="36"/>
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -179,7 +179,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Albums" id="p6b-Yr-G6v">
-                        <barButtonItem key="rightBarButtonItem" title="Next" style="done" id="tSL-LS-HjA">
+                        <barButtonItem key="rightBarButtonItem" tag="1001" title="Next" style="done" id="tSL-LS-HjA">
                             <connections>
                                 <segue destination="a0v-dp-oqa" kind="show" identifier="EvaluateSegue" id="PYv-cV-rQq"/>
                             </connections>

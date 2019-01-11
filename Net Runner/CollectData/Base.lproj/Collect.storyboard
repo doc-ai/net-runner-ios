@@ -107,8 +107,8 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an album or create a new one" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huw-2B-IXt">
-                                    <rect key="frame" x="49" y="22" width="277.5" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <rect key="frame" x="60.5" y="23" width="254" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -162,7 +162,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Album" id="JGK-nf-mak">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3d6-V8-lsu"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3d6-V8-lsu">
+                            <connections>
+                                <action selector="createAlbum:" destination="bgW-II-A8I" id="XTv-Uh-TJd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8p7-wz-SqY" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -27,13 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Runs inference on a single `CVPixelBufferRef`, applying any required transformations to the input.
- * Appropriate for models with a single input node that expects a pixel buffer.
+ * Appropriate for models with a single input layer that expects a pixel buffer.
  */
 
 @interface CVPixelBufferEvaluator : NSObject <Evaluator>
 
 /**
- * The `TIOModel` object on which inference is run. Noted in the results dictionary under the `kEvaluatorResultsKeyModel` key.
+ * The `TIOModel` object on which inference is run. Noted in the results dictionary under the
+ * `kEvaluatorResultsKeyModel` key.
  */
 
 @property (readonly) id<TIOModel> model;
