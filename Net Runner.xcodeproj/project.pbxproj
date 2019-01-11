@@ -371,8 +371,20 @@
 				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */,
 				E392F889215D5AB400116078 /* ModelDetailsJSONViewController.h */,
 				E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */,
+				E344013521E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.h */,
+				E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */,
 			);
 			path = ModelDetails;
+			sourceTree = "<group>";
+		};
+		E344013C21E8252400B6E9CC /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				E3F6C689210A56DD00D200D8 /* UserDefaults.plist */,
+				E3F6C687210A56DD00D200D8 /* UserDefaults.h */,
+				E3F6C688210A56DD00D200D8 /* UserDefaults.m */,
+			);
+			path = UserDefaults;
 			sourceTree = "<group>";
 		};
 		E354776621C8515600FB573C /* LabelOutputs */ = {
@@ -390,7 +402,7 @@
 			path = LabelOutputs;
 			sourceTree = "<group>";
 		};
-		E374029E210A55220025AA59 /* Select Model */ = {
+		E374029E210A55220025AA59 /* SelectModel */ = {
 			isa = PBXGroup;
 			children = (
 				E3458A84210A55A80040648C /* EvaluateSelectModelsTableViewController.h */,
@@ -398,10 +410,10 @@
 				E3458A86210A55A80040648C /* EvaluateModelTableViewCell.h */,
 				E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */,
 			);
-			path = "Select Model";
+			path = SelectModel;
 			sourceTree = "<group>";
 		};
-		E37402A0210A55390025AA59 /* Photo Library Browser */ = {
+		E37402A0210A55390025AA59 /* PhotoLibraryBrowser */ = {
 			isa = PBXGroup;
 			children = (
 				E3F6C67B210A567300D200D8 /* PhotoAssetsCollectionViewController.h */,
@@ -411,19 +423,19 @@
 				E3F6C67E210A567300D200D8 /* PhotoAlbumPhotoViewController.h */,
 				E3F6C67F210A567300D200D8 /* PhotoAlbumPhotoViewController.m */,
 			);
-			path = "Photo Library Browser";
+			path = PhotoLibraryBrowser;
 			sourceTree = "<group>";
 		};
-		E37402A1210A554B0025AA59 /* Results By Photo */ = {
+		E37402A1210A554B0025AA59 /* ResultsByPhoto */ = {
 			isa = PBXGroup;
 			children = (
 				E3C43750210A565F005E7E16 /* EvaluateResultsPhotoViewController.h */,
 				E3C43751210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm */,
 			);
-			path = "Results By Photo";
+			path = ResultsByPhoto;
 			sourceTree = "<group>";
 		};
-		E37402A2210A55510025AA59 /* Results By Model */ = {
+		E37402A2210A55510025AA59 /* ResultsByModel */ = {
 			isa = PBXGroup;
 			children = (
 				E3C43748210A565A005E7E16 /* EvaluateResultsByModelCollectionViewController.h */,
@@ -433,10 +445,10 @@
 				E3C4374B210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.h */,
 				E3C4374C210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.mm */,
 			);
-			path = "Results By Model";
+			path = ResultsByModel;
 			sourceTree = "<group>";
 		};
-		E37402A3210A55580025AA59 /* Results Overview */ = {
+		E37402A3210A55580025AA59 /* ResultsOverview */ = {
 			isa = PBXGroup;
 			children = (
 				E3458A99210A56460040648C /* EvaluateResultsTableViewController.h */,
@@ -444,10 +456,10 @@
 				E3458A96210A56460040648C /* EvaluateResultsModelTableViewCell.h */,
 				E3458A97210A56460040648C /* EvaluateResultsModelTableViewCell.m */,
 			);
-			path = "Results Overview";
+			path = ResultsOverview;
 			sourceTree = "<group>";
 		};
-		E37402A4210A555F0025AA59 /* Confirm and Options */ = {
+		E37402A4210A555F0025AA59 /* ConfirmAndOptions */ = {
 			isa = PBXGroup;
 			children = (
 				E3458A90210A56410040648C /* EvaluateConfirmTableViewController.h */,
@@ -455,10 +467,10 @@
 				E3458A93210A56410040648C /* EvaluateIterationsTableViewCell.h */,
 				E3458A92210A56410040648C /* EvaluateIterationsTableViewCell.m */,
 			);
-			path = "Confirm and Options";
+			path = ConfirmAndOptions;
 			sourceTree = "<group>";
 		};
-		E37402A5210A55640025AA59 /* Select Album */ = {
+		E37402A5210A55640025AA59 /* SelectAlbum */ = {
 			isa = PBXGroup;
 			children = (
 				E3458A8D210A563C0040648C /* EvaluateSelectAlbumsTableViewController.h */,
@@ -466,7 +478,7 @@
 				E3458A8C210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.h */,
 				E3458A8A210A563B0040648C /* EvaluatePhotoAlbumTableViewCell.m */,
 			);
-			path = "Select Album";
+			path = SelectAlbum;
 			sourceTree = "<group>";
 		};
 		E378488521CAE17800AB6C1E /* CollectData */ = {
@@ -512,12 +524,10 @@
 				E3E7725321C42DE3004988DC /* Main.storyboard */,
 				E3A520E9210A49A1004B912B /* Assets.xcassets */,
 				E3A520EE210A49A1004B912B /* Info.plist */,
-				E3F6C689210A56DD00D200D8 /* UserDefaults.plist */,
-				E3F6C687210A56DD00D200D8 /* UserDefaults.h */,
-				E3F6C688210A56DD00D200D8 /* UserDefaults.m */,
 				E3A520EF210A49A1004B912B /* main.m */,
 				E3A520E0210A49A0004B912B /* AppDelegate.h */,
 				E3A520E1210A49A0004B912B /* AppDelegate.mm */,
+				E344013C21E8252400B6E9CC /* UserDefaults */,
 				E344013821E81D0600B6E9CC /* GlobalManagers */,
 				E33229D92126098F0031435F /* ModelOutput */,
 				E3A52126210A5147004B912B /* headless */,
@@ -527,7 +537,7 @@
 				E3F6C686210A56C500D200D8 /* RunImageModel */,
 				E3F6C683210A569400D200D8 /* AdditionalUI */,
 				E3F6C685210A56B500D200D8 /* HeadlessMode */,
-				E3B57E8D210A5301008D19C0 /* EvaluationUI */,
+				E3B57E8D210A5301008D19C0 /* EvaluateModel */,
 				E3B57E7E210A52ED008D19C0 /* Evaluation */,
 				E3A5214E210A5292004B912B /* EvaluationMetrics */,
 				E378488521CAE17800AB6C1E /* CollectData */,
@@ -601,21 +611,21 @@
 			path = Evaluation;
 			sourceTree = "<group>";
 		};
-		E3B57E8D210A5301008D19C0 /* EvaluationUI */ = {
+		E3B57E8D210A5301008D19C0 /* EvaluateModel */ = {
 			isa = PBXGroup;
 			children = (
 				E3740299210A551A0025AA59 /* Evaluate.storyboard */,
 				E374029A210A551A0025AA59 /* EvaluationResultsActivityItemProvider.h */,
 				E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */,
-				E374029E210A55220025AA59 /* Select Model */,
-				E37402A5210A55640025AA59 /* Select Album */,
-				E37402A4210A555F0025AA59 /* Confirm and Options */,
-				E37402A3210A55580025AA59 /* Results Overview */,
-				E37402A2210A55510025AA59 /* Results By Model */,
-				E37402A1210A554B0025AA59 /* Results By Photo */,
-				E37402A0210A55390025AA59 /* Photo Library Browser */,
+				E374029E210A55220025AA59 /* SelectModel */,
+				E37402A5210A55640025AA59 /* SelectAlbum */,
+				E37402A4210A555F0025AA59 /* ConfirmAndOptions */,
+				E37402A3210A55580025AA59 /* ResultsOverview */,
+				E37402A2210A55510025AA59 /* ResultsByModel */,
+				E37402A1210A554B0025AA59 /* ResultsByPhoto */,
+				E37402A0210A55390025AA59 /* PhotoLibraryBrowser */,
 			);
-			path = EvaluationUI;
+			path = EvaluateModel;
 			sourceTree = "<group>";
 		};
 		E3E7725F21C43678004988DC /* RunModel */ = {
@@ -641,8 +651,6 @@
 				E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */,
 				E344013221E6C09200B6E9CC /* ImageModelLabelsExporter.h */,
 				E344013321E6C09200B6E9CC /* ImageModelLabelsExporter.mm */,
-				E344013521E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.h */,
-				E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */,
 			);
 			path = ModelLabels;
 			sourceTree = "<group>";
