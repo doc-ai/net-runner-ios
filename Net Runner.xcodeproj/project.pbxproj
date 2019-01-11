@@ -16,6 +16,7 @@
 		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
 		E344013421E6C09200B6E9CC /* ImageModelLabelsExporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E344013321E6C09200B6E9CC /* ImageModelLabelsExporter.mm */; };
 		E344013721E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */; };
+		E344013B21E81DC300B6E9CC /* ModelDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E344013A21E81DC300B6E9CC /* ModelDetails.storyboard */; };
 		E3458A88210A55A80040648C /* EvaluateModelTableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */; };
 		E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A87210A55A80040648C /* EvaluateSelectModelsTableViewController.mm */; };
 		E3458A8E210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A8A210A563B0040648C /* EvaluatePhotoAlbumTableViewCell.m */; };
@@ -132,6 +133,7 @@
 		E344013321E6C09200B6E9CC /* ImageModelLabelsExporter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabelsExporter.mm; sourceTree = "<group>"; };
 		E344013521E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabelsExportActivityItemProvider.h; sourceTree = "<group>"; };
 		E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabelsExportActivityItemProvider.mm; sourceTree = "<group>"; };
+		E344013A21E81DC300B6E9CC /* ModelDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ModelDetails.storyboard; sourceTree = "<group>"; };
 		E3458A84210A55A80040648C /* EvaluateSelectModelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateSelectModelsTableViewController.h; sourceTree = "<group>"; };
 		E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluateModelTableViewCell.mm; sourceTree = "<group>"; };
 		E3458A86210A55A80040648C /* EvaluateModelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateModelTableViewCell.h; sourceTree = "<group>"; };
@@ -361,6 +363,18 @@
 			path = GlobalManagers;
 			sourceTree = "<group>";
 		};
+		E344013921E81DA900B6E9CC /* ModelDetails */ = {
+			isa = PBXGroup;
+			children = (
+				E344013A21E81DC300B6E9CC /* ModelDetails.storyboard */,
+				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
+				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */,
+				E392F889215D5AB400116078 /* ModelDetailsJSONViewController.h */,
+				E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */,
+			);
+			path = ModelDetails;
+			sourceTree = "<group>";
+		};
 		E354776621C8515600FB573C /* LabelOutputs */ = {
 			isa = PBXGroup;
 			children = (
@@ -508,6 +522,7 @@
 				E33229D92126098F0031435F /* ModelOutput */,
 				E3A52126210A5147004B912B /* headless */,
 				E3A52127210A5147004B912B /* models */,
+				E344013921E81DA900B6E9CC /* ModelDetails */,
 				E3E7725F21C43678004988DC /* RunModel */,
 				E3F6C686210A56C500D200D8 /* RunImageModel */,
 				E3F6C683210A569400D200D8 /* AdditionalUI */,
@@ -609,10 +624,6 @@
 				E3E7725C21C4351F004988DC /* Run.storyboard */,
 				E3F6C6A1210A56FC00D200D8 /* ModelsTableViewController.h */,
 				E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */,
-				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
-				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */,
-				E392F889215D5AB400116078 /* ModelDetailsJSONViewController.h */,
-				E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */,
 				E32FB5DA2149BA0A00367B11 /* AddModelTableViewController.h */,
 				E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.mm */,
 				E392F8862155914700116078 /* ModelImporter.h */,
@@ -786,6 +797,7 @@
 				E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */,
 				E3E7725B21C42F7B004988DC /* Collect.storyboard in Resources */,
 				E31C799D212E0E8300139C90 /* LICENSE in Resources */,
+				E344013B21E81DC300B6E9CC /* ModelDetails.storyboard in Resources */,
 				E3E7725521C42DE3004988DC /* Main.storyboard in Resources */,
 				E3F6C6AB210A578100D200D8 /* LaunchScreen.storyboard in Resources */,
 				E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */,

@@ -69,8 +69,12 @@
     BOOL showShareLabels = (self.actions & ModelDetailsActionShareLabels) != 0
                          && labelsDatabaseExists;
     
+    // Show or hide unavailable actions
+    
     self.actionsStackView.arrangedSubviews[1].hidden = hideDeleteModel;
     self.actionsStackView.arrangedSubviews[0].hidden = hideClearLabels;
+    
+    // Add or remove the share navigation item
     
     if (showShareLabels) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(shareLabels:)];
@@ -78,11 +82,17 @@
         self.navigationItem.rightBarButtonItem = nil;
     }
     
-    if (hideDeleteModel && hideClearLabels) {
-        self.tableView.tableFooterView.hidden = YES;
-    } else {
-        self.tableView.tableFooterView.hidden = NO;
-    }
+    // Adjust the size of the footer and show or hide it
+    
+    NSUInteger items = (NSUInteger)!hideDeleteModel + (NSUInteger)!hideClearLabels;
+    CGFloat height = items * 44.0f;
+    
+    CGRect frame = self.tableView.tableFooterView.frame;
+    frame.size.height = height;
+    
+    self.tableView.tableFooterView.frame = frame;
+    self.tableView.tableFooterView = self.tableView.tableFooterView;
+    self.tableView.tableFooterView.hidden = (items == 0);
 }
 
 #pragma mark - Table view data source
