@@ -30,7 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (weak, nonatomic) IBOutlet UILabel *countLabel;
+@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
 @property (weak) id<LabelOutputTableViewCellDelegate> delegate;
 @property UIReturnKeyType returnKeyType;
@@ -44,6 +45,24 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 @property (nullable, nonatomic) NSArray<NSString*> *knownLabels;
+
+/**
+ * Returns `YES` if the cell encountered an erorr oupdating the value, `NO` otherwise.
+ */
+
+@property (readonly) BOOL hasError;
+
+/**
+ * The set of labels being managed by the view this cell belongs to.
+ */
+
+@property (readonly) ImageModelLabels *labels;
+
+/**
+ * The key (name) for the label this cell is managing specifically.
+ */
+
+@property (readonly) NSString *key;
 
 /**
  * Set the output labels object and key (layer name) which this cell is managing.

@@ -22,6 +22,7 @@
 #import "ImageModelLabels.h"
 
 static NSString * const NumericLabelPlaceholder = @"Enter numeric values";
+#define ErrorColor [UIColor colorWithRed:255./255. green:98./255. blue:86./255. alpha:1]
 
 NSNumberFormatter * TextToNumberFormatter() {
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
@@ -63,8 +64,9 @@ NSArray<NSNumber*> * _Nullable TextToNumericVector(NSString * _Nullable text, NS
 
 @interface NumericLabelTableViewCell()
 
-@property ImageModelLabels *labels;
-@property NSString *key;
+@property (readwrite) BOOL hasError;
+@property (readwrite) ImageModelLabels *labels;
+@property (readwrite) NSString *key;
 
 @end
 
@@ -108,7 +110,7 @@ NSArray<NSNumber*> * _Nullable TextToNumericVector(NSString * _Nullable text, NS
 - (void)setNumberOfExpectedValues:(NSUInteger)numberOfExpectedValues {
     _numberOfExpectedValues = numberOfExpectedValues;
     
-    self.countLabel.text = numberOfExpectedValues >= 2
+    self.infoLabel.text = numberOfExpectedValues >= 2
         ? [NSString stringWithFormat:@"%ld comma separated numeric values", numberOfExpectedValues]
         : [NSString stringWithFormat:@"%ld numeric value", numberOfExpectedValues];
 }
@@ -167,19 +169,24 @@ NSArray<NSNumber*> * _Nullable TextToNumericVector(NSString * _Nullable text, NS
     // The label must be set before the placeholder is returned
     NSArray<NSNumber*> *vector = TextToNumericVector(textView.text, TextToNumberFormatter());
     
-    // TODO: error handling
-    
     if (vector == nil) {
         // Error converting text to numbers
+        [self showError:@"Please ensure all values are numbers."];
+    } else if (vector.count != self.numberOfExpectedValues && vector.count != 0) {
+        // Incorrect number of values, but no value is allowed
+        [self showError:[NSString stringWithFormat:@"Please enter %ld numeric values", self.numberOfExpectedValues]];
     } else {
         // All good
         @try {
             [self.labels setLabel:vector forKey:self.key];
         }
         @catch (NSException *exception) {
+            [self showError:@"Unsupported label. Try clearing the labels first."];
             NSLog(@"An exception occurred trying to write the %@ key to labels, exception: %@",
                 self.key, exception);
         }
+        
+        [self clearError];
     }
     
     if ( [textView.text isEqualToString:@""] ) {
@@ -201,6 +208,29 @@ NSArray<NSNumber*> * _Nullable TextToNumericVector(NSString * _Nullable text, NS
     }
     
     return YES;
+}
+
+// MARK: - Error Handling
+
+- (void)showError:(NSString*)errorDescription {
+    self.hasError = YES;
+    
+    self.errorLabel.textColor = ErrorColor;
+    self.errorLabel.text = errorDescription;
+    self.errorLabel.hidden = NO;
+    self.infoLabel.hidden = YES;
+    
+    [self.delegate labelOutputCellDidError:self error:errorDescription];
+}
+
+- (void)clearError {
+    self.hasError = NO;
+    
+    self.errorLabel.text = nil;
+    self.errorLabel.hidden = YES;
+    self.infoLabel.hidden = NO;
+    
+    [self.delegate labelOutputCellDidClearError:self];
 }
 
 @end
