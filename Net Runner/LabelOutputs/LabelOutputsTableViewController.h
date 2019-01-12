@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-// TODO: rename this
+// TODO: rename this, maybe specific for images?
 
 @import UIKit;
 @import Photos;

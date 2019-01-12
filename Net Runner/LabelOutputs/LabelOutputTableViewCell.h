@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol LabelOutputTableViewCellDelegate
 
 - (void)labelOutputCellDidReturn:(UITableViewCell<LabelOutputTableViewCell>*)cell;
+- (void)labelOutputCellDidError:(UITableViewCell<LabelOutputTableViewCell>*)cell error:(NSString*)errorDescription;
+- (void)labelOutputCellDidClearError:(UITableViewCell<LabelOutputTableViewCell>*)cell;
 
 @end
 
@@ -45,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setLabels:(ImageModelLabels*)labels key:(NSString*)key;
 - (BOOL)becomeFirstResponder;
+
+@property ImageModelLabels *labels;
+@property NSString *key;
 
 @end
 

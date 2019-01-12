@@ -43,6 +43,9 @@
 @property ImageModelLabelsDatabase *labelsDatabase;
 @property ImageModelLabels *labels;
 
+@property (readonly) BOOL hasError;
+@property NSArray<NSString*> *errors;
+
 @end
 
 @implementation LabelOutputsTableViewController
@@ -99,12 +102,28 @@
     
     self.labelsDatabase = [[ImageModelLabelsDatabase alloc] initWithModel:self.model basepath:NRFileManager.sharedManager.labelDatabasesDirectory];
     self.labels = [self.labelsDatabase labelsForImageWithID:self.asset.localIdentifier];
+    
+    // No initial errors
+    
+    self.errors = [[NSArray alloc] init];
 }
 
 - (void)setImage:(UIImage *)image {
     _image = image;
     
     self.imageView.image = _image;
+}
+
+- (BOOL)hasError {
+    return self.errors.count != 0;
+}
+
+- (void)showErrorAlert {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Save Labels" message:@"Please correct the listed errors before saving." preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 // MARK: - User Actions
@@ -125,6 +144,12 @@
 
 - (IBAction)save:(id)sender {
     [self.view endEditing:YES];
+    
+    if (self.hasError) {
+        [self showErrorAlert];
+        return;
+    }
+    
     [self.labels save];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -195,6 +220,20 @@
     UITableViewCell<LabelOutputTableViewCell> *targetCell = [self.tableView cellForRowAtIndexPath:targetPath];
     
     [targetCell becomeFirstResponder];
+}
+
+// Manage errors
+
+- (void)labelOutputCellDidError:(UITableViewCell<LabelOutputTableViewCell>*)cell error:(NSString*)errorDescription {
+    NSMutableArray<NSString*> *update = self.errors.mutableCopy;
+    [update addObject:cell.key];
+    self.errors = update.copy;
+}
+
+- (void)labelOutputCellDidClearError:(UITableViewCell<LabelOutputTableViewCell>*)cell {
+    NSMutableArray<NSString*> *update = self.errors.mutableCopy;
+    [update removeObject:cell.key];
+    self.errors = update.copy;
 }
 
 @end

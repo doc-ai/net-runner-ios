@@ -22,11 +22,13 @@
 #import "ImageModelLabels.h"
 
 static NSString * const TextLabelPlaceholder = @"Enter text label";
+#define ErrorColor [UIColor colorWithRed:255./255. green:98./255. blue:86./255. alpha:1]
 
 @interface TextLabelTableViewCell() <UITableViewDataSource, UITableViewDelegate>
 
-@property ImageModelLabels *labels;
-@property NSString *key;
+@property (readwrite) BOOL hasError;
+@property (readwrite) ImageModelLabels *labels;
+@property (readwrite) NSString *key;
 
 @end
 
@@ -135,9 +137,12 @@ static NSString * const TextLabelPlaceholder = @"Enter text label";
         [self.labels setLabel:textView.text forKey:self.key];
     }
     @catch (NSException *exception) {
+        [self showError:@"Unsupported label. Try clearing the labels first."];
         NSLog(@"An exception occurred trying to write the %@ key to labels, exception: %@",
             self.key, exception);
     }
+    
+    [self clearError];
     
     if ( [textView.text isEqualToString:@""] ) {
         [self setPlaceholderVisible:YES];
@@ -229,6 +234,29 @@ static NSString * const TextLabelPlaceholder = @"Enter text label";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.textView.text = _filteredLabels[indexPath.row];
+}
+
+// MARK: - Error Handling
+
+- (void)showError:(NSString*)errorDescription {
+    self.hasError = YES;
+    
+    self.errorLabel.textColor = ErrorColor;
+    self.errorLabel.text = errorDescription;
+    self.errorLabel.hidden = NO;
+    self.infoLabel.hidden = YES;
+    
+    [self.delegate labelOutputCellDidError:self error:errorDescription];
+}
+
+- (void)clearError {
+    self.hasError = NO;
+    
+    self.errorLabel.text = nil;
+    self.errorLabel.hidden = YES;
+    self.infoLabel.hidden = NO;
+    
+    [self.delegate labelOutputCellDidClearError:self];
 }
 
 @end
