@@ -225,7 +225,7 @@ static NSString * const LabelPhotoSegue = @"LabelPhotoSegue";
     picker.sourceType = sourceType;
     picker.delegate = self;
     
-    // Se the preferred camera position according to the moel bundle if available
+    // Set the preferred camera position according to the moel bundle if available
     
     if ( self.modelBundle.options.devicePosition == AVCaptureDevicePositionFront
         && [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront] ) {

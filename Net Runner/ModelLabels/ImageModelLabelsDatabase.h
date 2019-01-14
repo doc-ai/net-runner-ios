@@ -20,7 +20,7 @@
 //  TODO: Note the use of TIOModel and TIOModelBundle below. It should be possible to
 //  instantiate an instance of the database with just the model bundle, which means that
 //  a model's description should be fully available from the bundle without needing to
-//  load a model into memory.
+//  load a model into memory. See TensorIO todos.
 
 #import <Foundation/Foundation.h>
 
