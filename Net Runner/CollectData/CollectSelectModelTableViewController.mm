@@ -38,9 +38,7 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
     [super viewDidLoad];
 }
 
-// TODO: move model details to its own storyboard
 // TODO: revisit how "data" payload is passed across controllers
-
 // ^^^^: This may involve a refactoring of the Evaluate and Collect code to make it simpler to share across them.
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
