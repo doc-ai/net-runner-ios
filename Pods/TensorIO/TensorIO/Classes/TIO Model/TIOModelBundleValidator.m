@@ -224,10 +224,12 @@ static NSError * TIOLabelsFileDoesNotExistError(NSString *filename);
         return NO;
     }
     
-    // Validate model
+    // Validate model, but only if this is not a placeholder bundle
     
-    if ( ![self validateModelProperties:JSON[@"model"] error:error] ) {
-        return NO;
+    if ( JSON[@"placeholder"] == nil || [JSON[@"placeholder"] boolValue] == NO ) {
+        if ( ![self validateModelProperties:JSON[@"model"] error:error] ) {
+            return NO;
+        }
     }
     
     // Validate inputs
@@ -291,11 +293,6 @@ static NSError * TIOLabelsFileDoesNotExistError(NSString *filename);
         return NO;
     }
     
-    if ( JSON[@"model"] == nil || ![JSON[@"model"] isKindOfClass:[NSDictionary class]] ) {
-        *error = TIOMissingPropertyError(@"model");
-        return NO;
-    }
-    
     if ( JSON[@"inputs"] == nil || ![JSON[@"inputs"] isKindOfClass:[NSArray class]] ) {
         *error = TIOMissingPropertyError(@"inputs");
         return NO;
@@ -304,6 +301,17 @@ static NSError * TIOLabelsFileDoesNotExistError(NSString *filename);
     if ( JSON[@"outputs"] == nil || ![JSON[@"outputs"] isKindOfClass:[NSArray class]] ) {
         *error = TIOMissingPropertyError(@"outputs");
         return NO;
+    }
+    
+    // Placeholder is optional
+    
+    // Enforce presence of a model field only if this is not a placeholder model
+    
+    if ( JSON[@"placeholder"] == nil || [JSON[@"placeholder"] boolValue] == NO ) {
+        if ( JSON[@"model"] == nil || ![JSON[@"model"] isKindOfClass:[NSDictionary class]] ) {
+            *error = TIOMissingPropertyError(@"model");
+            return NO;
+        }
     }
     
     return YES;
@@ -347,16 +355,20 @@ static NSError * TIOLabelsFileDoesNotExistError(NSString *filename);
 - (BOOL)validateAssets:(NSDictionary*)JSON error:(NSError**)error {
     NSFileManager *fm = NSFileManager.defaultManager;
     
-    // validate model file
+    // validate model file, but only if this is not a placeholder model
     
-    NSString *modelFilename = JSON[@"model"][@"file"];
-    NSString *modelFilepath = [self.path stringByAppendingPathComponent:modelFilename];
+    if ( JSON[@"placeholder"] == nil || [JSON[@"placeholder"] boolValue] == NO ) {
     
-    if ( ![fm fileExistsAtPath:modelFilepath] ) {
-        *error = TIOModelFileDoesNotExistsError(modelFilename);
-        return NO;
+        NSString *modelFilename = JSON[@"model"][@"file"];
+        NSString *modelFilepath = [self.path stringByAppendingPathComponent:modelFilename];
+        
+        if ( ![fm fileExistsAtPath:modelFilepath] ) {
+            *error = TIOModelFileDoesNotExistsError(modelFilename);
+            return NO;
+        }
+        
     }
-    
+        
     // validate any labels that appear in outputs
     
     for ( NSDictionary *output in JSON[@"outputs"] ) {

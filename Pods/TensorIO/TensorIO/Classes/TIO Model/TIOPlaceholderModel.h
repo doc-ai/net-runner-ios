@@ -1,9 +1,9 @@
 //
-//  TIOTFLiteModel.h
+//  TIOPlaceholderModel.h
 //  TensorIO
 //
-//  Created by Philip Dow on 8/3/18.
-//  Copyright © 2018 doc.ai (http://doc.ai)
+//  Created by Philip Dow on 1/11/19.
+//  Copyright © 2019 doc.ai (http://doc.ai)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+
 #import <Foundation/Foundation.h>
 
 #import "TIOLayerInterface.h"
@@ -26,14 +27,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * An Objective-C wrapper around TensorFlow lite models that provides a unified interface to the
- * input and output layers of the underlying model.
- *
- * See `TIOModel` for more information about TensorIO models and for a description of the
- * conforming properties and methods here.
+ * A placeholder model declares an interface but does not contain any underlying model
+ * implementation. It is used to gather labeled data for a model that has not been trained
+ * yet. Performing inference with a placeholder model will return an empty result.
  */
 
-@interface TIOTFLiteModel : NSObject <TIOModel>
+@interface TIOPlaceholderModel : NSObject <TIOModel>
 
 + (nullable instancetype)modelWithBundleAtPath:(NSString*)path;
 

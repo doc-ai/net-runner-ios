@@ -109,6 +109,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSString* license;
 
 /**
+ * A boolean value indicating if this is a placeholder bundle.
+ *
+ * A placeholder bundle has no underlying model and instantiates a `TIOModel` that does nothing.
+ * Placeholders bundles are used to collect labeled data for models that haven't been trained yet.
+ */
+
+@property (readonly) BOOL placeholder;
+
+/**
  * A boolean value indicating if the model is quantized or not.
  *
  * Quantized models have 8 bit `uint8_t` interfaces while unquantized modesl have 32 bit, `float_t`
