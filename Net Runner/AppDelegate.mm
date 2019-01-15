@@ -17,6 +17,8 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+//  BUILD STEPS
+//  TODO: Remove models we don't want to appear in the app store
 
 #import "AppDelegate.h"
 
