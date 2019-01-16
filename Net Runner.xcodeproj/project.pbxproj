@@ -14,6 +14,9 @@
 		E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.mm */; };
 		E33229D7212607680031435F /* ModelOutputManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E33229D6212607680031435F /* ModelOutputManager.m */; };
 		E33229DC21260C880031435F /* DefaultModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E33229DB21260C880031435F /* DefaultModelOutput.mm */; };
+		E344013421E6C09200B6E9CC /* ImageModelLabelsExporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E344013321E6C09200B6E9CC /* ImageModelLabelsExporter.mm */; };
+		E344013721E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm in Sources */ = {isa = PBXBuildFile; fileRef = E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */; };
+		E344013B21E81DC300B6E9CC /* ModelDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E344013A21E81DC300B6E9CC /* ModelDetails.storyboard */; };
 		E3458A88210A55A80040648C /* EvaluateModelTableViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */; };
 		E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A87210A55A80040648C /* EvaluateSelectModelsTableViewController.mm */; };
 		E3458A8E210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A8A210A563B0040648C /* EvaluatePhotoAlbumTableViewCell.m */; };
@@ -22,9 +25,16 @@
 		E3458A95210A56410040648C /* EvaluateIterationsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A92210A56410040648C /* EvaluateIterationsTableViewCell.m */; };
 		E3458A9A210A56460040648C /* EvaluateResultsModelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3458A97210A56460040648C /* EvaluateResultsModelTableViewCell.m */; };
 		E3458A9B210A56460040648C /* EvaluateResultsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3458A98210A56460040648C /* EvaluateResultsTableViewController.mm */; };
+		E354776521C8515100FB573C /* LabelOutputsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E354776421C8515100FB573C /* LabelOutputsTableViewController.mm */; };
 		E3740298210A53E00025AA59 /* EvaluationMetricFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = E3740297210A53E00025AA59 /* EvaluationMetricFactory.m */; };
 		E374029C210A551A0025AA59 /* Evaluate.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3740299210A551A0025AA59 /* Evaluate.storyboard */; };
 		E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */; };
+		E378487E21C993D800AB6C1E /* NumericLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E378487D21C993D800AB6C1E /* NumericLabelTableViewCell.m */; };
+		E378488121C993E300AB6C1E /* TextLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E378488021C993E300AB6C1E /* TextLabelTableViewCell.m */; };
+		E378488421CADF1C00AB6C1E /* Label.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E378488321CADF1C00AB6C1E /* Label.storyboard */; };
+		E378488821CAE1FE00AB6C1E /* CollectSelectModelTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E378488721CAE1FE00AB6C1E /* CollectSelectModelTableViewController.mm */; };
+		E378488B21CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E378488A21CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.mm */; };
+		E384E27721E5691A005166CB /* NRFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E384E27621E5691A005166CB /* NRFileManager.m */; };
 		E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */; };
 		E392F8882155914700116078 /* ModelImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F8872155914700116078 /* ModelImporter.mm */; };
 		E392F88B215D5AB400116078 /* ModelDetailsJSONViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */; };
@@ -54,6 +64,11 @@
 		E3C4374E210A565A005E7E16 /* EvaluateResultsHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3C4374A210A565A005E7E16 /* EvaluateResultsHeaderCollectionReusableView.m */; };
 		E3C4374F210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3C4374C210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.mm */; };
 		E3C43752210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3C43751210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm */; };
+		E3E7725521C42DE3004988DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7725321C42DE3004988DC /* Main.storyboard */; };
+		E3E7725B21C42F7B004988DC /* Collect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7725921C42F7B004988DC /* Collect.storyboard */; };
+		E3E7725E21C4351F004988DC /* Run.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7725C21C4351F004988DC /* Run.storyboard */; };
+		E3E9A20721E4137900C64FC6 /* ImageModelLabelsDatabase.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3E9A20621E4137900C64FC6 /* ImageModelLabelsDatabase.mm */; };
+		E3E9A20B21E4171000C64FC6 /* ImageModelLabels.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */; };
 		E3F6C680210A567300D200D8 /* PhotoAssetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */; };
 		E3F6C681210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67D210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m */; };
 		E3F6C682210A567300D200D8 /* PhotoAlbumPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67F210A567300D200D8 /* PhotoAlbumPhotoViewController.m */; };
@@ -64,15 +79,14 @@
 		E3F6C696210A56EC00D200D8 /* HeadlessTestBundleRunner.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C68E210A56EB00D200D8 /* HeadlessTestBundleRunner.mm */; };
 		E3F6C697210A56EC00D200D8 /* HeadlessTestBundleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C690210A56EB00D200D8 /* HeadlessTestBundleManager.mm */; };
 		E3F6C69A210A56F300D200D8 /* ImageInputPreviewView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C699210A56F200D200D8 /* ImageInputPreviewView.mm */; };
-		E3F6C6A2210A56FC00D200D8 /* SettingsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C69B210A56FB00D200D8 /* SettingsTableViewController.mm */; };
+		E3F6C6A2210A56FC00D200D8 /* ImageSettingsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C69B210A56FB00D200D8 /* ImageSettingsTableViewController.mm */; };
 		E3F6C6A3210A56FC00D200D8 /* ModelsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */; };
-		E3F6C6A4210A56FC00D200D8 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C69E210A56FC00D200D8 /* Settings.storyboard */; };
 		E3F6C6A5210A56FC00D200D8 /* ModelDetailsTableViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */; };
 		E3F6C6AB210A578100D200D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */; };
 		E3F6C6AE210A57F200D200D8 /* ResultInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6AD210A57F200D200D8 /* ResultInfoView.m */; };
-		E3F6C6B1210A5B8D00D200D8 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */; };
+		E3F6C6B1210A5B8D00D200D8 /* RunImageModelViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C6B0210A5B8D00D200D8 /* RunImageModelViewController.mm */; };
 		E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6B2210A661200D200D8 /* Headless.storyboard */; };
-		E3F6C6B7210A661300D200D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6B4210A661300D200D8 /* Main.storyboard */; };
+		E3F6C6B7210A661300D200D8 /* RunImageModel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3F6C6B4210A661300D200D8 /* RunImageModel.storyboard */; };
 		E3FA5B4A210A9C58009BA905 /* CVPixelBufferEvaluator.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3FA5B49210A9C58009BA905 /* CVPixelBufferEvaluator.mm */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +129,11 @@
 		E33229D6212607680031435F /* ModelOutputManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelOutputManager.m; sourceTree = "<group>"; };
 		E33229DA21260C880031435F /* DefaultModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultModelOutput.h; sourceTree = "<group>"; };
 		E33229DB21260C880031435F /* DefaultModelOutput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DefaultModelOutput.mm; sourceTree = "<group>"; };
+		E344013221E6C09200B6E9CC /* ImageModelLabelsExporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabelsExporter.h; sourceTree = "<group>"; };
+		E344013321E6C09200B6E9CC /* ImageModelLabelsExporter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabelsExporter.mm; sourceTree = "<group>"; };
+		E344013521E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabelsExportActivityItemProvider.h; sourceTree = "<group>"; };
+		E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabelsExportActivityItemProvider.mm; sourceTree = "<group>"; };
+		E344013A21E81DC300B6E9CC /* ModelDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ModelDetails.storyboard; sourceTree = "<group>"; };
 		E3458A84210A55A80040648C /* EvaluateSelectModelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateSelectModelsTableViewController.h; sourceTree = "<group>"; };
 		E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluateModelTableViewCell.mm; sourceTree = "<group>"; };
 		E3458A86210A55A80040648C /* EvaluateModelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateModelTableViewCell.h; sourceTree = "<group>"; };
@@ -131,10 +150,24 @@
 		E3458A97210A56460040648C /* EvaluateResultsModelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluateResultsModelTableViewCell.m; sourceTree = "<group>"; };
 		E3458A98210A56460040648C /* EvaluateResultsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluateResultsTableViewController.mm; sourceTree = "<group>"; };
 		E3458A99210A56460040648C /* EvaluateResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateResultsTableViewController.h; sourceTree = "<group>"; };
+		E354776321C8515100FB573C /* LabelOutputsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelOutputsTableViewController.h; sourceTree = "<group>"; };
+		E354776421C8515100FB573C /* LabelOutputsTableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LabelOutputsTableViewController.mm; sourceTree = "<group>"; };
 		E3740297210A53E00025AA59 /* EvaluationMetricFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationMetricFactory.m; sourceTree = "<group>"; };
 		E3740299210A551A0025AA59 /* Evaluate.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Evaluate.storyboard; sourceTree = "<group>"; };
 		E374029A210A551A0025AA59 /* EvaluationResultsActivityItemProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluationResultsActivityItemProvider.h; sourceTree = "<group>"; };
 		E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EvaluationResultsActivityItemProvider.m; sourceTree = "<group>"; };
+		E378487C21C993D800AB6C1E /* NumericLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumericLabelTableViewCell.h; sourceTree = "<group>"; };
+		E378487D21C993D800AB6C1E /* NumericLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NumericLabelTableViewCell.m; sourceTree = "<group>"; };
+		E378487F21C993E300AB6C1E /* TextLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextLabelTableViewCell.h; sourceTree = "<group>"; };
+		E378488021C993E300AB6C1E /* TextLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TextLabelTableViewCell.m; sourceTree = "<group>"; };
+		E378488221C9B40100AB6C1E /* LabelOutputTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelOutputTableViewCell.h; sourceTree = "<group>"; };
+		E378488321CADF1C00AB6C1E /* Label.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Label.storyboard; sourceTree = "<group>"; };
+		E378488621CAE1FE00AB6C1E /* CollectSelectModelTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectSelectModelTableViewController.h; sourceTree = "<group>"; };
+		E378488721CAE1FE00AB6C1E /* CollectSelectModelTableViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CollectSelectModelTableViewController.mm; sourceTree = "<group>"; };
+		E378488921CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LabelPhotoAssetsCollectionViewController.h; sourceTree = "<group>"; };
+		E378488A21CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LabelPhotoAssetsCollectionViewController.mm; sourceTree = "<group>"; };
+		E384E27521E5691A005166CB /* NRFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NRFileManager.h; sourceTree = "<group>"; };
+		E384E27621E5691A005166CB /* NRFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NRFileManager.m; sourceTree = "<group>"; };
 		E3851386210D0A3100F600C5 /* ModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ModelOutput.h; sourceTree = "<group>"; };
 		E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageNetClassificationModelOutput.h; sourceTree = "<group>"; };
 		E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageNetClassificationModelOutput.mm; sourceTree = "<group>"; };
@@ -193,6 +226,13 @@
 		E3C4374C210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluateResultsPhotoCollectionViewCell.mm; sourceTree = "<group>"; };
 		E3C43750210A565F005E7E16 /* EvaluateResultsPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EvaluateResultsPhotoViewController.h; sourceTree = "<group>"; };
 		E3C43751210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EvaluateResultsPhotoViewController.mm; sourceTree = "<group>"; };
+		E3E7725421C42DE3004988DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E3E7725A21C42F7B004988DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Collect.storyboard; sourceTree = "<group>"; };
+		E3E7725D21C4351F004988DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Run.storyboard; sourceTree = "<group>"; };
+		E3E9A20521E4137900C64FC6 /* ImageModelLabelsDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabelsDatabase.h; sourceTree = "<group>"; };
+		E3E9A20621E4137900C64FC6 /* ImageModelLabelsDatabase.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabelsDatabase.mm; sourceTree = "<group>"; };
+		E3E9A20921E4171000C64FC6 /* ImageModelLabels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabels.h; sourceTree = "<group>"; };
+		E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabels.mm; sourceTree = "<group>"; };
 		E3F6C67A210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		E3F6C67B210A567300D200D8 /* PhotoAssetsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAssetsCollectionViewController.h; sourceTree = "<group>"; };
 		E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAssetsCollectionViewController.m; sourceTree = "<group>"; };
@@ -212,20 +252,19 @@
 		E3F6C693210A56EC00D200D8 /* HeadlessTestBundleRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeadlessTestBundleRunner.h; sourceTree = "<group>"; };
 		E3F6C698210A56F200D200D8 /* ImageInputPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInputPreviewView.h; sourceTree = "<group>"; };
 		E3F6C699210A56F200D200D8 /* ImageInputPreviewView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageInputPreviewView.mm; sourceTree = "<group>"; };
-		E3F6C69B210A56FB00D200D8 /* SettingsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SettingsTableViewController.mm; sourceTree = "<group>"; };
+		E3F6C69B210A56FB00D200D8 /* ImageSettingsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageSettingsTableViewController.mm; sourceTree = "<group>"; };
 		E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelsTableViewController.mm; sourceTree = "<group>"; };
 		E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelDetailsTableViewController.h; sourceTree = "<group>"; };
-		E3F6C69E210A56FC00D200D8 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		E3F6C69F210A56FC00D200D8 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		E3F6C69F210A56FC00D200D8 /* ImageSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageSettingsTableViewController.h; sourceTree = "<group>"; };
 		E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ModelDetailsTableViewController.mm; sourceTree = "<group>"; };
 		E3F6C6A1210A56FC00D200D8 /* ModelsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelsTableViewController.h; sourceTree = "<group>"; };
 		E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E3F6C6AC210A57F200D200D8 /* ResultInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultInfoView.h; sourceTree = "<group>"; };
 		E3F6C6AD210A57F200D200D8 /* ResultInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultInfoView.m; sourceTree = "<group>"; };
-		E3F6C6AF210A5B8D00D200D8 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
+		E3F6C6AF210A5B8D00D200D8 /* RunImageModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunImageModelViewController.h; sourceTree = "<group>"; };
+		E3F6C6B0210A5B8D00D200D8 /* RunImageModelViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RunImageModelViewController.mm; sourceTree = "<group>"; };
 		E3F6C6B3210A661200D200D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Headless.storyboard; sourceTree = "<group>"; };
-		E3F6C6B5210A661300D200D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E3F6C6B5210A661300D200D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RunImageModel.storyboard; sourceTree = "<group>"; };
 		E3FA5B48210A9C58009BA905 /* CVPixelBufferEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVPixelBufferEvaluator.h; sourceTree = "<group>"; };
 		E3FA5B49210A9C58009BA905 /* CVPixelBufferEvaluator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CVPixelBufferEvaluator.mm; sourceTree = "<group>"; };
 		E5E3C0E09754E88DA571C288 /* Pods-Net RunnerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Net RunnerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -299,7 +338,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E33229D92126098F0031435F /* Model Output */ = {
+		E33229D92126098F0031435F /* ModelOutput */ = {
 			isa = PBXGroup;
 			children = (
 				E3851386210D0A3100F600C5 /* ModelOutput.h */,
@@ -310,10 +349,60 @@
 				E33229DA21260C880031435F /* DefaultModelOutput.h */,
 				E33229DB21260C880031435F /* DefaultModelOutput.mm */,
 			);
-			path = "Model Output";
+			path = ModelOutput;
 			sourceTree = "<group>";
 		};
-		E374029E210A55220025AA59 /* Select Model */ = {
+		E344013821E81D0600B6E9CC /* GlobalManagers */ = {
+			isa = PBXGroup;
+			children = (
+				E384E27521E5691A005166CB /* NRFileManager.h */,
+				E384E27621E5691A005166CB /* NRFileManager.m */,
+				E392F88C215D6B3B00116078 /* ModelManager.h */,
+				E392F88D215D6B3B00116078 /* ModelManager.mm */,
+			);
+			path = GlobalManagers;
+			sourceTree = "<group>";
+		};
+		E344013921E81DA900B6E9CC /* ModelDetails */ = {
+			isa = PBXGroup;
+			children = (
+				E344013A21E81DC300B6E9CC /* ModelDetails.storyboard */,
+				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
+				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */,
+				E392F889215D5AB400116078 /* ModelDetailsJSONViewController.h */,
+				E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */,
+				E344013521E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.h */,
+				E344013621E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm */,
+			);
+			path = ModelDetails;
+			sourceTree = "<group>";
+		};
+		E344013C21E8252400B6E9CC /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				E3F6C689210A56DD00D200D8 /* UserDefaults.plist */,
+				E3F6C687210A56DD00D200D8 /* UserDefaults.h */,
+				E3F6C688210A56DD00D200D8 /* UserDefaults.m */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		E354776621C8515600FB573C /* LabelOutputs */ = {
+			isa = PBXGroup;
+			children = (
+				E378488321CADF1C00AB6C1E /* Label.storyboard */,
+				E354776321C8515100FB573C /* LabelOutputsTableViewController.h */,
+				E354776421C8515100FB573C /* LabelOutputsTableViewController.mm */,
+				E378488221C9B40100AB6C1E /* LabelOutputTableViewCell.h */,
+				E378487C21C993D800AB6C1E /* NumericLabelTableViewCell.h */,
+				E378487D21C993D800AB6C1E /* NumericLabelTableViewCell.m */,
+				E378487F21C993E300AB6C1E /* TextLabelTableViewCell.h */,
+				E378488021C993E300AB6C1E /* TextLabelTableViewCell.m */,
+			);
+			path = LabelOutputs;
+			sourceTree = "<group>";
+		};
+		E374029E210A55220025AA59 /* SelectModel */ = {
 			isa = PBXGroup;
 			children = (
 				E3458A84210A55A80040648C /* EvaluateSelectModelsTableViewController.h */,
@@ -321,10 +410,10 @@
 				E3458A86210A55A80040648C /* EvaluateModelTableViewCell.h */,
 				E3458A85210A55A80040648C /* EvaluateModelTableViewCell.mm */,
 			);
-			path = "Select Model";
+			path = SelectModel;
 			sourceTree = "<group>";
 		};
-		E37402A0210A55390025AA59 /* Photo Library Browser */ = {
+		E37402A0210A55390025AA59 /* PhotoLibraryBrowser */ = {
 			isa = PBXGroup;
 			children = (
 				E3F6C67B210A567300D200D8 /* PhotoAssetsCollectionViewController.h */,
@@ -334,19 +423,19 @@
 				E3F6C67E210A567300D200D8 /* PhotoAlbumPhotoViewController.h */,
 				E3F6C67F210A567300D200D8 /* PhotoAlbumPhotoViewController.m */,
 			);
-			path = "Photo Library Browser";
+			path = PhotoLibraryBrowser;
 			sourceTree = "<group>";
 		};
-		E37402A1210A554B0025AA59 /* Results By Photo */ = {
+		E37402A1210A554B0025AA59 /* ResultsByPhoto */ = {
 			isa = PBXGroup;
 			children = (
 				E3C43750210A565F005E7E16 /* EvaluateResultsPhotoViewController.h */,
 				E3C43751210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm */,
 			);
-			path = "Results By Photo";
+			path = ResultsByPhoto;
 			sourceTree = "<group>";
 		};
-		E37402A2210A55510025AA59 /* Results By Model */ = {
+		E37402A2210A55510025AA59 /* ResultsByModel */ = {
 			isa = PBXGroup;
 			children = (
 				E3C43748210A565A005E7E16 /* EvaluateResultsByModelCollectionViewController.h */,
@@ -356,10 +445,10 @@
 				E3C4374B210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.h */,
 				E3C4374C210A565A005E7E16 /* EvaluateResultsPhotoCollectionViewCell.mm */,
 			);
-			path = "Results By Model";
+			path = ResultsByModel;
 			sourceTree = "<group>";
 		};
-		E37402A3210A55580025AA59 /* Results Overview */ = {
+		E37402A3210A55580025AA59 /* ResultsOverview */ = {
 			isa = PBXGroup;
 			children = (
 				E3458A99210A56460040648C /* EvaluateResultsTableViewController.h */,
@@ -367,10 +456,10 @@
 				E3458A96210A56460040648C /* EvaluateResultsModelTableViewCell.h */,
 				E3458A97210A56460040648C /* EvaluateResultsModelTableViewCell.m */,
 			);
-			path = "Results Overview";
+			path = ResultsOverview;
 			sourceTree = "<group>";
 		};
-		E37402A4210A555F0025AA59 /* Confirm and Options */ = {
+		E37402A4210A555F0025AA59 /* ConfirmAndOptions */ = {
 			isa = PBXGroup;
 			children = (
 				E3458A90210A56410040648C /* EvaluateConfirmTableViewController.h */,
@@ -378,10 +467,10 @@
 				E3458A93210A56410040648C /* EvaluateIterationsTableViewCell.h */,
 				E3458A92210A56410040648C /* EvaluateIterationsTableViewCell.m */,
 			);
-			path = "Confirm and Options";
+			path = ConfirmAndOptions;
 			sourceTree = "<group>";
 		};
-		E37402A5210A55640025AA59 /* Select Album */ = {
+		E37402A5210A55640025AA59 /* SelectAlbum */ = {
 			isa = PBXGroup;
 			children = (
 				E3458A8D210A563C0040648C /* EvaluateSelectAlbumsTableViewController.h */,
@@ -389,7 +478,19 @@
 				E3458A8C210A563C0040648C /* EvaluatePhotoAlbumTableViewCell.h */,
 				E3458A8A210A563B0040648C /* EvaluatePhotoAlbumTableViewCell.m */,
 			);
-			path = "Select Album";
+			path = SelectAlbum;
+			sourceTree = "<group>";
+		};
+		E378488521CAE17800AB6C1E /* CollectData */ = {
+			isa = PBXGroup;
+			children = (
+				E3E7725921C42F7B004988DC /* Collect.storyboard */,
+				E378488621CAE1FE00AB6C1E /* CollectSelectModelTableViewController.h */,
+				E378488721CAE1FE00AB6C1E /* CollectSelectModelTableViewController.mm */,
+				E378488921CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.h */,
+				E378488A21CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.mm */,
+			);
+			path = CollectData;
 			sourceTree = "<group>";
 		};
 		E3A520D4210A49A0004B912B = {
@@ -420,28 +521,28 @@
 			children = (
 				E3F6C6A8210A578100D200D8 /* LaunchScreen.storyboard */,
 				E3F6C6B2210A661200D200D8 /* Headless.storyboard */,
-				E3F6C6B4210A661300D200D8 /* Main.storyboard */,
+				E3E7725321C42DE3004988DC /* Main.storyboard */,
 				E3A520E9210A49A1004B912B /* Assets.xcassets */,
 				E3A520EE210A49A1004B912B /* Info.plist */,
-				E3F6C689210A56DD00D200D8 /* UserDefaults.plist */,
-				E3F6C687210A56DD00D200D8 /* UserDefaults.h */,
-				E3F6C688210A56DD00D200D8 /* UserDefaults.m */,
 				E3A520EF210A49A1004B912B /* main.m */,
 				E3A520E0210A49A0004B912B /* AppDelegate.h */,
 				E3A520E1210A49A0004B912B /* AppDelegate.mm */,
-				E3F6C6AF210A5B8D00D200D8 /* MainViewController.h */,
-				E3F6C6B0210A5B8D00D200D8 /* MainViewController.mm */,
-				E392F88C215D6B3B00116078 /* ModelManager.h */,
-				E392F88D215D6B3B00116078 /* ModelManager.mm */,
-				E33229D92126098F0031435F /* Model Output */,
+				E344013C21E8252400B6E9CC /* UserDefaults */,
+				E344013821E81D0600B6E9CC /* GlobalManagers */,
+				E33229D92126098F0031435F /* ModelOutput */,
 				E3A52126210A5147004B912B /* headless */,
 				E3A52127210A5147004B912B /* models */,
-				E3F6C686210A56C500D200D8 /* Settings */,
-				E3F6C683210A569400D200D8 /* Additional UI */,
-				E3F6C685210A56B500D200D8 /* Headless Mode */,
-				E3B57E8D210A5301008D19C0 /* Evaluation UI */,
+				E344013921E81DA900B6E9CC /* ModelDetails */,
+				E3E7725F21C43678004988DC /* RunModel */,
+				E3F6C686210A56C500D200D8 /* RunImageModel */,
+				E3F6C683210A569400D200D8 /* AdditionalUI */,
+				E3F6C685210A56B500D200D8 /* HeadlessMode */,
+				E3B57E8D210A5301008D19C0 /* EvaluateModel */,
 				E3B57E7E210A52ED008D19C0 /* Evaluation */,
-				E3A5214E210A5292004B912B /* Evaluation Metrics */,
+				E3A5214E210A5292004B912B /* EvaluationMetrics */,
+				E378488521CAE17800AB6C1E /* CollectData */,
+				E354776621C8515600FB573C /* LabelOutputs */,
+				E3E9A20821E4138000C64FC6 /* ModelLabels */,
 				E3A52112210A5105004B912B /* Utilities */,
 			);
 			path = "Net Runner";
@@ -478,7 +579,7 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		E3A5214E210A5292004B912B /* Evaluation Metrics */ = {
+		E3A5214E210A5292004B912B /* EvaluationMetrics */ = {
 			isa = PBXGroup;
 			children = (
 				E3B57E78210A52D9008D19C0 /* EvaluationMetric.h */,
@@ -487,7 +588,7 @@
 				E3B57E7A210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.h */,
 				E3B57E7B210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.mm */,
 			);
-			path = "Evaluation Metrics";
+			path = EvaluationMetrics;
 			sourceTree = "<group>";
 		};
 		E3B57E7E210A52ED008D19C0 /* Evaluation */ = {
@@ -510,24 +611,51 @@
 			path = Evaluation;
 			sourceTree = "<group>";
 		};
-		E3B57E8D210A5301008D19C0 /* Evaluation UI */ = {
+		E3B57E8D210A5301008D19C0 /* EvaluateModel */ = {
 			isa = PBXGroup;
 			children = (
 				E3740299210A551A0025AA59 /* Evaluate.storyboard */,
 				E374029A210A551A0025AA59 /* EvaluationResultsActivityItemProvider.h */,
 				E374029B210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m */,
-				E374029E210A55220025AA59 /* Select Model */,
-				E37402A5210A55640025AA59 /* Select Album */,
-				E37402A4210A555F0025AA59 /* Confirm and Options */,
-				E37402A3210A55580025AA59 /* Results Overview */,
-				E37402A2210A55510025AA59 /* Results By Model */,
-				E37402A1210A554B0025AA59 /* Results By Photo */,
-				E37402A0210A55390025AA59 /* Photo Library Browser */,
+				E374029E210A55220025AA59 /* SelectModel */,
+				E37402A5210A55640025AA59 /* SelectAlbum */,
+				E37402A4210A555F0025AA59 /* ConfirmAndOptions */,
+				E37402A3210A55580025AA59 /* ResultsOverview */,
+				E37402A2210A55510025AA59 /* ResultsByModel */,
+				E37402A1210A554B0025AA59 /* ResultsByPhoto */,
+				E37402A0210A55390025AA59 /* PhotoLibraryBrowser */,
 			);
-			path = "Evaluation UI";
+			path = EvaluateModel;
 			sourceTree = "<group>";
 		};
-		E3F6C683210A569400D200D8 /* Additional UI */ = {
+		E3E7725F21C43678004988DC /* RunModel */ = {
+			isa = PBXGroup;
+			children = (
+				E3E7725C21C4351F004988DC /* Run.storyboard */,
+				E3F6C6A1210A56FC00D200D8 /* ModelsTableViewController.h */,
+				E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */,
+				E32FB5DA2149BA0A00367B11 /* AddModelTableViewController.h */,
+				E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.mm */,
+				E392F8862155914700116078 /* ModelImporter.h */,
+				E392F8872155914700116078 /* ModelImporter.mm */,
+			);
+			path = RunModel;
+			sourceTree = "<group>";
+		};
+		E3E9A20821E4138000C64FC6 /* ModelLabels */ = {
+			isa = PBXGroup;
+			children = (
+				E3E9A20521E4137900C64FC6 /* ImageModelLabelsDatabase.h */,
+				E3E9A20621E4137900C64FC6 /* ImageModelLabelsDatabase.mm */,
+				E3E9A20921E4171000C64FC6 /* ImageModelLabels.h */,
+				E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */,
+				E344013221E6C09200B6E9CC /* ImageModelLabelsExporter.h */,
+				E344013321E6C09200B6E9CC /* ImageModelLabelsExporter.mm */,
+			);
+			path = ModelLabels;
+			sourceTree = "<group>";
+		};
+		E3F6C683210A569400D200D8 /* AdditionalUI */ = {
 			isa = PBXGroup;
 			children = (
 				E3F6C698210A56F200D200D8 /* ImageInputPreviewView.h */,
@@ -535,10 +663,10 @@
 				E3F6C6AC210A57F200D200D8 /* ResultInfoView.h */,
 				E3F6C6AD210A57F200D200D8 /* ResultInfoView.m */,
 			);
-			path = "Additional UI";
+			path = AdditionalUI;
 			sourceTree = "<group>";
 		};
-		E3F6C685210A56B500D200D8 /* Headless Mode */ = {
+		E3F6C685210A56B500D200D8 /* HeadlessMode */ = {
 			isa = PBXGroup;
 			children = (
 				E3F6C691210A56EC00D200D8 /* HeadlessViewController.h */,
@@ -550,27 +678,19 @@
 				E3F6C693210A56EC00D200D8 /* HeadlessTestBundleRunner.h */,
 				E3F6C68E210A56EB00D200D8 /* HeadlessTestBundleRunner.mm */,
 			);
-			path = "Headless Mode";
+			path = HeadlessMode;
 			sourceTree = "<group>";
 		};
-		E3F6C686210A56C500D200D8 /* Settings */ = {
+		E3F6C686210A56C500D200D8 /* RunImageModel */ = {
 			isa = PBXGroup;
 			children = (
-				E3F6C69E210A56FC00D200D8 /* Settings.storyboard */,
-				E3F6C69F210A56FC00D200D8 /* SettingsTableViewController.h */,
-				E3F6C69B210A56FB00D200D8 /* SettingsTableViewController.mm */,
-				E3F6C6A1210A56FC00D200D8 /* ModelsTableViewController.h */,
-				E3F6C69C210A56FB00D200D8 /* ModelsTableViewController.mm */,
-				E3F6C69D210A56FC00D200D8 /* ModelDetailsTableViewController.h */,
-				E3F6C6A0210A56FC00D200D8 /* ModelDetailsTableViewController.mm */,
-				E392F889215D5AB400116078 /* ModelDetailsJSONViewController.h */,
-				E392F88A215D5AB400116078 /* ModelDetailsJSONViewController.mm */,
-				E32FB5DA2149BA0A00367B11 /* AddModelTableViewController.h */,
-				E32FB5DB2149BA0A00367B11 /* AddModelTableViewController.mm */,
-				E392F8862155914700116078 /* ModelImporter.h */,
-				E392F8872155914700116078 /* ModelImporter.mm */,
+				E3F6C6B4210A661300D200D8 /* RunImageModel.storyboard */,
+				E3F6C6AF210A5B8D00D200D8 /* RunImageModelViewController.h */,
+				E3F6C6B0210A5B8D00D200D8 /* RunImageModelViewController.mm */,
+				E3F6C69F210A56FC00D200D8 /* ImageSettingsTableViewController.h */,
+				E3F6C69B210A56FB00D200D8 /* ImageSettingsTableViewController.mm */,
 			);
-			path = Settings;
+			path = RunImageModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -682,12 +802,16 @@
 			files = (
 				E3A52129210A5147004B912B /* models in Resources */,
 				E3A52128210A5147004B912B /* headless in Resources */,
-				E3F6C6A4210A56FC00D200D8 /* Settings.storyboard in Resources */,
 				E3F6C6B6210A661300D200D8 /* Headless.storyboard in Resources */,
+				E3E7725B21C42F7B004988DC /* Collect.storyboard in Resources */,
 				E31C799D212E0E8300139C90 /* LICENSE in Resources */,
+				E344013B21E81DC300B6E9CC /* ModelDetails.storyboard in Resources */,
+				E3E7725521C42DE3004988DC /* Main.storyboard in Resources */,
 				E3F6C6AB210A578100D200D8 /* LaunchScreen.storyboard in Resources */,
 				E3A520EA210A49A1004B912B /* Assets.xcassets in Resources */,
-				E3F6C6B7210A661300D200D8 /* Main.storyboard in Resources */,
+				E3E7725E21C4351F004988DC /* Run.storyboard in Resources */,
+				E3F6C6B7210A661300D200D8 /* RunImageModel.storyboard in Resources */,
+				E378488421CADF1C00AB6C1E /* Label.storyboard in Resources */,
 				E3F6C68B210A56DD00D200D8 /* UserDefaults.plist in Resources */,
 				E374029C210A551A0025AA59 /* Evaluate.storyboard in Resources */,
 			);
@@ -733,17 +857,17 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Net Runner/Pods-Net Runner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -795,8 +919,10 @@
 			files = (
 				E3A52121210A511C004B912B /* LatencyCounter.m in Sources */,
 				E3F6C6AE210A57F200D200D8 /* ResultInfoView.m in Sources */,
+				E344013721E7E15C00B6E9CC /* ImageModelLabelsExportActivityItemProvider.mm in Sources */,
 				E3A52124210A511C004B912B /* PHFetchResult+Extensions.m in Sources */,
 				E3458A88210A55A80040648C /* EvaluateModelTableViewCell.mm in Sources */,
+				E378487E21C993D800AB6C1E /* NumericLabelTableViewCell.m in Sources */,
 				E3740298210A53E00025AA59 /* EvaluationMetricFactory.m in Sources */,
 				E3F6C6A3210A56FC00D200D8 /* ModelsTableViewController.mm in Sources */,
 				E3458A9A210A56460040648C /* EvaluateResultsModelTableViewCell.m in Sources */,
@@ -805,33 +931,41 @@
 				E3FA5B4A210A9C58009BA905 /* CVPixelBufferEvaluator.mm in Sources */,
 				E3B57E8B210A52FC008D19C0 /* URLImageEvaluator.mm in Sources */,
 				E3458A94210A56410040648C /* EvaluateConfirmTableViewController.mm in Sources */,
+				E378488B21CC61FE00AB6C1E /* LabelPhotoAssetsCollectionViewController.mm in Sources */,
 				E3F6C695210A56EC00D200D8 /* HeadlessViewController.mm in Sources */,
 				E3F6C6A5210A56FC00D200D8 /* ModelDetailsTableViewController.mm in Sources */,
-				E3F6C6A2210A56FC00D200D8 /* SettingsTableViewController.mm in Sources */,
+				E3F6C6A2210A56FC00D200D8 /* ImageSettingsTableViewController.mm in Sources */,
 				E3F6C69A210A56F300D200D8 /* ImageInputPreviewView.mm in Sources */,
 				E3C43752210A565F005E7E16 /* EvaluateResultsPhotoViewController.mm in Sources */,
 				E3C4374D210A565A005E7E16 /* EvaluateResultsByModelCollectionViewController.mm in Sources */,
 				E3458A9B210A56460040648C /* EvaluateResultsTableViewController.mm in Sources */,
 				E3458A89210A55A80040648C /* EvaluateSelectModelsTableViewController.mm in Sources */,
 				E3B57E7D210A52D9008D19C0 /* EvaluationMetricAccuracyTop5.mm in Sources */,
+				E384E27721E5691A005166CB /* NRFileManager.m in Sources */,
 				E32FB5DC2149BA0A00367B11 /* AddModelTableViewController.mm in Sources */,
 				E392F88E215D6B3B00116078 /* ModelManager.mm in Sources */,
 				E3851389210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm in Sources */,
 				E374029D210A551A0025AA59 /* EvaluationResultsActivityItemProvider.m in Sources */,
 				E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */,
+				E344013421E6C09200B6E9CC /* ImageModelLabelsExporter.mm in Sources */,
 				E3A52122210A511C004B912B /* Utilities.mm in Sources */,
+				E3E9A20721E4137900C64FC6 /* ImageModelLabelsDatabase.mm in Sources */,
 				E3F6C68A210A56DD00D200D8 /* UserDefaults.m in Sources */,
 				E3A520F0210A49A1004B912B /* main.m in Sources */,
 				E3A520E2210A49A0004B912B /* AppDelegate.mm in Sources */,
 				E3C4374E210A565A005E7E16 /* EvaluateResultsHeaderCollectionReusableView.m in Sources */,
+				E3E9A20B21E4171000C64FC6 /* ImageModelLabels.mm in Sources */,
+				E378488821CAE1FE00AB6C1E /* CollectSelectModelTableViewController.mm in Sources */,
 				E3B57E8A210A52FC008D19C0 /* AlbumPhotoEvaluator.mm in Sources */,
 				E3F6C682210A567300D200D8 /* PhotoAlbumPhotoViewController.m in Sources */,
 				E3458A95210A56410040648C /* EvaluateIterationsTableViewCell.m in Sources */,
 				E3F6C697210A56EC00D200D8 /* HeadlessTestBundleManager.mm in Sources */,
 				E3F6C694210A56EC00D200D8 /* HeadlessTestBundle.mm in Sources */,
 				E3B57E8C210A52FC008D19C0 /* ImageEvaluator.mm in Sources */,
+				E354776521C8515100FB573C /* LabelOutputsTableViewController.mm in Sources */,
 				E3458A8F210A563C0040648C /* EvaluateSelectAlbumsTableViewController.m in Sources */,
-				E3F6C6B1210A5B8D00D200D8 /* MainViewController.mm in Sources */,
+				E3F6C6B1210A5B8D00D200D8 /* RunImageModelViewController.mm in Sources */,
+				E378488121C993E300AB6C1E /* TextLabelTableViewCell.m in Sources */,
 				E392F8882155914700116078 /* ModelImporter.mm in Sources */,
 				E3F6C680210A567300D200D8 /* PhotoAssetsCollectionViewController.m in Sources */,
 				E392F88B215D5AB400116078 /* ModelDetailsJSONViewController.mm in Sources */,
@@ -875,6 +1009,30 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		E3E7725321C42DE3004988DC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3E7725421C42DE3004988DC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E3E7725921C42F7B004988DC /* Collect.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3E7725A21C42F7B004988DC /* Base */,
+			);
+			name = Collect.storyboard;
+			sourceTree = "<group>";
+		};
+		E3E7725C21C4351F004988DC /* Run.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E3E7725D21C4351F004988DC /* Base */,
+			);
+			name = Run.storyboard;
+			sourceTree = "<group>";
+		};
 		E3F6C6B2210A661200D200D8 /* Headless.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -883,12 +1041,12 @@
 			name = Headless.storyboard;
 			sourceTree = "<group>";
 		};
-		E3F6C6B4210A661300D200D8 /* Main.storyboard */ = {
+		E3F6C6B4210A661300D200D8 /* RunImageModel.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E3F6C6B5210A661300D200D8 /* Base */,
 			);
-			name = Main.storyboard;
+			name = RunImageModel.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

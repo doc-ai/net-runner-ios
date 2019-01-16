@@ -17,12 +17,15 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+//  BUILD STEPS
+//  TODO: Remove models we don't want to appear in the app store
 
 #import "AppDelegate.h"
 
 #import "ModelManager.h"
 #import "UserDefaults.h"
 
+@import SVProgressHUD;
 @import TensorIO;
 
 @interface AppDelegate ()
@@ -82,6 +85,13 @@
     if ( bundle == nil ) {
         [NSUserDefaults.standardUserDefaults setObject:kPresDefaultModelID forKey:kPrefsSelectedModelID];
     }
+    
+    // Global Appearance
+    
+    [[UILabel appearanceWhenContainedInInstancesOfClasses:@[UITableView.class]] setTextColor:[UIColor colorWithWhite:0.2 alpha:1.0]];
+    
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setMinimumDismissTimeInterval:2.0];
     
     // Kick off application
     

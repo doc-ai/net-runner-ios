@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="m2Y-Iu-VTD">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Evaluate Models-->
+        <scene sceneID="kbE-if-Aw0">
+            <objects>
+                <tableViewController title="Evaluate Models" id="m2Y-Iu-VTD" customClass="CollectSelectModelTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="Yxe-Bt-XWq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="6pn-Um-nSA" userLabel="Header View">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main-collect" translatesAutoresizingMaskIntoConstraints="NO" id="HWO-sH-sMp">
+                                    <rect key="frame" x="20" y="15" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="50" id="4wJ-08-gIC"/>
+                                        <constraint firstAttribute="height" constant="50" id="q1s-Wg-Tpy"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a model for labeling" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9a-3B-bnl">
+                                    <rect key="frame" x="84" y="41" width="283" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="m9a-3B-bnl" secondAttribute="trailing" constant="8" id="4qX-lF-CkG"/>
+                                <constraint firstItem="HWO-sH-sMp" firstAttribute="centerY" secondItem="6pn-Um-nSA" secondAttribute="centerY" constant="5" id="KlQ-tb-bsU"/>
+                                <constraint firstItem="HWO-sH-sMp" firstAttribute="leading" secondItem="6pn-Um-nSA" secondAttribute="leading" constant="20" id="PMm-0C-BVY"/>
+                                <constraint firstItem="m9a-3B-bnl" firstAttribute="leading" secondItem="HWO-sH-sMp" secondAttribute="trailing" constant="14" id="SlK-s5-7b6"/>
+                                <constraint firstAttribute="bottom" secondItem="m9a-3B-bnl" secondAttribute="bottom" constant="8" id="Tmk-Wg-g3k"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="ModelCell" id="mNC-tc-bR7" customClass="EvaluateModelTableViewCell">
+                                <rect key="frame" x="0.0" y="125.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mNC-tc-bR7" id="lE6-3U-kTH">
+                                    <rect key="frame" x="0.0" y="0.0" width="327" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QU-du-sEm">
+                                            <rect key="frame" x="16" y="11.5" width="293" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="5QU-du-sEm" secondAttribute="trailing" constant="10" id="6yV-Ps-yWv"/>
+                                        <constraint firstItem="5QU-du-sEm" firstAttribute="centerY" secondItem="lE6-3U-kTH" secondAttribute="centerY" id="jBL-m2-83R"/>
+                                        <constraint firstItem="5QU-du-sEm" firstAttribute="leading" secondItem="lE6-3U-kTH" secondAttribute="leading" constant="16" id="mfO-IR-T03"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="titleLabel" destination="5QU-du-sEm" id="DS4-5n-SPZ"/>
+                                    <segue destination="bgW-II-A8I" kind="show" identifier="SelectAlbumsSegue" id="7BZ-yG-YvO"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="m2Y-Iu-VTD" id="Zo1-bj-PB8"/>
+                            <outlet property="delegate" destination="m2Y-Iu-VTD" id="h40-Sa-xPR"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Collect and Label Data" id="CqM-6f-bor"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="PWm-XV-Bn8" kind="show" identifier="ModelDetailsSegue" id="Jhy-Td-sC0"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qtf-Gy-jYf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50" y="57"/>
+        </scene>
+        <!--ModelDetails-->
+        <scene sceneID="fz0-o8-C1X">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ModelDetails" id="PWm-XV-Bn8" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="exO-t7-nIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50" y="541"/>
+        </scene>
+        <!--Select Albums-->
+        <scene sceneID="fTd-m7-Xal">
+            <objects>
+                <tableViewController title="Select Albums" id="bgW-II-A8I" customClass="EvaluateSelectAlbumsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fwz-fY-SbK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="dY9-jj-uHW" userLabel="Header View">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select an album or create a new one" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huw-2B-IXt">
+                                    <rect key="frame" x="60.5" y="23" width="254" height="18"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="huw-2B-IXt" firstAttribute="centerX" secondItem="dY9-jj-uHW" secondAttribute="centerX" id="PdH-Vj-oYk"/>
+                                <constraint firstItem="huw-2B-IXt" firstAttribute="centerY" secondItem="dY9-jj-uHW" secondAttribute="centerY" id="j0E-9E-eGb"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumCell" rowHeight="80" id="oWK-Na-QOp" customClass="EvaluatePhotoAlbumTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="375" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oWK-Na-QOp" id="N4d-zZ-eqq">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cVI-05-QOg">
+                                            <rect key="frame" x="16" y="8" width="64" height="64"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="64" id="JVb-3c-rZu"/>
+                                                <constraint firstAttribute="width" constant="64" id="svU-hg-q6g"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buc-U0-7ld">
+                                            <rect key="frame" x="88" y="29.5" width="271" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="cVI-05-QOg" firstAttribute="centerY" secondItem="N4d-zZ-eqq" secondAttribute="centerY" id="Jp4-Sh-4cK"/>
+                                        <constraint firstItem="buc-U0-7ld" firstAttribute="centerY" secondItem="N4d-zZ-eqq" secondAttribute="centerY" id="M5B-cL-6OE"/>
+                                        <constraint firstItem="buc-U0-7ld" firstAttribute="leading" secondItem="cVI-05-QOg" secondAttribute="trailing" constant="8" id="MiM-Hv-Kys"/>
+                                        <constraint firstItem="buc-U0-7ld" firstAttribute="trailing" secondItem="N4d-zZ-eqq" secondAttribute="trailingMargin" id="OgC-1C-xf5"/>
+                                        <constraint firstItem="cVI-05-QOg" firstAttribute="leading" secondItem="N4d-zZ-eqq" secondAttribute="leading" constant="16" id="dA1-dU-GgJ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="albumImageView" destination="cVI-05-QOg" id="Q8G-af-PE5"/>
+                                    <outlet property="titleLabel" destination="buc-U0-7ld" id="xGX-70-Kgz"/>
+                                    <segue destination="Ipg-gO-L9m" kind="show" identifier="LabelAlbumDetailsSegue" id="MSN-jm-SKa"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bgW-II-A8I" id="Zy9-Qy-Unv"/>
+                            <outlet property="delegate" destination="bgW-II-A8I" id="zZH-Q8-Kmy"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select Album" id="JGK-nf-mak">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="3d6-V8-lsu">
+                            <connections>
+                                <action selector="createAlbum:" destination="bgW-II-A8I" id="XTv-Uh-TJd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8p7-wz-SqY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="751" y="56"/>
+        </scene>
+        <!--Album Title-->
+        <scene sceneID="p8f-tW-g6C">
+            <objects>
+                <collectionViewController title="Album Title" id="Ipg-gO-L9m" customClass="LabelPhotoAssetsCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="0Yi-On-yOk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="htc-cI-Dj7">
+                            <size key="itemSize" width="96" height="96"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AlbumPhotoCell" id="tgL-g9-n8v" customClass="PhotoAlbumPhotoCollectionViewCell">
+                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                                <connections>
+                                    <segue destination="ePK-8B-hQD" kind="presentation" identifier="LabelPhotoSegue" id="GKh-eP-ACm"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Ipg-gO-L9m" id="pph-i1-i0E"/>
+                            <outlet property="delegate" destination="Ipg-gO-L9m" id="QT8-bb-zpe"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Album title" id="Tet-ih-ddJ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="w2E-of-Ern">
+                            <connections>
+                                <action selector="takePicture:" destination="Ipg-gO-L9m" id="jLl-sb-fdI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JfH-L2-oD3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1530" y="55"/>
+        </scene>
+        <!--LabelSingle-->
+        <scene sceneID="gzV-9p-9Hh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Label" referencedIdentifier="LabelSingle" id="ePK-8B-hQD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NyZ-wM-7Or" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2201" y="54"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="main-collect" width="100" height="102"/>
+    </resources>
+</document>

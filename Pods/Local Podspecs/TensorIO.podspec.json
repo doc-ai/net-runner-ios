@@ -1,6 +1,6 @@
 {
   "name": "TensorIO",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "summary": "An Objective-C wrapper for TensorFlow Lite.",
   "description": "Perform inference with TensorFlow Lite models using all the conveniences of Objective-C",
   "homepage": "https://github.com/doc-ai/TensorIO",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/doc-ai/TensorIO.git",
-    "tag": "0.3.0"
+    "tag": "0.3.2"
   },
   "platforms": {
     "ios": "9.3"

@@ -8,8 +8,10 @@ target 'Net Runner' do
 
   # Pods for Net Runner
 
-  pod 'TensorIO'
+  pod 'TensorIO', :git => 'https://github.com/doc-ai/TensorIO.git'
+  pod 'SVProgressHUD'
   pod 'SSZipArchive'
+  pod 'FMDB'
 
   target 'Net RunnerTests' do
     inherit! :search_paths

@@ -30,6 +30,7 @@
 #import "TIOModelJSONParsing.h"
 #import "TIOModelOptions.h"
 #import "TIOPixelNormalization.h"
+#import "TIOPlaceholderModel.h"
 #import "TIOQuantization.h"
 #import "TIOVisionModelHelpers.h"
 #import "TIOVisionPipeline.h"

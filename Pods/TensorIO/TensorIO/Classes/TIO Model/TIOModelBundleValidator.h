@@ -22,7 +22,29 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * A validation block that allows clients of the validator to add custom validation as a final step.
+ *
+ * For example, Net Runner currrently only works with models that take a single image input,
+ * so it verifies that model inputs conform to that requirement in its custom validation block.
+ *
+ * @param path The path to the model bundle.
+ * @param JSON The json loaded from model.json in the model bundle.
+ * @param error A pointer to an error object that the custom validator can set if validation fails.
+ *
+ * @return BOOL `YES` if the custom validation passed, `NO` otherwise.
+ */
+
 typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON, NSError **error);
+
+/**
+ * `TIOModelBundleValidator` is responsible for ensuring that the contents of a TensorIO bundle
+ * are valid.
+ *
+ * The bundle validator will commonly be used to validate bundles that are deployed after release of
+ * an app rather than those that are packaged with it. It validates each part of the TensorIO model
+ * spec, and also allows the client to provide a custom validation block.
+ */
 
 @interface TIOModelBundleValidator : NSObject
 
@@ -54,8 +76,10 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
 
 @property(readonly) NSDictionary *JSON;
 
+// MARK: - Validation
+
 /**
- * Validates the bundle which was provided at initialization.
+ * Validates the bundle which was provided at initialization. Use this method to validate models.
  *
  * @param customValidator A custom validation block for application specific validation
  * @param error Pointer to an `NSError` that will be set if the bundle could not be validated.
@@ -66,7 +90,7 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
 - (BOOL)validate:(_Nullable TIOModelBundleValidationBlock)customValidator error:(NSError**)error;
 
 /**
- * A convenience method for validating the bundle when not custom validation is needed
+ * A convenience method for validating the bundle when no custom validation is needed.
  *
  * @param error Pointer to an `NSError` that will be set if the bundle could not be validated.
  *
@@ -75,8 +99,10 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
 
 - (BOOL)validate:(NSError**)error;
 
+// MARK: - Specific Validation Steps
+
 /**
- * Validates bundle properties from a JSON dictionary. Called by `validate:`
+ * Validates basic bundle properties from a JSON dictionary. Called by `validate:error:`
  *
  * @param JSON The bundle properties loaded from a model.json file.
  * @param error Pointer to an `NSError` that will be set if the bundle properties could not be validated.
@@ -84,17 +110,69 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
  * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
  */
 
-// TODO: documentation
-
 - (BOOL)validateBundleProperties:(NSDictionary*)JSON error:(NSError**)error;
+
+/**
+ * Validates basic model properties from a JSON dictionary. Called by `validate:error:`
+ *
+ * The `validate:error:` function passes the value of the "model" field to this method.
+ *
+ * @param JSON The model properties loaded from a model.json file.
+ * @param error Pointer to an `NSError` that will be set if the model properties could not be validated.
+ *
+ * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
+ */
 
 - (BOOL)validateModelProperties:(NSDictionary*)JSON error:(NSError**)error;
 
+/**
+ * Validates presence of assets identified in JSON dictionary. Called by `validate:error:`
+ *
+ * @param JSON The bundle properties loaded from a model.json file.
+ * @param error Pointer to an `NSError` that will be set if the assets could not be located.
+ *
+ * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
+ */
+
 - (BOOL)validateAssets:(NSDictionary*)JSON error:(NSError**)error;
+
+/**
+ * Validates input properties from a JSON array. Called by `validate:error:`
+ *
+ * The `validate:error:` function passes the value of the "inputs" field to this method.
+ *
+ * @param JSON The bundle properties loaded from a model.json file.
+ * @param error Pointer to an `NSError` that will be set if the input properties could not be validated.
+ *
+ * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
+ */
 
 - (BOOL)validateInputs:(NSArray*)JSON error:(NSError**)error;
 
+/**
+ * Validates input properties from a JSON array. Called by `validate:error:`
+ *
+ * The `validate:error:` function passes the value of the "outputs" field to this method.
+ *
+ * @param JSON The bundle properties loaded from a model.json file.
+ * @param error Pointer to an `NSError` that will be set if the output properties could not be validated.
+ *
+ * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
+ */
+
 - (BOOL)validateOutputs:(NSArray*)JSON error:(NSError**)error;
+
+/**
+ * Executes a custom validator. Called by `validate:error:`
+ *
+ * The `validate:error:` function passes the custom validator provided there to this function.
+ *
+ * @param JSON The bundle properties loaded from a model.json file.
+ * @param customValidator The custom validator provided to the `validate:error:` function.
+ * @param error Pointer to an `NSError` that will be set if the output properties could not be validated.
+ *
+ * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
+ */
 
 - (BOOL)validateCustomValidator:(NSDictionary*)JSON validator:(TIOModelBundleValidationBlock)customValidator error:(NSError**)error;
 

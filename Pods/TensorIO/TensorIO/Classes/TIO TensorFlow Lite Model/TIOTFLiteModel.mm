@@ -80,6 +80,7 @@ static NSString * const kTensorTypeImage = @"image";
         _details = bundle.details;
         _author = bundle.author;
         _license = bundle.license;
+        _placeholder = bundle.placeholder;
         _quantized = bundle.quantized;
         _type = bundle.type;
         
@@ -119,6 +120,8 @@ static NSString * const kTensorTypeImage = @"image";
 }
 
 // MARK: - JSON Parsing
+
+// TODO: Move JSON Parsing to an external function or to the model bundle class
 
 /**
  * Enumerates through the json described inputs and constructs a `TIOLayerInterface` for each one.
@@ -299,6 +302,14 @@ static NSString * const kTensorTypeImage = @"image";
 }
 
 // MARK: - Input and Output Features
+
+- (NSArray<TIOLayerInterface*>*)inputs {
+    return _indexedInputInterfaces;
+}
+
+- (NSArray<TIOLayerInterface*>*)outputs {
+    return _indexedOutputInterfaces;
+}
 
 - (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index {
     return _indexedInputInterfaces[index].dataDescription;
