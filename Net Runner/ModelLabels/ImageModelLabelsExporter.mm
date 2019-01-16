@@ -75,12 +75,12 @@ NSString * PathSafeString(NSString * string) {
     return self;
 }
 
-// TODO: remove images that could not be found from the labels.json output
-
 - (BOOL)exportTo:(NSString*)path {
     NSArray<ImageModelLabels*> *labels = self.database.allLabels;
-    NSMutableArray<NSDictionary*> *labelDictionaries = [[NSMutableArray alloc] init];
     NSMutableArray<NSString*> *identifiers = [[NSMutableArray alloc] init];
+    NSMutableDictionary<NSString*,ImageModelLabels*> *labelsByIdentifier = [[NSMutableDictionary alloc] init];
+    
+    NSMutableArray<NSDictionary*> *labelDictionaries = [[NSMutableArray alloc] init];
     
     // Prepare a temporary directory to hold our contents
     
@@ -93,18 +93,16 @@ NSString * PathSafeString(NSString * string) {
         return NO;
     }
     
-    // Iterate through each set of labels
+    // Iterate through each set of labels, noting the identifiers and mapping from identifier to labels
+    
+    // The identifiers array will be used to request image assets. Because the photo library may
+    // return fewer image assets than we have identifiers for (in case an image has been deleted),
+    // only include labels for the available images in the final labelDictionaries dict that is
+    // converted to JSON.
     
     for (ImageModelLabels *label in labels) {
-        // Collect the local identifiers
         [identifiers addObject:label.identifier];
-        
-        // Prepare the JSON entry for labelDictionaries
-        // Use a path safe version of the identifier, as that is how the image will be written to disk
-        
-        NSMutableDictionary *l = label.labels.mutableCopy;
-        l[@"id"] = PathSafeString(label.identifier);
-        [labelDictionaries addObject:l.copy];
+        labelsByIdentifier[label.identifier] = label;
     }
     
     // Acquire the image assets and write them out
@@ -123,6 +121,8 @@ NSString * PathSafeString(NSString * string) {
             options:imageRequestOptions
             resultHandler:^(UIImage *result, NSDictionary *info) {
             
+                // Write the image
+                
                 NSString *imageFilename = [NSString stringWithFormat:@"%@.jpg", PathSafeString(asset.localIdentifier)];
                 NSURL *imageFilepath = [tmpDirectory URLByAppendingPathComponent:imageFilename];
                 NSData *imageData = UIImageJPEGRepresentation(result, 1.0);
@@ -130,6 +130,12 @@ NSString * PathSafeString(NSString * string) {
                 
                 if (![imageData writeToURL:imageFilepath options:NSDataWritingAtomic error:&imageError]) {
                     NSLog(@"Could not write image with identifier %@ to file, error: %@", asset.localIdentifier, imageData);
+                } else {
+                    // Prepare the JSON entry for the final labelDictionaries dict
+                    ImageModelLabels *label = labelsByIdentifier[asset.localIdentifier];
+                    NSMutableDictionary *l = label.labels.mutableCopy;
+                    l[@"id"] = PathSafeString(label.identifier);
+                    [labelDictionaries addObject:l.copy];
                 }
             }
         ];
