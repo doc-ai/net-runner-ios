@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I1T-tQ-jQA">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Import Model-->
+        <scene sceneID="vzQ-bR-592">
+            <objects>
+                <tableViewController title="Import Model" id="fdd-xA-vcW" customClass="AddModelTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7Fg-cM-3Q7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <sections>
+                            <tableViewSection id="oKS-X8-ANi">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="141" id="mqb-dG-XPc">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mqb-dG-XPc" id="4r5-P3-ahG">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="You may import models that have been prepared for TensorIO and Net Runner. For more information visit our GitHub repository:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUR-Mf-55K">
+                                                    <rect key="frame" x="16" y="31" width="343" height="54"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9x-dU-VtB">
+                                                    <rect key="frame" x="16" y="95" width="343" height="35"/>
+                                                    <state key="normal" title="https://github.com/doc-ai/net-runner-ios"/>
+                                                    <connections>
+                                                        <action selector="visitNetRunnerRepository:" destination="fdd-xA-vcW" eventType="touchUpInside" id="3x8-AR-XGa"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="p9x-dU-VtB" firstAttribute="top" secondItem="ZUR-Mf-55K" secondAttribute="bottom" constant="10" id="5pL-LZ-lY7"/>
+                                                <constraint firstItem="ZUR-Mf-55K" firstAttribute="leading" secondItem="4r5-P3-ahG" secondAttribute="leadingMargin" id="Gb5-wr-Ghy"/>
+                                                <constraint firstItem="ZUR-Mf-55K" firstAttribute="trailing" secondItem="4r5-P3-ahG" secondAttribute="trailingMargin" id="cv2-fW-kIT"/>
+                                                <constraint firstItem="ZUR-Mf-55K" firstAttribute="top" secondItem="4r5-P3-ahG" secondAttribute="topMargin" constant="20" id="hxx-OM-fTO"/>
+                                                <constraint firstItem="p9x-dU-VtB" firstAttribute="leading" secondItem="4r5-P3-ahG" secondAttribute="leadingMargin" id="kIS-5w-OkI"/>
+                                                <constraint firstItem="p9x-dU-VtB" firstAttribute="bottom" secondItem="4r5-P3-ahG" secondAttribute="bottomMargin" id="sl6-wQ-05b"/>
+                                                <constraint firstItem="p9x-dU-VtB" firstAttribute="trailing" secondItem="4r5-P3-ahG" secondAttribute="trailingMargin" id="wtq-tE-wZf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="105" id="BQ2-FT-KpN">
+                                        <rect key="frame" x="0.0" y="141" width="375" height="105"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BQ2-FT-KpN" id="SiI-hw-kwS">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="http://" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sn6-E8-rni">
+                                                    <rect key="frame" x="16" y="63" width="343" height="31"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="url"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="fdd-xA-vcW" id="pgW-84-hml"/>
+                                                    </connections>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a URL that points to a zipped .tfbundle directory then tap Import Model below:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0m-7Q-0Ql">
+                                                    <rect key="frame" x="16" y="11" width="343" height="36"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sn6-E8-rni" firstAttribute="leading" secondItem="SiI-hw-kwS" secondAttribute="leadingMargin" id="1WF-Re-0oI"/>
+                                                <constraint firstItem="sn6-E8-rni" firstAttribute="trailing" secondItem="SiI-hw-kwS" secondAttribute="trailingMargin" id="5V5-NT-7tl"/>
+                                                <constraint firstItem="W0m-7Q-0Ql" firstAttribute="leading" secondItem="SiI-hw-kwS" secondAttribute="leadingMargin" id="OQP-Ex-qv7"/>
+                                                <constraint firstItem="W0m-7Q-0Ql" firstAttribute="top" secondItem="SiI-hw-kwS" secondAttribute="topMargin" id="ZLa-wA-Qyd"/>
+                                                <constraint firstItem="sn6-E8-rni" firstAttribute="top" secondItem="W0m-7Q-0Ql" secondAttribute="bottom" constant="16" id="aGt-6q-DIo"/>
+                                                <constraint firstItem="sn6-E8-rni" firstAttribute="bottom" secondItem="SiI-hw-kwS" secondAttribute="bottomMargin" id="dg8-i9-beS"/>
+                                                <constraint firstItem="W0m-7Q-0Ql" firstAttribute="trailing" secondItem="SiI-hw-kwS" secondAttribute="trailingMargin" id="vUV-bn-h11"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="113" id="IdA-aT-rk2">
+                                        <rect key="frame" x="0.0" y="246" width="375" height="113"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IdA-aT-rk2" id="Prz-OW-8eA">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading model…" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYH-Zy-pYl">
+                                                    <rect key="frame" x="16" y="30" width="148" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2qP-dO-Ieo">
+                                                    <rect key="frame" x="16" y="60" width="343" height="2"/>
+                                                </progressView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2qP-dO-Ieo" firstAttribute="trailing" secondItem="Prz-OW-8eA" secondAttribute="trailingMargin" id="1i2-aV-hYN"/>
+                                                <constraint firstItem="2qP-dO-Ieo" firstAttribute="leading" secondItem="Prz-OW-8eA" secondAttribute="leadingMargin" id="1kh-kl-fIr"/>
+                                                <constraint firstItem="QYH-Zy-pYl" firstAttribute="top" secondItem="Prz-OW-8eA" secondAttribute="top" constant="30" id="CJp-NZ-lOq"/>
+                                                <constraint firstItem="2qP-dO-Ieo" firstAttribute="top" secondItem="QYH-Zy-pYl" secondAttribute="bottom" constant="12" id="Lac-1c-I92"/>
+                                                <constraint firstItem="QYH-Zy-pYl" firstAttribute="leading" secondItem="Prz-OW-8eA" secondAttribute="leading" constant="16" id="wuo-27-VQl"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="2qP-dO-Ieo" secondAttribute="bottom" constant="40" id="xRl-ny-Zkt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="fdd-xA-vcW" id="nYo-Ba-lRI"/>
+                            <outlet property="delegate" destination="fdd-xA-vcW" id="aOZ-FH-00V"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="flexibleSpace" id="vaj-JV-N41"/>
+                        <barButtonItem title="Import Model" id="g7K-qi-K25">
+                            <connections>
+                                <action selector="importModel:" destination="fdd-xA-vcW" id="fE2-go-Lbx"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="djb-jk-4M7"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Import Model" id="eFk-7Q-afU"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="URLField" destination="sn6-E8-rni" id="yr8-Kk-3Hq"/>
+                        <outlet property="downloadLabel" destination="QYH-Zy-pYl" id="AQ7-05-JNc"/>
+                        <outlet property="downloadProgressView" destination="2qP-dO-Ieo" id="oIJ-T6-AbI"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YQ6-KS-VKn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1318" y="1232"/>
+        </scene>
+        <!--Run a Model-->
+        <scene sceneID="c55-Vg-mPv">
+            <objects>
+                <tableViewController title="Run a Model" id="I1T-tQ-jQA" customClass="ModelsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="bFI-X0-Ouf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="lFU-u5-QWR">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main-run" translatesAutoresizingMaskIntoConstraints="NO" id="leT-3s-R9f">
+                                    <rect key="frame" x="20" y="15" width="50" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="X0U-7H-EMk"/>
+                                        <constraint firstAttribute="width" constant="50" id="suT-ip-R0W"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a model to run" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPn-Ua-mO8">
+                                    <rect key="frame" x="84" y="41" width="283" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="TPn-Ua-mO8" firstAttribute="leading" secondItem="leT-3s-R9f" secondAttribute="trailing" constant="14" id="HdC-Rs-Mj1"/>
+                                <constraint firstAttribute="trailing" secondItem="TPn-Ua-mO8" secondAttribute="trailing" constant="8" id="QBt-Mj-mra"/>
+                                <constraint firstItem="leT-3s-R9f" firstAttribute="centerY" secondItem="lFU-u5-QWR" secondAttribute="centerY" constant="5" id="S3i-CZ-Mb1"/>
+                                <constraint firstAttribute="bottom" secondItem="TPn-Ua-mO8" secondAttribute="bottom" constant="8" id="bjC-qe-omn"/>
+                                <constraint firstItem="leT-3s-R9f" firstAttribute="leading" secondItem="lFU-u5-QWR" secondAttribute="leading" constant="20" id="wQm-i8-Pbv"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ModelCell" id="J21-od-ODz">
+                                <rect key="frame" x="0.0" y="125.5" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J21-od-ODz" id="zQM-Oo-bG2">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="sZK-oG-OhS" kind="show" identifier="RunImageModelSegue" id="SVo-lf-Y21"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="I1T-tQ-jQA" id="EwK-fq-HSX"/>
+                            <outlet property="delegate" destination="I1T-tQ-jQA" id="5c5-yo-bdU"/>
+                        </connections>
+                    </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <segue destination="Dc7-S9-vlB" kind="presentation" identifier="AddModelSegue" id="jkh-er-hQj"/>
+                        <segue destination="0BS-X2-gSB" kind="show" identifier="ModelDetailsSegue" id="beA-DY-zxp"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xR7-aP-fVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1318" y="-262"/>
+        </scene>
+        <!--ModelDetails-->
+        <scene sceneID="yHI-56-Yn0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ModelDetails" id="0BS-X2-gSB" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dL9-gJ-1LD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1978" y="-327"/>
+        </scene>
+        <!--RunImageModel-->
+        <scene sceneID="9mH-hy-jzG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="RunImageModel" id="sZK-oG-OhS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bh0-wg-JUY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1992" y="-194"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Akg-u6-st2">
+            <objects>
+                <navigationController toolbarHidden="NO" id="Dc7-S9-vlB" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6UO-Hv-s0y">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IOx-Kq-Jee">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="fdd-xA-vcW" kind="relationship" relationship="rootViewController" id="2ie-cX-L5u"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y0K-rz-C8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1318" y="489"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="main-run" width="100" height="102"/>
+    </resources>
+</document>

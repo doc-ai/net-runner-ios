@@ -22,6 +22,7 @@
 
 #import "TIOModel.h"
 #import "TIOModelOptions.h"
+#import "TIOPlaceholderModel.h"
 
 NSString * const kTFModelBundleExtension = @"tfbundle";
 NSString * const kTFModelInfoFile = @"model.json";
@@ -82,12 +83,19 @@ NSString * const kTFModelAssetsDirectory = @"assets";
         _modelClassName = json[@"model"][@"class"] != nil
             ? json[@"model"][@"class"]
             : kTFLiteModelClassName;
+        
+        _placeholder = json[@"placeholder"] != nil
+                    && [json[@"placeholder"] boolValue] == YES;
     }
     
     return self;
 }
 
 - (nullable id<TIOModel>)newModel {
+    
+    if ( self.placeholder ) {
+        return [[TIOPlaceholderModel alloc] initWithBundle:self];
+    }
     
     Class ModelClass = NSClassFromString(self.modelClassName);
     
@@ -107,7 +115,11 @@ NSString * const kTFModelAssetsDirectory = @"assets";
 }
 
 - (NSString*)modelFilepath {
-    return [_path stringByAppendingPathComponent:_info[@"model"][@"file"]];
+    if (self.isPlaceholder) {
+        return nil;
+    } else {
+        return [_path stringByAppendingPathComponent:_info[@"model"][@"file"]];
+    }
 }
 
 - (NSString*)pathToAsset:(NSString*)filename {

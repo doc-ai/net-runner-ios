@@ -27,7 +27,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * Wraps a `CVPixelBuffer` so that it can provide data to and receive data from a tensor.
+ * Wraps a `CVPixelBuffer` and its orientation so that it can provide data to and receive data from a tensor.
  */
 
 @interface TIOPixelBuffer : NSObject <TIOData>

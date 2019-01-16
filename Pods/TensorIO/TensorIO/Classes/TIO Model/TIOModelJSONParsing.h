@@ -36,12 +36,12 @@ NS_ASSUME_NONNULL_BEGIN
  * Handles a vector, matrix, or other multidimensional array (tensor), described as a
  * one dimensional unrolled vector with an optional labels entry.
  *
- * @param dict The JSON description in `NSDictionary` format
- * @param isInput `YES` if this is an input layer, `NO` if it is an output layer
- * @param quantized `YES` if the layer expects or returns quantized bytes, `NO` otherwise
- * @param bundle `The ModelBundel` that is being parsed, needed to derive a path to the labels file
+ * @param dict The JSON description in `NSDictionary` format.
+ * @param isInput `YES` if this is an input layer, `NO` if it is an output layer.
+ * @param quantized `YES` if the layer expects or returns quantized bytes, `NO` otherwise.
+ * @param bundle `The ModelBundel` that is being parsed, needed to derive a path to the labels file.
  *
- * @return TIOLayerInterface An interface that describes this pixel buffer input or output
+ * @return TIOLayerInterface An interface that describes this pixel buffer input or output.
  */
 
 TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle);
@@ -52,23 +52,23 @@ TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictiona
  * Pixel buffers are handled as their own case instead of as a three-dimensional volume because
  * of byte alignment and pixel format conversion requirements.
  *
- * @param dict The JSON description in `NSDictionary` format
- * @param isInput `YES` if this is an input layer, `NO` if it is an output layer
- * @param quantized `YES` if the layer expects or returns quantized bytes, `NO` otherwise
+ * @param dict The JSON description in `NSDictionary` format.
+ * @param isInput `YES` if this is an input layer, `NO` if it is an output layer.
+ * @param quantized `YES` if the layer expects or returns quantized bytes, `NO` otherwise.
  *
- * @return TIOLayerInterface An interface that describes this pixel buffer input or output
+ * @return TIOLayerInterface An interface that describes this pixel buffer input or output.
  */
 
 TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDictionary *dict, BOOL isInput, BOOL quantized);
 
 /**
- * Parses the `quantization` key of an input description and returns an associated data quantizer
+ * Parses the `quantization` key of an input description and returns an associated data quantizer.
  */
 
 _Nullable TIODataQuantizer TIODataQuantizerForDict(NSDictionary * _Nullable dict, NSError **error);
 
 /**
- * Parses the `dequantization` key of an output description and returns an associated data quantizer
+ * Parses the `dequantization` key of an output description and returns an associated data dequantizer.
  */
 
 _Nullable TIODataDequantizer TIODataDequantizerForDict(NSDictionary * _Nullable dict, NSError **error);
@@ -92,7 +92,7 @@ OSType TIOPixelFormatForString(NSString * _Nullable formatString);
 TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary * _Nullable input, NSError **error);
 
 /**
- * Returns the denormalizer for a given input dictionary
+ * Returns the denormalizer for a given input dictionary.
  */
 
 TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary * _Nullable input, NSError **error);

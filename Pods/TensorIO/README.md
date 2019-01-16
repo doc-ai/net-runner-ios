@@ -21,6 +21,8 @@ NSDictionary *classification = [inference[@"classification"] topN:5 threshold:0.
 
 See the <a href="#usage">Usage</a> section below for important notes on adding TensorIO to your project.
 
+For the complete Objectice-C project documentation, visit [tensorio.info](https://tensorio.info/).
+
 ## Table of Contents
 
 * [ Overview ](#overview)
@@ -1270,6 +1272,8 @@ TensorIO includes a number of additional utilities, especially for working with 
 - UIImage+TIOCVPixelBufferExtensions
 - TIOModelOptions
 - TIOVisionPipeline
+
+You may also refer to [tensorio.info](https://tensorio.info/) for the complete Objectice-C project documentation.
 
 <a name="netrunner"></a>
 ### Net Runner

@@ -25,13 +25,32 @@ NS_ASSUME_NONNULL_BEGIN
 @class TIOModelOptions;
 @protocol TIOModel;
 
+/**
+ * The file extension used to identify a TensorIO bundle, currently '.tfbundle'.
+ */
+
 extern NSString * const kTFModelBundleExtension;
+
+/**
+ * The name of the file inside a TensorIO bundle that contains the model spec, currently 'model.json'.
+ */
+
 extern NSString * const kTFModelInfoFile;
+
+/**
+ * The default classname for use with TensorFlow Lite models, currently `TIOTFLiteModel`.
+ */
+
 extern NSString * const kTFLiteModelClassName;
+
+/**
+ * The name of the directory inside a TensorIO bundle that contains additional data, currently 'assets'.
+ */
+
 extern NSString * const kTFModelAssetsDirectory;
 
 /**
- * Encapsulates information about a `TIOModel` without actaully loading the model.
+ * Encapsulates information about a `TIOModel` without actually loading the model.
  *
  * A `TIOModelBundle` is used by the UI to show model details and is used to instantiate model
  * instances as a model factory. There is currently a one-to-one correspondence between a
@@ -97,7 +116,16 @@ extern NSString * const kTFModelAssetsDirectory;
 @property (readonly) NSString *license;
 
 /**
- * A boolean value indicated if the model represnted by this bundle is quantized or not.
+ * A boolean value indicating if this is a placeholder bundle.
+ *
+ * A placeholder bundle has no underlying model and instantiates a `TIOModel` that does nothing.
+ * Placeholders bundles are used to collect labeled data for models that haven't been trained yet.
+ */
+
+@property (readonly, getter=isPlaceholder) BOOL placeholder;
+
+/**
+ * A boolean value indicating if the model represnted by this bundle is quantized or not.
  */
 
 @property (readonly) BOOL quantized;
@@ -117,10 +145,11 @@ extern NSString * const kTFModelAssetsDirectory;
 /**
  * The file path to the actual underlying model contained in this bundle.
  *
- * Currently, only tflite models are supported.
+ * Currently, only tflite models are supported. If this `placeholder` is `YES` this property
+ * returns `nil`.
  */
 
-@property (readonly) NSString *modelFilepath;
+@property (nullable, readonly) NSString *modelFilepath;
 
 /**
  * Designated initializer.

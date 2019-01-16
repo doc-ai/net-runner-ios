@@ -18,12 +18,16 @@ limitations under the License.
 #include <memory>
 #include <vector>
 
-#include "tensorflow/contrib/lite/context.h"
+#include "tensorflow/contrib/lite/c/c_api_internal.h"
 #include "tensorflow/contrib/lite/graph_info.h"
 #include "tensorflow/contrib/lite/memory_planner.h"
 #include "tensorflow/contrib/lite/simple_memory_arena.h"
 
 namespace tflite {
+
+// Memory allocation tuning
+constexpr const int kDefaultArenaAlignment = 64;
+constexpr const int kDefaultTensorAlignment = 64;
 
 struct AllocationInfo;
 
@@ -33,8 +37,8 @@ struct AllocationInfo;
 // each tensor needs to be allocated and deallocated, and preallocates all the
 // necessary memory (the PlanAllocations phase). It then assigns portions of
 // this memory buffer to each tensor (the ExecuteAllocations phase). Tensors may
-// share some of the buffer if a tensor B is to be allocated after another tensor
-// A has been deallocated.
+// share some of the buffer if a tensor B is to be allocated after another
+// tensor A has been deallocated.
 //
 // If dynamic tensors are used the planning steps can be repeated during model
 // execution. Since dynamic tensors don't have sizes until after the
@@ -47,7 +51,8 @@ class ArenaPlanner : public MemoryPlanner {
   // graph will not share memory with any other tensor, effectively preserving
   // them until the end of inference.
   ArenaPlanner(TfLiteContext* context, std::unique_ptr<GraphInfo> graph_info,
-               bool preserve_inputs, bool preserve_intermediates);
+               bool preserve_inputs, bool preserve_intermediates,
+               int tensor_alignment = kDefaultTensorAlignment);
   ~ArenaPlanner() override;
   ArenaPlanner(const ArenaPlanner&) = delete;
   ArenaPlanner& operator=(const ArenaPlanner&) = delete;
@@ -112,6 +117,9 @@ class ArenaPlanner : public MemoryPlanner {
   // If true, then no overlapping of memory areas is done, meaning intermediates
   // results can be queried after running (modulo running delegates).
   bool preserve_intermediates_;
+
+  // Number of bytes that tensor buffers should be aligned to.
+  int tensor_alignment_;
 };
 
 }  // namespace tflite
