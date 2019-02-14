@@ -28,7 +28,7 @@ const TIOImageVolume kTIOImageVolumeInvalid = {
     .channels   = 0
 };
 
-BOOL TIOImageVolumesEqual(const TIOImageVolume& a, const TIOImageVolume& b) {
+BOOL TIOImageVolumesEqual(TIOImageVolume a, TIOImageVolume b) {
     return a.height == b.height
         && a.width == b.width
         && a.channels == b.channels;
