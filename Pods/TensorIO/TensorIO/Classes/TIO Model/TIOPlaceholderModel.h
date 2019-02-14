@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable instancetype)initWithBundle:(TIOModelBundle*)bundle NS_DESIGNATED_INITIALIZER;
 
-- (nullable instancetype)init NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
 
 - (BOOL)load:(NSError**)error;
 - (void)unload;
