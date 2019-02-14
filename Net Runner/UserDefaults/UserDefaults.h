@@ -25,10 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSString * const kPrefsShowInputBuffers;
 extern NSString * const kPrefsShowInputBufferAlpha;
-extern NSString * const kPrefsSelectedModelID DEPRECATED_ATTRIBUTE;
 extern NSString * const kPrefsEvaluateIterations;
 extern NSString * const kPrefsBuild7CleanedModelsDir;
-extern NSString * const kPresDefaultModelID;
 
 NS_ASSUME_NONNULL_END
 
