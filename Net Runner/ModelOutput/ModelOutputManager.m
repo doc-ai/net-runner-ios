@@ -52,6 +52,8 @@
     NSMutableDictionary<NSString*,Class> *classes = [[NSMutableDictionary alloc] init];
     
     classes[@"image.classification.imagenet"] = NSClassFromString(@"ImageNetClassificationModelOutput");
+    classes[@"image.classification.emotion"] = NSClassFromString(@"ClassificationModelOutput");
+    
     // Add your model output class here
     
     return [classes copy];

@@ -747,11 +747,10 @@ typedef enum : NSUInteger {
 
 - (void)showModelOutput:(id<ModelOutput>)modelOutput withDecay:(BOOL)withDecay {
     if ( withDecay ) {
-        self.infoView.classifications = [modelOutput decayedOutput:self.previousOutput].localizedDescription;
-    } else {
-        self.infoView.classifications = modelOutput.localizedDescription;
+        modelOutput = [modelOutput decayedOutput:self.previousOutput];
     }
     
+    self.infoView.classifications = modelOutput.localizedDescription;
     self.previousOutput = modelOutput;
 }
 
