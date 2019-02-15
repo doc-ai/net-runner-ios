@@ -16,7 +16,7 @@
 			"type": "image",
 			"shape": [224,224,3],
 			"format": "RGB"
-		},
+		}
 	],
 	"outputs": [
 		{
@@ -27,7 +27,7 @@
 			"dequantize": {
 				"standard": "[0,1]"
 			}
-		},
+		}
 	],
 	"options": {
 		"device_position": "back"

@@ -14,10 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * A wrapper for classification outputs. Model outputs are considered application specific
- * at this point. There must be only one output and its name must be "classification".
+ * at this point. For this formatter, there must be only one output and its name
+ * must be "classification".
  */
 
-@interface ClassificationModelOutput : NSObject <ModelOutput>
+@interface NoDecayClassificationModelOutput : NSObject <ModelOutput>
 
 /**
  * The output of the model, e.g. the result of performing inference with the model
@@ -26,7 +27,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly) NSDictionary *output;
 
-- (instancetype)initWithDictionary:(NSDictionary*)dictionary;
+/**
+ * Designated initializer.
+ *
+ * @param dictionary the results of performing inference with a model.
+ */
+
+- (instancetype)initWithDictionary:(NSDictionary*)dictionary NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Use the designated initializer.
+ */
+
+- (instancetype)init NS_UNAVAILABLE;
 
 // Model Output Conformance
 
