@@ -69,7 +69,7 @@
 		E3E7725E21C4351F004988DC /* Run.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3E7725C21C4351F004988DC /* Run.storyboard */; };
 		E3E9A20721E4137900C64FC6 /* ImageModelLabelsDatabase.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3E9A20621E4137900C64FC6 /* ImageModelLabelsDatabase.mm */; };
 		E3E9A20B21E4171000C64FC6 /* ImageModelLabels.mm in Sources */ = {isa = PBXBuildFile; fileRef = E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */; };
-		E3EEA61022166E4100E3E002 /* ClassificationModelOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EEA60F22166E4100E3E002 /* ClassificationModelOutput.m */; };
+		E3EEA61022166E4100E3E002 /* NoDecayClassificationModelOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = E3EEA60F22166E4100E3E002 /* NoDecayClassificationModelOutput.m */; };
 		E3F6C680210A567300D200D8 /* PhotoAssetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */; };
 		E3F6C681210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67D210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.m */; };
 		E3F6C682210A567300D200D8 /* PhotoAlbumPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E3F6C67F210A567300D200D8 /* PhotoAlbumPhotoViewController.m */; };
@@ -234,8 +234,8 @@
 		E3E9A20621E4137900C64FC6 /* ImageModelLabelsDatabase.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabelsDatabase.mm; sourceTree = "<group>"; };
 		E3E9A20921E4171000C64FC6 /* ImageModelLabels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageModelLabels.h; sourceTree = "<group>"; };
 		E3E9A20A21E4171000C64FC6 /* ImageModelLabels.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ImageModelLabels.mm; sourceTree = "<group>"; };
-		E3EEA60E22166E4100E3E002 /* ClassificationModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassificationModelOutput.h; sourceTree = "<group>"; };
-		E3EEA60F22166E4100E3E002 /* ClassificationModelOutput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassificationModelOutput.m; sourceTree = "<group>"; };
+		E3EEA60E22166E4100E3E002 /* NoDecayClassificationModelOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NoDecayClassificationModelOutput.h; sourceTree = "<group>"; };
+		E3EEA60F22166E4100E3E002 /* NoDecayClassificationModelOutput.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoDecayClassificationModelOutput.m; sourceTree = "<group>"; };
 		E3F6C67A210A567300D200D8 /* PhotoAlbumPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumPhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		E3F6C67B210A567300D200D8 /* PhotoAssetsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAssetsCollectionViewController.h; sourceTree = "<group>"; };
 		E3F6C67C210A567300D200D8 /* PhotoAssetsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAssetsCollectionViewController.m; sourceTree = "<group>"; };
@@ -349,8 +349,8 @@
 				E33229D6212607680031435F /* ModelOutputManager.m */,
 				E3851387210D0D2A00F600C5 /* ImageNetClassificationModelOutput.h */,
 				E3851388210D0D2A00F600C5 /* ImageNetClassificationModelOutput.mm */,
-				E3EEA60E22166E4100E3E002 /* ClassificationModelOutput.h */,
-				E3EEA60F22166E4100E3E002 /* ClassificationModelOutput.m */,
+				E3EEA60E22166E4100E3E002 /* NoDecayClassificationModelOutput.h */,
+				E3EEA60F22166E4100E3E002 /* NoDecayClassificationModelOutput.m */,
 				E33229DA21260C880031435F /* DefaultModelOutput.h */,
 				E33229DB21260C880031435F /* DefaultModelOutput.mm */,
 			);
@@ -954,7 +954,7 @@
 				E3B1D8972113E37900BC9D46 /* EvaluatorConstants.mm in Sources */,
 				E344013421E6C09200B6E9CC /* ImageModelLabelsExporter.mm in Sources */,
 				E3A52122210A511C004B912B /* Utilities.mm in Sources */,
-				E3EEA61022166E4100E3E002 /* ClassificationModelOutput.m in Sources */,
+				E3EEA61022166E4100E3E002 /* NoDecayClassificationModelOutput.m in Sources */,
 				E3E9A20721E4137900C64FC6 /* ImageModelLabelsDatabase.mm in Sources */,
 				E3F6C68A210A56DD00D200D8 /* UserDefaults.m in Sources */,
 				E3A520F0210A49A1004B912B /* main.m in Sources */,

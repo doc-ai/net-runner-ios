@@ -39,7 +39,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly) NSDictionary *output;
 
-- (instancetype)initWithDictionary:(NSDictionary*)dictionary;
+/**
+ * Designated initializer.
+ *
+ * @param dictionary the results of performing inference with a model.
+ */
+
+- (instancetype)initWithDictionary:(NSDictionary*)dictionary NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Use the designated initializer.
+ */
+
+- (instancetype)init NS_UNAVAILABLE;
 
 // Model Output Conformance
 

@@ -6,18 +6,18 @@
 //  Copyright © 2019 doc.ai. All rights reserved.
 //
 
-#import "ClassificationModelOutput.h"
+#import "NoDecayClassificationModelOutput.h"
 #import "NSArray+TIOExtensions.h"
 
 static NSString * const kClassificationOutputKey = @"classification";
 
-@interface ClassificationModelOutput ()
+@interface NoDecayClassificationModelOutput ()
 
 @property (readwrite) NSDictionary *output;
 
 @end
 
-@implementation ClassificationModelOutput
+@implementation NoDecayClassificationModelOutput
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary {
     if (self = [super init]) {
