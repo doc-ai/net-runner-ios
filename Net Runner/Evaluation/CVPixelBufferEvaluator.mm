@@ -113,7 +113,7 @@
         results = (NSDictionary*)[self.model runOn:pixelBufferWrapper];
     });
     
-    id<ModelOutput> modelOutput = [[[[ModelOutputManager sharedManager] classForType:self.model.type] alloc] initWithDictionary:results];
+    id<ModelOutput> modelOutput = [[[[ModelOutputManager sharedManager] classForTypes:@[self.model.type, self.model.options.outputFormat]] alloc] initWithDictionary:results];
     
     if (modelOutput == nil) {
         NSLog(@"Running the model produced null results");

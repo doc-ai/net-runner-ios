@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedManager;
 
-- (Class)classForType:(NSString*)type;
+- (Class)classForTypes:(NSArray<NSString*>*)types;
 
 @end
 

@@ -56,6 +56,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSString *localizedDescription;
 
 /**
+ * Designated initializer.
+ *
+ * @param dictionary the results of performing inference with a model.
+ */
+
+- (instancetype)initWithDictionary:(NSDictionary*)dictionary;
+
+/**
  * `YES` if the two outputs are equal, `NO` otherwise
  */
 
