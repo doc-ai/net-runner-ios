@@ -16,7 +16,7 @@
 			"type": "image",
 			"shape": [128,128,3],
 			"format": "RGB"
-		},
+		}
 	],
 	"outputs": [
 		{
@@ -27,9 +27,10 @@
 			"dequantize": {
 				"standard": "[0,1]"
 			}
-		},
+		}
 	],
 	"options": {
-		"device_position": "back"
+		"device_position": "back",
+		"output_format": "image.classification.imagenet"
 	}
 }

@@ -52,18 +52,24 @@
     NSMutableDictionary<NSString*,Class> *classes = [[NSMutableDictionary alloc] init];
     
     classes[@"image.classification.imagenet"] = NSClassFromString(@"ImageNetClassificationModelOutput");
+    classes[@"image.classification.nodecay"] = NSClassFromString(@"NoDecayClassificationModelOutput");
+    
     // Add your model output class here
+    // Classes may target a model's model.type or options.output_format field
+    // The options.output_format field takes precedence
     
     return [classes copy];
 }
 
-- (Class)classForType:(NSString*)type {
-    Class class = self.classes[type];
-    if ( class != nil ) {
-        return class;
-    } else {
-        return DefaultModelOutput.class;
+- (Class)classForTypes:(NSArray<NSString*>*)types {
+    for (NSString *type in types) {
+        Class class = self.classes[type];
+        if ( class != nil ) {
+            return class;
+        }
     }
+    
+    return DefaultModelOutput.class;
 }
 
 @end

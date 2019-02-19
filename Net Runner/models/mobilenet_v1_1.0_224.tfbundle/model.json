@@ -19,7 +19,7 @@
 			"normalize": {
 				"standard": "[-1,1]"
 			}
-		},
+		}
 	],
 	"outputs": [
 		{
@@ -27,7 +27,7 @@
 			"type": "array",
 			"shape": [1,1000],
 			"labels": "labels.txt"
-		},
+		}
 	],
 	"options": {
 		"device_position": "back"

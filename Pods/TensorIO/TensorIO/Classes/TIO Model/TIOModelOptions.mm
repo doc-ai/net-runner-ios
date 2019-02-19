@@ -20,6 +20,8 @@
 
 #import "TIOModelOptions.h"
 
+static NSString * const TIOModelOptionOutputFormatNone = @"";
+
 AVCaptureDevicePosition TIOModelOptionsAVCaptureDevicePositionFromString(NSString * _Nullable descriptor) {
     if ( [descriptor isEqualToString:@"front"] ) {
         return AVCaptureDevicePositionFront;
@@ -30,21 +32,37 @@ AVCaptureDevicePosition TIOModelOptionsAVCaptureDevicePositionFromString(NSStrin
     }
 }
 
+NSString * TIOModelOptionsOutputFormatFromString(NSString * _Nullable descriptor) {
+    if ( descriptor == nil ) {
+        return TIOModelOptionOutputFormatNone;
+    } else {
+        return descriptor;
+    }
+}
+
 @implementation TIOModelOptions
 
-- (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition {
+- (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition outputFormat:(NSString*)outputFormat {
     if (self = [super init]) {
         _devicePosition = devicePosition;
+        _outputFormat = outputFormat;
     }
     return self;
 }
 
 - (instancetype)initWithDictionary:(NSDictionary*)dictionary {
+    AVCaptureDevicePosition devicePosition;
+    NSString *outputFormat;
+    
     if ( dictionary == nil ) {
-        return [self initWithDevicePosition:AVCaptureDevicePositionUnspecified];
+        devicePosition = AVCaptureDevicePositionUnspecified;
+        outputFormat = TIOModelOptionOutputFormatNone;
     } else {
-        return [self initWithDevicePosition:TIOModelOptionsAVCaptureDevicePositionFromString(dictionary[@"device_position"])];
+        devicePosition = TIOModelOptionsAVCaptureDevicePositionFromString(dictionary[@"device_position"]);
+        outputFormat = TIOModelOptionsOutputFormatFromString(dictionary[@"output_format"]);
     }
+    
+    return [self initWithDevicePosition:devicePosition outputFormat:outputFormat];
 }
 
 - (instancetype)init {

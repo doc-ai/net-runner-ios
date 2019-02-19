@@ -5,7 +5,7 @@ PODS:
   - SSZipArchive (2.1.4)
   - SVProgressHUD (2.2.5)
   - TensorFlowLite (1.12.0)
-  - TensorIO (0.4):
+  - TensorIO (0.4.1):
     - TensorFlowLite
 
 DEPENDENCIES:
@@ -27,7 +27,7 @@ SPEC CHECKSUMS:
   SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TensorFlowLite: e81aef029750aa46b42ad16553fa4cddd81498cc
-  TensorIO: 9b339d207f9b9dd1c378a4be9b0b68c5b6bc5de8
+  TensorIO: 25588fee92d13804133012019d174d6e47d38fdb
 
 PODFILE CHECKSUM: d9f64d480ea6b921912e9f60aa497fe0d57d890b
 
