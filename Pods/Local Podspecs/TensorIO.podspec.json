@@ -1,9 +1,9 @@
 {
   "name": "TensorIO",
-  "version": "0.3.2",
-  "summary": "An Objective-C wrapper for TensorFlow Lite.",
-  "description": "Perform inference with TensorFlow Lite models using all the conveniences of Objective-C",
-  "homepage": "https://github.com/doc-ai/TensorIO",
+  "version": "0.4.1",
+  "summary": "An Objective-C and Swift wrapper for TensorFlow Lite.",
+  "description": "Perform inference with TensorFlow Lite models using all the conveniences of Objective-C or Swift",
+  "homepage": "https://github.com/doc-ai/tensorio-ios",
   "license": {
     "type": "Apache 2",
     "file": "LICENSE"
@@ -12,16 +12,17 @@
     "Philip Dow": "philip@doc.ai"
   },
   "source": {
-    "git": "https://github.com/doc-ai/TensorIO.git",
-    "tag": "0.3.2"
+    "git": "https://github.com/doc-ai/tensorio-ios.git",
+    "tag": "0.4.1"
   },
   "platforms": {
     "ios": "9.3"
   },
-  "source_files": "TensorIO/Classes/**/*",
   "static_framework": true,
+  "libraries": "c++",
   "frameworks": [
     "Foundation",
+    "UIKit",
     "AVFoundation",
     "CoreMedia",
     "Accelerate",
@@ -32,7 +33,10 @@
 
     ]
   },
-  "libraries": "c++",
+  "source_files": "TensorIO/Classes/**/*",
+  "private_header_files": [
+    "TensorIO/Classes/TIO Model/TIOPixelBufferToTensorHelpers.h"
+  ],
   "xcconfig": {
     "USER_HEADER_SEARCH_PATHS": "\"${PODS_ROOT}/TensorFlowLite/Frameworks/tensorflow_lite.framework/Headers\""
   }

@@ -52,10 +52,20 @@ AVCaptureDevicePosition TIOModelOptionsAVCaptureDevicePositionFromString(NSStrin
 @property (readonly) AVCaptureDevicePosition devicePosition;
 
 /**
+ * Preferred output formatting.
+ *
+ * Expresses a preference for how the model's output should be formatted. Content
+ * is application specific.
+ */
+
+@property (readonly) NSString *outputFormat;
+
+/**
  * Designated initializer.
  */
 
-- (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition
+    outputFormat:(NSString*)outputFormat NS_DESIGNATED_INITIALIZER;
 
 /**
  * Convenience initializer used when reading from a TIOModelBundle.
