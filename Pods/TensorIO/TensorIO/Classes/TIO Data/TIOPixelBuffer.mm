@@ -21,6 +21,7 @@
 #import "TIOPixelBuffer.h"
 
 #import "TIOPixelBufferLayerDescription.h"
+#import "TIOPixelBufferToTensorHelpers.h"
 #import "TIOVisionPipeline.h"
 
 @implementation TIOPixelBuffer

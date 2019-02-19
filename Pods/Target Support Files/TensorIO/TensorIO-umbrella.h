@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "TensorIO.h"
 #import "NSArray+TIOData.h"
 #import "NSData+TIOData.h"
 #import "NSDictionary+TIOData.h"

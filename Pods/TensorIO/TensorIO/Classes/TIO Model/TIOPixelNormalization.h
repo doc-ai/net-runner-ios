@@ -65,7 +65,7 @@ typedef TIOPixelNormalization TIOPixelDenormalization;
  * @return float_t The transformed value.
  */
 
-typedef float_t (^TIOPixelNormalizer)(const uint8_t &value, const uint8_t &channel);
+typedef float_t (^TIOPixelNormalizer)(uint8_t value, uint8_t channel);
 
 /**
  * A `TIOPixelDenormalizer` is a function that transforms a normalized pixel value, typically in the
@@ -81,7 +81,7 @@ typedef float_t (^TIOPixelNormalizer)(const uint8_t &value, const uint8_t &chann
  * @return uint8_t The denormalized value.
  */
 
-typedef uint8_t (^TIOPixelDenormalizer)(const float_t &value, const uint8_t &channel);
+typedef uint8_t (^TIOPixelDenormalizer)(float_t value, uint8_t channel);
 
 /**
  * An invalid pixel normalization, used when there is an error parsing the normalization settings.
@@ -151,13 +151,13 @@ TIOPixelNormalizer _Nullable TIOPixelNormalizerNone();
  * A normalizing function that applies a scaling factor and equal bias to each pixel channel.
  */
 
-TIOPixelNormalizer TIOPixelNormalizerSingleBias(const TIOPixelNormalization& normalization);
+TIOPixelNormalizer TIOPixelNormalizerSingleBias(TIOPixelNormalization normalization);
 
 /**
  * A normalizing function that applies a scaling factor and different biases to each pixel channel.
  */
 
-TIOPixelNormalizer TIOPixelNormalizerPerChannelBias(const TIOPixelNormalization& normalization);
+TIOPixelNormalizer TIOPixelNormalizerPerChannelBias(TIOPixelNormalization normalization);
 
 // MARK: - Helpers for Constructing Standard Pixel Normalizers
 
@@ -189,13 +189,13 @@ TIOPixelDenormalizer _Nullable TIOPixelDenormalizerNone();
  * A denormalizing function that applies a scaling factor and equal bias to each pixel channel.
  */
 
-TIOPixelDenormalizer TIOPixelDenormalizerSingleBias(const TIOPixelNormalization& normalization);
+TIOPixelDenormalizer TIOPixelDenormalizerSingleBias(TIOPixelNormalization normalization);
 
 /**
  * A denormalizing function that applies a scaling factor and different biases to each pixel channel.
  */
 
-TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(const TIOPixelNormalization& normalization);
+TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(TIOPixelNormalization normalization);
 
 // MARK: - Helpers for Constructing Standard Pixel Denormalizers
 
@@ -226,7 +226,7 @@ TIOPixelDenormalizer TIOPixelDenormalizerNegativeOneToOne();
  * @return BOOL `YES` if the two structs are equal, `NO` otherwise.
  */
 
-BOOL TIOPixelNormalizationsEqual(const TIOPixelNormalization& a, const TIOPixelNormalization& b);
+BOOL TIOPixelNormalizationsEqual(TIOPixelNormalization a, TIOPixelNormalization b);
 
 /**
  * Checks if two TIOPixelDenormalization structs are equal.
@@ -237,6 +237,6 @@ BOOL TIOPixelNormalizationsEqual(const TIOPixelNormalization& a, const TIOPixelN
  * @return BOOL `YES` if the two structs are equal, `NO` otherwise.
  */
 
-BOOL TIOPixelDenormalizationsEqual(const TIOPixelDenormalization& a, const TIOPixelDenormalization& b);
+BOOL TIOPixelDenormalizationsEqual(TIOPixelDenormalization a, TIOPixelDenormalization b);
 
 NS_ASSUME_NONNULL_END

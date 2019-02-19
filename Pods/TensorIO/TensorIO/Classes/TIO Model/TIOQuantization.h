@@ -50,7 +50,7 @@ typedef struct TIODataQuantization {
  * @return uint8_t A quantized representation of the value.
  */
 
-typedef uint8_t (^TIODataQuantizer)(const float_t &value);
+typedef uint8_t (^TIODataQuantizer)(float_t value);
 
 /**
  * A quantizing function that applies the provide scale and bias according to the following forumla.
@@ -64,7 +64,7 @@ typedef uint8_t (^TIODataQuantizer)(const float_t &value);
  * @return TIODataQuantizer The quantizing function,
  */
 
-TIODataQuantizer TIODataQuantizerWithQuantization(const TIODataQuantization& quantization);
+TIODataQuantizer TIODataQuantizerWithQuantization(TIODataQuantization quantization);
 
 /**
  * A standard quantization function that converts values from a range of `[0,1]` to `[0,255]`.
@@ -112,7 +112,7 @@ typedef struct TIODataDequantization {
  * @return float_t A floating point representation of the value.
  */
 
-typedef float_t (^TIODataDequantizer)(const uint8_t &value);
+typedef float_t (^TIODataDequantizer)(uint8_t value);
 
 /**
  * A dequantizing function that applies the provide scale and bias according to the following forumla.
@@ -126,7 +126,7 @@ typedef float_t (^TIODataDequantizer)(const uint8_t &value);
  * @return TIODataQuantizer The quantizing function.
  */
 
-TIODataDequantizer TIODataDequantizerWithDequantization(const TIODataDequantization& dequantization);
+TIODataDequantizer TIODataDequantizerWithDequantization(TIODataDequantization dequantization);
 
 /**
  * A standard dequantizing function that converts values from a range of `[0,255]` to `[0,1]`.
