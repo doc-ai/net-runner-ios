@@ -19,6 +19,20 @@ NSDictionary *inference = (NSDictionary*)[model runOn:buffer];
 NSDictionary *classification = [inference[@"classification"] topN:5 threshold:0.1];
 ```
 
+And in Swift:
+
+```swift
+let image = UIImage(named: "example-image")!
+let pixels = image.pixelBuffer()!
+let value = pixels.takeUnretainedValue() as CVPixelBuffer
+let buffer = TIOPixelBuffer(pixelBuffer:value, orientation: .up)
+
+let model = TIOTFLiteModel.withBundleAtPath(path)!
+
+let inference = model.run(on: buffer)
+let classification = ((inference as! NSDictionary)["classification"] as! NSDictionary).topN(5, threshold: 0.1)
+```
+
 See the <a href="#usage">Usage</a> section below for important notes on adding TensorIO to your project.
 
 For the complete Objectice-C project documentation, visit [tensorio.info](https://tensorio.info/).
@@ -113,12 +127,14 @@ TensorIO is available under the Apache 2 license. See the LICENSE file for more 
 <a name="importing"></a>
 ### Adding TensorIO to Your Project
 
+#### Objective-C
+
 Because the umbrella TensorIO header imports headers with C++ syntax, any files that use TensorIO must have Obj-C++ extensions. Rename your `.m` files to `.mm`.
 
-Wherever you'd like to use TensorIO, add:
+Wherever you'd like to use TensorIO, import the umbrella header:
 
 ```objc
-#import <TensorIO/TensorIO.h>
+#import <TensorIO/TensorIO-umbrella.h>
 ```
 
 To use TensorIO as a module, make sure `use_frameworks!` is uncommented in your Podfile, and add the following *Other C Flags* to your project's build settings:
@@ -159,6 +175,17 @@ Because of how Objective-C++ and Objective-C headers interract, you may only imp
 // Do something with the model
 @end
 
+```
+
+#### Swift
+
+Make sure `use_frameworks!` is uncommented in your Podfile, and wherever you'd like to use TensorIO, simply import it:
+
+```swift
+import TensorIO
+
+let model = TIOTFLiteModel.withBundleAtPath(path)
+let classifications = model.run(on: buffer)
 ```
 
 <a name="basic-usage"></a>

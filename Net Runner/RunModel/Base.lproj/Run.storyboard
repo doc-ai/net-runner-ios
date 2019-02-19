@@ -33,7 +33,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9x-dU-VtB">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9x-dU-VtB">
                                                     <rect key="frame" x="16" y="95" width="343" height="35"/>
                                                     <state key="normal" title="https://github.com/doc-ai/net-runner-ios"/>
                                                     <connections>
@@ -108,6 +108,7 @@
                                                 <constraint firstItem="2qP-dO-Ieo" firstAttribute="leading" secondItem="Prz-OW-8eA" secondAttribute="leadingMargin" id="1kh-kl-fIr"/>
                                                 <constraint firstItem="QYH-Zy-pYl" firstAttribute="top" secondItem="Prz-OW-8eA" secondAttribute="top" constant="30" id="CJp-NZ-lOq"/>
                                                 <constraint firstItem="2qP-dO-Ieo" firstAttribute="top" secondItem="QYH-Zy-pYl" secondAttribute="bottom" constant="12" id="Lac-1c-I92"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QYH-Zy-pYl" secondAttribute="trailing" constant="20" symbolic="YES" id="ehr-C1-wEC"/>
                                                 <constraint firstItem="QYH-Zy-pYl" firstAttribute="leading" secondItem="Prz-OW-8eA" secondAttribute="leading" constant="16" id="wuo-27-VQl"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="2qP-dO-Ieo" secondAttribute="bottom" constant="40" id="xRl-ny-Zkt"/>
                                             </constraints>

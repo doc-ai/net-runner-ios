@@ -100,10 +100,10 @@ static NSString * const kTensorTypeImage = @"image";
     return self;
 }
 
-- (nullable instancetype)init {
+- (instancetype)init {
     self = [self initWithBundle:[[TIOModelBundle alloc] initWithPath:@""]];
     NSAssert(NO, @"Use the designated initializer initWithBundle:");
-    return nil;
+    return self;
 }
 
 // MARK: - JSON Parsing
