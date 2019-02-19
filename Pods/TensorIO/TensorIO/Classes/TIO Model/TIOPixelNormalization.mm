@@ -86,22 +86,22 @@ TIOPixelNormalizer _Nullable TIOPixelNormalizerNone() {
     return nil;
 }
 
-TIOPixelNormalizer TIOPixelNormalizerSingleBias(const TIOPixelNormalization& normalization) {
+TIOPixelNormalizer TIOPixelNormalizerSingleBias(TIOPixelNormalization normalization) {
     const float scale = normalization.scale;
     const float bias = normalization.redBias;
     
-    return ^float_t (const uint8_t &value, const uint8_t &channel) {
+    return ^float_t (uint8_t value, uint8_t channel) {
         return ((float_t)value * scale) + bias;
     };
 }
 
-TIOPixelNormalizer TIOPixelNormalizerPerChannelBias(const TIOPixelNormalization& normalization) {
+TIOPixelNormalizer TIOPixelNormalizerPerChannelBias(TIOPixelNormalization normalization) {
     const float scale = normalization.scale;
     const float redBias = normalization.redBias;
     const float greenBias = normalization.greenBias;
     const float blueBias = normalization.blueBias;
     
-    return ^float_t (const uint8_t &value, const uint8_t &channel) {
+    return ^float_t (uint8_t value, uint8_t channel) {
         switch (channel) {
         case 0:
             return ((float_t)value * scale) + redBias;
@@ -121,7 +121,7 @@ TIOPixelNormalizer TIOPixelNormalizerPerChannelBias(const TIOPixelNormalization&
 TIOPixelNormalizer TIOPixelNormalizerZeroToOne() {
     const float scale = 1.0/255.0;
     
-    return ^float_t (const uint8_t &value, const uint8_t &channel) {
+    return ^float_t (uint8_t value, uint8_t channel) {
         return ((float_t)value * scale);
     };
 }
@@ -130,7 +130,7 @@ TIOPixelNormalizer TIOPixelNormalizerNegativeOneToOne() {
     const float scale = 2.0/255.0;
     const float bias = -1;
     
-    return ^float_t (const uint8_t &value, const uint8_t &channel) {
+    return ^float_t (uint8_t value, uint8_t channel) {
         return ((float_t)value * scale) + bias;
     };
 }
@@ -141,22 +141,22 @@ TIOPixelDenormalizer _Nullable TIOPixelDenormalizerNone() {
     return nil;
 }
 
-TIOPixelDenormalizer TIOPixelDenormalizerSingleBias(const TIOPixelNormalization& normalization) {
+TIOPixelDenormalizer TIOPixelDenormalizerSingleBias(TIOPixelNormalization normalization) {
     const float scale = normalization.scale;
     const float bias = normalization.redBias;
     
-    return ^uint8_t (const float_t &value, const uint8_t &channel) {
+    return ^uint8_t (float_t value, uint8_t channel) {
         return (uint8_t)((value + bias) * scale);
     };
 }
 
-TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(const TIOPixelNormalization& normalization) {
+TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(TIOPixelNormalization normalization) {
     const float scale = normalization.scale;
     const float redBias = normalization.redBias;
     const float greenBias = normalization.greenBias;
     const float blueBias = normalization.blueBias;
     
-    return ^uint8_t (const float_t &value, const uint8_t &channel) {
+    return ^uint8_t (float_t value, uint8_t channel) {
         switch (channel) {
         case 0:
             return (uint8_t)((value + redBias) * scale);
@@ -176,7 +176,7 @@ TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(const TIOPixelNormalizat
 TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne() {
     const float scale = 255.0;
     
-    return ^uint8_t (const float_t &value, const uint8_t &channel) {
+    return ^uint8_t (float_t value, uint8_t channel) {
         return (uint8_t)(value * scale);
     };
 }
@@ -185,21 +185,21 @@ TIOPixelDenormalizer TIOPixelDenormalizerNegativeOneToOne() {
     const float scale = 255.0/2.0;
     const float bias = 1;
     
-    return ^uint8_t (const float_t &value, const uint8_t &channel) {
+    return ^uint8_t (float_t value, uint8_t channel) {
         return (uint8_t)((value + bias) * scale);
     };
 }
 
 // MARK: - Utilities
 
-BOOL TIOPixelNormalizationsEqual(const TIOPixelNormalization& a, const TIOPixelNormalization& b) {
+BOOL TIOPixelNormalizationsEqual(TIOPixelNormalization a, TIOPixelNormalization b) {
     return a.scale == b.scale
         && a.redBias == b.redBias
         && a.greenBias == b.greenBias
         && a.blueBias == b.blueBias;
 }
 
-BOOL TIOPixelDenormalizationsEqual(const TIOPixelDenormalization& a, const TIOPixelDenormalization& b) {
+BOOL TIOPixelDenormalizationsEqual(TIOPixelDenormalization a, TIOPixelDenormalization b) {
     return a.scale == b.scale
         && a.redBias == b.redBias
         && a.greenBias == b.greenBias

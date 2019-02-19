@@ -77,15 +77,6 @@
     
     [NSUserDefaults.standardUserDefaults registerDefaults:[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"]]];
     
-    // Ensure that the select model is available, and if it is not, default to an included mobilenet model
-    
-    NSString *modelId = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsSelectedModelID];
-    TIOModelBundle *bundle = [TIOModelBundleManager.sharedManager bundleWithId:modelId];
-    
-    if ( bundle == nil ) {
-        [NSUserDefaults.standardUserDefaults setObject:kPresDefaultModelID forKey:kPrefsSelectedModelID];
-    }
-    
     // Global Appearance
     
     [[UILabel appearanceWhenContainedInInstancesOfClasses:@[UITableView.class]] setTextColor:[UIColor colorWithWhite:0.2 alpha:1.0]];

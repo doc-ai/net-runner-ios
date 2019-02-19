@@ -858,7 +858,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Net Runner/Pods-Net Runner-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Net Runner/Pods-Net Runner-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -871,7 +871,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Net Runner/Pods-Net Runner-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Net Runner/Pods-Net Runner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C74F13DAE66D8B96FFA9470C /* [CP] Check Pods Manifest.lock */ = {

@@ -48,8 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setLabels:(ImageModelLabels*)labels key:(NSString*)key;
 - (BOOL)becomeFirstResponder;
 
-@property ImageModelLabels *labels;
-@property NSString *key;
+@property (readonly) ImageModelLabels *labels;
+@property (readonly) NSString *key;
 
 @end
 

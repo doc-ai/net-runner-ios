@@ -8,7 +8,7 @@ target 'Net Runner' do
 
   # Pods for Net Runner
 
-  pod 'TensorIO', :git => 'https://github.com/doc-ai/TensorIO.git'
+  pod 'TensorIO'
   pod 'SVProgressHUD'
   pod 'SSZipArchive'
   pod 'FMDB'
