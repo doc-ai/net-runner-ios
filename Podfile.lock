@@ -4,8 +4,8 @@ PODS:
   - FMDB/standard (2.7.5)
   - SSZipArchive (2.1.4)
   - SVProgressHUD (2.2.5)
-  - TensorFlowLite (1.12.0)
-  - TensorIO (0.4.1):
+  - TensorFlowLite (1.13.1)
+  - TensorIO (0.4.2):
     - TensorFlowLite
 
 DEPENDENCIES:
@@ -26,8 +26,8 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   SSZipArchive: 41455d4b8d2b6ab93990820b50dc697c2554a322
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
-  TensorFlowLite: e81aef029750aa46b42ad16553fa4cddd81498cc
-  TensorIO: 25588fee92d13804133012019d174d6e47d38fdb
+  TensorFlowLite: 8b9dc4eb32eac0f8cb660c66bca7604da56dcc5a
+  TensorIO: e2c0287831a5cb4cb12a0b3f7536fe332a6c9598
 
 PODFILE CHECKSUM: d9f64d480ea6b921912e9f60aa497fe0d57d890b
 
