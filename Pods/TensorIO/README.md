@@ -54,6 +54,7 @@ For the complete Objectice-C project documentation, visit [tensorio.info](https:
 		* [ The Model Field ](#model-field)
 		* [ The Inputs Field ](#inputs-field)
 		* [ The Outputs Field ](#outputs-field)
+		* [ The Options Field ](#options-field)
 		* [ A Complete Example ](#complete-example)
 	* [ Quantization and Dequantization ](#quantization)
 		* [ A Basic Example ](#quantization-basic-example)
@@ -644,6 +645,26 @@ NSNumber *scalarOutput = inference[@"scalar-output"];
 
 *Scalar outputs are supported as a convenience. Model outputs may change in a later version of this library and so this convenience may be removed or modified.*
 
+<a name="options-field"></a>
+#### The Options Field
+
+You may optionally included an *options* field in the json description. It contains properties that are not required by TensorIO to perform inference but which are used in application specific ways. TensorIO will ignore these properties but you may inspect them from application space to change your product's behavior when a particular model is running.
+
+Two options are currently supported: *device\_position* and *output\_format*:
+
+**Device Position**
+
+The *device\_position* option target computer vision models specifically and tells a consumer of the model which device camera it should begin with for this model. For example, some models target facial features and would prefer that the model run on the front facing camera initially, while others target features of the world and would prefer to run on the back facing camera. Valid entries for this field include:
+
+- *front*
+- *back*
+
+**Output Format**
+
+The value of the *output\_format* field is an arbitrary, application specific string providing a hint to consumers of the model about how they should format the model's output. Provide any arbitrary string. 
+
+For example, Net Runner knows how to interpret *"image.classification.nodecay"*. When it sees this output format identifier, it will inspect a model's output, expecting a single "classification" output of an array of values, and format the probability values to two decimal places without applying any exponential decay to them.
+
 <a name="complete-example"></a>
 #### A Complete Example
 
@@ -694,7 +715,11 @@ The *model.json* file might look something like:
       "type": "array",
       "shape": [6]
     }
-  ]
+  ],
+  "options": {
+    "device_position": "back",
+    "output_format": "image.classification.nodecay"
+  }
 }
 ```
 
