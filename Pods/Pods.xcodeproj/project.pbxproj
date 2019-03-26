@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = TensorFlowLite;
+			productName = TensorFlowLite;
 		};
 /* End PBXAggregateTarget section */
 
@@ -216,32 +217,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		07E2EE00EB43B98614EB6ED65597F996 /* TIOPixelBufferLayerDescription.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOPixelBufferLayerDescription.mm; path = "TensorIO/Classes/TIO Layer Interface/TIOPixelBufferLayerDescription.mm"; sourceTree = "<group>"; };
+		07E2EE00EB43B98614EB6ED65597F996 /* TIOPixelBufferLayerDescription.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOPixelBufferLayerDescription.mm; path = "TensorIO/Classes/TIO Layer Interface/TIOPixelBufferLayerDescription.mm"; sourceTree = "<group>"; };
 		0893EB0F8CACAC2337CB3844CE3795FD /* minishared.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = minishared.h; path = SSZipArchive/minizip/minishared.h; sourceTree = "<group>"; };
 		0C7C0312DA9068A9B9AE488DAD387768 /* Pods-Net Runner.release headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net Runner.release headless.xcconfig"; sourceTree = "<group>"; };
 		0D484B6B2330C766F795C47E2C0EBB6E /* Pods-Net RunnerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net RunnerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		0D8E50C7FF18F35EC2F40D755D176406 /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
 		0ECECD29CB47724A986FA5EDB4F0C547 /* NSArray+TIOExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+TIOExtensions.h"; path = "TensorIO/Classes/TIO Utilities/NSArray+TIOExtensions.h"; sourceTree = "<group>"; };
-		0ED696ADE68E8AA6E16AFE466377FF7B /* TIOModelJSONParsing.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOModelJSONParsing.mm; path = "TensorIO/Classes/TIO Model/TIOModelJSONParsing.mm"; sourceTree = "<group>"; };
-		10CDEFE705EF39EC1BC8B3FBC1CDE887 /* UIImage+TIOCVPixelBufferExtensions.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = "UIImage+TIOCVPixelBufferExtensions.mm"; path = "TensorIO/Classes/TIO Utilities/UIImage+TIOCVPixelBufferExtensions.mm"; sourceTree = "<group>"; };
+		0ED696ADE68E8AA6E16AFE466377FF7B /* TIOModelJSONParsing.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOModelJSONParsing.mm; path = "TensorIO/Classes/TIO Model/TIOModelJSONParsing.mm"; sourceTree = "<group>"; };
+		10CDEFE705EF39EC1BC8B3FBC1CDE887 /* UIImage+TIOCVPixelBufferExtensions.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = "UIImage+TIOCVPixelBufferExtensions.mm"; path = "TensorIO/Classes/TIO Utilities/UIImage+TIOCVPixelBufferExtensions.mm"; sourceTree = "<group>"; };
 		12F9A7170E89BD35FFB324E69D023119 /* SVProgressHUD-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SVProgressHUD-Info.plist"; sourceTree = "<group>"; };
 		1534F14323BEE2A3DB73CBDB78820C9F /* Pods-Net RunnerTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Net RunnerTests.modulemap"; sourceTree = "<group>"; };
 		1538F71603AC3D58D9E7E53494DA2F48 /* TIOPixelNormalization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOPixelNormalization.h; path = "TensorIO/Classes/TIO Model/TIOPixelNormalization.h"; sourceTree = "<group>"; };
 		1634C2EE47F45CF6CAABE08C19C1259E /* ioapi_buf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ioapi_buf.h; path = SSZipArchive/minizip/ioapi_buf.h; sourceTree = "<group>"; };
 		16FC113DF63CC93FCC5F57172DCEF6D1 /* Pods-Net RunnerUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Net RunnerUITests-acknowledgements.plist"; sourceTree = "<group>"; };
 		1725EFFD8A2E34BBB8F84554752C2085 /* Pods-Net RunnerTests.debug headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net RunnerTests.debug headless.xcconfig"; sourceTree = "<group>"; };
-		1760C77209B4832D131C2AC63DFB3252 /* TIOModelOptions.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOModelOptions.mm; path = "TensorIO/Classes/TIO Model/TIOModelOptions.mm"; sourceTree = "<group>"; };
+		1760C77209B4832D131C2AC63DFB3252 /* TIOModelOptions.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOModelOptions.mm; path = "TensorIO/Classes/TIO Model/TIOModelOptions.mm"; sourceTree = "<group>"; };
 		17AD6385DE88F8F48D824653880A0E54 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
 		18A11D5F8C4AE9CE4027C5718C2D3EC0 /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
-		195FCA62D18A49EDE3C20646CFC2BDBE /* NSArray+TIOData.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSArray+TIOData.mm"; path = "TensorIO/Classes/TIO Data/NSArray+TIOData.mm"; sourceTree = "<group>"; };
+		195FCA62D18A49EDE3C20646CFC2BDBE /* NSArray+TIOData.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = "NSArray+TIOData.mm"; path = "TensorIO/Classes/TIO Data/NSArray+TIOData.mm"; sourceTree = "<group>"; };
 		197B2EA53398D95EAD069F8142E9C532 /* FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMDB-dummy.m"; sourceTree = "<group>"; };
 		1A61585C2F4B95CF1977CAC4D3E99A91 /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
 		1A77628D7AD180F549C743F13674EF9D /* TIOCVPixelBufferHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOCVPixelBufferHelpers.h; path = "TensorIO/Classes/TIO Utilities/TIOCVPixelBufferHelpers.h"; sourceTree = "<group>"; };
 		1B2901717281706B82FD3CE614D69619 /* hmac.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = hmac.h; path = SSZipArchive/minizip/aes/hmac.h; sourceTree = "<group>"; };
-		1B603E3BF0048E210BDAE84F4532B1AF /* TIOPlaceholderModel.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOPlaceholderModel.mm; path = "TensorIO/Classes/TIO Model/TIOPlaceholderModel.mm"; sourceTree = "<group>"; };
-		1D85446182F33C98F322B04ADDDCB69F /* hmac.c */ = {isa = PBXFileReference; includeInIndex = 1; name = hmac.c; path = SSZipArchive/minizip/aes/hmac.c; sourceTree = "<group>"; };
-		1F76A38048F992A74BDC5188ABB478FF /* unzip.c */ = {isa = PBXFileReference; includeInIndex = 1; name = unzip.c; path = SSZipArchive/minizip/unzip.c; sourceTree = "<group>"; };
-		1F950399BBC59A5490F6DE2A9928E03E /* TIOCVPixelBufferHelpers.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOCVPixelBufferHelpers.mm; path = "TensorIO/Classes/TIO Utilities/TIOCVPixelBufferHelpers.mm"; sourceTree = "<group>"; };
+		1B603E3BF0048E210BDAE84F4532B1AF /* TIOPlaceholderModel.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOPlaceholderModel.mm; path = "TensorIO/Classes/TIO Model/TIOPlaceholderModel.mm"; sourceTree = "<group>"; };
+		1D85446182F33C98F322B04ADDDCB69F /* hmac.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = hmac.c; path = SSZipArchive/minizip/aes/hmac.c; sourceTree = "<group>"; };
+		1F76A38048F992A74BDC5188ABB478FF /* unzip.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = SSZipArchive/minizip/unzip.c; sourceTree = "<group>"; };
+		1F950399BBC59A5490F6DE2A9928E03E /* TIOCVPixelBufferHelpers.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOCVPixelBufferHelpers.mm; path = "TensorIO/Classes/TIO Utilities/TIOCVPixelBufferHelpers.mm"; sourceTree = "<group>"; };
 		20BD01EAD89C32A8761F0C2CD7202B0F /* Pods-Net RunnerTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Net RunnerTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		22072573327EC7F53BE7A8D8E3907C5E /* NSArray+TIOExtensions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+TIOExtensions.m"; path = "TensorIO/Classes/TIO Utilities/NSArray+TIOExtensions.m"; sourceTree = "<group>"; };
 		23BCB764C9E772DA1D914A38FF33441D /* TIOModelBundleJSONSchema.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOModelBundleJSONSchema.h; path = "TensorIO/Classes/TIO Model/TIOModelBundleJSONSchema.h"; sourceTree = "<group>"; };
@@ -251,31 +252,31 @@
 		298CB4EA2E6FDEDD447EC03D1D71306F /* aesopt.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = aesopt.h; path = SSZipArchive/minizip/aes/aesopt.h; sourceTree = "<group>"; };
 		2CCDD830747D8179E5CFE5FF9014882E /* TIOPixelBufferToTensorHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOPixelBufferToTensorHelpers.h; path = "TensorIO/Classes/TIO Model/TIOPixelBufferToTensorHelpers.h"; sourceTree = "<group>"; };
 		2E309CCDA4D7D7852CDC258CECBE3E91 /* Pods-Net Runner-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Net Runner-acknowledgements.markdown"; sourceTree = "<group>"; };
-		2EBF36020E0DA14614604386A0492BEA /* minishared.c */ = {isa = PBXFileReference; includeInIndex = 1; name = minishared.c; path = SSZipArchive/minizip/minishared.c; sourceTree = "<group>"; };
+		2EBF36020E0DA14614604386A0492BEA /* minishared.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = minishared.c; path = SSZipArchive/minizip/minishared.c; sourceTree = "<group>"; };
 		2F7DC2641C46649F588C9F02C05DB886 /* NSArray+TIOData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+TIOData.h"; path = "TensorIO/Classes/TIO Data/NSArray+TIOData.h"; sourceTree = "<group>"; };
 		36B11EA6BAF5C22E7631EA201D3E8BB8 /* zip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zip.h; path = SSZipArchive/minizip/zip.h; sourceTree = "<group>"; };
 		36BCBFAB19632B2694614560CAAE2DD9 /* Pods-Net Runner.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Net Runner.modulemap"; sourceTree = "<group>"; };
 		37292CA8CC1D29978AF4697DE76CDB70 /* SSZipArchive-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SSZipArchive-dummy.m"; sourceTree = "<group>"; };
-		37552D5A0135025FD738FB6954FFEE52 /* ioapi.c */ = {isa = PBXFileReference; includeInIndex = 1; name = ioapi.c; path = SSZipArchive/minizip/ioapi.c; sourceTree = "<group>"; };
+		37552D5A0135025FD738FB6954FFEE52 /* ioapi.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = SSZipArchive/minizip/ioapi.c; sourceTree = "<group>"; };
 		38F6511030B06CE60ECB2C295E3E9631 /* TIOModelBundleValidator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOModelBundleValidator.h; path = "TensorIO/Classes/TIO Model/TIOModelBundleValidator.h"; sourceTree = "<group>"; };
 		396A4327D5DA4AE21BFFD8008260C62B /* SSZipArchive-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SSZipArchive-prefix.pch"; sourceTree = "<group>"; };
 		3BB36ADC1917D5D6485DD58551101E58 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVRadialGradientLayer.m; path = SVProgressHUD/SVRadialGradientLayer.m; sourceTree = "<group>"; };
-		3C198633BD0CED6F3E59FB7B6E850F98 /* aeskey.c */ = {isa = PBXFileReference; includeInIndex = 1; name = aeskey.c; path = SSZipArchive/minizip/aes/aeskey.c; sourceTree = "<group>"; };
+		3C198633BD0CED6F3E59FB7B6E850F98 /* aeskey.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = aeskey.c; path = SSZipArchive/minizip/aes/aeskey.c; sourceTree = "<group>"; };
 		3EFF9E656EBBEA23E009751638008B3A /* TIOPixelBuffer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOPixelBuffer.h; path = "TensorIO/Classes/TIO Data/TIOPixelBuffer.h"; sourceTree = "<group>"; };
 		3F8FD6DE4AE616D44C88F3EB7622F660 /* TIOTFLiteModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOTFLiteModel.h; path = "TensorIO/Classes/TIO TensorFlow Lite Model/TIOTFLiteModel.h"; sourceTree = "<group>"; };
 		422F2DABA6E36B74490FD32F96BACDD6 /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
 		42918A91DF6D9A7016D0F5AD66016C83 /* ZipArchive.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ZipArchive.h; path = SSZipArchive/ZipArchive.h; sourceTree = "<group>"; };
 		44CA92245125B68BFA956C412D49263E /* Pods-Net Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net Runner.debug.xcconfig"; sourceTree = "<group>"; };
-		44CB50630D6E70FD31266F8C92C2B0EA /* ioapi_buf.c */ = {isa = PBXFileReference; includeInIndex = 1; name = ioapi_buf.c; path = SSZipArchive/minizip/ioapi_buf.c; sourceTree = "<group>"; };
+		44CB50630D6E70FD31266F8C92C2B0EA /* ioapi_buf.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = ioapi_buf.c; path = SSZipArchive/minizip/ioapi_buf.c; sourceTree = "<group>"; };
 		4597913E4A93113BDCD70B30508D53D7 /* Pods-Net Runner-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Net Runner-acknowledgements.plist"; sourceTree = "<group>"; };
-		46BA9A82610D3E5262AFCBD87ED92B95 /* aescrypt.c */ = {isa = PBXFileReference; includeInIndex = 1; name = aescrypt.c; path = SSZipArchive/minizip/aes/aescrypt.c; sourceTree = "<group>"; };
+		46BA9A82610D3E5262AFCBD87ED92B95 /* aescrypt.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = aescrypt.c; path = SSZipArchive/minizip/aes/aescrypt.c; sourceTree = "<group>"; };
 		47E3FB1BC9B23B236422C3B549BD2124 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = SVProgressHUD.bundle; path = SVProgressHUD/SVProgressHUD.bundle; sourceTree = "<group>"; };
-		49FC97E52BEC96F351FC3981696A64BF /* NSData+TIOData.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSData+TIOData.mm"; path = "TensorIO/Classes/TIO Data/NSData+TIOData.mm"; sourceTree = "<group>"; };
-		4C9AD552E8E6034E094B87989B75B8C7 /* Pods_Net_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Net_RunnerTests.framework; path = "Pods-Net RunnerTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		512D4DFC06980FC1F02B3AD7BD7BA08A /* NSDictionary+TIOData.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSDictionary+TIOData.mm"; path = "TensorIO/Classes/TIO Data/NSDictionary+TIOData.mm"; sourceTree = "<group>"; };
+		49FC97E52BEC96F351FC3981696A64BF /* NSData+TIOData.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = "NSData+TIOData.mm"; path = "TensorIO/Classes/TIO Data/NSData+TIOData.mm"; sourceTree = "<group>"; };
+		4C9AD552E8E6034E094B87989B75B8C7 /* Pods_Net_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Net_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		512D4DFC06980FC1F02B3AD7BD7BA08A /* NSDictionary+TIOData.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = "NSDictionary+TIOData.mm"; path = "TensorIO/Classes/TIO Data/NSDictionary+TIOData.mm"; sourceTree = "<group>"; };
 		51586A13AA5FC4AF136DF9951B4839DD /* TIOModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOModel.h; path = "TensorIO/Classes/TIO Model/TIOModel.h"; sourceTree = "<group>"; };
 		5411C9518A4D6648548E1BF84847C354 /* Pods-Net RunnerTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Net RunnerTests-Info.plist"; sourceTree = "<group>"; };
-		56128154295657BE142851B8B92F749B /* SSZipArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SSZipArchive.framework; path = SSZipArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56128154295657BE142851B8B92F749B /* SSZipArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SSZipArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58814A635DC623CA3FA83DEB5E99C7E2 /* TIOVisionModelHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOVisionModelHelpers.h; path = "TensorIO/Classes/TIO Model/TIOVisionModelHelpers.h"; sourceTree = "<group>"; };
 		58F0D78B21451E1320B7642D5221FEB4 /* TIOModelOptions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOModelOptions.h; path = "TensorIO/Classes/TIO Model/TIOModelOptions.h"; sourceTree = "<group>"; };
 		59F49FC7283B9CC7628F8ADDDCFA85A8 /* Pods-Net RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -283,8 +284,8 @@
 		5EF7619BE6D0A0F3B228DCF5790BA0D5 /* TIOLayerInterface.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOLayerInterface.h; path = "TensorIO/Classes/TIO Layer Interface/TIOLayerInterface.h"; sourceTree = "<group>"; };
 		5F0AF784FCC69659D64F8BF522DB8DD4 /* ioapi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = SSZipArchive/minizip/ioapi.h; sourceTree = "<group>"; };
 		5F706685E6436E32436613F561BA4547 /* TIOQuantization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOQuantization.h; path = "TensorIO/Classes/TIO Model/TIOQuantization.h"; sourceTree = "<group>"; };
-		622C10F2B228BAE913444F6BDC0ADF13 /* prng.c */ = {isa = PBXFileReference; includeInIndex = 1; name = prng.c; path = SSZipArchive/minizip/aes/prng.c; sourceTree = "<group>"; };
-		656BB46019F4AC46E3B371BAC0B70C16 /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FMDB.framework; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		622C10F2B228BAE913444F6BDC0ADF13 /* prng.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = prng.c; path = SSZipArchive/minizip/aes/prng.c; sourceTree = "<group>"; };
+		656BB46019F4AC46E3B371BAC0B70C16 /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65AC2459277BC05EF5DAD8B4349F242B /* TensorIO.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TensorIO.modulemap; sourceTree = "<group>"; };
 		6697FE7D16E17A68D5F5EFD1744AB495 /* aestab.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = aestab.h; path = SSZipArchive/minizip/aes/aestab.h; sourceTree = "<group>"; };
 		66B5BA3D29458E8EEB230651A0865605 /* unzip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = unzip.h; path = SSZipArchive/minizip/unzip.h; sourceTree = "<group>"; };
@@ -299,7 +300,7 @@
 		7488C1BF8FA5752DA5BA8A09BB994AA8 /* Pods-Net RunnerUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Net RunnerUITests.modulemap"; sourceTree = "<group>"; };
 		74BDD6BFEC50EF75C55D47479D0E0EA4 /* UIImage+TIOCVPixelBufferExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+TIOCVPixelBufferExtensions.h"; path = "TensorIO/Classes/TIO Utilities/UIImage+TIOCVPixelBufferExtensions.h"; sourceTree = "<group>"; };
 		777D592297E8C169D9495B809706C4BF /* tensorflow_lite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = tensorflow_lite.framework; path = Frameworks/tensorflow_lite.framework; sourceTree = "<group>"; };
-		77FD46FD185B7ADA268B899BD43EE8B8 /* TIOLayerInterface.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOLayerInterface.mm; path = "TensorIO/Classes/TIO Layer Interface/TIOLayerInterface.mm"; sourceTree = "<group>"; };
+		77FD46FD185B7ADA268B899BD43EE8B8 /* TIOLayerInterface.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOLayerInterface.mm; path = "TensorIO/Classes/TIO Layer Interface/TIOLayerInterface.mm"; sourceTree = "<group>"; };
 		7808CF8B1215075AE52A85F1A38AB8AD /* NSDictionary+TIOExtensions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+TIOExtensions.m"; path = "TensorIO/Classes/TIO Utilities/NSDictionary+TIOExtensions.m"; sourceTree = "<group>"; };
 		78C583B3FE8076642F33C5E06D75D37D /* Pods-Net Runner-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Net Runner-umbrella.h"; sourceTree = "<group>"; };
 		7AD2C06A671C4391E5A7E5391499BE36 /* TIOPlaceholderModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOPlaceholderModel.h; path = "TensorIO/Classes/TIO Model/TIOPlaceholderModel.h"; sourceTree = "<group>"; };
@@ -318,22 +319,22 @@
 		8F279DF9D40B6DCB3A44C45F80D93B41 /* SVProgressAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVProgressAnimatedView.m; path = SVProgressHUD/SVProgressAnimatedView.m; sourceTree = "<group>"; };
 		93CC5787C4D7225262138F10874B1FB4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		94677BC9527DD8229F874606DBF6E9D4 /* SSZipArchive.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SSZipArchive.m; path = SSZipArchive/SSZipArchive.m; sourceTree = "<group>"; };
-		94A575C34897E92F92AA3B05B46F592A /* zip.c */ = {isa = PBXFileReference; includeInIndex = 1; name = zip.c; path = SSZipArchive/minizip/zip.c; sourceTree = "<group>"; };
-		96D64343166B2E2FC56BB04E4BF5D05A /* crypt.c */ = {isa = PBXFileReference; includeInIndex = 1; name = crypt.c; path = SSZipArchive/minizip/crypt.c; sourceTree = "<group>"; };
-		970EA18FD85B096490DF9CB261FC0619 /* ioapi_mem.c */ = {isa = PBXFileReference; includeInIndex = 1; name = ioapi_mem.c; path = SSZipArchive/minizip/ioapi_mem.c; sourceTree = "<group>"; };
+		94A575C34897E92F92AA3B05B46F592A /* zip.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = zip.c; path = SSZipArchive/minizip/zip.c; sourceTree = "<group>"; };
+		96D64343166B2E2FC56BB04E4BF5D05A /* crypt.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = crypt.c; path = SSZipArchive/minizip/crypt.c; sourceTree = "<group>"; };
+		970EA18FD85B096490DF9CB261FC0619 /* ioapi_mem.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = ioapi_mem.c; path = SSZipArchive/minizip/ioapi_mem.c; sourceTree = "<group>"; };
 		996090E3F0E95FFA18E8CB619C6A8647 /* TensorFlowLite.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TensorFlowLite.xcconfig; sourceTree = "<group>"; };
 		9AC6F3C6A2AEF523DEEBE00F6C7489F5 /* Pods-Net RunnerUITests.debug headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net RunnerUITests.debug headless.xcconfig"; sourceTree = "<group>"; };
 		9CE74DC65531D338B41C202AF2BD1E83 /* TensorIO-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TensorIO-prefix.pch"; sourceTree = "<group>"; };
 		9D05FB9460F23B82839145065855BA3D /* SVProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressHUD.h; path = SVProgressHUD/SVProgressHUD.h; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E9C9E1CAD28D22D991F49D5C5666A77 /* TIOPixelBufferLayerDescription.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOPixelBufferLayerDescription.h; path = "TensorIO/Classes/TIO Layer Interface/TIOPixelBufferLayerDescription.h"; sourceTree = "<group>"; };
 		A2C82F367F6AC20DBC3EF51095C2AA68 /* TensorIO.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TensorIO.xcconfig; sourceTree = "<group>"; };
 		A35367876F2E08FA31B68B0B4CCB4DD7 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SVProgressAnimatedView.h; path = SVProgressHUD/SVProgressAnimatedView.h; sourceTree = "<group>"; };
-		A617BF7887CD1970952BD2B94517E87F /* TIOTFLiteModel.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOTFLiteModel.mm; path = "TensorIO/Classes/TIO TensorFlow Lite Model/TIOTFLiteModel.mm"; sourceTree = "<group>"; };
-		A6CDC0AD317950B86D3A58234C5D8C53 /* sha1.c */ = {isa = PBXFileReference; includeInIndex = 1; name = sha1.c; path = SSZipArchive/minizip/aes/sha1.c; sourceTree = "<group>"; };
+		A617BF7887CD1970952BD2B94517E87F /* TIOTFLiteModel.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOTFLiteModel.mm; path = "TensorIO/Classes/TIO TensorFlow Lite Model/TIOTFLiteModel.mm"; sourceTree = "<group>"; };
+		A6CDC0AD317950B86D3A58234C5D8C53 /* sha1.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = sha1.c; path = SSZipArchive/minizip/aes/sha1.c; sourceTree = "<group>"; };
 		A756293B2F85B1510483D9F878B7D884 /* FMDB-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-umbrella.h"; sourceTree = "<group>"; };
-		AC0560B2C20D4BACBB541F35986DB458 /* aestab.c */ = {isa = PBXFileReference; includeInIndex = 1; name = aestab.c; path = SSZipArchive/minizip/aes/aestab.c; sourceTree = "<group>"; };
-		AC2401C0423D6C94B6C17A02AA85CD23 /* TIOTFLiteErrors.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOTFLiteErrors.mm; path = "TensorIO/Classes/TIO TensorFlow Lite Model/TIOTFLiteErrors.mm"; sourceTree = "<group>"; };
+		AC0560B2C20D4BACBB541F35986DB458 /* aestab.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = aestab.c; path = SSZipArchive/minizip/aes/aestab.c; sourceTree = "<group>"; };
+		AC2401C0423D6C94B6C17A02AA85CD23 /* TIOTFLiteErrors.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOTFLiteErrors.mm; path = "TensorIO/Classes/TIO TensorFlow Lite Model/TIOTFLiteErrors.mm"; sourceTree = "<group>"; };
 		AC7BBE86508487332CC6CBF3A45A9DBC /* SVProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD-dummy.m"; sourceTree = "<group>"; };
 		AE2615BAE98F9E8B10303FE8AB53EE27 /* fileenc.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = fileenc.h; path = SSZipArchive/minizip/aes/fileenc.h; sourceTree = "<group>"; };
 		AEEE101AF14887D92DBA1BD3524F4F5F /* TIOModelBundleManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIOModelBundleManager.m; path = "TensorIO/Classes/TIO Model/TIOModelBundleManager.m"; sourceTree = "<group>"; };
@@ -342,26 +343,26 @@
 		B07F4FCD5ADBD9659C49AF7BE903A80C /* SVProgressHUD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-umbrella.h"; sourceTree = "<group>"; };
 		B32916D32DE92E7D64ED4AFB65AFA3F9 /* pwd2key.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = pwd2key.h; path = SSZipArchive/minizip/aes/pwd2key.h; sourceTree = "<group>"; };
 		B3B0EE8ABC3638F791FB0B18932AACDD /* Pods-Net Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net Runner.release.xcconfig"; sourceTree = "<group>"; };
-		B3B883C42EE846D2D21F54D01C07D5EE /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SVProgressHUD.framework; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3B883C42EE846D2D21F54D01C07D5EE /* SVProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SVProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53360547A191D3CEB87E2F985CF66D9 /* TIOLayerDescription.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOLayerDescription.h; path = "TensorIO/Classes/TIO Layer Interface/TIOLayerDescription.h"; sourceTree = "<group>"; };
 		B60221B2E10F7197B71D1F931C4BA19F /* NSNumber+TIOData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSNumber+TIOData.h"; path = "TensorIO/Classes/TIO Data/NSNumber+TIOData.h"; sourceTree = "<group>"; };
 		BF24D7BF18265EFD1E8EB079D5F629EE /* SSZipArchive.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SSZipArchive.modulemap; sourceTree = "<group>"; };
 		BFBFC60EDFB251350AE9F5AEA3E5DC56 /* Pods-Net RunnerTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Net RunnerTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		C06383632DF1FD2F6E26D5E203BC7877 /* TIOQuantization.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOQuantization.mm; path = "TensorIO/Classes/TIO Model/TIOQuantization.mm"; sourceTree = "<group>"; };
+		C06383632DF1FD2F6E26D5E203BC7877 /* TIOQuantization.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOQuantization.mm; path = "TensorIO/Classes/TIO Model/TIOQuantization.mm"; sourceTree = "<group>"; };
 		C152F3DECE702C1576495C6896670CC9 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SVIndefiniteAnimatedView.m; path = SVProgressHUD/SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		C1CE176EF4E4C4AE41548853CB76EDCA /* SSZipArchive.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SSZipArchive.h; path = SSZipArchive/SSZipArchive.h; sourceTree = "<group>"; };
-		C2A83E1D59A83EE85A8924AC82A95545 /* TIOVectorLayerDescription.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOVectorLayerDescription.mm; path = "TensorIO/Classes/TIO Layer Interface/TIOVectorLayerDescription.mm"; sourceTree = "<group>"; };
+		C2A83E1D59A83EE85A8924AC82A95545 /* TIOVectorLayerDescription.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOVectorLayerDescription.mm; path = "TensorIO/Classes/TIO Layer Interface/TIOVectorLayerDescription.mm"; sourceTree = "<group>"; };
 		C344BB6792B7F1B7AFC0B7EA978071D3 /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
 		C74AB82D815638D731B70E6B23727FE6 /* NSData+TIOData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSData+TIOData.h"; path = "TensorIO/Classes/TIO Data/NSData+TIOData.h"; sourceTree = "<group>"; };
 		C7A6A23EF5B560B5BE0B3E6FB2B19635 /* SSZipArchive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SSZipArchive.xcconfig; sourceTree = "<group>"; };
 		C991AD98E3F5CF151E5C6D57DD02707C /* SVProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SVProgressHUD.xcconfig; sourceTree = "<group>"; };
 		C9CE8CDEBEDF13B6B36AC3833C5C686D /* SVProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-prefix.pch"; sourceTree = "<group>"; };
-		C9FF619CE89058DAD122B415EA878FA6 /* TIOPixelNormalization.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOPixelNormalization.mm; path = "TensorIO/Classes/TIO Model/TIOPixelNormalization.mm"; sourceTree = "<group>"; };
+		C9FF619CE89058DAD122B415EA878FA6 /* TIOPixelNormalization.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOPixelNormalization.mm; path = "TensorIO/Classes/TIO Model/TIOPixelNormalization.mm"; sourceTree = "<group>"; };
 		CACC94B8D1F6F816C18D7C6D9F599DF4 /* NSDictionary+TIOData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+TIOData.h"; path = "TensorIO/Classes/TIO Data/NSDictionary+TIOData.h"; sourceTree = "<group>"; };
-		CB3F1B6E987DEAB002B824203E96BB73 /* NSNumber+TIOData.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = "NSNumber+TIOData.mm"; path = "TensorIO/Classes/TIO Data/NSNumber+TIOData.mm"; sourceTree = "<group>"; };
+		CB3F1B6E987DEAB002B824203E96BB73 /* NSNumber+TIOData.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = "NSNumber+TIOData.mm"; path = "TensorIO/Classes/TIO Data/NSNumber+TIOData.mm"; sourceTree = "<group>"; };
 		CB5B5FDDAF9D5569371095669F109115 /* Pods-Net Runner-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Net Runner-frameworks.sh"; sourceTree = "<group>"; };
 		CB918739B1156E86A912A999669E07E9 /* brg_endian.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = brg_endian.h; path = SSZipArchive/minizip/aes/brg_endian.h; sourceTree = "<group>"; };
-		CC066D863E63BA839FEFA66B3949EA80 /* TIOVisionModelHelpers.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOVisionModelHelpers.mm; path = "TensorIO/Classes/TIO Model/TIOVisionModelHelpers.mm"; sourceTree = "<group>"; };
+		CC066D863E63BA839FEFA66B3949EA80 /* TIOVisionModelHelpers.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOVisionModelHelpers.mm; path = "TensorIO/Classes/TIO Model/TIOVisionModelHelpers.mm"; sourceTree = "<group>"; };
 		D05500B6DC015960678912C7F88375F2 /* TIOModelBundle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TIOModelBundle.m; path = "TensorIO/Classes/TIO Model/TIOModelBundle.m"; sourceTree = "<group>"; };
 		D4C902E06E027FFF8CFE19D7B5E42E31 /* Pods-Net RunnerTests.release headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net RunnerTests.release headless.xcconfig"; sourceTree = "<group>"; };
 		D5496F13757563CC0FF255235CD1B7B4 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
@@ -380,21 +381,21 @@
 		E9A89B631C8D54A69CCCDA45D3669B8B /* Pods-Net RunnerUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Net RunnerUITests-umbrella.h"; sourceTree = "<group>"; };
 		EB41A8F3626BC95A6835DC46544BF603 /* NSDictionary+TIOExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+TIOExtensions.h"; path = "TensorIO/Classes/TIO Utilities/NSDictionary+TIOExtensions.h"; sourceTree = "<group>"; };
 		ECB334FDA7C3C7E0512FE6A25E1421BC /* aes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = aes.h; path = SSZipArchive/minizip/aes/aes.h; sourceTree = "<group>"; };
-		EDBE21D2429F5A2192F29153294058F9 /* TensorIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TensorIO.framework; path = TensorIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFB6E94CAB073334A3FA0E5459D239DC /* fileenc.c */ = {isa = PBXFileReference; includeInIndex = 1; name = fileenc.c; path = SSZipArchive/minizip/aes/fileenc.c; sourceTree = "<group>"; };
+		EDBE21D2429F5A2192F29153294058F9 /* TensorIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TensorIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFB6E94CAB073334A3FA0E5459D239DC /* fileenc.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = fileenc.c; path = SSZipArchive/minizip/aes/fileenc.c; sourceTree = "<group>"; };
 		F1BFE40FDADE47AD3706A9572EFF2C42 /* TensorIO-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TensorIO-umbrella.h"; sourceTree = "<group>"; };
 		F1D6E129058DDABEBE483C442B7A5385 /* Pods-Net RunnerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net RunnerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F24ACA65124B34C11F75F96478A25CF6 /* aes_ni.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = aes_ni.h; path = SSZipArchive/minizip/aes/aes_ni.h; sourceTree = "<group>"; };
 		F26650CEBEC9232529159BAFFAF3BC76 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
-		F573F8871543F540D92AF5F353A96A34 /* pwd2key.c */ = {isa = PBXFileReference; includeInIndex = 1; name = pwd2key.c; path = SSZipArchive/minizip/aes/pwd2key.c; sourceTree = "<group>"; };
-		F76A8961B0ED39AE93A00AAE63049B13 /* Pods_Net_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Net_Runner.framework; path = "Pods-Net Runner.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9B72979CD43246E12D908CB46A9A396 /* Pods_Net_RunnerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Net_RunnerUITests.framework; path = "Pods-Net RunnerUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F573F8871543F540D92AF5F353A96A34 /* pwd2key.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = pwd2key.c; path = SSZipArchive/minizip/aes/pwd2key.c; sourceTree = "<group>"; };
+		F76A8961B0ED39AE93A00AAE63049B13 /* Pods_Net_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Net_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9B72979CD43246E12D908CB46A9A396 /* Pods_Net_RunnerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Net_RunnerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB297F4071617B555E7EC15D41A99799 /* Pods-Net RunnerUITests.release headless.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Net RunnerUITests.release headless.xcconfig"; sourceTree = "<group>"; };
-		FC9560A8816C30FDA6A8725501AB7590 /* aes_ni.c */ = {isa = PBXFileReference; includeInIndex = 1; name = aes_ni.c; path = SSZipArchive/minizip/aes/aes_ni.c; sourceTree = "<group>"; };
+		FC9560A8816C30FDA6A8725501AB7590 /* aes_ni.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = aes_ni.c; path = SSZipArchive/minizip/aes/aes_ni.c; sourceTree = "<group>"; };
 		FCE014A8E0A423C649E1965090809E57 /* TensorIO-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TensorIO-dummy.m"; sourceTree = "<group>"; };
 		FD482CABD0E634B552895AF025FA5210 /* FMDB-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FMDB-Info.plist"; sourceTree = "<group>"; };
-		FDBEE40422B6A2E8230542F71D4E0C81 /* TIOVisionPipeline.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOVisionPipeline.mm; path = "TensorIO/Classes/TIO Model/TIOVisionPipeline.mm"; sourceTree = "<group>"; };
-		FEFDE8F0E5C3CE2AA1C8E02564741329 /* TIOPixelBuffer.mm */ = {isa = PBXFileReference; includeInIndex = 1; name = TIOPixelBuffer.mm; path = "TensorIO/Classes/TIO Data/TIOPixelBuffer.mm"; sourceTree = "<group>"; };
+		FDBEE40422B6A2E8230542F71D4E0C81 /* TIOVisionPipeline.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOVisionPipeline.mm; path = "TensorIO/Classes/TIO Model/TIOVisionPipeline.mm"; sourceTree = "<group>"; };
+		FEFDE8F0E5C3CE2AA1C8E02564741329 /* TIOPixelBuffer.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = TIOPixelBuffer.mm; path = "TensorIO/Classes/TIO Data/TIOPixelBuffer.mm"; sourceTree = "<group>"; };
 		FFF7AF003EF90863B0E67BC7F7187F35 /* TIOVisionPipeline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TIOVisionPipeline.h; path = "TensorIO/Classes/TIO Model/TIOVisionPipeline.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -465,7 +466,6 @@
 				2B25F6BC4F93F52ED516AEB3175E3621 /* standard */,
 				62D60B1FB92B1EDDBB3CCEF00DCD57E7 /* Support Files */,
 			);
-			name = FMDB;
 			path = FMDB;
 			sourceTree = "<group>";
 		};
@@ -616,7 +616,6 @@
 				10CDEFE705EF39EC1BC8B3FBC1CDE887 /* UIImage+TIOCVPixelBufferExtensions.mm */,
 				7949F5CCE8449D6D628F129C1F5CB4EE /* Support Files */,
 			);
-			name = TensorIO;
 			path = TensorIO;
 			sourceTree = "<group>";
 		};
@@ -696,7 +695,6 @@
 				6E16A809DA86C06E4781802391CDFCB0 /* Resources */,
 				371F38DCCD8E53E188E00922BC10CEE8 /* Support Files */,
 			);
-			name = SVProgressHUD;
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
@@ -752,7 +750,6 @@
 				42918A91DF6D9A7016D0F5AD66016C83 /* ZipArchive.h */,
 				EEB1D6DB2450B7A07613EA3A705EBBE9 /* Support Files */,
 			);
-			name = SSZipArchive;
 			path = SSZipArchive;
 			sourceTree = "<group>";
 		};
@@ -822,7 +819,6 @@
 				5B85FB0AED424161FC7D7BC1AF2613F1 /* Frameworks */,
 				BE54ACECE2D8B5409A9B813A0A97CEE5 /* Support Files */,
 			);
-			name = TensorFlowLite;
 			path = TensorFlowLite;
 			sourceTree = "<group>";
 		};
@@ -1091,14 +1087,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = D8653B0EF4C88A7548AF58127E007400 /* Products */;
@@ -1338,10 +1335,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1365,11 +1359,7 @@
 				INFOPLIST_FILE = "Target Support Files/SSZipArchive/SSZipArchive-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SSZipArchive/SSZipArchive.modulemap";
 				PRODUCT_MODULE_NAME = SSZipArchive;
 				PRODUCT_NAME = SSZipArchive;
@@ -1400,11 +1390,7 @@
 				INFOPLIST_FILE = "Target Support Files/TensorIO/TensorIO-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/TensorIO/TensorIO.modulemap";
 				PRODUCT_MODULE_NAME = TensorIO;
@@ -1436,11 +1422,7 @@
 				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
 				PRODUCT_MODULE_NAME = FMDB;
 				PRODUCT_NAME = FMDB;
@@ -1471,11 +1453,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net Runner/Pods-Net Runner-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net Runner/Pods-Net Runner.modulemap";
 				OTHER_LDFLAGS = "";
@@ -1498,10 +1476,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1525,11 +1500,7 @@
 				INFOPLIST_FILE = "Target Support Files/TensorIO/TensorIO-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/TensorIO/TensorIO.modulemap";
 				PRODUCT_MODULE_NAME = TensorIO;
@@ -1560,11 +1531,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -1598,11 +1565,7 @@
 				INFOPLIST_FILE = "Target Support Files/SSZipArchive/SSZipArchive-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SSZipArchive/SSZipArchive.modulemap";
 				PRODUCT_MODULE_NAME = SSZipArchive;
 				PRODUCT_NAME = SSZipArchive;
@@ -1633,11 +1596,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -1670,11 +1629,7 @@
 				INFOPLIST_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD.modulemap";
 				PRODUCT_MODULE_NAME = SVProgressHUD;
 				PRODUCT_NAME = SVProgressHUD;
@@ -1705,11 +1660,7 @@
 				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
 				PRODUCT_MODULE_NAME = FMDB;
 				PRODUCT_NAME = FMDB;
@@ -1740,11 +1691,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net Runner/Pods-Net Runner-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net Runner/Pods-Net Runner.modulemap";
 				OTHER_LDFLAGS = "";
@@ -1778,11 +1725,7 @@
 				INFOPLIST_FILE = "Target Support Files/SSZipArchive/SSZipArchive-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SSZipArchive/SSZipArchive.modulemap";
 				PRODUCT_MODULE_NAME = SSZipArchive;
 				PRODUCT_NAME = SSZipArchive;
@@ -1813,11 +1756,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net Runner/Pods-Net Runner-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net Runner/Pods-Net Runner.modulemap";
 				OTHER_LDFLAGS = "";
@@ -1851,11 +1790,7 @@
 				INFOPLIST_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD.modulemap";
 				PRODUCT_MODULE_NAME = SVProgressHUD;
 				PRODUCT_NAME = SVProgressHUD;
@@ -1886,11 +1821,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net Runner/Pods-Net Runner-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net Runner/Pods-Net Runner.modulemap";
 				OTHER_LDFLAGS = "";
@@ -1911,6 +1842,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1943,6 +1875,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1958,10 +1891,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -1984,11 +1917,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -2022,11 +1951,7 @@
 				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
 				PRODUCT_MODULE_NAME = FMDB;
 				PRODUCT_NAME = FMDB;
@@ -2044,6 +1969,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2121,11 +2047,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -2159,11 +2081,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -2197,11 +2115,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -2225,10 +2139,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2251,11 +2162,7 @@
 				INFOPLIST_FILE = "Target Support Files/TensorIO/TensorIO-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/TensorIO/TensorIO.modulemap";
 				PRODUCT_MODULE_NAME = TensorIO;
@@ -2287,11 +2194,7 @@
 				INFOPLIST_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD.modulemap";
 				PRODUCT_MODULE_NAME = SVProgressHUD;
 				PRODUCT_NAME = SVProgressHUD;
@@ -2322,11 +2225,7 @@
 				INFOPLIST_FILE = "Target Support Files/TensorIO/TensorIO-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/TensorIO/TensorIO.modulemap";
 				PRODUCT_MODULE_NAME = TensorIO;
@@ -2358,11 +2257,7 @@
 				INFOPLIST_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SVProgressHUD/SVProgressHUD.modulemap";
 				PRODUCT_MODULE_NAME = SVProgressHUD;
 				PRODUCT_NAME = SVProgressHUD;
@@ -2379,6 +2274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2428,8 +2324,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -2452,11 +2347,7 @@
 				INFOPLIST_FILE = "Target Support Files/SSZipArchive/SSZipArchive-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/SSZipArchive/SSZipArchive.modulemap";
 				PRODUCT_MODULE_NAME = SSZipArchive;
 				PRODUCT_NAME = SSZipArchive;
@@ -2486,11 +2377,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net RunnerTests/Pods-Net RunnerTests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -2524,11 +2411,7 @@
 				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
 				PRODUCT_MODULE_NAME = FMDB;
 				PRODUCT_NAME = FMDB;
@@ -2548,10 +2431,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2575,11 +2455,7 @@
 				INFOPLIST_FILE = "Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-Net RunnerUITests/Pods-Net RunnerUITests.modulemap";
 				OTHER_LDFLAGS = "";
@@ -2599,6 +2475,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2648,8 +2525,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
