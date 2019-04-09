@@ -5,7 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/TensorIO.svg?style=flat)](https://cocoapods.org/pods/TensorIO)
 [![Platform](https://img.shields.io/cocoapods/p/TensorIO.svg?style=flat)](https://cocoapods.org/pods/TensorIO)
 
-TensorIO is an Objective-C wrapper for TensorFlow Lite. It abstracts the work of copying bytes into and out of tensors and allows you to interract with native types instead, such as numbers, arrays, dictionaries, and pixel buffers.
+TensorIO is an Objective-C wrapper for an underlying machine learning library and currently supports TensorFlow Lite. It abstracts the work of copying bytes into and out of tensors and allows you to interract with native types instead, such as numbers, arrays, dictionaries, and pixel buffers.
+
+This implementation is part of the [TensorIO project](https://doc-ai.github.io/tensorio/) with support for machine learning on iOS, Android, and React Native.
 
 With TensorIO you can perform inference in just a few lines of code:
 
@@ -79,11 +81,11 @@ For the complete Objectice-C project documentation, visit [tensorio.info](https:
 
 TensorIO supports many kinds of models with multiple input and output layers of different shapes and kinds but with minimal boilerplate code. In fact, you can run a variety of models without needing to write any model specific code at all.
 
-Instead, TensorIO relies on a json description of the model that you provide. During inference, the library matches incoming data to the model layers that expect it, performing any transformations that are needed and ensuring that the underlying bytes are copied to the right place.  Once inference is complete, the library copies bytes from the output tensors back to native Objective-C types.
+Instead, TensorIO relies on a JSON description of the model that you provide. During inference, the library matches incoming data to the model layers that expect it, performing any transformations that are needed and ensuring that the underlying bytes are copied to the right place.  Once inference is complete, the library copies bytes from the output tensors back to native Objective-C types.
 
 The built-in class for working with TensorFlow Lite (TF Lite) models, `TIOTFLiteModel`, includes support for multiple input and output layers; single-valued, vectored, matrix, and image data; pixel normalization and denormalization; and quantization and dequantization of data.
 
-In case you require a completely custom interface to a model you may specify your own class in the json description, and TensorIO will use it in place of the default class.
+In case you require a completely custom interface to a model you may specify your own class in the JSON description, and TensorIO will use it in place of the default class.
 
 <a name="example"></a>
 ## Example
@@ -108,6 +110,7 @@ TensorIO is available through [CocoaPods](https://cocoapods.org). Add the follow
 
 ```ruby
 pod 'TensorIO'
+pod 'TensorIO/TFLite'
 ```
 
 And run `pod install`.
@@ -263,7 +266,7 @@ The *model.tflite* file is required but may have another name. The bundle must i
 
 The *assets* directory is optional and contains any additional assets required by your specific use case. Those assets may be referenced from *model.json*.
 
-Because image classification is such a common task, TensorIO includes built-in support for it, and no additional code is required. You'll simply need to specify a labels file in the model's json description, which we'll look at in a moment.
+Because image classification is such a common task, TensorIO includes built-in support for it, and no additional code is required. You'll simply need to specify a labels file in the model's JSON description, which we'll look at in a moment.
 
 **Using Model Bundles**
 
@@ -300,7 +303,7 @@ Model interfaces can vary widely. Some models may have a single input and single
 
 Consequently, every time we want to try a different model, or even the same model with a slightly different interface, we must modify the code that moves bytes into and out of  buffers.
 
-TensorIO abstracts the work of copying bytes into and out of tensors and replaces that imperative code with a declarative language you already know: json.
+TensorIO abstracts the work of copying bytes into and out of tensors and replaces that imperative code with a declarative language you already know: JSON.
 
 The *model.json* file in a TensorIO bundle contains metadata about your underlying model as well as a description of the model's input and output layers. TensorIO parses those descriptions and then, when you perform inference with the model, internally handles all the byte copying operations, taking into account layer shapes, data sizes, data transformations, and even output labeling. All you have to do is provide data to the model and ask for the data out of it.
 
@@ -340,7 +343,7 @@ The *model.json* file has the following basic structure:
 
 ```
 
-In addition to the model's metadata, such as name, identifier, version, etc, all of which are required, the json file also includes three additional, required entries:
+In addition to the model's metadata, such as name, identifier, version, etc, all of which are required, the JSON file also includes three additional, required entries:
 
 1. The *model* field is a dictionary that contains information about the model itself
 2. The *inputs* field is an array of dictionaries that describe the model's input layers
@@ -483,7 +486,7 @@ Here's what the *inputs* field looks like for a model with two input layers, the
 ],
 ```
 
-With this description we can pass either an array of arrays or a dictionary of arrays to the model's `runOn:` method. To pass an array, make sure the order of your inputs matches the order of their entries in the json file:
+With this description we can pass either an array of arrays or a dictionary of arrays to the model's `runOn:` method. To pass an array, make sure the order of your inputs matches the order of their entries in the JSON file:
 
 ```objc
 NSArray *vectorInput = @[ ... ]; // with 8 values
@@ -555,7 +558,7 @@ Each line of the *labels.txt *text file contains the name of the classification 
 
 **Model Outputs**
 
-Normally, a model returns a dictionary of array values from its `runOn:` method, and those values will usually be arrays. Each layer produces its own entry in that dictionary, corresponding to the name of the layer in its json description. 
+Normally, a model returns a dictionary of array values from its `runOn:` method, and those values will usually be arrays. Each layer produces its own entry in that dictionary, corresponding to the name of the layer in its JSON description. 
 
 For example, a self-driving car model might classify three kinds of things in an image (well, hopefully more than that!). The *outputs* field for this model might look like:
 
@@ -648,7 +651,7 @@ NSNumber *scalarOutput = inference[@"scalar-output"];
 <a name="options-field"></a>
 #### The Options Field
 
-You may optionally included an *options* field in the json description. It contains properties that are not required by TensorIO to perform inference but which are used in application specific ways. TensorIO will ignore these properties but you may inspect them from application space to change your product's behavior when a particular model is running.
+You may optionally included an *options* field in the JSON description. It contains properties that are not required by TensorIO to perform inference but which are used in application specific ways. TensorIO will ignore these properties but you may inspect them from application space to change your product's behavior when a particular model is running.
 
 Two options are currently supported: *device\_position* and *output\_format*:
 

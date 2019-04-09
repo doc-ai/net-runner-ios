@@ -1,8 +1,8 @@
 //
-//  TIOPixelBuffer.mm
+//  TIOPixelBuffer+TIOTFLiteData.mm
 //  TensorIO
 //
-//  Created by Philip Dow on 8/3/18.
+//  Created by Phil Dow on 4/8/19.
 //  Copyright © 2018 doc.ai (http://doc.ai)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,27 +18,19 @@
 //  limitations under the License.
 //
 
-#import "TIOPixelBuffer.h"
+#import "TIOPixelBuffer+TIOTFLiteData.h"
 
 #import "TIOPixelBufferLayerDescription.h"
 #import "TIOPixelBufferToTensorHelpers.h"
 #import "TIOVisionPipeline.h"
 
-@implementation TIOPixelBuffer
+@interface TIOPixelBuffer (TIOTFLiteData_Protected)
 
-- (instancetype)initWithPixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation {
-    if (self = [super init]) {
-        _orientation = orientation;
-        _pixelBuffer = pixelBuffer;
-        CVPixelBufferRetain(_pixelBuffer);
-    }
-    return self;
-}
+@property (readwrite) CVPixelBufferRef transformedPixelBuffer;
 
-- (void)dealloc {
-    CVPixelBufferRelease(_pixelBuffer);
-    CVPixelBufferRelease(_transformedPixelBuffer);
-}
+@end
+
+@implementation TIOPixelBuffer (TIOTFLiteData)
 
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
     
@@ -80,32 +72,38 @@
     // If the pixel buffer is already the right size, format, and orientation simpy copy it to the tensor.
     // Otherwise, run it through the vision pipeline
     
-    int width = (int)CVPixelBufferGetWidth(_pixelBuffer);
-    int height = (int)CVPixelBufferGetHeight(_pixelBuffer);
-    OSType pixelFormat = CVPixelBufferGetPixelFormatType(_pixelBuffer);
+    CVPixelBufferRef pixelBuffer = self.pixelBuffer;
+    CGImagePropertyOrientation orientation = self.orientation;
+    
+    CVPixelBufferRef transformedPixelBuffer;
+    
+    int width = (int)CVPixelBufferGetWidth(pixelBuffer);
+    int height = (int)CVPixelBufferGetHeight(pixelBuffer);
+    OSType pixelFormat = CVPixelBufferGetPixelFormatType(pixelBuffer);
     
     if ( width == pixelBufferDescription.shape.width
         && height == pixelBufferDescription.shape.height
         && pixelFormat == pixelBufferDescription.pixelFormat
-        && _orientation == kCGImagePropertyOrientationUp ) {
-        _transformedPixelBuffer = _pixelBuffer;
+        && orientation == kCGImagePropertyOrientationUp ) {
+        transformedPixelBuffer = pixelBuffer;
     } else {
         TIOVisionPipeline *pipeline = [[TIOVisionPipeline alloc] initWithTIOPixelBufferDescription:pixelBufferDescription];
-        _transformedPixelBuffer = [pipeline transform:self.pixelBuffer orientation:self.orientation];
+        transformedPixelBuffer = [pipeline transform:self.pixelBuffer orientation:self.orientation];
     }
     
-    CVPixelBufferRetain(_transformedPixelBuffer);
+    CVPixelBufferRetain(transformedPixelBuffer);
+    self.transformedPixelBuffer = transformedPixelBuffer;
     
     if ( description.isQuantized ) {
         TIOCopyCVPixelBufferToTensor(
-            _transformedPixelBuffer,
+            transformedPixelBuffer,
             (uint8_t *)buffer,
             pixelBufferDescription.shape,
             pixelBufferDescription.normalizer
         );
     } else {
         TIOCopyCVPixelBufferToTensor(
-            _transformedPixelBuffer,
+            transformedPixelBuffer,
             (float_t *)buffer,
             pixelBufferDescription.shape,
             pixelBufferDescription.normalizer
