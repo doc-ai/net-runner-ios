@@ -10,10 +10,6 @@
 #endif
 #endif
 
-#import "NSArray+TIOData.h"
-#import "NSData+TIOData.h"
-#import "NSDictionary+TIOData.h"
-#import "NSNumber+TIOData.h"
 #import "TIOData.h"
 #import "TIOPixelBuffer.h"
 #import "TIOVector.h"
@@ -33,13 +29,19 @@
 #import "TIOQuantization.h"
 #import "TIOVisionModelHelpers.h"
 #import "TIOVisionPipeline.h"
-#import "TIOTFLiteErrors.h"
-#import "TIOTFLiteModel.h"
 #import "NSArray+TIOExtensions.h"
 #import "NSDictionary+TIOExtensions.h"
 #import "TIOCVPixelBufferHelpers.h"
 #import "TIOObjcDefer.h"
 #import "UIImage+TIOCVPixelBufferExtensions.h"
+#import "NSArray+TIOTFLiteData.h"
+#import "NSData+TIOTFLiteData.h"
+#import "NSDictionary+TIOTFLiteData.h"
+#import "NSNumber+TIOTFLiteData.h"
+#import "TIOPixelBuffer+TIOTFLiteData.h"
+#import "TIOTFLiteData.h"
+#import "TIOTFLiteErrors.h"
+#import "TIOTFLiteModel.h"
 
 FOUNDATION_EXPORT double TensorIOVersionNumber;
 FOUNDATION_EXPORT const unsigned char TensorIOVersionString[];

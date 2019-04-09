@@ -1,5 +1,5 @@
 //
-//  NSArray+TIOData.mm
+//  NSArray+TIOTFLiteData.mm
 //  TensorIO
 //
 //  Created by Philip Dow on 8/3/18.
@@ -18,11 +18,11 @@
 //  limitations under the License.
 //
 
-#import "NSArray+TIOData.h"
+#import "NSArray+TIOTFLiteData.h"
 
 #import "TIOVectorLayerDescription.h"
 
-@implementation NSArray (TIOData)
+@implementation NSArray (TIOTFLiteData)
 
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);

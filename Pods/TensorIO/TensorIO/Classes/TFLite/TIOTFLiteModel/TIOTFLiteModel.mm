@@ -32,15 +32,17 @@
 #import "TIOModelBundle.h"
 #import "TIOTFLiteErrors.h"
 #import "TIOData.h"
+#import "TIOTFLiteData.h"
 #import "TIOLayerInterface.h"
 #import "TIOLayerDescription.h"
 #import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
 #import "TIOPixelBuffer.h"
-#import "NSArray+TIOData.h"
-#import "NSNumber+TIOData.h"
-#import "NSData+TIOData.h"
-#import "NSDictionary+TIOData.h"
+#import "NSArray+TIOTFLiteData.h"
+#import "NSNumber+TIOTFLiteData.h"
+#import "NSData+TIOTFLiteData.h"
+#import "NSDictionary+TIOTFLiteData.h"
+#import "TIOPixelBuffer+TIOTFLiteData.h"
 #import "NSArray+TIOExtensions.h"
 #import "TIOModelJSONParsing.h"
 
@@ -434,7 +436,7 @@ static NSString * const kTensorTypeImage = @"image";
                 * pixelBufferDescription.shape.channels
                 * byteSize;
             
-            [input getBytes:tensor length:byteCount description:pixelBufferDescription];
+            [(id<TIOTFLiteData>)input getBytes:tensor length:byteCount description:pixelBufferDescription];
             
         } caseVector:^(TIOVectorLayerDescription *vectorDescription) {
             
@@ -446,7 +448,7 @@ static NSString * const kTensorTypeImage = @"image";
                 = vectorDescription.length
                 * byteSize;
             
-            [input getBytes:tensor length:byteCount description:vectorDescription];
+            [(id<TIOTFLiteData>)input getBytes:tensor length:byteCount description:vectorDescription];
         }];
 }
 

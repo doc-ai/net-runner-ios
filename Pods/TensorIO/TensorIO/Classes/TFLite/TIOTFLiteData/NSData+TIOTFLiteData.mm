@@ -1,5 +1,5 @@
 //
-//  NSData+TIOData.mm
+//  NSData+TIOTFLiteData.mm
 //  TensorIO
 //
 //  Created by Philip Dow on 8/3/18.
@@ -18,11 +18,11 @@
 //  limitations under the License.
 //
 
-#import "NSData+TIOData.h"
+#import "NSData+TIOTFLiteData.h"
 
 #import "TIOVectorLayerDescription.h"
 
-@implementation NSData (TIOData)
+@implementation NSData (TIOTFLiteData)
 
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
