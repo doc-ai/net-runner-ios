@@ -1,8 +1,8 @@
 //
-//  NSData+TIOData.h
+//  NSNumber+TIOTFLiteData.h
 //  TensorIO
 //
-//  Created by Philip Dow on 8/3/18.
+//  Created by Philip Dow on 8/4/18.
 //  Copyright © 2018 doc.ai (http://doc.ai)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,67 +21,55 @@
 #import <Foundation/Foundation.h>
 
 #import "TIOLayerDescription.h"
-#import "TIOData.h"
+#import "TIOTFLiteData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * An `NSData` object may be an input to a tensor or an output from a tensor.
- *
- * The underlying bytes will be supplied directly to or accepted directly from a tensor.
- * NSData already implements both:
- *
- * @code
- * - (instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length
- * - (void)getBytes:(void *)buffer length:(NSUInteger)length`.
- * @endcode
- *
- * So we just pass initialization to those methods without making any assumptions about the type
- * of the data (`float_t` or `uint8_t`).
+ * An `NSNumber` can provide a single value to a TFLite tensor or accepts a
+ * single value from a TFLite tensor.
  */
 
-@interface NSData (TIOData) <TIOData>
+@interface NSNumber (TIOTFLiteData) <TIOTFLiteData>
 
 /**
- * Initializes an `NSData` object with bytes from a tensor.
+ * Initializes an `NSNumber` with bytes from a TFLite tensor.
  *
  * Bytes are copied according to the following rules, with information about quantization taken
  * from the description:
  *
- * - If the layer is unquantized, the tensor's bytes are copied directly into a data object
- *   (the bytes are implicitly interpreted as `float_t` values).
+ * - If the layer is unquantized, the tensor's bytes are copied directly into a numeric object
+ *   (the bytes are implicitly interpreted as `float_t` values)
  *
  * - If the layer is quantized and no dequantizer block is provided, the tensor's bytes are copied
- *   directly into a data object (the bytes are implicitly interpreted as `uint8_t` values).
+ *   directly into a numeric object (the bytes are implicitly interpreted as `uint8_t` values)
  *
  * - If the layer is quantized and a dequantizer block is provided, the tensor's bytes are
  *   interpreted as `uint8_t` values, passed to the dequantizer block, and the resulting `float_t`
- *   bytes are copied into a data object.
+ *   bytes are copied into a numeric object
  *
  * @param bytes The output buffer to read from.
  * @param length The length of the buffer.
  * @param description A description of the data this buffer produces.
  *
- * @return instancetype An instance of `NSData`.
+ * @return instancetype An instance of `NSNumber`.
  */
 
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
 
 /**
- * Request to fill a tensor with bytes.
+ * Request to fill a TFLite tensor with bytes.
  *
  * Bytes are copied according to the following rules, with information about quantization taken
  * from the description:
  *
- * - If the layer is unquantized, the data's bytes are copied directly to the buffer (and
- *   implicitly interpreted as `float_t` values).
+ * - If the layer is unquantized, the number's `float_t` value is copied directly to the buffer
  *
- * - If the layer is quantized and no quantizer block is provided, the data's bytes are copied
- *   directly to the buffer (and implicitly interpreted as `uint8_t` values).
+ * - If the layer is quantized and no quantizer block is provided, the number's `uint8_t` value is
+ *   copied directly to the buffer
  *
- * - If the layer is quantized and a quantizer block is provided, the data's bytes are interpreted
- *   as `float_t` values, passed to the quantizer block, and the `uint8_t` values returned from it
- *   are copied to the buffer.
+ * - If the layer is quantized and a quantizer block is provided, the number's `float_t` vlaue
+ *   is passed to the quantizer block and the `uint8_t` value it returns is copied to the buffer
  *
  * @param buffer The input buffer to copy bytes to.
  * @param length The length of the input buffer.

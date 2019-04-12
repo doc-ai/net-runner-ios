@@ -1,5 +1,5 @@
 //
-//  NSDictionary+TIOData.h
+//  NSDictionary+TIOTFLiteData.h
 //  TensorIO
 //
 //  Created by Philip Dow on 8/6/18.
@@ -21,23 +21,24 @@
 #import <Foundation/Foundation.h>
 
 #import "TIOLayerDescription.h"
-#import "TIOData.h"
+#import "TIOTFLiteData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * `NSDictionary` conforms to `TIOData` so that it may be passed as input to a model and returned
- * as output from a model.
+ * `NSDictionary` conforms to `TIOData` so that it may be passed as input to a
+ * model and returned as output from a model.
  *
  * @warning
- * A dictionary can neither provide bytes directly to nor capture bytes directly from a tensor.
- * Instead the named entries of the dictionary must be able to do so.
+ * A dictionary can neither provide bytes directly to nor capture bytes directly
+ * from a TFLite tensor. Instead the named entries of the dictionary must be able
+ * to do so.
  */
 
-@interface NSDictionary (TIOData) <TIOData>
+@interface NSDictionary (TIOTFLiteData) <TIOTFLiteData>
 
 /**
- * Initializes an `NSDictionary` object with bytes from a tensor.
+ * Initializes an `NSDictionary` object with bytes from a TFLite tensor.
  *
  * @param bytes The output buffer to read from.
  * @param length The length of the buffer.
@@ -51,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
 
 /**
- * Request to fill a tensor with bytes.
+ * Request to fill a TFLite tensor with bytes.
  *
  * @param buffer The input buffer to copy bytes to.
  * @param length The length of the input buffer.

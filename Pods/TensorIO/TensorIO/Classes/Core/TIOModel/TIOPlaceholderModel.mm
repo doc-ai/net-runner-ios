@@ -27,7 +27,6 @@
 #import "TIOLayerDescription.h"
 #import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
-#import "NSDictionary+TIOData.h"
 #import "TIOModelJSONParsing.h"
 
 static NSString * const kTensorTypeVector = @"array";

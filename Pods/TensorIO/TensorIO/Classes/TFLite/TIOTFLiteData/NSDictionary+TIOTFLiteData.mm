@@ -1,5 +1,5 @@
 //
-//  NSDictionary+TIOData.mm
+//  NSDictionary+TIOTFLiteData.mm
 //  TensorIO
 //
 //  Created by Philip Dow on 8/6/18.
@@ -18,9 +18,9 @@
 //  limitations under the License.
 //
 
-#import "NSDictionary+TIOData.h"
+#import "NSDictionary+TIOTFLiteData.h"
 
-@implementation NSDictionary (TIOData)
+@implementation NSDictionary (TIOTFLiteData)
 
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
     NSAssert(NO, @"This method is unimplemented. A dictionary cannot be constructed directly from a tensor.");
