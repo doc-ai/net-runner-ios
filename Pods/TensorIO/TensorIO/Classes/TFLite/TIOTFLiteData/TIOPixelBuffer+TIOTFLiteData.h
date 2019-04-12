@@ -1,8 +1,8 @@
 //
-//  TIOData.h
+//  TIOPixelBuffer+TIOTFLiteData.h
 //  TensorIO
 //
-//  Created by Philip Dow on 8/3/18.
+//  Created by Phil Dow on 4/8/19.
 //  Copyright © 2018 doc.ai (http://doc.ai)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,33 +18,31 @@
 //  limitations under the License.
 //
 
+
 #import <Foundation/Foundation.h>
 
 #import "TIOLayerDescription.h"
+#import "TIOPixelBuffer.h"
+#import "TIOTFLiteData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- * A `TIOData` is any data type that knows how to provide bytes to a input tensor and how to
- * read bytes from an output tensor.
- */
-
-@protocol TIOData <NSObject>
+@interface TIOPixelBuffer (TIOTFLiteData) <TIOTFLiteData>
 
 /**
- * Initializes a conforming object with bytes from a tensor.
+ * Initializes `TIOPixelBuffer` with bytes from a TFLite tensor.
  *
  * @param bytes The output buffer to read from.
  * @param length The length of the buffer.
  * @param description A description of the data this buffer produces.
  *
- * @return instancetype An instance of the conforming data type.
+ * @return instancetype An instance of `TIOPixelBuffer`
  */
 
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
 
 /**
- * Requests that a conforming object fill the tensor with bytes.
+ * Request to fill a TFLite tensor with bytes.
  *
  * @param buffer The input buffer to copy bytes to.
  * @param length The length of the input buffer.

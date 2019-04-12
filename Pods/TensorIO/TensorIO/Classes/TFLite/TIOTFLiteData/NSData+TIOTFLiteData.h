@@ -1,5 +1,5 @@
 //
-//  NSArray+TIOData.h
+//  NSData+TIOTFLiteData.h
 //  TensorIO
 //
 //  Created by Philip Dow on 8/3/18.
@@ -21,33 +21,42 @@
 #import <Foundation/Foundation.h>
 
 #import "TIOLayerDescription.h"
-#import "TIOData.h"
+#import "TIOTFLiteData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * An array of numbers, also typed as a `TIOVector`, is able to provide bytes to or capture bytes
- * from a tensor.
+ * An `NSData` object may be an input to a TFLite tensor or an output from a TFLite tensor.
+ *
+ * The underlying bytes will be supplied directly to or accepted directly from a
+ * TFLite tensor. NSData already implements both:
+ *
+ * @code
+ * - (instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length
+ * - (void)getBytes:(void *)buffer length:(NSUInteger)length`.
+ * @endcode
+ *
+ * So we just pass initialization to those methods without making any assumptions about the type
+ * of the data (`float_t` or `uint8_t`).
  */
 
-@interface NSArray (TIOData) <TIOData>
+@interface NSData (TIOTFLiteData) <TIOTFLiteData>
 
 /**
- * Initializes an `NSArray` object with bytes from a tensor.
+ * Initializes an `NSData` object with bytes from a TFLite tensor.
  *
  * Bytes are copied according to the following rules, with information about quantization taken
  * from the description:
  *
- * - If the layer is unquantized, the tensor's bytes are copied directly into numeric values and
- *   added to the resulting array (the bytes are implicitly interpreted as `float_t` values)
+ * - If the layer is unquantized, the tensor's bytes are copied directly into a data object
+ *   (the bytes are implicitly interpreted as `float_t` values).
  *
  * - If the layer is quantized and no dequantizer block is provided, the tensor's bytes are copied
- *   directly into numeric values and added to the resulting array (the bytes are implicitly
- *   interpreted as `uint8_t` values)
+ *   directly into a data object (the bytes are implicitly interpreted as `uint8_t` values).
  *
  * - If the layer is quantized and a dequantizer block is provided, the tensor's bytes are
  *   interpreted as `uint8_t` values, passed to the dequantizer block, and the resulting `float_t`
- *   bytes are copied into numeric values and added to the resulting array
+ *   bytes are copied into a data object.
  *
  * @param bytes The output buffer to read from.
  * @param length The length of the buffer.
@@ -59,20 +68,20 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
 
 /**
- * Request to fill a tensor with bytes.
+ * Request to fill a TFLite tensor with bytes.
  *
  * Bytes are copied according to the following rules, with information about quantization taken
  * from the description:
  *
- * - If the layer is unquantized, the bytes of the array's numeric entries are copied directly to
- *   the buffer (and implicitly interpreted as `float_t` values)
+ * - If the layer is unquantized, the data's bytes are copied directly to the buffer (and
+ *   implicitly interpreted as `float_t` values).
  *
- * - If the layer is quantized and no quantizer block is provided, the bytes of the array's numeric
- *   entries are copied directly to the buffer (and implicitly interpreted as `uint8_t` values)
+ * - If the layer is quantized and no quantizer block is provided, the data's bytes are copied
+ *   directly to the buffer (and implicitly interpreted as `uint8_t` values).
  *
- * - If the layer is quantized and a quantizer block is provided, the the bytes of the array's
- *   numeric entries are interpreted as `float_t` values, passed to the quantizer block, and the
- *   `uint8_t` values returned from it are copied to the buffer
+ * - If the layer is quantized and a quantizer block is provided, the data's bytes are interpreted
+ *   as `float_t` values, passed to the quantizer block, and the `uint8_t` values returned from it
+ *   are copied to the buffer.
  *
  * @param buffer The input buffer to copy bytes to.
  * @param length The length of the input buffer.
