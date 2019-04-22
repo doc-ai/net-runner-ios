@@ -24,7 +24,7 @@
 
 @implementation NSNumber (TIOTFLiteData)
 
-- (nullable instancetype)initWithBytes:(const void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+- (nullable instancetype)initWithBytes:(const void *)buffer description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
     TIODataDequantizer dequantizer = ((TIOVectorLayerDescription*)description).dequantizer;
@@ -38,7 +38,7 @@
     }
 }
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+- (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
     TIODataQuantizer quantizer = ((TIOVectorLayerDescription*)description).quantizer;

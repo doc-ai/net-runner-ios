@@ -24,29 +24,35 @@
 
 @implementation NSData (TIOTFLiteData)
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+- (nullable instancetype)initWithBytes:(const void *)bytes description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
     TIODataDequantizer dequantizer = ((TIOVectorLayerDescription*)description).dequantizer;
+    NSUInteger length = ((TIOVectorLayerDescription*)description).length;
     
     if ( description.isQuantized && dequantizer != nil ) {
-        size_t float_length = length * sizeof(float_t);
-        float_t *buffer = (float_t *)malloc(float_length);
+        size_t dest_size = length * sizeof(float_t);
+        float_t *buffer = (float_t *)malloc(dest_size);
         for ( NSInteger i = 0; i < length; i++ ) {
             ((float_t *)buffer)[i] = dequantizer(((uint8_t *)bytes)[i]);
         }
-        return [[NSData alloc] initWithBytes:buffer length:float_length];
+        NSData *data = [[NSData alloc] initWithBytes:buffer length:dest_size];
+        free(buffer);
+        return data;
     } else if ( description.isQuantized && dequantizer == nil ) {
-        return [[NSData alloc] initWithBytes:bytes length:length];
+        size_t dest_size = length * sizeof(uint8_t);
+        return [[NSData alloc] initWithBytes:bytes length:dest_size];
     } else {
-        return [[NSData alloc] initWithBytes:bytes length:length];
+        size_t dest_size = length * sizeof(float_t);
+        return [[NSData alloc] initWithBytes:bytes length:dest_size];
     }
 }
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+- (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
     TIODataQuantizer quantizer = ((TIOVectorLayerDescription*)description).quantizer;
+    NSUInteger length = ((TIOVectorLayerDescription*)description).length;
     
     if ( description.isQuantized && quantizer != nil ) {
         float_t *bytes = (float_t *)self.bytes;
@@ -54,9 +60,11 @@
             ((uint8_t *)buffer)[i] = quantizer(bytes[i]);
         }
     } else if ( description.isQuantized && quantizer == nil ) {
-        [self getBytes:buffer length:length];
+        size_t src_size = length * sizeof(uint8_t);
+        [self getBytes:buffer length:src_size];
     } else {
-        [self getBytes:buffer length:length];
+        size_t src_size = length * sizeof(float_t);
+        [self getBytes:buffer length:src_size];
     }
 }
 

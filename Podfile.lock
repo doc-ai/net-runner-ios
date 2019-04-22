@@ -5,10 +5,10 @@ PODS:
   - SSZipArchive (2.1.5)
   - SVProgressHUD (2.2.5)
   - TensorFlowLite (1.13.1)
-  - TensorIO (0.5.0):
-    - TensorIO/Core (= 0.5.0)
-  - TensorIO/Core (0.5.0)
-  - TensorIO/TFLite (0.5.0):
+  - TensorIO (0.6.1):
+    - TensorIO/Core (= 0.6.1)
+  - TensorIO/Core (0.6.1)
+  - TensorIO/TFLite (0.6.1):
     - TensorFlowLite
     - TensorIO/Core
 
@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   SSZipArchive: cefe1364104a0231268a5deb8495bdf2861f52f0
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TensorFlowLite: 8b9dc4eb32eac0f8cb660c66bca7604da56dcc5a
-  TensorIO: d0f8036476a2a1555e3c903f7011e2bc98bc0975
+  TensorIO: 953bf9ca8e987bbd372447cf0d96f6415ece459b
 
 PODFILE CHECKSUM: 7539d19b1ae6fd92db383585eab7b187e6ee6ec5
 

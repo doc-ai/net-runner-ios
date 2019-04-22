@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/TensorIO.svg?style=flat)](https://cocoapods.org/pods/TensorIO)
 [![Platform](https://img.shields.io/cocoapods/p/TensorIO.svg?style=flat)](https://cocoapods.org/pods/TensorIO)
 
-TensorIO is an Objective-C wrapper for an underlying machine learning library and currently supports TensorFlow Lite. It abstracts the work of copying bytes into and out of tensors and allows you to interract with native types instead, such as numbers, arrays, dictionaries, and pixel buffers.
+TensorIO is an Objective-C wrapper for an underlying machine learning library and currently supports TensorFlow and TensorFlow Lite. It abstracts the work of copying bytes into and out of tensors and allows you to interract with native types instead, such as numbers, arrays, dictionaries, and pixel buffers.
 
 This implementation is part of the [TensorIO project](https://doc-ai.github.io/tensorio/) with support for machine learning on iOS, Android, and React Native.
 
@@ -74,7 +74,6 @@ For the complete Objectice-C project documentation, visit [tensorio.info](https:
 		* [ A Complete Example ](#pixel-buffer-complete-example)
 * [ Advanced Usage ](#advanced-usage)
 * [ Net Runner ](#netrunner)
-* [ FAQ ](#faq)
 
 <a name="overview"></a>
 ## Overview
@@ -83,9 +82,9 @@ TensorIO supports many kinds of models with multiple input and output layers of 
 
 Instead, TensorIO relies on a JSON description of the model that you provide. During inference, the library matches incoming data to the model layers that expect it, performing any transformations that are needed and ensuring that the underlying bytes are copied to the right place.  Once inference is complete, the library copies bytes from the output tensors back to native Objective-C types.
 
-The built-in class for working with TensorFlow Lite (TF Lite) models, `TIOTFLiteModel`, includes support for multiple input and output layers; single-valued, vectored, matrix, and image data; pixel normalization and denormalization; and quantization and dequantization of data.
+The built-in class for working with TensorFlow Lite (TF Lite) models, `TIOTFLiteModel`, includes support for multiple input and output layers; single-valued, vectored, matrix, and image data; pixel normalization and denormalization; and quantization and dequantization of data. In case you require a completely custom interface to a model you may specify your own class in the JSON description, and TensorIO will use it in place of the default class.
 
-In case you require a completely custom interface to a model you may specify your own class in the JSON description, and TensorIO will use it in place of the default class.
+Although TensorIO supports both full TensorFlow and TF Lite models, this README will refer to TFLite throughout. Except for small differences in support of data types (`uint8_t`, `float32_t`, etc), the interface is the same.
 
 <a name="example"></a>
 ## Example
@@ -109,16 +108,26 @@ TensorIO requires iOS 9.3+
 TensorIO is available through [CocoaPods](https://cocoapods.org). Add the following to your Podfile:
 
 ```ruby
-pod 'TensorIO'
 pod 'TensorIO/TFLite'
 ```
 
 And run `pod install`.
 
+If you would prefer to use TensorFlow instead add the following:
+
+```ruby
+pod 'TensorIO/TensorFlow'
+```
+
 <a name="author"></a>
 ## Author
 
-Philip Dow (philip@doc.ai)
+[doc.ai](https://doc.ai/)
+
+**Principle Contributors**
+
+- [Philip Dow](https://github.com/phildow)
+- [Neeraj Kashyap](https://github.com/nkashy1)
 
 <a name="license"></a>
 ## License
@@ -154,33 +163,6 @@ Wherever you'd like to use TensorIO, add:
 @import TensorIO;
 ```
 
-Because of how Objective-C++ and Objective-C headers interract, you may only import TensorIO into implementation files. If you reference TensorIO types in your header files, forward declare them with `@class` and `@protocol` directives:
-
-**MyClass.h**
-
-```objc
-@import Foundation;
-
-@class TIOTFLiteModel;
-
-@interface MyClass: NSObject
-@property TIOTFLiteModel *model;
-@end
-```
-
-**MyClass.m**
-
-```objc
-#import "MyClass.h"
-
-@import TensorIO;
-
-@implementation MyClass
-// Do something with the model
-@end
-
-```
-
 #### Swift
 
 Make sure `use_frameworks!` is uncommented in your Podfile, and wherever you'd like to use TensorIO, simply import it:
@@ -210,9 +192,9 @@ NSNumber *price = output[@"price"];
 
 **TIOData**
 
-TensorIO models take inputs and produce outputs of type `TIOData`. This is a protocol that defines two required methods. One method copies bytes from the conforming class to an input tensor's buffer, and the other instantiates an object from the bytes in an output tensor's buffer.
+TensorIO models take inputs and produce outputs of type `TIOData`. This is a generic protocol that simply marks native data types as available to TensorIO models. A backend that supports a specific underlying machine learning library extends this protocol and implements methods that copy data into and out of tensors.
 
-The TensorIO library includes implementations of this protocol for the following classes:
+TensorIO backends such as those for TensorFlow and TFLite will always include implementations of this protocol for the following classes:
 
 - NSNumber
 - NSData
@@ -241,18 +223,18 @@ TensorIO currently includes support for TensorFlow Lite (TF Lite) models. Althou
 
 A TF Lite model is contained in a single *.tflite* file. All the operations and weights required to perform inference with a model are included in this file.
 
-However, a model may have other assets that are required to interpret the resulting inference. For example, an MNIST image classification model will output 1000 values corresponding to the softmax probability that a particular object has been recognized in an image. The model doesn't match probabilities to their labels, for example "rocking chair" or "lakeside", it only outputs numeric values. It is left to us to associate the numeric values with their labels.
+However, a model may have other assets that are required to interpret the resulting inference. For example, an ImageNet image classification model will output 1000 values corresponding to the softmax probability that a particular object has been recognized in an image. The model doesn't match probabilities to their labels, for example "rocking chair" or "lakeside", it only outputs numeric values. It is left to us to associate the numeric values with their labels.
 
 Rather than requiring a developer to do this in application space and consequently store the lables in a text file or in some code somewhere in the application, TensorIO wraps models in a bundle and allows model builders to include additional assets in that bundle.
 
-A TensorIO bundle is just a folder with an extension that identifies it as such. For TF Lite models, the extension is *.tfbundle*. Assets may be included in this bundle and then referenced from model specific code. 
+A TensorIO bundle is just a folder with an extension that identifies it as such: *.tiobundle*. Assets may be included in this bundle and then referenced from model specific code. 
 
-*When you use your own models with TensorIO, make sure to put them in a folder with the .tfbundle extension.*
+*When you use your own models with TensorIO, make sure to put them in a folder with the .tiobundle extension.*
 
 A TensorIO TF Lite bundle has the following directory structure:
 
 ```
-mymodel.tfbundle
+mymodel.tiobundle
   - model.tflite
   - model.json
   - assets
@@ -295,17 +277,17 @@ TIOTFLiteModel *model = [TIOTFLiteModel modelWithBundleAtPath:path];
 <a name="model-json"></a>
 ### The Model JSON File
 
-One of TensorIO's goals is to reduce the amount of new code required to integrate TF Lite models into an application.
+One of TensorIO's goals is to reduce the amount of new code required to integrate models into an application.
 
-The primary work of using a TF Lite model on iOS involves copying bytes of the right length to the right place. TF Lite is a C++ library, and the input and output tensors are exposed as C style buffers. In order to use a model we must copy byte representations of our input data into these buffers, ask TensorFlow to perform inference on those bytes, and then extract the byte representations back out of them.
+The primary work of using a model on iOS involves copying bytes of the right length to the right place. TF Lite, for example, is a C++ library, and the input and output tensors are exposed as C style buffers. In order to use a model we must copy byte representations of our input data into these buffers, ask the library to perform inference on those bytes, and then extract the byte representations back out of them.
 
-Model interfaces can vary widely. Some models may have a single input and single output layer, others multiple inputs with a single output, or vice versa. The layers may be of varying shapes, with some layers taking single values, others an array of values, and yet others taking matrices or volumes of higher dimensions. Some models may work on four byte, floating point representations of data, while others use single byte, unsigned integer representations (these are called *quantized* models, more on them below).
+Model interfaces can vary widely. Some models may have a single input and single output layer, others multiple inputs with a single output, or vice versa. The layers may be of varying shapes, with some layers taking single values, others an array of values, and yet others taking matrices or volumes of higher dimensions. Some models may work on four byte, floating point representations of data, while others use single byte, unsigned integer representations. The latter are called *quantized* models, more on them below.
 
 Consequently, every time we want to try a different model, or even the same model with a slightly different interface, we must modify the code that moves bytes into and out of  buffers.
 
 TensorIO abstracts the work of copying bytes into and out of tensors and replaces that imperative code with a declarative language you already know: JSON.
 
-The *model.json* file in a TensorIO bundle contains metadata about your underlying model as well as a description of the model's input and output layers. TensorIO parses those descriptions and then, when you perform inference with the model, internally handles all the byte copying operations, taking into account layer shapes, data sizes, data transformations, and even output labeling. All you have to do is provide data to the model and ask for the data out of it.
+The *model.json* file in a TensorIO bundle contains metadata about the underlying model as well as a description of the model's input and output layers. TensorIO parses those descriptions and then, when you perform inference with the model, internally handles all the byte copying operations, taking into account layer shapes, data sizes, data transformations, and even output labeling. All you have to do is provide data to the model and ask for the data out of it.
 
 The *model.json* file is the primary point of interaction with the TensorIO library. Any code you write to prepare data for a model and read data from a model will depend on a description of the model's input and output layers that you provide in this file.
 
@@ -318,16 +300,17 @@ The *model.json* file has the following basic structure:
 
 ```json
 {
-  "name": "name of your model",
-  "details": "description of your model",
+  "name": "ModelName",
+  "details": "Description of your model",
   "id": "unique-identifier",
   "version": "1",
-  "author": "you",
+  "author": "doc.ai",
   "license": "MIT",
   "model": {
     "file": "model.tflite",
     "quantized": false,
-    "type": "image.classification.imagenet"
+    "type": "image.classification.imagenet",
+    "backend": "tflite"
   },
   "inputs": [
     {
@@ -352,11 +335,12 @@ In addition to the model's metadata, such as name, identifier, version, etc, all
 <a name="model-field"></a>
 #### The Model Field
 
-The model field is a dictionary that itself contains two to four entries:
+The model field is a dictionary that itself contains two to five entries:
 
 ```json
 "model": {
   "file": "model.tflite",
+  "backend": "tflite",
   "quantized": false,
   "type": "image.classification.imagenet",
   "class": "MyOptionalCustomClassName"
@@ -365,9 +349,18 @@ The model field is a dictionary that itself contains two to four entries:
 
 *file*
 
-The *file* field is a string value that contains the name of your TF Lite model file. It is the file with the *.tflite* extension that resides at the top level of your model bundle folder. 
+The *file* field is a string value that contains the name of your model file. For TF Lite models it is the file with the *.tflite* extension that resides at the top level of your model bundle folder. For TensorFlow models it is the directory produced by [Estimator.export_saved_model](https://www.tensorflow.org/api_docs/python/tf/estimator/Estimator#export_saved_model) or by [tf.saved_model.simple_save](https://www.tensorflow.org/guide/saved_model#simple_save) and which contains the saved_model.pb file and a variables directory. This folder must reside at the top level of your model bundle.
 
 This field is required.
+
+*backend*
+
+TensorIO supports multiple machine learning libraries, or backends. The *backend* field is a string that identifies which backend to use for this model. TensorFlow and TF Lite are currently supported, and this field should indicate which one to use, either of:
+
+- tflite
+- tensorflow
+
+This field is required. 
 
 *quantized*
 
@@ -383,7 +376,7 @@ This field is optional.
 
 *class*
 
-The *class* field is a string value that contains the Objective-C class name of the custom class you would like to use with your model. It must conform to the `TIOModel` protocol and ship with your application. A custom class is not required, and TensorIO will use `TIOTFLiteModel` for TensorFlow Lite models if you do not provide one.
+The *class* field is a string value that contains the Objective-C class name of the custom class you would like to use with your model. It must conform to the `TIOModel` protocol and ship with your application. A custom class is not required, and TensorIO will use `TIOTFLiteModel` by default and assume you are using a TensorFlow Lite backend. If you are using the full TensorFlow build you must currently set the custom class name to `TIOTensorFlowModel`.
 
 This field is optional.
 
@@ -398,14 +391,14 @@ A basic entry in this array will have the following fields:
 {
   "name": "layer-name",
   "type": "array",
+  "dtype": "float32",
   "shape": [224]
 }
 ```
 
 *name*
 
-The *name* field is a string value that names this input tensor. It does not have to match the name of a tensor in the underlying model but is rather a reference in application space in case you would like to pass an `NSDictionary` as input to a model's `runOn:` method.
-
+The *name* field is a string value that names this input tensor. It should match the name of a tensor in the underlying model and functions as a reference in application space in case you would like to pass an `NSDictionary` as input to a model's `runOn:` method.
 This field is required.
 
 *type*
@@ -419,24 +412,45 @@ Use the *array* type for shapes of any dimension, including single values, vecto
 
 This field is required.
 
+*dtype*
+
+The *dtype* field indicates what type of data this input accepts and will correspond, for example, to a primitive C type or a TensorFlow dtype. The following data types are supported:
+
+- *uint8*
+- *float32*
+- *int32*
+- *int64*
+
+Note that complete support for this field is in development and that not all backends support all datatypes. TFLite supports only uint8 and float32 data types, and this field is ignored. Quantized models automatically use uint8 types and unquantized models float32 types. The full TensorFlow backend, on the other hand, supports all four types, but if a type is not specified it defaults to float32.
+
+This field is currently optional. The *float32* is assumed in most cases.
+
 *shape*
 
 The *shape* field is an array of integer values that describe the size of the input layer, ignoring whether the layer expects four byte or single byte values. Common shapes might include:
 
 ```json
 // a single-valued input
-"shape": [1] 			
+"shape": [1]
 
 // a vector with 16 values
-"shape": [16]			
+"shape": [1,16]
 
 // a matrix with 32 rows and 100 columns
-"shape": [32,100]		
+"shape": [32,100]
 
 // a three dimensional image volume with a width of 224px, 
 // a height of 224px, and 3 channels (RGB)
-"shape": [224,224,3]	
+"shape": [224,224,3]
 ```
+
+If you are using TensorFlow models with tensors whose first dimension takes a variable batch size, use a `-1` for the first dimension of the shape:
+
+```json
+"shape": [-1,224,224,3]	
+```
+
+The shape should accurately reflect the shape of the underlying tensor, even though in many cases what matters is the total byte count. For example, a row vector with sixteen elements would have a shape of `[1,16]` while a column vector one of `[16,1]`.
 
 This field is required.
 
@@ -465,7 +479,7 @@ There are additional fields for handling data transformations such as quantizati
 
 **Both Order and Name Matter**
 
-Input to a `TIOModel` may be organized by either index or name, so that both the order of the dictionaries in the *inputs* array and their names are significant. TF Lite tensors are accessed by index, but internally TensorIO associates a name with each index in case you prefer to send `NSDictionary` inputs to your models.
+Input to a `TIOModel` may be organized by either index or name, so that both the order of the dictionaries in the *inputs* array and their names are significant. TF Lite tensors are accessed by index, but internally TensorIO associates a name with each index in case you prefer to send `NSDictionary` inputs to your models. TensorFlow models use the name exclusively, which is why names must match the names of underlying tensors.
 
 **Example**
 
@@ -524,6 +538,7 @@ The *outputs* field is an array of dictionaries that describe the output layers 
   {
     "name": "vector-output",
     "type": "array",
+    "dtype": "float32",
     "shape": [8]
   }
 ]
@@ -544,17 +559,17 @@ An *array* type output optionally supports the presence of a *labels* field for 
 ]
 ```
 
-The value of this field is a string which corresponds to the name of a text file in the bundle's *assets* directory.  The *.tfbundle* directory structure for this model might look like:
+The value of this field is a string which corresponds to the name of a text file in the bundle's *assets* directory.  The *.tiobundle* directory structure for this model might look like:
 
 ```
-mymodel.tfbundle
+mymodel.tiobundle
   - model.json
   - model.tflite
   - assets
     - labels.txt
 ```
 
-Each line of the *labels.txt *text file contains the name of the classification for that line number index in the layer's output. When a *labels* field is present, TensorIO internally maps labels to their numeric outputs and returns an `NSDictionary` representation of that mapping, rather than a simple `NSArray` of values. Let's see what that looks like.
+Each line of the *labels.txt* text file contains the name of the classification for that line number index in the layer's output. When a *labels* field is present, TensorIO internally maps labels to their numeric outputs and returns an `NSDictionary` representation of that mapping, rather than a simple `NSArray` of values. Let's see what that looks like.
 
 **Model Outputs**
 
@@ -673,10 +688,10 @@ For example, Net Runner knows how to interpret *"image.classification.nodecay"*.
 
 Let's see a complete example of a model with two input layers and two output layers. The model takes two vectors, the first with 4 values and the second with 8 values, and outputs two vectors, the first with 3 values and the second with 6.
 
-Our *tfbundle* folder will have the following contents:
+Our *tiobundle* folder will have the following contents:
 
 ```
-mymodel.tfbundle
+mymodel.tiobundle
   - model.json
   - model.tflite
 ```
@@ -991,7 +1006,7 @@ Let's look at a complete example. This model is quantized and has two input laye
 The model bundle will again have two files in it:
 
 ```
-myquantizedmodel.tfbundle
+myquantizedmodel.tiobundle
   - model.json
   - model.tflite
 ```
@@ -1008,6 +1023,7 @@ Noting the value of the *model.quantized* field and the presence of *quantize* a
   "license": "Apache 2",
   "model": {
     "file": "model.tflite",
+    "backend": "tflite",
     "quantized": true
   },
   "inputs": [
@@ -1070,7 +1086,7 @@ NSArray *quxOutputs = inference[@"qux-outputs"]; // length 6 in range [-1,1]
 <a name="quantization-without-quantization"></a>
 #### Quantized Models without Quantization
 
-The *quantize* field is optional for *array* input layers, even when the model is quantized. When you use a quantized model without including a *quantize* field, it is up to you to ensure that the data you send to TensorIO for inference is already quantized and that you treat output data as still quantized. 
+The *quantize* field is optional for *array* input layers, even when the model is quantized. When you use a quantized model without including a *quantize* field, it is up to you to ensure that the data you send to TensorIO for inference is already quantized and that you treat output data as quantized. 
 
 This may be the case when your input and output data is only ever in the range of [0,255], for example pixel data, or when you are quantizing the floating point inputs yourself before sending them to the model.
 
@@ -1264,7 +1280,7 @@ Let's look at a complete example. This is the unquantized MobileNetV2 image clas
 The model bundle folder might look something like:
 
 ```
-mobilenet-model.tfbundle
+mobilenet-model.tiobundle
   - model.json
   - model.tflite
   - assets
@@ -1283,6 +1299,7 @@ The *model.json* file might look like:
   "license": "Apache License. Version 2.0 http://www.apache.org/licenses/LICENSE-2.0",
   "model": {
     "file": "model.tflite",
+    "backend": "tflite",
     "quantized": false,
   },
   "inputs": [
@@ -1334,8 +1351,3 @@ You may also refer to [tensorio.info](https://tensorio.info/) for the complete O
 ### Net Runner
 
 For an example of TensorIO in action check out [Net Runner](https://github.com/doc-ai/net-runner-ios), our iOS environment for evaluating computer vision machine learning models.
-
-<a name="faq"></a>
-### FAQ
-
-The FAQ is forthcoming.
