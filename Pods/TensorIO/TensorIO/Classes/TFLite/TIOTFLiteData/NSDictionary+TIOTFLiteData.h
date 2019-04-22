@@ -26,7 +26,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- * `NSDictionary` conforms to `TIOData` so that it may be passed as input to a
+ * `NSDictionary` conforms to `TIOTFLiteData` so that it may be passed as input to a
  * model and returned as output from a model.
  *
  * @warning
@@ -41,7 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
  * Initializes an `NSDictionary` object with bytes from a TFLite tensor.
  *
  * @param bytes The output buffer to read from.
- * @param length The length of the buffer.
  * @param description A description of the data this buffer produces.
  *
  * @return instancetype An empty dictionary.
@@ -49,19 +48,18 @@ NS_ASSUME_NONNULL_BEGIN
  * @warning This method is unimplemented. A dictionary cannot be constructed directly from a tensor.
  */
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
+- (nullable instancetype)initWithBytes:(const void *)bytes description:(id<TIOLayerDescription>)description;
 
 /**
  * Request to fill a TFLite tensor with bytes.
  *
  * @param buffer The input buffer to copy bytes to.
- * @param length The length of the input buffer.
  * @param description A description of the data this buffer expects.
  *
  * @warning This method is unimplemented. A dictionary cannot provide bytes directly to a tensor.
  */
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
+- (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description;
 
 @end
 

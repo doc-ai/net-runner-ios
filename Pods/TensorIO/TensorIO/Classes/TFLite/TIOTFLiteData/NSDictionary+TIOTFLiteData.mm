@@ -22,12 +22,12 @@
 
 @implementation NSDictionary (TIOTFLiteData)
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+- (nullable instancetype)initWithBytes:(const void *)bytes description:(id<TIOLayerDescription>)description {
     NSAssert(NO, @"This method is unimplemented. A dictionary cannot be constructed directly from a tensor.");
     return [self init];
 }
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+- (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description {
     NSAssert(NO, @"This method is unimplemented. Tensor bytes cannot be captured from a dictionary.");
 }
 

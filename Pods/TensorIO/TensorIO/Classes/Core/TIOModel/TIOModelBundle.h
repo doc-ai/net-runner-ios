@@ -26,35 +26,38 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TIOModel;
 
 /**
- * The file extension used to identify a TensorIO bundle, currently '.tfbundle'.
+ * The file extension used to identify a TensorIO tensorflow or tensorflow lite
+ * bundle, currently '.tfbundle'. This bundle extension is deprecated. Use
+ * `TIOModelBundleExtension` instead and indicate the desired backend in the
+ * model.json's model.backend field.
  */
 
-extern NSString * const kTFModelBundleExtension;
+extern NSString * const TIOTFModelBundleExtension __attribute__((deprecated));
+
+/**
+ * The file extension used to identify a TensorIO bundle, currently '.tiobundle'.
+ */
+
+extern NSString * const TIOModelBundleExtension;
 
 /**
  * The name of the file inside a TensorIO bundle that contains the model spec, currently 'model.json'.
  */
 
-extern NSString * const kTFModelInfoFile;
-
-/**
- * The default classname for use with TensorFlow Lite models, currently `TIOTFLiteModel`.
- */
-
-extern NSString * const kTFLiteModelClassName;
+extern NSString * const TIOModelInfoFile;
 
 /**
  * The name of the directory inside a TensorIO bundle that contains additional data, currently 'assets'.
  */
 
-extern NSString * const kTFModelAssetsDirectory;
+extern NSString * const TIOModelAssetsDirectory;
 
 /**
  * Encapsulates information about a `TIOModel` without actually loading the model.
  *
  * A `TIOModelBundle` is used by the UI to show model details and is used to instantiate model
  * instances as a model factory. There is currently a one-to-one correspondence between a
- * `TIOModelBundle` and a .tfbundle folder in the models directory.
+ * `TIOModelBundle` and a .tiobundle folder in the models directory.
  *
  * A model bundle folder must contain at least a model.json file, which contains information
  * about the model. Some information is required, such as the identifier and name field,
@@ -135,6 +138,12 @@ extern NSString * const kTFModelAssetsDirectory;
  */
 
 @property (readonly) NSString *type;
+
+/**
+ * A string indicating the backend to use with this model
+ */
+
+@property (readonly) NSString *backend;
 
 /**
  * Options associated with the model represented by this bundle.

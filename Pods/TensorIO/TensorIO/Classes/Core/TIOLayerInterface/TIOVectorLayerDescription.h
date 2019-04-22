@@ -23,6 +23,7 @@
 #import "TIOLayerDescription.h"
 #import "TIOVector.h"
 #import "TIOQuantization.h"
+#import "TIODataTypes.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,8 +35,9 @@ NS_ASSUME_NONNULL_BEGIN
  * For example, if an input layer is a tensor of shape `(24,24,2)`, the length of the vector will be
  * `24x24x2 = 1152`.
  *
- * TensorFlow Lite models expect row major ordering of bytes, such that higher order dimensions are
- * traversed first. For example, a 2x4 matrix with the following values:
+ * TensorFlow and TensorFlow Lite models expect row major ordering of bytes,
+ * such that higher order dimensions are traversed first. For example, a 2x4 matrix
+ * with the following values:
  *
  * @code
  * [[1 2 3 4]
@@ -62,13 +64,31 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TIOVectorLayerDescription : NSObject <TIOLayerDescription>
 
 /**
+ * The layer's data type
+ *
+ * @warning
+ * There are complex interactions between backends, data types, and quantization
+ * that will be addressed and validated in later releases.
+ */
+
+@property (readonly) TIODataType dtype;
+
+/**
  * `YES` if the layer is quantized, `NO` otherwise
  */
 
 @property (readonly, getter=isQuantized) BOOL quantized;
 
 /**
- * The length of the vector in terms of its number of elements.
+ * The shape of the underlying tensor.
+ */
+
+@property (readonly) NSArray<NSNumber*> *shape;
+
+/**
+ * The length of the vector in terms of its total number of elements. Calculated
+ * as the product of the dimenions in `shape`. A dimension of -1 which acts as
+ * placeholder for a batch size will be interpreted as a 1.
  */
 
 @property (readonly) NSUInteger length;
@@ -104,15 +124,17 @@ NS_ASSUME_NONNULL_BEGIN
  * Designated initializer. Creates a vector description from the properties parsed in a model.json
  * file.
  *
- * @param length The total number of elements in this layer.
+ * @param shape The shape of the underlying tensor
+ * @param dtype The type of data this layer expects or produces
  * @param labels The indexed labels associated with the outputs of this layer. May be `nil`.
+ * @param quantized `YES` if the underlying model is quantized, `NO` otherwise
  * @param quantizer A function that transforms unquantized values to quantized input
  * @param dequantizer A function that transforms quantized output to unquantized values
  *
  * @return instancetype A read-only instance of `TIOVectorLayerDescription`
  */
 
-- (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(nullable TIODataDequantizer)dequantizer NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithShape:(NSArray<NSNumber*>*)shape dtype:(TIODataType)dtype labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(nullable TIODataDequantizer)dequantizer NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.

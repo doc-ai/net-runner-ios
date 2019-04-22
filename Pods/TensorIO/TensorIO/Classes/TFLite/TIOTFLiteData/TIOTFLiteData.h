@@ -30,23 +30,21 @@ NS_ASSUME_NONNULL_BEGIN
  * Initializes a conforming object with bytes from a TFLite tensor.
  *
  * @param bytes The output buffer to read from.
- * @param length The length of the buffer.
  * @param description A description of the data this buffer produces.
  *
  * @return instancetype An instance of the conforming data type.
  */
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
+- (nullable instancetype)initWithBytes:(const void *)bytes description:(id<TIOLayerDescription>)description;
 
 /**
  * Requests that a conforming object fill the TFLite tensor with bytes.
  *
  * @param buffer The input buffer to copy bytes to.
- * @param length The length of the input buffer.
  * @param description A description of the data this buffer expects.
  */
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
+- (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description;
 
 @end
 
