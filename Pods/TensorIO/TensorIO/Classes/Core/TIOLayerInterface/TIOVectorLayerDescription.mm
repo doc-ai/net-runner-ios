@@ -19,16 +19,20 @@
 //
 
 #import "TIOVectorLayerDescription.h"
+#import "NSArray+TIOExtensions.h"
 
 @implementation TIOVectorLayerDescription
 
-- (instancetype)initWithLength:(NSUInteger)length labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(TIODataDequantizer)dequantizer {
+- (instancetype)initWithShape:(NSArray<NSNumber*>*)shape dtype:(TIODataType)dtype labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(TIODataDequantizer)dequantizer {
     if (self=[super init]) {
-        _length = length;
+        _shape = shape;
+        _dtype = dtype;
         _labels = labels.copy;
         _quantized = quantized;
         _quantizer = quantizer;
         _dequantizer = dequantizer;
+        
+        _length = ABS(shape.product);
     }
     return self;
 }

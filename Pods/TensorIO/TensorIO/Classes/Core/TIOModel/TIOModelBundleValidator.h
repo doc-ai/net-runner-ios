@@ -51,7 +51,7 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
 /**
  * Instantiates a bundle validator with a model bundle.
  *
- * @param path A path to a .tfbundle folder that will be validated.
+ * @param path A path to a .tiobundle folder that will be validated.
  *
  * @return instancetype A validator instance.
  */

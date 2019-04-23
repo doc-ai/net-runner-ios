@@ -59,13 +59,12 @@ NS_ASSUME_NONNULL_BEGIN
  *   bytes are copied into a data object.
  *
  * @param bytes The output buffer to read from.
- * @param length The length of the buffer.
  * @param description A description of the data this buffer produces.
  *
  * @return instancetype An instance of `NSData`.
  */
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
+- (nullable instancetype)initWithBytes:(const void *)bytes description:(id<TIOLayerDescription>)description;
 
 /**
  * Request to fill a TFLite tensor with bytes.
@@ -84,11 +83,10 @@ NS_ASSUME_NONNULL_BEGIN
  *   are copied to the buffer.
  *
  * @param buffer The input buffer to copy bytes to.
- * @param length The length of the input buffer.
  * @param description A description of the data this buffer expects.
  */
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
+- (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description;
 
 @end
 

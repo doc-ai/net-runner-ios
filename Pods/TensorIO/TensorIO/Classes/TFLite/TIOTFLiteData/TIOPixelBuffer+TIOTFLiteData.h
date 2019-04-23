@@ -27,29 +27,32 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ * An `TIOPixelBuffer` can provide pixel buffers to a TFLite tensor or read
+ * pixel values from one.
+ */
+
 @interface TIOPixelBuffer (TIOTFLiteData) <TIOTFLiteData>
 
 /**
  * Initializes `TIOPixelBuffer` with bytes from a TFLite tensor.
  *
  * @param bytes The output buffer to read from.
- * @param length The length of the buffer.
  * @param description A description of the data this buffer produces.
  *
  * @return instancetype An instance of `TIOPixelBuffer`
  */
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
+- (nullable instancetype)initWithBytes:(const void *)bytes description:(id<TIOLayerDescription>)description;
 
 /**
  * Request to fill a TFLite tensor with bytes.
  *
  * @param buffer The input buffer to copy bytes to.
- * @param length The length of the input buffer.
  * @param description A description of the data this buffer expects.
  */
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description;
+- (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description;
 
 @end
 

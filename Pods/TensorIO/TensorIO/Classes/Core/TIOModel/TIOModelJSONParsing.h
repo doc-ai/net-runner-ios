@@ -24,6 +24,7 @@
 #import "TIOLayerInterface.h"
 #import "TIOQuantization.h"
 #import "TIOVisionModelHelpers.h"
+#import "TIODataTypes.h"
 
 @class TIOModelBundle;
 @class TIOLayerInterface;
@@ -96,6 +97,12 @@ TIOPixelNormalizer _Nullable TIOPixelNormalizerForDictionary(NSDictionary * _Nul
  */
 
 TIOPixelDenormalizer _Nullable TIOPixelDenormalizerForDictionary(NSDictionary * _Nullable input, NSError **error);
+
+/**
+ * Returns the data type for a given dtype string.
+ */
+
+TIODataType TIODataTypeForString(NSString * _Nullable string);
 
 // MARK: - Pixel Format
 

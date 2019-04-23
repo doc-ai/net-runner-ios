@@ -26,3 +26,4 @@ NSString * const kPrefsShowInputBuffers         = @"app.ui.show-input-buffers";
 NSString * const kPrefsShowInputBufferAlpha     = @"app.ui.show-input-buffer-alpha";
 NSString * const kPrefsEvaluateIterations       = @"app.eval.number-of-iterations";
 NSString * const kPrefsBuild7CleanedModelsDir   = @"app.build7.cleaned-models-dir";
+NSString * const kPrefsVersionLast              = @"app.version.last";

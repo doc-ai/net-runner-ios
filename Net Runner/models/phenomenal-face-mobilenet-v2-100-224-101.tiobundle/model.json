@@ -1,0 +1,50 @@
+{
+	"name": "Phenomenal Face (MobileNet 101)",
+	"details": "Sample MobileNet V2 phenomenal face model, with a width multiplier of 1.0 and an input size of 224.\n\nThe Phenomenal Face model infers your age, sex, height, and weight from a picture of your face.",
+	"id": "phenomenal-face-mobilenet-v2-100-224-v101",
+	"version": "4",
+	"author": "doc.ai",
+	"license": "Copyright © 2018 doc.ai",
+	"model": {
+		"file": "batch-5-mv2-0-00003-l.tflite",
+		"quantized": false,
+		"type": "doc.ai.image.phenomenal-face",
+		"backend": "tflite"
+	},
+	"inputs": [
+		{
+			"name": "image",
+			"type": "image",
+			"shape": [224,224,3],
+			"format": "RGB",
+			"normalize": {
+				"standard": "[0,1]"
+			}
+		}
+	],
+	"outputs": [
+		{
+			"name": "Age",
+			"type": "array",
+			"shape": [1]
+		},
+		{
+			"name": "Sex",
+			"type": "array",
+			"shape": [1]
+		},
+		{
+			"name": "Height",
+			"type": "array",
+			"shape": [1]
+		},
+		{
+			"name": "Weight",
+			"type": "array",
+			"shape": [1]
+		}
+	],
+	"options": {
+		"device_position": "front"
+	}
+}
