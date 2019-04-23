@@ -1,4 +1,5 @@
 PODS:
+  - EDSemver (0.4.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -13,6 +14,7 @@ PODS:
     - TensorIO/Core
 
 DEPENDENCIES:
+  - EDSemver
   - FMDB
   - SSZipArchive
   - SVProgressHUD
@@ -21,6 +23,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - EDSemver
     - FMDB
     - SSZipArchive
     - SVProgressHUD
@@ -28,12 +31,13 @@ SPEC REPOS:
     - TensorIO
 
 SPEC CHECKSUMS:
+  EDSemver: 2923ee872701634861fe566ad8a028ed4300989d
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   SSZipArchive: cefe1364104a0231268a5deb8495bdf2861f52f0
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TensorFlowLite: 8b9dc4eb32eac0f8cb660c66bca7604da56dcc5a
   TensorIO: 953bf9ca8e987bbd372447cf0d96f6415ece459b
 
-PODFILE CHECKSUM: 7539d19b1ae6fd92db383585eab7b187e6ee6ec5
+PODFILE CHECKSUM: 094e8cb71ecc136835b546b8c400a7e849de1973
 
 COCOAPODS: 1.6.0

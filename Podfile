@@ -11,6 +11,7 @@ target 'Net Runner' do
 
   pod 'SVProgressHUD'
   pod 'SSZipArchive'
+  pod 'EDSemver'
   pod 'FMDB'
 
   target 'Net RunnerTests' do
