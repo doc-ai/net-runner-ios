@@ -26,6 +26,7 @@
 #import "UserDefaults.h"
 
 @import SVProgressHUD;
+@import EDSemver;
 @import TensorIO;
 
 @interface AppDelegate ()
@@ -68,6 +69,12 @@
     } else {
         NSLog(@"File/directory already exists at modelsPath: %@", modelsPath);
     }
+    
+    // Perform any data or model migrations
+    
+    [self performMigrations];
+    
+    // Load models
     
     if ( ![TIOModelBundleManager.sharedManager loadModelBundlesAtPath:modelsPath error:&error] ) {
         NSLog(@"Unable to load model bundles at path %@", modelsPath);
@@ -135,5 +142,53 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+// MARK: - Migrations
+
+- (void)performMigrations {
+    NSString *currentVersionString = NSBundle.mainBundle.infoDictionary[@"CFBundleShortVersionString"];
+    NSString *lastVersionString = [NSUserDefaults.standardUserDefaults stringForKey:kPrefsVersionLast];
+    if (!lastVersionString) { lastVersionString = @"0.0.0"; }
+    
+    EDSemver *lastVersion = [EDSemver semverWithString:lastVersionString];
+    
+    EDSemver *vMajor2Minor0Patch3 = [EDSemver semverWithString:@"2.0.3"];
+    
+    if ([lastVersion compare:vMajor2Minor0Patch3] == NSOrderedAscending) {
+        NSLog(@"Performing 2.0.3 Migration (TensorIO 0.6.1)");
+        [self performMajor2Minor0Patch3Migration];
+    }
+    
+    [NSUserDefaults.standardUserDefaults setObject:currentVersionString forKey:kPrefsVersionLast];
+}
+
+- (void)performMajor2Minor0Patch3Migration {
+    
+    // Rename .tfbundle extensions to .tiobundle
+    
+    NSString *modelsPath = ModelManager.sharedManager.modelsPath;
+    NSFileManager *fm = NSFileManager.defaultManager;
+    
+    if (![fm fileExistsAtPath:modelsPath]) {
+        return;
+    }
+    
+    NSArray<NSString*> *contents = [fm contentsOfDirectoryAtPath:modelsPath error:nil];
+    for (NSString *filename in contents) {
+        if (![filename.pathExtension isEqualToString:TIOTFModelBundleExtension]) {
+            continue;
+        }
+        
+        NSString *dstFilename = [[filename stringByDeletingPathExtension] stringByAppendingPathExtension:TIOModelBundleExtension];
+        NSString *dst = [modelsPath stringByAppendingPathComponent:dstFilename];
+        NSString *src = [modelsPath stringByAppendingPathComponent:filename];
+        NSError *error;
+        
+        NSLog(@"Renamed %@ to %@", src.lastPathComponent, dst.lastPathComponent);
+        
+        if (![fm moveItemAtPath:src toPath:dst error:&error]) {
+            NSLog(@"Unable to rename %@, error: %@", src, error);
+        }
+    }
+}
 
 @end
