@@ -10,7 +10,7 @@
 	<string>mobilenet-v1-100-224-quantized</string>
 	<key>app.eval.number-of-iterations</key>
 	<integer>10</integer>
-	<key>app.tensorio.version</key>
-	<string>0.6.1</string>
+	<key>app.version.last</key>
+	<string>2.0.3</string>
 </dict>
 </plist>
