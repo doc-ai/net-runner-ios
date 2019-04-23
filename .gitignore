@@ -4,10 +4,12 @@
 Net Runner/models/*
 
 # But keep a few sample mobilenet models in the repo 
-!Net Runner/models/mobilenet_v1_1.0_224_quant.tfbundle/
-!Net Runner/models/mobilenet_v1_1.0_128_quant.tfbundle/
-!Net Runner/models/mobilenet_v1_1.0_224.tfbundle/
-!Net Runner/models/mobilenet_v2_1.4_224.tfbundle/
+!Net Runner/models/mobilenet_v1_1.0_224_quant.tiobundle/
+!Net Runner/models/mobilenet_v1_1.0_128_quant.tiobundle/
+!Net Runner/models/mobilenet_v1_1.0_224.tiobundle/
+!Net Runner/models/mobilenet_v2_1.4_224.tiobundle/
+!Net Runner/models/mobilenet_v2_1.4_224.tiobundle/
+!Net Runner/models/phenomenal-face-mobilenet-v2-100-224-101.tiobundle
 
 # macOS
 .DS_Store

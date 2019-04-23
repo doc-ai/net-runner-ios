@@ -8,7 +8,8 @@
 	"model": {
 		"file": "mobilenet_v1_1.0_128_quant.tflite",
 		"quantized": true,
-		"type": "image.classification.imagenet"
+		"type": "image.classification.imagenet",
+		"backend": "tflite"
 	},
 	"inputs": [
 		{

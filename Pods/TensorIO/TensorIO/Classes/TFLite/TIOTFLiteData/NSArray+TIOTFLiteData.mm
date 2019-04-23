@@ -24,10 +24,11 @@
 
 @implementation NSArray (TIOTFLiteData)
 
-- (nullable instancetype)initWithBytes:(const void *)bytes length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+- (nullable instancetype)initWithBytes:(const void *)bytes description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
     TIODataDequantizer dequantizer = ((TIOVectorLayerDescription*)description).dequantizer;
+    NSUInteger length = ((TIOVectorLayerDescription*)description).length;
     NSMutableArray *array = NSMutableArray.array;
     
     if ( description.isQuantized && dequantizer != nil ) {
@@ -47,7 +48,7 @@
     return [self initWithArray:array];
 }
 
-- (void)getBytes:(void *)buffer length:(NSUInteger)length description:(id<TIOLayerDescription>)description {
+- (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
 
     TIODataQuantizer quantizer = ((TIOVectorLayerDescription*)description).quantizer;

@@ -46,7 +46,7 @@
 + (NSError*)noValidModelBundlesError {
     return [NSError errorWithDomain:@"doc.ai.netrunner" code:201 userInfo:@{
         NSLocalizedDescriptionKey: @"No valid model bundles found at path",
-        NSLocalizedRecoverySuggestionErrorKey: @"Ensure this path exists and that it contains one or more correctly formated .tfbundle folders"
+        NSLocalizedRecoverySuggestionErrorKey: @"Ensure this path exists and that it contains one or more correctly formated .tiobundle folders"
     }];
 }
 
@@ -59,9 +59,15 @@
         return NO;
     }
     
-    NSArray<NSString*> *bundleNames = [paths filter:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        return [[(NSString*)obj pathExtension] isEqualToString:kTFModelBundleExtension];
+    NSArray<NSString*> *tfBundleNames = [paths filter:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        return [[(NSString*)obj pathExtension] isEqualToString:TIOTFModelBundleExtension]; // Deprecated
     }];
+    
+    NSArray<NSString*> *tioBundleNames = [paths filter:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        return [[(NSString*)obj pathExtension] isEqualToString:TIOModelBundleExtension];
+    }];
+    
+    NSArray<NSString*> *bundleNames = [tfBundleNames arrayByAddingObjectsFromArray:tioBundleNames];
     
     NSArray<NSString*> *bundlePaths = [bundleNames map:^id _Nonnull(id _Nonnull obj) {
         return [path stringByAppendingPathComponent:(NSString*)obj];

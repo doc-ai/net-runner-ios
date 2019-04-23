@@ -55,8 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedManager;
 
 /**
- * Loads the available models at the specified path, e.g. folders that end in .tfbundle
- * and assigns them to the models property. Models will be sorted by name by default.
+ * Loads the available models at the specified path, e.g. folders that end in
+ * '.tiobundle' and assigns them to the models property. Models will be sorted
+ * by name by default.
  
  * @param path Directory where model bundles are located, may be in the application bundle,
  * application documents directory, or elsewhere.

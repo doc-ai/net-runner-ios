@@ -27,6 +27,7 @@ extern NSString * const kPrefsShowInputBuffers;
 extern NSString * const kPrefsShowInputBufferAlpha;
 extern NSString * const kPrefsEvaluateIterations;
 extern NSString * const kPrefsBuild7CleanedModelsDir;
+extern NSString * const kPrefsVersionLast;
 
 NS_ASSUME_NONNULL_END
 

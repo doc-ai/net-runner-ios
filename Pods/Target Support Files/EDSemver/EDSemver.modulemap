@@ -1,0 +1,6 @@
+framework module EDSemver {
+  umbrella header "EDSemver-umbrella.h"
+
+  export *
+  module * { export * }
+}

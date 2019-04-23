@@ -1,9 +1,9 @@
 //
-//  UserDefaults.m
-//  Net Runner
+//  TIODataTypes.h
+//  TensorIO
 //
-//  Created by Philip Dow on 7/23/18.
-//  Copyright © 2018 doc.ai (http://doc.ai)
+//  Created by Phil Dow on 4/18/19.
+//  Copyright © 2019 doc.ai (http://doc.ai)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,12 +18,19 @@
 //  limitations under the License.
 //
 
-@import Foundation;
+#ifndef TIODataTypes_h
+#define TIODataTypes_h
 
-#import "UserDefaults.h"
+/**
+ * The data types used by at least one of the supported backends
+ */
 
-NSString * const kPrefsShowInputBuffers         = @"app.ui.show-input-buffers";
-NSString * const kPrefsShowInputBufferAlpha     = @"app.ui.show-input-buffer-alpha";
-NSString * const kPrefsEvaluateIterations       = @"app.eval.number-of-iterations";
-NSString * const kPrefsBuild7CleanedModelsDir   = @"app.build7.cleaned-models-dir";
-NSString * const kPrefsVersionLast              = @"app.version.last";
+typedef enum : NSUInteger {
+    TIODataTypeUnknown,
+    TIODataTypeUInt8,       // "uint8"
+    TIODataTypeFloat32,     // "float32"
+    TIODataTypeInt32,       // "int32"
+    TIODataTypeInt64        // "int64"
+} TIODataType;
+
+#endif /* TIODataTypes_h */
