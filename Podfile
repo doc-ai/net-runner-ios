@@ -6,8 +6,8 @@ target 'Net Runner' do
 
   # Pods for Net Runner
 
-  pod 'TensorIO'
-  pod 'TensorIO/TFLite'
+  pod 'TensorIO', '~> 0.6.1'
+  pod 'TensorIO/TFLite', '~> 0.6.1'
 
   pod 'SVProgressHUD'
   pod 'SSZipArchive'

@@ -95,8 +95,8 @@ static NSString * const kClassificationOutputKey = @"classification";
     
     NSAssert([previousOutput isKindOfClass:self.class], @"previousOutput is not same class as self: %@, %@", previousOutput.class, self.class);
     
-    const float decayValue = 0.75f;
-    const float updateValue = 0.25f;
+    const float decayValue = 0.70f;
+    const float updateValue = 0.30f;
     const float thresholdValue = 0.01f;
     
     NSMutableDictionary<NSString*,NSNumber*> *decayedInference = [NSMutableDictionary dictionary];
@@ -104,7 +104,7 @@ static NSString * const kClassificationOutputKey = @"classification";
     NSDictionary<NSString*,NSNumber*> *newInference = self.value[kClassificationOutputKey];
     
     for ( NSString *key in previousInference ) {
-        decayedInference[key] = previousInference[key];
+        decayedInference[key] = @(previousInference[key].floatValue * decayValue);
     }
     
     for ( NSString *key in newInference ) {
@@ -112,8 +112,10 @@ static NSString * const kClassificationOutputKey = @"classification";
             decayedInference[key] = @(0.0f);
         }
         
-        decayedInference[key] = @((decayedInference[key].floatValue * decayValue ) + (newInference[key].floatValue * updateValue));
-        
+        decayedInference[key] = @(decayedInference[key].floatValue + (newInference[key].floatValue * updateValue));
+    }
+    
+    for ( NSString *key in decayedInference ) {
         if ( decayedInference[key].floatValue < thresholdValue ) {
             [decayedInference removeObjectForKey:key];
         }
