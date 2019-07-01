@@ -157,7 +157,7 @@
 // MARK: - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.model.outputs.count;
+    return self.model.io.outputs.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -167,7 +167,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __block UITableViewCell<LabelOutputTableViewCell> *cell;
  
-    TIOLayerInterface *layer = self.model.outputs[indexPath.section];
+    TIOLayerInterface *layer = self.model.io.outputs[indexPath.section];
  
     [layer matchCasePixelBuffer:^(TIOPixelBufferLayerDescription * _Nonnull pixelBufferDescription) {
             // Image layer: editing not currently supported
@@ -190,7 +190,7 @@
         }
     }];
     
-    if ( indexPath.section == self.model.outputs.count-1 ) {
+    if ( indexPath.section == self.model.io.outputs.count-1 ) {
         cell.returnKeyType = UIReturnKeyDone;
     } else {
         cell.returnKeyType = UIReturnKeyNext;
@@ -202,7 +202,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return self.model.outputs[section].name;
+    return self.model.io.outputs[section].name;
 }
 
 // MARK: - LabelOutputTableViewCell Delegate
@@ -212,7 +212,7 @@
 - (void)labelOutputCellDidReturn:(UITableViewCell<LabelOutputTableViewCell>*)cell {
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
-    if ( indexPath.section == self.model.outputs.count-1) {
+    if ( indexPath.section == self.model.io.outputs.count-1) {
         return;
     }
     
