@@ -70,19 +70,19 @@ TIODataQuantizer TIODataQuantizerWithQuantization(TIODataQuantization quantizati
  * A standard quantization function that converts values from a range of `[0,1]` to `[0,255]`.
  */
 
-TIODataQuantizer TIODataQuantizerZeroToOne();
+TIODataQuantizer TIODataQuantizerZeroToOne(void);
 
 /**
  * A standard quantization function that converts values from a range of `[-1,1]` to `[0,255]`.
  */
 
-TIODataQuantizer TIODataQuantizerNegativeOneToOne();
+TIODataQuantizer TIODataQuantizerNegativeOneToOne(void);
 
 /**
  * No quantization, i.e. `nil`.
  */
 
-_Nullable TIODataQuantizer TIODataQuantizerNone();
+_Nullable TIODataQuantizer TIODataQuantizerNone(void);
 
 // MARK: - Dequantization
 
@@ -134,7 +134,7 @@ TIODataDequantizer TIODataDequantizerWithDequantization(TIODataDequantization de
  * This is equivalent to applying a scaling factor of `1.0/255.0` and no bias.
  */
 
-TIODataDequantizer TIODataDequantizerZeroToOne();
+TIODataDequantizer TIODataDequantizerZeroToOne(void);
 
 /**
  * A standard dequantizing function that converts values from a range of `[0,255]` to `[-1,1]`.
@@ -142,12 +142,12 @@ TIODataDequantizer TIODataDequantizerZeroToOne();
  * This is equivalent to applying a scaling factor of `2.0/255.0` and a bias of `-1`.
  */
 
-TIODataDequantizer TIODataDequantizerNegativeOneToOne();
+TIODataDequantizer TIODataDequantizerNegativeOneToOne(void);
 
 /**
  * No dequantization, i.e. `nil`.
  */
 
-_Nullable TIODataDequantizer TIODataDequantizerNone();
+_Nullable TIODataDequantizer TIODataDequantizerNone(void);
 
 NS_ASSUME_NONNULL_END

@@ -19,16 +19,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TIOModelBundle.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol TIOData;
 @protocol TIOLayerDescription;
 @class TIOLayerInterface;
-@class TIOModelBundle;
 @class TIOModelOptions;
-
-// MARK: -
+@class TIOModelModes;
+@class TIOBatch;
+@class TIOModelIO;
 
 /**
  * An Obj-C wrapper around lower level, usually C++ model implementations. This is the primary
@@ -133,6 +134,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSString *type;
 
 /**
+ * A string indicating the backend to use with this model
+ */
+
+@property (readonly) NSString *backend;
+
+/**
+ * The modes available to this model, i.e. predict, train, and eval.
+ */
+
+@property (readonly) TIOModelModes *modes;
+
+/**
  * A boolean value indicating whether the model has been loaded or not. Conforming classes may want
  * to wrap the underlying models such that they can be aggressively loaded and unloaded from memory,
  * as some models contain hundreds of megabytes of paramters.
@@ -141,16 +154,34 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) BOOL loaded;
 
 /**
- * Returns descriptions of the model's inputs indexed to the order they appear in model.json.
+ * Contains the descriptions of the model's inputs and outputs accessible by
+ * numeric index or by name:
+ *
+ * @code
+ * io.inputs[0]
+ * io.inputs[@"image"]
+ * io.outputs[0]
+ * io.outputs[@"label"]
+ * @endcode
  */
 
-@property (readonly) NSArray<TIOLayerInterface*> *inputs;
+@property (readonly) TIOModelIO *io;
+
+/**
+ * Returns descriptions of the model's inputs indexed to the order they appear in model.json.
+ * This attribute is deprecated. Use `io` instead.
+ */
+
+@property (readonly) NSArray<TIOLayerInterface*> *inputs __attribute__((deprecated));
 
 /**
  * Returns descriptions of the model's outputs indexed to the order they appear in model.json.
+ * This attribute is deprecated. Use `io` instead.
  */
 
-@property (readonly) NSArray<TIOLayerInterface*> *outputs;
+@property (readonly) NSArray<TIOLayerInterface*> *outputs __attribute__((deprecated));
+
+ // MARK: - Initialization
 
 /**
  * The designated initializer for conforming classes.
@@ -165,7 +196,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return instancetype An instance of the conforming class, may be `nil`.
  */
 
-- (nullable instancetype)initWithBundle:(TIOModelBundle*)bundle;
+- (nullable instancetype)initWithBundle:(TIOModelBundle *)bundle;
 
 /**
  * Convenience method for initializing a model directly from bundle at some path
@@ -175,7 +206,9 @@ NS_ASSUME_NONNULL_BEGIN
  * @return instancetype An instance of the model, or `nil`.
  */
 
-+ (nullable instancetype)modelWithBundleAtPath:(NSString*)path;
++ (nullable instancetype)modelWithBundleAtPath:(NSString *)path;
+
+// MARK: - Lifecycle
 
 /**
  * Loads a model into memory.
@@ -191,7 +224,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return BOOL `YES` if the model is successfully loaded, `NO` otherwise.
  */
 
-- (BOOL)load:(NSError**)error;
+- (BOOL)load:(NSError * _Nullable *)error;
 
 /**
  * Unloads a model from memory
@@ -204,6 +237,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)unload;
 
+// MARK: - Run
+
 /**
  * Performs inference on the provided input and returns the results. The primary interface to a
  * conforming class.
@@ -213,7 +248,11 @@ NS_ASSUME_NONNULL_BEGIN
  * @return TIOData The results of performing inference
  */
 
-- (id<TIOData>)runOn:(id<TIOData>)input;
+- (id<TIOData>)runOn:(id<TIOData>)input __attribute__((deprecated));
+- (id<TIOData>)runOn:(id<TIOData>)input error:(NSError* _Nullable *)error;
+- (id<TIOData>)run:(TIOBatch *)batch error:(NSError * _Nullable *)error;
+
+// MARK: - Input/Output Layers
 
 /**
  * Returns a description of the model's input at a given index
@@ -227,7 +266,7 @@ NS_ASSUME_NONNULL_BEGIN
  * for more information about this json file.
  */
 
-- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index;
+- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index __attribute__((deprecated));
 
 /**
  * Returns a description of the model's input for a given name
@@ -241,7 +280,7 @@ NS_ASSUME_NONNULL_BEGIN
  * for more information about this json file.
  */
  
-- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString*)name;
+- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString *)name __attribute__((deprecated));
 
 /**
  * Returns a description of the model's output at a given index
@@ -255,7 +294,7 @@ NS_ASSUME_NONNULL_BEGIN
  * for more information about this json file.
  */
 
-- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index;
+- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index __attribute__((deprecated));
 
 /**
  * Returns a description of the model's output for a given name
@@ -269,7 +308,7 @@ NS_ASSUME_NONNULL_BEGIN
  * for more information about this json file.
  */
 
-- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString*)name;
+- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString *)name __attribute__((deprecated));
 
 @end
 

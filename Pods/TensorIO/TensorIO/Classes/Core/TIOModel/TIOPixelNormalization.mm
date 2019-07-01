@@ -82,7 +82,7 @@ const TIOPixelDenormalization kTIOPixelDenormalizationNegativeOneToOne = {
 
 // MARK: - Core Pixel Normalizers
 
-TIOPixelNormalizer _Nullable TIOPixelNormalizerNone() {
+TIOPixelNormalizer _Nullable TIOPixelNormalizerNone(void) {
     return nil;
 }
 
@@ -118,7 +118,7 @@ TIOPixelNormalizer TIOPixelNormalizerPerChannelBias(TIOPixelNormalization normal
 
 // MARK: - Helpers for Constructing Standard Pixel Normalizers
 
-TIOPixelNormalizer TIOPixelNormalizerZeroToOne() {
+TIOPixelNormalizer TIOPixelNormalizerZeroToOne(void) {
     const float scale = 1.0/255.0;
     
     return ^float_t (uint8_t value, uint8_t channel) {
@@ -126,7 +126,7 @@ TIOPixelNormalizer TIOPixelNormalizerZeroToOne() {
     };
 }
 
-TIOPixelNormalizer TIOPixelNormalizerNegativeOneToOne() {
+TIOPixelNormalizer TIOPixelNormalizerNegativeOneToOne(void) {
     const float scale = 2.0/255.0;
     const float bias = -1;
     
@@ -137,7 +137,7 @@ TIOPixelNormalizer TIOPixelNormalizerNegativeOneToOne() {
 
 // MARK: - Core Pixel Denormalizers
 
-TIOPixelDenormalizer _Nullable TIOPixelDenormalizerNone() {
+TIOPixelDenormalizer _Nullable TIOPixelDenormalizerNone(void) {
     return nil;
 }
 
@@ -173,7 +173,7 @@ TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(TIOPixelNormalization no
 
 // MARK: - Helpers for Constructing Standard Pixel Denormalizers
 
-TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne() {
+TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne(void) {
     const float scale = 255.0;
     
     return ^uint8_t (float_t value, uint8_t channel) {
@@ -181,7 +181,7 @@ TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne() {
     };
 }
 
-TIOPixelDenormalizer TIOPixelDenormalizerNegativeOneToOne() {
+TIOPixelDenormalizer TIOPixelDenormalizerNegativeOneToOne(void) {
     const float scale = 255.0/2.0;
     const float bias = 1;
     

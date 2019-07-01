@@ -27,8 +27,8 @@
 - (nullable instancetype)initWithBytes:(const void *)bytes description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
-    TIODataDequantizer dequantizer = ((TIOVectorLayerDescription*)description).dequantizer;
-    NSUInteger length = ((TIOVectorLayerDescription*)description).length;
+    TIODataDequantizer dequantizer = ((TIOVectorLayerDescription *)description).dequantizer;
+    NSUInteger length = ((TIOVectorLayerDescription *)description).length;
     
     if ( description.isQuantized && dequantizer != nil ) {
         size_t dest_size = length * sizeof(float_t);
@@ -51,8 +51,8 @@
 - (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
-    TIODataQuantizer quantizer = ((TIOVectorLayerDescription*)description).quantizer;
-    NSUInteger length = ((TIOVectorLayerDescription*)description).length;
+    TIODataQuantizer quantizer = ((TIOVectorLayerDescription *)description).quantizer;
+    NSUInteger length = ((TIOVectorLayerDescription *)description).length;
     
     if ( description.isQuantized && quantizer != nil ) {
         float_t *bytes = (float_t *)self.bytes;

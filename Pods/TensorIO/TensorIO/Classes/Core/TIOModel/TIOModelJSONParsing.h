@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return TIOLayerInterface An interface that describes this pixel buffer input or output.
  */
 
-TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle);
+TIOLayerInterface * _Nullable TIOModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle);
 
 /**
  * Parses the JSON description of a pixel buffer input or output.
@@ -60,7 +60,7 @@ TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOVectorDescription(NSDictiona
  * @return TIOLayerInterface An interface that describes this pixel buffer input or output.
  */
 
-TIOLayerInterface * _Nullable TIOTFLiteModelParseTIOPixelBufferDescription(NSDictionary *dict, BOOL isInput, BOOL quantized);
+TIOLayerInterface * _Nullable TIOModelParseTIOPixelBufferDescription(NSDictionary *dict, BOOL isInput, BOOL quantized);
 
 /**
  * Parses the `quantization` key of an input description and returns an associated data quantizer.
