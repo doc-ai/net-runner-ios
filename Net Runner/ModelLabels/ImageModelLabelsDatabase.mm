@@ -31,7 +31,7 @@ NSString * _Nonnull  ImageModelLabelsDatabasePath(NSString * _Nonnull  basepath,
 NSDictionary * _Nonnull PlaceholderLabelsForModel(id<TIOModel> _Nonnull model) {
     NSMutableDictionary *placeholders = [[NSMutableDictionary alloc] init];
     
-    for ( TIOLayerInterface *layer in model.outputs) {
+    for ( TIOLayerInterface *layer in model.io.outputs.all) {
         [layer matchCasePixelBuffer:^(TIOPixelBufferLayerDescription * _Nonnull pixelBufferDescription) {
                 // Image buffer: currently unsupported
                 placeholders[layer.name] = [NSData data];

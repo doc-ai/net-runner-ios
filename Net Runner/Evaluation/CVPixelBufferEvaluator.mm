@@ -87,7 +87,22 @@
     
     // Transform the image to the required format
     
-    TIOPixelBufferLayerDescription *description = [self.model descriptionOfInputAtIndex:0];
+    __block TIOPixelBufferLayerDescription *description = nil;
+    [self.model.io.inputs[0] matchCasePixelBuffer:^(TIOPixelBufferLayerDescription * _Nonnull pixelBufferDescription) {
+        description = pixelBufferDescription;
+    } caseVector:^(TIOVectorLayerDescription * _Nonnull vectorDescription) {
+        ;
+    }];
+    
+    if ( description == nil ) {
+        NSLog(@"Model does not contain an image input at index 0");
+        NSDictionary *results = @{
+            kEvaluatorResultsKeyPreprocessingError: @"Model does not contain an image input in the first layer"
+        };
+        safe_block(completionHandler, results, NULL);
+        return;
+    }
+    
     TIOVisionPipeline *pipeline = [[TIOVisionPipeline alloc] initWithTIOPixelBufferDescription:description];
     __block CVPixelBufferRef transformedPixelBuffer = NULL;
     
@@ -110,7 +125,7 @@
     TIOPixelBuffer *pixelBufferWrapper = [[TIOPixelBuffer alloc] initWithPixelBuffer:transformedPixelBuffer orientation:kCGImagePropertyOrientationUp];
     
     measuring_latency(&inferenceLatency, ^{
-        results = (NSDictionary*)[self.model runOn:pixelBufferWrapper];
+        results = (NSDictionary*)[self.model runOn:pixelBufferWrapper error:nil];
     });
     
     id<ModelOutput> modelOutput = [[[[ModelOutputManager sharedManager] classForTypes:@[self.model.type, self.model.options.outputFormat]] alloc] initWithDictionary:results];
