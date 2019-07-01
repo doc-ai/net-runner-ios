@@ -27,7 +27,7 @@
 
 @implementation TIOVisionPipeline
 
-- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription {
+- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferLayerDescription *)pixelBufferDescription {
     if (self = [super init]) {
         _pixelBufferDescription = pixelBufferDescription;
     }
@@ -44,8 +44,8 @@
     
     const size_t srcWidth = CVPixelBufferGetWidth(pixelBuffer);
     const size_t srcHeight = CVPixelBufferGetHeight(pixelBuffer);
-    const size_t dstWidth = self.pixelBufferDescription.shape.width;
-    const size_t dstHeight = self.pixelBufferDescription.shape.height;
+    const size_t dstWidth = self.pixelBufferDescription.imageVolume.width;
+    const size_t dstHeight = self.pixelBufferDescription.imageVolume.height;
     
     if (srcWidth != dstWidth || srcHeight != dstHeight) {
         resizedPixelBuffer = TIOCVPixelBufferResizeToSquare(pixelBuffer, CGSizeMake(dstWidth, dstHeight));

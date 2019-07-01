@@ -25,6 +25,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TIOModelIO;
+
 /**
  * An Objective-C wrapper around TensorFlow lite models that provides a unified interface to the
  * input and output layers of the underlying model.
@@ -35,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TIOTFLiteModel : NSObject <TIOModel>
 
-+ (nullable instancetype)modelWithBundleAtPath:(NSString*)path;
++ (nullable instancetype)modelWithBundleAtPath:(NSString *)path;
 
 // Model Protocol Properties
 
@@ -49,27 +51,46 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) BOOL placeholder;
 @property (readonly) BOOL quantized;
 @property (readonly) NSString *type;
+@property (readonly) NSString *backend;
+@property (readonly) TIOModelModes *modes;
 @property (readonly) BOOL loaded;
-
-@property (readonly) NSArray<TIOLayerInterface*> *inputs;
-@property (readonly) NSArray<TIOLayerInterface*> *outputs;
+@property (readonly) TIOModelIO *io;
 
 // Model Protocol Methods
 
-- (nullable instancetype)initWithBundle:(TIOModelBundle*)bundle NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithBundle:(TIOModelBundle *)bundle NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (BOOL)load:(NSError**)error;
+- (BOOL)load:(NSError * _Nullable *)error;
 - (void)unload;
 
+/**
+ * Performs inference on the provided input and returns the results. The primary
+ * interface to a conforming class.
+ *
+ * @param input Any class conforming to `TIOData` that you want to run
+ *  inference on
+ *
+ * @return TIOData The results of performing inference, or an empty dictionary
+ *  if the model has not been loaded yet and a load error occurs.
+ */
+
 - (id<TIOData>)runOn:(id<TIOData>)input;
+- (id<TIOData>)runOn:(id<TIOData>)input error:(NSError * _Nullable *)error;
+- (id<TIOData>)run:(TIOBatch *)batch error:(NSError * _Nullable *)error;
 
-- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index;
-- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString*)name;
+// TODO: Where are these used? Can we deprecate them? By the data collection UI?
+// Use `io` instead
 
-- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index;
-- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString*)name;
+@property (readonly) NSArray<TIOLayerInterface*> *inputs __attribute__((deprecated));
+@property (readonly) NSArray<TIOLayerInterface*> *outputs __attribute__((deprecated));
+
+- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index __attribute__((deprecated));
+- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString *)name __attribute__((deprecated));
+
+- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index __attribute__((deprecated));
+- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString *)name __attribute__((deprecated));
 
 @end
 

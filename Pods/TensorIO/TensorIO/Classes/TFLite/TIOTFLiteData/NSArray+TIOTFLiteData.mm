@@ -27,8 +27,8 @@
 - (nullable instancetype)initWithBytes:(const void *)bytes description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
     
-    TIODataDequantizer dequantizer = ((TIOVectorLayerDescription*)description).dequantizer;
-    NSUInteger length = ((TIOVectorLayerDescription*)description).length;
+    TIODataDequantizer dequantizer = ((TIOVectorLayerDescription *)description).dequantizer;
+    NSUInteger length = ((TIOVectorLayerDescription *)description).length;
     NSMutableArray *array = NSMutableArray.array;
     
     if ( description.isQuantized && dequantizer != nil ) {
@@ -51,19 +51,19 @@
 - (void)getBytes:(void *)buffer description:(id<TIOLayerDescription>)description {
     assert([description isKindOfClass:TIOVectorLayerDescription.class]);
 
-    TIODataQuantizer quantizer = ((TIOVectorLayerDescription*)description).quantizer;
+    TIODataQuantizer quantizer = ((TIOVectorLayerDescription *)description).quantizer;
 
     if ( description.isQuantized && quantizer != nil ) {
         for ( NSInteger i = 0; i < self.count; i++ ) {
-            ((uint8_t *)buffer)[i] = quantizer(((NSNumber*)self[i]).floatValue);
+            ((uint8_t *)buffer)[i] = quantizer(((NSNumber *)self[i]).floatValue);
         }
     } else  if ( description.isQuantized && quantizer == nil ) {
         for ( NSInteger i = 0; i < self.count; i++ ) {
-            ((uint8_t *)buffer)[i] = ((NSNumber*)self[i]).unsignedCharValue;
+            ((uint8_t *)buffer)[i] = ((NSNumber *)self[i]).unsignedCharValue;
         }
     } else {
         for ( NSInteger i = 0; i < self.count; i++ ) {
-            ((float_t *)buffer)[i] = ((NSNumber*)self[i]).floatValue;
+            ((float_t *)buffer)[i] = ((NSNumber *)self[i]).floatValue;
         }
     }
 }

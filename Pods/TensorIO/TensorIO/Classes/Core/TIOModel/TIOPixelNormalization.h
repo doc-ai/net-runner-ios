@@ -145,7 +145,7 @@ extern const TIOPixelDenormalization kTIOPixelDenormalizationNegativeOneToOne;
  * A normalizing function that applies no normalization to the pixel values, `nil`.
  */
 
-TIOPixelNormalizer _Nullable TIOPixelNormalizerNone();
+TIOPixelNormalizer _Nullable TIOPixelNormalizerNone(void);
 
 /**
  * A normalizing function that applies a scaling factor and equal bias to each pixel channel.
@@ -167,7 +167,7 @@ TIOPixelNormalizer TIOPixelNormalizerPerChannelBias(TIOPixelNormalization normal
  * This is equivalent to applying a scaling factor of `1.0/255.0` and no channel bias.
  */
 
-TIOPixelNormalizer TIOPixelNormalizerZeroToOne();
+TIOPixelNormalizer TIOPixelNormalizerZeroToOne(void);
 
 /**
  * Normalizes pixel values from a range of `[0,255]` to `[-1,1]`.
@@ -175,7 +175,7 @@ TIOPixelNormalizer TIOPixelNormalizerZeroToOne();
  * This is equivalent to applying a scaling factor of `2.0/255.0` and a bias of `-1` to each channel.
  */
 
-TIOPixelNormalizer TIOPixelNormalizerNegativeOneToOne();
+TIOPixelNormalizer TIOPixelNormalizerNegativeOneToOne(void);
 
 // MARK: - Core Pixel Denormalizers
 
@@ -183,7 +183,7 @@ TIOPixelNormalizer TIOPixelNormalizerNegativeOneToOne();
  * A denormalizing function that applies no denormalization to the pixel values, `nil`.
  */
 
-TIOPixelDenormalizer _Nullable TIOPixelDenormalizerNone();
+TIOPixelDenormalizer _Nullable TIOPixelDenormalizerNone(void);
 
 /**
  * A denormalizing function that applies a scaling factor and equal bias to each pixel channel.
@@ -205,7 +205,7 @@ TIOPixelDenormalizer TIOPixelDenormalizerPerChannelBias(TIOPixelNormalization no
  * This is equivalent to applying no channel bias a scaling factor of `255.0`.
  */
 
-TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne();
+TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne(void);
 
 /**
  * Denormalizes pixel values from a range of `[-1,1]` to `[0,255]`.
@@ -213,7 +213,7 @@ TIOPixelDenormalizer TIOPixelDenormalizerZeroToOne();
  * This is equivalent to applying a bias of `1` to each channel and a scaling factor of `255.0/2.0`.
  */
 
-TIOPixelDenormalizer TIOPixelDenormalizerNegativeOneToOne();
+TIOPixelDenormalizer TIOPixelDenormalizerNegativeOneToOne(void);
 
 // MARK: - Utilities
 

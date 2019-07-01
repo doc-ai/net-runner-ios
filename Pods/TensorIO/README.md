@@ -1,15 +1,17 @@
-# TensorIO
+# Tensor/IO
 
 [![Build Status](https://travis-ci.org/doc-ai/TensorIO.svg?branch=master)](https://travis-ci.org/doc-ai/TensorIO)
 [![Version](https://img.shields.io/cocoapods/v/TensorIO.svg?style=flat)](https://cocoapods.org/pods/TensorIO)
 [![License](https://img.shields.io/cocoapods/l/TensorIO.svg?style=flat)](https://cocoapods.org/pods/TensorIO)
 [![Platform](https://img.shields.io/cocoapods/p/TensorIO.svg?style=flat)](https://cocoapods.org/pods/TensorIO)
 
-TensorIO is an Objective-C wrapper for an underlying machine learning library and currently supports TensorFlow and TensorFlow Lite. It abstracts the work of copying bytes into and out of tensors and allows you to interract with native types instead, such as numbers, arrays, dictionaries, and pixel buffers.
+## Introduction
 
-This implementation is part of the [TensorIO project](https://doc-ai.github.io/tensorio/) with support for machine learning on iOS, Android, and React Native.
+Tensor/IO iOS is an Objective-C wrapper for machine learning with support for TensorFlow and TensorFlow Lite. It abstracts the work of copying bytes into and out of tensors and allows you to interract with native types instead, such as numbers, arrays, dictionaries, and pixel buffers. Tensor/IO iOS support packaging and deployment, inference, training, and federated learning. This implementation is part of the [Tensor/IO project](https://doc-ai.github.io/tensorio/) with support for machine learning on iOS, Android, and React Native.
 
-With TensorIO you can perform inference in just a few lines of code:
+## Example
+
+With Tensor/IO you can perform inference in just a few lines of code:
 
 ```objc
 UIImage *image = [UIImage imageNamed:@"example-image"];
@@ -17,7 +19,7 @@ TIOPixelBuffer *buffer = [[TIOPixelBuffer alloc] initWithPixelBuffer:image.pixel
 
 TIOTFLiteModel *model = [TIOTFLiteModel modelWithBundleAtPath:path];
 
-NSDictionary *inference = (NSDictionary*)[model runOn:buffer];
+NSDictionary *inference = (NSDictionary *)[model runOn:buffer];
 NSDictionary *classification = [inference[@"classification"] topN:5 threshold:0.1];
 ```
 
@@ -35,7 +37,7 @@ let inference = model.run(on: buffer)
 let classification = ((inference as! NSDictionary)["classification"] as! NSDictionary).topN(5, threshold: 0.1)
 ```
 
-See the <a href="#usage">Usage</a> section below for important notes on adding TensorIO to your project.
+See the <a href="#usage">Usage</a> section below for important notes on adding Tensor/IO to your project.
 
 For the complete Objectice-C project documentation, visit [tensorio.info](https://tensorio.info/).
 
@@ -48,7 +50,7 @@ For the complete Objectice-C project documentation, visit [tensorio.info](https:
 * [ Author ](#author)
 * [ License ](#license)
 * [ Usage ](#usage)
-	* [ Add TensorIO to Your Project ](#importing)
+	* [ Add Tensor/IO to Your Project ](#importing)
 	* [ Basic Usage ](#basic-usage)
 	* [ Model Bundles ](#model-bundles)
 	* [ The Model JSON File ](#model-json)
@@ -72,22 +74,26 @@ For the complete Objectice-C project documentation, visit [tensorio.info](https:
 		* [ Pixel Normalization ](#pixel-normalization)
 		* [ Pixel Denormalization ](#pixel-normalization)
 		* [ A Complete Example ](#pixel-buffer-complete-example)
+	* [ Training ](#training)
+		* [ A Basic Example ](#training-basic-example)
+		* [ The Batch API ](#training-batch-api)
+		* [ A Complete Example ](#training-complete-example)
 * [ Advanced Usage ](#advanced-usage)
 * [ Net Runner ](#netrunner)
 
 <a name="overview"></a>
 ## Overview
 
-TensorIO supports many kinds of models with multiple input and output layers of different shapes and kinds but with minimal boilerplate code. In fact, you can run a variety of models without needing to write any model specific code at all.
+Tensor/IO supports many kinds of models with multiple input and output layers of different shapes and kinds but with minimal boilerplate code. In fact, you can run a variety of models without needing to write any model specific code at all.
 
-Instead, TensorIO relies on a JSON description of the model that you provide. During inference, the library matches incoming data to the model layers that expect it, performing any transformations that are needed and ensuring that the underlying bytes are copied to the right place.  Once inference is complete, the library copies bytes from the output tensors back to native Objective-C types.
+Instead, Tensor/IO relies on a JSON description of the model that you provide. During inference, the library matches incoming data to the model layers that expect it, performing any transformations that are needed and ensuring that the underlying bytes are copied to the right place.  Once inference is complete, the library copies bytes from the output tensors back to native Objective-C types.
 
-The built-in class for working with TensorFlow Lite (TF Lite) models, `TIOTFLiteModel`, includes support for multiple input and output layers; single-valued, vectored, matrix, and image data; pixel normalization and denormalization; and quantization and dequantization of data. In case you require a completely custom interface to a model you may specify your own class in the JSON description, and TensorIO will use it in place of the default class.
+The built-in class for working with TensorFlow Lite (TF Lite) models, `TIOTFLiteModel`, includes support for multiple input and output layers; single-valued, vectored, matrix, and image data; pixel normalization and denormalization; and quantization and dequantization of data. In case you require a completely custom interface to a model you may specify your own class in the JSON description, and Tensor/IO will use it in place of the default class.
 
-Although TensorIO supports both full TensorFlow and TF Lite models, this README will refer to TFLite throughout. Except for small differences in support of data types (`uint8_t`, `float32_t`, etc), the interface is the same.
+Although Tensor/IO supports both full TensorFlow and TF Lite models, this README will refer to TFLite throughout. Except for small differences in support of data types (`uint8_t`, `float32_t`, etc), the interface is the same.
 
 <a name="example"></a>
-## Example
+## Example Project
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first. 
 
@@ -95,17 +101,17 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 - See *TensorIOTFLiteModelIntegrationTests.mm* for more complex models. 
 - iPython notebooks for the test models may be found in the *notebooks* directory in this repo.
 
-For more detailed information about using TensorIO, refer to the <a href="#usage">Usage</a> section below.
+For more detailed information about using Tensor/IO, refer to the <a href="#usage">Usage</a> section below.
 
 <a name="requirements"></a>
 ## Requirements
 
-TensorIO requires iOS 9.3+
+Tensor/IO requires iOS 9.3+
 
 <a name="installation"></a>
 ## Installation
 
-TensorIO is available through [CocoaPods](https://cocoapods.org). Add the following to your Podfile:
+Tensor/IO is available through [CocoaPods](https://cocoapods.org). Add the following to your Podfile:
 
 ```ruby
 pod 'TensorIO/TFLite'
@@ -132,32 +138,32 @@ pod 'TensorIO/TensorFlow'
 <a name="license"></a>
 ## License
 
-TensorIO is available under the Apache 2 license. See the LICENSE file for more info.
+Tensor/IO is available under the Apache 2 license. See the LICENSE file for more info.
 
 <a name="usage"></a>
 ## Usage
 
 <a name="importing"></a>
-### Adding TensorIO to Your Project
+### Adding Tensor/IO to Your Project
 
 #### Objective-C
 
-Because the umbrella TensorIO header imports headers with C++ syntax, any files that use TensorIO must have Obj-C++ extensions. Rename your `.m` files to `.mm`.
+Because the umbrella Tensor/IO header imports headers with C++ syntax, any files that use Tensor/IO must have Obj-C++ extensions. Rename your `.m` files to `.mm`.
 
-Wherever you'd like to use TensorIO, import the umbrella header:
+Wherever you'd like to use Tensor/IO, import the umbrella header:
 
 ```objc
 #import <TensorIO/TensorIO-umbrella.h>
 ```
 
-To use TensorIO as a module, make sure `use_frameworks!` is uncommented in your Podfile, and add the following *Other C Flags* to your project's build settings:
+To use Tensor/IO as a module, make sure `use_frameworks!` is uncommented in your Podfile, and add the following *Other C Flags* to your project's build settings:
 
 ```
 -fmodules
 -fcxx-modules
 ```
 
-Wherever you'd like to use TensorIO, add:
+Wherever you'd like to use Tensor/IO, add:
 
 ```objc
 @import TensorIO;
@@ -165,7 +171,7 @@ Wherever you'd like to use TensorIO, add:
 
 #### Swift
 
-Make sure `use_frameworks!` is uncommented in your Podfile, and wherever you'd like to use TensorIO, simply import it:
+Make sure `use_frameworks!` is uncommented in your Podfile, and wherever you'd like to use Tensor/IO, simply import it:
 
 ```swift
 import TensorIO
@@ -177,24 +183,24 @@ let classifications = model.run(on: buffer)
 <a name="basic-usage"></a>
 ### Basic Usage
 
-A TensorIO model takes a set of inputs, performs inference, and returns a set of outputs.
+A Tensor/IO model takes a set of inputs, performs inference, and returns a set of outputs.
 
 Consider a model that predicts the price of a house given a feacture vector that includes square footage, number of bedrooms, number of bathrooms, proximity to a school, and so forth.
 
-With TensorIO you construct an `NSArray` of numeric values for these features, pass the array to your model, and extract the price from the results.
+With Tensor/IO you construct an `NSArray` of numeric values for these features, pass the array to your model, and extract the price from the results.
 
 ```objc
 TIOTFLiteModel *model = ...
 NSArray *input = @[ @(1890), @(3), @(2), @(1.6) ];
-NSDictionary *output = (NSDictionary*)[model runOn:input];
+NSDictionary *output = (NSDictionary *)[model runOn:input];
 NSNumber *price = output[@"price"];
 ```
 
 **TIOData**
 
-TensorIO models take inputs and produce outputs of type `TIOData`. This is a generic protocol that simply marks native data types as available to TensorIO models. A backend that supports a specific underlying machine learning library extends this protocol and implements methods that copy data into and out of tensors.
+Tensor/IO models take inputs and produce outputs of type `TIOData`. This is a generic protocol that simply marks native data types as available to Tensor/IO models. A backend that supports a specific underlying machine learning library extends this protocol and implements methods that copy data into and out of tensors.
 
-TensorIO backends such as those for TensorFlow and TFLite will always include implementations of this protocol for the following classes:
+Tensor/IO backends such as those for TensorFlow and TFLite will always include implementations of this protocol for the following classes:
 
 - NSNumber
 - NSData
@@ -209,29 +215,29 @@ In the above example, we're passing a single `NSArray` to the model. The model e
 
 Why is the resulting price not returned directly, and how do we know that the value is keyed to `@"price"` in the returned dictionary?
 
-Because models may have multiple inputs and outputs, TensorIO tries to make no assumptions about how many input and output layers a model actually has. This gives it some flexiblity in what kinds of inputs it can take, for example a single numeric value, arrays of numeric arrays, or a dictionary, and it intelligently matches those inputs to the underlying tensor buffers, but a model consequently always returns a dictionary of outputs. 
+Because models may have multiple inputs and outputs, Tensor/IO tries to make no assumptions about how many input and output layers a model actually has. This gives it some flexiblity in what kinds of inputs it can take, for example a single numeric value, arrays of numeric arrays, or a dictionary, and it intelligently matches those inputs to the underlying tensor buffers, but a model consequently always returns a dictionary of outputs. 
 
 (*Note: this may change in a future implementation, and single outputs may be returned directly*)
 
-To understand why the output value is keyed to a specific entry, we must understand how TensorIO is able to match Objective-C inputs and outputs to the underlying model's input and output layers, and for that we require an understanding of model bundles and the JSON file which describes the underlying model.
+To understand why the output value is keyed to a specific entry, we must understand how Tensor/IO is able to match Objective-C inputs and outputs to the underlying model's input and output layers, and for that we require an understanding of model bundles and the JSON file which describes the underlying model.
 
 
 <a name="model-bundles"></a>
 ### Model Bundles
 
-TensorIO currently includes support for TensorFlow Lite (TF Lite) models. Although the library is built with support for other machine learning frameworks in mind, we'll focus on TF Lite models here.
+Tensor/IO currently includes support for TensorFlow Lite (TF Lite) models. Although the library is built with support for other machine learning frameworks in mind, we'll focus on TF Lite models here.
 
 A TF Lite model is contained in a single *.tflite* file. All the operations and weights required to perform inference with a model are included in this file.
 
 However, a model may have other assets that are required to interpret the resulting inference. For example, an ImageNet image classification model will output 1000 values corresponding to the softmax probability that a particular object has been recognized in an image. The model doesn't match probabilities to their labels, for example "rocking chair" or "lakeside", it only outputs numeric values. It is left to us to associate the numeric values with their labels.
 
-Rather than requiring a developer to do this in application space and consequently store the lables in a text file or in some code somewhere in the application, TensorIO wraps models in a bundle and allows model builders to include additional assets in that bundle.
+Rather than requiring a developer to do this in application space and consequently store the lables in a text file or in some code somewhere in the application, Tensor/IO wraps models in a bundle and allows model builders to include additional assets in that bundle.
 
-A TensorIO bundle is just a folder with an extension that identifies it as such: *.tiobundle*. Assets may be included in this bundle and then referenced from model specific code. 
+A Tensor/IO bundle is just a folder with an extension that identifies it as such: *.tiobundle*. Assets may be included in this bundle and then referenced from model specific code. 
 
-*When you use your own models with TensorIO, make sure to put them in a folder with the .tiobundle extension.*
+*When you use your own models with Tensor/IO, make sure to put them in a folder with the .tiobundle extension.*
 
-A TensorIO TF Lite bundle has the following directory structure:
+A Tensor/IO TF Lite bundle has the following directory structure:
 
 ```
 mymodel.tiobundle
@@ -248,11 +254,11 @@ The *model.tflite* file is required but may have another name. The bundle must i
 
 The *assets* directory is optional and contains any additional assets required by your specific use case. Those assets may be referenced from *model.json*.
 
-Because image classification is such a common task, TensorIO includes built-in support for it, and no additional code is required. You'll simply need to specify a labels file in the model's JSON description, which we'll look at in a moment.
+Because image classification is such a common task, Tensor/IO includes built-in support for it, and no additional code is required. You'll simply need to specify a labels file in the model's JSON description, which we'll look at in a moment.
 
 **Using Model Bundles**
 
-TensorIO encapsulate information about a model in `TIOModelBundle` . This class parses the metadata for a model from the *model.json* file and manage access to files in the *assets* directory.
+Tensor/IO encapsulate information about a model in `TIOModelBundle` . This class parses the metadata for a model from the *model.json* file and manage access to files in the *assets* directory.
 
 You may load a bundle from a known path:
 
@@ -277,7 +283,7 @@ TIOTFLiteModel *model = [TIOTFLiteModel modelWithBundleAtPath:path];
 <a name="model-json"></a>
 ### The Model JSON File
 
-One of TensorIO's goals is to reduce the amount of new code required to integrate models into an application.
+One of Tensor/IO's goals is to reduce the amount of new code required to integrate models into an application.
 
 The primary work of using a model on iOS involves copying bytes of the right length to the right place. TF Lite, for example, is a C++ library, and the input and output tensors are exposed as C style buffers. In order to use a model we must copy byte representations of our input data into these buffers, ask the library to perform inference on those bytes, and then extract the byte representations back out of them.
 
@@ -285,11 +291,11 @@ Model interfaces can vary widely. Some models may have a single input and single
 
 Consequently, every time we want to try a different model, or even the same model with a slightly different interface, we must modify the code that moves bytes into and out of  buffers.
 
-TensorIO abstracts the work of copying bytes into and out of tensors and replaces that imperative code with a declarative language you already know: JSON.
+Tensor/IO abstracts the work of copying bytes into and out of tensors and replaces that imperative code with a declarative language you already know: JSON.
 
-The *model.json* file in a TensorIO bundle contains metadata about the underlying model as well as a description of the model's input and output layers. TensorIO parses those descriptions and then, when you perform inference with the model, internally handles all the byte copying operations, taking into account layer shapes, data sizes, data transformations, and even output labeling. All you have to do is provide data to the model and ask for the data out of it.
+The *model.json* file in a Tensor/IO bundle contains metadata about the underlying model as well as a description of the model's input and output layers. Tensor/IO parses those descriptions and then, when you perform inference with the model, internally handles all the byte copying operations, taking into account layer shapes, data sizes, data transformations, and even output labeling. All you have to do is provide data to the model and ask for the data out of it.
 
-The *model.json* file is the primary point of interaction with the TensorIO library. Any code you write to prepare data for a model and read data from a model will depend on a description of the model's input and output layers that you provide in this file.
+The *model.json* file is the primary point of interaction with the Tensor/IO library. Any code you write to prepare data for a model and read data from a model will depend on a description of the model's input and output layers that you provide in this file.
 
 Let's have a closer look.
 
@@ -310,7 +316,8 @@ The *model.json* file has the following basic structure:
     "file": "model.tflite",
     "quantized": false,
     "type": "image.classification.imagenet",
-    "backend": "tflite"
+    "backend": "tflite",
+    "modes": ["train"]
   },
   "inputs": [
     {
@@ -342,6 +349,7 @@ The model field is a dictionary that itself contains two to five entries:
   "file": "model.tflite",
   "backend": "tflite",
   "quantized": false,
+  "modes": ["train"],
   "type": "image.classification.imagenet",
   "class": "MyOptionalCustomClassName"
 }
@@ -355,7 +363,7 @@ This field is required.
 
 *backend*
 
-TensorIO supports multiple machine learning libraries, or backends. The *backend* field is a string that identifies which backend to use for this model. TensorFlow and TF Lite are currently supported, and this field should indicate which one to use, either of:
+Tensor/IO supports multiple machine learning libraries, or backends. The *backend* field is a string that identifies which backend to use for this model. TensorFlow and TF Lite are currently supported, and this field should indicate which one to use, either of:
 
 - tflite
 - tensorflow
@@ -368,6 +376,18 @@ The *quantized* field is a boolean value that is `true` when your model is quant
 
 This field is required.
 
+*modes*
+
+The *modes* field is an array of strings that describes the modes supported by this model, for example, if the model supports prediction, training, or evaluation. The strings may be the following values:
+
+- *predict*
+- *train*
+- *eval*
+
+TF Lite models only support prediction while TensorFlow models support both training and prediction.
+
+This field is optional but will be required in a future version.
+
 *type*
 
 The *type* field is a string value that describes the class of models your model belongs to. Currently the field supports arbitrary strings with no formal hierarchy.
@@ -376,14 +396,14 @@ This field is optional.
 
 *class*
 
-The *class* field is a string value that contains the Objective-C class name of the custom class you would like to use with your model. It must conform to the `TIOModel` protocol and ship with your application. A custom class is not required, and TensorIO will use `TIOTFLiteModel` by default and assume you are using a TensorFlow Lite backend. If you are using the full TensorFlow build you must currently set the custom class name to `TIOTensorFlowModel`.
+The *class* field is a string value that contains the Objective-C class name of the custom class you would like to use with your model. It must conform to the `TIOModel` protocol and ship with your application. A custom class is not required, and Tensor/IO will use `TIOTFLiteModel` by default and assume you are using a TensorFlow Lite backend. If you are using the full TensorFlow build you must currently set the custom class name to `TIOTensorFlowModel`.
 
 This field is optional.
 
 <a name="inputs-field"></a>
 #### The Inputs Field
 
-The *inputs* field is an array of dictionaries that describe the input layers of your model. There must be a dictionary entry for each input layer in your model. TensorIO uses the information in this field to match inputs to model layers and correctly copy bytes into tensor buffers.
+The *inputs* field is an array of dictionaries that describe the input layers of your model. There must be a dictionary entry for each input layer in your model. Tensor/IO uses the information in this field to match inputs to model layers and correctly copy bytes into tensor buffers.
 
 A basic entry in this array will have the following fields:
 
@@ -456,9 +476,9 @@ This field is required.
 
 **Unrolling Data**
 
-Although we describe the inputs to a layer in terms of shapes with multiple dimensions, and from a mathematical perspective work with vectors, matrices, and tensors, at a machine level, neither TensorIO nor TensorFlow Lite has a concept of a shape.
+Although we describe the inputs to a layer in terms of shapes with multiple dimensions, and from a mathematical perspective work with vectors, matrices, and tensors, at a machine level, neither Tensor/IO nor TensorFlow Lite has a concept of a shape.
 
-From a tensor's perspective all shapes are represented as an unrolled vector of numeric values and packed into a contiguous region of memory, i.e. a buffer. Similary, from an Objective-C perspective, all values passed as input to a TensorIO model must already be unrolled into an array of data, either an array of bytes when using `NSData` or an array of `NSNumber` when using `NSArray`.
+From a tensor's perspective all shapes are represented as an unrolled vector of numeric values and packed into a contiguous region of memory, i.e. a buffer. Similary, from an Objective-C perspective, all values passed as input to a Tensor/IO model must already be unrolled into an array of data, either an array of bytes when using `NSData` or an array of `NSNumber` when using `NSArray`.
 
 When you order your data into an array of bytes or an array of numbers in preparation for running a model on it, unroll the bytes using row major ordering. That is, traverse higher order dimensions before lower ones.
 
@@ -479,7 +499,7 @@ There are additional fields for handling data transformations such as quantizati
 
 **Both Order and Name Matter**
 
-Input to a `TIOModel` may be organized by either index or name, so that both the order of the dictionaries in the *inputs* array and their names are significant. TF Lite tensors are accessed by index, but internally TensorIO associates a name with each index in case you prefer to send `NSDictionary` inputs to your models. TensorFlow models use the name exclusively, which is why names must match the names of underlying tensors.
+Input to a `TIOModel` may be organized by either index or name, so that both the order of the dictionaries in the *inputs* array and their names are significant. TF Lite tensors are accessed by index, but internally Tensor/IO associates a name with each index in case you prefer to send `NSDictionary` inputs to your models. TensorFlow models use the name exclusively, which is why names must match the names of underlying tensors.
 
 **Example**
 
@@ -569,7 +589,7 @@ mymodel.tiobundle
     - labels.txt
 ```
 
-Each line of the *labels.txt* text file contains the name of the classification for that line number index in the layer's output. When a *labels* field is present, TensorIO internally maps labels to their numeric outputs and returns an `NSDictionary` representation of that mapping, rather than a simple `NSArray` of values. Let's see what that looks like.
+Each line of the *labels.txt* text file contains the name of the classification for that line number index in the layer's output. When a *labels* field is present, Tensor/IO internally maps labels to their numeric outputs and returns an `NSDictionary` representation of that mapping, rather than a simple `NSArray` of values. Let's see what that looks like.
 
 **Model Outputs**
 
@@ -587,10 +607,10 @@ For example, a self-driving car model might classify three kinds of things in an
 ]
 ```
 
-After performing inference the underlying TensorFlow model will produce an output with three values corresponding to the softmax probability that this item appears in the image. TensorIO extracts those bytes and packs them into an `NSArray` of `NSNumber`:
+After performing inference the underlying TensorFlow model will produce an output with three values corresponding to the softmax probability that this item appears in the image. Tensor/IO extracts those bytes and packs them into an `NSArray` of `NSNumber`:
 
 ```objc
-NSDictionary *inference = (NSDictionary*)[model runOn:input];
+NSDictionary *inference = (NSDictionary *)[model runOn:input];
 NSArray<NSNumber*> *classifications = inference[@"classification-output"];
 
 // classifications[0] == 0.25
@@ -621,10 +641,10 @@ car
 motorcycle
 ```
 
-The underlying tensorflow model still produces an output with three values corresponding to the softmax probability that this item appears in the image. TensorIO, however, now maps labels to those probabilities and returns a dictionary of those mappings:
+The underlying tensorflow model still produces an output with three values corresponding to the softmax probability that this item appears in the image. Tensor/IO, however, now maps labels to those probabilities and returns a dictionary of those mappings:
 
 ```objc
-NSDictionary *inference = (NSDictionary*)[model runOn:input];
+NSDictionary *inference = (NSDictionary *)[model runOn:input];
 NSDictionary<NSString*, NSNumber*> *classifications = inference[@"classification-output"];
 
 // classifications[@"pedestrian"] == 0.25
@@ -634,7 +654,7 @@ NSDictionary<NSString*, NSNumber*> *classifications = inference[@"classification
 
 **Single Valued Outputs**
 
-In some cases your model might output a single value in one of its output layers. Consider the housing price model we discussed earlier. When that is the case, instead of wrapping that single value in an array and returning an array for that layer, TensorIO will simply output a single value for it.
+In some cases your model might output a single value in one of its output layers. Consider the housing price model we discussed earlier. When that is the case, instead of wrapping that single value in an array and returning an array for that layer, Tensor/IO will simply output a single value for it.
 
 Consider a model with two output layers. The first layer outputs a vector of four values while the second outputs a single value:
 
@@ -656,7 +676,7 @@ Consider a model with two output layers. The first layer outputs a vector of fou
 After performing inference, access the first layer as an array of numbers and the second layer as a single number:
 
 ```objc
-NSDictionary *inference = (NSDictionary*)[model runOn:input];
+NSDictionary *inference = (NSDictionary *)[model runOn:input];
 NSArray<NSNumber*> *vectorOutput = inference[@"vector-output"];
 NSNumber *scalarOutput = inference[@"scalar-output"];
 ```
@@ -666,7 +686,7 @@ NSNumber *scalarOutput = inference[@"scalar-output"];
 <a name="options-field"></a>
 #### The Options Field
 
-You may optionally included an *options* field in the JSON description. It contains properties that are not required by TensorIO to perform inference but which are used in application specific ways. TensorIO will ignore these properties but you may inspect them from application space to change your product's behavior when a particular model is running.
+You may optionally included an *options* field in the JSON description. It contains properties that are not required by Tensor/IO to perform inference but which are used in application specific ways. Tensor/IO will ignore these properties but you may inspect them from application space to change your product's behavior when a particular model is running.
 
 Two options are currently supported: *device\_position* and *output\_format*:
 
@@ -752,7 +772,7 @@ NSDictionary *features = @{
   @"bar-features": barFeatures
 };
 
-NSDictionary *inference = (NSDictionary*)[model runOn:features];
+NSDictionary *inference = (NSDictionary *)[model runOn:features];
 
 NSArray *bazOutputs = inference[@"baz-outputs"]; // length 3
 NSArray *quxOutputs = inference[@"qux-outputs"]; // length 6
@@ -767,7 +787,7 @@ In TF Lite, models represent weights with and perform operations on four byte fl
 
 A quantized TF Lite model works with single byte representations `(uint8_t)`. It expects single byte inputs and it produces single byte outputs. A single unsigned byte can represent numbers in the range of 0 to 255. Still pretty cool.
 
-When you use a quantized model but start with floating point data, you must first transform that four byte representation into one byte. This is called *quantization*. The model's single byte output must also be transformed back into a floating point representation, an inverse process called *dequantization*. TensorIO can do both for you.
+When you use a quantized model but start with floating point data, you must first transform that four byte representation into one byte. This is called *quantization*. The model's single byte output must also be transformed back into a floating point representation, an inverse process called *dequantization*. Tensor/IO can do both for you.
 
 Let's see what a basic quantization and dequantization look like.
 
@@ -810,7 +830,7 @@ Note that the transformations are inverses of one anther, and a sanity check pro
 <a name="quantize-field"></a>
 #### The Quantize Field
 
-Instruct TensorIO to perform quantization by adding a *quantize* field to an input layer's description:
+Instruct Tensor/IO to perform quantization by adding a *quantize* field to an input layer's description:
 
 ```json
 "inputs": [
@@ -835,7 +855,7 @@ The *scale* field is a numeric value that specifies the scaling factor to apply 
 
 The *bias* field is a numeric value that specifies the bias to apply to unquantized, incoming data.
 
-Together, TensorIO applies the following equation to any data sent to this layer:
+Together, Tensor/IO applies the following equation to any data sent to this layer:
 
 ```
 quantized_value = (unquantized_value + bias) * scale
@@ -845,7 +865,7 @@ quantized_value = (unquantized_value + bias) * scale
 
 The *standard* field is a string value corresponding to one of a number of commonly used quantization functions. Its presence overrides the *scale* and *bias* fields.
 
-TensorIO currently has support for two standard quantizations. The ranges tell TensorIO *what range of values you are quantizing from*:
+Tensor/IO currently has support for two standard quantizations. The ranges tell Tensor/IO *what range of values you are quantizing from*:
 
 ```json
 "quantize": {
@@ -909,7 +929,7 @@ NSDictionary *features = @{
   @"vector-input": vectorInput
 };
 
-NSDictionary *inference = (NSDictionary*)[model runOn:features];
+NSDictionary *inference = (NSDictionary *)[model runOn:features];
 
 NSArray *vectorOutput = inference[@"vector-output"];
 
@@ -960,7 +980,7 @@ scale = 255 / (1-(-1))
       = 127.5
 ```
 
-Which are exactly the values TensorIO uses when you specify a standard quantize string *"[-1,1]"*.
+Which are exactly the values Tensor/IO uses when you specify a standard quantize string *"[-1,1]"*.
 
 **Dequantization Scale and Bias**
 
@@ -994,7 +1014,7 @@ scale = (1-(-1)) / 255
       = 0.0078
 ```
 
-Which once again are the values TensorIO uses when you specify the standard dequantize string *"[-1,1]"*.
+Which once again are the values Tensor/IO uses when you specify the standard dequantize string *"[-1,1]"*.
 
 In both cases, you will need to know what the maximum and minimum values are that you are quantizing from and dequantizing to, and these must match the values you have used for your model.
 
@@ -1024,7 +1044,8 @@ Noting the value of the *model.quantized* field and the presence of *quantize* a
   "model": {
     "file": "model.tflite",
     "backend": "tflite",
-    "quantized": true
+    "quantized": true,
+    "modes": ["predict"]
   },
   "inputs": [
     {
@@ -1076,7 +1097,7 @@ NSDictionary *features = @{
   @"bar-features": barFeatures
 };
 
-NSDictionary *inference = (NSDictionary*)[model runOn:features];
+NSDictionary *inference = (NSDictionary *)[model runOn:features];
 
 NSArray *bazOutputs = inference[@"baz-outputs"]; // length 3 in range [0,1]
 NSArray *quxOutputs = inference[@"qux-outputs"]; // length 6 in range [-1,1]
@@ -1086,7 +1107,7 @@ NSArray *quxOutputs = inference[@"qux-outputs"]; // length 6 in range [-1,1]
 <a name="quantization-without-quantization"></a>
 #### Quantized Models without Quantization
 
-The *quantize* field is optional for *array* input layers, even when the model is quantized. When you use a quantized model without including a *quantize* field, it is up to you to ensure that the data you send to TensorIO for inference is already quantized and that you treat output data as quantized. 
+The *quantize* field is optional for *array* input layers, even when the model is quantized. When you use a quantized model without including a *quantize* field, it is up to you to ensure that the data you send to Tensor/IO for inference is already quantized and that you treat output data as quantized. 
 
 This may be the case when your input and output data is only ever in the range of [0,255], for example pixel data, or when you are quantizing the floating point inputs yourself before sending them to the model.
 
@@ -1102,7 +1123,7 @@ NSDictionary *features = @{
   @"quantized-input": quantizedInput
 };
 
-NSDictionary *inference = (NSDictionary*)[model runOn:features];
+NSDictionary *inference = (NSDictionary *)[model runOn:features];
 
 NSArray *quantizedOutput = inference[@"quantized-output"]; // in range [0,255]
 NSArray *dequantizedOutput = [quantizedOutput map:^NSNumber * _Nonnull(NSNumber *  _Nonnull obj) {
@@ -1113,14 +1134,14 @@ NSArray *dequantizedOutput = [quantizedOutput map:^NSNumber * _Nonnull(NSNumber 
 <a name="images"></a>
 ### Working with Image Data
 
-TensorIO has built-in support for  image data and can perform inference on image data as well as return image data as an output. A key concept when working with image data is the *pixel buffer*, which is a pixel by pixel representation of an image in memory. 
+Tensor/IO has built-in support for  image data and can perform inference on image data as well as return image data as an output. A key concept when working with image data is the *pixel buffer*, which is a pixel by pixel representation of an image in memory. 
 
-TensorIO works with pixel buffers and includes a wrapper for the native `CVPixelBufferRef`. It also provides utility functions for converting instances of `UIImage` to and from pixel buffers.
+Tensor/IO works with pixel buffers and includes a wrapper for the native `CVPixelBufferRef`. It also provides utility functions for converting instances of `UIImage` to and from pixel buffers.
 
 <a name="images-basic-example"></a>
 #### A Basic Example
 
-As always, inform TensorIO that an input layer expects pixel buffer data by modifying that layer's description in *model.json*. Set its *type* to *image*. You must specify the *shape* as an array of *[height, width, channels]* and the *format* of the image as either *RGB* or *BGR*. More on image formats below. 
+As always, inform Tensor/IO that an input layer expects pixel buffer data by modifying that layer's description in *model.json*. Set its *type* to *image*. You must specify the *shape* as an array of *[height, width, channels]* and the *format* of the image as either *RGB* or *BGR*. More on image formats below. 
 
 For now let's assume the tensor takes image volumes of size 224x224x3 with RGB byte ordering:
 
@@ -1142,7 +1163,7 @@ UIImage *image = [UIImage imageNamed:@"example-image"];
 CVPixelBufferRef pixelBuffer = image.pixelBuffer;
 TIOPixelBuffer *buffer = [[TIOPixelBuffer alloc] initWithPixelBuffer:pixelBuffer orientation:kCGImagePropertyOrientationUp];
 
-NSDictionary *inference = (NSDictionary*)[model runOn:buffer];
+NSDictionary *inference = (NSDictionary *)[model runOn:buffer];
 ```
 
 <a name="pixel-buffer"></a>
@@ -1171,9 +1192,9 @@ Now imagine what that same image looks like to the tensor in BGRA format:
 
 The byte ordering, which is to say, the format of the pixel buffer, definitely matters! 
 
-You must let TensorIO know what byte ordering an input layer expects via the *format* field. Consequently you must know what byte ordering your model expects.
+You must let Tensor/IO know what byte ordering an input layer expects via the *format* field. Consequently you must know what byte ordering your model expects.
 
-TensorIO supports two byte orderings, *RGB* and *BGR*. Models ignore the alpha channel and don't expect it to be present, so TensorIO internally skips it when copying ARGB or BGRA pixel buffer bytes into tensors.
+Tensor/IO supports two byte orderings, *RGB* and *BGR*. Models ignore the alpha channel and don't expect it to be present, so Tensor/IO internally skips it when copying ARGB or BGRA pixel buffer bytes into tensors.
 
 ```json
 {
@@ -1194,7 +1215,7 @@ Hm. It looks like pixel buffer data is already "quantized"!
 
 In fact, when working with quantized models, you may pass pixel buffer data directly to input layers and read it directly from output layers without needing to transform the data (other than skipping the alpha channel). Quantized models already work on values in a range from 0 to 255, and pixel buffer data is exactly in this range.
 
-Models that are not quantized, however, expect pixel buffer data in a floating point representation, and they will typically want it in a *normalized* range of values, usually from 0 to 1 or from -1 to 1. The process of converting pixel values from a single byte representation to a floating point representation is called *normalization*, and TensorIO includes built-in support for it.
+Models that are not quantized, however, expect pixel buffer data in a floating point representation, and they will typically want it in a *normalized* range of values, usually from 0 to 1 or from -1 to 1. The process of converting pixel values from a single byte representation to a floating point representation is called *normalization*, and Tensor/IO includes built-in support for it.
 
 **The Normalize Field**
 
@@ -1221,7 +1242,7 @@ Together, a *scale* and *bias* entry might look like:
 }
 ```
 
-And together, TensorIO applies the following equation to any pixel data sent to this layer:
+And together, Tensor/IO applies the following equation to any pixel data sent to this layer:
 
 ```
 normalized_red_value   = scale * red_value   + red_bias
@@ -1233,7 +1254,7 @@ normalized_blue_value  = scale * blue_value  + blue_bias
 
 The *standard* field is a string value corresponding to one of a number of commonly used normalizations. Its presence overrides the *scale* and *bias* fields.
 
-TensorIO currently supports two standard normalizations. The ranges tell TensorIO *what values you are normalizing to*:
+Tensor/IO currently supports two standard normalizations. The ranges tell Tensor/IO *what values you are normalizing to*:
 
 ```json
 "normalize": {
@@ -1248,7 +1269,7 @@ TensorIO currently supports two standard normalizations. The ranges tell TensorI
 <a name="pixel-normalization"></a>
 #### Pixel Denormalization
 
-TensorIO can also read pixel data from output tensors and reconstruct pixel buffers from them. When reading pixel data from an unquantized model it will usually be necessary to convert the values from a normalized floating point representation back to `uint8_t` values in the range of 0 to 255. This process is called *denormalization*, and once again TensorIO has built in support for it.
+Tensor/IO can also read pixel data from output tensors and reconstruct pixel buffers from them. When reading pixel data from an unquantized model it will usually be necessary to convert the values from a normalized floating point representation back to `uint8_t` values in the range of 0 to 255. This process is called *denormalization*, and once again Tensor/IO has built in support for it.
 
 To denormalize pixel data add a *denormalize* field to an output layer's description. Like the *normalize* field this field takes either *scale* and *bias* entries or a *standard* entry. The fields work as they do for normalization but as their inverses.
 
@@ -1260,7 +1281,7 @@ green_value = (normalized_green_value + green_bias) * scale
 blue_value  = (normalized_blue_value  + blue_bias)  * scale
 ```
 
-Similarly, TensorIO supports two standard denormalizations. The ranges tell TensorIO *what values you are denormalizing from*:
+Similarly, Tensor/IO supports two standard denormalizations. The ranges tell Tensor/IO *what values you are denormalizing from*:
 
 ```json
 "denormalize": {
@@ -1301,6 +1322,7 @@ The *model.json* file might look like:
     "file": "model.tflite",
     "backend": "tflite",
     "quantized": false,
+    "modes": ["predict"]
   },
   "inputs": [
     {
@@ -1330,15 +1352,305 @@ And we can use this model as follows:
 UIImage *image = [UIImage imageNamed:@"example-image"];
 TIOPixelBuffer *buffer = [[TIOPixelBuffer alloc] initWithPixelBuffer:image.pixelBuffer orientation:kCGImagePropertyOrientationUp];
 
-NSDictionary *inference = (NSDictionary*)[model runOn:buffer];
+NSDictionary *inference = (NSDictionary *)[model runOn:buffer];
 NSDictionary<NSString*,NSNumber*> *classification = inference[@"classification"];
 
+```
+
+<a name="training"></a>
+### Training
+
+The full TensorFlow backend supports on-device training with Tensor/IO. Support for training allows you to deploy a trainable model to a phone and then train it directly on the device with local data. You use the same model.json file to describe the inputs and outputs for training and add a *train* field that identifies the training ops to run.
+
+Training inputs will usually include both the model inputs and outputs, while the training output will be the loss value you would like to measure. The training ops will be the named operations that are responsible for executing a round of training on the model and will usually include the optimization operation.
+
+<a name="training-basic-example"></a>
+#### A Basic Example
+
+Make sure you are using a backend which supports training and have a model with the additional ops required for training. Tell Tensor/IO that your model targets training with the *model.modes* field, and add the *train* field to your model.json:
+
+```json
+"model": {
+  "file": "train",
+  "backend": "tensorflow",
+  "modes": ["train"]
+},
+
+"inputs": [ 
+	... 
+],
+"outputs": [ 
+	... 
+],
+
+"train": {
+  "ops": [
+    "training_op_name"
+  ]
+}
+```
+
+<a name="training-batch-api"></a>
+#### The Batch API 
+
+Unlike inference, which currently runs on a single example, training runs on many examples simultaneously and requires the use of the `TIOBatch` API. A batch is simply a collection of training examples whose key-values correspond to the named training inputs expected by the model. Think of a batch as a matrix of training data with each item occupying a row and each column a named column of values for a single input layer across every item.
+
+Instantiate a batch with the input keys to your trainable model. This will typically include both the inputs and labels. Then add items to the batch, typed to `TIOBatchItem` but which are really just dictionaries of named values corresponding to the `TIOData` protocol:
+
+```objc
+TIOBatch *batch = [[TIOBatch alloc] initWithKeys:@[@"image", @"labels"]];
+
+[batch addItem:@{
+    @"image": cat,
+    @"labels": @(0)
+}];
+    
+[batch addItem:@{
+    @"image": dog,
+    @"labels": @(1)
+}];
+```
+
+You can then call train on the model with this batch to execute a single round of training, equivalent to one epoch with a single batch:
+
+```objc
+NSDictionary *results = (NSDictionary *)[model train:batch];
+```
+
+As with inference, the results dictionary will contain the output of training, typically the loss function you'd like to measure.
+
+To execute multiple epochs of training across many batches, you will need to set up an epoch loop and collect data for the batches yourself. An API to support this common practice is forthcoming.
+
+<a name="training-complete-example"></a>
+#### A Complete Example
+
+A trainable cats vs dogs model is included with the full TensorFlow example in this repository. Inside the cats-vs-dogs-train.tiobundle you'll find the expected *model.json* file along with a *train* directory that contains the results of exporting a saved model in TensorFlow (more below).
+
+The *model.json* looks like:
+
+```json
+{
+  "name": "Cats vs Dogs MobileNet V2 1.0 128",
+  "details": "Cats vs Dogs Kaggle model based on MobileNet V2 architecture with a width multiplier of 1.0 and an input resolution of 128x128.",
+  "id": "cats-vs-dogs-v2-100-128-unquantized",
+  "version": "1",
+  "author": "doc.ai",
+  "license": "Apache License. Version 2.0 http://www.apache.org/licenses/LICENSE-2.0",
+  "model": {
+    "file": "train",
+    "quantized": false,
+    "type": "image.classification.catsvsdogs",
+    "backend": "tensorflow",
+    "modes": ["train"]
+  },
+  "inputs": [
+    {
+      "name": "image",
+      "type": "image",
+      "shape": [-1,128,128,3],
+      "format": "RGB",
+      "normalize": { "standard": "[0,1]" }
+    },
+    {
+      "name": "labels",
+      "type": "array",
+      "dtype": "int32",
+      "shape": [-1,1]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "sigmoid_cross_entropy_loss/value",
+      "type": "array",
+      "shape": [1]
+    }
+  ],
+  "train": {
+    "ops": [
+      "train"
+    ]
+  }
+}
+```
+
+Notice especially the addition of the *train* field with its *ops* parameter and that the shape of the two inputs includes a batch dimension, identified in TensorFlow by a `-1` along the first axis. The names of the inputs and of the training op have been taken from the graph, snippets of which are included below. The name of the output comes from an inspection of the exported graph using TensorFlow's *saved_model_cli*, also below.
+
+Train this model with the `TIOBatch` API:
+
+```objc
+TIOBatch *batch = [[TIOBatch alloc] initWithKeys:@[@"image", @"labels"]];
+    
+[batch addItem:@{
+    @"image": cat,
+    @"labels": @(0)
+}];
+    
+[batch addItem:@{
+    @"image": dog,
+    @"labels": @(1)
+}];
+
+for (NSUInteger epoch = 0; epoch < 100; epoch++) {
+	NSDictionary *results = (NSDictionary *)[model train:batch];
+	NSLog(@"%@", results[@"sigmoid_cross_entropy_loss/value"]);
+}
+```
+
+
+**Model Snippets**
+
+This model was exported from the following code. Notice that the `serving_input_receive_fn` provides an input named *image*, that we are exporting the model using `experimental_mode=tf.estimator.ModeKeys.TRAIN`, and that in the `model_fn` we set up a placeholder for the `labels` and name it *labels* and name the training op *train*. The names in the *model.json* file correspond directly to these values.
+
+This model was built with TensorFlow 1.13. 
+
+```python
+# trainable model snippets
+
+# service_input_receive_fn used by estimator.export_saved_model
+
+def serving_input_receiver_fn(params):
+  dimension = [None, params['target_dim'], params['target_dim'], 3]
+
+  inputs = {
+    'image': tf.placeholder(tf.float32, dimension, name='image'),
+  }
+
+  return tf.estimator.export.ServingInputReceiver(inputs, inputs)
+
+# the save_model function which is called by a custom python script
+# you must have already trained the model for at least a single epoch and generated training checkpoints
+# the model_dir param points to that checkpoints directory
+
+def save_model(model_dir, output_dir, dims):
+  input_params = {'target_dim': dims}
+  estimator = tf.estimator.Estimator(
+    model_fn=model.model_fn, 
+    model_dir=model_dir)
+  estimator.export_saved_model(
+    output_dir, 
+    lambda:serving_input_receiver_fn(input_params),
+    as_text=False,
+    experimental_mode=tf.estimator.ModeKeys.TRAIN)
+    
+# the model_fn expected by tensorflow's estimator api
+# note: the labels placeholder if labels is None
+# note: the named optimization op
+ 
+def model_fn(features, labels, mode, params):
+  
+  MOBILENET = 'https://tfhub.dev/google/imagenet/mobilenet_v2_100_128/feature_vector/2'
+
+  # build model layers
+
+  module = hub.Module(MOBILENET)
+  feature_vector = module(features["image"])
+
+  logits = tf.layers.dense(feature_vector, 1, name='logit')
+  probabilities = tf.nn.sigmoid(logits, name='sigmoid')
+
+  # prepare predictions
+
+  predictions = {
+    'probability': probabilities,
+    'class': tf.to_int32(probabilities > 0.5)
+  }
+  prediction_output = tf.estimator.export.PredictOutput({
+    'probability': probabilities,
+    'class': tf.to_int32(probabilities > 0.5)
+  })
+
+  # return an estimator spec for prediction before computing a loss
+
+  if mode == tf.estimator.ModeKeys.PREDICT:
+    return tf.estimator.EstimatorSpec(
+      mode=mode, 
+      predictions=predictions,
+      export_outputs={
+        tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: prediction_output
+      })
+
+  # calculate loss
+
+  if labels is None: # during training export
+    labels = tf.placeholder(tf.int32, shape=(1), name='labels')
+
+  labels = tf.reshape(labels, [-1,1])
+  labels = tf.cast(labels, tf.float32)
+
+  loss = tf.losses.sigmoid_cross_entropy(
+    multi_class_labels=labels,
+    logits=logits
+  )
+
+  # calculate accuracy metric
+
+  accuracy = tf.metrics.accuracy(labels=labels, predictions=predictions["class"], name='accuracy')
+
+  if mode == tf.estimator.ModeKeys.TRAIN:
+
+    # generate some summary info
+    # these ops are not supported by the TensorFlow mobile build
+
+    # unsupported ops on mobile build
+    # tf.summary.scalar('average_loss', loss)
+    # tf.summary.scalar('accuracy', accuracy[1])
+
+    # prepare an optimizer
+
+    optimizer = tf.train.AdamOptimizer(learning_rate=1e-4)
+    train_op = optimizer.minimize(
+      loss=loss,
+      global_step=tf.train.get_global_step(),
+      name="train")
+
+    # return an estimator spec
+
+    return tf.estimator.EstimatorSpec(
+      mode=mode, 
+      loss=loss, 
+      train_op=train_op)
+  
+  if mode == tf.estimator.ModeKeys.EVAL:
+
+    # add evaluation metrics
+    
+    eval_metric_ops = {
+      "accuracy": accuracy
+    }
+
+    # return an estimator spec
+
+    return tf.estimator.EstimatorSpec(
+      mode=mode, 
+      loss=loss, 
+      eval_metric_ops=eval_metric_ops)
+```
+
+We can use tensorflow's *saved_model_cli* to give us the inputs and outputs to this model. We already know the input is named "image" and we learn that the output corresponds to the sigmoid cross entropy loss, which we use for our model outputs field:
+
+```bash
+$ saved_model_cli show --dir {export-dir} --all
+
+MetaGraphDef with tag-set: 'train' contains the following SignatureDefs:
+
+signature_def['train']:
+  The given SavedModel SignatureDef contains the following input(s):
+    inputs['image'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (-1, 128, 128, 3)
+        name: image:0
+  The given SavedModel SignatureDef contains the following output(s):
+    outputs['loss'] tensor_info:
+        dtype: DT_FLOAT
+        shape: ()
+        name: sigmoid_cross_entropy_loss/value:0
+  Method name is: tensorflow/supervised/training
 ```
 
 <a name="advanced-usage"></a>
 ### Advanced Usage
 
-TensorIO includes a number of additional utilities, especially for working with image data. Until this section is completed, refer to the following files:
+Tensor/IO includes a number of additional utilities, especially for working with image data. Until this section is completed, refer to the following files:
 
 - TIOCVPixelBufferHelpers
 - UIImage+TIOCVPixelBufferExtensions
@@ -1350,4 +1662,4 @@ You may also refer to [tensorio.info](https://tensorio.info/) for the complete O
 <a name="netrunner"></a>
 ### Net Runner
 
-For an example of TensorIO in action check out [Net Runner](https://github.com/doc-ai/net-runner-ios), our iOS environment for evaluating computer vision machine learning models.
+For an example of Tensor/IO in action check out [Net Runner](https://github.com/doc-ai/net-runner-ios), our iOS environment for evaluating computer vision machine learning models.

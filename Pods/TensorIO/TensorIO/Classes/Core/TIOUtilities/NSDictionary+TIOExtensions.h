@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Returns the top N or fewer entries in the dictionary, by probability.
  */
 
-- (NSDictionary*)topN:(NSUInteger)count;
+- (NSDictionary *)topN:(NSUInteger)count;
 
 /**
  * Returns the top N entries in the dictionary, by probability, but only
@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  * top N or fewer entries are returned.
  */
 
-- (NSDictionary*)topN:(NSUInteger)count threshold:(float)threshold;
+- (NSDictionary *)topN:(NSUInteger)count threshold:(float)threshold;
 
 @end
 

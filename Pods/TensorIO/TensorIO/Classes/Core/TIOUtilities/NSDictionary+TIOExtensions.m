@@ -24,18 +24,18 @@
 
 @implementation NSDictionary (Extensions)
 
-- (NSDictionary*)topN:(NSUInteger)count {
+- (NSDictionary *)topN:(NSUInteger)count {
     NSArray *keys = [[[self keysSortedByValueUsingSelector:@selector(compare:)] reversed] firstN:count];
     NSArray *objects = [self objectsForKeys:keys notFoundMarker:NSNull.null];
     return [NSDictionary dictionaryWithObjects:objects forKeys:keys];
 }
 
-- (NSDictionary*)topN:(NSUInteger)count threshold:(float)threshold {
+- (NSDictionary *)topN:(NSUInteger)count threshold:(float)threshold {
     
     // Filter entries below the threshold
     
     NSArray<NSString*> *thresholdedKeys = [self keysOfEntriesPassingTest:^BOOL(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        return ((NSNumber*)obj).floatValue > threshold;
+        return ((NSNumber *)obj).floatValue > threshold;
     }].allObjects;
     
     NSArray *thresholdedObjects = [self objectsForKeys:thresholdedKeys notFoundMarker:NSNull.null];
