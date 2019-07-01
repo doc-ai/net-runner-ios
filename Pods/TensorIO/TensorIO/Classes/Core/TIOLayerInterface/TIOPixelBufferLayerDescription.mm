@@ -22,10 +22,18 @@
 
 @implementation TIOPixelBufferLayerDescription
 
-- (instancetype)initWithPixelFormat:(OSType)pixelFormat shape:(TIOImageVolume)shape batched:(BOOL)batched normalizer:(nullable TIOPixelNormalizer)normalizer denormalizer:(nullable TIOPixelDenormalizer)denormalizer quantized:(BOOL)quantized {
+- (instancetype)initWithPixelFormat:(OSType)pixelFormat
+    shape:(NSArray<NSNumber*>*)shape
+    imageVolume:(TIOImageVolume)imageVolume
+    batched:(BOOL)batched
+    normalizer:(nullable TIOPixelNormalizer)normalizer
+    denormalizer:(nullable TIOPixelDenormalizer)denormalizer
+    quantized:(BOOL)quantized {
+    
     if (self=[super init]) {
         _pixelFormat = pixelFormat;
         _shape = shape;
+        _imageVolume = imageVolume;
         _batched = batched;
         _normalizer = normalizer;
         _denormalizer = denormalizer;

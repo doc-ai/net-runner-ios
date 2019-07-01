@@ -177,7 +177,20 @@ typedef enum : NSUInteger {
         return NO;
     }
     
-    TIOPixelBufferLayerDescription *description = [self.model descriptionOfInputAtIndex:0];
+    __block TIOPixelBufferLayerDescription *description = nil;
+    [self.model.io.inputs[0] matchCasePixelBuffer:^(TIOPixelBufferLayerDescription * _Nonnull pixelBufferDescription) {
+        description = pixelBufferDescription;
+    } caseVector:^(TIOVectorLayerDescription * _Nonnull vectorDescription) {
+        ;
+    }];
+    
+    if (description == nil) {
+        NSLog(@"Model does not contain an image input at index 0, model id: %@", bundle.identifier);
+        [self showLoadModelAlert:@"Model does not contain an image input in the first layer"];
+        self.modelBundle = nil;
+        self.model = nil;
+        return NO;
+    }
     
     self.title = self.model.name;
     self.imageInputPreviewView.pixelFormat = description.pixelFormat;

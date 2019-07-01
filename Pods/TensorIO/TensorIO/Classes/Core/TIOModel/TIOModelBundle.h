@@ -23,6 +23,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class TIOModelOptions;
+@class TIOModelModes;
+@class TIOModelIO;
 @protocol TIOModel;
 
 /**
@@ -146,10 +148,30 @@ extern NSString * const TIOModelAssetsDirectory;
 @property (readonly) NSString *backend;
 
 /**
+ * The modes available to this model, i.e. predict, train, and eval.
+ */
+
+@property (readonly) TIOModelModes *modes;
+
+/**
  * Options associated with the model represented by this bundle.
  */
 
 @property (readonly) TIOModelOptions *options;
+
+/**
+ * Contains the descriptions of the model's inputs and outputs accessible by
+ * numeric index or by name:
+ *
+ * @code
+ * io.inputs[0]
+ * io.inputs[@"image"]
+ * io.outputs[0]
+ * io.outputs[@"label"]
+ * @endcode
+ */
+
+@property (readonly) TIOModelIO *io;
 
 /**
  * The file path to the actual underlying model contained in this bundle.
@@ -168,7 +190,7 @@ extern NSString * const TIOModelAssetsDirectory;
  * @return An instance of a `TIOModelBundle` or `nil` if no bundle could be loaded at that path.
  */
 
-- (nullable instancetype)initWithPath:(NSString*)path NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.
@@ -191,7 +213,7 @@ extern NSString * const TIOModelAssetsDirectory;
  * @return NSString The full path to the file
  */
 
-- (NSString*)pathToAsset:(NSString*)filename;
+- (NSString *)pathToAsset:(NSString *)filename;
 
 @end
 

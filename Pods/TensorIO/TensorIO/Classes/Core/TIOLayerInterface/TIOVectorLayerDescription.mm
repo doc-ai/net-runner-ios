@@ -23,9 +23,17 @@
 
 @implementation TIOVectorLayerDescription
 
-- (instancetype)initWithShape:(NSArray<NSNumber*>*)shape dtype:(TIODataType)dtype labels:(nullable NSArray<NSString*>*)labels quantized:(BOOL)quantized quantizer:(nullable TIODataQuantizer)quantizer dequantizer:(TIODataDequantizer)dequantizer {
+- (instancetype)initWithShape:(NSArray<NSNumber*>*)shape
+    batched:(BOOL)batched
+    dtype:(TIODataType)dtype
+    labels:(nullable NSArray<NSString*>*)labels
+    quantized:(BOOL)quantized
+    quantizer:(nullable TIODataQuantizer)quantizer
+    dequantizer:(TIODataDequantizer)dequantizer {
+    
     if (self=[super init]) {
         _shape = shape;
+        _batched = batched;
         _dtype = dtype;
         _labels = labels.copy;
         _quantized = quantized;
@@ -41,7 +49,7 @@
     return self.labels != nil && self.labels.count != 0;
 }
 
-- (NSDictionary<NSString*,NSNumber*>*)labeledValues:(TIOVector*)vector {
+- (NSDictionary<NSString*,NSNumber*>*)labeledValues:(TIOVector *)vector {
     assert(self.isLabeled);
     
     NSMutableDictionary<NSString*,NSNumber*> *labeledValues = NSMutableDictionary.dictionary;
