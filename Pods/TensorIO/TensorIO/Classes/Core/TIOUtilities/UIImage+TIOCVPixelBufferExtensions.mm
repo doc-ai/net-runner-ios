@@ -83,8 +83,8 @@
     CGFloat height = self.size.height;
     
     NSDictionary *attrs = @{
-        (NSString*)kCVPixelBufferCGImageCompatibilityKey: @(YES),
-        (NSString*)kCVPixelBufferCGBitmapContextCompatibilityKey: @(YES)
+        (NSString *)kCVPixelBufferCGImageCompatibilityKey: @(YES),
+        (NSString *)kCVPixelBufferCGBitmapContextCompatibilityKey: @(YES)
     };
     
     CVReturn status = CVPixelBufferCreate(
@@ -108,7 +108,7 @@
     
     CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
     
-    unsigned char* addr = (unsigned char*)(CVPixelBufferGetBaseAddress(pixelBuffer));
+    unsigned char* addr = (unsigned char *)(CVPixelBufferGetBaseAddress(pixelBuffer));
     const int bytesPerRow = (int)CVPixelBufferGetBytesPerRow(pixelBuffer);
     
     CGContextRef context = CGBitmapContextCreate(

@@ -32,7 +32,7 @@ typedef enum : NSUInteger {
     TIOLayerInterfaceType _type;
 }
 
-- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription {
+- (instancetype)initWithName:(NSString *)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription *)pixelBufferDescription {
     if ( self = [super init] ) {
         _name = name;
         _input = isInput;
@@ -42,7 +42,7 @@ typedef enum : NSUInteger {
     return self;
 }
 
-- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription*)vectorDescription {
+- (instancetype)initWithName:(NSString *)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription *)vectorDescription {
     if ( self = [super init] ) {
         _name = name;
         _input = isInput;
@@ -56,10 +56,10 @@ typedef enum : NSUInteger {
     
     switch ( _type ) {
     case TIOLayerInterfaceTypePixelBuffer:
-        pixelBufferMatcher((TIOPixelBufferLayerDescription*)_dataDescription);
+        pixelBufferMatcher((TIOPixelBufferLayerDescription *)_dataDescription);
         break;
     case TIOLayerInterfaceTypeVector:
-        vectorMatcher((TIOVectorLayerDescription*)_dataDescription);
+        vectorMatcher((TIOVectorLayerDescription *)_dataDescription);
         break;
     }
 }

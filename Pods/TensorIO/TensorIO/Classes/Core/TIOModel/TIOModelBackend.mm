@@ -19,6 +19,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TIOModelBackend.h"
 
 // Backend Names
 
@@ -30,6 +31,11 @@ static NSString * const TIOBackendTensorFlow = @"tensorflow";
 static NSString * const TIOModelClassNameTFLite = @"TIOTFLiteModel";
 static NSString * const TIOModelClassNameTensorFlow = @"TIOTensorFlowModel";
 
+// Resource Bundle Names
+
+static NSString * const TIOTFLiteResourceBundle = @"TFLite.bundle";
+static NSString * const TIOTensorFlowResourceBundle = @"TensorFlow.bundle";
+
 // Backend Exception
 
 static NSString * const TIONoBackendAvailableException = @"TIONoBackendAvailableException";
@@ -38,10 +44,12 @@ static NSString * const TIONoBackendAvailableReason =
     @"along with the core pod installation. Add pod 'TensorIO/TFLite' "
     @"or another backend to your podfile and run pod install.";
 
-// Available Backend
-// Add your backend define and name to this method
+@implementation TIOModelBackend
 
-NSString * _Nullable TIOAvailableBackend() {
+// Available Backend
+// Add your backend preprocessor definition and name to this method
+
++ (nullable NSString *)availableBackend {
     #ifdef TIO_TFLITE
         return TIOBackendTFLite;
     #elif TIO_TENSORFLOW
@@ -58,16 +66,36 @@ NSString * _Nullable TIOAvailableBackend() {
 // Class Name for Backend
 // Add your backend name and class name to this dictionary
 
-NSString * _Nullable TIOClassNameForBackend(NSString *backend) {
-    static NSDictionary<NSString*,NSString*> *backends = nil;
++ (nullable NSString *)classNameForBackend:(NSString *)backend {
+    static NSDictionary<NSString*,NSString*> *classnames = nil;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        backends = @{
+        classnames = @{
             TIOBackendTFLite:       TIOModelClassNameTFLite,
             TIOBackendTensorFlow:   TIOModelClassNameTensorFlow
         };
     });
     
-    return backends[backend.lowercaseString];
+    return classnames[backend.lowercaseString];
 }
+
++ (nullable NSBundle *)resourceBundleForBackend:(NSString *)backend {
+    static NSDictionary<NSString*,NSString*> *bundles = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        bundles = @{
+            TIOBackendTFLite:       TIOTFLiteResourceBundle,
+            TIOBackendTensorFlow:   TIOTensorFlowResourceBundle
+        };
+    });
+    
+    NSBundle *frameworkBundle = [NSBundle bundleForClass:self.class];
+    NSURL *resourceURL = [frameworkBundle.resourceURL URLByAppendingPathComponent:bundles[backend.lowercaseString]];
+    NSBundle *resourceBundle = [NSBundle bundleWithURL:resourceURL];
+    
+    return resourceBundle;
+}
+
+@end

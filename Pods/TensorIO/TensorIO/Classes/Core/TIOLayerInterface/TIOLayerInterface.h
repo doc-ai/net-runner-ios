@@ -56,7 +56,7 @@ typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
  * @return TIOLayerInterface The encapsulated description
  */
 
-- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithName:(NSString *)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription *)pixelBufferDescription NS_DESIGNATED_INITIALIZER;
 
 /**
  * Initializes a `TIOLayerInterface` with a vector description, e.g. the description of a vector,
@@ -67,7 +67,7 @@ typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
  * @return TIOLayerInterface The encapsulated description
  */
 
-- (instancetype)initWithName:(NSString*)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription*)vectorDescription NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithName:(NSString *)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription *)vectorDescription NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use one of the above initializers
@@ -98,7 +98,7 @@ typedef void (^TIOVectorMatcher)(TIOVectorLayerDescription *vectorDescription);
  * `TIOLayerDescription` directly.
  */
 
-@property (readonly) id<TIOLayerDescription> dataDescription;
+@property (readonly) id<TIOLayerDescription> dataDescription __attribute__((deprecated));
 
 /**
  * Use this function to switch on the underlying description.

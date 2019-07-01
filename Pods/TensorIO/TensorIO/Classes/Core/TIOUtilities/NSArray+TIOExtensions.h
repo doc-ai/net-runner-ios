@@ -17,6 +17,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -85,6 +86,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSInteger)product;
 
+/**
+ * Returns a subset of the array without the batch dimension, if it has one.
+ * The batch will always be along the first or last axis and is indicated by
+ * the presence of `-1` in that dimension.
+ */
+
+- (NSArray *)excludingBatch;
+
+/**
+ * Returns a subset of the array excluding the first item, or an empty array
+ * if the array is empty.
+ */
+
+- (NSArray *)excludingFirst;
+
+/**
+ * Returns a subset of the array excluding the last item, or an empty array
+ * if the array is empty.
+ */
+
+- (NSArray *)excludingLast;
+
 @end
 
 // MARK: - Arrays of Dictionaries
@@ -99,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Groups the items in the array by some key, returning a dictionary of those key-grouping pairs.
  */
 
-- (NSDictionary *)groupBy:(NSString*)key;
+- (NSDictionary *)groupBy:(NSString *)key;
 
 @end
 

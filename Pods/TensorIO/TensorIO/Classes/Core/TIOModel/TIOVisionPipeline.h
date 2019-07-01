@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  * needed to convert a pixel buffer to a format that can be accepted by the model.
  */
 
-- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferLayerDescription*)pixelBufferDescription;
+- (instancetype)initWithTIOPixelBufferDescription:(TIOPixelBufferLayerDescription *)pixelBufferDescription;
 
 /**
  * Use the designated initializer.
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param pixelBuffer The `CVPixelBufferRef` that will be transformed.
  * @param orientation The orientation of the pixel buffer.
  *
- * @return A `CVPixelBufferRef` that is suitable for use as input to the model.
+ * @return An autoreleased `CVPixelBufferRef` that is suitable for use as input to the model.
  */
 
 - (nullable CVPixelBufferRef)transform:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation;

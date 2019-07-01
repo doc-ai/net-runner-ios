@@ -100,7 +100,7 @@ CVPixelBufferRef TIOCVPixelBufferRotate(CVPixelBufferRef pixelBuffer, TIOCVPixel
     
     // Prepare source image buffer from input pixel buffer
     
-    unsigned char* sourceBaseAddr = (unsigned char*)(CVPixelBufferGetBaseAddress(pixelBuffer));
+    unsigned char* sourceBaseAddr = (unsigned char *)(CVPixelBufferGetBaseAddress(pixelBuffer));
     
     vImage_Buffer srcImageBuffer = {
         .width = (vImagePixelCount)bufferWidth,
@@ -111,7 +111,7 @@ CVPixelBufferRef TIOCVPixelBufferRotate(CVPixelBufferRef pixelBuffer, TIOCVPixel
     
     // Prepare destination image buffer with new block of memory
     
-    unsigned char *destData = (unsigned char*)malloc(bufferHeight*sourceRowBytes);
+    unsigned char *destData = (unsigned char *)malloc(bufferHeight*sourceRowBytes);
     const size_t destRowBytes = bufferHeight * ( sourceRowBytes / bufferWidth );
     const int destBufferWidth = bufferHeight;
     const int destBufferHeight = bufferWidth;
@@ -234,8 +234,8 @@ CVPixelBufferRef TIOCVPixelBufferCreateBGRAFromARGB(CVPixelBufferRef pixelBuffer
     CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
     CVPixelBufferLockBaseAddress(destPixelBuffer, kNilOptions);
     
-    unsigned char* in = (unsigned char*)CVPixelBufferGetBaseAddress(pixelBuffer);
-    unsigned char* out = (unsigned char*)CVPixelBufferGetBaseAddress(destPixelBuffer);
+    unsigned char* in = (unsigned char *)CVPixelBufferGetBaseAddress(pixelBuffer);
+    unsigned char* out = (unsigned char *)CVPixelBufferGetBaseAddress(destPixelBuffer);
 
     for (int y = 0; y < bufferHeight; y++) {
         for (int x = 0; x < bufferWidth; x++) {
@@ -317,8 +317,8 @@ CVPixelBufferRef TIOCVPixelBufferCreateARGBFromBGRA(CVPixelBufferRef pixelBuffer
     CVPixelBufferLockBaseAddress(pixelBuffer, kNilOptions);
     CVPixelBufferLockBaseAddress(destPixelBuffer, kNilOptions);
     
-    unsigned char* in = (unsigned char*)CVPixelBufferGetBaseAddress(pixelBuffer);
-    unsigned char* out = (unsigned char*)CVPixelBufferGetBaseAddress(destPixelBuffer);
+    unsigned char* in = (unsigned char *)CVPixelBufferGetBaseAddress(pixelBuffer);
+    unsigned char* out = (unsigned char *)CVPixelBufferGetBaseAddress(destPixelBuffer);
     
     for (int y = 0; y < bufferHeight; y++) {
         for (int x = 0; x < bufferWidth; x++) {
@@ -453,11 +453,11 @@ CVReturn TIOCVPixelBufferCopySeparateChannels(
     CVPixelBufferLockBaseAddress(channel2, kNilOptions);
     CVPixelBufferLockBaseAddress(channel3, kNilOptions);
     
-    unsigned char* in = (unsigned char*)CVPixelBufferGetBaseAddress(pixelBuffer);
-    unsigned char* out0 = (unsigned char*)CVPixelBufferGetBaseAddress(channel0);
-    unsigned char* out1 = (unsigned char*)CVPixelBufferGetBaseAddress(channel1);
-    unsigned char* out2 = (unsigned char*)CVPixelBufferGetBaseAddress(channel2);
-    unsigned char* out3 = (unsigned char*)CVPixelBufferGetBaseAddress(channel3);
+    unsigned char* in = (unsigned char *)CVPixelBufferGetBaseAddress(pixelBuffer);
+    unsigned char* out0 = (unsigned char *)CVPixelBufferGetBaseAddress(channel0);
+    unsigned char* out1 = (unsigned char *)CVPixelBufferGetBaseAddress(channel1);
+    unsigned char* out2 = (unsigned char *)CVPixelBufferGetBaseAddress(channel2);
+    unsigned char* out3 = (unsigned char *)CVPixelBufferGetBaseAddress(channel3);
     
     for (int y = 0; y < bufferHeight; y++) {
         for (int x = 0; x < bufferWidth; x++) {
@@ -534,7 +534,7 @@ CVPixelBufferRef TIOCVPixelBufferResizeToSquare(CVPixelBufferRef srcPixelBuffer,
     
     // Prepare source image buffer
     
-    unsigned char* sourceBaseAddr = (unsigned char*)(CVPixelBufferGetBaseAddress(srcPixelBuffer));
+    unsigned char* sourceBaseAddr = (unsigned char *)(CVPixelBufferGetBaseAddress(srcPixelBuffer));
     const int sourceRowBytes = (int)CVPixelBufferGetBytesPerRow(srcPixelBuffer);
     auto offset = cropY*sourceRowBytes + cropX*4;
     
@@ -550,7 +550,7 @@ CVPixelBufferRef TIOCVPixelBufferResizeToSquare(CVPixelBufferRef srcPixelBuffer,
     vImage_Buffer destImageBuffer;
     
     const int destRowBytes = 4*destWidth;
-    unsigned char *destData = (unsigned char*)malloc(destHeight*destRowBytes);
+    unsigned char *destData = (unsigned char *)malloc(destHeight*destRowBytes);
     
     destImageBuffer.width = (vImagePixelCount)destWidth;
     destImageBuffer.height = (vImagePixelCount)destHeight;

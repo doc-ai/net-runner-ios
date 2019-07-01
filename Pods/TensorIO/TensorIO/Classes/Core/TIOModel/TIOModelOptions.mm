@@ -42,7 +42,7 @@ NSString * TIOModelOptionsOutputFormatFromString(NSString * _Nullable descriptor
 
 @implementation TIOModelOptions
 
-- (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition outputFormat:(NSString*)outputFormat {
+- (instancetype)initWithDevicePosition:(AVCaptureDevicePosition)devicePosition outputFormat:(NSString *)outputFormat {
     if (self = [super init]) {
         _devicePosition = devicePosition;
         _outputFormat = outputFormat;
@@ -50,7 +50,7 @@ NSString * TIOModelOptionsOutputFormatFromString(NSString * _Nullable descriptor
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSDictionary*)dictionary {
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
     AVCaptureDevicePosition devicePosition;
     NSString *outputFormat;
     

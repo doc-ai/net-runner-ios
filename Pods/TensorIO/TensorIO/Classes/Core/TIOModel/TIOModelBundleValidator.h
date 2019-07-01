@@ -56,7 +56,7 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
  * @return instancetype A validator instance.
  */
 
-- (instancetype)initWithModelBundleAtPath:(NSString*)path NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithModelBundleAtPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.
@@ -87,7 +87,7 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
  * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
  */
 
-- (BOOL)validate:(_Nullable TIOModelBundleValidationBlock)customValidator error:(NSError**)error;
+- (BOOL)validate:(_Nullable TIOModelBundleValidationBlock)customValidator error:(NSError * _Nullable *)error;
 
 /**
  * A convenience method for validating the bundle when no custom validation is needed.
@@ -97,33 +97,7 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
  * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
  */
 
-- (BOOL)validate:(NSError**)error;
-
-// MARK: - Specific Validation Steps
-
-/**
- * Validates basic bundle properties from a JSON dictionary. Called by `validate:error:`
- *
- * @param JSON The bundle properties loaded from a model.json file.
- * @param error Pointer to an `NSError` that will be set if the bundle properties could not be validated.
- *
- * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
- */
-
-- (BOOL)validateBundleProperties:(NSDictionary*)JSON error:(NSError**)error;
-
-/**
- * Validates basic model properties from a JSON dictionary. Called by `validate:error:`
- *
- * The `validate:error:` function passes the value of the "model" field to this method.
- *
- * @param JSON The model properties loaded from a model.json file.
- * @param error Pointer to an `NSError` that will be set if the model properties could not be validated.
- *
- * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
- */
-
-- (BOOL)validateModelProperties:(NSDictionary*)JSON error:(NSError**)error;
+- (BOOL)validate:(NSError * _Nullable *)error;
 
 /**
  * Validates presence of assets identified in JSON dictionary. Called by `validate:error:`
@@ -134,33 +108,7 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
  * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
  */
 
-- (BOOL)validateAssets:(NSDictionary*)JSON error:(NSError**)error;
-
-/**
- * Validates input properties from a JSON array. Called by `validate:error:`
- *
- * The `validate:error:` function passes the value of the "inputs" field to this method.
- *
- * @param JSON The bundle properties loaded from a model.json file.
- * @param error Pointer to an `NSError` that will be set if the input properties could not be validated.
- *
- * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
- */
-
-- (BOOL)validateInputs:(NSArray*)JSON error:(NSError**)error;
-
-/**
- * Validates input properties from a JSON array. Called by `validate:error:`
- *
- * The `validate:error:` function passes the value of the "outputs" field to this method.
- *
- * @param JSON The bundle properties loaded from a model.json file.
- * @param error Pointer to an `NSError` that will be set if the output properties could not be validated.
- *
- * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
- */
-
-- (BOOL)validateOutputs:(NSArray*)JSON error:(NSError**)error;
+- (BOOL)validateAssets:(NSDictionary *)JSON error:(NSError * _Nullable *)error;
 
 /**
  * Executes a custom validator. Called by `validate:error:`
@@ -174,7 +122,7 @@ typedef BOOL (^TIOModelBundleValidationBlock)(NSString *path, NSDictionary *JSON
  * @return BOOL `YES` if the bundle was successfully validated, `NO` otherwise.
  */
 
-- (BOOL)validateCustomValidator:(NSDictionary*)JSON validator:(TIOModelBundleValidationBlock)customValidator error:(NSError**)error;
+- (BOOL)validateCustomValidator:(NSDictionary *)JSON validator:(TIOModelBundleValidationBlock)customValidator error:(NSError * _Nullable *)error;
 
 @end
 

@@ -23,6 +23,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ * A collection of utility functions for managing model backends.
+ *
+ * To add your own backend, create a subspec in TensorIO.podspec and add
+ * a preprocessor definition there.
+ 
+ * On the `availableBackend` return a string identifying your backend if your
+ * preprocessor definion resolves. Return your model classname for that string
+ * in `classNameForBackend`. Return the resource bundle for your backend in
+ * `resourceBundle:`.
+ */
+
+@interface TIOModelBackend: NSObject
+
+/**
  * Returns the available backend or the first one it finds
  *
  * When you define a backend in the Podspec, you should also add a
@@ -30,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  * of the backend here if that preprocessor definition is defined.
  */
 
-NSString * _Nullable TIOAvailableBackend();
++ (nullable NSString *)availableBackend;
 
 /**
  * Returns the default model class name used with a backend
@@ -40,6 +54,17 @@ NSString * _Nullable TIOAvailableBackend();
  * returns the correct class name in TIOModelBackendsTests.
  */
 
-NSString * _Nullable TIOClassNameForBackend(NSString *backend);
++ (nullable NSString *)classNameForBackend:(NSString *)backend;
+
+/**
+ * Returns the resource bundle for a backend.
+ *
+ * Resource bundles are defined in your backend's pod subspec and will include
+ * the model's JSON schema.
+ */
+
++ (nullable NSBundle *)resourceBundleForBackend:(NSString *)backend;
+
+@end
 
 NS_ASSUME_NONNULL_END
