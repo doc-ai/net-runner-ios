@@ -88,9 +88,12 @@
     // Transform the image to the required format
     
     __block TIOPixelBufferLayerDescription *description = nil;
+    
     [self.model.io.inputs[0] matchCasePixelBuffer:^(TIOPixelBufferLayerDescription * _Nonnull pixelBufferDescription) {
         description = pixelBufferDescription;
     } caseVector:^(TIOVectorLayerDescription * _Nonnull vectorDescription) {
+        ;
+    } caseString:^(TIOStringLayerDescription * _Nonnull stringDescription) {
         ;
     }];
     

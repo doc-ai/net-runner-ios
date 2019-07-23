@@ -188,6 +188,11 @@
             [textCell setLabels:self.labels key:layer.name];
             cell = textCell;
         }
+    } caseString:^(TIOStringLayerDescription * _Nonnull stringDescription) {
+        // TODO: Raw bytes interface
+        
+        TextLabelTableViewCell *textCell = (TextLabelTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"TextLabelOutputCell" forIndexPath:indexPath];
+        cell = textCell;
     }];
     
     if ( indexPath.section == self.model.io.outputs.count-1 ) {
