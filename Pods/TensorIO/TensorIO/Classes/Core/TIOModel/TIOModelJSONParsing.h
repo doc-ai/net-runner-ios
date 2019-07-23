@@ -32,20 +32,35 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ * Enumerates through the JSON description of a model's inputs or outputs and
+ * constructs a `TIOLayerInterface` for each one.
+ *
+ * @param bundle The model bundle whose layer descriptions are being parsed.
+ *  May be `nil` if descriptions are being parsed from something other than a bundle.
+ * @param io An array of dictionaries describing the model's input or output layers
+ * @param mode `TIOLayerInterfaceMode` one of input, output, or placeholder,
+ *  describing the kind of layer this is.
+ * @return NSArray An array of `TIOLayerInterface` matching the descriptions, or `nil` if parsing failed
+ */
+
+NSArray<TIOLayerInterface*> * _Nullable TIOModelParseIO(TIOModelBundle * _Nullable bundle, NSArray<NSDictionary<NSString*,id>*> *io, TIOLayerInterfaceMode mode);
+
+/**
  * Parses the JSON description of a vector input or output.
  *
  * Handles a vector, matrix, or other multidimensional array (tensor), described as a
  * one dimensional unrolled vector with an optional labels entry.
  *
  * @param dict The JSON description in `NSDictionary` format.
- * @param isInput `YES` if this is an input layer, `NO` if it is an output layer.
+ * @param mode `TIOLayerInterfaceMode` one of input, output, or placeholder.
  * @param quantized `YES` if the layer expects or returns quantized bytes, `NO` otherwise.
  * @param bundle `The ModelBundel` that is being parsed, needed to derive a path to the labels file.
+ * May be `nil` if descriptions are being parsed from something other than a bundle.
  *
- * @return TIOLayerInterface An interface that describes this pixel buffer input or output.
+ * @return TIOLayerInterface An interface that describes this vector input or output.
  */
 
-TIOLayerInterface * _Nullable TIOModelParseTIOVectorDescription(NSDictionary *dict, BOOL isInput, BOOL quantized, TIOModelBundle *bundle);
+TIOLayerInterface * _Nullable TIOModelParseTIOVectorDescription(NSDictionary *dict, TIOLayerInterfaceMode mode, BOOL quantized, TIOModelBundle *_Nullable bundle);
 
 /**
  * Parses the JSON description of a pixel buffer input or output.
@@ -54,13 +69,29 @@ TIOLayerInterface * _Nullable TIOModelParseTIOVectorDescription(NSDictionary *di
  * of byte alignment and pixel format conversion requirements.
  *
  * @param dict The JSON description in `NSDictionary` format.
- * @param isInput `YES` if this is an input layer, `NO` if it is an output layer.
+ * @param mode `TIOLayerInterfaceMode` one of input, output, or placeholder.
  * @param quantized `YES` if the layer expects or returns quantized bytes, `NO` otherwise.
  *
  * @return TIOLayerInterface An interface that describes this pixel buffer input or output.
  */
 
-TIOLayerInterface * _Nullable TIOModelParseTIOPixelBufferDescription(NSDictionary *dict, BOOL isInput, BOOL quantized);
+TIOLayerInterface * _Nullable TIOModelParseTIOPixelBufferDescription(NSDictionary *dict, TIOLayerInterfaceMode mode, BOOL quantized);
+
+/**
+ * Parses the JSON description of a string input or output.
+ *
+ * String inputs provides access to the underlying raw bytes that are sent into
+ * or out of a tensor. Although they are described as "string" data types in
+ * both TensorFlow and Caffe, they are handled by `NSData` here.
+ *
+ * @param dict The JSON description in `NSDictionary` format.
+ * @param mode `TIOLayerInterfaceMode` one of input, output, or placeholder.
+ * @param quantized `YES` if the layer expects or returns quantized bytes, `NO` otherwise.
+ *
+ * @return TIOLayerInterface An interface that describes this string input or output.
+ */
+
+TIOLayerInterface * _Nullable TIOModelParseTIOStringDescription(NSDictionary *dict, TIOLayerInterfaceMode mode, BOOL quantized);
 
 /**
  * Parses the `quantization` key of an input description and returns an associated data quantizer.

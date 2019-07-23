@@ -36,10 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TIOPlaceholderModel : NSObject <TIOModel>
 
-+ (nullable instancetype)modelWithBundleAtPath:(NSString *)path;
-
-// Model Protocol Properties
-
 @property (readonly) TIOModelBundle *bundle;
 @property (readonly) TIOModelOptions *options;
 @property (readonly) NSString* identifier;
@@ -55,28 +51,25 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) BOOL loaded;
 @property (readonly) TIOModelIO *io;
 
-// Model Protocol Methods
+// MARK: - Initialization
 
 - (nullable instancetype)initWithBundle:(TIOModelBundle *)bundle NS_DESIGNATED_INITIALIZER;
-
 - (instancetype)init NS_UNAVAILABLE;
+
++ (nullable instancetype)modelWithBundleAtPath:(NSString *)path;
+
+// MARK: - Lifecycle
 
 - (BOOL)load:(NSError * _Nullable *)error;
 - (void)unload;
 
-- (id<TIOData>)runOn:(id<TIOData>)input;
+// MARK: - Run
 
-// TODO: Where are these used? Can we deprecate them? By the data collection UI?
-// Use `io` instead
-
-@property (readonly) NSArray<TIOLayerInterface*> *inputs __attribute__((deprecated));
-@property (readonly) NSArray<TIOLayerInterface*> *outputs __attribute__((deprecated));
-
-- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index __attribute__((deprecated));
-- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString *)name __attribute__((deprecated));
-
-- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index __attribute__((deprecated));
-- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString *)name __attribute__((deprecated));
+- (id<TIOData>)runOn:(id<TIOData>)input error:(NSError* _Nullable *)error;
+- (id<TIOData>)runOn:(id<TIOData>)input placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError* _Nullable *)error;
+- (id<TIOData>)run:(TIOBatch *)batch error:(NSError * _Nullable *)error;
+- (id<TIOData>)run:(TIOBatch *)batch placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError * _Nullable *)error;
+- (id<TIOData>)runOn:(id<TIOData>)input __attribute__((deprecated));
 
 @end
 

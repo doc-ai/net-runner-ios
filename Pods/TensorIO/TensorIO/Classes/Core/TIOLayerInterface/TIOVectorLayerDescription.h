@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * The length of the vector in terms of its total number of elements. Calculated
- * as the product of the dimenions in `shape`. A dimension of -1 which acts as
+ * as the product of the dimensions in `shape`. A dimension of -1 which acts as
  * placeholder for a batch size will be interpreted as a 1.
  */
 

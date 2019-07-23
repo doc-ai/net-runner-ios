@@ -7,12 +7,12 @@ PODS:
   - SSZipArchive (2.2.2)
   - SVProgressHUD (2.2.5)
   - TensorFlowLite (1.13.1)
-  - TensorIO (0.9.4):
+  - TensorIO (0.9.5):
     - DSJSONSchemaValidation
-    - TensorIO/Core (= 0.9.4)
-  - TensorIO/Core (0.9.4):
+    - TensorIO/Core (= 0.9.5)
+  - TensorIO/Core (0.9.5):
     - DSJSONSchemaValidation
-  - TensorIO/TFLite (0.9.4):
+  - TensorIO/TFLite (0.9.5):
     - DSJSONSchemaValidation
     - TensorFlowLite
     - TensorIO/Core
@@ -22,8 +22,8 @@ DEPENDENCIES:
   - FMDB
   - SSZipArchive
   - SVProgressHUD
-  - TensorIO (~> 0.9.4)
-  - TensorIO/TFLite (~> 0.9.4)
+  - TensorIO (~> 0.9.5)
+  - TensorIO/TFLite (~> 0.9.5)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -42,8 +42,8 @@ SPEC CHECKSUMS:
   SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TensorFlowLite: 8b9dc4eb32eac0f8cb660c66bca7604da56dcc5a
-  TensorIO: 64c2ac3ae1ea7026c28876163f3811c6ebb36504
+  TensorIO: 07e2866d21eaae43b961c2a2b3ed940cfe739c48
 
-PODFILE CHECKSUM: ece3dc65a39d6750be5f37c2458147e6288133ca
+PODFILE CHECKSUM: 661d404f2c0bd1845b92e49aadcd1c081e1a7622
 
 COCOAPODS: 1.6.0

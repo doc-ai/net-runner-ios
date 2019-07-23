@@ -154,34 +154,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) BOOL loaded;
 
 /**
- * Contains the descriptions of the model's inputs and outputs accessible by
- * numeric index or by name:
+ * Contains the descriptions of the model's inputs, outputs, and placeholders
+ * accessible by numeric index or by name. Not all model backends support
+ * placeholders.
  *
  * @code
  * io.inputs[0]
  * io.inputs[@"image"]
  * io.outputs[0]
  * io.outputs[@"label"]
+ * io.placeholders[0]
+ * io.placeholders[@"label"]
  * @endcode
  */
 
 @property (readonly) TIOModelIO *io;
 
-/**
- * Returns descriptions of the model's inputs indexed to the order they appear in model.json.
- * This attribute is deprecated. Use `io` instead.
- */
-
-@property (readonly) NSArray<TIOLayerInterface*> *inputs __attribute__((deprecated));
-
-/**
- * Returns descriptions of the model's outputs indexed to the order they appear in model.json.
- * This attribute is deprecated. Use `io` instead.
- */
-
-@property (readonly) NSArray<TIOLayerInterface*> *outputs __attribute__((deprecated));
-
- // MARK: - Initialization
+// MARK: - Initialization
 
 /**
  * The designated initializer for conforming classes.
@@ -240,75 +229,67 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: - Run
 
 /**
- * Performs inference on the provided input and returns the results. The primary interface to a
- * conforming class.
+ * Performs inference on the provided input and returns the results. The primary
+ * interface to a conforming class.
  *
- * @param input Any class conforming to `TIOData` that you want to run inference on
+ * @param input Any class conforming to `TIOData`.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of performing inference on input.
+ */
+
+- (id<TIOData>)runOn:(id<TIOData>)input error:(NSError* _Nullable *)error;
+
+/**
+ * Performs inference on the provided input and returns the results.
  *
- * @return TIOData The results of performing inference
+ * @warning
+ * Not all model backends support the use of placeholders.
+ *
+ * @param input Any class conforming to `TIOData`.
+ * @param placeholders A dictionary of `TIOData` conforming placeholder values,
+ *  which will be matched to placeholder layers in the model. May be nil.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of performing inference on input.
+ */
+
+- (id<TIOData>)runOn:(id<TIOData>)input placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError* _Nullable *)error;
+
+/**
+ * Performs inference on the provided batch and returns the results. A batch is
+ * a more well defined way of providing data to a model and is comprised of
+ * batch items, effectively rows of data, each of which contains feature values
+ * as columns. See `TIOBatch` for more information.
+ *
+ * @param batch A batch of input data.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of performing inference on input.
+ */
+
+- (id<TIOData>)run:(TIOBatch *)batch error:(NSError * _Nullable *)error;
+
+/**
+ * Performs inference on the provided batch and returns the results. A batch is
+ * a more well defined way of providing data to a model and is comprised of
+ * batch items, effectively rows of data, each of which contains feature values
+ * as columns. See `TIOBatch` for more information.
+ *
+ * @warning
+ * Not all model backends support the use of placeholders.
+ *
+ * @param batch A batch of input data.
+ * @param placeholders A dictionary of `TIOData` conforming placeholder values,
+ *  which will be matched to placeholder layers in the model. May be nil.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of performing inference on input.
+ */
+
+- (id<TIOData>)run:(TIOBatch *)batch placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError * _Nullable *)error;
+
+/**
+ * Deprecated. Use `runOn:error:` or one of the other similar methods instead.
  */
 
 - (id<TIOData>)runOn:(id<TIOData>)input __attribute__((deprecated));
-- (id<TIOData>)runOn:(id<TIOData>)input error:(NSError* _Nullable *)error;
-- (id<TIOData>)run:(TIOBatch *)batch error:(NSError * _Nullable *)error;
-
-// MARK: - Input/Output Layers
-
-/**
- * Returns a description of the model's input at a given index
- *
- * Model inputs and outputs are organized by index and name. In the model.json file that describes
- * the interface to a model, an array of named inputs includes information such as the type of
- * data the input expects, its volume, and any transformations that will be applied to it.
- *
- * This information is encapsulated in a `TIOLayerDescription`, which is used to prepare
- * inputs provided to the `runOn:` method prior to performing inference. See TIOModelBundleJSONSchema.h
- * for more information about this json file.
- */
-
-- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index __attribute__((deprecated));
-
-/**
- * Returns a description of the model's input for a given name
- *
- * Model inputs and outputs are organized by index and name. In the model.json file that describes
- * the interface to a model, an array of named inputs includes information such as the type of
- * data the input expects, its volume, and any transformations that will be applied to it.
- *
- * This information is encapsulated in a `TIOLayerDescription`, which is used to prepare
- * inputs provided to the `runOn:` method prior to performing inference. See TIOModelBundleJSONSchema.h
- * for more information about this json file.
- */
- 
-- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString *)name __attribute__((deprecated));
-
-/**
- * Returns a description of the model's output at a given index
- *
- * Model inputs and outputs are organized by index and name. In the model.json file that describes
- * the interface to a model, an array of named inputs includes information such as the type of
- * data the input expects, its volume, and any transformations that will be applied to it.
- *
- * This information is encapsulated in a `TIOLayerDescription`, which is used to prepare the results
- * of performing inference and returned from the `runOn:` method. See TIOModelBundleJSONSchema.h
- * for more information about this json file.
- */
-
-- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index __attribute__((deprecated));
-
-/**
- * Returns a description of the model's output for a given name
- *
- * Model inputs and outputs are organized by index and name. In the model.json file that describes
- * the interface to a model, an array of named inputs includes information such as the type of
- * data the input expects, its volume, and any transformations that will be applied to it.
- *
- * This information is encapsulated in a `TIOLayerDescription`, which is used to prepare the results
- * of performing inference and returned from the `runOn:` method. See TIOModelBundleJSONSchema.h
- * for more information about this json file.
- */
-
-- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString *)name __attribute__((deprecated));
 
 @end
 

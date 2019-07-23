@@ -1,8 +1,8 @@
 //
-//  TIODataTypes.h
+//  TIOStringLayerDescription.m
 //  TensorIO
 //
-//  Created by Phil Dow on 4/18/19.
+//  Created by Phil Dow on 7/3/19.
 //  Copyright © 2019 doc.ai (http://doc.ai)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,21 +18,19 @@
 //  limitations under the License.
 //
 
-#ifndef TIODataTypes_h
-#define TIODataTypes_h
+#import "TIOStringLayerDescription.h"
+#import "NSArray+TIOExtensions.h"
 
-/**
- * The data types used by at least one of the supported backends
- */
+@implementation TIOStringLayerDescription
 
-typedef enum : NSUInteger {
-    TIODataTypeUnknown,
-    TIODataTypeUInt8,       // "uint8"
-    TIODataTypeFloat32,     // "float32"
-    TIODataTypeInt32,       // "int32"
-    TIODataTypeInt64        // "int64"
-} TIODataType;
+- (instancetype)initWithShape:(NSArray<NSNumber*>*)shape batched:(BOOL)batched dtype:(TIODataType)dtype {
+    if ((self=[super init])) {
+        _shape = shape;
+        _batched = batched;
+        _dtype = dtype;
+        _length = ABS(shape.product);
+    }
+    return self;
+}
 
-NSUInteger TIOByteSizeOfDataType(TIODataType dtype);
-
-#endif /* TIODataTypes_h */
+@end

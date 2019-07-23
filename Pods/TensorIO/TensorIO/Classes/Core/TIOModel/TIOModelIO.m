@@ -31,6 +31,13 @@
     return self;
 }
 
+- (instancetype)initWithInputInterfaces:(NSArray<TIOLayerInterface*> *)inputInterfaces ouputInterfaces:(NSArray<TIOLayerInterface*> *)outputInterfaces placeholderInterfaces:(nullable NSArray<TIOLayerInterface*> *)placeholderInterfaces {
+    if ((self = [self initWithInputInterfaces:inputInterfaces ouputInterfaces:outputInterfaces])) {
+        _placeholders = [[TIOModelIOList alloc] initWithLayerInterfaces:placeholderInterfaces];
+    }
+    return self;
+}
+
 @end
 
 // MARK: -
@@ -41,21 +48,26 @@
     NSDictionary<NSString*,NSNumber*> *_nameToIndex;
 }
 
-- (instancetype)initWithLayerInterfaces:(NSArray<TIOLayerInterface*> *)interfaces {
+- (instancetype)initWithLayerInterfaces:(nullable NSArray<TIOLayerInterface*> *)interfaces {
     if ((self=[super init])) {
-        _indexedInterfaces = interfaces;
-        
-        NSMutableDictionary *namedInterfaces = NSMutableDictionary.dictionary;
-        NSMutableDictionary *nameToIndex = NSMutableDictionary.dictionary;
-        
-        [interfaces enumerateObjectsUsingBlock:^(TIOLayerInterface * _Nonnull interface, NSUInteger idx, BOOL * _Nonnull stop) {
-            namedInterfaces[interface.name] = interface;
-            nameToIndex[interface.name] = @(idx);
-        }];
-        
-        _namedInterfaces = namedInterfaces.copy;
-        _nameToIndex = nameToIndex.copy;
-        
+        if ( interfaces == nil ) {
+            _indexedInterfaces = @[];
+            _namedInterfaces = @{};
+            _nameToIndex = @{};
+        } else {
+            _indexedInterfaces = interfaces;
+            
+            NSMutableDictionary *namedInterfaces = NSMutableDictionary.dictionary;
+            NSMutableDictionary *nameToIndex = NSMutableDictionary.dictionary;
+            
+            [interfaces enumerateObjectsUsingBlock:^(TIOLayerInterface * _Nonnull interface, NSUInteger idx, BOOL * _Nonnull stop) {
+                namedInterfaces[interface.name] = interface;
+                nameToIndex[interface.name] = @(idx);
+            }];
+            
+            _namedInterfaces = namedInterfaces.copy;
+            _nameToIndex = nameToIndex.copy;
+        }
     }
     return self;
 }
@@ -94,6 +106,35 @@
 
 - (void)setObject:(TIOLayerInterface *)obj forKeyedSubscript:(NSString *)key {
     NSAssert(NO, @"Writing to an indexed subscript is not supported.");
+}
+
+// MARK: -
+
+- (BOOL)isEqualToModelIOList:(TIOModelIOList *)otherList {
+    
+    // Same keys
+    
+    if ( ![[NSSet setWithArray:self.keys] isEqualToSet:[NSSet setWithArray:otherList.keys]] ) {
+        return NO;
+    }
+    
+    // Inteface descriptions are identical
+    
+    for ( NSString *key in self.keys ) {
+        if ( ![self[key] isEqualToLayerInterface:otherList[key]] ) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)isEqual:(id)object {
+    if ( ![object isKindOfClass:TIOModelIOList.class] ) {
+        return NO;
+    }
+    
+    return [self isEqualToModelIOList:object];
 }
 
 @end

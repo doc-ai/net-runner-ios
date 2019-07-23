@@ -1,8 +1,8 @@
 //
-//  TIODataTypes.h
+//  TIODataTypes.c
 //  TensorIO
 //
-//  Created by Phil Dow on 4/18/19.
+//  Created by Phil Dow on 7/3/19.
 //  Copyright © 2019 doc.ai (http://doc.ai)
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,21 +18,19 @@
 //  limitations under the License.
 //
 
-#ifndef TIODataTypes_h
-#define TIODataTypes_h
+#import "TIODataTypes.h"
 
-/**
- * The data types used by at least one of the supported backends
- */
-
-typedef enum : NSUInteger {
-    TIODataTypeUnknown,
-    TIODataTypeUInt8,       // "uint8"
-    TIODataTypeFloat32,     // "float32"
-    TIODataTypeInt32,       // "int32"
-    TIODataTypeInt64        // "int64"
-} TIODataType;
-
-NSUInteger TIOByteSizeOfDataType(TIODataType dtype);
-
-#endif /* TIODataTypes_h */
+NSUInteger TIOByteSizeOfDataType(TIODataType dtype) {
+    switch (dtype) {
+    case TIODataTypeUnknown:
+        return 0;
+    case TIODataTypeUInt8:
+        return 1;
+    case TIODataTypeFloat32:
+        return 4;
+    case TIODataTypeInt32:
+        return 4;
+    case TIODataTypeInt64:
+        return 8;
+    }
+}

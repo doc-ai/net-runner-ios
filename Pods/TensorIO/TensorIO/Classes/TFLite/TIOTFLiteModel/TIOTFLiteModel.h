@@ -37,10 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TIOTFLiteModel : NSObject <TIOModel>
 
-+ (nullable instancetype)modelWithBundleAtPath:(NSString *)path;
-
-// Model Protocol Properties
-
 @property (readonly) TIOModelBundle *bundle;
 @property (readonly) TIOModelOptions *options;
 @property (readonly) NSString* identifier;
@@ -56,41 +52,130 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) BOOL loaded;
 @property (readonly) TIOModelIO *io;
 
-// Model Protocol Methods
+// MARK: - Initialization
+
+/**
+ * The designated initializer for conforming classes.
+ *
+ * You should not need to call this method directly. Instead, acquire an instance of a `TIOModelBundle`
+ * associated with this model by way of the model's identifier. Then the `TIOModelBundle` class
+ * calls this `initWithBundle:` factory initialization method, which conforming classes may override
+ * to support custom initialization.
+ *
+ * @param bundle `TIOModelBundle` containing information about the model and its path
+ *
+ * @return instancetype An instance of the conforming class, may be `nil`.
+ */
 
 - (nullable instancetype)initWithBundle:(TIOModelBundle *)bundle NS_DESIGNATED_INITIALIZER;
 
+/**
+ * Use the designated initializer.
+ */
+
 - (instancetype)init NS_UNAVAILABLE;
 
+/**
+ * Convenience method for initializing a model directly from bundle at some path
+ *
+ * @param path The path to the model bundle folder
+ *
+ * @return instancetype An instance of the model, or `nil`.
+ */
+
++ (nullable instancetype)modelWithBundleAtPath:(NSString *)path;
+
+// MARK: - Lifecycle
+
+/**
+ * Loads a model into memory.
+ *
+ * A model should load itself prior to running on any input, but consumers of the model may want
+ * more control over when a model is loaded in order to avoid placing parameters into memory
+ * before they are needed.
+ *
+ * Conforming classes should override this method to perform custom loading and set loaded=YES.
+ *
+ * @param error Set to one of the errors in TIOTFLiteErrors.h for TFLiteModels, or one of your own error.
+ *
+ * @return BOOL `YES` if the model is successfully loaded, `NO` otherwise.
+ */
+
 - (BOOL)load:(NSError * _Nullable *)error;
+
+/**
+ * Unloads a model from memory
+ *
+ * A model will unload its resources automatically when it is deallocated, but the unload function
+ * may do this as well in order to provide finer grained control to consumers.
+ *
+ * Conforming classes should override this method to perform custom unloading and set `loaded=NO`.
+ */
+
 - (void)unload;
+
+// MARK: - Run
 
 /**
  * Performs inference on the provided input and returns the results. The primary
  * interface to a conforming class.
  *
- * @param input Any class conforming to `TIOData` that you want to run
- *  inference on
- *
- * @return TIOData The results of performing inference, or an empty dictionary
- *  if the model has not been loaded yet and a load error occurs.
+ * @param input Any class conforming to `TIOData`.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of performing inference on input.
  */
 
-- (id<TIOData>)runOn:(id<TIOData>)input;
-- (id<TIOData>)runOn:(id<TIOData>)input error:(NSError * _Nullable *)error;
+- (id<TIOData>)runOn:(id<TIOData>)input error:(NSError* _Nullable *)error;
+
+/**
+ * Performs inference on the provided input and returns the results.
+ *
+ * @warning
+ * The TFLite backend does not support the use of placeholders, and
+ * this method will raise an exception.
+ *
+ * @param input Any class conforming to `TIOData`.
+ * @param placeholders A dictionary of `TIOData` conforming placeholder values,
+ *  which will be matched to placeholder layers in the model. May be nil.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of performing inference on input.
+ */
+
+- (id<TIOData>)runOn:(id<TIOData>)input placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError* _Nullable *)error;
+
+/**
+ * Performs inference on the provided batch and returns the results. A batch is
+ * a more well defined way of providing data to a model and is comprised of
+ * batch items, effectively rows of data, each of which contains feature values
+ * as columns. See `TIOBatch` for more information.
+ *
+ * @param batch A batch of input data.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of performing inference on input.
+ */
+
 - (id<TIOData>)run:(TIOBatch *)batch error:(NSError * _Nullable *)error;
 
-// TODO: Where are these used? Can we deprecate them? By the data collection UI?
-// Use `io` instead
+/**
+ * Performs inference on the provided batch and returns the results. A batch is
+ * a more well defined way of providing data to a model and is comprised of
+ * batch items, effectively rows of data, each of which contains feature values
+ * as columns. See `TIOBatch` for more information.
+ *
+ * @param batch A batch of input data.
+ * @param placeholders A dictionary of `TIOData` conforming placeholder values,
+ *  which will be matched to placeholder layers in the model. May be nil.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of performing inference on input.
+ */
 
-@property (readonly) NSArray<TIOLayerInterface*> *inputs __attribute__((deprecated));
-@property (readonly) NSArray<TIOLayerInterface*> *outputs __attribute__((deprecated));
+- (id<TIOData>)run:(TIOBatch *)batch placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError * _Nullable *)error;
 
-- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index __attribute__((deprecated));
-- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString *)name __attribute__((deprecated));
+/**
+ * Deprecated. Use `runOn:error:` or one of the other similar methods instead.
+ */
 
-- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index __attribute__((deprecated));
-- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString *)name __attribute__((deprecated));
+- (id<TIOData>)runOn:(id<TIOData>)input __attribute__((deprecated));
 
 @end
 
