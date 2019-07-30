@@ -43,6 +43,9 @@ NSDictionary * _Nonnull PlaceholderLabelsForModel(id<TIOModel> _Nonnull model) {
                 // Text label
                 placeholders[layer.name] = @"";
             }
+        } caseString:^(TIOStringLayerDescription * _Nonnull stringDescription) {
+            // Text label
+            placeholders[layer.name] = @"";
         }];
     }
     

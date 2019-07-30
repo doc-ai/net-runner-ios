@@ -23,20 +23,50 @@
 #import "TIOTrainableModel.h"
 #import "TIOData.h"
 
-@implementation TIOModelTrainer
+@interface NSMutableArray (TIOShuffle)
 
-- (instancetype)initWithModel:(id<TIOTrainableModel>)model dataSource:(id<TIOBatchDataSource>)dataSource placeholders:(NSDictionary<NSString*, id<TIOData>>*)placeholders epochs:(NSUInteger)epochs batchSize:(NSUInteger)batchSize {
+- (NSMutableArray *)TIOShuffle;
+
+@end
+
+@implementation NSMutableArray (TIOShuffle)
+
+/**
+ * Fisher-Yates shuffle for shuffling training items order. `shuffledArray` is
+ * only availabe on iOS 10.0+.
+ */
+
+- (NSMutableArray *)TIOShuffle {
+    for (NSUInteger i = self.count; i > 1; i--) {
+        [self exchangeObjectAtIndex:i - 1 withObjectAtIndex:arc4random_uniform((u_int32_t)i)];
+    }
+    
+    return self;
+}
+
+@end
+
+// MARK: -
+
+@implementation TIOModelTrainer {
+    NSArray<NSNumber*> *_itemOrder;
+}
+
+- (instancetype)initWithModel:(id<TIOTrainableModel>)model dataSource:(id<TIOBatchDataSource>)dataSource placeholders:(NSDictionary<NSString*, id<TIOData>> *)placeholders epochs:(NSUInteger)epochs batchSize:(NSUInteger)batchSize shuffle:(BOOL)shuffle {
     if ((self=[super init])) {
         _model = model;
         _dataSource = dataSource;
         _placeholders = placeholders;
         _epochs = epochs;
         _batchSize = batchSize;
+        _shuffle = shuffle;
     }
     return self;
 }
 
 - (id<TIOData>)train {
+    [self _prepareItemOrder];
+
     NSUInteger batchCount = self._batchCount;
     id<TIOData> results;
     
@@ -46,7 +76,7 @@
                 TIOBatch *batch = [self _batchAtIndex:batchIndex];
                 NSError *error;
                 
-                results = [self.model train:batch error:&error];
+                results = [self.model train:batch placeholders:self.placeholders error:&error];
             }
         }
     }
@@ -81,11 +111,27 @@
     }
     
     for ( NSUInteger itemIndex = itemRange.location; itemIndex < NSMaxRange(itemRange); itemIndex++ ) {
-        TIOBatchItem *item = [self.dataSource itemAtIndex:itemIndex];
+        TIOBatchItem *item = [self.dataSource itemAtIndex:_itemOrder[itemIndex].unsignedIntegerValue];
         [batch addItem:item];
     }
     
     return batch;
+}
+
+/**
+ * Prepare the batch item order for requests to the data source, shuffled if necessary
+ */
+
+- (void)_prepareItemOrder {
+    NSMutableArray *order = NSMutableArray.array;
+    
+    for ( NSUInteger i = 0; i < self.dataSource.numberOfItems; i++ ) {
+        [order addObject:@(i)];
+    }
+    
+    _itemOrder = self.shuffle
+        ? order.TIOShuffle.copy
+        : order.copy;
 }
 
 @end

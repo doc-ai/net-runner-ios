@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class TIOModelIOList;
 
 /**
- * Encapsulates information about the inputs and outputs to a model.
+ * Encapsulates information about the inputs, outputs, and placeholders for a model.
  */
 
 @interface TIOModelIO : NSObject
@@ -36,6 +36,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 - (instancetype)initWithInputInterfaces:(NSArray<TIOLayerInterface*> *)inputInterfaces ouputInterfaces:(NSArray<TIOLayerInterface*> *)outputInterfaces NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Initializes an instance of TIOModelIO with input, output, and placeholder interfaces.
+ */
+
+- (instancetype)initWithInputInterfaces:(NSArray<TIOLayerInterface*> *)inputInterfaces ouputInterfaces:(NSArray<TIOLayerInterface*> *)outputInterfaces placeholderInterfaces:(nullable NSArray<TIOLayerInterface*> *)placeholderInterfaces;
 
 /**
  * Use the designated initializer.
@@ -67,6 +73,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly) TIOModelIOList *outputs;
 
+/**
+ * The placeholders list. May be empty. Access the values in this list using
+ * indexed subscripting by name or by key.
+ *
+ * @code
+ * placeholders[0]
+ * placeholders[@"label"]
+ * @endcode
+ */
+
+@property (readonly) TIOModelIOList *placeholders;
+
 @end
 
 // MARK: -
@@ -80,9 +98,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Initializes an indexed model list with a list interfaces. You should not
  * need to create instances of this class yourself.
+ *
+ * If the initializing interfaces parameter is nil, it will be treated as an
+ * empty list.
  */
 
-- (instancetype)initWithLayerInterfaces:(NSArray<TIOLayerInterface*> *)interfaces NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithLayerInterfaces:(nullable NSArray<TIOLayerInterface*> *)interfaces NS_DESIGNATED_INITIALIZER;
 
 /**
  * Use the designated initializer.
@@ -143,6 +164,10 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 - (void)setObject:(TIOLayerInterface *)obj forKeyedSubscript:(NSString *)key;
+
+// MARK: -
+
+- (BOOL)isEqualToModelIOList:(TIOModelIOList *)otherList;
 
 @end
 

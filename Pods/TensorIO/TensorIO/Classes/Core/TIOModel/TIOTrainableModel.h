@@ -36,10 +36,40 @@ NS_ASSUME_NONNULL_BEGIN
  * A complete round of training will involve iterating over all the available
  * batches for a certain number of epochs. It is the responsibility of other
  * objects to execute those loops and prepare batches for calls to this method.
+ * The `TIOModelTrainer` provides that functionality.
+ *
+ * @param batch A batch of input data.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of training, or an empty dictionary if an error
+ *  occurs.
+ */
+
+- (id<TIOData>)train:(TIOBatch *)batch error:(NSError * _Nullable *)error;
+
+/**
+ * Calls the underlying training op with a single batch and a set of placeholder
+ * values.
+ *
+ * A complete round of training will involve iterating over all the available
+ * batches for a certain number of epochs. It is the responsibility of other
+ * objects to execute those loops and prepare batches for calls to this method.
+ * The `TIOModelTrainer` provides that functionality.
+ *
+ * @param batch A batch of input data.
+ * @param placeholders A dictionary of `TIOData` conforming placeholder values,
+ *  which will be matched to placeholder layers in the model. May be nil.
+ * @param error Set if an error occurred during inference. May be nil.
+ * @return TIOData The results of training, or an empty dictionary if an error
+ *  occurs.
+ */
+
+- (id<TIOData>)train:(TIOBatch *)batch placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError * _Nullable *)error;
+
+/**
+ * Deprecated. `Use train:error:` or train:placeholders:error:` instead.
  */
 
 - (id<TIOData>)train:(TIOBatch *)batch __attribute__((deprecated));
-- (id<TIOData>)train:(TIOBatch *)batch error:(NSError * _Nullable *)error;
 
 /**
  * Exports the results of training to the specified directory. The directory

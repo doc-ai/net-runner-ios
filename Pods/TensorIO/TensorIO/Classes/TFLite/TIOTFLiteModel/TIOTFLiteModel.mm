@@ -36,6 +36,7 @@
 #import "TIOLayerDescription.h"
 #import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
+#import "TIOStringLayerDescription.h"
 #import "TIOPixelBuffer.h"
 #import "NSArray+TIOTFLiteData.h"
 #import "NSNumber+TIOTFLiteData.h"
@@ -164,32 +165,6 @@
     _loaded = NO;
 }
 
-// MARK: - Input and Output Features
-
-- (NSArray<TIOLayerInterface*>*)inputs {;
-    return self.io.inputs.all;
-}
-
-- (NSArray<TIOLayerInterface*>*)outputs {
-    return self.io.outputs.all;
-}
-
-- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index {
-    return self.io.inputs[index].dataDescription;
-}
-
-- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString *)name {
-    return self.io.inputs[name].dataDescription;
-}
-
-- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index {
-    return self.io.outputs[index].dataDescription;
-}
-
-- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString *)name {
-    return self.io.outputs[name].dataDescription;
-}
-
 // MARK: - Perform Inference
 
 - (id<TIOData>)runOn:(id<TIOData>)input {
@@ -212,6 +187,11 @@
     [self _runInference];
     
     return [self _captureOutput];
+}
+
+- (id<TIOData>)runOn:(id<TIOData>)input placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError* _Nullable *)error {
+    NSAssert(NO, @"TFLite models do not support placeholders.");
+    return @{};
 }
 
 - (id<TIOData>)run:(TIOBatch *)batch error:(NSError * _Nullable *)error {
@@ -249,6 +229,13 @@
     [self _runInference];
     return [self _captureOutput];
 }
+
+- (id<TIOData>)run:(TIOBatch *)batch placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError * _Nullable *)error {
+    NSAssert(NO, @"TFLite models do not support placeholders.");
+    return @{};
+}
+
+// MARK: - Prepare Inputs
 
 /**
  * Iterates through the provided `TIOData` inputs, matching them to the model's input layers, and
@@ -323,20 +310,25 @@
 
     [interface
         matchCasePixelBuffer:^(TIOPixelBufferLayerDescription *pixelBufferDescription) {
-            
             assert( [input isKindOfClass:TIOPixelBuffer.class] );
             
             [(id<TIOTFLiteData>)input getBytes:tensor description:pixelBufferDescription];
             
         } caseVector:^(TIOVectorLayerDescription *vectorDescription) {
-            
             assert( [input isKindOfClass:NSArray.class]
                 ||  [input isKindOfClass:NSData.class]
                 ||  [input isKindOfClass:NSNumber.class] );
             
             [(id<TIOTFLiteData>)input getBytes:tensor description:vectorDescription];
+            
+        } caseString:^(TIOStringLayerDescription * _Nonnull stringDescription) {
+            assert( [input isKindOfClass:NSData.class]);
+            
+            [(id<TIOTFLiteData>)input getBytes:tensor description:stringDescription];
         }];
 }
+
+// MARK: - Execute Inference
 
 /**
  * Runs inference on the model. Inputs must be copied to the input tensors prior to calling this method
@@ -347,6 +339,8 @@
         NSLog(@"Failed to invoke for model %@", self.identifier);
     }
 }
+
+// MARK: - Capture Outputs
 
 /**
  * Captures outputs from the model.
@@ -399,6 +393,9 @@
                     ? vector[0]
                     : vector;
             }
+        } caseString:^(TIOStringLayerDescription * _Nonnull stringDescription) {
+            
+            data = [[NSData alloc] initWithBytes:tensor description:stringDescription];
         }];
     
     return data;

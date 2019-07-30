@@ -22,46 +22,83 @@
 
 #import "TIOPixelBufferLayerDescription.h"
 #import "TIOVectorLayerDescription.h"
+#import "TIOStringLayerDescription.h"
 
 typedef enum : NSUInteger {
     TIOLayerInterfaceTypePixelBuffer,
     TIOLayerInterfaceTypeVector,
+    TIOLayerInterfaceTypeString
 } TIOLayerInterfaceType;
 
 @implementation TIOLayerInterface {
+    id<TIOLayerDescription> _layerDescription;
     TIOLayerInterfaceType _type;
 }
 
-- (instancetype)initWithName:(NSString *)name isInput:(BOOL)isInput pixelBufferDescription:(TIOPixelBufferLayerDescription *)pixelBufferDescription {
+- (instancetype)initWithName:(NSString *)name JSON:(nullable NSDictionary *)JSON mode:(TIOLayerInterfaceMode)mode pixelBufferDescription:(TIOPixelBufferLayerDescription *)pixelBufferDescription {
     if ( self = [super init] ) {
         _name = name;
-        _input = isInput;
+        _JSON = JSON;
+        _mode = mode;
         _type = TIOLayerInterfaceTypePixelBuffer;
-        _dataDescription = pixelBufferDescription;
+        _layerDescription = pixelBufferDescription;
     }
     return self;
 }
 
-- (instancetype)initWithName:(NSString *)name isInput:(BOOL)isInput vectorDescription:(TIOVectorLayerDescription *)vectorDescription {
+- (instancetype)initWithName:(NSString *)name JSON:(nullable NSDictionary *)JSON mode:(TIOLayerInterfaceMode)mode vectorDescription:(TIOVectorLayerDescription *)vectorDescription {
     if ( self = [super init] ) {
         _name = name;
-        _input = isInput;
+        _JSON = JSON;
+        _mode = mode;
         _type = TIOLayerInterfaceTypeVector;
-        _dataDescription = vectorDescription;
+        _layerDescription = vectorDescription;
     }
     return self;
 }
 
-- (void)matchCasePixelBuffer:(TIOPixelBufferMatcher)pixelBufferMatcher caseVector:(TIOVectorMatcher)vectorMatcher {
-    
+- (instancetype)initWithName:(NSString *)name JSON:(nullable NSDictionary *)JSON mode:(TIOLayerInterfaceMode)mode stringDescription:(TIOStringLayerDescription *)stringDescription {
+    if ( self = [super init] ) {
+        _name = name;
+        _JSON = JSON;
+        _mode = mode;
+        _type = TIOLayerInterfaceTypeString;
+        _layerDescription = stringDescription;
+    }
+    return self;
+}
+
+// MARK: -
+
+- (void)matchCasePixelBuffer:(TIOPixelBufferMatcher)pixelBufferMatcher caseVector:(TIOVectorMatcher)vectorMatcher caseString:(TIOStringMatcher)stringMatcher {
     switch ( _type ) {
     case TIOLayerInterfaceTypePixelBuffer:
-        pixelBufferMatcher((TIOPixelBufferLayerDescription *)_dataDescription);
+        pixelBufferMatcher((TIOPixelBufferLayerDescription *)_layerDescription);
         break;
     case TIOLayerInterfaceTypeVector:
-        vectorMatcher((TIOVectorLayerDescription *)_dataDescription);
+        vectorMatcher((TIOVectorLayerDescription *)_layerDescription);
+        break;
+    case TIOLayerInterfaceTypeString:
+        stringMatcher((TIOStringLayerDescription *)_layerDescription);
         break;
     }
+}
+
+- (BOOL)isEqualToLayerInterface:(TIOLayerInterface *)otherLayerInterface {
+    if ( self.JSON == nil || otherLayerInterface.JSON == nil ) {
+        NSLog(@"Unable to compare interfaces because one or the other JSON value is nil");
+        return NO;
+    }
+    
+    return [self.JSON isEqualToDictionary:otherLayerInterface.JSON];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ( ![object isKindOfClass:TIOLayerInterface.class] ) {
+        return NO;
+    }
+    
+    return [self isEqualToLayerInterface:object];
 }
 
 @end

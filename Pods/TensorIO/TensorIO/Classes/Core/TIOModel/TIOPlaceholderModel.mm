@@ -79,47 +79,29 @@
     _loaded = NO;
 }
 
-// MARK: - Input and Output Features
-
-- (NSArray<TIOLayerInterface*>*)inputs {;
-    return self.io.inputs.all;
-}
-
-- (NSArray<TIOLayerInterface*>*)outputs {
-    return self.io.outputs.all;
-}
-
-- (id<TIOLayerDescription>)descriptionOfInputAtIndex:(NSUInteger)index {
-    return self.io.inputs[index].dataDescription;
-}
-
-- (id<TIOLayerDescription>)descriptionOfInputWithName:(NSString *)name {
-    return self.io.inputs[name].dataDescription;
-}
-
-- (id<TIOLayerDescription>)descriptionOfOutputAtIndex:(NSUInteger)index {
-    return self.io.outputs[index].dataDescription;
-}
-
-- (id<TIOLayerDescription>)descriptionOfOutputWithName:(NSString *)name {
-    return self.io.outputs[name].dataDescription;
-}
-
 // MARK: - Perform Inference
 
 /**
  * A placeholder model performs no inference and returns an empty dictionary
  */
 
-- (id<TIOData>)runOn:(id<TIOData>)input {
+- (id<TIOData>)runOn:(id<TIOData>)input error:(NSError* _Nullable *)error {
     return @{};
 }
 
-- (id<TIOData>)runOn:(nonnull id<TIOData>)input error:(NSError * _Nullable *)error {
+- (id<TIOData>)runOn:(id<TIOData>)input placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError* _Nullable *)error {
     return @{};
 }
 
-- (id<TIOData>)run:(nonnull TIOBatch *)batch error:(NSError * _Nullable *)error {
+- (id<TIOData>)run:(TIOBatch *)batch error:(NSError * _Nullable *)error {
+    return @{};
+}
+
+- (id<TIOData>)run:(TIOBatch *)batch placeholders:(nullable NSDictionary<NSString*,id<TIOData>> *)placeholders error:(NSError * _Nullable *)error {
+    return @{};
+}
+
+- (id<TIOData>)runOn:(id<TIOData>)input __attribute__((deprecated)) {
     return @{};
 }
 

@@ -160,14 +160,17 @@ extern NSString * const TIOModelAssetsDirectory;
 @property (readonly) TIOModelOptions *options;
 
 /**
- * Contains the descriptions of the model's inputs and outputs accessible by
- * numeric index or by name:
+ * Contains the descriptions of the model's inputs, outputs, and placeholders
+ * accessible by numeric index or by name. Not all model backends support
+ * placeholders.
  *
  * @code
  * io.inputs[0]
  * io.inputs[@"image"]
  * io.outputs[0]
  * io.outputs[@"label"]
+ * io.placeholders[0]
+ * io.placeholders[@"label"]
  * @endcode
  */
 

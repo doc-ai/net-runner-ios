@@ -36,6 +36,31 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TIOModelTrainer : NSObject
 
 /**
+ * Instantiates a `TIOModelTrainer` with the information required to exceute a
+ * training loop.
+ *
+ * @param model The model that will be trained.
+ * @param dataSource A data source that will provide batch items.
+ * @param placeholders A dictionary of placeholder values that will be injected
+ *  into the underlying model, e.g. hyperparameters. Currently unsupported.
+ * @param epochs The number of training epochs.
+ * @param batchSize The batch size to use for each training pass.
+ * @param shuffle `YES` if batch items should be shuffled.
+ *
+ * @return TIOModelTrainer The trainer instance.
+ *
+ * @warning placeholders is currently unsupported.
+ */
+
+- (instancetype)initWithModel:(id<TIOTrainableModel>)model dataSource:(id<TIOBatchDataSource>)dataSource placeholders:(nullable NSDictionary<NSString*, id<TIOData>> *)placeholders epochs:(NSUInteger)epochs batchSize:(NSUInteger)batchSize shuffle:(BOOL)shuffle NS_DESIGNATED_INITIALIZER;
+
+/**
+ * Use the designated initializer.
+ */
+
+- (instancetype)init NS_UNAVAILABLE;
+
+/**
  * The model that will be trained.
  */
 
@@ -50,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * A dictionary of placeholder values that will be injected into the underlying
  * model. Except for the number of epochs and the batch size, hyperparameters
- * are be passed into the model trainer via this property. Currently unuspported.
+ * are usually passed into the model trainer via this property.
  */
 
 @property (nullable, readonly) NSDictionary<NSString*, id<TIOData>> *placeholders;
@@ -68,28 +93,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) NSUInteger batchSize;
 
 /**
- * Instantiates a `TIOModelTrainer` with the information required to exceute a
- * training loop.
- *
- * @param model The model that will be trained.
- * @param dataSource A data source that will provide batch items.
- * @param placeholders A dictionary of placeholder values that will be injected
- *  into the underlying model, e.g. hyperparameters. Currently unsupported.
- * @param epochs The number of training epochs.
- * @param batchSize The batch size to use for each training pass.
- *
- * @return TIOModelTrainer The trainer instance.
- *
- * @warning placeholders is currently unsupported.
+ * `YES` if the trainer will shuffle batch item indices before requesting them
+ * from the data source, `NO` otherwise.
  */
 
-- (instancetype)initWithModel:(id<TIOTrainableModel>)model dataSource:(id<TIOBatchDataSource>)dataSource placeholders:(nullable NSDictionary<NSString*, id<TIOData>>*)placeholders epochs:(NSUInteger)epochs batchSize:(NSUInteger)batchSize NS_DESIGNATED_INITIALIZER;
-
-/**
- * Use the designated initializer.
- */
-
-- (instancetype)init NS_UNAVAILABLE;
+@property (readonly) BOOL shuffle;
 
 /**
  * Executes the training loop and returns the results.
