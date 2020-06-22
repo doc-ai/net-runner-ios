@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
  * An I/O list may be indexed by key or by index.
  */
 
-@interface TIOModelIOList : NSObject
+@interface TIOModelIOList : NSObject <NSFastEnumeration>
 
 /**
  * Initializes an indexed model list with a list interfaces. You should not

@@ -160,7 +160,7 @@ static NSString * const kAlbumCellIdentifier = @"AlbumCell";
         actionWithTitle:NSLocalizedString(@"Grant Access", @"Photo library access unauthorized grant access action")
         style:UIAlertActionStyleDefault
         handler:^(UIAlertAction * _Nonnull action) {
-            [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
         }]];
     
     [self presentViewController:alert animated:YES completion:nil];

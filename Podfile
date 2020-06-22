@@ -1,4 +1,4 @@
-platform :ios, '9.3'
+platform :ios, '12.0'
 inhibit_all_warnings!
 
 target 'Net Runner' do
@@ -6,8 +6,8 @@ target 'Net Runner' do
 
   # Pods for Net Runner
 
-  pod 'TensorIO', '~> 0.9.5'
-  pod 'TensorIO/TFLite', '~> 0.9.5'
+  pod 'TensorIO'
+  pod 'TensorIO/TFLite'
 
   pod 'SVProgressHUD'
   pod 'SSZipArchive'

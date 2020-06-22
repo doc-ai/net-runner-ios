@@ -102,7 +102,7 @@ NSError * NetRunnerReloadModelsError() {
 }
 
 - (IBAction)visitNetRunnerRepository:(id)sender {
-    [UIApplication.sharedApplication openURL:[NSURL URLWithString:NetRunnerGitHubRepository]];
+    [UIApplication.sharedApplication openURL:[NSURL URLWithString:NetRunnerGitHubRepository] options:@{} completionHandler:nil];
 }
 
 - (IBAction)importModel:(id)sender {

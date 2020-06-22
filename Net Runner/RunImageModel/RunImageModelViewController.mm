@@ -339,7 +339,7 @@ typedef enum : NSUInteger {
         actionWithTitle:NSLocalizedString(@"Grant Access", @"Camera access unauthorized grant access action")
         style:UIAlertActionStyleDefault
         handler:^(UIAlertAction * _Nonnull action) {
-            [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
         }]];
     
     [self presentViewController:alert animated:YES completion:nil];
@@ -519,11 +519,9 @@ typedef enum : NSUInteger {
         ? AVCaptureDevicePositionBack
         : position;
     
-    NSArray<AVCaptureDevice*> *devices =
-        [[AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo]
-        filter:^BOOL(AVCaptureDevice * _Nonnull device, NSUInteger idx, BOOL * _Nonnull stop) {
-            return device.position == targetPosition;
-        }];
+    AVCaptureDeviceDiscoverySession *discovery = [AVCaptureDeviceDiscoverySession discoverySessionWithDeviceTypes:@[AVCaptureDeviceTypeBuiltInWideAngleCamera] mediaType:AVMediaTypeVideo position:targetPosition];
+    
+    NSArray<AVCaptureDevice*> *devices = discovery.devices;
     
     return devices.count > 0 ? devices[0] : nil;
 }

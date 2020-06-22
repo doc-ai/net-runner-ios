@@ -35,7 +35,7 @@ NSString * const DSJSONSchemaErrorFailingObjectPathKey = @"path";
         userInfo[NSLocalizedDescriptionKey] = localizedDescription;
     }
     
-    return [NSError errorWithDomain:DSJSONSchemaErrorDomain code:code userInfo:[userInfo copy]];
+    return [NSError errorWithDomain:DSJSONSchemaErrorDomain code:(NSInteger)code userInfo:[userInfo copy]];
 }
 
 + (instancetype)vv_JSONSchemaValidationErrorWithFailingValidator:(id<DSJSONSchemaValidator>)failingValidator reason:(NSString *)failureReason context:(DSJSONSchemaValidationContext *)validationContext
