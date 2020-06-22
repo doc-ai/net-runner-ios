@@ -339,7 +339,7 @@ typedef enum : NSUInteger {
         actionWithTitle:NSLocalizedString(@"Grant Access", @"Camera access unauthorized grant access action")
         style:UIAlertActionStyleDefault
         handler:^(UIAlertAction * _Nonnull action) {
-            [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            [UIApplication.sharedApplication openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
         }]];
     
     [self presentViewController:alert animated:YES completion:nil];
