@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-Net Runner/Pods-Net Runner-frameworks.sh
+${BUILT_PRODUCTS_DIR}/DSJSONSchemaValidation/DSJSONSchemaValidation.framework
+${BUILT_PRODUCTS_DIR}/EDSemver/EDSemver.framework
+${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework
+${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework
+${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework

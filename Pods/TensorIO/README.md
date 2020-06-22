@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Tensor/IO iOS is an Objective-C wrapper for machine learning with support for TensorFlow and TensorFlow Lite. It abstracts the work of copying bytes into and out of tensors and allows you to interract with native types instead, such as numbers, arrays, dictionaries, and pixel buffers. Tensor/IO iOS support packaging and deployment, inference, training, and federated learning. This implementation is part of the [Tensor/IO project](https://doc-ai.github.io/tensorio/) with support for machine learning on iOS, Android, and React Native.
+Tensor/IO iOS is an Objective-C wrapper for machine learning with support for TensorFlow and TensorFlow Lite. It abstracts the work of copying bytes into and out of tensors and allows you to interract with native types instead, such as numbers, arrays, dictionaries, and pixel buffers. Tensor/IO iOS support packaging and deployment, inference, and training. This implementation is part of the [Tensor/IO project](https://doc-ai.github.io/tensorio/) with support for machine learning on iOS, Android, and React Native.
 
 ## Example
 
