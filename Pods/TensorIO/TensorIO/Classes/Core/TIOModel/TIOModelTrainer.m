@@ -84,6 +84,26 @@
     return results;
 }
 
+- (void)train:(void(^_Nonnull)(NSUInteger epoch, id<TIOData> results, NSError * _Nullable error))callback {
+    [self _prepareItemOrder];
+
+    NSUInteger batchCount = self._batchCount;
+    id<TIOData> results;
+    NSError *error;
+    
+    for ( NSUInteger epoch = 0; epoch < self.epochs; epoch++ ) {
+        for ( NSUInteger batchIndex = 0; batchIndex < batchCount; batchIndex++ ) {
+            @autoreleasepool {
+                TIOBatch *batch = [self _batchAtIndex:batchIndex];
+                results = [self.model train:batch placeholders:self.placeholders error:&error];
+            }
+        }
+        callback(epoch, results, error);
+    }
+}
+
+// MARK: -
+
 /**
  * The total number of batches needed to feed all of the data source's item
  * in chunks of the specified batch size.

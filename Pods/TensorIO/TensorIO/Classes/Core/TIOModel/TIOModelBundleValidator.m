@@ -22,7 +22,9 @@
 #import "TIOModelBundle.h"
 #import "TIOModelBackend.h"
 
-@import DSJSONSchemaValidation;
+#import "DSJSONSchemaValidator.h"
+#import "DSJSONSchema.h"
+#import "DSJSONSchemaSpecification.h"
 
 static NSError * TIOMalformedJSONError(void);
 static NSError * TIOInvalidFilepathError(NSString * path);

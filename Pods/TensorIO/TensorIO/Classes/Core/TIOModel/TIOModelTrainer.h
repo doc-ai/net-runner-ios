@@ -105,6 +105,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id<TIOData>)train;
 
+// TODO: Test
+
+/**
+ * Executes the training loop with a callback.
+ *
+ * The callback is called after each epoch with that epoch's training results.
+ *
+ * @warning
+ * An error will be reported only if an error occurred during the last batch
+ * processing for the current epoch
+ */
+
+- (void)train:(void(^_Nonnull)(NSUInteger epoch, id<TIOData> results, NSError * _Nullable error))callback;
+
 @end
 
 NS_ASSUME_NONNULL_END

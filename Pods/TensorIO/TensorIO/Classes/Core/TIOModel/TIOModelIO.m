@@ -137,4 +137,10 @@
     return [self isEqualToModelIOList:object];
 }
 
+// MARK: -
+
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id  _Nullable [])buffer count:(NSUInteger)len {
+    return [_indexedInterfaces countByEnumeratingWithState:state objects:buffer count:len];
+}
+
 @end
