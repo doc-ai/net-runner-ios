@@ -45,7 +45,7 @@
 }
 
 - (void)sharedInit {
-    _effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
+    _effectView = [[UIVisualEffectView alloc] initWithEffect:[self backgroundBlurEffect]];
     _classificationLabel = [[UILabel alloc] init];
     _statsLabel = [[UILabel alloc] init];
     
@@ -92,6 +92,16 @@
         [_statsLabel.rightAnchor constraintEqualToAnchor:_effectView.rightAnchor constant:-16],
         [_statsLabel.bottomAnchor constraintLessThanOrEqualToAnchor:_effectView.bottomAnchor constant:-16],
     ]];
+}
+
+- (UIBlurEffect *)backgroundBlurEffect {
+    if ( @available(iOS 13.0, *) ) {
+        if ( UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ) {
+            return [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+        }
+    }
+    
+    return [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
 }
 
 - (void)setClassifications:(NSString *)classifications {

@@ -85,6 +85,8 @@ static NSString * const kModelCellIdentifier = @"ModelCell";
     TIOModelBundle *bundle = TIOModelBundleManager.sharedManager.modelBundles[indexPath.row];
     
     cell.titleLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+    cell.accessoryType = UITableViewCellAccessoryDetailButton;
+    
     cell.bundle = bundle;
     
     return cell;
