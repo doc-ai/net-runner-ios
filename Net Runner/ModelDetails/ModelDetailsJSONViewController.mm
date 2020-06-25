@@ -35,6 +35,16 @@
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     self.textView.text = string;
+    
+    if ( @available(iOS 13.0, *) ) {
+        self.view.backgroundColor = UIColor.systemBackgroundColor;
+                
+        if ( UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ) {
+            self.textView.textColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+        } else {
+            self.textView.textColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+        }
+    }
 }
 
 @end

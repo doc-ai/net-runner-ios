@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CO1-PU-6Rq">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CO1-PU-6Rq">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -47,7 +45,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ModelCell" id="A0E-Tg-Cqc" customClass="EvaluateModelTableViewCell">
-                                <rect key="frame" x="0.0" y="125.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="125.5" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A0E-Tg-Cqc" id="UF6-Fj-3QO">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -135,7 +133,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1RB-m8-D6v" id="scU-In-Ahs">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dcg-gv-xxd">
@@ -197,7 +195,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="hlP-h2-vYy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="IZa-3Q-G4f">
                             <size key="itemSize" width="96" height="96"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -236,19 +234,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gQc-Vv-0de">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="8Li-fq-j0D">
+                                <rect key="frame" x="169" y="335" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zdz-bl-cJY" firstAttribute="trailing" secondItem="gQc-Vv-0de" secondAttribute="trailing" id="2Af-hh-DAN"/>
                             <constraint firstItem="gQc-Vv-0de" firstAttribute="leading" secondItem="zdz-bl-cJY" secondAttribute="leading" id="DSJ-dl-fj9"/>
+                            <constraint firstItem="8Li-fq-j0D" firstAttribute="centerY" secondItem="Hve-KV-0g2" secondAttribute="centerY" constant="20" id="Qja-ch-6k9"/>
                             <constraint firstItem="gQc-Vv-0de" firstAttribute="top" secondItem="zdz-bl-cJY" secondAttribute="top" id="mcY-RI-klv"/>
                             <constraint firstItem="zdz-bl-cJY" firstAttribute="bottom" secondItem="gQc-Vv-0de" secondAttribute="bottom" id="obx-oZ-PUj"/>
+                            <constraint firstItem="8Li-fq-j0D" firstAttribute="centerX" secondItem="Hve-KV-0g2" secondAttribute="centerX" id="pcB-rV-nOs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zdz-bl-cJY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="8Li-fq-j0D" id="prl-Oj-rgt"/>
                         <outlet property="imageView" destination="gQc-Vv-0de" id="loV-u9-R4S"/>
                     </connections>
                 </viewController>
@@ -266,7 +271,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ModelCell" id="yNz-9E-z92" customClass="EvaluateModelTableViewCell">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yNz-9E-z92" id="2Yo-mb-rUM">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -296,10 +301,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumCell" rowHeight="80" id="PB5-EW-TQE" customClass="EvaluatePhotoAlbumTableViewCell">
-                                <rect key="frame" x="0.0" y="99.5" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="99" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PB5-EW-TQE" id="0Sg-hl-PdY">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o60-iE-Fei">
@@ -336,7 +341,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IterationsCell" id="ydh-6P-y0v" customClass="EvaluateIterationsTableViewCell">
-                                <rect key="frame" x="0.0" y="179.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="179" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ydh-6P-y0v" id="8MQ-WK-Ieg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -367,7 +372,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DefaultCell" id="SAP-iZ-pmr">
-                                <rect key="frame" x="0.0" y="223.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="222.5" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SAP-iZ-pmr" id="QCL-Va-6Nj">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -375,14 +380,14 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EvaluateCell" id="XBM-Ex-IXz">
-                                <rect key="frame" x="0.0" y="267.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="266" width="375" height="30.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XBM-Ex-IXz" id="rn0-wc-hIy">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3a-tL-DH8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="30.5"/>
                                             <state key="normal" title="Evaluate Models"/>
                                             <connections>
                                                 <segue destination="axw-rR-Yqm" kind="show" identifier="EvaluateResultsSegue" id="ttf-k4-wHn"/>
@@ -424,7 +429,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnT-hN-ufF">
                                     <rect key="frame" x="16" y="72" width="343" height="36"/>
                                     <string key="text">This may take some time. 
-How about a nice game of chess? ♟️</string>
+How about a nice game of chess?</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -475,7 +480,7 @@ How about a nice game of chess? ♟️</string>
                                 <rect key="frame" x="0.0" y="165.5" width="375" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="61r-2D-OWZ" id="puA-JF-tCW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="87.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XBO-0P-iD0">
@@ -491,7 +496,7 @@ How about a nice game of chess? ♟️</string>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="my4-qL-3Pc">
-                                            <rect key="frame" x="16" y="58.5" width="343" height="2"/>
+                                            <rect key="frame" x="16" y="59" width="343" height="2"/>
                                         </progressView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100ms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGK-aw-IaE">
                                             <rect key="frame" x="133.5" y="47" width="46" height="18"/>
@@ -569,7 +574,7 @@ How about a nice game of chess? ♟️</string>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Album Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IDd-hx-kkx">
-                                    <rect key="frame" x="8" y="52.5" width="118.5" height="27.5"/>
+                                    <rect key="frame" x="8" y="52.5" width="119" height="27.5"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -610,14 +615,14 @@ How about a nice game of chess? ♟️</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ll-HY-9nE" customClass="ImageInputPreviewView">
-                                <rect key="frame" x="16" y="80" width="343" height="64"/>
+                                <rect key="frame" x="16" y="60" width="343" height="64"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" placeholder="YES" id="Kmb-Bf-2ds"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fgc-Jw-fQM">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPi-hr-3Yw" customClass="ResultInfoView">
                                 <rect key="frame" x="16" y="523" width="343" height="128"/>
@@ -626,6 +631,10 @@ How about a nice game of chess? ♟️</string>
                                     <constraint firstAttribute="height" constant="128" placeholder="YES" id="GhY-JO-L2t"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="sMn-pJ-kQg">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -639,6 +648,8 @@ How about a nice game of chess? ♟️</string>
                             <constraint firstItem="0Ll-HY-9nE" firstAttribute="top" secondItem="jfX-Hh-wTC" secondAttribute="top" constant="16" id="UcI-HU-n2G"/>
                             <constraint firstItem="0Ll-HY-9nE" firstAttribute="leading" secondItem="jfX-Hh-wTC" secondAttribute="leading" constant="16" id="Y6r-as-JJr"/>
                             <constraint firstItem="jfX-Hh-wTC" firstAttribute="bottom" secondItem="fgc-Jw-fQM" secondAttribute="bottom" id="cPR-zs-Pe7"/>
+                            <constraint firstItem="sMn-pJ-kQg" firstAttribute="centerY" secondItem="jHz-36-SNF" secondAttribute="centerY" id="wLq-Kd-Ha6"/>
+                            <constraint firstItem="sMn-pJ-kQg" firstAttribute="centerX" secondItem="jHz-36-SNF" secondAttribute="centerX" id="xcP-x8-fdr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jfX-Hh-wTC"/>
                     </view>
@@ -650,6 +661,7 @@ How about a nice game of chess? ♟️</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="sMn-pJ-kQg" id="AE4-AV-eoR"/>
                         <outlet property="imageInputPreviewView" destination="0Ll-HY-9nE" id="MCC-YY-EzW"/>
                         <outlet property="imageView" destination="fgc-Jw-fQM" id="Nzd-CZ-T74"/>
                         <outlet property="resultInfoView" destination="pPi-hr-3Yw" id="9jj-cC-owH"/>

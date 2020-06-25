@@ -86,7 +86,7 @@
     
     // Global Appearance
     
-    [[UILabel appearanceWhenContainedInInstancesOfClasses:@[UITableView.class]] setTextColor:[UIColor colorWithWhite:0.2 alpha:1.0]];
+    [self updateGlobalAppearance];
     
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [SVProgressHUD setMinimumDismissTimeInterval:2.0];
@@ -128,6 +128,10 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    // Update global appearance in case dark/light mode has changed
+    
+    [self updateGlobalAppearance];
 }
 
 
@@ -140,6 +144,26 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+// MARK: - Global Appearance
+
+- (void)updateGlobalAppearance {
+    // [UIColor colorWithWhite:0.2 alpha:1.0]
+    // [UIColor colorWithWhite:0.8 alpha:1.0]
+    
+    // UIColor.lightTextColor
+    // UIColor.darkTextColor
+    
+    [[UILabel appearanceWhenContainedInInstancesOfClasses:@[UITableView.class]] setTextColor:[UIColor colorWithWhite:0.2 alpha:1.0]];
+    [[UIImageView appearanceWhenContainedInInstancesOfClasses:@[UITableView.class]] setTintColor:[UIColor colorWithWhite:0.2 alpha:1.0]];
+    
+    if ( @available(iOS 13.0, *) ) {
+        if ( UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ) {
+            [[UILabel appearanceWhenContainedInInstancesOfClasses:@[UITableView.class]] setTextColor:[UIColor colorWithWhite:0.8 alpha:1.0]];
+            [[UIImageView appearanceWhenContainedInInstancesOfClasses:@[UITableView.class]] setTintColor:[UIColor colorWithWhite:0.8 alpha:1.0]];
+        }
+    }
 }
 
 // MARK: - Migrations

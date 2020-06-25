@@ -121,8 +121,18 @@ NSArray<NSNumber*> * _Nullable TextToNumericVector(NSString * _Nullable text, NS
         self.textView.textColor = [UIColor lightGrayColor];
     } else {
         self.textView.text = @"";
-        self.textView.textColor = [UIColor blackColor];
+        self.textView.textColor = [self defaultTextViewColor];
     }
+}
+
+- (UIColor *)defaultTextViewColor {
+    if ( @available(iOS 13.0, *) ) {
+        if ( UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark ) {
+            return [UIColor colorWithWhite:0.8 alpha:1.0];
+        }
+    }
+    
+    return [UIColor colorWithWhite:0.2 alpha:1.0];
 }
 
 // MARK - Label Output Table View Cell Protocol
