@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface EvaluateResultsPhotoViewController : UIViewController
 
 @property (weak) IBOutlet ImageInputPreviewView *imageInputPreviewView;
+@property (weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak) IBOutlet ResultInfoView *resultInfoView;
 @property (weak) IBOutlet UIImageView *imageView;
 

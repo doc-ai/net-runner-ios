@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LabelOutputsTableViewController : UITableViewController
 
 @property (weak) IBOutlet UIImageView *imageView;
+@property (weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic) PHCachingImageManager *imageManager;
 @property (nonatomic) PHAsset *asset;

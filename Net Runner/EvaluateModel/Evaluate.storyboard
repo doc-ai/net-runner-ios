@@ -236,17 +236,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gQc-Vv-0de">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="8Li-fq-j0D">
+                                <rect key="frame" x="169" y="335" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zdz-bl-cJY" firstAttribute="trailing" secondItem="gQc-Vv-0de" secondAttribute="trailing" id="2Af-hh-DAN"/>
                             <constraint firstItem="gQc-Vv-0de" firstAttribute="leading" secondItem="zdz-bl-cJY" secondAttribute="leading" id="DSJ-dl-fj9"/>
+                            <constraint firstItem="8Li-fq-j0D" firstAttribute="centerY" secondItem="Hve-KV-0g2" secondAttribute="centerY" constant="20" id="Qja-ch-6k9"/>
                             <constraint firstItem="gQc-Vv-0de" firstAttribute="top" secondItem="zdz-bl-cJY" secondAttribute="top" id="mcY-RI-klv"/>
                             <constraint firstItem="zdz-bl-cJY" firstAttribute="bottom" secondItem="gQc-Vv-0de" secondAttribute="bottom" id="obx-oZ-PUj"/>
+                            <constraint firstItem="8Li-fq-j0D" firstAttribute="centerX" secondItem="Hve-KV-0g2" secondAttribute="centerX" id="pcB-rV-nOs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zdz-bl-cJY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="8Li-fq-j0D" id="prl-Oj-rgt"/>
                         <outlet property="imageView" destination="gQc-Vv-0de" id="loV-u9-R4S"/>
                     </connections>
                 </viewController>
@@ -624,6 +631,10 @@ How about a nice game of chess?</string>
                                     <constraint firstAttribute="height" constant="128" placeholder="YES" id="GhY-JO-L2t"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="sMn-pJ-kQg">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -637,6 +648,8 @@ How about a nice game of chess?</string>
                             <constraint firstItem="0Ll-HY-9nE" firstAttribute="top" secondItem="jfX-Hh-wTC" secondAttribute="top" constant="16" id="UcI-HU-n2G"/>
                             <constraint firstItem="0Ll-HY-9nE" firstAttribute="leading" secondItem="jfX-Hh-wTC" secondAttribute="leading" constant="16" id="Y6r-as-JJr"/>
                             <constraint firstItem="jfX-Hh-wTC" firstAttribute="bottom" secondItem="fgc-Jw-fQM" secondAttribute="bottom" id="cPR-zs-Pe7"/>
+                            <constraint firstItem="sMn-pJ-kQg" firstAttribute="centerY" secondItem="jHz-36-SNF" secondAttribute="centerY" id="wLq-Kd-Ha6"/>
+                            <constraint firstItem="sMn-pJ-kQg" firstAttribute="centerX" secondItem="jHz-36-SNF" secondAttribute="centerX" id="xcP-x8-fdr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jfX-Hh-wTC"/>
                     </view>
@@ -648,6 +661,7 @@ How about a nice game of chess?</string>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="sMn-pJ-kQg" id="AE4-AV-eoR"/>
                         <outlet property="imageInputPreviewView" destination="0Ll-HY-9nE" id="MCC-YY-EzW"/>
                         <outlet property="imageView" destination="fgc-Jw-fQM" id="Nzd-CZ-T74"/>
                         <outlet property="resultInfoView" destination="pPi-hr-3Yw" id="9jj-cC-owH"/>

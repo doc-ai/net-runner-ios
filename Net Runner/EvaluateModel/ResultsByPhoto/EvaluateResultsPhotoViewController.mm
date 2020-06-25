@@ -83,6 +83,8 @@
         contentMode = PHImageContentModeDefault;
     }
     
+    [self.activityIndicator startAnimating];
+    
     [self.imageManager
         requestImageForAsset:self.asset
         targetSize:targetSize
@@ -90,6 +92,8 @@
         options:[EvaluateResultsPhotoViewController imageRequestOptions]
         resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         
+            [self.activityIndicator stopAnimating];
+            
             if ( result == nil ) {
                 NSLog(@"Unable to request image for asset %@", self.asset.localIdentifier);
                 return;
