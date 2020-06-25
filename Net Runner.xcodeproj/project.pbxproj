@@ -546,6 +546,7 @@
 				E3B57E7E210A52ED008D19C0 /* Evaluation */,
 				E3A5214E210A5292004B912B /* EvaluationMetrics */,
 				E378488521CAE17800AB6C1E /* CollectData */,
+				E37402A0210A55390025AA59 /* PhotoLibraryBrowser */,
 				E354776621C8515600FB573C /* LabelOutputs */,
 				E3E9A20821E4138000C64FC6 /* ModelLabels */,
 				E3A52112210A5105004B912B /* Utilities */,
@@ -628,7 +629,6 @@
 				E37402A3210A55580025AA59 /* ResultsOverview */,
 				E37402A2210A55510025AA59 /* ResultsByModel */,
 				E37402A1210A554B0025AA59 /* ResultsByPhoto */,
-				E37402A0210A55390025AA59 /* PhotoLibraryBrowser */,
 			);
 			path = EvaluateModel;
 			sourceTree = "<group>";

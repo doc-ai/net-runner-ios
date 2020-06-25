@@ -45,12 +45,16 @@
         return options;
     }
     
-    options = [[PHImageRequestOptions alloc] init];
+    if ( @available(iOS 13.0, *) ) {
+        options.resizeMode = PHImageRequestOptionsResizeModeNone;
+        options.synchronous = NO;
+    } else {
+        options.resizeMode = PHImageRequestOptionsResizeModeExact;
+        options.synchronous = YES;
+    }
     
     options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-    options.resizeMode = PHImageRequestOptionsResizeModeExact;
     options.networkAccessAllowed = YES;
-    options.synchronous = YES;
     
     return options;
 }
@@ -71,10 +75,18 @@
     
     // Load Image
     
+    CGSize targetSize = PHImageManagerMaximumSize;
+    PHImageContentMode contentMode = PHImageContentModeAspectFill;
+    
+    if ( @available(iOS 13.0, *) ) {
+        targetSize = CGSizeMake(self.asset.pixelWidth, self.asset.pixelHeight);
+        contentMode = PHImageContentModeDefault;
+    }
+    
     [self.imageManager
         requestImageForAsset:self.asset
-        targetSize:PHImageManagerMaximumSize
-        contentMode:PHImageContentModeAspectFill
+        targetSize:targetSize
+        contentMode:contentMode
         options:[EvaluateResultsPhotoViewController imageRequestOptions]
         resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
         
